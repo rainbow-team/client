@@ -1,0 +1,47 @@
+<nz-layout #content class="content-layout" style="padding: 0;">
+  <nz-content class="center-content" style="overflow: hidden;">
+    <div nz-row class="post-search-condition">
+      <div nz-col [nzSpan]="6" [nzOffset]="16">
+        <input nz-input name="searchKey" style="width:100%;">
+      </div>
+      <div nz-col [nzSpan]="2" style="padding-left: 8px;">
+        <button nz-button nzType="primary" [nzShape]="'round'">搜索</button>
+      </div>
+    </div>
+    <div nz-row style="margin-bottom: 8px;">
+      <div nz-col [nzSpan]="12" style="text-align: left;">
+        <button nz-button nzType="primary" [nzShape]="'round'" (click)="showPostInfo()">添加岗位</button>
+      </div>
+    </div>
+    <div nz-row style="margin-bottom: 8px;">
+      <nz-table #nzTable [nzData]="dataSet" [nzPageSize]="20" [nzPageIndex]="1" [nzShowTotal]="dataTotal"
+        [nzFrontPagination]="'false'" [nzScroll]="nzTableScroll">
+        <thead>
+          <tr>
+            <th nzWidth="240px">岗位名称</th>
+            <th>分配权限</th>
+            <th nzWidth="150px">岗位级别</th>
+            <th nzWidth="240px">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of nzTable.data">
+            <td>123</td>
+            <td>123</td>
+            <td>123</td>
+            <td>
+              <button nz-button [nzSize]="'small'" nzType="primary" [nzShape]="'round'" style="margin:0 5px;"
+                (click)="showPostInfo(data)">编辑</button>
+              <button nz-button [nzSize]="'small'" nzType="danger" [nzShape]="'round'" nz-popconfirm
+                [nzTitle]="'确定删除该岗位？'" (nzOnConfirm)="deletePost(data)">删除</button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <ng-template #dataTotal>
+        <span style="margin: 0 24px;">{{'每页显示20条，共' + dataSet.length + '条'}}</span>
+      </ng-template>
+    </div>
+    <app-post-detail [isVisible]="showDetail" (handleClose)="showDetail=false;"></app-post-detail>
+  </nz-content>
+</nz-layout>

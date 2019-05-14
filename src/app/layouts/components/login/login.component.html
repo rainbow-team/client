@@ -1,0 +1,40 @@
+<div class="login-layout">
+  <div class="container">
+    <img src="../../../../assets/images/login/login_title.png" alt="">
+    <form nz-form #loginForm="ngForm" class="login-form" (keydown.enter)="login(loginForm)"
+      (ngSubmit)="login(loginForm)">
+      <nz-alert nzType="error" *ngIf="loginMessage" nzCloseable nzMessage="Warning Text Warning"
+        (nzOnClose)="closeMessage()" style="margin-bottom: 16px;">
+      </nz-alert>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group [nzPrefix]="prefixUser" nzSize="large">
+            <input nz-input type="text" name="username" [(ngModel)]="formData.userName" placeholder="用户名" required>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group [nzPrefix]="prefixLock" nzSize="large">
+            <input nz-input type="password" name="password" [(ngModel)]="formData.password" placeholder="密码" required>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <label nz-checkbox name="rememberMe" [(ngModel)]="formData.remeberMe" style="margin-left: 16px;">
+            <span>记住我</span>
+          </label>
+        </nz-form-control>
+      </nz-form-item>
+      <button nz-button class="login-button" [nzType]="'primary'" [nzSize]="'large'" [nzShape]="'round'"
+        [nzLoading]="isBusy" [disabled]="loginForm.invalid">登&nbsp;录</button>
+    </form>
+    <ng-template #prefixUser>
+      <span>用户名</span>
+    </ng-template>
+    <ng-template #prefixLock>
+      <span>密&nbsp;码</span>
+    </ng-template>
+  </div>
+</div>

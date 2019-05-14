@@ -1,0 +1,134 @@
+<nz-layout class="content-layout">
+  <nz-content class="center-content">
+    <div nz-row nzGutter="16" style="height: 100%;">
+      <div nz-col nzSpan="12" style="height: 100%;">
+        <nz-card [nzTitle]="titleTemplate" [nzExtra]="extraTemplate" [nzBordered]="false" style="height: 100%;">
+          <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" class="setting-item">
+            <div nz-col [nzSpan]="12">
+              <span>套合重叠率</span>
+            </div>
+            <div nz-col [nzSpan]="12">
+              <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" [nzGutter]="8">
+                <div nz-col [nzSpan]="21">
+                  <nz-slider [nzTipFormatter]="tipFormatter" [(ngModel)]="thcdRatio"></nz-slider>
+                </div>
+                <div nz-col [nzSpan]="3">
+                  <span>{{thcdRatio + '%'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div nz-row class="setting-container">
+            <div nz-row class="container-header">
+              <span>选择条件</span>
+            </div>
+            <nz-divider></nz-divider>
+            <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" class="setting-item">
+              <div nz-col [nzSpan]="12">
+                <span>图斑批次</span>
+              </div>
+              <div nz-col [nzSpan]="3" [nzOffset]="9">
+                <nz-switch [(ngModel)]="switchValue"></nz-switch>
+              </div>
+            </div>
+            <nz-divider></nz-divider>
+            <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" class="setting-item">
+              <div nz-col [nzSpan]="12">
+                <span>图斑来源</span>
+              </div>
+              <div nz-col [nzSpan]="3" [nzOffset]="9">
+                <nz-switch [(ngModel)]="switchValue"></nz-switch>
+              </div>
+            </div>
+            <nz-divider></nz-divider>
+            <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" class="setting-item">
+              <div nz-col [nzSpan]="12">
+                <span>图斑类型</span>
+              </div>
+              <div nz-col [nzSpan]="3" [nzOffset]="9">
+                <nz-switch [(ngModel)]="switchValue"></nz-switch>
+              </div>
+            </div>
+          </div>
+        </nz-card>
+        <ng-template #titleTemplate>
+          <span>
+            <i class="fa fa-circle-o" aria-hidden="true" style="color:#1E66DC;margin-right: 8px;"></i>重复性规则设置
+          </span>
+        </ng-template>
+        <ng-template #extraTemplate>
+          <button nz-button nzType="primary" [nzLoading]="" nzShape="round">恢复默认设置</button>
+        </ng-template>
+      </div>
+      <div nz-col nzSpan="12" style="height: 100%;">
+        <nz-card [nzTitle]="titleTemplate2" [nzExtra]="extraTemplate2" [nzBordered]="false" style="height: 100%;">
+          <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" class="setting-item">
+            <div nz-col [nzSpan]="10">
+              <span>土地报批图斑</span>
+            </div>
+            <div nz-col [nzSpan]="11">
+              <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" [nzGutter]="8" *ngIf="switchValue">
+                <div nz-col [nzSpan]="21">
+                  <nz-slider [nzTipFormatter]="tipFormatter" [(ngModel)]="thcdRatio"></nz-slider>
+                </div>
+                <div nz-col [nzSpan]="3">
+                  <span>{{thcdRatio + '%'}}</span>
+                </div>
+              </div>
+            </div>
+            <div nz-col [nzSpan]="3">
+              <nz-switch [(ngModel)]="switchValue"></nz-switch>
+            </div>
+          </div>
+          <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" class="setting-item">
+            <div nz-col [nzSpan]="10">
+              <span>土地供应图斑</span>
+            </div>
+            <div nz-col [nzSpan]="11">
+              <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" [nzGutter]="8" *ngIf="switchValue">
+                <div nz-col [nzSpan]="21">
+                  <nz-slider [nzTipFormatter]="tipFormatter" [(ngModel)]="thcdRatio"></nz-slider>
+                </div>
+                <div nz-col [nzSpan]="3">
+                  <span>{{thcdRatio + '%'}}</span>
+                </div>
+              </div>
+            </div>
+            <div nz-col [nzSpan]="3">
+              <nz-switch [(ngModel)]="switchValue"></nz-switch>
+            </div>
+          </div>
+          <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" class="setting-item">
+            <div nz-col [nzSpan]="10">
+              <span>重点工程</span>
+            </div>
+            <div nz-col [nzSpan]="11">
+              <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" [nzGutter]="8" *ngIf="switchValue">
+                <div nz-col [nzSpan]="21">
+                  <nz-slider [nzTipFormatter]="tipFormatter" [(ngModel)]="thcdRatio"></nz-slider>
+                </div>
+                <div nz-col [nzSpan]="3">
+                  <span>{{thcdRatio + '%'}}</span>
+                </div>
+              </div>
+            </div>
+            <div nz-col [nzSpan]="3">
+              <nz-switch [(ngModel)]="switchValue"></nz-switch>
+            </div>
+          </div>
+        </nz-card>
+        <ng-template #titleTemplate2>
+          <span>
+            <i class="fa fa-circle-o" aria-hidden="true" style="color:#1E66DC;margin-right: 8px;"></i>合法性规则设置
+          </span>
+        </ng-template>
+        <ng-template #extraTemplate2>
+          <button nz-button nzType="primary" [nzLoading]="" nzShape="round">恢复默认设置</button>
+        </ng-template>
+      </div>
+    </div>
+  </nz-content>
+  <nz-footer class="bottom-bar">
+    <button nz-button nzType="primary" [nzLoading]="" nzSize="large" nzShape="round">保存修改</button>
+  </nz-footer>
+</nz-layout>

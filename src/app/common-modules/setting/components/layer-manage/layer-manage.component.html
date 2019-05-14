@@ -1,0 +1,54 @@
+<nz-layout class="content-layout">
+  <nz-content class="center-content">
+    <nz-layout style="height: 100%;width: 100%;">
+      <nz-sider [nzWidth]="330" style="background: #FFFFFF;padding: 8px;">
+        <h2>图层</h2>
+        <nz-input-group [nzSuffix]="suffixIcon">
+          <input type="text" nz-input placeholder="Search" [(ngModel)]="searchValue">
+          <ng-template #suffixIcon>
+            <i nz-icon type="search"></i>
+          </ng-template>
+        </nz-input-group>
+        <span style="margin-top: 8px;color: red;display: inline-block;">*拖拽调节图层显示顺序</span>
+        <nz-tree #layerDataTree class="layer-tree" [nzData]="nodes" [nzMultiple]="'false'" [nzShowLine]="'true'"
+          [nzDraggable]="'true'" [nzSearchValue]="searchValue" (nzSearchValueChange)="searchTreeData($event)"
+          (nzContextMenu)="openContextMenu($event, contextTemplate)">
+          <ng-template #contextTemplate>
+            <ul nz-menu nzInDropDown style="min-width: 80px;text-align: left;padding: 0 8px;">
+              <li nz-menu-item (click)="selectDropdown('file')">添加图层</li>
+              <nz-divider style="margin:0;"></nz-divider>
+              <li nz-menu-item (click)="selectDropdown('folder')">添加文件夹</li>
+            </ul>
+          </ng-template>
+        </nz-tree>
+      </nz-sider>
+      <nz-content style="background: #F2F2F2;padding: 0 16px;">
+        <div nz-row nzGutter="16" style="height: 100%;">
+          <div nz-col nzSpan="12" style="height: 100%;">
+            <nz-card [nzTitle]="titleTemplate" [nzBordered]="false" style="height: 100%;">
+
+            </nz-card>
+            <ng-template #titleTemplate>
+              <span>
+                <i class="fa fa-circle-o" aria-hidden="true" style="color:#1E66DC;margin-right: 8px;"></i>图斑分析
+              </span>
+            </ng-template>
+          </div>
+          <div nz-col nzSpan="12" style="height: 100%;">
+            <nz-card [nzTitle]="titleTemplate2" [nzBordered]="false" style="height: 100%;">
+
+            </nz-card>
+            <ng-template #titleTemplate2>
+              <span>
+                <i class="fa fa-circle-o" aria-hidden="true" style="color:#1E66DC;margin-right: 8px;"></i>要素识别
+              </span>
+            </ng-template>
+          </div>
+        </div>
+      </nz-content>
+    </nz-layout>
+  </nz-content>
+  <nz-footer class="bottom-bar">
+    <button nz-button nzType="primary" [nzLoading]="" nzSize="large" nzShape="round">保存修改</button>
+  </nz-footer>
+</nz-layout>

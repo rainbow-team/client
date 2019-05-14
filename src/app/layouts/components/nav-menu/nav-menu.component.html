@@ -1,0 +1,33 @@
+<div class="nav-menu">
+  <ul nz-menu [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+    <ng-container *ngFor="let item of navMenu">
+      <li nz-submenu [(nzOpen)]="item.selected" (nzOpenChange)="subMenuOpen($event, item)"
+        *ngIf="item.children && item.children.length>0; else navMenuItem">
+        <span title>
+          <i nz-icon type="setting"></i>
+          <span>{{item.name}}</span>
+        </span>
+        <ul>
+          <li nz-menu-item [(nzSelected)]="child.selected" (click)="menuItemClick(child)"
+            *ngFor="let child of item.children">{{item.name}}</li>
+        </ul>
+      </li>
+      <ng-template #navMenuItem>
+        <li nz-menu-item nz-tooltip nzPlacement="right" [(nzSelected)]="item.selected"
+          [nzTitle]="isCollapsed ? item.name : ''" (click)="menuItemClick(item)">
+          <span title>
+            <i nz-icon type="mail"></i>
+            <span>{{item.name}}</span>
+          </span>
+        </li>
+      </ng-template>
+    </ng-container>
+  </ul>
+  <div *ngIf="collapsed" class="btn-collapsed" (click)="toggleCollapsed()">
+    <i *ngIf="isCollapsed; else btnExpand" class="fa fa-angle-double-right fa-lg" style="color: #fff;"
+      aria-hidden="true"></i>
+    <ng-template #btnExpand>
+      <i class="fa fa-angle-double-left fa-lg" style="color: #fff;" aria-hidden="true"></i>
+    </ng-template>
+  </div>
+</div>

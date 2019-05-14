@@ -1,0 +1,33 @@
+<nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()" (nzOnOk)="submitData()"
+  [nzOkLoading]="isBusy" [nzWidth]="480">
+  <div nz-row [nzGutter]="8" [nzType]="'flex'" [nzAlign]="'middle'">
+    <div nz-col [nzSpan]="4" style="text-align: right;">
+      <span style="color: red;">*</span>岗位名称
+    </div>
+    <div nz-col [nzSpan]="20">
+      <input nz-input placeholder="请选择岗位" style="width:100%;">
+    </div>
+  </div>
+  <div nz-row [nzGutter]="8" [nzType]="'flex'" [nzAlign]="'middle'" style="margin-top: 16px;">
+    <div nz-col [nzSpan]="4" style="text-align: right;">
+      <span style="color: red;">*</span>岗位级别
+    </div>
+    <div nz-col [nzSpan]="20">
+      <nz-select style="width:100%;" nzShowSearch nzAllowClear nzPlaceHolder="请选择级别">
+        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="8" [nzType]="'flex'" [nzAlign]="'middle'" style="margin-top: 16px;">
+    <div nz-col [nzSpan]="4" style="text-align: right;">
+      <span style="color: red;">*</span>权限列表
+    </div>
+    <div nz-col [nzSpan]="20">
+      <nz-tree-select style="width:100%;" [nzNodes]="nodes" [nzDefaultExpandAll]="'true'" nzShowSearch nzCheckable
+        nzPlaceHolder="请勾选权限" [nzShowLine]="'true'">
+      </nz-tree-select>
+    </div>
+  </div>
+</nz-modal>
