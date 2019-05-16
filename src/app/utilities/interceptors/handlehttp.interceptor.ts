@@ -39,10 +39,14 @@ export class HandleHttpInterceptor implements HttpInterceptor {
             }
         }
 
-        // 添加请求头
-        authReq = authReq.clone({
-            headers: req.headers.set('Content-Type', "application/json;charset=UTF-8")
-        });
+        if (requestUrl.indexOf("upload") > -1) {
+            
+        } else {
+            // 添加请求头
+            authReq = authReq.clone({
+                headers: req.headers.set('Content-Type', "application/json;charset=UTF-8")
+            });
+        }
 
         return next.handle(authReq)
             .pipe(map(

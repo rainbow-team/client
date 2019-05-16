@@ -22,8 +22,8 @@
             <div class="searchContion"> <button nz-button nzType="primary" nzSize="small" (click)="add()">新增</button>
             </div>
 
-            <div class="searchContion">
-                <nz-upload nzAction="https\://localhost:8080/fileInfo/upload" nzName="uploadFile">
+            <div>
+                <nz-upload nzAction="http://localhost:8080/fileInfo/upload" nzName="file"  [nzCustomRequest]="customReq">
                     <button nz-button><i nz-icon nzType="upload"></i><span>Click to Upload</span></button>
                 </nz-upload>
             </div>
