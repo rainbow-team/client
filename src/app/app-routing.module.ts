@@ -3,21 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './layouts/components/login/login.component';
 import { IndexComponent } from './layouts/components/index/index.component';
-import { SettingComponent } from './layouts/components/setting/setting.component';
 
 const appRoutes: Routes = [{
   path: 'login',
   component: LoginComponent
 }, {
   path: 'index',
-  component: IndexComponent
-}, {
-  path: 'setting',
-  component: SettingComponent,
+  component: IndexComponent,
   children: [
     {
       path: '',
-      loadChildren: './common-modules/setting/setting.module#SettingModule'
+      loadChildren: './business-modules/business-modules#BusinessModulesModule'
     }
   ]
 }, {

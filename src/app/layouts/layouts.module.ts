@@ -11,8 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
 import { ShareModule } from '../common-modules/share/share.module';
-import { MapModule } from '../common-modules/map/map.module';
-import { SettingComponent } from './components/setting/setting.component';
+
 
 @NgModule({
   imports: [
@@ -21,22 +20,19 @@ import { SettingComponent } from './components/setting/setting.component';
     HttpClientModule,
     RouterModule,
     NgZorroAntdModule,
-    ShareModule,
-    MapModule
+    ShareModule
   ],
   declarations: [
     LoginComponent,
     IndexComponent,
     HeaderComponent,
-    NavMenuComponent,
-    SettingComponent
+    NavMenuComponent
   ],
   exports: [
     LoginComponent,
     IndexComponent,
     HeaderComponent,
-    NavMenuComponent,
-    SettingComponent
+    NavMenuComponent
   ]
 })
 export class LayoutsModule { }

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         endpoint: 'client'
       }).subscribe((data) => {
         this.isBusy = false;
-        this.router.navigate(['/setting']);
+        this.router.navigate(['/index']);
       }, 
       error => {
         this.isBusy = false;
