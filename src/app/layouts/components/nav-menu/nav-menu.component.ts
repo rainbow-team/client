@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, NgZone, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -14,13 +14,10 @@ import { NavMenu, NavMenuItem } from 'src/app/utilities/entities/navMenu';
 })
 export class NavMenuComponent implements OnInit, OnDestroy {
 
-  @Input()
-  collapsed = false;
+  @Output() private breadcrumbChangeOuter = new EventEmitter();
 
   @Input()
   navMenu: NavMenu = [];
-
-  isCollapsed = false;
 
   subRouterEvent: Subscription;
 
@@ -30,70 +27,34 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // 订阅路由跳转事件
-    this.subRouterEvent = this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe((e: NavigationEnd) => {
-        this.setMenuStateByUrl(e.url);
-      });
-
     // 默认打开第一个菜单
-    this.menuItemClick(this.navMenu[0]);
-  }
-
-  // 根据跳转路由设置菜单选中状态
-  setMenuStateByUrl(url: string): void {
-    // 展开菜单对象数组
-    let menuItemList = _.flatMapDeep(this.navMenu, (item) => {
-      return [item].concat(item.children ? item.children : []);
-    });
-    let checkedItem = menuItemList.find(x => x.route === url);
-    if (checkedItem) {
-      this.menuItemClick(checkedItem);
-    }
+    this.menuItemClick(this.navMenu[0], null, null);
   }
 
   // 菜单项选中
-  menuItemClick(menuItem: NavMenuItem) {
-    let checkedItem = menuItem;
-    if (menuItem.children && menuItem.children) {
-      checkedItem = menuItem.children[0];
+  menuItemClick(menuItem1: NavMenuItem, menuItem2: NavMenuItem, menuItem3: NavMenuItem) {
+    let checkedItem = null;
+    let breadcrumbName = [];
+
+    if (menuItem3) {
+      checkedItem = menuItem3;
+      breadcrumbName.push(menuItem1.name);
+      breadcrumbName.push(menuItem2.name);
+      breadcrumbName.push(menuItem3.name);
+    } else if (menuItem2) {
+      breadcrumbName.push(menuItem1.name);
+      breadcrumbName.push(menuItem2.name);
+      checkedItem = menuItem2;
+    } else {
+      breadcrumbName.push(menuItem1.name);  
+      checkedItem = menuItem1;
     }
-    // 设置菜单状态
-    this.zone.runOutsideAngular(() => {
-      this.navMenu.forEach(item => {
-        item.selected = (item.id === checkedItem.id);
-        if (item.children) {
-          item.children.forEach(child => {
-            child.selected = (child.id === checkedItem.id);
-            if (child.selected) {
-              item.selected = true;
-            }
-          });
-        }
-      });
-    });
-    this.zone.run(() => {
-      this.navMenu = this.navMenu;
-    });
+
     // 路由跳转
     if (checkedItem.route) {
+      this.breadcrumbChangeOuter.emit(breadcrumbName);
       this.router.navigate([checkedItem.route]);
     }
-  }
-
-  // 一级菜单展开
-  subMenuOpen(isOpen: boolean, subMenu: NavMenuItem): void {
-    if (isOpen) {
-      this.menuItemClick(subMenu);
-    }
-  }
-
-  // 菜单展开折叠
-  toggleCollapsed(): void {
-    this.isCollapsed = !this.isCollapsed;
-    this.layoutService.setNavMenuState(this.isCollapsed ? NavMenuState.Collapsed : NavMenuState.Expand);
-    this.layoutService.setContentPanelState(this.collapsed ? ContentPanelState.Maximize : ContentPanelState.Normal);
   }
 
   ngOnDestroy() {

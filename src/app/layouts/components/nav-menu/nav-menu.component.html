@@ -1,20 +1,43 @@
 <div class="nav-menu">
   <ul nz-menu [nzMode]="'horizontal'">
     <ng-container *ngFor="let item of navMenu">
-      <li nz-submenu  [(nzOpen)]="item.selected" (nzOpenChange)="subMenuOpen($event, item)"
-        *ngIf="item.children && item.children.length>0; else navMenuItem">
+      <li nz-submenu *ngIf="item.children && item.children.length>0; else navMenuItem" style="width: 12%;text-align: center;">
         <span title>
-          <i nz-icon type="setting"></i>
+          <!-- <i nz-icon type="setting"></i> -->
           <span>{{item.name}}</span>
         </span>
         <ul>
-          <li nz-menu-item [(nzSelected)]="child.selected" (click)="menuItemClick(child)"
-            *ngFor="let child of item.children">{{child.name}}</li>
+
+          <ng-container *ngFor="let child of item.children">
+
+            <li *ngIf="child.children && child.children.length>0;else navChildMenuItem" nz-submenu >
+              <span title>
+                <span>{{child.name}}</span>
+              </span>
+
+              <ul>
+                <li *ngFor="let thirdChild of child.children" nz-menu-item nzPlacement="right" (click)="menuItemClick(item,child,thirdChild)">
+                  <span title>
+                    <span>{{thirdChild.name}}</span>
+                  </span>
+                </li>
+              </ul>
+            </li>
+
+            <ng-template #navChildMenuItem>
+              <li nz-menu-item nzPlacement="right" (click)="menuItemClick(item,child,null)">
+                <span title>
+                  <span>{{child.name}}</span>
+                </span>
+              </li>
+            </ng-template>
+
+          </ng-container>
+
         </ul>
       </li>
       <ng-template #navMenuItem>
-        <li nz-menu-item nz-tooltip nzPlacement="right" [(nzSelected)]="item.selected"
-          [nzTitle]="isCollapsed ? item.name : ''" (click)="menuItemClick(item)" style="width: 11%;text-align: center;">
+        <li nz-menu-item  (click)="menuItemClick(item,null,null)" style="width: 4%;text-align: center;">
           <span title>
             <!-- <i nz-icon type="mail"></i> -->
             <span>{{item.name}}</span>

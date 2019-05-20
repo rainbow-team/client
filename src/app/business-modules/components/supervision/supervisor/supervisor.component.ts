@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SupervisionSercice } from '../../../../common-modules/share/services/supervision/supervision.service';
+import { SupervisionSercice } from '../../../../services/supervision/supervision.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UploadXHRArgs } from 'ng-zorro-antd';
 import { HttpRequest, HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';

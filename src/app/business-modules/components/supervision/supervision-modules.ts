@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
-import { BusinessModulesRoutingModule } from './business-modules-routing.module';
-import { HomeComponent } from './components/home/home.component';
+import { SupervisionRoutingModule } from './supervision-routing.module';
+import { SupervisorComponent } from './supervisor/supervisor.component';
 
 @NgModule({
   imports: [
@@ -12,10 +12,10 @@ import { HomeComponent } from './components/home/home.component';
     FormsModule,
     ReactiveFormsModule,
     NgZorroAntdModule,
-    BusinessModulesRoutingModule
+    SupervisionRoutingModule
   ],
   declarations: [
-    HomeComponent
+    SupervisorComponent
   ]
 })
-export class BusinessModulesModule { }
+export class SupervisionModule { }

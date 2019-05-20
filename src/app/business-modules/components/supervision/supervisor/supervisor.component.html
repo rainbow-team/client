@@ -4,16 +4,14 @@
 
         <div style="height:50px;">
 
-            <div class="searchContion"> <button nz-button nzType="danger" nzSize="small" (click)="delete()">删除</button>
-            </div>
-            <div class="searchContion"> <button nz-button nzType="primary" nzSize="small" (click)="update()">修改</button>
-            </div>
-            <div class="searchContion"> <button nz-button nzType="primary" nzSize="small" (click)="add()">新增</button>
+            <div class="searchContion">
+                <button nz-button nzType="danger" nzSize="small" (click)="delete()">删除</button>
             </div>
             <div class="searchContion">
-                <nz-upload nzAction="http://localhost:8080/fileInfo/upload" nzName="file"  [nzCustomRequest]="customReq">
-                    <button nz-button><i nz-icon nzType="upload"></i><span>Click to Upload</span></button>
-                </nz-upload>
+                <button nz-button nzType="primary" nzSize="small" (click)="update()">修改</button>
+            </div>
+            <div class="searchContion">
+                <button nz-button nzType="primary" nzSize="small" (click)="add()">新增</button>
             </div>
 
             <div class="fr mr">
@@ -41,8 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of borderedTable.data" (click)="clickList(data)"
-                    [ngClass]="{selected:selectData.id==data.id}">
+                <tr *ngFor="let data of borderedTable.data" (click)="clickList(data)" [ngClass]="{selected:selectData.id==data.id}">
                     <td>{{ data.name }}</td>
                     <td>{{ data.birthday }}</td>
                     <td>{{ data.orgId }}</td>
@@ -199,6 +196,14 @@
         </table>
 
         <button style="margin-top: 30px;" nz-button nzType="primary" (click)="Submit()">提交</button>
+        <div class="searchContion">
+            <nz-upload nzAction="http://localhost:8080/fileInfo/upload" nzName="file" [nzCustomRequest]="customReq">
+                <button nz-button>
+                    <i nz-icon nzType="upload"></i>
+                    <span>上传</span>
+                </button>
+            </nz-upload>
+        </div>
 
     </nz-tab>
 </nz-tabset>
