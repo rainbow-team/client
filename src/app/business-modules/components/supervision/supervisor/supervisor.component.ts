@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SupervisionSercice } from '../../../../services/supervision/supervision.service';
+import { AttachmentSercice } from '../../../../services/common/attachment.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UploadXHRArgs } from 'ng-zorro-antd';
+import { UploadXHRArgs, UploadFile } from 'ng-zorro-antd';
 import { HttpRequest, HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
+import { from } from 'rxjs';
 @Component({
     selector: 'app-supervision-supervisor',
     templateUrl: './supervisor.component.html',
@@ -11,11 +13,13 @@ import { HttpRequest, HttpClient, HttpEvent, HttpEventType, HttpResponse } from 
 export class SupervisorComponent implements OnInit {
 
     public dataSet: any;
-    public data = {};
+    public data: any = {};
     public selectData: any = {};
     public name: any = "";
     public selectedIndex: any = 0;
-    constructor(private supervisionSercice: SupervisionSercice,private http:HttpClient) { }
+    public attachmentList: any = [];
+
+    constructor(private supervisionSercice: SupervisionSercice, private attachmentSercice: AttachmentSercice, private http: HttpClient) { }
 
     ngOnInit() {
 
@@ -23,7 +27,14 @@ export class SupervisorComponent implements OnInit {
     }
 
     Submit() {
-        var that =this;
+        var that = this;
+        this.data.attachmentList = [];
+
+        if (this.attachmentList.length > 0) {
+            this.attachmentList.forEach(element => {
+                this.data.attachmentList.push({ fileinfoId: element.response.msg });
+            });
+        }
         this.supervisionSercice.saveOrUpdateSupervisionSupervisor(this.data).subscribe(
             (res) => {
                 that.selectedIndex = 0;
@@ -37,11 +48,23 @@ export class SupervisorComponent implements OnInit {
     }
 
     update() {
-        var that =this;
+        var that = this;
         this.supervisionSercice.getSupervisionSupervisorById(this.selectData.id).subscribe(
             (res) => {
                 that.selectedIndex = 1;
                 that.data = res.msg;
+
+                this.attachmentList = [];
+                if (that.data.attachmentList && that.data.attachmentList.length > 0) {
+                    that.data.attachmentList.forEach(element => {
+                        this.attachmentList.push(
+                            {
+                                uid: element.fileinfoId,
+                                name: element.fileinfoClientFileName
+                            }
+                        );
+                    });
+                }
             }
         );
     }
@@ -87,7 +110,7 @@ export class SupervisorComponent implements OnInit {
             withCredentials: false
         });
         // 始终返回一个 `Subscription` 对象，nz-upload 会在适当时机自动取消订阅
-        return this.http.request(req).subscribe((event: HttpEvent<{}>) => {
+        return this.http.request(req).subscribe((event: any) => {
             if (event.type === HttpEventType.UploadProgress) {
                 if (event.total > 0) {
                     // tslint:disable-next-line:no-any
@@ -96,6 +119,11 @@ export class SupervisorComponent implements OnInit {
                 // 处理上传进度条，必须指定 `percent` 属性来表示进度
                 item.onProgress(event, item.file);
             } else if (event instanceof HttpResponse) {
+
+                // this.attachmentList.push({
+                //     uid: event.body.msg,
+                //     name: item.file.name
+                // });
                 // 处理成功
                 item.onSuccess(event.body, item.file, event);
             }
@@ -103,6 +131,19 @@ export class SupervisorComponent implements OnInit {
             // 处理失败
             item.onError(err, item.file);
         });
+    }
+
+    RemoveAttachment = (file: UploadFile) => {
+
+        if (this.data.id) {
+            this.attachmentSercice.deleteFileById(file.uid).subscribe(
+                (data) => {
+
+                }
+            );
+        }
+
+
     }
 
 }

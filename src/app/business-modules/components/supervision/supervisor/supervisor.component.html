@@ -27,7 +27,7 @@
         </div>
 
 
-        <nz-table #borderedTable nzBordered [nzData]="dataSet">
+        <nz-table #borderedTable nzBordered [nzData]="dataSet" [nzPageSize]="4">
             <thead>
                 <tr>
                     <th>姓名</th>
@@ -197,7 +197,7 @@
 
         <button style="margin-top: 30px;" nz-button nzType="primary" (click)="Submit()">提交</button>
         <div class="searchContion">
-            <nz-upload nzAction="http://localhost:8080/fileInfo/upload" nzName="file" [nzCustomRequest]="customReq">
+            <nz-upload nzAction="http://localhost:8080/fileInfo/upload" nzName="file" [nzCustomRequest]="customReq" [nzFileList]="attachmentList" [nzRemove]="RemoveAttachment">
                 <button nz-button>
                     <i nz-icon nzType="upload"></i>
                     <span>上传</span>
