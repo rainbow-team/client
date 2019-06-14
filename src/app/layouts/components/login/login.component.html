@@ -1,40 +1,47 @@
-<div class="login-layout">
-  <div class="container">
-    <img src="../../../../assets/images/login/login_title.png" alt="">
-    <form nz-form #loginForm="ngForm" class="login-form" (keydown.enter)="login(loginForm)"
-      (ngSubmit)="login(loginForm)">
-      <nz-alert nzType="error" *ngIf="loginMessage" nzCloseable nzMessage="Warning Text Warning"
-        (nzOnClose)="closeMessage()" style="margin-bottom: 16px;">
-      </nz-alert>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group [nzPrefix]="prefixUser" nzSize="large">
-            <input nz-input type="text" name="username" [(ngModel)]="formData.userName" placeholder="用户名" required>
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group [nzPrefix]="prefixLock" nzSize="large">
-            <input nz-input type="password" name="password" [(ngModel)]="formData.password" placeholder="密码" required>
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <label nz-checkbox name="rememberMe" [(ngModel)]="formData.remeberMe" style="margin-left: 16px;">
-            <span>记住我</span>
-          </label>
-        </nz-form-control>
-      </nz-form-item>
-      <button nz-button class="login-button" [nzType]="'primary'" [nzSize]="'large'" [nzShape]="'round'"
-        [nzLoading]="isBusy" [disabled]="loginForm.invalid">登&nbsp;录</button>
-    </form>
+<div class="login_div">
+
+  <!--标题-->
+  <div class="login_title" nz-row [nzType]="'flex'" [nzAlign]="'middle'" [nzJustify]="'center'">
+    <div nz-col [nzSpan]="24" style="text-align: center;">
+      <img src="./../../../../assets/images/login/login_title.png" />
+    </div>
+  </div>
+
+  <!--登录-->
+  <div class="login_contain">
+
+    <div>
+      <nz-input-group [nzPrefix]="prefixUser">
+        <input nz-input placeholder="请输入用户名" class="login_input">
+      </nz-input-group>
+    </div>
+
+    <div>
+      <nz-input-group [nzPrefix]="prefixPsw">
+        <input nz-input placeholder="请输入密码" class="login_input">
+      </nz-input-group>
+    </div>
+
+    <div>
+      <nz-input-group [nzPrefix]="prefixIdy">
+        <input nz-input placeholder="请输入验证码" class="login_input">
+      </nz-input-group>
+    </div>
+
+    <div style="text-align: center;">
+        <button nz-button nzType="primary" class="login_btn">登&nbsp;录</button>
+    </div>
+
+
     <ng-template #prefixUser>
-      <span>用户名</span>
+      <img src="./../../../../assets/images/login/login_user.png" style="margin-top: -20px;"/>
     </ng-template>
-    <ng-template #prefixLock>
-      <span>密&nbsp;码</span>
+    <ng-template #prefixPsw>
+      <img src="./../../../../assets/images/login/login_psw.png" style="margin-top: -20px;"/>
+    </ng-template>
+    <ng-template #prefixIdy>
+      <img src="./../../../../assets/images/login/login_idf.png" style="margin-top: -20px;"/>
     </ng-template>
   </div>
+
 </div>

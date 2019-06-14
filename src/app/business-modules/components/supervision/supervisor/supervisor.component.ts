@@ -60,7 +60,10 @@ export class SupervisorComponent implements OnInit {
                         this.attachmentList.push(
                             {
                                 uid: element.fileinfoId,
-                                name: element.fileinfoClientFileName
+                                name: element.fileinfoClientFileName,
+                                response:{
+                                    msg:element.fileinfoId
+                                }
                             }
                         );
                     });

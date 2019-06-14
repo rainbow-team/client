@@ -1,41 +1,48 @@
-.login-layout {
+
+.login_div{
   height: 100%;
   width: 100%;
-  padding-right: 80px;
   overflow: hidden;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
   background-image: url(../../../../assets/images/login/login_bg.png);
   background-size: cover;
   background-repeat: no-repeat;
-
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
-    .login-form {
-      width: 360px;
-      padding: 8px;
-      margin-top: 90px;
-
-      .login-button {
-        width: 120px;
-        border: none;
-        outline: none;
-        color: #ffffff;
-        background: linear-gradient(to right, #856EFC, #1E66DC);
-        float: right;
-      }
-    }
-  }
 }
 
-:host ::ng-deep .ant-input {
-  width: 100%;
-  padding-left: 65px !important;
-  border: none;
-  border-radius: 40px;
-  background-color: #E9F0FB;
+.login_title{
+  height: 240px;
+  width: 640px;
+  position: absolute;
+  left: 10%;
+  top: 27%;
+  background-image: url(../../../../assets/images/login/login_title_bg.png);
+  background-repeat: no-repeat;
 }
+
+.login_contain{
+  padding: 140px 55px 0 65px;
+  right: 9%;
+  position: absolute;
+  top: 20%;
+  height: 520px;
+  width: 420px;
+  background-image: url(../../../../assets/images/login/login_03.png);
+  background-repeat: no-repeat;
+}
+
+.login_input{
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+  padding-left: 40px!important;
+}
+
+.login_btn{
+  height: 50px;
+  width: 170px;
+  border-radius: 35px;
+  margin-top:40px;
+  font-size: 18px;
+}
+
+
+
