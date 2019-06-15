@@ -1,21 +1,37 @@
 <div class="header">
-  <img src="../../../../assets/images/header/header_title.png" alt="">
-  <div class="right-container">
-    <div class="content">
-      <img src="../../../../assets/images/header/icon_user.png" alt="">
-      <span style="margin-left: 8px;color: #4381E6;">XX单位&nbsp;&nbsp;系统管理员</span>
+  <div nz-row [nzType]="'flex'" [nzAlign]="'top'">
+    <div nz-col [nzSpan]="6" style="font-size: 18px;">
+      <img src="../../../../assets/images/index_01.png" style="margin-right: 10px;">
+      核安全数据库
     </div>
-    <nz-divider nzType="vertical" style="margin:0 16px;height: 24px;width: 2px;"></nz-divider>
-    <div class="content">
-      <a class="func-button" title="帮助">
-        <img src="../../../../assets/images/header/icon_help.png" alt="">
+    <div nz-col [nzSpan]="18" style="text-align: right;">
+      <img src="../../../../assets/images/index_03.png">
+      <span style="margin-left: 8px;">admin&nbsp;&nbsp;XXX单位&nbsp;&nbsp;XXX科室</span>
+      <nz-divider nzType="vertical" style="margin: 0 16px 0 35px;;height: 24px;width: 1px;"></nz-divider>
+
+
+
+      <a nz-popover class="func-button" [nzContent]="contentTemplate" nzPlacement="bottomRight">
+        <img src="../../../../assets/images/index_05.png" alt="">
       </a>
-      <a class="func-button" title="设置">
-        <img src="../../../../assets/images/header/icon_setting.png" alt="">
+     
+      <a class="func-button">
+        <img src="../../../../assets/images/index_07.png" alt="">
       </a>
       <a (click)="exitSystem()" class="func-button" title="退出">
-        <img src="../../../../assets/images/header/icon_exit.png" alt="">
+        <img src="../../../../assets/images/index_09.png" alt="">
       </a>
+
+      <ng-template #contentTemplate>
+        <div>
+            法规标准数据库
+        </div>
+        <div>
+            放射性废物治理数据库
+        </div>
+      </ng-template>
+
     </div>
   </div>
+
 </div>

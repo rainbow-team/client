@@ -99,6 +99,12 @@ export class IndexComponent implements OnInit {
         { name: '安全问题统计', id: '', route: '' },
         { name: '事故事件统计', id: '', route: '' }
       ]
+    }, {
+      name: '数据迁移', id: 'sjqy', route: '',
+    },
+    {
+      name: '查询展示', id: 'cxzs', route: ''
+
     },
     {
       name: '系统设置', id: 'xtsz', route: '',

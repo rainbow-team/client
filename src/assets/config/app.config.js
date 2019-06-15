@@ -17,7 +17,7 @@
 
     // WCF服务完整地址
     get serviceAddress() {
-      return 'http://localhost:8081';
+      return 'http://localhost:8080';
     },
 
     // 附件配置节点

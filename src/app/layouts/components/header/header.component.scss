@@ -1,30 +1,12 @@
 .header {
-  height: 100%;
+  height: 130px;
   width: 100%;
-  padding: 0 16px;
+  padding: 0px 20px 30px 20px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #E0E0E0;
+  background: #0050b3;
+  color: #fff;
+}
 
-  .right-container {
-    height: 100%;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-
-    .content {
-      display: flex;
-      align-items: center;
-
-      .func-button {
-        margin: 0 16px;
-
-        &:first-child {
-          margin-left: 0;
-        }
-      }
-    }
-  }
+.func-button{
+  margin-left: 30px;
 }

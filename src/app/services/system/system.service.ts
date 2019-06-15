@@ -9,7 +9,7 @@ export class SystemService {
   constructor(private http: HttpClient) { }
 
   // 系统登录
-  login(param) {
-    return this.http.post(AppConfig.serviceAddress+'/login1',null);
+  login(param):any {
+    return this.http.post('/login',param);
   }
 }

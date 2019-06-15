@@ -1,7 +1,7 @@
 <div class="nav-menu">
   <ul nz-menu [nzMode]="'horizontal'">
     <ng-container *ngFor="let item of navMenu">
-      <li nz-submenu *ngIf="item.children && item.children.length>0; else navMenuItem" style="width: 12%;text-align: center;">
+      <li nz-submenu *ngIf="item.children && item.children.length>0; else navMenuItem" style="width: 9%;text-align: center;">
         <span title>
           <!-- <i nz-icon type="setting"></i> -->
           <span>{{item.name}}</span>
@@ -37,7 +37,7 @@
         </ul>
       </li>
       <ng-template #navMenuItem>
-        <li nz-menu-item  (click)="menuItemClick(item,null,null)" style="width: 4%;text-align: center;">
+        <li nz-menu-item  (click)="menuItemClick(item,null,null)" style="width: 9%;text-align: center;">
           <span title>
             <!-- <i nz-icon type="mail"></i> -->
             <span>{{item.name}}</span>

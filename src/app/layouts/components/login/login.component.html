@@ -12,24 +12,28 @@
 
     <div>
       <nz-input-group [nzPrefix]="prefixUser">
-        <input nz-input placeholder="请输入用户名" class="login_input">
+        <input nz-input placeholder="请输入用户名" class="login_input" [(ngModel)]="username">
       </nz-input-group>
     </div>
 
     <div>
       <nz-input-group [nzPrefix]="prefixPsw">
-        <input nz-input placeholder="请输入密码" class="login_input">
+        <input nz-input type="password" placeholder="请输入密码" class="login_input" [(ngModel)]="password">
       </nz-input-group>
     </div>
 
     <div>
-      <nz-input-group [nzPrefix]="prefixIdy">
-        <input nz-input placeholder="请输入验证码" class="login_input">
+      <nz-input-group [nzPrefix]="prefixIdy" [nzSuffix]="suffixIdy">
+        <input nz-input placeholder="请输入验证码" class="login_input" [(ngModel)]="code">
       </nz-input-group>
     </div>
 
+    <div style="color: #ff2828;height: 0;">
+      {{loginMessage}}
+    </div>
+
     <div style="text-align: center;">
-        <button nz-button nzType="primary" class="login_btn">登&nbsp;录</button>
+        <button nz-button nzType="primary" class="login_btn" [nzLoading]="isLogining" (click)="login()">登&nbsp;录</button>
     </div>
 
 
@@ -41,6 +45,10 @@
     </ng-template>
     <ng-template #prefixIdy>
       <img src="./../../../../assets/images/login/login_idf.png" style="margin-top: -20px;"/>
+    </ng-template>
+
+    <ng-template #suffixIdy>
+      <img [src]="getVerifyCode" class="login_idy" (click)="changeVerifyCode()" title="换一张"/>
     </ng-template>
   </div>
 

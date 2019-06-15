@@ -10,14 +10,15 @@ import { SystemService } from '../../../services/system/system.service';
 })
 export class LoginComponent implements OnInit {
 
-  isBusy = false;
-  loginMessage = '';
+  isLogining = false;
 
-  formData = {
-    userName: '111',
-    password: '111',
-    remeberMe: false
-  };
+  loginMessage = '';
+  username = "";
+  password = "";
+  code = "";
+
+
+  getVerifyCode = AppConfig.serviceAddress + "/getVerifyCode?" + new Date().getTime();
 
   constructor(private router: Router,
     private systemService: SystemService) { }
@@ -25,43 +26,52 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(loginForm: NgForm): void {
-    this.isBusy = true;
-    if (loginForm.valid) {
+  login(): void {
 
-      // 接口调用示例
-      this.systemService.login({
-        account: 'YWRtaW4=',
-        password: 'ODg4',
-        endpoint: 'client'
-      }).subscribe((data) => {
-        this.isBusy = false;
+    this.loginMessage = "";
+
+    if (!this.username) {
+      this.loginMessage = "用户名不能为空"
+      return;
+    }
+
+    if (!this.password) {
+      this.loginMessage = "密码不能为空"
+      return;
+    }
+
+    if (!this.code) {
+      this.loginMessage = "验证吗不能为空"
+      return;
+    }
+
+
+    this.isLogining = true;
+    // 接口调用示例
+    this.systemService.login({
+      username: this.username,
+      password: this.password,
+      code: this.code
+    }).subscribe((data) => {
+
+      this.isLogining = false;
+
+      if (data.code == 200) {
         this.router.navigate(['/index']);
-      }, 
+      } else {
+        this.loginMessage = data.msg;
+      }
+
+    },
       error => {
-        this.isBusy = false;
+        this.isLogining = false;
         this.loginMessage = error.message;
       });
 
-      // const errorMsg = '';
-      // if (errorMsg) {
-      //   this.loginMessage = '登录失败';
-      //   this.isBusy = false;
-      //   const closeTimeout = setTimeout(() => {
-      //     this.closeMessage();
-      //     clearTimeout(closeTimeout);
-      //   }, 3000);
-      // } else {
-      //   setTimeout(() => {
-      //     this.isBusy = false;
-      //     this.router.navigate(['/setting']);
-      //     // this.router.navigate(['/index']);
-      //   }, 3000);  // sdfsdf 
-      // }
-    }
   }
 
-  closeMessage() {
-    this.loginMessage = '';
+  changeVerifyCode() {
+    this.getVerifyCode = AppConfig.serviceAddress + "/getVerifyCode?" + new Date().getTime();
   }
+
 }
