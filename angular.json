@@ -102,7 +102,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/lib/echarts/common.min.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

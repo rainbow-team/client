@@ -1,0 +1,15 @@
+.div1{
+    height: 100%;
+    background: #fff;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+.div2{
+    height: calc(100% - 10px);
+    width: calc(calc(100% - 20px)/2);
+    background: #fff;
+    background-image: url(../../../../assets/images/index_30.png);
+    background-repeat: no-repeat;
+    padding: 20px;
+}

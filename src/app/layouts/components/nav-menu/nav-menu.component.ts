@@ -19,6 +19,8 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   @Input()
   navMenu: NavMenu = [];
 
+  checkedItem: any;
+
   subRouterEvent: Subscription;
 
   constructor(private router: Router,
@@ -33,27 +35,27 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
   // 菜单项选中
   menuItemClick(menuItem1: NavMenuItem, menuItem2: NavMenuItem, menuItem3: NavMenuItem) {
-    let checkedItem = null;
+    this.checkedItem = null;
     let breadcrumbName = [];
 
     if (menuItem3) {
-      checkedItem = menuItem3;
+      this.checkedItem = menuItem3;
       breadcrumbName.push(menuItem1.name);
       breadcrumbName.push(menuItem2.name);
       breadcrumbName.push(menuItem3.name);
     } else if (menuItem2) {
       breadcrumbName.push(menuItem1.name);
       breadcrumbName.push(menuItem2.name);
-      checkedItem = menuItem2;
+      this.checkedItem = menuItem2;
     } else {
-      breadcrumbName.push(menuItem1.name);  
-      checkedItem = menuItem1;
+      breadcrumbName.push(menuItem1.name);
+      this.checkedItem = menuItem1;
     }
 
     // 路由跳转
-    if (checkedItem.route) {
+    if (this.checkedItem.route) {
       this.breadcrumbChangeOuter.emit(breadcrumbName);
-      this.router.navigate([checkedItem.route]);
+      this.router.navigate([this.checkedItem.route]);
     }
   }
 
