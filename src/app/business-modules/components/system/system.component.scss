@@ -1,0 +1,19 @@
+.div_1{
+    height: 100%;
+    background: #fff;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    padding: 10px 0 0 10px;
+
+    .div_menu{
+        height: 50px;
+        line-height: 50px;
+        font-size: 16px;
+        padding-left: 20px;
+    }
+    .menu_select{
+        background: #e6f1ff;
+        color: #3a6dbe;
+        border-right: 2px solid #0050b3;
+    }
+}

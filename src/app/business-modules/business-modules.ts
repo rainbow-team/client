@@ -5,6 +5,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { BusinessModulesRoutingModule } from './business-modules-routing.module';
 import { HomeComponent } from './components/home/home.component';
+import { SystemComponent } from './components/system/system.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HomeComponent } from './components/home/home.component';
     BusinessModulesRoutingModule
   ],
   declarations: [
-    HomeComponent
+    HomeComponent,
+    SystemComponent
   ]
 })
 export class BusinessModulesModule { }

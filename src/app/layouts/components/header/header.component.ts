@@ -104,15 +104,8 @@ export class HeaderComponent implements OnInit {
 
     },
     {
-      name: '系统设置', id: 'xtsz', route: '',
-      children: [
-        { name: '组织机构管理', id: '', route: '' },
-        { name: '用户管理', id: '', route: '' },
-        { name: '角色权限管理', id: '', route: '' },
-        { name: '日志管理', id: '', route: '' },
-        { name: '静态数据', id: '', route: '' },
-        { name: '数据迁移', id: '', route: '' }
-      ]
+      name: '系统设置', id: 'xtsz', route: 'index/system',
+      children: []
     }
   ];
 

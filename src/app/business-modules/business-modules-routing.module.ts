@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { SystemComponent } from './components/system/system.component';
 
 const appRoutes: Routes = [
     {
@@ -17,6 +18,9 @@ const appRoutes: Routes = [
                 loadChildren: './components/supervision/supervision-modules#SupervisionModule'
             }
         ]
+    }, {
+        path: 'system',
+        component: SystemComponent
     }
 ];
 
