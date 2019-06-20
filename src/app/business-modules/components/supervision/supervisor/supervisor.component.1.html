@@ -1,0 +1,209 @@
+<nz-tabset [nzTabPosition]="'top'" [nzType]="'card'" [nzSelectedIndex]="selectedIndex">
+    <nz-tab [nzTitle]="'信息查询'" (nzClick)="selectedIndex=0">
+
+
+        <div style="height:50px;">
+
+            <div class="searchContion">
+                <button nz-button nzType="danger" nzSize="small" (click)="delete()">删除</button>
+            </div>
+            <div class="searchContion">
+                <button nz-button nzType="primary" nzSize="small" (click)="update()">修改</button>
+            </div>
+            <div class="searchContion">
+                <button nz-button nzType="primary" nzSize="small" (click)="add()">新增</button>
+            </div>
+
+            <div class="fr mr">
+
+                <nz-input-group [nzSuffix]="suffixIconSearch">
+                    <input type="text" nz-input placeholder="请输入姓名" [(ngModel)]="name" />
+                </nz-input-group>
+                <ng-template #suffixIconSearch>
+                    <i nz-icon type="search" (click)="select()"></i>
+                </ng-template>
+
+            </div>
+        </div>
+
+
+        <nz-table #borderedTable nzBordered [nzData]="dataSet" [nzPageSize]="4">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>出生年月</th>
+                    <th>所属单位</th>
+                    <th>入职时间</th>
+                    <th>职称</th>
+                    <th>到期时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of borderedTable.data" (click)="clickList(data)" [ngClass]="{selected:selectData.id==data.id}">
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.birthday }}</td>
+                    <td>{{ data.orgId }}</td>
+                    <td>{{data.entryDate}}</td>
+                    <td>{{data.titleId}}</td>
+                    <td>{{data.educateDate}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="'信息录入'" (nzClick)="selectedIndex=1">
+
+        <table class="tableC">
+            <tr>
+                <td>
+                    姓名:
+                </td>
+                <td>
+                    <input nz-input name="name" [(ngModel)]="data.name" class="w200" />
+                </td>
+                <td>
+                    出生年月
+                </td>
+                <td>
+                    <nz-date-picker name="birthday" [(ngModel)]="data.birthday" class="w200"></nz-date-picker>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    身份证:
+                </td>
+                <td>
+                    <input nz-input name="identity" [(ngModel)]="data.identity" class="w200" />
+                </td>
+                <td>
+                    性别
+                </td>
+                <td>
+                    <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="data.sex">
+                        <nz-option nzLabel="男" nzValue=1></nz-option>
+                        <nz-option nzLabel="女" nzValue=0></nz-option>
+                    </nz-select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    政治面貌:
+                </td>
+                <td>
+                    <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="data.politicalId">
+                        <nz-option nzLabel="党员" nzValue="1"></nz-option>
+                        <nz-option nzLabel="共青团员" nzValue="0"></nz-option>
+                    </nz-select>
+                </td>
+                <td>
+                    联系方式:
+                </td>
+                <td>
+                    <input nz-input name="contact" [(ngModel)]="data.contact" class="w200" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    所属单位:
+                </td>
+                <td>
+                    <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="data.orgId">
+                        <nz-option nzLabel="所属单位1" nzValue="1"></nz-option>
+                        <nz-option nzLabel="所属单位2" nzValue="0"></nz-option>
+                    </nz-select>
+                </td>
+                <td>
+                    入职时间:
+                </td>
+                <td>
+                    <nz-date-picker name="entryDate" [(ngModel)]="data.entryDate" class="w200"></nz-date-picker>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    职称:
+                </td>
+                <td>
+                    <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="data.titleId">
+                        <nz-option nzLabel="技术员" nzValue="1"></nz-option>
+                        <nz-option nzLabel="工程师" nzValue="0"></nz-option>
+                    </nz-select>
+                </td>
+                <td>
+                    职务:
+                </td>
+                <td>
+                    <nz-date-picker name="post" [(ngModel)]="data.post" class="w200"></nz-date-picker>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    毕业学校:
+                </td>
+                <td>
+                    <input nz-input name="educationSchool" [(ngModel)]="data.educationSchool" class="w200" />
+                </td>
+                <td>
+                    毕业时间:
+                </td>
+                <td>
+                    <nz-date-picker name="educateDate" [(ngModel)]="data.educateDate" class="w200"></nz-date-picker>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    专业:
+                </td>
+                <td>
+                    <input nz-input name="major" [(ngModel)]="data.major" class="w200" />
+                </td>
+                <td>
+                    核安全工作时间:
+                </td>
+                <td>
+                    <nz-date-picker name="continueTime" [(ngModel)]="data.continueTime" class="w200"></nz-date-picker>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    学历:
+                </td>
+                <td>
+                    <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="data.educationId">
+                        <nz-option nzLabel="本科" nzValue="1"></nz-option>
+                        <nz-option nzLabel="博士" nzValue="0"></nz-option>
+                    </nz-select>
+                </td>
+                <td>
+                    学位:
+                </td>
+                <td>
+                    <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="data.degreeId">
+                        <nz-option nzLabel="学士" nzValue="1"></nz-option>
+                        <nz-option nzLabel="博士" nzValue="0"></nz-option>
+                    </nz-select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    参加培训班次及成绩：
+                </td>
+                <td colspan="3">
+                    <textarea rows="4" nz-input [(ngModel)]="score"></textarea>
+                </td>
+
+            </tr>
+        </table>
+
+        <button style="margin-top: 30px;" nz-button nzType="primary" (click)="Submit()">提交</button>
+        <div class="searchContion">
+            <nz-upload nzAction="http://localhost:8081/fileInfo/upload" nzName="file" [nzCustomRequest]="customReq" [nzFileList]="attachmentList" [nzRemove]="RemoveAttachment">
+                <button nz-button>
+                    <i nz-icon nzType="upload"></i>
+                    <span>上传</span>
+                </button>
+            </nz-upload>
+        </div>
+
+    </nz-tab>
+</nz-tabset>

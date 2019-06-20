@@ -19,10 +19,32 @@ export class SupervisorComponent implements OnInit {
     public selectedIndex: any = 0;
     public attachmentList: any = [];
 
+    nestedTableData = [];
+    innerTableData = [];
+    
     constructor(private supervisionSercice: SupervisionSercice, private attachmentSercice: AttachmentSercice, private http: HttpClient) { }
 
     ngOnInit() {
-
+        for (let i = 0; i < 3; ++i) {
+            this.nestedTableData.push({
+                key: i,
+                name: 'Screem',
+                platform: 'iOS',
+                version: '10.3.4.5654',
+                upgradeNum: 500,
+                creator: 'Jack',
+                createdAt: '2014-12-24 23:12:00',
+                expand: false
+            });
+        }
+        for (let i = 0; i < 3; ++i) {
+            this.innerTableData.push({
+                key: i,
+                date: '2014-12-24 23:12:00',
+                name: 'This is production name',
+                upgradeNum: 'Upgraded: 56',
+            });
+        }
         this.select();
     }
 
@@ -61,8 +83,8 @@ export class SupervisorComponent implements OnInit {
                             {
                                 uid: element.fileinfoId,
                                 name: element.fileinfoClientFileName,
-                                response:{
-                                    msg:element.fileinfoId
+                                response: {
+                                    msg: element.fileinfoId
                                 }
                             }
                         );
