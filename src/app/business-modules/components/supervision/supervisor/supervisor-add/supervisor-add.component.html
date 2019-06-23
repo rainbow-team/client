@@ -1,0 +1,111 @@
+<div style="height: 100%;background:#fff">
+  <div class="div_top">
+    监督员信息
+  </div>
+
+  <div class="div_contain">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>姓名：<input nz-input name="name" [(ngModel)]="data.name" class="w200" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>身份证号：<input nz-input name="identity" [(ngModel)]="data.identity" class="w200" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>性别：
+        <nz-radio-group [(ngModel)]="data.sex" style="width: 200px;text-align: left;">
+          <label nz-radio nzValue="1">男</label>
+          <label nz-radio nzValue="0">女</label>
+        </nz-radio-group>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>出生年月：
+        <nz-date-picker name="birthday" [nzStyle]="dataStyle" [(ngModel)]="data.birthday" class="w200">
+        </nz-date-picker>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>政治面貌：
+        <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="data.politicalId">
+          <nz-option nzLabel="党员" nzValue="1"></nz-option>
+          <nz-option nzLabel="共青团员" nzValue="0"></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>联系方式：
+        <input nz-input name="contact" [(ngModel)]="data.contact" class="w200" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>入职时间： <nz-date-picker name="entryDate" [(ngModel)]="data.entryDate" class="w200">
+        </nz-date-picker>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>所属单位：
+        <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="data.orgId">
+          <nz-option nzLabel="所属单位1" nzValue="1"></nz-option>
+          <nz-option nzLabel="所属单位2" nzValue="0"></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        职称：
+        <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="data.titleId">
+          <nz-option nzLabel="技术员" nzValue="1"></nz-option>
+          <nz-option nzLabel="工程师" nzValue="0"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        职务：<input nz-input name="post" [(ngModel)]="data.post" class="w200" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        毕业学校：<input nz-input name="educationSchool" [(ngModel)]="data.educationSchool" class="w200" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        专业：<input nz-input name="major" [(ngModel)]="data.major" class="w200" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        备注：
+        <textarea nz-input style="width: calc(100% - 130px);height: 70px;"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <div class="clearfix">
+    <nz-upload nzAction="http://localhost:8081/fileInfo/upload" nzName="file" [nzCustomRequest]="customReq"
+      [nzFileList]="attachmentList" [nzRemove]="RemoveAttachment">
+      <i nz-icon type="plus"></i>
+      <div class="ant-upload-text">上传附件</div>
+    </nz-upload>
+  </div> -->
+
+  <div class="clearfix" style="padding:0 50px;">
+    <nz-upload
+      nzAction="https://jsonplaceholder.typicode.com/posts/"
+      nzListType="picture-card"
+      [(nzFileList)]="fileList"
+      [nzShowButton]="fileList.length < 3"
+      [nzPreview]="handlePreview">
+        <i nz-icon type="plus"></i>
+        <div class="ant-upload-text">上传附件</div>
+    </nz-upload>
+    <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
+      <ng-template #modalContent>
+        <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+      </ng-template>
+    </nz-modal>
+  </div>
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'" >
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>

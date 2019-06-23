@@ -32,3 +32,47 @@
 .fl{
   float: left;
 }
+
+.addbtn{
+  width: 70px;
+  background:#1890ff url(./assets/images/add_btn.png) no-repeat 7px center;
+  padding-right: 0px;
+}
+
+.delbtn{
+  width: 70px;
+  background: #f47264 url(./assets/images/del_btn.png) no-repeat 7px center;
+  padding-right: 0px;
+  color: #fff;
+}
+
+.commontable{
+  th{
+    color: #0050b3!important;
+  }
+}
+
+.w200{
+  width: 200px;
+}
+
+.ta_r{
+  text-align: right;
+}
+
+.clo_r{
+  color: red;
+}
+
+.ma_b20{
+  margin-bottom: 20px;
+}
+
+:host ::ng-deep i {
+  font-size: 32px;
+  color: #999;
+}
+:host ::ng-deep .ant-upload-text {
+  margin-top: 8px;
+  color: #666;
+}

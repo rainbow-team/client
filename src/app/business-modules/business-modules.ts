@@ -7,6 +7,9 @@ import { BusinessModulesRoutingModule } from './business-modules-routing.module'
 import { HomeComponent } from './components/home/home.component';
 import { SystemComponent } from './components/system/system.component';
 import { SettingComponent } from './components/system/setting/setting.component';
+import { SupervisorComponent } from './components/supervision/supervisor/supervisor.component';
+import { SupervisorAddComponent } from './components/supervision/supervisor/supervisor-add/supervisor-add.component';
+import { SupervisorChildmanageComponent } from './components/supervision/supervisor/supervisor-childmanage/supervisor-childmanage.component';
 
 @NgModule({
   imports: [
@@ -19,7 +22,10 @@ import { SettingComponent } from './components/system/setting/setting.component'
   declarations: [
     HomeComponent,
     SystemComponent,
-    SettingComponent
+    SettingComponent,
+    SupervisorComponent,
+    SupervisorAddComponent,
+    SupervisorChildmanageComponent
   ]
 })
 export class BusinessModulesModule { }

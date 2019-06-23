@@ -35,90 +35,52 @@
             </div>
 
             <div class="fr">
-                <button nz-button nzType="danger" style="width: 70px;">删除</button>
+                <button nz-button nzType="danger" class="delbtn">删除</button>
             </div>
 
             <div class="fr">
-                <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;">添加</button>
+                <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="goChildManage()">子项管理</button>
+            </div>
+
+            <div class="fr">
+                <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
             </div>
 
         </div>
         <div>
-            <nz-table #nestedTable [nzData]="nestedTableData" [nzPageSize]="10">
+            <nz-table #nestedTable [nzData]="dataSet" [nzPageSize]="10" class="commontable">
                 <thead>
                     <tr>
-                        <th nzShowExpand></th>
-                        <th>Name</th>
-                        <th>Platform</th>
-                        <th>Version</th>
-                        <th>Upgraded</th>
-                        <th>Creator</th>
-                        <th>Date</th>
-                        <th>Action</th>
+                        <th nzShowCheckbox></th>
+                        <th>序号</th>
+                        <th>姓名</th>
+                        <th nzShowSort >出生年月</th>
+                        <th>所属单位</th>
+                        <th nzShowSort >入职时间</th>
+                        <th>职称</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-template ngFor let-data [ngForOf]="nestedTable.data">
+                    <ng-template *ngFor="let data of nestedTable.data;index as index">
                         <tr>
-                            <td nzShowExpand [(nzExpand)]="data.expand"></td>
+                            <td nzShowCheckbox></td>
+                            <td>{{index+1}}</td>
                             <td>{{data.name}}</td>
-                            <td>{{data.platform}}</td>
-                            <td>{{data.version}}</td>
-                            <td>{{data.upgradeNum}}</td>
-                            <td>{{data.creator}}</td>
-                            <td>{{data.createdAt}}</td>
+                            <td>{{data.birthday}}</td>
+                            <td>{{data.orgId}}</td>
+                            <td>{{data.entryDate}}</td>
+                            <td>{{data.titleId}}</td>
                             <td>
-                                <a>Publish</a>
+                                <a>查看</a>
+                                <nz-divider nzType="vertical"></nz-divider>
+                                <a>编辑</a>
+                                <nz-divider nzType="vertical"></nz-divider>
+                                <a>子项管理</a>
                             </td>
                         </tr>
-                        <tr [nzExpand]="data.expand">
-                            <td></td>
-                            <td colspan="7">
-                                <nz-table #innerTable [nzData]="innerTableData" nzSize="middle"
-                                    [nzShowPagination]="false">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Name</th>
-                                            <th>Status</th>
-                                            <th>Upgrade Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                <tbody>
-                    <tr *ngFor="let data of innerTable.data">
-                        <td>{{data.date}}</td>
-                        <td>{{data.name}}</td>
-                        <td>
-                            <nz-badge [nzStatus]="'success'" [nzText]="'Finished'"></nz-badge>
-                        </td>
-                        <td>{{data.upgradeNum}}</td>
-                        <td>
-                            <span class="table-operation">
-                                <nz-dropdown>
-                                    <a nz-dropdown class="operation">
-                                        Pause <i nz-icon type="down"></i>
-                                    </a>
-                                    <ul nz-menu>
-                                        <li nz-menu-item>
-                                            <a>Action 1</a>
-                                        </li>
-                                        <li nz-menu-item>
-                                            <a>Action 2</a>
-                                        </li>
-                                    </ul>
-                                </nz-dropdown>
-                                <a class="operation">Stop</a>
-                                <a>More</a>
-                            </span>
-                        </td>
-                    </tr>
+                    </ng-template>
                 </tbody>
-            </nz-table>
-            </td>
-            </tr>
-            </ng-template>
-            </tbody>
             </nz-table>
         </div>
     </div>

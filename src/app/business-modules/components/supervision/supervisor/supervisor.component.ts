@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SupervisionSercice } from '../../../../services/supervision/supervision.service';
 import { AttachmentSercice } from '../../../../services/common/attachment.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UploadXHRArgs, UploadFile } from 'ng-zorro-antd';
 import { HttpRequest, HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
-import { from } from 'rxjs';
+import { Router } from '@angular/router';
+
 @Component({
     selector: 'app-supervision-supervisor',
     templateUrl: './supervisor.component.html',
@@ -22,29 +22,9 @@ export class SupervisorComponent implements OnInit {
     nestedTableData = [];
     innerTableData = [];
     
-    constructor(private supervisionSercice: SupervisionSercice, private attachmentSercice: AttachmentSercice, private http: HttpClient) { }
+    constructor(private supervisionSercice: SupervisionSercice, private attachmentSercice: AttachmentSercice, private http: HttpClient,private router: Router) { }
 
     ngOnInit() {
-        for (let i = 0; i < 3; ++i) {
-            this.nestedTableData.push({
-                key: i,
-                name: 'Screem',
-                platform: 'iOS',
-                version: '10.3.4.5654',
-                upgradeNum: 500,
-                creator: 'Jack',
-                createdAt: '2014-12-24 23:12:00',
-                expand: false
-            });
-        }
-        for (let i = 0; i < 3; ++i) {
-            this.innerTableData.push({
-                key: i,
-                date: '2014-12-24 23:12:00',
-                name: 'This is production name',
-                upgradeNum: 'Upgraded: 56',
-            });
-        }
         this.select();
     }
 
@@ -95,8 +75,11 @@ export class SupervisorComponent implements OnInit {
     }
 
     add() {
-        this.selectedIndex = 1;
-        this.data = {};
+        this.router.navigate(['/index/supersivion/supervisor/add'], { queryParams: { sid: 1 } });
+    }
+
+    goChildManage(){
+        this.router.navigate(['/index/supersivion/supervisor/childmanage'], { queryParams: { sid: 1 } });
     }
 
     delete() {
