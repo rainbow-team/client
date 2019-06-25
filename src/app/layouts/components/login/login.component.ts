@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SystemService } from '../../../services/system/system.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   getVerifyCode = AppConfig.serviceAddress + "/getVerifyCode?" + new Date().getTime();
 
   constructor(private router: Router,
-    private systemService: SystemService) { }
+    private systemService: SystemService, private cookieService: CookieService) { }
 
   ngOnInit() {
   }
@@ -41,10 +42,16 @@ export class LoginComponent implements OnInit {
     }
 
     if (!this.code) {
-      this.loginMessage = "验证吗不能为空"
+      this.loginMessage = "验证码不能为空"
       return;
     }
 
+    let idyCode = this.cookieService.get("_code");
+
+    if (idyCode.toLocaleLowerCase()!=this.code.toLocaleLowerCase()) {
+      this.loginMessage = "验证码不正确"
+      return;
+    }
 
     this.isLogining = true;
     // 接口调用示例

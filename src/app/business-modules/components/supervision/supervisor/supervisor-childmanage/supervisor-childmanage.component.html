@@ -7,20 +7,21 @@
     <div nz-row style="height: 50px" [nzType]="'flex'" [nzAlign]="'middle'">
       <div nz-col [nzSpan]="8">
         <nz-input-group [nzSuffix]="suffixIconSearch" style="width: 300px;">
-          <input type="text" nz-input placeholder="请输入班次搜索" >
+          <input type="text" nz-input placeholder="请输入班次搜索">
         </nz-input-group>
         <ng-template #suffixIconSearch>
           <i nz-icon type="search"></i>
         </ng-template>
       </div>
       <div nz-col [nzSpan]="16" style="text-align: right;">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn">添加</button>
+        <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn"
+          (click)="isVisible=true;">添加</button>
       </div>
     </div>
     <div nz-row>
       <nz-table #nestedTable [nzData]="dataSet" [nzPageSize]="10" class="commontable">
         <thead>
-          <tr>     
+          <tr>
             <th>序号</th>
             <th>培训班次</th>
             <th nzShowSort>培训时间</th>
@@ -59,4 +60,50 @@
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'">
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="添加培训信息" nzOkText="提交" nzCancelText="取消" (nzOnOk)="isVisible=false;"
+    (nzOnCancel)="isVisible=false;" nzWidth="700">
+
+    <div style="padding: 10px 30px 50px 0;">
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="12"  class="ta_r">
+          培训班次：
+          <input nz-input name="pxbc" [(ngModel)]="pxbc" style="width: 140px;" />
+          <button nz-button nzType="primary" style=" margin-left: 10px;width: 50px;" 
+          >选择</button>
+        </div>
+        <div nz-col [nzSpan]="12"  class="ta_r">
+          培训时间：
+          <nz-date-picker name="pxsj" [nzStyle]="dataStyle" [(ngModel)]="pxsj" class="w200">
+          </nz-date-picker>
+        </div>
+      </div>
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="12" class="ta_r">
+          成绩：
+          <nz-select class="w200" nzShowSearch nzAllowClear [(ngModel)]="score">
+            <nz-option nzLabel="A" nzValue="1"></nz-option>
+            <nz-option nzLabel="B" nzValue="0"></nz-option>
+          </nz-select>
+        </div>
+        <div nz-col [nzSpan]="12" class="ta_r">
+          监督员证号：
+          <input nz-input name="pxbc" [(ngModel)]="pxbc" class="w200" />
+        </div>
+      </div>
+      <div nz-row>
+        <div nz-col [nzSpan]="12" class="ta_r">
+          到期时间：
+          <nz-date-picker name="pxsj" [nzStyle]="dataStyle" [(ngModel)]="pxsj" class="w200">
+          </nz-date-picker>
+        </div>
+        <div nz-col [nzSpan]="12" class="ta_r">
+          发证时间：
+          <nz-date-picker name="pxsj" [nzStyle]="dataStyle" [(ngModel)]="pxsj" class="w200">
+          </nz-date-picker>
+        </div>
+      </div>
+    </div>
+  </nz-modal>
+
 </div>

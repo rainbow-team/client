@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutsModule } from './layouts/layouts.module';
 import { HandleHttpInterceptor } from './utilities/interceptors/handlehttp.interceptor';
+import { CookieService } from 'ngx-cookie-service';
 
 /** 配置 angular i18n **/
 registerLocaleData(zh);
@@ -29,7 +30,8 @@ registerLocaleData(zh);
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HandleHttpInterceptor, multi: true },
-    { provide: NZ_I18N, useValue: zh_CN }
+    { provide: NZ_I18N, useValue: zh_CN },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

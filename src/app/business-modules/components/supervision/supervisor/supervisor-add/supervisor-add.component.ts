@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
+import { DictionarySercice } from './../../../../../services/common/dictionary.service'
 
 @Component({
   selector: 'app-supervisor-add',
@@ -22,7 +23,9 @@ export class SupervisorAddComponent implements OnInit {
   previewImage = '';
   previewVisible = false;
 
-  constructor(private msg: NzMessageService,private router: Router) {}
+  dictionary: any = {};
+
+  constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice) { }
 
   handlePreview = (file: UploadFile) => {
     this.previewImage = file.url || file.thumbUrl;
@@ -30,9 +33,11 @@ export class SupervisorAddComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.dictionary = this.dictionarySercice.getAllConfig();
   }
 
-  close(){
+  close() {
     this.router.navigate(['/index/supersivion/supervisor'], { queryParams: { sid: 1 } });
   }
 
