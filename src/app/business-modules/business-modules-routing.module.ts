@@ -5,6 +5,8 @@ import { SystemComponent } from './components/system/system.component';
 import { SupervisorComponent } from './components/supervision/supervisor/supervisor.component';
 import { SupervisorAddComponent } from './components/supervision/supervisor/supervisor-add/supervisor-add.component';
 import { SupervisorChildmanageComponent } from './components/supervision/supervisor/supervisor-childmanage/supervisor-childmanage.component';
+import { MonitorTrainComponent } from './components/supervision/monitor-train/monitor-train.component';
+import { MonitorTrainAddComponent } from './components/supervision/monitor-train/monitor-train-add/monitor-train-add.component';
 
 const appRoutes: Routes = [
     {
@@ -25,6 +27,14 @@ const appRoutes: Routes = [
     {
         path: 'supersivion/supervisor/childmanage',
         component: SupervisorChildmanageComponent,
+    },
+    {
+        path: 'supersivion/monitorTrain',
+        component: MonitorTrainComponent
+    },
+    {
+        path: 'supersivion/monitorTrain/add',
+        component:MonitorTrainAddComponent
     }
     //     children: [
     // {

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SystemService } from '../../../services/system/system.service';
 import { CookieService } from 'ngx-cookie-service';
+import { StaffSercice } from '../../../services/common/staff-service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   getVerifyCode = AppConfig.serviceAddress + "/getVerifyCode?" + new Date().getTime();
 
   constructor(private router: Router,
-    private systemService: SystemService, private cookieService: CookieService) { }
+    private systemService: SystemService, private cookieService: CookieService,private staffSercice:StaffSercice) { }
 
   ngOnInit() {
   }
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
 
     let idyCode = this.cookieService.get("_code");
 
-    if (idyCode.toLocaleLowerCase()!=this.code.toLocaleLowerCase()) {
+    if (idyCode.toLocaleLowerCase() != this.code.toLocaleLowerCase()) {
       this.loginMessage = "验证码不正确"
       return;
     }
@@ -64,6 +65,8 @@ export class LoginComponent implements OnInit {
       this.isLogining = false;
 
       if (data.code == 200) {
+
+        this.staffSercice.setStaffObj(data.msg);
         this.router.navigate(['/index']);
       } else {
         this.loginMessage = data.msg;

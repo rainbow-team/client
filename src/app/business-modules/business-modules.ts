@@ -10,6 +10,8 @@ import { SettingComponent } from './components/system/setting/setting.component'
 import { SupervisorComponent } from './components/supervision/supervisor/supervisor.component';
 import { SupervisorAddComponent } from './components/supervision/supervisor/supervisor-add/supervisor-add.component';
 import { SupervisorChildmanageComponent } from './components/supervision/supervisor/supervisor-childmanage/supervisor-childmanage.component';
+import { MonitorTrainComponent } from './components/supervision/monitor-train/monitor-train.component';
+import { MonitorTrainAddComponent } from './components/supervision/monitor-train/monitor-train-add/monitor-train-add.component';
 
 @NgModule({
   imports: [
@@ -25,7 +27,9 @@ import { SupervisorChildmanageComponent } from './components/supervision/supervi
     SettingComponent,
     SupervisorComponent,
     SupervisorAddComponent,
-    SupervisorChildmanageComponent
+    SupervisorChildmanageComponent,
+    MonitorTrainComponent,
+    MonitorTrainAddComponent
   ]
 })
 export class BusinessModulesModule { }

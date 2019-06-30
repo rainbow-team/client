@@ -1,0 +1,83 @@
+<div style="height: 100%;background:#fff">
+  <div class="div_top">
+    监督员培训信息
+  </div>
+
+  <div class="div_contain">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>培训班次：<input nz-input name="batch" [(ngModel)]="data.batch" class="w200" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>培训开始时间：
+        <nz-date-picker [(ngModel)]="data.beginDate" class="w200" name="beginDate">
+        </nz-date-picker>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>培训结束时间：
+        <nz-date-picker [(ngModel)]="data.endDate" class="w200" name="endDate">
+        </nz-date-picker>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>培训地点：<input nz-input [(ngModel)]="data.place" class="w200" name="place"/>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        参培人数：<input nz-input [(ngModel)]="data.number" class="w200" name="number" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        培训内容及讲师：
+        <input nz-input [(ngModel)]="data.content" class="w200" name="content"/>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+
+      <div nz-col [nzSpan]="8" class="ta_r">
+        录入人 ：<input nz-input name="name1" [(ngModel)]="staffObj.name" class="w200" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        录入时间：
+        <nz-date-picker [(ngModel)]="data.createDate"  name="createDate" class="w200">
+          </nz-date-picker>
+      </div>
+    </div>
+
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        备注：
+        <textarea nz-input name="note"  style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.note"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <div class="clearfix">
+      <nz-upload nzAction="http://localhost:8081/fileInfo/upload" nzName="file" [nzCustomRequest]="customReq"
+        [nzFileList]="attachmentList" [nzRemove]="RemoveAttachment">
+        <i nz-icon type="plus"></i>
+        <div class="ant-upload-text">上传附件</div>
+      </nz-upload>
+    </div> -->
+
+  <div class="clearfix" style="padding:0 50px;">
+    <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/" nzListType="picture-card"
+      [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 3" [nzPreview]="handlePreview">
+      <i nz-icon type="plus"></i>
+      <div class="ant-upload-text">上传附件</div>
+    </nz-upload>
+    <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+      (nzOnCancel)="previewVisible=false">
+      <ng-template #modalContent>
+        <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+      </ng-template>
+    </nz-modal>
+  </div>
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'">
+    <button nz-button nzType ="primary" (click)="save()" style="margin-right: 10px;">保存</button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>
