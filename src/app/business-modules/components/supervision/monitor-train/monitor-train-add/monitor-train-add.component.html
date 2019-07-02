@@ -6,23 +6,23 @@
   <div class="div_contain">
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>培训班次：<input nz-input name="batch" [(ngModel)]="data.batch" class="w200" />
+        <span class="clo_r">*</span>培训班次：<input nz-input name="batch" [(ngModel)]="data.batch" class="w200" required [validation]="true"/>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>培训开始时间：
-        <nz-date-picker [(ngModel)]="data.beginDate" class="w200" name="beginDate">
+        <nz-date-picker [(ngModel)]="data.beginDate" class="w200" name="beginDate" required [validation]="true">
         </nz-date-picker>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>培训结束时间：
-        <nz-date-picker [(ngModel)]="data.endDate" class="w200" name="endDate">
+        <nz-date-picker [(ngModel)]="data.endDate" class="w200" name="endDate" required [validation]="true">
         </nz-date-picker>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>培训地点：<input nz-input [(ngModel)]="data.place" class="w200" name="place"/>
+        <span class="clo_r">*</span>培训地点：<input nz-input [(ngModel)]="data.place" class="w200" name="place" required [validation]="true"/>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         参培人数：<input nz-input [(ngModel)]="data.number" class="w200" name="number" />
@@ -64,11 +64,11 @@
     </div> -->
 
   <div class="clearfix" style="padding:0 50px;">
-    <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/" nzListType="picture-card"
-      [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 3" [nzPreview]="handlePreview">
-      <i nz-icon type="plus"></i>
-      <div class="ant-upload-text">上传附件</div>
+    <nz-upload [nzAction]="uploadUrl"  [nzCustomRequest]="customReq"
+    [nzFileList]="fileList"  [nzPreview]="handlePreview" [nzRemove]="RemoveAttachment">
+      <i nz-icon type="upload"></i><span>上传附件</span>
     </nz-upload>
+
     <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
       (nzOnCancel)="previewVisible=false">
       <ng-template #modalContent>

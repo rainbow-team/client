@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
 import { ShareModule } from '../common-modules/share/share.module';
+import { ValidationDirective } from './_directives/validation.directive';
 
 
 @NgModule({

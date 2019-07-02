@@ -12,6 +12,7 @@ import { SupervisorAddComponent } from './components/supervision/supervisor/supe
 import { SupervisorChildmanageComponent } from './components/supervision/supervisor/supervisor-childmanage/supervisor-childmanage.component';
 import { MonitorTrainComponent } from './components/supervision/monitor-train/monitor-train.component';
 import { MonitorTrainAddComponent } from './components/supervision/monitor-train/monitor-train-add/monitor-train-add.component';
+import { ValidationDirective } from './../layouts/_directives/validation.directive';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { MonitorTrainAddComponent } from './components/supervision/monitor-train
     SupervisorAddComponent,
     SupervisorChildmanageComponent,
     MonitorTrainComponent,
-    MonitorTrainAddComponent
+    MonitorTrainAddComponent,
+    ValidationDirective
   ]
 })
 export class BusinessModulesModule { }

@@ -17,5 +17,9 @@ export class AttachmentSercice {
         return this.http.get('/fileInfo/delete?id='+param);
     }
 
+    getFileListById(param):any{
+        return this.http.get('/fileInfo/getFileListById?id='+param);
+    }
+
 
 }
