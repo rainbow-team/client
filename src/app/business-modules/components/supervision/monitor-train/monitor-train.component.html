@@ -2,21 +2,21 @@
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
       培训开始时间
-      <nz-date-picker class="w200" [(ngModel)]="startTime">
+      <nz-date-picker class="w200" [(ngModel)]="beginDate">
       </nz-date-picker>
     </div>
     <div nz-col [nzSpan]="5">
       培训结束时间
-      <nz-date-picker class="w200" [(ngModel)]="endTime">
+      <nz-date-picker class="w200" [(ngModel)]="endDate">
       </nz-date-picker>
     </div>
     <div nz-col [nzSpan]="5">
       培训班次
-      <input nz-input nzSize="default" class="w200" [(ngModel)]="pxbc">
+      <input nz-input nzSize="default" class="w200" [(ngModel)]="batch">
     </div>
     <div nz-col [nzSpan]="5">
       培训地点
-      <input nz-input nzSize="default" class="w200" [(ngModel)]="pxdd">
+      <input nz-input nzSize="default" class="w200" [(ngModel)]="place">
     </div>
     <div nz-col [nzSpan]="4">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
@@ -48,9 +48,9 @@
         <thead>
           <tr>
             <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
-            <th nzShowSort style="width: 125px;">培训班次</th>
-            <th nzShowSort style="width: 150px;">培训开始日期</th>
-            <th nzShowSort style="width: 150px;">培训结束日期</th>
+            <th nzShowSort (nzSortChange)="sortBatch($event)" [nzSort]="sortBatchValue" style="width: 125px;">培训班次</th>
+            <th nzShowSort (nzSortChange)="sortBeginDate($event)" [nzSort]="sortBeginDateValue" style="width: 150px;">培训开始日期</th>
+            <th nzShowSort (nzSortChange)="sortEndDate($event)" [nzSort]="sortEndDateValue" style="width: 150px;">培训结束日期</th>
             <th>培训地点</th>
             <th>参培人数</th>
             <th>培训内容及讲师</th>

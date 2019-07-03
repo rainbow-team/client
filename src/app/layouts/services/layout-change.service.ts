@@ -10,6 +10,7 @@ export class LayoutChangeService {
   subNavMenu = new Subject<NavMenuState>();
   subContentPanel = new Subject<ContentPanelState>();
   subWinResize = new Subject();
+  routeChange = new Subject();
 
   constructor() { }
 

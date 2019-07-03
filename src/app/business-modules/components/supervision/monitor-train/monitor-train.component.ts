@@ -22,10 +22,17 @@ export class MonitorTrainComponent implements OnInit {
   pageIndex: any = 1;
   pageSize: any = 10;
 
-  startTime: any;
-  endTime: any;
-  pxbc: any;
-  pxdd: any;
+  beginDate: any;
+  endDate: any;
+  batch: any;
+  place: any;
+
+  sortName: any;
+  sortValue: any;
+
+  sortBatchValue: any;
+  sortBeginDateValue: any;
+  sortEndDateValue: any;
 
   ngOnInit() {
 
@@ -39,17 +46,24 @@ export class MonitorTrainComponent implements OnInit {
       conditions: []
     }
 
-    if (this.startTime) {
-      option.conditions.push({ key: "startTime", value: this.startTime })
+    if (this.beginDate) {
+      option.conditions.push({ key: "beginDate", value: this.beginDate })
     }
-    if (this.endTime) {
-      option.conditions.push({ key: "endTime", value: this.endTime })
+    if (this.endDate) {
+      option.conditions.push({ key: "endDate", value: this.endDate })
     }
-    if (this.pxbc) {
-      option.conditions.push({ key: "pxbc", value: this.pxbc })
+    if (this.batch) {
+      option.conditions.push({ key: "batch", value: this.batch })
     }
-    if (this.pxdd) {
-      option.conditions.push({ key: "pxdd", value: this.pxdd })
+    if (this.place) {
+      option.conditions.push({ key: "place", value: this.place })
+    }
+
+    if (this.sortValue) {
+
+      option.conditions.push({ key: "sortValue", value: this.sortValue })
+      option.conditions.push({ key: "sortName", value: this.sortName })
+
     }
 
     this.supervisionSercice.getTrainRecordList(option).subscribe(
@@ -66,6 +80,40 @@ export class MonitorTrainComponent implements OnInit {
     this.search();
   }
 
+  sortBatch(sort) {
+    this.sortName = "batch";
+    this.sortValue = sort;
+
+    this.sortBatchValue = sort;
+    this.sortBeginDateValue = null;
+    this.sortEndDateValue = null;
+
+    this.search();
+  }
+
+  sortBeginDate(sort) {
+    this.sortName = "begin_date";
+    this.sortValue = sort;
+
+    this.sortBatchValue = null;
+    this.sortBeginDateValue = sort;
+    this.sortEndDateValue = null;
+
+    this.search();
+  }
+
+  sortEndDate(sort) {
+    this.sortName = "end_date";
+    this.sortValue = sort;
+
+    this.sortBatchValue = null;
+    this.sortBeginDateValue = null;
+    this.sortEndDateValue = sort;
+    
+    this.search();
+  }
+
+
   pageSizeChange(num) {
     this.pageSize = num;
     this.pageIndex = 1;
@@ -74,10 +122,10 @@ export class MonitorTrainComponent implements OnInit {
 
   reset() {
 
-    this.startTime = null;
-    this.endTime = null;
-    this.pxbc = null;
-    this.pxdd = null;
+    this.beginDate = null;
+    this.endDate = null;
+    this.batch = null;
+    this.place = null;
 
   }
 

@@ -6,7 +6,7 @@
 
   <nz-content style="padding:0 20px;">
 
-    <div class="index-top" nz-row [nzType]="'flex'" [nzAlign]="'middle'">
+    <div class="index-top" nz-row [nzType]="'flex'" [nzAlign]="'middle'" *ngIf="isIndex">
 
       <div nz-col [nzSpan]="6" class="index_top_bor">
 
@@ -58,6 +58,19 @@
           </div>  
       </div>
 
+    </div>
+
+    <div class="index-top" nz-row [nzType]="'flex'" [nzAlign]="'middle'" *ngIf="!isIndex" style="padding-left: 20px;">
+    
+        <nz-breadcrumb>
+            <nz-breadcrumb-item>
+              <i nz-icon type="home"></i>
+            </nz-breadcrumb-item>
+            <nz-breadcrumb-item *ngFor="let name of breadcrumbList">
+              <span>{{name}}</span>
+            </nz-breadcrumb-item>
+           
+          </nz-breadcrumb>
     </div>
 
     <router-outlet></router-outlet>

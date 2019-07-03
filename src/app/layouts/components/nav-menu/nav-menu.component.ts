@@ -14,8 +14,6 @@ import { NavMenu, NavMenuItem } from 'src/app/utilities/entities/navMenu';
 })
 export class NavMenuComponent implements OnInit, OnDestroy {
 
-  @Output() private breadcrumbChangeOuter = new EventEmitter();
-
   @Input()
   navMenu: NavMenu = [];
 
@@ -54,8 +52,10 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
     // 路由跳转
     if (this.checkedItem.route) {
-      this.breadcrumbChangeOuter.emit(breadcrumbName);
+
+      this.layoutService.routeChange.next(breadcrumbName);
       this.router.navigate([this.checkedItem.route]);
+      
     }
   }
 
