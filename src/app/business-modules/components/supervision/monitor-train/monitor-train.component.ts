@@ -19,6 +19,9 @@ export class MonitorTrainComponent implements OnInit {
   indeterminate: any = false;
 
   totalCount: any = 0;
+  pageIndex: any = 1;
+  pageSize: any = 10;
+
   startTime: any;
   endTime: any;
   pxbc: any;
@@ -31,8 +34,8 @@ export class MonitorTrainComponent implements OnInit {
 
   search() {
     var option = {
-      pageNo: 1,
-      pageSize: 10,
+      pageNo: this.pageIndex,
+      pageSize: this.pageSize,
       conditions: []
     }
 
@@ -58,6 +61,17 @@ export class MonitorTrainComponent implements OnInit {
     );
   }
 
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
+  }
+
   reset() {
 
     this.startTime = null;
@@ -71,8 +85,8 @@ export class MonitorTrainComponent implements OnInit {
     this.router.navigate(['/index/supersivion/monitorTrain/add']);
   }
 
-  show(item) {
-    this.router.navigate(['/index/supersivion/monitorTrain/add'], { queryParams: { id: item.id } });
+  show(item, flag) {
+    this.router.navigate(['/index/supersivion/monitorTrain/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   refreshStatus() {
@@ -91,13 +105,13 @@ export class MonitorTrainComponent implements OnInit {
 
     let checkItems = this.dataSet.filter(value => value.checked);
 
-    if (checkItems!= null && checkItems.length == 0) {
+    if (checkItems != null && checkItems.length == 0) {
       this.msg.create("warning", "请选择删除项");
       return;
     }
 
     checkItems.forEach(element => {
-        this.ids.push(element.id);
+      this.ids.push(element.id);
     });
 
     this.supervisionSercice.deleteTrainRecordByIds(this.ids).subscribe((res) => {

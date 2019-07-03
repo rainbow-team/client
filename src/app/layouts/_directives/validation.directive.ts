@@ -153,6 +153,9 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     number: function (value) {
       return /^\d+$/.test(value)
     },
+    nullnumber:function(value){
+      return value == null || value == "" ||/^\d+$/.test(value)
+    },
     nulldate: function (value) {
       return value == null || value == "" || /^\d+$/.test(value)
     },
@@ -237,6 +240,10 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     number: {
       error: '输入必须是数字',
       success: 'It\'s Number'
+    },
+    nullnumber:{
+      error:"输入必须是数字",
+      success:"It\'s Number"
     },
     areaNumber: {
       error: '输入必须是数字且最多保留两位小数',
@@ -375,14 +382,14 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     if(name == 'textarea'){
          preheight = $(this.el.nativeElement).prev().height()
     }
-    let tipTop = $(this.el.nativeElement).height() + 10 +preheight;
+    let tipTop = $(this.el.nativeElement).height() + 13 +preheight;
     let prevAllList = $(this.el.nativeElement).prevAll();
     let prevAllWidth = 0;
     for (var i = 0; i < (prevAllList.length); i++) {
       prevAllWidth += prevAllList[i].offsetWidth;
     }
     let tipLeft = prevAllWidth + 5;
-    this.tips = $("<div class=\"vtooltip bottom  bottom-left\" style=\"top: " + tipTop + "px; left: " + tipLeft + "px;opacity:1\">"
+    this.tips = $("<div class=\"vtooltip bottom  bottom-left\" style=\"top: " + tipTop + "px; right:0;opacity:1\">"
       + "<div class=\"vtooltip-arrow\" style=\"position:absolute\"></div>"
       + "<div class=\"vtooltip-inner\"></div></div>"
     );
@@ -510,7 +517,12 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
 
   ShowErrorTip(msg) {
     if (!$(this.el.nativeElement).is(":hidden")) {
-      $(this.el.nativeElement).addClass('ng2-invalid');
+      // if(this.el.nativeElement.localName=""){
+        $(this.el.nativeElement).find('input').addClass('ng2-invalid');
+      // }else{
+        $(this.el.nativeElement).addClass('ng2-invalid');
+      // }
+      
       this.tips.find(".vtooltip-inner").html(msg);
 
       Object.assign(this.ngModel, {
@@ -526,7 +538,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
         setTimeout(() => {
           let first_error_tip = $(".ng2-invalid:first")[0];
           if (first_error_tip) {
-            first_error_tip.parentElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
+            // first_error_tip.parentElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
           }
         }, 0);
         // this.tips[0].scrollIntoView(false)
@@ -557,6 +569,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
 
       }
     $(this.el.nativeElement).removeClass('ng2-invalid');
+    $(this.el.nativeElement).find('input').removeClass('ng2-invalid');
     if(this.tips){
       this.tips.hide();
     }

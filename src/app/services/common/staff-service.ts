@@ -6,17 +6,25 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StaffSercice {
 
-    staffObj: any = null;
-
     constructor() { }
 
 
     getStaffObj(): any {
-        return this.staffObj;
+
+        let staffObj = sessionStorage.getItem("staffObj");
+
+        if (staffObj) {
+            return JSON.parse(staffObj);
+        } else {
+            return {};
+        }
     }
 
     setStaffObj(item): any {
-        this.staffObj = item;
+
+        let staffObj = JSON.stringify(item);
+        sessionStorage.setItem("staffObj", staffObj);
+
     }
 
 }

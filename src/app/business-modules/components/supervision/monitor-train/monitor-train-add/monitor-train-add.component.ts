@@ -18,6 +18,8 @@ export class MonitorTrainAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
+  isSaving = false;
+  isDisable = false;
 
   fileList = [
   ];
@@ -43,9 +45,18 @@ export class MonitorTrainAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
+    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+
+    if (flag && flag == "true") {
+      this.isDisable = true;
+    } else {
+      this.isDisable = false;
+    }
+
     if (id) {
       this.supervisionSercice.getTrainRecordById(id).subscribe((res) => {
         this.data = res.msg;
+        this.staffObj.name = this.data.creatorName;
       });
 
       this.attachmentSercice.getFileListById(id).subscribe((res1) => {
@@ -71,6 +82,7 @@ export class MonitorTrainAddComponent implements OnInit {
       return;
     }
 
+    this.isSaving = true;
     this.data.attachmentList = [];
 
     if (this.fileList.length > 0) {
@@ -85,10 +97,14 @@ export class MonitorTrainAddComponent implements OnInit {
       this.supervisionSercice.modifyTrainRecord(this.data).subscribe((res) => {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
+
           this.router.navigate(['/index/supersivion/monitorTrain']);
         } else {
+
           this.msg.create('error', '保存失败');
         }
+
+        this.isSaving = false;
       });
 
 
@@ -104,6 +120,8 @@ export class MonitorTrainAddComponent implements OnInit {
         } else {
           this.msg.create('error', '保存失败');
         }
+
+        this.isSaving = false;
       });
     }
 
@@ -147,14 +165,14 @@ export class MonitorTrainAddComponent implements OnInit {
     });
   }
 
-  RemoveAttachment = (file: UploadFile) => {
+  RemoveAttachment(id) {
 
-    this.attachmentSercice.deleteFileById(file.uid).subscribe(
+    this.attachmentSercice.deleteFileById(id).subscribe(
       (data) => {
         if (data.code == 200) {
 
           for (let i = 0; i <= this.fileList.length; i++) {
-            if (this.fileList[i].uid == file.uid) {
+            if (this.fileList[i].uid == id) {
               this.fileList.splice(i, 1);
               break;
             }

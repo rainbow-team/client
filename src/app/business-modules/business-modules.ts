@@ -13,6 +13,7 @@ import { SupervisorChildmanageComponent } from './components/supervision/supervi
 import { MonitorTrainComponent } from './components/supervision/monitor-train/monitor-train.component';
 import { MonitorTrainAddComponent } from './components/supervision/monitor-train/monitor-train-add/monitor-train-add.component';
 import { ValidationDirective } from './../layouts/_directives/validation.directive';
+import { RecordtimePipe } from './../layouts/_pipes/recordtime.pipe';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { ValidationDirective } from './../layouts/_directives/validation.directi
     SupervisorChildmanageComponent,
     MonitorTrainComponent,
     MonitorTrainAddComponent,
-    ValidationDirective
+    ValidationDirective,
+    RecordtimePipe
   ]
 })
 export class BusinessModulesModule { }

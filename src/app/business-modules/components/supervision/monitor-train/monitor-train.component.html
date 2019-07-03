@@ -11,12 +11,14 @@
       </nz-date-picker>
     </div>
     <div nz-col [nzSpan]="5">
-      培训班次 <input nz-input nzSize="default" class="w200" [(ngModel)]="pxbc">
+      培训班次
+      <input nz-input nzSize="default" class="w200" [(ngModel)]="pxbc">
     </div>
     <div nz-col [nzSpan]="5">
-      培训地点 <input nz-input nzSize="default" class="w200" [(ngModel)]="pxdd">
+      培训地点
+      <input nz-input nzSize="default" class="w200" [(ngModel)]="pxdd">
     </div>
-    <div nz-col [nzSpan]="4" >
+    <div nz-col [nzSpan]="4">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>
@@ -33,7 +35,7 @@
       </div>
 
       <div class="fr">
-        <button nz-button nzType="danger" class="delbtn" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()" >删除</button>
+        <button nz-button nzType="danger" class="delbtn" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
       </div>
 
       <div class="fr">
@@ -42,13 +44,13 @@
 
     </div>
     <div>
-      <nz-table #nestedTable1 [nzData]="dataSet"  class="commontable" [nzShowPagination]="false">
+      <nz-table #nestedTable1 [nzData]="dataSet" class="commontable" [nzShowPagination]="false">
         <thead>
           <tr>
             <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
-            <th>培训班次</th>
-            <th nzShowSort>培训开始日期</th>
-            <th nzShowSort>培训结束日期</th>
+            <th nzShowSort style="width: 125px;">培训班次</th>
+            <th nzShowSort style="width: 150px;">培训开始日期</th>
+            <th nzShowSort style="width: 150px;">培训结束日期</th>
             <th>培训地点</th>
             <th>参培人数</th>
             <th>培训内容及讲师</th>
@@ -57,25 +59,27 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <ng-template *ngFor="let data of dataSet"> -->
-            <tr *ngFor="let data of dataSet">
-              <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
-              <td>{{data.batch}}</td>
-              <td>{{data.beginDate}}</td>
-              <td>{{data.endDate}}</td>
-              <td>{{data.place}}</td>
-              <td>{{data.number}}</td>
-              <td>{{data.content}}</td>
-              <td>{{data.note}}</td>
-              <td>
-                <a (click)="show(data)">查看</a>
-                <nz-divider nzType="vertical"></nz-divider>
-                <a (click)="show(data)">编辑</a>
-              </td>
-            </tr>
-          <!-- </ng-template> -->
+          <tr *ngFor="let data of dataSet">
+            <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
+            <td>{{data.batch}}</td>
+            <td>{{data.beginDate|recordtime}}</td>
+            <td>{{data.endDate|recordtime}}</td>
+            <td>{{data.place}}</td>
+            <td>{{data.number}}</td>
+            <td>{{data.content}}</td>
+            <td>{{data.note}}</td>
+            <td>
+              <a (click)="show(data,true)">查看</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a (click)="show(data,false)">编辑</a>
+            </td>
+          </tr>
         </tbody>
       </nz-table>
+    </div>
+    <div class="pagination_pos">
+      <nz-pagination [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+      (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
     </div>
   </div>
 </div>
