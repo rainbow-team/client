@@ -1,26 +1,23 @@
 <div style="height: 100%;">
     <div nz-row style="height: 40px;">
         <div nz-col [nzSpan]="5">
-            专家姓名 <input nz-input nzSize="default" class="w200">
+            姓名 <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
         </div>
         <div nz-col [nzSpan]="5">
-            专业 <input nz-input nzSize="default" class="w200">
-        </div>
-        <div nz-col [nzSpan]="5">
-            职称 <nz-select style="width: 200px;" [(ngModel)]="singleValue" [nzSize]="size">
+            所属单位 <nz-select style="width: 200px;" [(ngModel)]="orgId" class="w200">
                 <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value">
                 </nz-option>
             </nz-select>
         </div>
         <div nz-col [nzSpan]="5">
-            所属单位 <nz-select style="width: 200px;" [(ngModel)]="singleValue" [nzSize]="size">
-                <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value">
-                </nz-option>
-            </nz-select>
+            到期时间
+            <nz-date-picker class="w200">
+            </nz-date-picker>
         </div>
-        <div nz-col [nzSpan]="4">
-            <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;">查询</button>
-            <button nz-button nzType="default" style="width: 70px;">重置</button>
+
+        <div nz-col [nzSpan]="4" [nzOffset]="5">
+            <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
+            <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
         </div>
     </div>
 
@@ -31,57 +28,58 @@
 
             </div>
             <div class="fl" style="color: #0050b3;">
-                核安全监管员信息列表（共174条）
+                核安全监管员信息列表（共{{totalCount}}条）
             </div>
 
             <div class="fr">
-                <button nz-button nzType="danger" class="delbtn">删除</button>
+                <button nz-button nzType="danger" class="delbtn" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
             </div>
 
             <div class="fr">
-                <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="goChildManage()">子项管理</button>
-            </div>
-
-            <div class="fr">
-                <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
+                <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn"
+                    (click)="add()">添加</button>
             </div>
 
         </div>
         <div>
-            <nz-table #nestedTable [nzData]="dataSet" [nzPageSize]="10" class="commontable">
+            <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzShowPagination]="false">
                 <thead>
                     <tr>
-                        <th nzShowCheckbox></th>
+                        <th nzShowCheckbox  [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
                         <th>序号</th>
                         <th>姓名</th>
-                        <th nzShowSort >出生年月</th>
+                        <th>出生年月</th>
                         <th>所属单位</th>
-                        <th nzShowSort >入职时间</th>
+                        <th>入职时间</th>
                         <th>职称</th>
-                        <th></th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-template *ngFor="let data of nestedTable.data;index as index">
-                        <tr>
-                            <td nzShowCheckbox></td>
-                            <td>{{index+1}}</td>
-                            <td>{{data.name}}</td>
-                            <td>{{data.birthday}}</td>
-                            <td>{{data.orgId}}</td>
-                            <td>{{data.entryDate}}</td>
-                            <td>{{data.titleId}}</td>
-                            <td>
-                                <a>查看</a>
-                                <nz-divider nzType="vertical"></nz-divider>
-                                <a>编辑</a>
-                                <nz-divider nzType="vertical"></nz-divider>
-                                <a>子项管理</a>
-                            </td>
-                        </tr>
-                    </ng-template>
+                    <tr *ngFor="let data of nestedTable.data;index as index">
+                        <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
+                        <td>{{index+1}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.birthday|recordtime}}</td>
+                        <td>{{data.orgId}}</td>
+                        <td>{{data.entryDate|recordtime}}</td>
+                        <td>{{data.titleId}}</td>
+                        <td>
+                            <a (click)="show(data.id,true)">查看</a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a (click)="show(data.id,false)">编辑</a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a (click)="goChildManage(data.id)">子项管理</a>
+                        </td>
+                    </tr>
                 </tbody>
             </nz-table>
+        </div>
+
+        <div class="pagination_pos">
+            <nz-pagination [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+                (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+            </nz-pagination>
         </div>
     </div>
 </div>

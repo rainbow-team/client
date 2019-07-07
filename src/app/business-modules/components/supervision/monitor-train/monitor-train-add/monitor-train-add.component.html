@@ -70,7 +70,7 @@
         <div class="file_item">
           <i nz-icon type="paper-clip" theme="outline" class="flie_item_pic"></i>
           <span>{{fileItem.name}}</span>
-          <i nz-icon type="close" theme="outline" class="file_item_delete" *ngIf="!isDisable" (click)="RemoveAttachment(fileItem.uid)"></i>
+          <i nz-icon type="close" style="color: red;" theme="outline" class="file_item_delete" *ngIf="!isDisable" (click)="RemoveAttachment(fileItem.uid)"></i>
         </div>
       </div>
     </div>
@@ -85,7 +85,7 @@
   </nz-modal>
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" style="margin-right: 10px;" [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;" [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
 </div>

@@ -74,38 +74,36 @@
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
       <div nz-col [nzSpan]="24" class="ta_r">
-        备注：
+        <div class="div_bz">备注：</div>
         <textarea nz-input style="width: calc(100% - 130px);height: 70px;"></textarea>
       </div>
     </div>
 
   </div>
 
-  <!-- <div class="clearfix">
-    <nz-upload nzAction="http://localhost:8081/fileInfo/upload" nzName="file" [nzCustomRequest]="customReq"
-      [nzFileList]="attachmentList" [nzRemove]="RemoveAttachment">
-      <i nz-icon type="plus"></i>
+  <div style="padding:0 50px;">
+    <nz-upload [nzAction]="uploadUrl" [nzCustomRequest]="customReq" [nzFileList]="fileList" [nzShowUploadList]="false"
+      [nzDisabled]="isDisable">
+      <i nz-icon type="plus" class="upload_i"></i>
       <div class="ant-upload-text">上传附件</div>
     </nz-upload>
-  </div> -->
 
-  <div class="clearfix" style="padding:0 50px;">
-    <nz-upload
-      nzAction="https://jsonplaceholder.typicode.com/posts/"
-      nzListType="picture-card"
-      [(nzFileList)]="fileList"
-      [nzShowButton]="fileList.length < 3"
-      [nzPreview]="handlePreview">
-        <i nz-icon type="plus"></i>
-        <div class="ant-upload-text">上传附件</div>
-    </nz-upload>
-    <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
-      <ng-template #modalContent>
-        <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
-      </ng-template>
-    </nz-modal>
+    <div class="file_div">
+      <div *ngFor="let fileItem of fileList">
+        <div class="file_item">
+          <i nz-icon type="paper-clip" theme="outline" class="flie_item_pic"></i>
+          <span>{{fileItem.name}}</span>
+          <i nz-icon type="close" style="color: red;" theme="outline" class="file_item_delete" *ngIf="!isDisable"
+            (click)="RemoveAttachment(fileItem.uid)"></i>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'" >
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+      [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
 </div>

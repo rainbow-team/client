@@ -20,21 +20,36 @@ const appRoutes: Routes = [
     {
         path: 'supersivion/supervisor',
         component: SupervisorComponent,
+        data: {
+            breadcrumb: "监管信息 / 核安全监督员信息"
+        }
     }, {
         path: 'supersivion/supervisor/add',
         component: SupervisorAddComponent,
+        data: {
+            breadcrumb: "监管信息 / 核安全监督员信息 / 添加"
+        }
     },
     {
         path: 'supersivion/supervisor/childmanage',
         component: SupervisorChildmanageComponent,
+        data: {
+            breadcrumb: "监管信息 / 核安全监督员信息 / 子项管理"
+        }
     },
     {
         path: 'supersivion/monitorTrain',
-        component: MonitorTrainComponent
+        component: MonitorTrainComponent,
+        data: {
+            breadcrumb: "监管信息 / 核安全监督培训信息"
+        }
     },
     {
         path: 'supersivion/monitorTrain/add',
-        component:MonitorTrainAddComponent
+        component: MonitorTrainAddComponent,
+        data: {
+            breadcrumb: "监管信息 / 核安全监督培训信息 / 添加"
+        }
     }
     //     children: [
     // {
@@ -54,7 +69,10 @@ const appRoutes: Routes = [
 
     , {
         path: 'system',
-        component: SystemComponent
+        component: SystemComponent,
+        data: {
+            breadcrumb: "系统管理"
+        }
     }
 ];
 

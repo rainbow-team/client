@@ -62,13 +62,9 @@
 
     <div class="index-top" nz-row [nzType]="'flex'" [nzAlign]="'middle'" *ngIf="!isIndex" style="padding-left: 20px;">
     
-        <nz-breadcrumb>
-            <nz-breadcrumb-item>
-              <i nz-icon type="home"></i>
-            </nz-breadcrumb-item>
-            <nz-breadcrumb-item *ngFor="let name of breadcrumbList">
-              <span>{{name}}</span>
-            </nz-breadcrumb-item>
+        <img src="../../../../assets//images//breadcrumb_icon.png" style="margin-right: 20px;"/>
+
+        <nz-breadcrumb [nzAutoGenerate]="true">
            
           </nz-breadcrumb>
     </div>

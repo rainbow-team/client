@@ -12,7 +12,7 @@ export class SupervisionSercice {
 
     constructor(private http: HttpClient) { }
 
-
+    //核安全监督员
     getSupervisionSupervisorList(param): any {
         return this.http.post('/SupervisionSupervisor/getSupervisionSupervisorList', param);
     }
@@ -21,8 +21,8 @@ export class SupervisionSercice {
         return this.http.post('/SupervisionSupervisor/saveOrUpdateSupervisionSupervisor', param);
     }
 
-    deleteSupervisionSupervisorById(id): any {
-        return this.http.get('/SupervisionSupervisor/deleteSupervisionSupervisorById?id=' + id);
+    deleteSupervisionSupervisorByIds(ids): any {
+        return this.http.post('/SupervisionSupervisor/deleteSupervisionSupervisorByIds',ids);
     }
 
     getSupervisionSupervisorById(id): any {
