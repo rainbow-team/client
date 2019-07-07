@@ -66,7 +66,7 @@ export class MonitorTrainComponent implements OnInit {
 
     }
 
-    this.supervisionSercice.getTrainRecordList(option).subscribe(
+    this.supervisionSercice.getMonitorTrainList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.dataSet = this.dataSet.map(r => { return Object.assign(r, { checked: false }) });
@@ -162,7 +162,7 @@ export class MonitorTrainComponent implements OnInit {
       this.ids.push(element.id);
     });
 
-    this.supervisionSercice.deleteTrainRecordByIds(this.ids).subscribe((res) => {
+    this.supervisionSercice.deleteMonitorTrainByIds(this.ids).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.search();

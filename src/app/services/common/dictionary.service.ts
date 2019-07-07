@@ -6,26 +6,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DictionarySercice {
 
-    dictionaryList: any = null;
-
-
     constructor(private http: HttpClient) { }
 
 
-    getAllConfig(): any {
+    getAllConfig(isInit=false): any {
 
-        if(this.dictionaryList){
-            return this.dictionaryList;
-        }else{
+        let dics = localStorage.getItem("dics");
+        if (dics && !isInit) {
+            return JSON.parse(dics);
+        } else {
             this.http.get('/config/getAllConfig').subscribe(
-                (res)=>{
-                    this.dictionaryList = res;
-                    return this.dictionaryList;
+                (res): any => {
+                    localStorage.setItem("dics", JSON.stringify(res));
+                    return res;
                 }
             )
         }
-        
-        
     }
 
 

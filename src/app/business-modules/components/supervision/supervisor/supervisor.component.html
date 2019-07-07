@@ -1,17 +1,19 @@
 <div style="height: 100%;">
     <div nz-row style="height: 40px;">
         <div nz-col [nzSpan]="5">
-            姓名 <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
+            姓名
+            <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
         </div>
         <div nz-col [nzSpan]="5">
-            所属单位 <nz-select style="width: 200px;" [(ngModel)]="orgId" class="w200">
-                <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value">
+            所属单位
+            <nz-select [(ngModel)]="orgId" class="w200">
+                <nz-option *ngFor="let option of orgList" [nzLabel]="option.name" [nzValue]="option.id">
                 </nz-option>
             </nz-select>
         </div>
         <div nz-col [nzSpan]="5">
             到期时间
-            <nz-date-picker class="w200">
+            <nz-date-picker class="w200" [(ngModel)]="expireDate" >
             </nz-date-picker>
         </div>
 
@@ -36,16 +38,17 @@
             </div>
 
             <div class="fr">
-                <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn"
-                    (click)="add()">添加</button>
+                <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
             </div>
 
         </div>
         <div>
-            <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzShowPagination]="false">
+            <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" nzShowSizeChanger
+                [nzPageSize]="pageSize" [nzTotal]="totalCount" (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)"
+                >
                 <thead>
                     <tr>
-                        <th nzShowCheckbox  [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
+                        <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
                         <th>序号</th>
                         <th>姓名</th>
                         <th>出生年月</th>
@@ -56,30 +59,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of nestedTable.data;index as index">
+                    <tr *ngFor="let data of nestedTable.data;index as index" [ngClass]="{true:'out_valid',false:''}[data.valid==0]">
                         <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
                         <td>{{index+1}}</td>
                         <td>{{data.name}}</td>
                         <td>{{data.birthday|recordtime}}</td>
-                        <td>{{data.orgId}}</td>
+                        <td>{{data.orgName}}</td>
                         <td>{{data.entryDate|recordtime}}</td>
-                        <td>{{data.titleId}}</td>
+                        <td>{{data.titleName}}</td>
                         <td>
-                            <a (click)="show(data.id,true)">查看</a>
+                            <a (click)="show(data,true)">查看</a>
                             <nz-divider nzType="vertical"></nz-divider>
-                            <a (click)="show(data.id,false)">编辑</a>
+                            <a (click)="show(data,false)">编辑</a>
                             <nz-divider nzType="vertical"></nz-divider>
-                            <a (click)="goChildManage(data.id)">子项管理</a>
+                            <a (click)="goChildManage(data)">子项管理</a>
                         </td>
                     </tr>
                 </tbody>
             </nz-table>
         </div>
 
-        <div class="pagination_pos">
-            <nz-pagination [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
-                (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
-            </nz-pagination>
-        </div>
     </div>
 </div>

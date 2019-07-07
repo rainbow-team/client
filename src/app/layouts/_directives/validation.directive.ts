@@ -5,7 +5,7 @@ import { Observable, Subject } from "rxjs"
 import { DecimalPipe } from '@angular/common';
 
 // declare var $: any;  //定义$
-import * as $ from 'jquery'; 
+import * as $ from 'jquery';
 
 @Directive({
   selector: '[ngModel][validation]',
@@ -153,8 +153,8 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     number: function (value) {
       return /^\d+$/.test(value)
     },
-    nullnumber:function(value){
-      return value == null || value == "" ||/^\d+$/.test(value)
+    nullnumber: function (value) {
+      return value == null || value == "" || /^\d+$/.test(value)
     },
     nulldate: function (value) {
       return value == null || value == "" || /^\d+$/.test(value)
@@ -166,6 +166,9 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     nullphonenumber: function (value) {
       return value == null || value == "" || (/^(0\d{2,3}-?)?\d{7,8}$/.test(value) || /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));
 
+    },
+    idcard: function (value) {
+      return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
     },
     // nullAreaNumber: function (value) {
     //     return value == null || value == "" || /^\d+(\.\d{1,2})?$/.test(value);
@@ -215,9 +218,9 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
         return /^[a-zA-Z0-9\u4e00-\u9fa5]+〔20[0-9]{2}〕[0-9]*号$/.test(text);
       }
     },
-    password:function(value){//密码的验证规则
+    password: function (value) {//密码的验证规则
       //必须含数字，字母字符二选一
-      return  value == null || value == "" || /^(?![a-zA-z]+$)(?![0-9]+$)(?![!@#$%^&*~()_+{}|:"<>?]+$)(?![a-zA-z!@#$%^&*~()_+{}|:"<>?]+$)[a-zA-Z0-9!@#$%^&*~()_+{}|:"<>?].{0,50}$/.test(value);
+      return value == null || value == "" || /^(?![a-zA-z]+$)(?![0-9]+$)(?![!@#$%^&*~()_+{}|:"<>?]+$)(?![a-zA-z!@#$%^&*~()_+{}|:"<>?]+$)[a-zA-Z0-9!@#$%^&*~()_+{}|:"<>?].{0,50}$/.test(value);
     }
   };
   defaultMsg = {
@@ -241,9 +244,9 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       error: '输入必须是数字',
       success: 'It\'s Number'
     },
-    nullnumber:{
-      error:"输入必须是数字",
-      success:"It\'s Number"
+    nullnumber: {
+      error: "输入必须是数字",
+      success: "It\'s Number"
     },
     areaNumber: {
       error: '输入必须是数字且最多保留两位小数',
@@ -358,12 +361,12 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       error: '批准文号不符合规则',
       success: 'success'
     },
-    dylAreaNumber:{
-      error:'图斑面积必须大于0',
+    dylAreaNumber: {
+      error: '图斑面积必须大于0',
       success: 'success'
     },
-    password:{
-      error:'密码必须是数字、字母或者特殊字符，数字与字符。',
+    password: {
+      error: '密码必须是数字、字母或者特殊字符，数字与字符。',
       success: 'success'
     }
   };
@@ -379,10 +382,10 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     $(this.el.nativeElement).parent().css("position", "relative");
     var name = $(this.el.nativeElement).prop('tagName').toLowerCase();
     var preheight = 0;
-    if(name == 'textarea'){
-         preheight = $(this.el.nativeElement).prev().height()
+    if (name == 'textarea') {
+      preheight = $(this.el.nativeElement).prev().height()
     }
-    let tipTop = $(this.el.nativeElement).height() + 13 +preheight;
+    let tipTop = $(this.el.nativeElement).height() + 13 + preheight;
     let prevAllList = $(this.el.nativeElement).prevAll();
     let prevAllWidth = 0;
     for (var i = 0; i < (prevAllList.length); i++) {
@@ -431,7 +434,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       // if(!ngModelVal){
       //   this.ngModel.control.setErrors({ "required": true });
       // }
-      if (this.ngModel.errors  && !isTemporary) {
+      if (this.ngModel.errors && !isTemporary) {
         // && (this.ngModel.errors.pattern || this.ngModel.errors.required)
         for (const key in this.ngModel.errors) {
           if (this.ngModel.errors[key]) {
@@ -450,7 +453,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       }
       else {
         if (this.type) {
-          if (this.expression[this.type](this.ngModel.model)) {
+          if (this.expression[this.type](this.ngModel.value)) {
             //value对比
             let theMaxValue = (this.maxValue || this.maxValue == 0) ? this.maxValue : (isNaN(this.maxValue) ? 0 : null);
             let theMinValue = (this.minValue || this.minValue == 0) ? this.minValue : (isNaN(this.minValue) ? 0 : null)
@@ -518,11 +521,12 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
   ShowErrorTip(msg) {
     if (!$(this.el.nativeElement).is(":hidden")) {
       // if(this.el.nativeElement.localName=""){
-        $(this.el.nativeElement).find('input').addClass('ng2-invalid');
+      $(this.el.nativeElement).find('input').addClass('ng2-invalid');
+      $(this.el.nativeElement).find('nz-select').addClass('ng2-invalid');
       // }else{
-        $(this.el.nativeElement).addClass('ng2-invalid');
+      $(this.el.nativeElement).addClass('ng2-invalid');
       // }
-      
+
       this.tips.find(".vtooltip-inner").html(msg);
 
       Object.assign(this.ngModel, {
@@ -570,7 +574,8 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       }
     $(this.el.nativeElement).removeClass('ng2-invalid');
     $(this.el.nativeElement).find('input').removeClass('ng2-invalid');
-    if(this.tips){
+    $(this.el.nativeElement).find('nz-select').removeClass('ng2-invalid');
+    if (this.tips) {
       this.tips.hide();
     }
   }

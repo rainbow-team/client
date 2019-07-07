@@ -3,6 +3,7 @@ import { SupervisionSercice } from '../../../../services/supervision/supervision
 import { UploadXHRArgs, UploadFile, NzMessageService } from 'ng-zorro-antd';
 import { HttpRequest, HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { OrgSercice } from 'src/app/services/supervision/org.service';
 
 @Component({
     selector: 'app-supervision-supervisor',
@@ -15,6 +16,7 @@ export class SupervisorComponent implements OnInit {
 
     name: any = "";
     orgId: any = "";
+    expireDate: any = "";
 
     pageIndex: any = 1;
     pageSize: any = 10;
@@ -24,10 +26,24 @@ export class SupervisorComponent implements OnInit {
     allChecked: any = false;
     indeterminate: any = false;
 
-    constructor(private supervisionSercice: SupervisionSercice, private http: HttpClient, private router: Router, private msg: NzMessageService) { }
+    orgList: any = [];
+
+    constructor(private supervisionSercice: SupervisionSercice, private http: HttpClient, private router: Router,
+        private msg: NzMessageService, private orgSercice: OrgSercice) { }
 
     ngOnInit() {
         this.search();
+        this.orgSercice.getAllOrgList().subscribe((res) => {
+            if (res.code == 200) {
+                this.orgList = [];
+                res.msg.forEach(element => {
+                    this.orgList.push({
+                        id: element.id,
+                        name: element.name
+                    });
+                });
+            }
+        })
     }
 
     add() {
@@ -55,6 +71,11 @@ export class SupervisorComponent implements OnInit {
         if (this.orgId) {
             option.conditions.push({ key: "orgId", value: this.orgId })
         }
+
+        if (this.expireDate) {
+            option.conditions.push({ key: "expireDate", value: this.expireDate })
+        }
+
 
         this.supervisionSercice.getSupervisionSupervisorList(option).subscribe(
             (data) => {
@@ -114,6 +135,7 @@ export class SupervisorComponent implements OnInit {
     reset() {
         this.name = "";
         this.orgId = "";
+        this.expireDate = "";
     }
 
 }

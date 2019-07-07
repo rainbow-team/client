@@ -22,31 +22,49 @@ export class SupervisionSercice {
     }
 
     deleteSupervisionSupervisorByIds(ids): any {
-        return this.http.post('/SupervisionSupervisor/deleteSupervisionSupervisorByIds',ids);
+        return this.http.post('/SupervisionSupervisor/deleteSupervisionSupervisorByIds', ids);
     }
 
     getSupervisionSupervisorById(id): any {
         return this.http.get('/SupervisionSupervisor/getSupervisionSupervisorById?id=' + id);
     }
 
-    //核安全监督员培训信息
+    //核安全监督员子项管理
     addTrainRecord(param): any {
-        return this.http.post('/supervisiontrain/addTrainRecord', param)
+        return this.http.post('/SupervisionTrainRecord/addTrainRecord', param);
     }
 
     modifyTrainRecord(param): any {
-        return this.http.post('/supervisiontrain/modifyTrainRecord', param)
+        return this.http.post('/SupervisionTrainRecord/modifyTrainRecord', param);
     }
 
     getTrainRecordList(param): any {
-        return this.http.post('/supervisiontrain/getTrainRecordList', param);
+        return this.http.post('/SupervisionTrainRecord/getTrainRecordList', param);
     }
 
-    getTrainRecordById(id): any {
-        return this.http.get('/supervisiontrain/getTrainRecordById?id=' + id);
+    deleteTrainRecordByIds(param): any {
+        return this.http.post('/SupervisionTrainRecord/deleteTrainRecordByIds', param);
     }
 
-    deleteTrainRecordByIds(ids): any {
-        return this.http.post('/supervisiontrain/deleteTrainRecordByIds', ids);
+
+    //核安全监督员培训信息
+    addMonitorTrain(param): any {
+        return this.http.post('/supervisiontrain/addMonitorTrain', param)
+    }
+
+    modifyMonitorTrain(param): any {
+        return this.http.post('/supervisiontrain/modifyMonitorTrain', param)
+    }
+
+    getMonitorTrainList(param): any {
+        return this.http.post('/supervisiontrain/getMonitorTrainList', param);
+    }
+
+    getMonitorTrainById(id): any {
+        return this.http.get('/supervisiontrain/getMonitorTrainById?id=' + id);
+    }
+
+    deleteMonitorTrainByIds(ids): any {
+        return this.http.post('/supervisiontrain/deleteMonitorTrainByIds', ids);
     }
 }

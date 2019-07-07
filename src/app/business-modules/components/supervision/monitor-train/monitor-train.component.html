@@ -44,7 +44,8 @@
 
     </div>
     <div>
-      <nz-table #nestedTable1 [nzData]="dataSet" class="commontable" [nzShowPagination]="false">
+      <nz-table #nestedTable1 [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+      (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzFrontPagination]="false">
         <thead>
           <tr>
             <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
@@ -76,10 +77,6 @@
           </tr>
         </tbody>
       </nz-table>
-    </div>
-    <div class="pagination_pos">
-      <nz-pagination [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
-      (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
     </div>
   </div>
 </div>

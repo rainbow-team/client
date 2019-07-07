@@ -54,7 +54,7 @@ export class MonitorTrainAddComponent implements OnInit {
     }
 
     if (id) {
-      this.supervisionSercice.getTrainRecordById(id).subscribe((res) => {
+      this.supervisionSercice.getMonitorTrainById(id).subscribe((res) => {
         this.data = res.msg;
         this.staffObj.name = this.data.creatorName;
       });
@@ -94,7 +94,7 @@ export class MonitorTrainAddComponent implements OnInit {
     if (this.data.id) {
 
       this.data.modifyId = this.staffObj.id;
-      this.supervisionSercice.modifyTrainRecord(this.data).subscribe((res) => {
+      this.supervisionSercice.modifyMonitorTrain(this.data).subscribe((res) => {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
 
@@ -113,7 +113,7 @@ export class MonitorTrainAddComponent implements OnInit {
 
       this.data.creatorId = this.staffObj.id;
       this.data.modifyId = this.staffObj.id;
-      this.supervisionSercice.addTrainRecord(this.data).subscribe((res) => {
+      this.supervisionSercice.addMonitorTrain(this.data).subscribe((res) => {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
           this.router.navigate(['/index/supersivion/monitorTrain']);
