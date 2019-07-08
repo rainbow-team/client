@@ -14,6 +14,7 @@ import { MonitorTrainComponent } from './components/supervision/monitor-train/mo
 import { MonitorTrainAddComponent } from './components/supervision/monitor-train/monitor-train-add/monitor-train-add.component';
 import { ValidationDirective } from './../layouts/_directives/validation.directive';
 import { RecordtimePipe } from './../layouts/_pipes/recordtime.pipe';
+import { AttachmentComponent } from './../layouts/components/attachment/attachment.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { RecordtimePipe } from './../layouts/_pipes/recordtime.pipe';
     MonitorTrainComponent,
     MonitorTrainAddComponent,
     ValidationDirective,
-    RecordtimePipe
+    RecordtimePipe,
+    AttachmentComponent
   ]
 })
 export class BusinessModulesModule { }

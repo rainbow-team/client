@@ -130,24 +130,8 @@
         </div>
       </div>
 
-      <div style="padding:0 50px;">
-        <nz-upload [nzAction]="uploadUrl" [nzCustomRequest]="customReq" [nzFileList]="fileList" [nzShowUploadList]="false" [nzDisabled]="isDisable">
-          <i nz-icon type="plus" class="upload_i"></i>
-          <div class="ant-upload-text">上传附件</div>
-        </nz-upload>
+     <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
 
-        <div class="file_div">
-          <div *ngFor="let fileItem of fileList">
-            <div class="file_item">
-              <i nz-icon type="paper-clip" theme="outline" class="flie_item_pic"></i>
-              <span>{{fileItem.name}}</span>
-              <i nz-icon type="download" theme="outline" (click)="downloadAccessory(fileItem)"></i>
-              <i nz-icon type="close" style="color: red;" theme="outline" class="file_item_delete" *ngIf="!isDisable" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="RemoveAttachment(fileItem)"></i>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </nz-tab>
 
     <nz-tab nzTitle="培训信息" *ngIf="isDisable">
