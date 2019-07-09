@@ -9,7 +9,6 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-supervisor-add',

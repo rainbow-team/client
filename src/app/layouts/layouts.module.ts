@@ -12,7 +12,8 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
 import { ShareModule } from '../common-modules/share/share.module';
 import { ValidationDirective } from './_directives/validation.directive';
-
+import { RecordtimePipe } from './_pipes/recordtime.pipe';
+import { AttachmentComponent } from './components/attachment/attachment.component';
 
 @NgModule({
   imports: [
@@ -27,13 +28,19 @@ import { ValidationDirective } from './_directives/validation.directive';
     LoginComponent,
     IndexComponent,
     HeaderComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    RecordtimePipe,
+    ValidationDirective,
+    AttachmentComponent
   ],
   exports: [
     LoginComponent,
     IndexComponent,
     HeaderComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    RecordtimePipe,
+    ValidationDirective,
+    AttachmentComponent
   ]
 })
 export class LayoutsModule { }

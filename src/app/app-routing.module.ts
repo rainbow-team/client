@@ -9,13 +9,7 @@ const appRoutes: Routes = [{
   component: LoginComponent
 }, {
   path: 'index',
-  component: IndexComponent,
-  children: [
-    {
-      path: '',
-      loadChildren: './business-modules/business-modules#BusinessModulesModule'
-    }
-  ]
+  loadChildren: './business-modules/business-modules.module#BusinessModulesModule'
 }, {
   path: '',
   pathMatch: 'full',
