@@ -8,12 +8,8 @@ const appRoutes: Routes = [{
   path: 'login',
   component: LoginComponent
 }, {
-  path: 'index',
-  loadChildren: './business-modules/business-modules.module#BusinessModulesModule'
-}, {
   path: '',
-  pathMatch: 'full',
-  redirectTo: '/login'
+  loadChildren: './business-modules/business-modules.module#BusinessModulesModule'
 }];
 
 @NgModule({

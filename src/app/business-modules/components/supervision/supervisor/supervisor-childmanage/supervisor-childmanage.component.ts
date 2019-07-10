@@ -144,7 +144,7 @@ export class SupervisorChildmanageComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/index/supersivion/supervisor']);
+    this.router.navigate(['/supersivion/supervisor']);
   }
 
   //添加的保存

@@ -116,7 +116,7 @@ export class MonitorTrainAddComponent implements OnInit {
       this.supervisionSercice.addMonitorTrain(this.data).subscribe((res) => {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
-          this.router.navigate(['/index/supersivion/monitorTrain']);
+          this.router.navigate(['/supersivion/monitorTrain']);
         } else {
           this.msg.create('error', '保存失败');
         }
@@ -128,7 +128,7 @@ export class MonitorTrainAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/index/supersivion/monitorTrain']);
+    this.router.navigate(['/supersivion/monitorTrain']);
   }
 
   customReq = (item: UploadXHRArgs) => {

@@ -4,7 +4,7 @@ import { NavMenu } from 'src/app/utilities/entities/navMenu';
 import { LayoutChangeService } from './../layouts/services/layout-change.service';
 import { DictionarySercice } from './../services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './business-modules.component.html',
@@ -17,16 +17,50 @@ export class BusinessModulesComponent implements OnInit {
     isIndex: any = true;
 
     constructor(private layoutChangeService: LayoutChangeService, private dictionarySercice: DictionarySercice,
-        private staffSercice: StaffSercice,private router: Router) { }
+        private staffSercice: StaffSercice, private router: Router, private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
 
-        let logUser= this.staffSercice.getStaffObj();
-        if (!logUser) {
+        let logUser = this.staffSercice.getStaffObj();
+        if (!logUser.id) {
             this.router.navigate(['/login'])
         }
         //初始化字典
         this.dictionarySercice.getAllConfig(true);
+
+        if (this.router.url == "/home") {
+            this.isIndex = true;
+        } else {
+            this.isIndex = false;
+        };
+
+        switch (this.router.url) {
+            case "/supersivion/supervisor":
+                this.breadcrumbList = ["监管信息", "核安全监管员信息"];
+                break;
+            case "/supersivion/supervisor/add":
+                this.breadcrumbList = ["监管信息", "核安全监管员信息", "添加"];
+                break;
+            case "/supersivion/supervisor/childmanage":
+                this.breadcrumbList = ["监管信息", "核安全监管员信息", "子项管理"];
+                break;
+            case "/supersivion/monitorTrain":
+                this.breadcrumbList = ["监管信息","核安全监督培训信息"];
+                break;
+            case "/supersivion/monitorTrain/add":
+                this.breadcrumbList = ["监管信息","核安全监督培训信息","添加"];
+                break;
+            case "/system":
+                this.breadcrumbList = ["系统管理"];
+                break;
+
+            default:
+                break;
+        }
+
+        let data = this.activatedRoute.snapshot.data;
+
+        // this.breadcrumbList = data.breadcrumb;
 
         this.layoutChangeService.routeChange.subscribe((data: any) => {
             if (data[0] == "首页") {

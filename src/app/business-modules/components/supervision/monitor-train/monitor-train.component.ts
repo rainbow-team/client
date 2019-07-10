@@ -130,11 +130,11 @@ export class MonitorTrainComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/index/supersivion/monitorTrain/add']);
+    this.router.navigate(['/supersivion/monitorTrain/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/index/supersivion/monitorTrain/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/supersivion/monitorTrain/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   refreshStatus() {

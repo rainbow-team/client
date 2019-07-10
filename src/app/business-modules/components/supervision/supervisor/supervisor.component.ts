@@ -47,15 +47,15 @@ export class SupervisorComponent implements OnInit {
     }
 
     add() {
-        this.router.navigate(['/index/supersivion/supervisor/add']);
+        this.router.navigate(['/supersivion/supervisor/add']);
     }
 
     show(item, flag) {
-        this.router.navigate(['/index/supersivion/supervisor/add'], { queryParams: { id: item.id, flag: flag } });
+        this.router.navigate(['/supersivion/supervisor/add'], { queryParams: { id: item.id, flag: flag } });
     }
 
     goChildManage(item) {
-        this.router.navigate(['/index/supersivion/supervisor/childmanage'], { queryParams: { id: item.id } });
+        this.router.navigate(['/supersivion/supervisor/childmanage'], { queryParams: { id: item.id } });
     }
 
     search() {

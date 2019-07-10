@@ -17,7 +17,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   @Input()
   navMenu: NavMenu = [];
 
-  checkedItem: any;
+  checkedTopItem: any = {};
 
   subRouterEvent: Subscription;
 
@@ -28,34 +28,43 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // 默认打开第一个菜单
-    this.menuItemClick(this.navMenu[0], null, null);
+    let currentUrl = this.router.url;
+
+    for (let i = 0; i < this.navMenu.length; i++) {
+      if (currentUrl.indexOf(this.navMenu[i].id) > -1) {
+        this.checkedTopItem = this.navMenu[i];
+        break;
+      }
+    }
   }
 
   // 菜单项选中
   menuItemClick(menuItem1: NavMenuItem, menuItem2: NavMenuItem, menuItem3: NavMenuItem) {
-    this.checkedItem = null;
+    let checkedItem = null;
     let breadcrumbName = [];
 
     if (menuItem3) {
-      this.checkedItem = menuItem3;
+      checkedItem = menuItem3;
       breadcrumbName.push(menuItem1.name);
       breadcrumbName.push(menuItem2.name);
       breadcrumbName.push(menuItem3.name);
     } else if (menuItem2) {
       breadcrumbName.push(menuItem1.name);
       breadcrumbName.push(menuItem2.name);
-      this.checkedItem = menuItem2;
+      checkedItem = menuItem2;
     } else {
       breadcrumbName.push(menuItem1.name);
-      this.checkedItem = menuItem1;
+      checkedItem = menuItem1;
     }
 
+    this.checkedTopItem = menuItem1;
+
     // 路由跳转
-    if (this.checkedItem.route) {
+    if (checkedItem.route) {
 
       this.layoutService.routeChange.next(breadcrumbName);
-      this.router.navigate([this.checkedItem.route]);
-      
+      this.router.navigate([checkedItem.route]);
+
     }
   }
 

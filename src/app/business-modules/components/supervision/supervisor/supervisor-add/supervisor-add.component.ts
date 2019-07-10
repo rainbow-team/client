@@ -159,7 +159,7 @@ export class SupervisorAddComponent implements OnInit {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
 
-        this.router.navigate(['/index/supersivion/supervisor']);
+        this.router.navigate(['/supersivion/supervisor']);
       } else {
 
         this.msg.create('error', '保存失败');
@@ -171,7 +171,7 @@ export class SupervisorAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/index/supersivion/supervisor']);
+    this.router.navigate(['/supersivion/supervisor']);
   }
 
  
