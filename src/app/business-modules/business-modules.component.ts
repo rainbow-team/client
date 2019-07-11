@@ -35,6 +35,16 @@ export class BusinessModulesComponent implements OnInit {
         };
 
         switch (this.router.url) {
+
+            case "/supersivion/sastind":
+                this.breadcrumbList = ["监管信息", "核安全监管机构信息", "国防科工局基本信息"];
+                break;
+            case "/supersivion/org":
+                this.breadcrumbList = ["监管信息", "核安全监管机构信息", "授权监管机构基本信息"];
+                break;
+            case "/supersivion/org/add":
+                this.breadcrumbList = ["监管信息", "核安全监管机构信息", "授权监管机构基本信息","添加"];
+                break;
             case "/supersivion/supervisor":
                 this.breadcrumbList = ["监管信息", "核安全监管员信息"];
                 break;
@@ -45,10 +55,10 @@ export class BusinessModulesComponent implements OnInit {
                 this.breadcrumbList = ["监管信息", "核安全监管员信息", "子项管理"];
                 break;
             case "/supersivion/monitorTrain":
-                this.breadcrumbList = ["监管信息","核安全监督培训信息"];
+                this.breadcrumbList = ["监管信息", "核安全监督培训信息"];
                 break;
             case "/supersivion/monitorTrain/add":
-                this.breadcrumbList = ["监管信息","核安全监督培训信息","添加"];
+                this.breadcrumbList = ["监管信息", "核安全监督培训信息", "添加"];
                 break;
             case "/system":
                 this.breadcrumbList = ["系统管理"];

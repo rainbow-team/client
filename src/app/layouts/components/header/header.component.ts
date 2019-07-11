@@ -20,8 +20,8 @@ export class HeaderComponent implements OnInit {
         {
           name: '核安全监管机构信息', id: '', route: '',
           children: [
-            { name: '国防科工局基本信息', id: '', route: '' },
-            { name: '授权监管机构基本信息', id: '', route: '' }
+            { name: '国防科工局基本信息', id: 'sastind', route: '/supersivion/sastind' },
+            { name: '授权监管机构基本信息', id: 'org', route: '/supersivion/org' }
           ]
         },
         {

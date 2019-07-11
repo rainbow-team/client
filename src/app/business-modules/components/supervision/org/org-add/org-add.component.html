@@ -1,0 +1,52 @@
+<div style="height: 100%;background:#fff">
+  <div class="div_top">
+    授权监管机构基本信息
+  </div>
+
+  <div class="div_contain">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>监管机构：
+        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true" [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>机构性质 ：
+        <nz-select [(ngModel)]="nature" class="w200" [nzMode]="multiple" [disabled]="isDisable" >
+          <nz-option *ngFor="let option of dictionary.config_supervision_org_nature" [nzLabel]="option.value" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>机构领导：
+        <input nz-input name="leader" [(ngModel)]="data.leader" class="w200" required [validation]="true" [disabled]="isDisable" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        机构领导电话：
+        <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" class="w200" [disabled]="isDisable"  [validation]="true"
+              [validationType]="'nullphonenumber'" />
+      </div>
+    </div>
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">工作职责：</div>
+        <textarea nz-input name="duty" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.duty" [disabled]="isDisable"></textarea>
+      </div>
+    </div>
+     
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">备注：</div>
+        <textarea nz-input name="note" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.note" [disabled]="isDisable"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;" [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>

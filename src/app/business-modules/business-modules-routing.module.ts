@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SystemComponent } from './components/system/system.component';
 import { BusinessModulesComponent } from './business-modules.component';
 
 const appRoutes: Routes = [
@@ -15,6 +14,8 @@ const appRoutes: Routes = [
         path: 'supersivion',
         component: BusinessModulesComponent,
         children: [
+            { path: 'sastind', loadChildren: './components/supervision/sastind/sastind.module#SastindModule' },
+            { path: 'org', loadChildren: './components/supervision/org/org.module#OrgModule' },
             { path: 'supervisor', loadChildren: './components/supervision/supervisor/supervisor.module#SupervisorModule' },
             { path: 'monitorTrain', loadChildren: './components/supervision/monitor-train/monitor-train.module#MonitorTrainModule' },
             { path: '', pathMatch: 'full', redirectTo: 'supervisor' }

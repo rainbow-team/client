@@ -1,0 +1,75 @@
+<div style="height: 100%;">
+  <div nz-row style="height: 40px;">
+    <div nz-col [nzSpan]="5">
+      监管机构
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
+    </div>
+    <div nz-col [nzSpan]="5">
+      机构性质
+      <nz-select [(ngModel)]="nature" class="w200" [nzMode]="multiple">
+        <nz-option *ngFor="let option of dictionary.config_supervision_org_nature" [nzLabel]="option.value" [nzValue]="option.id">
+        </nz-option>
+      </nz-select>
+    </div>
+    <div nz-col [nzSpan]="5">
+      机构领导
+      <input nz-input nzSize="default" [(ngModel)]="leader" class="w200">
+    </div>
+
+    <div nz-col [nzSpan]="4" [nzOffset]="5">
+      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
+      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
+    </div>
+  </div>
+
+  <div nz-row class="div_contain">
+
+    <div class="div_top">
+      <div class="fl div_top_tip">
+
+      </div>
+      <div class="fl" style="color: #0050b3;">
+        授权监管机构基本信息（共{{totalCount}}条）
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
+      </div>
+
+    </div>
+    <div>
+      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>监管机构</th>
+            <th>机构性质</th>
+            <th>机构领导</th>
+            <th>机构领导电话 </th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of nestedTable.data;index as index">
+            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.natureName}}</td>
+            <td>{{data.leader}}</td>
+            <td>{{data.leaderTel}}</td>
+            <td>
+              <a (click)="show(data,true)">查看</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a (click)="show(data,false)">编辑</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a nz-popconfirm nzTitle="确定删除吗?"
+              (nzOnConfirm)="delete(data)">删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+  </div>
+</div>
