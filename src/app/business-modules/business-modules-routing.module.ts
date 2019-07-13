@@ -18,6 +18,7 @@ const appRoutes: Routes = [
             { path: 'org', loadChildren: './components/supervision/org/org.module#OrgModule' },
             { path: 'supervisor', loadChildren: './components/supervision/supervisor/supervisor.module#SupervisorModule' },
             { path: 'monitorTrain', loadChildren: './components/supervision/monitor-train/monitor-train.module#MonitorTrainModule' },
+            { path: 'law', loadChildren: './components/supervision/law/law.module#LawModule' },
             { path: '', pathMatch: 'full', redirectTo: 'supervisor' }
         ]
     }, {

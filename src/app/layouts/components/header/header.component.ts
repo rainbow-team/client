@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
           name: '核安全监管员信息', id: 'supervisor', route: '/supersivion/supervisor'
         },
         { name: '核安全监督培训信息', id: 'monitorTrain', route: '/supersivion/monitorTrain' },
-        { name: '监管法规信息', id: '', route: '' },
+        { name: '监管法规信息', id: 'law', route: '/supersivion/law' },
         { name: '除核电外安全生产培训信息', id: '', route: '' },
         { name: '核安全监督专家信息', id: '', route: '' },
         { name: '焊接人员资质信息', id: '', route: '' },
