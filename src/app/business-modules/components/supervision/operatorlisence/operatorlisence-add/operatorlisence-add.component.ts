@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-import { LawSercice } from 'src/app/services/supervision/law.service';
+import { OperatorLisenceSercice } from 'src/app/services/supervision/operatorlisence.service';
 
 @Component({
-  selector: 'app-law-add',
-  templateUrl: './law-add.component.html',
-  styleUrls: ['./law-add.component.scss']
+  selector: 'app-operatorlisence-add',
+  templateUrl: './operatorlisence-add.component.html',
+  styleUrls: ['./operatorlisence-add.component.scss']
 })
-export class LawAddComponent implements OnInit {
+export class OperatorlisenceAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -27,7 +27,7 @@ export class LawAddComponent implements OnInit {
 
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
-    private attachmentSercice: AttachmentSercice, private lawSercice: LawSercice) { }
+    private attachmentSercice: AttachmentSercice, private operatorLisenceSercice: OperatorLisenceSercice) { }
 
 
   ngOnInit() {
@@ -45,7 +45,7 @@ export class LawAddComponent implements OnInit {
     }
 
     if (id) {
-      this.lawSercice.getLawById(id).subscribe((res) => {
+      this.operatorLisenceSercice.getOperatorLisenceById(id).subscribe((res) => {
         this.data = res.msg;
       });
 
@@ -85,11 +85,10 @@ export class LawAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.lawSercice.saveOrUpdateLaw(this.data).subscribe((res) => {
+    this.operatorLisenceSercice.saveOrUpdateOperatorlisence(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
-
-        this.router.navigate(['/supersivion/law']);
+        this.router.navigate(['/supersivion/operatorlisence']);
       } else {
 
         this.msg.create('error', '保存失败');
@@ -101,7 +100,7 @@ export class LawAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/supersivion/law']);
+    this.router.navigate(['/supersivion/operatorlisence']);
   }
 
 
@@ -116,5 +115,4 @@ export class LawAddComponent implements OnInit {
     });
     return isValid;
   }
-
 }

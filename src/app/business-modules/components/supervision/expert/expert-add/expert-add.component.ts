@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-import { LawSercice } from 'src/app/services/supervision/law.service';
+import { ExpertSercice } from 'src/app/services/supervision/expert.service';
 
 @Component({
-  selector: 'app-law-add',
-  templateUrl: './law-add.component.html',
-  styleUrls: ['./law-add.component.scss']
+  selector: 'app-expert-add',
+  templateUrl: './expert-add.component.html',
+  styleUrls: ['./expert-add.component.scss']
 })
-export class LawAddComponent implements OnInit {
+export class ExpertAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -21,13 +21,14 @@ export class LawAddComponent implements OnInit {
   isDisable = false;
   fileList = [
   ];
+  sexValue: any = "";
 
   dictionary: any = {};
   staffObj: any = {};
 
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
-    private attachmentSercice: AttachmentSercice, private lawSercice: LawSercice) { }
+    private attachmentSercice: AttachmentSercice, private expertSercice: ExpertSercice) { }
 
 
   ngOnInit() {
@@ -45,29 +46,34 @@ export class LawAddComponent implements OnInit {
     }
 
     if (id) {
-      this.lawSercice.getLawById(id).subscribe((res) => {
+      this.expertSercice.getExpertById(id).subscribe((res) => {
         this.data = res.msg;
+        this.sexValue = this.data.sex + "";
       });
 
-      this.attachmentSercice.getFileListById(id).subscribe((res1) => {
-
-        if (res1.msg.length > 0) {
-          res1.msg.forEach(element => {
-            this.fileList.push({
-              response: {
-                msg: element.fileinfoId
-              },
-              name: element.fileinfoClientFileName
-            });
-          });
-        }
-      })
     } else {
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
 
   }
+
+    //身份证变化
+    identityChange(params) {
+
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+      if (reg.test(params)) {
+  
+        this.data.birthday = new Date(params.substring(6, 10), params.substring(10, 12) - 1, params.substring(12, 14));
+        if (parseInt(params.substr(16, 1)) % 2 == 1) {
+          //男
+          return this.sexValue = "1";
+        } else {
+          //女
+          return this.sexValue = "2";
+        }
+      }
+    }
 
   save() {
 
@@ -76,20 +82,13 @@ export class LawAddComponent implements OnInit {
     }
 
     this.isSaving = true;
-    this.data.attachmentList = [];
-
-    if (this.fileList.length > 0) {
-      this.fileList.forEach(element => {
-        this.data.attachmentList.push({ fileinfoId: element.response.msg });
-      });
-    }
 
     this.data.modifyId = this.staffObj.id;
-    this.lawSercice.saveOrUpdateLaw(this.data).subscribe((res) => {
+    this.data.sex = this.sexValue;
+    this.expertSercice.saveOrUpdateExpert(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
-
-        this.router.navigate(['/supersivion/law']);
+        this.router.navigate(['/supersivion/expert']);
       } else {
 
         this.msg.create('error', '保存失败');
@@ -101,7 +100,7 @@ export class LawAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/supersivion/law']);
+    this.router.navigate(['/supersivion/expert']);
   }
 
 

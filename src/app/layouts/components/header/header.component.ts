@@ -29,11 +29,11 @@ export class HeaderComponent implements OnInit {
         },
         { name: '核安全监督培训信息', id: 'monitorTrain', route: '/supersivion/monitorTrain' },
         { name: '监管法规信息', id: 'law', route: '/supersivion/law' },
-        { name: '除核电外安全生产培训信息', id: '', route: '' },
-        { name: '核安全监督专家信息', id: '', route: '' },
-        { name: '焊接人员资质信息', id: '', route: '' },
-        { name: '无损检验人员资质信息', id: '', route: '' },
-        { name: '研究堆操纵员执照信息', id: '', route: '' }
+        { name: '安全生产培训信息', id: 'producetrain', route: '/supersivion/producetrain' },
+        { name: '核安全监督专家信息', id: 'expert', route: 'supersivion/expert' },
+        { name: '焊接人员资质信息', id: 'welder', route: '/supersivion/welder' },
+        { name: '无损检验人员资质信息', id: 'breakchecker', route: '/supersivion/breakchecker' },
+        { name: '研究堆操纵员执照信息', id: 'operatorlisence', route: '/supersivion/operatorlisence' }
       ]
     },
     {

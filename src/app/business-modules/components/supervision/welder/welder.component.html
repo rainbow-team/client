@@ -1,25 +1,24 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      法规文号
-      <input nz-input nzSize="default" [(ngModel)]="code" class="w200">
-    </div>
-    <div nz-col [nzSpan]="5">
-      法规名称
+      姓名
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
     <div nz-col [nzSpan]="5">
-      发布开始时间
-      <nz-date-picker class="w200" [(ngModel)]="startTime" >
-      </nz-date-picker>
+      聘用单位
+      <input nz-input nzSize="default" [(ngModel)]="employ_depart" class="w200">
+    </div>
+    <div nz-col [nzSpan]="6">
+      考试合格项目代号
+      <input nz-input nzSize="default" [(ngModel)]="exam_project" class="w200">
     </div>
     <div nz-col [nzSpan]="5">
-      发布结束时间
-      <nz-date-picker class="w200" [(ngModel)]="endTime" >
-      </nz-date-picker>
+      有效期限
+      <nz-range-picker class="w200" [(ngModel)]="expire_date" >
+      </nz-range-picker>
     </div>
 
-    <div nz-col [nzSpan]="4">
+    <div nz-col [nzSpan]="3">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>
@@ -32,7 +31,7 @@
 
       </div>
       <div class="fl" style="color: #0050b3;">
-        监管法规信息（共{{totalCount}}条）
+        焊接人员资质信息（共{{totalCount}}条）
       </div>
 
       <div class="fr">
@@ -47,18 +46,20 @@
         <thead>
           <tr>
             <th>序号</th>
-            <th>法规文号</th>
-            <th>法规名称</th>
-            <th>发布日期</th>
+            <th>人员姓名</th>
+            <th>聘用单位</th>
+            <th>考试合格项目代号</th>
+            <th>有效期限</th>
             <th>操作</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of nestedTable.data;index as index">
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-            <td>{{data.code}}</td>
             <td>{{data.name}}</td>
-            <td>{{data.releaseDate|recordtime}}</td>
+            <td>{{data.employDepart}}</td>
+            <td>{{data.examProject}}</td>
+            <td>{{data.expireDate|recordtime}}</td>
             <td>
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>

@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
+import { StaffSercice } from 'src/app/services/common/staff-service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
-import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-import { LawSercice } from 'src/app/services/supervision/law.service';
+import { ProducetrainSercice } from 'src/app/services/supervision/producetrain.service';
 
 @Component({
-  selector: 'app-law-add',
-  templateUrl: './law-add.component.html',
-  styleUrls: ['./law-add.component.scss']
+  selector: 'app-producetrain-add',
+  templateUrl: './producetrain-add.component.html',
+  styleUrls: ['./producetrain-add.component.scss']
 })
-export class LawAddComponent implements OnInit {
+export class ProducetrainAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -21,13 +21,14 @@ export class LawAddComponent implements OnInit {
   isDisable = false;
   fileList = [
   ];
+  sexValue: any = "";
 
   dictionary: any = {};
   staffObj: any = {};
 
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
-    private attachmentSercice: AttachmentSercice, private lawSercice: LawSercice) { }
+    private attachmentSercice: AttachmentSercice, private producetrainSercice: ProducetrainSercice) { }
 
 
   ngOnInit() {
@@ -45,8 +46,9 @@ export class LawAddComponent implements OnInit {
     }
 
     if (id) {
-      this.lawSercice.getLawById(id).subscribe((res) => {
+      this.producetrainSercice.getProduceTrainRecordById(id).subscribe((res) => {
         this.data = res.msg;
+        this.sexValue = this.data.sex + "";
       });
 
       this.attachmentSercice.getFileListById(id).subscribe((res1) => {
@@ -85,11 +87,10 @@ export class LawAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.lawSercice.saveOrUpdateLaw(this.data).subscribe((res) => {
+    this.producetrainSercice.saveOrUpdateProducetrain(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
-
-        this.router.navigate(['/supersivion/law']);
+        this.router.navigate(['/supersivion/producetrain']);
       } else {
 
         this.msg.create('error', '保存失败');
@@ -101,7 +102,7 @@ export class LawAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/supersivion/law']);
+    this.router.navigate(['/supersivion/producetrain']);
   }
 
 

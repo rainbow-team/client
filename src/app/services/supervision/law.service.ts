@@ -15,7 +15,7 @@ export class LawSercice {
 
     saveOrUpdateLaw(param): any {
 
-        let url = param.id ? "/lawsupervision/addLaw" : "/lawsupervision/modifyLaw";
+        let url = !param.id ? "/lawsupervision/addLaw" : "/lawsupervision/modifyLaw";
         return this.http.post(url, param);
     }
 

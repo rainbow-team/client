@@ -4,17 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from './../../../../layouts/layouts.module';
-import { SastindComponent } from './sastind.component';
-import { SastindAddComponent } from './sastind-add/sastind-add.component';
+import { BreakcheckerComponent } from './breakchecker.component';
+import { BreakcheckerAddComponent } from './breakchecker-add/breakchecker-add.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: SastindComponent
+        component: BreakcheckerComponent
     },
     {
         path: 'add',
-        component: SastindAddComponent
+        component: BreakcheckerAddComponent
     }
 ];
 
@@ -29,8 +29,8 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        SastindComponent,
-        SastindAddComponent
+        BreakcheckerComponent,
+        BreakcheckerAddComponent
     ]
 })
-export class SastindModule { }
+export class BreakCheckerModule { }

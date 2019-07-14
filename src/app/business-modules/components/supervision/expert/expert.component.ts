@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
+import { ExpertSercice } from 'src/app/services/supervision/expert.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { SastindSercice } from 'src/app/services/supervision/sastind.service';
 
 @Component({
-  selector: 'app-sastind',
-  templateUrl: './sastind.component.html',
-  styleUrls: ['./sastind.component.scss']
+  selector: 'app-expert',
+  templateUrl: './expert.component.html',
+  styleUrls: ['./expert.component.scss']
 })
-export class SastindComponent implements OnInit {
+export class ExpertComponent implements OnInit {
 
   dictionary: any = {};
   staffObj: any = {};
@@ -21,10 +21,13 @@ export class SastindComponent implements OnInit {
 
   dataSet: any = [];
 
+
   name: any = "";
+  major: any = "";
+
 
   constructor(private router: Router,
-    private msg: NzMessageService, private sastindSercice: SastindSercice, private dictionarySercice: DictionarySercice,
+    private msg: NzMessageService, private  expertSercice: ExpertSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice) { }
 
   ngOnInit() {
@@ -45,8 +48,11 @@ export class SastindComponent implements OnInit {
     if (this.name) {
       option.conditions.push({ key: "name", value: this.name })
     }
+    if (this.major) {
+      option.conditions.push({ key: "major", value: this.major })
+    }
 
-    this.sastindSercice.getSastindList(option).subscribe(
+    this.expertSercice.getExpertList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -56,19 +62,20 @@ export class SastindComponent implements OnInit {
 
   reset() {
     this.name = "";
+    this.major = "";
   }
 
   add() {
-    this.router.navigate(['/supersivion/sastind/add']);
+    this.router.navigate(['/supersivion/expert/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/supersivion/sastind/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/supersivion/expert/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {
 
-    this.sastindSercice.deleteSastindById([item.id]).subscribe((res) => {
+    this.expertSercice.deleteExpertByIds([item.id]).subscribe((res) => {
 
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
@@ -79,4 +86,5 @@ export class SastindComponent implements OnInit {
     })
 
   }
+
 }

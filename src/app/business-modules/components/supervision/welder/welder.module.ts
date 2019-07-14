@@ -4,17 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from './../../../../layouts/layouts.module';
-import { SastindComponent } from './sastind.component';
-import { SastindAddComponent } from './sastind-add/sastind-add.component';
+import { WelderComponent } from './welder.component';
+import { WelderAddComponent } from './welder-add/welder-add.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: SastindComponent
+        component: WelderComponent
     },
     {
         path: 'add',
-        component: SastindAddComponent
+        component: WelderAddComponent
     }
 ];
 
@@ -29,8 +29,8 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        SastindComponent,
-        SastindAddComponent
+        WelderComponent,
+        WelderAddComponent
     ]
 })
-export class SastindModule { }
+export class WelderModule { }

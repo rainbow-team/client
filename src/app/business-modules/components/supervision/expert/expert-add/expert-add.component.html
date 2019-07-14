@@ -1,0 +1,72 @@
+<div style="height: 100%;background:#fff">
+  <div class="div_top_add">
+    核安全监督专家信息
+  </div>
+  <div class="div_contain_add" style="height:290px;">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>姓名：
+        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"
+          [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        身份证号：
+        <input nz-input name="identity" [(ngModel)]="data.identity" class="w200" [validation]="true"
+          [validationType]="'nullidcard'" [disabled]="isDisable" (ngModelChange)="identityChange($event)" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        性别：
+        <nz-radio-group [(ngModel)]="sexValue" style="width: 200px;text-align: left;" [disabled]="isDisable">
+          <label nz-radio nzValue="1">男</label>
+          <label nz-radio nzValue="0">女</label>
+        </nz-radio-group>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>专业：
+        <input nz-input name="major" [(ngModel)]="data.major" class="w200" required [validation]="true"
+          [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        职称：
+        <nz-select [(ngModel)]="data.titleId" class="w200" [disabled]="isDisable" required [validation]="true">
+          <nz-option *ngFor="let option of dictionary.config_title" [nzLabel]="option.value" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>年龄：
+        <input nz-input name="certNumber" class="w200" disabled />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>联系方式：
+        <input nz-input name="contact" [(ngModel)]="data.contact" class="w200" [disabled]="isDisable" required
+          [validation]="true" [validationType]="'phonenumber'" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>所属单位：
+        <input nz-input name="org" [(ngModel)]="data.org" class="w200" required [validation]="true"
+          [disabled]="isDisable" />
+      </div>
+    </div>
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">备注：</div>
+        <textarea nz-input name="note" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.note"
+          [disabled]="isDisable"></textarea>
+      </div>
+    </div>
+
+
+  </div>
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+      [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>

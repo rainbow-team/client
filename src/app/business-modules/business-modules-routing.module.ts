@@ -18,7 +18,12 @@ const appRoutes: Routes = [
             { path: 'org', loadChildren: './components/supervision/org/org.module#OrgModule' },
             { path: 'supervisor', loadChildren: './components/supervision/supervisor/supervisor.module#SupervisorModule' },
             { path: 'monitorTrain', loadChildren: './components/supervision/monitor-train/monitor-train.module#MonitorTrainModule' },
+            { path: 'producetrain', loadChildren: './components/supervision/producetrain/producetrain.module#ProducetrainModule' },
+            { path: 'expert', loadChildren: './components/supervision/expert/expert.module#ExpertModule' },
             { path: 'law', loadChildren: './components/supervision/law/law.module#LawModule' },
+            { path: 'welder', loadChildren: './components/supervision/welder/welder.module#WelderModule' },
+            { path: 'breakchecker', loadChildren: './components/supervision/breakchecker/breakchecker.module#BreakCheckerModule' },
+            { path: 'operatorlisence', loadChildren: './components/supervision/operatorlisence/operatorlisence.module#OperatorLisenceModule' },
             { path: '', pathMatch: 'full', redirectTo: 'supervisor' }
         ]
     }, {

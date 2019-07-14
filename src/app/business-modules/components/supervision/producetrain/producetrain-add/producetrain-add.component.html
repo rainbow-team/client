@@ -1,0 +1,61 @@
+<div style="height: 100%;background:#fff">
+  <div class="div_top_add">
+    安全生产培训信息
+  </div>
+  <div class="div_contain_add" style="height:230px;">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>培训班次：
+        <input nz-input name="batch" [(ngModel)]="data.batch" class="w200" required [validation]="true"
+          [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>培训开始日期：
+        <nz-date-picker name="beginDate" [(ngModel)]="data.beginDate" class="w200" required [validation]="true"
+          [disabled]="isDisable">
+        </nz-date-picker>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>培训结束日期：
+        <nz-date-picker name="endDate" [(ngModel)]="data.endDate" class="w200" required [validation]="true"
+          [disabled]="isDisable">
+        </nz-date-picker>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>培训地点：
+        <input nz-input name="place" [(ngModel)]="data.place" class="w200" required [validation]="true"
+          [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        参培人数：
+        <input nz-input name="number" [(ngModel)]="data.number" validation="true" [validationType]="'nullnumber'"
+          class="w200" [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        培训内容及教师：
+        <input nz-input name="content" [(ngModel)]="data.content" class="w200" 
+          [disabled]="isDisable" />
+      </div>
+    </div>
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">备注：</div>
+        <textarea nz-input name="note" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.note"
+          [disabled]="isDisable"></textarea>
+      </div>
+    </div>
+
+
+  </div>
+
+  <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+      [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>

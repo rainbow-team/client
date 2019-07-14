@@ -4,17 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from './../../../../layouts/layouts.module';
-import { SastindComponent } from './sastind.component';
-import { SastindAddComponent } from './sastind-add/sastind-add.component';
+import { ExpertComponent } from './expert.component';
+import { ExpertAddComponent } from './expert-add/expert-add.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: SastindComponent
+        component: ExpertComponent
     },
     {
         path: 'add',
-        component: SastindAddComponent
+        component: ExpertAddComponent
     }
 ];
 
@@ -29,8 +29,8 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        SastindComponent,
-        SastindAddComponent
+        ExpertComponent,
+        ExpertAddComponent
     ]
 })
-export class SastindModule { }
+export class ExpertModule { }

@@ -170,6 +170,9 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     idcard: function (value) {
       return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
     },
+    nullidcard: function (value) {
+      return value == null || value == "" || /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
+    },
     // nullAreaNumber: function (value) {
     //     return value == null || value == "" || /^\d+(\.\d{1,2})?$/.test(value);
 
@@ -282,6 +285,10 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       success: ' is nullnumber!'
     },
     idcard: {
+      error: '输入必须是身份证号码',
+      success: ' is idcard!'
+    },
+    nullidcard: {
       error: '输入必须是身份证号码',
       success: ' is idcard!'
     },
