@@ -5,7 +5,7 @@
 
   <nz-tabset>
     <nz-tab nzTitle="监督员信息">
-      <div class="div_contain" style="height:360px;">
+      <div class="div_contain_add" style="height: calc(100% - 20px);">
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>姓名：
@@ -128,9 +128,11 @@
             <input nz-input name="note" [(ngModel)]="data.note" class="w200" [disabled]="isDisable" />
           </div>
         </div>
+
+        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
       </div>
 
-     <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+     
 
     </nz-tab>
 
@@ -183,7 +185,7 @@
 
 
 
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'">
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
     <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;" [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>

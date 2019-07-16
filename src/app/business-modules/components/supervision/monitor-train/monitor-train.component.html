@@ -1,14 +1,9 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      培训开始时间
-      <nz-date-picker class="w200" [(ngModel)]="beginDate">
-      </nz-date-picker>
-    </div>
-    <div nz-col [nzSpan]="5">
-      培训结束时间
-      <nz-date-picker class="w200" [(ngModel)]="endDate">
-      </nz-date-picker>
+      培训时间
+      <nz-range-picker class="w200" [(ngModel)]="px_date" >
+        </nz-range-picker>
     </div>
     <div nz-col [nzSpan]="5">
       培训班次
@@ -18,7 +13,7 @@
       培训地点
       <input nz-input nzSize="default" class="w200" [(ngModel)]="place">
     </div>
-    <div nz-col [nzSpan]="4">
+    <div nz-col [nzSpan]="4" [nzOffset]="5" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>

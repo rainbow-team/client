@@ -22,8 +22,7 @@ export class MonitorTrainComponent implements OnInit {
   pageIndex: any = 1;
   pageSize: any = 10;
 
-  beginDate: any;
-  endDate: any;
+  px_date:any=[];
   batch: any;
   place: any;
 
@@ -46,12 +45,16 @@ export class MonitorTrainComponent implements OnInit {
       conditions: []
     }
 
-    if (this.beginDate) {
-      option.conditions.push({ key: "beginDate", value: this.beginDate })
+    if (this.px_date && this.px_date.length > 0) {
+      if (this.px_date[0]) {
+        option.conditions.push({ key: "beginDate", value: this.px_date[0] })
+      }
+
+      if (this.px_date[1]) {
+        option.conditions.push({ key: "endDate", value: this.px_date[1] })
+      }
     }
-    if (this.endDate) {
-      option.conditions.push({ key: "endDate", value: this.endDate })
-    }
+
     if (this.batch) {
       option.conditions.push({ key: "batch", value: this.batch })
     }
@@ -122,8 +125,7 @@ export class MonitorTrainComponent implements OnInit {
 
   reset() {
 
-    this.beginDate = null;
-    this.endDate = null;
+    this.px_date = [];
     this.batch = null;
     this.place = null;
 

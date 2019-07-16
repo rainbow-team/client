@@ -22,8 +22,7 @@ export class ProducetrainComponent implements OnInit {
   dataSet: any = [];
 
 
-  begin_date: any = "";
-  end_date: any = "";
+  px_date: any = [];
   batch: any = "";
   place: any = "";
 
@@ -46,11 +45,14 @@ export class ProducetrainComponent implements OnInit {
       conditions: []
     }
 
-    if (this.begin_date) {
-      option.conditions.push({ key: "begin_date", value: this.begin_date })
-    }
-    if (this.end_date) {
-      option.conditions.push({ key: "end_date", value: this.end_date })
+    if (this.px_date && this.px_date.length > 0) {
+      if (this.px_date[0]) {
+        option.conditions.push({ key: "begin_date", value: this.px_date[0] })
+      }
+
+      if (this.px_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.px_date[1] })
+      }
     }
     if (this.batch) {
       option.conditions.push({ key: "batch", value: this.batch })
@@ -68,8 +70,7 @@ export class ProducetrainComponent implements OnInit {
   }
 
   reset() {
-    this.begin_date = "";
-    this.end_date = "";
+    this.px_date = [];
     this.batch = "";
     this.place = "'";
   }

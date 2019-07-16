@@ -3,7 +3,7 @@
     监督员培训信息
   </div>
 
-  <div class="div_contain">
+  <div class="div_contain_add">
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>培训班次：
@@ -84,7 +84,7 @@
     </ng-template>
   </nz-modal>
 
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'">
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
     <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;" [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>

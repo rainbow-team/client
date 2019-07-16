@@ -9,17 +9,12 @@
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
     <div nz-col [nzSpan]="5">
-      发布开始时间
-      <nz-date-picker class="w200" [(ngModel)]="startTime" >
-      </nz-date-picker>
-    </div>
-    <div nz-col [nzSpan]="5">
-      发布结束时间
-      <nz-date-picker class="w200" [(ngModel)]="endTime" >
-      </nz-date-picker>
+      发布时间
+      <nz-range-picker class="w200" [(ngModel)]="fb_date" >
+        </nz-range-picker>
     </div>
 
-    <div nz-col [nzSpan]="4">
+    <div nz-col [nzSpan]="4" [nzOffset]="5" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>
