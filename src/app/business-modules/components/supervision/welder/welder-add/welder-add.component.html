@@ -2,7 +2,7 @@
   <div class="div_top_add">
     焊接人员资质信息
   </div>
-  <div class="div_contain_add" style="height:290px;">
+  <div class="div_contain_add">
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>姓名：
@@ -65,11 +65,12 @@
           [disabled]="isDisable"></textarea>
       </div>
     </div>
-
+    
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
 
   </div>
 
-  <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+  
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
     <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"

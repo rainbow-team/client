@@ -30,6 +30,11 @@
   width:200px;
 }
 
+//修改下拉菜单宽度
+.ant-menu-horizontal.ant-menu-sub, .ant-menu-vertical-left.ant-menu-sub, .ant-menu-vertical-right.ant-menu-sub, .ant-menu-vertical.ant-menu-sub {
+  min-width: 190px;
+}
+
 .ant-breadcrumb a {
   color: black;
   transition: color .3s;
@@ -249,7 +254,7 @@
 }
 
 .div_contain_add{
-  height: 500px;
+  height: calc(100% - 150px);
   padding-right: 130px;
   padding-top: 30px;
   overflow: auto;

@@ -22,8 +22,7 @@ export class LawComponent implements OnInit {
 
   code: any = "";
   name: any = "";
-  startTime: any = "";
-  endTime: any = "";
+  fb_date: any = [];
 
   constructor(private router: Router,
     private msg: NzMessageService, private lawSercice: LawSercice, private dictionarySercice: DictionarySercice,
@@ -50,11 +49,15 @@ export class LawComponent implements OnInit {
     if (this.name) {
       option.conditions.push({ key: "name", value: this.name })
     }
-    if (this.startTime) {
-      option.conditions.push({ key: "startTime", value: this.startTime })
-    }
-    if (this.endTime) {
-      option.conditions.push({ key: "endTime", value: this.endTime })
+
+    if (this.fb_date && this.fb_date.length > 0) {
+      if (this.fb_date[0]) {
+        option.conditions.push({ key: "startTime", value: this.fb_date[0] })
+      }
+
+      if (this.fb_date[1]) {
+        option.conditions.push({ key: "endTime", value: this.fb_date[1] })
+      }
     }
 
     this.lawSercice.getLawList(option).subscribe(
@@ -68,8 +71,7 @@ export class LawComponent implements OnInit {
   reset() {
     this.code = "";
     this.name = "";
-    this.startTime = "";
-    this.endTime = "";
+    this.fb_date = [];
   }
 
   add() {
