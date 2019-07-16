@@ -26,7 +26,15 @@ const appRoutes: Routes = [
             { path: 'operatorlisence', loadChildren: './components/supervision/operatorlisence/operatorlisence.module#OperatorLisenceModule' },
             { path: '', pathMatch: 'full', redirectTo: 'supervisor' }
         ]
-    }, {
+    }, 
+    {
+        path: 'unit',
+        component: BusinessModulesComponent,
+        children: [
+            { path: 'group', loadChildren: './components/unit/group/group.module#GroupModule' },
+        ]
+    }, 
+    {
         path: 'system',
         component: BusinessModulesComponent,
         children: [

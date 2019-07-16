@@ -37,9 +37,9 @@ export class HeaderComponent implements OnInit {
       ]
     },
     {
-      name: '营运单位及设施', id: 'yydwjss', route: '',
+      name: '营运单位及设施', id: 'unit', route: '',
       children: [
-        { name: '集团信息', id: '', route: '' },
+        { name: '集团信息', id: 'group', route: '/unit/group' },
         { name: '核设施营运单位信息', id: '', route: '' },
         { name: '铀矿冶单位信息', id: '', route: '' },
         { name: '核安全设备单位信息', id: '', route: '' },

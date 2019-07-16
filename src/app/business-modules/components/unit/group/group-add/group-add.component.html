@@ -1,0 +1,33 @@
+<div style="height: 100%;background:#fff">
+  <div class="div_top_add">
+    监管法规信息
+  </div>
+  <div class="div_contain_add" style="height:160px;">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>法规文号：
+        <input nz-input name="code" [(ngModel)]="data.code" class="w200" required [validation]="true"
+          [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>法规名称：
+        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"
+          [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>发布时间 ：
+        <nz-date-picker name="releaseDate" [nzStyle]="dataStyle" [(ngModel)]="data.releaseDate" class="w200" required
+          [validation]="true" [disabled]="isDisable">
+        </nz-date-picker>
+      </div>
+    </div>
+  </div>
+
+  <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+      [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>
