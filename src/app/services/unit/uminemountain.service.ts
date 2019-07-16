@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class UmineMountainSercice {
+export class UmineMountainService {
 
     constructor(private http: HttpClient) { }
 

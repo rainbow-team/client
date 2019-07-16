@@ -28,4 +28,8 @@ export class FacSercice {
     deleteFacById(id): any {
         return this.http.post('/fac/deleteFacById',id);
     }
+
+    getFacListByServiceid(id): any {
+        return this.http.post('/fac/getFacListByServiceid',id);
+    }
 }

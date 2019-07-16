@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
-import { UmineSercice } from 'src/app/services/unit/umine.service';
+import { UmineService } from 'src/app/services/unit/umine.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { UminePlaceSercice } from 'src/app/services/unit/umineplace.service';
+import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 
 @Component({
   selector: 'app-umineplace',
@@ -28,8 +28,8 @@ export class UmineplaceComponent implements OnInit {
   umineList: any = [];
   
   constructor(private router: Router,
-    private msg: NzMessageService, private umineSercice: UmineSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private uminePlaceSercice:UminePlaceSercice) { }
+    private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,private uminePlaceSercice:UminePlaceService) { }
 
   ngOnInit() {
 

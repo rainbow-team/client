@@ -5,7 +5,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-import { GroupSercice } from 'src/app/services/unit/group.service';
+import { GroupService } from 'src/app/services/unit/group.service';
 
 @Component({
   selector: 'app-group-add',
@@ -27,7 +27,7 @@ export class GroupAddComponent implements OnInit {
 
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
-    private attachmentSercice: AttachmentSercice, private groupSercice: GroupSercice) { }
+    private attachmentSercice: AttachmentSercice, private groupService: GroupService) { }
 
 
   ngOnInit() {
@@ -45,7 +45,7 @@ export class GroupAddComponent implements OnInit {
     }
 
     if (id) {
-      this.groupSercice.getGroupById(id).subscribe((res) => {
+      this.groupService.getGroupById(id).subscribe((res) => {
         this.data = res.msg;
       });
 
@@ -85,7 +85,7 @@ export class GroupAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.groupSercice.saveOrUpdateGroup(this.data).subscribe((res) => {
+    this.groupService.saveOrUpdateGroup(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
 

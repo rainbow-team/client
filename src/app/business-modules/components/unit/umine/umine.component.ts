@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
-import { UmineSercice } from 'src/app/services/unit/umine.service';
+import { UmineService } from 'src/app/services/unit/umine.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { GroupSercice } from 'src/app/services/unit/group.service';
+import { GroupService } from 'src/app/services/unit/group.service';
 
 @Component({
   selector: 'app-umine',
@@ -28,8 +28,8 @@ export class UmineComponent implements OnInit {
   groupList: any = [];
   
   constructor(private router: Router,
-    private msg: NzMessageService, private umineSercice: UmineSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private groupService: GroupSercice) { }
+    private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,private groupService: GroupService) { }
 
   ngOnInit() {
 

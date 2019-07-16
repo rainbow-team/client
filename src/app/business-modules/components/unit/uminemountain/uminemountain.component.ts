@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { UmineSercice } from 'src/app/services/unit/umine.service';
-import { UmineMountainSercice } from 'src/app/services/unit/uminemountain.service';
+import { UmineService } from 'src/app/services/unit/umine.service';
+import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
 
 @Component({
   selector: 'app-uminemountain',
@@ -28,8 +28,8 @@ export class UminemountainComponent implements OnInit {
   umineList: any = [];
   
   constructor(private router: Router,
-    private msg: NzMessageService, private umineSercice: UmineSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private umineMountainService:UmineMountainSercice) { }
+    private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,private umineMountainService:UmineMountainService) { }
 
   ngOnInit() {
 

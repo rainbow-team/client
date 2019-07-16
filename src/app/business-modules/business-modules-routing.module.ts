@@ -41,6 +41,37 @@ const appRoutes: Routes = [
         ]
     }, 
     {
+        path: 'check',
+        component: BusinessModulesComponent,
+        children: [
+            { path: 'fac', loadChildren: './components/check/fac/fac.module#FacModule' },
+            { path: 'equip', loadChildren: './components/check/equip/equip.module#EquipModule' },
+            { path: 'activity', loadChildren: './components/check/activity/activity.module#ActivityModule' },
+            { path: 'umineplace', loadChildren: './components/check/umineplace/umineplace.module#UmineplaceModule' },
+            { path: 'uminemountain', loadChildren: './components/check/uminemountain/uminemountain.module#UminemountainModule' }
+        ]
+    }, 
+    {
+        path: 'monitor',
+        component: BusinessModulesComponent,
+        children: [
+            { path: 'daily', loadChildren: './components/monitor/daily/daily.module#DailyModule' },
+            { path: 'check', loadChildren: './components/monitor/check/check.module#CheckModule' },
+            { path: 'witness', loadChildren: './components/monitor/witness/witness.module#WitnessModule' },
+            { path: 'report', loadChildren: './components/monitor/report/report.module#ReportModule' }
+        ]
+    }, 
+    {
+        path: 'security',
+        component: BusinessModulesComponent,
+        children: [
+            { path: 'fac', loadChildren: './components/security/fac/fac.module#FacModule' },
+            { path: 'equip', loadChildren: './components/security/equip/equip.module#EquipModule' },
+            { path: 'umineplace', loadChildren: './components/security/umineplace/umineplace.module#UmineplaceModule' },
+            { path: 'accident', loadChildren: './components/security/accident/accident.module#AccidentModule' }
+        ]
+    }, 
+    {
         path: 'system',
         component: BusinessModulesComponent,
         children: [

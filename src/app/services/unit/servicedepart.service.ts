@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class ServiceDepartSercice {
+export class ServiceDepartService {
 
     constructor(private http: HttpClient) { }
 
@@ -27,5 +27,9 @@ export class ServiceDepartSercice {
 
     deleteServiceDepartById(ids): any {
         return this.http.post('/group/deleteServiceDepartById',ids);
+    }
+
+    getAllDepartService(): any {
+        return this.http.post('/group/getAllServiceDepartList',null);
     }
 }

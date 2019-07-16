@@ -59,31 +59,31 @@ export class HeaderComponent implements OnInit {
       ]
     },
     {
-      name: '核安全审评', id: 'haqps', route: '',
+      name: '核安全审评', id: 'check', route: '',
       children: [
-        { name: '核设施审评信息', id: '', route: '' },
-        { name: '核安全设备审评信息', id: '', route: '' },
-        { name: '核活动及其他审评信息', id: '', route: '' },
-        { name: '铀尾矿（渣）库审评信息', id: '', route: '' },
-        { name: '铀矿山井下消防审查信息', id: '', route: '' }
+        { name: '核设施审评信息', id: 'fac', route: '/check/fac' },
+        { name: '核安全设备审评信息', id: 'equip', route: '/check/equip' },
+        { name: '核活动及其他审评信息', id: 'activity', route: '/check/activity' },
+        { name: '铀尾矿（渣）库审评信息', id: 'umineplace', route: '/check/umineplace' },
+        { name: '铀矿山井下消防审查信息', id: 'uminemountain', route: '/check/uminemountain' }
       ]
     },
     {
-      name: '核安全监督', id: 'haqjd', route: '',
+      name: '核安全监督', id: 'monitor', route: '',
       children: [
-        { name: '日常监督信息', id: '', route: '' },
-        { name: '监督检查信息', id: '', route: '' },
-        { name: '监督见证信息', id: '', route: '' },
-        { name: '监督报告信息', id: '', route: '' }
+        { name: '日常监督信息', id: 'daily', route: '/monitor/daily' },
+        { name: '监督检查信息', id: 'check', route: '/monitor/check' },
+        { name: '监督见证信息', id: 'witness', route: '/monitor/witness' },
+        { name: '监督报告信息', id: 'report', route: '/monitor/report' }
       ]
     },
     {
-      name: '安全信息', id: 'aqxx', route: '',
+      name: '安全信息', id: 'security', route: '',
       children: [
-        { name: '单位及核设施安全问题', id: '', route: '' },
-        { name: '单位及核安全设备安全问题', id: '', route: '' },
-        { name: '单位及铀尾矿（渣）库安全问题', id: '', route: '' },
-        { name: '事故事件', id: '', route: '' }
+        { name: '核设施安全问题', id: 'fac', route: '/security/fac' },
+        { name: '核安全设备安全问题', id: 'equip', route: '/security/equip' },
+        { name: '单位及铀尾矿（渣）库安全问题', id: 'umineplace', route: '/security/umineplace' },
+        { name: '事故事件', id: 'accident', route: '/security/accident' }
       ]
     },
     {

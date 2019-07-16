@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class UminePlaceSercice {
+export class UminePlaceService {
 
     constructor(private http: HttpClient) { }
 

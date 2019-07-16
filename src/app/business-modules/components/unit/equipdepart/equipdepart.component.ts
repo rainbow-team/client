@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { EquipDepartSercice } from 'src/app/services/unit/equipdepart.service';
+import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 
 @Component({
   selector: 'app-equipdepart',
@@ -26,12 +26,12 @@ export class EquipdepartComponent implements OnInit {
   product: any="";
 
   constructor(private router: Router,
-    private msg: NzMessageService, private equipDepartSercice: EquipDepartSercice, private dictionarySercice: DictionarySercice,
+    private msg: NzMessageService, private equipDepartService: EquipDepartService, private dictionaryService: DictionarySercice,
     private staffSercice: StaffSercice) { }
 
   ngOnInit() {
 
-    this.dictionary = this.dictionarySercice.getAllConfig();
+    this.dictionary = this.dictionaryService.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
     this.search();
@@ -53,7 +53,7 @@ export class EquipdepartComponent implements OnInit {
     }
 
 
-    this.equipDepartSercice.getEquipDepartList(option).subscribe(
+    this.equipDepartService.getEquipDepartList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -76,7 +76,7 @@ export class EquipdepartComponent implements OnInit {
 
   delete(item) {
 
-    this.equipDepartSercice.deleteEquipDepartById(item.id).subscribe((res) => {
+    this.equipDepartService.deleteEquipDepartById(item.id).subscribe((res) => {
 
       if (res.code == 200) {
         this.msg.create("success", "删除成功");

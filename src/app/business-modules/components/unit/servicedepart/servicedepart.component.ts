@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
-import { ServiceDepartSercice } from 'src/app/services/unit/servicedepart.service';
-import { GroupSercice } from 'src/app/services/unit/group.service';
+import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
+import { GroupService } from 'src/app/services/unit/group.service';
 
 @Component({
   selector: 'app-servicedepart',
@@ -28,8 +28,8 @@ export class ServicedepartComponent implements OnInit {
   groupList: any = [];
 
   constructor(private router: Router,
-    private msg: NzMessageService, private serviceDepartSercice: ServiceDepartSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private groupService: GroupSercice) { }
+    private msg: NzMessageService, private serviceDepartSercice: ServiceDepartService, private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,private groupService: GroupService) { }
 
   ngOnInit() {
 

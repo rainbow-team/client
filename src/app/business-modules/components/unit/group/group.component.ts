@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
-import { GroupSercice } from 'src/app/services/unit/group.service';
+import { GroupService } from 'src/app/services/unit/group.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 
@@ -23,7 +23,7 @@ export class GroupComponent implements OnInit {
   name: any = "";
 
   constructor(private router: Router,
-    private msg: NzMessageService, private groupSercice: GroupSercice, private dictionarySercice: DictionarySercice,
+    private msg: NzMessageService, private groupSercice: GroupService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice) { }
 
   ngOnInit() {
