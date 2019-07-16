@@ -32,6 +32,12 @@ const appRoutes: Routes = [
         component: BusinessModulesComponent,
         children: [
             { path: 'group', loadChildren: './components/unit/group/group.module#GroupModule' },
+            { path: 'servicedepart', loadChildren: './components/unit/servicedepart/servicedepart.module#ServiceDepartModule' },
+            { path: 'umine', loadChildren: './components/unit/umine/umine.module#UmineModule' },
+            { path: 'equipdepart', loadChildren: './components/unit/equipdepart/equipdepart.module#EquipDepartModule' },
+            { path: 'fac', loadChildren: './components/unit/fac/fac.module#FacModule' },
+            { path: 'umineplace', loadChildren: './components/unit/umineplace/umineplace.module#UmineplaceModule' },
+            { path: 'uminemountain', loadChildren: './components/unit/uminemountain/uminemountain.module#UminemountainModule' }
         ]
     }, 
     {

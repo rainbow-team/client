@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
-import { GroupSercice } from 'src/app/services/unit/group.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
+import { UmineSercice } from 'src/app/services/unit/umine.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
+import { GroupSercice } from 'src/app/services/unit/group.service';
 
 @Component({
-  selector: 'app-group',
-  templateUrl: './group.component.html',
-  styleUrls: ['./group.component.scss']
+  selector: 'app-umine',
+  templateUrl: './umine.component.html',
+  styleUrls: ['./umine.component.scss']
 })
-export class GroupComponent implements OnInit {
+export class UmineComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
@@ -22,9 +23,13 @@ export class GroupComponent implements OnInit {
 
   name: any = "";
 
+  groupIds: any = [];
+
+  groupList: any = [];
+  
   constructor(private router: Router,
-    private msg: NzMessageService, private groupSercice: GroupSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private msg: NzMessageService, private umineSercice: UmineSercice, private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,private groupService: GroupSercice) { }
 
   ngOnInit() {
 
@@ -32,6 +37,18 @@ export class GroupComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     this.search();
+
+    this.groupService.getAllGroup().subscribe((res) => {
+      if (res.code == 200) {
+          this.groupList = [];
+          res.msg.forEach(element => {
+              this.groupList.push({
+                  id: element.id,
+                  name: element.name
+              });
+          });
+      }
+  })
   }
 
   search() {
@@ -45,7 +62,11 @@ export class GroupComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    this.groupSercice.getGroupList(option).subscribe(
+    if (this.groupIds.length > 0) {
+      option.conditions.push({ key: "groupIds", value: this.groupIds })
+    }
+
+    this.umineSercice.getUmineList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -55,19 +76,20 @@ export class GroupComponent implements OnInit {
 
   reset() {
     this.name = "";
+    this.groupIds = [];
   }
 
   add() {
-    this.router.navigate(['/unit/group/add']);
+    this.router.navigate(['/unit/umine/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/unit/group/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/unit/umine/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {
 
-    this.groupSercice.deleteGroupById(item.id).subscribe((res) => {
+    this.umineSercice.deleteUmineById(item.id).subscribe((res) => {
 
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
@@ -78,5 +100,4 @@ export class GroupComponent implements OnInit {
     })
 
   }
-
 }

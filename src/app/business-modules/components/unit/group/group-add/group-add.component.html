@@ -1,33 +1,97 @@
 <div style="height: 100%;background:#fff">
   <div class="div_top_add">
-    监管法规信息
+    集团信息
   </div>
-  <div class="div_contain_add" style="height:160px;">
-    <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>法规文号：
-        <input nz-input name="code" [(ngModel)]="data.code" class="w200" required [validation]="true"
-          [disabled]="isDisable" />
-      </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>法规名称：
-        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"
-          [disabled]="isDisable" />
-      </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>发布时间 ：
-        <nz-date-picker name="releaseDate" [nzStyle]="dataStyle" [(ngModel)]="data.releaseDate" class="w200" required
-          [validation]="true" [disabled]="isDisable">
-        </nz-date-picker>
+  <div class="div_contain_add">
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">集团名称：</div>
+        <input nz-input name="name" [(ngModel)]="data.name" style="width: calc(100% - 130px);" required [validation]="true"
+        [disabled]="isDisable" />
       </div>
     </div>
-  </div>
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">集团概况：</div>
+        <textarea nz-input name="survey" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.survey"
+            [disabled]="isDisable"></textarea>
+      </div>
+    </div>
 
-  <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">地址：</div>
+        <input nz-input name="address" [(ngModel)]="data.address" style="width: calc(100% - 130px);" [disabled]="isDisable" />
+      </div>
+    </div>
 
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
-      [nzLoading]="isSaving">保存</button>
-    <button nz-button nzType="default" (click)="close()">关闭</button>
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'">
+      <div nz-col [nzSpan]="12">
+        核设施营运单位数量：
+        <input nz-input name="serviceDepartNum" [(ngModel)]="data.serviceDepartNum" class="w200"  [disabled]="true" />
+      </div>
+      <div nz-col [nzSpan]="12">
+        铀矿冶单位数量：
+        <input nz-input name="umineNum" [(ngModel)]="data.umineNum" class="w200" [disabled]="true"/>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'start'">
+      <div nz-col [nzSpan]="12" class="ta_r">
+        应急电话：
+        <input nz-input name="emergencyTel" [(ngModel)]="data.emergencyTel" class="w200"  [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="12" class="ta_r">
+        传真：
+        <input nz-input name="fax" [(ngModel)]="data.fax" class="w200" [disabled]="isDisable"/>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">法人代表：</div>
+        <input nz-input name="owner" [(ngModel)]="data.owner" style="width: calc(100% - 130px);" required [validation]="true"
+        [disabled]="isDisable" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'start'">
+      <div nz-col [nzSpan]="12" class="ta_r">
+        主管安全领导：
+        <input nz-input name="leader" [(ngModel)]="data.leader" class="w200"  [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="12" class="ta_r">
+        主管安全领导电话：
+        <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" class="w200" [disabled]="isDisable"/>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'start'">
+      <div nz-col [nzSpan]="12" class="ta_r">
+        安全主管部门领导：
+        <input nz-input name="departLeader" [(ngModel)]="data.departLeader" class="w200"  [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="12" class="ta_r">
+        安全主管部门领导电话：
+        <input nz-input name="departLeaderTel" [(ngModel)]="data.departLeaderTel" class="w200" [disabled]="isDisable"/>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">备注</div>
+        <textarea nz-input name="note" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.note"
+            [disabled]="isDisable"></textarea>
+      </div>
+    </div>
+
+  <div>
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+  
+    <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+      <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+        [nzLoading]="isSaving">保存</button>
+      <button nz-button nzType="default" (click)="close()">关闭</button>
+    </div>
   </div>
 </div>

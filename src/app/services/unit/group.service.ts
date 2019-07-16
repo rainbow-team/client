@@ -25,7 +25,11 @@ export class GroupSercice {
 
     }
 
-    deleteGroupById(ids): any {
-        return this.http.post('/group/deleteGroupById',ids);
+    deleteGroupById(id): any {
+        return this.http.post('/group/deleteGroupById',id);
+    }
+
+    getAllGroup(): any {
+        return this.http.post('/group/getAllGroup',null);
     }
 }

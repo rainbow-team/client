@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
-import { GroupSercice } from 'src/app/services/unit/group.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
+import { FacSercice } from 'src/app/services/unit/fac.service';
 
 @Component({
-  selector: 'app-group',
-  templateUrl: './group.component.html',
-  styleUrls: ['./group.component.scss']
+  selector: 'app-fac',
+  templateUrl: './fac.component.html',
+  styleUrls: ['./fac.component.scss']
 })
-export class GroupComponent implements OnInit {
+export class FacComponent implements OnInit {
+
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -22,8 +24,10 @@ export class GroupComponent implements OnInit {
 
   name: any = "";
 
+  product: any="";
+
   constructor(private router: Router,
-    private msg: NzMessageService, private groupSercice: GroupSercice, private dictionarySercice: DictionarySercice,
+    private msg: NzMessageService, private facSercice: FacSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice) { }
 
   ngOnInit() {
@@ -45,7 +49,12 @@ export class GroupComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    this.groupSercice.getGroupList(option).subscribe(
+    if (this.product) {
+      option.conditions.push({ key: "product", value: this.product })
+    }
+
+
+    this.facSercice.getFacList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -55,19 +64,20 @@ export class GroupComponent implements OnInit {
 
   reset() {
     this.name = "";
+    this.product = "";
   }
 
   add() {
-    this.router.navigate(['/unit/group/add']);
+    this.router.navigate(['/unit/fac/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/unit/group/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/unit/fac/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {
 
-    this.groupSercice.deleteGroupById(item.id).subscribe((res) => {
+    this.facSercice.deleteFacById(item.id).subscribe((res) => {
 
       if (res.code == 200) {
         this.msg.create("success", "删除成功");

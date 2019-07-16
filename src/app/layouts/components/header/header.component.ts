@@ -40,12 +40,12 @@ export class HeaderComponent implements OnInit {
       name: '营运单位及设施', id: 'unit', route: '',
       children: [
         { name: '集团信息', id: 'group', route: '/unit/group' },
-        { name: '核设施营运单位信息', id: '', route: '' },
-        { name: '铀矿冶单位信息', id: '', route: '' },
-        { name: '核安全设备单位信息', id: '', route: '' },
-        { name: '核设施信息', id: '', route: '' },
-        { name: '铀尾矿（渣）库信息', id: '', route: '' },
-        { name: '铀矿山信息', id: '', route: '' }
+        { name: '核设施营运单位信息', id: 'servicedepart', route: '/unit/servicedepart' },
+        { name: '铀矿冶单位信息', id: 'umine', route: '/unit/umine' },
+        { name: '核安全设备单位信息', id: 'equipdepart', route: '/unit/equipdepart' },
+        { name: '核设施信息', id: 'fac', route: '/unit/fac' },
+        { name: '铀尾矿（渣）库信息', id: 'umineplace', route: '/unit/umineplace' },
+        { name: '铀矿山信息', id: 'uminemountain', route: '/unit/uminemountain' }
       ]
     },
     {

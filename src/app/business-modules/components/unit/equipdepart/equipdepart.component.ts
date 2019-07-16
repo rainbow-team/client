@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
-import { GroupSercice } from 'src/app/services/unit/group.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
+import { EquipDepartSercice } from 'src/app/services/unit/equipdepart.service';
 
 @Component({
-  selector: 'app-group',
-  templateUrl: './group.component.html',
-  styleUrls: ['./group.component.scss']
+  selector: 'app-equipdepart',
+  templateUrl: './equipdepart.component.html',
+  styleUrls: ['./equipdepart.component.scss']
 })
-export class GroupComponent implements OnInit {
+export class EquipdepartComponent implements OnInit {
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -22,8 +23,10 @@ export class GroupComponent implements OnInit {
 
   name: any = "";
 
+  product: any="";
+
   constructor(private router: Router,
-    private msg: NzMessageService, private groupSercice: GroupSercice, private dictionarySercice: DictionarySercice,
+    private msg: NzMessageService, private equipDepartSercice: EquipDepartSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice) { }
 
   ngOnInit() {
@@ -45,7 +48,12 @@ export class GroupComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    this.groupSercice.getGroupList(option).subscribe(
+    if (this.product) {
+      option.conditions.push({ key: "product", value: this.product })
+    }
+
+
+    this.equipDepartSercice.getEquipDepartList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -55,19 +63,20 @@ export class GroupComponent implements OnInit {
 
   reset() {
     this.name = "";
+    this.product = "";
   }
 
   add() {
-    this.router.navigate(['/unit/group/add']);
+    this.router.navigate(['/unit/equipdepart/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/unit/group/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/unit/equipdepart/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {
 
-    this.groupSercice.deleteGroupById(item.id).subscribe((res) => {
+    this.equipDepartSercice.deleteEquipDepartById(item.id).subscribe((res) => {
 
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
@@ -78,5 +87,4 @@ export class GroupComponent implements OnInit {
     })
 
   }
-
 }
