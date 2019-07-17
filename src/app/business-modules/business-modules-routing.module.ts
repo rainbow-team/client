@@ -65,10 +65,10 @@ const appRoutes: Routes = [
         path: 'security',
         component: BusinessModulesComponent,
         children: [
-            { path: 'fac', loadChildren: './components/security/fac/fac.module#FacModule' },
-            { path: 'equip', loadChildren: './components/security/equip/equip.module#EquipModule' },
-            { path: 'umineplace', loadChildren: './components/security/umineplace/umineplace.module#UmineplaceModule' },
-            { path: 'accident', loadChildren: './components/security/accident/accident.module#AccidentModule' }
+            { path: 'fac', loadChildren: './components/security/fac/fac.module#FacSecurityModule' },
+            { path: 'equip', loadChildren: './components/security/equip/equip.module#EquipSecurityModule' },
+            { path: 'umineplace', loadChildren: './components/security/umineplace/umineplace.module#UmineplaceSecurityModule' },
+            { path: 'accident', loadChildren: './components/security/accident/accident.module#AccidentSecurityModule' }
         ]
     }, 
     {

@@ -46,11 +46,13 @@
         <tbody>
           <tr *ngFor="let data of nestedTable.data;index as index">
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-            <td>{{data.umineName}}</td>
-            <td>{{data.uminePlaceName}}</td>
-            <td>{{data.typeValue}}</td>
-            <td>{{data.stageValue}}</td>
-            <td>{{data.checkDate}}</td>
+            <td>{{data.serviceDepartName}}</td>
+            <td>{{data.facName}}</td>
+            <td>{{data.stageVaue}}</td>
+            <td>{{data.orgName}}</td>
+            <td>{{data.fileTypeValue}}</td>
+            <td>{{data.fileName}}</td>
+            <td>{{data.fileDate}}</td>
             <td>
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
