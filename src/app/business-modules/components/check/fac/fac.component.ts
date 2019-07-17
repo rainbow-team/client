@@ -72,12 +72,12 @@ export class FacComponent implements OnInit {
     //   option.conditions.push({ key: "groupIds", value: this.groupIds })
     // }
 
-    // this.umineSercice.getUmineList(option).subscribe(
-    //   (data) => {
-    //     this.dataSet = data.msg.currentList;
-    //     this.totalCount = data.msg.recordCount;
-    //   }
-    // );
+    this.facCheckSercice.getFacCheckList(option).subscribe(
+      (data) => {
+        this.dataSet = data.msg.currentList;
+        this.totalCount = data.msg.recordCount;
+      }
+    );
   }
 
   reset() {
@@ -86,16 +86,16 @@ export class FacComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/unit/umine/add']);
+    this.router.navigate(['/check/fac/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/unit/umine/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/check/fac/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {
 
-    this.facCheckSercice.deleteFacById(item.id).subscribe((res) => {
+    this.facCheckSercice.deleteFacCheckById(item.id).subscribe((res) => {
 
       if (res.code == 200) {
         this.msg.create("success", "删除成功");

@@ -28,4 +28,8 @@ export class EquipDepartService {
     deleteEquipDepartById(id): any {
         return this.http.post('/equipdepart/deleteEquipDepartById',id);
     }
+
+    getAllEquipDepart(): any {
+        return this.http.post('/equipdepart/getAllEquipDepart',null);
+    }
 }
