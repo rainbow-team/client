@@ -72,7 +72,7 @@ export class BusinessModulesComponent implements OnInit {
             case "/supersivion/expert":
                 this.breadcrumbList = ["监管信息", "核安全监督专家信息"];
                 break;
-            case "/supersivion/expert/add": 
+            case "/supersivion/expert/add":
                 this.breadcrumbList = ["监管信息", "核安全监督专家信息", "添加"];
                 break;
             case "/supersivion/law":
@@ -98,6 +98,12 @@ export class BusinessModulesComponent implements OnInit {
                 break;
             case "/supersivion/operatorlisence/add":
                 this.breadcrumbList = ["监管信息", "研究堆操纵员执照信息", "添加"];
+                break;
+            case "/unit/group":
+                this.breadcrumbList = ["营运单位及设施", "集团信息"];
+                break;
+            case "/unit/group/add":
+                this.breadcrumbList = ["营运单位及设施", "集团信息", "添加"];
                 break;
             case "/system":
                 this.breadcrumbList = ["系统管理"];

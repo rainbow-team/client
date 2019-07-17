@@ -47,12 +47,12 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    let idyCode = this.cookieService.get("_code");
+    // let idyCode = this.cookieService.get("_code");
 
-    if (idyCode.toLocaleLowerCase() != this.code.toLocaleLowerCase()) {
-      this.loginMessage = "验证码不正确"
-      return;
-    }
+    // if (idyCode.toLocaleLowerCase() != this.code.toLocaleLowerCase()) {
+    //   this.loginMessage = "验证码不正确"
+    //   return;
+    // }
 
     this.isLogining = true;
     // 接口调用示例
