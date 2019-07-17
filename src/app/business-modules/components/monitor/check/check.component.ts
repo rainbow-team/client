@@ -108,11 +108,11 @@ export class CheckComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/monitor/daily/add']);
+    this.router.navigate(['/monitor/check/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/monitor/daily/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {
