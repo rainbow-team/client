@@ -1,3 +1,71 @@
-<p>
-  equip works!
-</p>
+<div style="height: 100%;">
+  <div nz-row style="height: 40px;">
+    <div nz-col [nzSpan]="5">
+      单位名称
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
+    </div>
+
+    <div nz-col [nzSpan]="3" [nzOffset]="16">
+      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
+      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
+    </div>
+  </div>
+
+  <div nz-row class="div_contain">
+
+    <div class="div_top">
+      <div class="fl div_top_tip">
+
+      </div>
+      <div class="fl" style="color: #0050b3;">
+        核设施安全问题信息（共{{totalCount}}条）
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
+      </div>
+
+    </div>
+    <div>
+      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>单位名称</th>
+            <th>设备名称</th>
+            <th>所属设施</th>
+            <th>检查类型</th>
+            <th>问题内容</th>
+            <th>发现时间</th>
+            <th>问题类别</th>
+            <th>整改状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of nestedTable.data;index as index">
+            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
+            <td>{{data.equipDepartName}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.serviceDepartName}}/{{data.facName}}</td>
+            <td>{{data.checkTypeValue}}</td>
+            <td>{{data.content}}</td>
+            <td>{{data.findDate}}</td>
+            <td>{{data.questionTypeValue}}</td>
+            <td>{{data.reformStatusTypeValue}}</td>
+            <td>
+              <a (click)="show(data,true)">查看</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a (click)="show(data,false)">编辑</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+  </div>
+</div>
