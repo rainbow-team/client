@@ -41,6 +41,13 @@ const appRoutes: Routes = [
         ]
     }, 
     {
+        path:'permit',
+        component:BusinessModulesComponent,
+        children:[
+            { path: 'fac', loadChildren: './components/permit/fac/fac.module#FacModule' },
+        ]
+    },
+    {
         path: 'check',
         component: BusinessModulesComponent,
         children: [

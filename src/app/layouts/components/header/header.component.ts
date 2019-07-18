@@ -49,9 +49,9 @@ export class HeaderComponent implements OnInit {
       ]
     },
     {
-      name: '核安全许可', id: 'haqxk', route: '',
+      name: '核安全许可', id: 'permit', route: '',
       children: [
-        { name: '核设施许可信息', id: '', route: '' },
+        { name: '核设施许可信息', id: 'fac', route: '/permit/fac' },
         { name: '核安全设备许可信息', id: '', route: '' },
         { name: '核活动许可信息', id: '', route: '' },
         { name: '铀尾矿（渣）库许可信息', id: '', route: '' },
