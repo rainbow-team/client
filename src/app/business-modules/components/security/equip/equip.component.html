@@ -1,15 +1,72 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
+
     <div nz-col [nzSpan]="5">
       单位名称
+      <input nz-input nzSize="default" [(ngModel)]="equipDepartName" class="w200">
+    </div>
+  
+    <div nz-col [nzSpan]="5">
+      设备名称
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
+  
+    <div nz-col [nzSpan]="5">
+      营运单位
+      <input nz-input nzSize="default" [(ngModel)]="serviceDepartName" class="w200">
+    </div>
+  
+    <div nz-col [nzSpan]="5">
+      设施名称
+      <input nz-input nzSize="default" [(ngModel)]="facName" class="w200">
+    </div>
 
-    <div nz-col [nzSpan]="3" [nzOffset]="16">
+    <div nz-col [nzSpan]="4" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>
   </div>
+
+  <div nz-row style="height: 40px;">
+      <div nz-col [nzSpan]="5">
+        检查类型
+        <nz-select [(ngModel)]="checkTypeIds" class="w200" nzMode="multiple">
+          <nz-option *ngFor="let option of dictionary.config_security_check_type" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+      
+      <div nz-col [nzSpan]="4">
+        问题内容
+        <input nz-input nzSize="default" [(ngModel)]="content" class="w150">
+      </div>
+
+      <div nz-col [nzSpan]="5">
+        发现时间
+        <nz-range-picker class="w200" [(ngModel)]="find_date">
+        </nz-range-picker>
+      </div>
+  
+        
+      <div nz-col [nzSpan]="5">
+        问题类别
+        <nz-select [(ngModel)]="questionTypeIds" class="w200" nzMode="multiple">
+          <nz-option *ngFor="let option of dictionary.config_equip_security_question_type" [nzLabel]="option.value" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+  
+      <div nz-col [nzSpan]="5">
+        整改状态
+        <nz-select [(ngModel)]="reformStatusTypeIds" class="w200" nzMode="multiple">
+          <nz-option *ngFor="let option of dictionary.config_security_reform_status" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+  
+    </div>
 
   <div nz-row class="div_contain">
 

@@ -1,3 +1,120 @@
-<p>
-  equip-add works!
-</p>
+<div style="height: 100%;background:#fff">
+    <div class="div_top_add">
+      核设施设备安全问题
+    </div>
+    <div class="div_contain_add">
+        <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="8" class="ta_r">
+              <span class="clo_r">*</span>单位名称：
+              <nz-select [(ngModel)]="data.equipDepartId" class="w200"  [disabled]="isDisable"
+              nzShowSearch nzAllowClear nzPlaceHolder="请选择核设备单位" >
+                <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
+                </nz-option>
+              </nz-select>
+            </div>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              <span class="clo_r">*</span>设备名称：
+              <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"
+                [disabled]="isDisable" />
+            </div>
+          </div>
+
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="8" class="ta_r">
+          <span class="clo_r">*</span>营运单位：
+          <nz-select [(ngModel)]="data.serviceId" class="w200" (ngModelChange)="serviceDepartChange($event)" [disabled]="isDisable"
+          nzShowSearch nzAllowClear nzPlaceHolder="请选择核设施营运单位" >
+            <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
+            </nz-option>
+          </nz-select>
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_r">
+          设施名称：
+          <nz-select [(ngModel)]="data.facId" class="w200" [disabled]="isDisable" nzShowSearch nzAllowClear>
+            <nz-option *ngFor="let option of facList" [nzLabel]="option.name"  [nzValue]="option.id">
+            </nz-option>
+          </nz-select>
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_r">
+            <span class="clo_r">*</span>检查类型：
+            <nz-select [(ngModel)]="data.checkTypeId" class="w200"  [disabled]="isDisable">
+              <nz-option *ngFor="let option of dictionary.config_security_check_type" [nzLabel]="option.value"
+                [nzValue]="option.id">
+              </nz-option>
+            </nz-select>
+          </div>
+      </div>
+  
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="24" class="ta_r">
+          <div class="div_bz"><span class="clo_r">*</span>问题内容：</div>
+          <textarea nz-input name="content" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.content"
+            required [validation]="true" [disabled]="isDisable">
+                  </textarea>
+        </div>
+      </div>
+
+  
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="8" class="ta_r">
+          问题类别：
+          <nz-select [(ngModel)]="data.questionTypeId" class="w200" [disabled]="isDisable">
+            <nz-option *ngFor="let option of dictionary.config_equip_security_question_type" [nzLabel]="option.value"
+              [nzValue]="option.id">
+            </nz-option>
+          </nz-select>
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_r">
+          <span class="clo_r">*</span>发现时间：
+          <nz-date-picker name="findDate" [(ngModel)]="data.findDate" class="w200" [validation]="true" [disabled]="isDisable">
+          </nz-date-picker>
+        </div>
+      </div>
+
+  
+      <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+        <div nz-col [nzSpan]="24" class="ta_r">
+          <div class="div_bz">监督要求：</div>
+          <textarea nz-input name="superviseRequire" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.superviseRequire"
+            [disabled]="isDisable"></textarea>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+        <div nz-col [nzSpan]="24" class="ta_r">
+          <div class="div_bz">整改方案：</div>
+          <textarea nz-input name="reformPlan" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.reformPlan"
+            [disabled]="isDisable"></textarea>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="8" class="ta_r">
+          <span class="clo_r">*</span>整改状态：
+          <nz-select [(ngModel)]="data.reformStatusId" class="w200" [disabled]="isDisable">
+            <nz-option *ngFor="let option of dictionary.config_security_reform_status" [nzLabel]="option.value"
+              [nzValue]="option.id">
+            </nz-option>
+          </nz-select>
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_r">
+          <span class="clo_r">*</span>完成时间：
+          <nz-date-picker name="reformCompleteDate" [(ngModel)]="data.reformCompleteDate" class="w200" 
+            [validation]="true" [disabled]="isDisable">
+          </nz-date-picker>
+        </div>
+  
+      </div>
+  
+      <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+  
+    </div>
+  
+  
+  
+    <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+      <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+        [nzLoading]="isSaving">保存</button>
+      <button nz-button nzType="default" (click)="close()">关闭</button>
+    </div>
+  </div>

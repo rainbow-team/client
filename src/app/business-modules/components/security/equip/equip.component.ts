@@ -105,11 +105,11 @@ export class EquipComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/monitor/check/add']);
+    this.router.navigate(['/security/equip/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/security/equip/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {
