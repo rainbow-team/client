@@ -7,7 +7,7 @@
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>营运单位：
         <nz-select [(ngModel)]="data.serviceId" class="w200" (ngModelChange)="serviceDepartChange($event)" [disabled]="isDisable"
-        nzShowSearch nzAllowClear>
+        nzShowSearch nzAllowClear nzPlaceHolder="请选择营运单位名称" >
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -31,7 +31,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
-        检查类型：
+        <span class="clo_r">*</span>检查类型：
         <nz-select [(ngModel)]="data.checkTypeId" class="w200"  [disabled]="isDisable">
           <nz-option *ngFor="let option of dictionary.config_security_check_type" [nzLabel]="option.value"
             [nzValue]="option.id">
@@ -49,15 +49,16 @@
 
      <div nz-row class="ma_b20" >
       <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">问题内容：</div>
-        <textarea nz-input name="content" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.content"
-          [disabled]="isDisable"></textarea>
+        <div class="div_bz"><span class="clo_r">*</span>问题内容：</div>
+        <textarea nz-input name="content" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.content" 
+           required [validation]="true" [disabled]="isDisable">
+        </textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
       <div nz-col [nzSpan]="8" class="ta_r">
-        问题性质：
+        <span class="clo_r">*</span>问题性质：
         <nz-select [(ngModel)]="data.questionNatureId" class="w200"  [disabled]="isDisable">
           <nz-option *ngFor="let option of dictionary.config_fac_security_question_nature"
             [nzLabel]="option.value" [nzValue]="option.id">
@@ -92,7 +93,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
-        整改状态：
+        <span class="clo_r">*</span>整改状态：
         <nz-select [(ngModel)]="data.reformStatusId" class="w200" [disabled]="isDisable">
           <nz-option *ngFor="let option of dictionary.config_security_reform_status" [nzLabel]="option.value"
             [nzValue]="option.id">

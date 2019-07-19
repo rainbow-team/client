@@ -54,9 +54,18 @@ export class FacAddComponent implements OnInit {
       this.isDisable = false;
     }
 
+
+    this.serviceDepartService.getAllDepartService().subscribe((res) => {
+
+      this.serviceDepartList = res.msg;
+    })
+
     if (id) {
       this.facSecuritySercice.getFacSecurityById(id).subscribe((res) => {
         this.data = res.msg;
+        this.facSercice.getFacListByServiceid(this.data.serviceId).subscribe((res) => {
+          this.facList = res.msg;
+        });
       });
 
       this.attachmentSercice.getFileListById(id).subscribe((res1) => {
@@ -72,15 +81,13 @@ export class FacAddComponent implements OnInit {
           });
         }
       })
+
+
     } else {
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
 
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-
-      this.serviceDepartList = res.msg;
-    })
   }
 
 
@@ -137,5 +144,9 @@ export class FacAddComponent implements OnInit {
     })
   }
 
-
+  // facChange(value: string): void {
+  //   this.facSercice.getFacListByServiceid(this.data.serviceId).subscribe((res) => {
+  //     this.facList = res.msg;
+  //   })
+  // }
 }
