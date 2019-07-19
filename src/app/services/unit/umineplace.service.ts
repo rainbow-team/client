@@ -28,4 +28,8 @@ export class UminePlaceService {
     deleteUminePlaceById(id): any {
         return this.http.post('/umineplace/deleteUmineplaceById',id);
     }
+
+    getUmineplaceListByUmineId(umineId):any{
+        return this.http.post('/umineplace/getUmineplaceListByUmineId',umineId);
+    }
 }

@@ -24,25 +24,28 @@ export class UmineplaceComponent implements OnInit {
 
   dataSet: any = [];
 
-  name: any = "";
+  umineName: any = "";
 
-  equipDepartIds: any = [];
+  uminePlaceName:any="";
 
-  equipDepartList: any = [];
+  statusTypeIds:any=[];
 
-  serviceDepartIds: any = [];
+  checkTypeIds:any=[];
 
-  serviceDepartList: any = [];
+  content:any="";
+  
+  find_date:any=[];
 
-  facIds: any = [];
+  questionTypeIds:any=[];
 
-  facList: any = [];
+  questionNatureIds:any=[];
 
+  reformStatusTypeIds:any=[];
 
   constructor(private router: Router,
     private msg: NzMessageService, private umineService: UmineService, 
     private dictionarySercice: DictionarySercice,private staffSercice: StaffSercice,
-    private uminePlaceService: UminePlaceService, private umineplaceSecuritySercice: UmineplaceSecuritySercice) { }
+     private umineplaceSecuritySercice: UmineplaceSecuritySercice) { }
 
   ngOnInit() {
 
@@ -85,8 +88,46 @@ export class UmineplaceComponent implements OnInit {
       conditions: []
     }
 
-    if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
+    if (this.umineName) {
+      option.conditions.push({ key: "umineName", value: this.umineName })
+    }
+
+    if (this.uminePlaceName) {
+      option.conditions.push({ key: "uminePlaceName", value: this.uminePlaceName })
+    }
+
+    if (this.statusTypeIds.length > 0) {
+      option.conditions.push({ key: "statusTypeIds", value: this.statusTypeIds })
+    }
+
+    if (this.checkTypeIds.length > 0) {
+      option.conditions.push({ key: "checkTypeIds", value: this.checkTypeIds })
+    }
+
+    if (this.content) {
+      option.conditions.push({ key: "content", value: this.content })
+    }
+
+    if (this.find_date && this.find_date.length > 0) {
+      if (this.find_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.find_date[0] })
+      }
+
+      if (this.find_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.find_date[1] })
+      }
+    }
+
+    if (this.questionTypeIds.length > 0) {
+      option.conditions.push({ key: "questionTypeIds", value: this.questionTypeIds })
+    }
+
+    if (this.questionNatureIds.length > 0) {
+      option.conditions.push({ key: "questionNatureIds", value: this.questionNatureIds })
+    }
+
+    if (this.reformStatusTypeIds.length > 0) {
+      option.conditions.push({ key: "reformStatusTypeIds", value: this.reformStatusTypeIds })
     }
 
     // if (this.groupIds.length > 0) {
@@ -102,16 +143,23 @@ export class UmineplaceComponent implements OnInit {
   }
 
   reset() {
-    this.name = "";
-    //this.groupIds = [];
+    this.umineName="";
+    this.uminePlaceName="";
+    this.statusTypeIds=[];
+    this.checkTypeIds=[];
+    this.content="";
+    this.find_date=[];
+    this.questionTypeIds=[];
+    this.questionNatureIds=[];
+    this.reformStatusTypeIds=[];
   }
 
   add() {
-    this.router.navigate(['/monitor/check/add']);
+    this.router.navigate(['/security/umineplace/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/security/umineplace/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {

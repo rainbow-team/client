@@ -23,19 +23,36 @@ export class EquipComponent implements OnInit {
 
   dataSet: any = [];
 
-  name: any = "";
+  equipDepartName: any = "";
 
-  equipDepartIds: any = [];
+  name:any="";
 
-  equipDepartList: any = [];
+  serviceDepartName: any = "";
 
-  serviceDepartIds: any = [];
+  facName:any="";
 
-  serviceDepartList: any = [];
+  checkTypeIds:any=[];
 
-  facIds: any = [];
+  content:any="";
+  
+  find_date:any=[];
 
-  facList: any = [];
+  questionTypeIds:any=[];
+
+  reformStatusTypeIds:any=[];
+  
+
+  // equipDepartIds: any = [];
+
+  // equipDepartList: any = [];
+
+  // serviceDepartIds: any = [];
+
+  // serviceDepartList: any = [];
+
+  // facIds: any = [];
+
+  // facList: any = [];
 
 
   constructor(private router: Router,
@@ -49,20 +66,7 @@ export class EquipComponent implements OnInit {
 
     this.search();
 
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-      if (res.code == 200) {
-        this.serviceDepartList = [];
-        res.msg.forEach(element => {
-          this.serviceDepartList.push({
-            id: element.id,
-            name: element.name
-          });
-        });
-      }
-    })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
+    // this.serviceDepartService.getAllDepartService().subscribe((res) => {
     //   if (res.code == 200) {
     //     this.serviceDepartList = [];
     //     res.msg.forEach(element => {
@@ -73,7 +77,6 @@ export class EquipComponent implements OnInit {
     //     });
     //   }
     // })
-
   }
 
   search() {
@@ -83,13 +86,49 @@ export class EquipComponent implements OnInit {
       conditions: []
     }
 
+    
+    if (this.equipDepartName) {
+      option.conditions.push({ key: "equipDepartName", value: this.equipDepartName })
+    }
+
     if (this.name) {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.serviceDepartName) {
+      option.conditions.push({ key: "serviceDepartName", value: this.serviceDepartName })
+    }
+
+    if (this.facName) {
+      option.conditions.push({ key: "facName", value: this.facName })
+    }
+
+    if (this.checkTypeIds.length > 0) {
+      option.conditions.push({ key: "checkTypeIds", value: this.checkTypeIds })
+    }
+
+    if (this.content) {
+      option.conditions.push({ key: "content", value: this.content })
+    }
+
+    if (this.find_date && this.find_date.length > 0) {
+      if (this.find_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.find_date[0] })
+      }
+
+      if (this.find_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.find_date[1] })
+      }
+    }
+
+    if (this.questionTypeIds.length > 0) {
+      option.conditions.push({ key: "questionTypeIds", value: this.questionTypeIds })
+    }
+
+    if (this.reformStatusTypeIds.length > 0) {
+      option.conditions.push({ key: "reformStatusTypeIds", value: this.reformStatusTypeIds })
+    }
+
 
     this.equipSecuritySercice.getEquipSecurityList(option).subscribe(
       (data) => {
@@ -100,8 +139,15 @@ export class EquipComponent implements OnInit {
   }
 
   reset() {
-    this.name = "";
-    //this.groupIds = [];
+    this.equipDepartName="";
+    this.name="";
+    this.serviceDepartName="";
+    this.facName="";
+    this.checkTypeIds=[];
+    this.content="";
+    this.find_date=[];
+    this.questionTypeIds=[];
+    this.reformStatusTypeIds=[];
   }
 
   add() {
