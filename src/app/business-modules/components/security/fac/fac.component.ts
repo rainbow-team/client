@@ -23,20 +23,23 @@ export class FacComponent implements OnInit {
 
   dataSet: any = [];
 
-  name: any = "";
+  serviceDepartName: any = "";
 
-  equipDepartIds: any = [];
+  facName:any="";
 
-  equipDepartList: any = [];
+  facStatusTypeIds:any=[];
 
-  serviceDepartIds: any = [];
+  checkTypeIds:any=[];
 
-  serviceDepartList: any = [];
+  content:any="";
+  
+  find_date:any=[];
 
-  facIds: any = [];
+  questionTypeIds:any=[];
 
-  facList: any = [];
+  questionNatureIds:any=[];
 
+  reformStatusTypeIds:any=[];
 
   constructor(private router: Router,
     private msg: NzMessageService, private facSecuritySercice: FacSecuritySercice, private dictionarySercice: DictionarySercice,
@@ -49,31 +52,6 @@ export class FacComponent implements OnInit {
 
     this.search();
 
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-      if (res.code == 200) {
-        this.serviceDepartList = [];
-        res.msg.forEach(element => {
-          this.serviceDepartList.push({
-            id: element.id,
-            name: element.name
-          });
-        });
-      }
-    })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
   }
 
   search() {
@@ -81,15 +59,50 @@ export class FacComponent implements OnInit {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
       conditions: []
+      
     }
 
-    if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
+    if (this.serviceDepartName) {
+      option.conditions.push({ key: "serviceDepartName", value: this.serviceDepartName })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.facName) {
+      option.conditions.push({ key: "facName", value: this.facName })
+    }
+
+    if (this.facStatusTypeIds.length > 0) {
+      option.conditions.push({ key: "facStatusTypeIds", value: this.facStatusTypeIds })
+    }
+
+    if (this.checkTypeIds.length > 0) {
+      option.conditions.push({ key: "checkTypeIds", value: this.checkTypeIds })
+    }
+
+    if (this.content) {
+      option.conditions.push({ key: "content", value: this.content })
+    }
+
+    if (this.find_date && this.find_date.length > 0) {
+      if (this.find_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.find_date[0] })
+      }
+
+      if (this.find_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.find_date[1] })
+      }
+    }
+
+    if (this.questionTypeIds.length > 0) {
+      option.conditions.push({ key: "questionTypeIds", value: this.questionTypeIds })
+    }
+
+    if (this.questionNatureIds.length > 0) {
+      option.conditions.push({ key: "questionNatureIds", value: this.questionNatureIds })
+    }
+
+    if (this.reformStatusTypeIds.length > 0) {
+      option.conditions.push({ key: "reformStatusTypeIds", value: this.reformStatusTypeIds })
+    }
 
     this.facSecuritySercice.getFacSecurityList(option).subscribe(
       (data) => {
@@ -100,16 +113,23 @@ export class FacComponent implements OnInit {
   }
 
   reset() {
-    this.name = "";
-    //this.groupIds = [];
+    this.serviceDepartName= "";
+    this.facName="";
+    this.facStatusTypeIds=[];
+    this.checkTypeIds=[];
+    this.content="";
+    this.find_date=[];
+    this.questionTypeIds=[];
+    this.questionNatureIds=[];
+    this.reformStatusTypeIds=[];
   }
 
   add() {
-    this.router.navigate(['/monitor/check/add']);
+    this.router.navigate(['/security/fac/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/security/fac/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {

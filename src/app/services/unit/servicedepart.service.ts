@@ -15,21 +15,21 @@ export class ServiceDepartService {
 
     saveOrUpdateServiceDepart(param): any {
 
-        let url = !param.id ? "/group/addServiceDepart" : "/group/modifyServiceDepart";
+        let url = !param.id ? "/servicedepart/addServiceDepart" : "/servicedepart/modifyServiceDepart";
         return this.http.post(url, param);
     }
 
     getServiceDepartById(id): any {
 
-        return this.http.get('/group/getServiceDepartById?id=' + id);
+        return this.http.get('/servicedepart/getServiceDepartById?id=' + id);
 
     }
 
     deleteServiceDepartById(ids): any {
-        return this.http.post('/group/deleteServiceDepartById',ids);
+        return this.http.post('/servicedepart/deleteServiceDepartById',ids);
     }
 
     getAllDepartService(): any {
-        return this.http.post('/group/getAllServiceDepartList',null);
+        return this.http.post('/servicedepart/getAllServiceDepartList',null);
     }
 }
