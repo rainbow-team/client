@@ -6,14 +6,15 @@
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>营运单位：
-        <nz-select [(ngModel)]="data.serviceId" class="w200" (ngModelChange)="serviceDepartChange($event)" [disabled]="isDisable">
+        <nz-select [(ngModel)]="data.serviceId" class="w200" (ngModelChange)="serviceDepartChange($event)" [disabled]="isDisable"
+        nzShowSearch nzAllowClear>
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         设施名称：
-        <nz-select [(ngModel)]="data.facId" class="w200" [disabled]="isDisable">
+        <nz-select [(ngModel)]="data.facId" class="w200" [disabled]="isDisable" nzShowSearch nzAllowClear>
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name"  [nzValue]="option.id">
           </nz-option>
         </nz-select>

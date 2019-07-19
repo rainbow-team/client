@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { FacSecuritySercice } from 'src/app/services/security/fac.service';
@@ -28,15 +28,15 @@ export class FacAddComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
-  serviceDepartList:any=[];
+  serviceDepartList: any = [];
 
-  facList:any=[];
+  facList: any = [];
 
 
-  constructor(private msg: NzMessageService, private router: Router, 
+  constructor(private msg: NzMessageService, private router: Router,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
-    private ActivatedRoute: ActivatedRoute,private attachmentSercice: AttachmentSercice,
-    private facSecuritySercice: FacSecuritySercice,private serviceDepartService: ServiceDepartService,
+    private ActivatedRoute: ActivatedRoute, private attachmentSercice: AttachmentSercice,
+    private facSecuritySercice: FacSecuritySercice, private serviceDepartService: ServiceDepartService,
     private facSercice: FacSercice) { }
 
 
@@ -77,9 +77,9 @@ export class FacAddComponent implements OnInit {
       this.data.creatorId = this.staffObj.id;
     }
 
-    this.serviceDepartService.getAllDepartService().subscribe((res)=>{
+    this.serviceDepartService.getAllDepartService().subscribe((res) => {
 
-      this.serviceDepartList=res.msg;
+      this.serviceDepartList = res.msg;
     })
   }
 
@@ -132,9 +132,10 @@ export class FacAddComponent implements OnInit {
   }
 
   serviceDepartChange(value: string): void {
-    this.facSercice.getFacListByServiceid(value).subscribe((res)=>{
-      this.facList=res.msg;
+    this.facSercice.getFacListByServiceid(value).subscribe((res) => {
+      this.facList = res.msg;
     })
   }
+
 
 }
