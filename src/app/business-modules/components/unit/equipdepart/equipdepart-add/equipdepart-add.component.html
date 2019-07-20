@@ -1,3 +1,89 @@
-<p>
-  equipdepart-add works!
-</p>
+<div style="height: 100%;background:#fff">
+  <div class="div_top_add">
+    核设备单位信息
+  </div>
+  <div class="div_contain_add">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>单位名称：
+        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"
+          [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        主要产品：
+        <input nz-input name="product" [(ngModel)]="data.product" class="w200" [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        地址：
+        <input nz-input name="address" [(ngModel)]="data.address" class="w200" [disabled]="isDisable" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        应急电话：
+        <input nz-input name="emergencyTel" [(ngModel)]="data.emergencyTel" class="w200" [disabled]="isDisable"
+          [validation]="true" [validationType]="'nullphonenumber'" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        传真：
+        <input nz-input name="fax" [(ngModel)]="data.fax" class="w200" [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        法人代表：
+        <input nz-input name="owner" [(ngModel)]="data.owner" class="w200" [disabled]="isDisable" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        主管质量领导：
+        <input nz-input name="leader" [(ngModel)]="data.leader" class="w200" [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        主管质量领导电话：
+        <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" class="w200" [disabled]="isDisable"
+          [validation]="true" [validationType]="'nullphonenumber'" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        质量部门领导：
+        <input nz-input name="departQualityLeader" [(ngModel)]="data.departQualityLeader" class="w200"
+          [disabled]="isDisable" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        质量部门领导电话：
+        <input nz-input name="departQualityLeaderTel" [(ngModel)]="data.departQualityLeaderTel" class="w200" [disabled]="isDisable"
+        [validation]="true" [validationType]="'nullphonenumber'" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">基本概况：</div>
+        <textarea nz-input name="survey" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.survey"
+          [disabled]="isDisable"></textarea>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">备注：</div>
+        <textarea nz-input name="note" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.note"
+          [disabled]="isDisable"></textarea>
+      </div>
+    </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+  </div>
+
+
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+      [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>

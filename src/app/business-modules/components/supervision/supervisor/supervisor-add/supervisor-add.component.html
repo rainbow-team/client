@@ -9,7 +9,7 @@
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>姓名：
-            <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true" [disabled]="isDisable" />
+            <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true" [readonly]="isDisable" />
           </div>
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>身份证号：

@@ -26,10 +26,23 @@ export class UminePlaceService {
     }
 
     deleteUminePlaceById(id): any {
-        return this.http.post('/umineplace/deleteUmineplaceById',id);
+        return this.http.post('/umineplace/deleteUmineplaceById', id);
     }
 
-    getUmineplaceListByUmineId(umineId):any{
-        return this.http.post('/umineplace/getUmineplaceListByUmineId',umineId);
+    getUmineplaceListByUmineId(umineId): any {
+        return this.http.post('/umineplace/getUmineplaceListByUmineId', umineId);
+    }
+
+    getUminePlaceImproveList(param): any {
+        return this.http.post('/umineplaceimprove/getUminePlaceImproveList', param);
+    }
+
+    deleteUminePlaceImproveByIds(param): any {
+        return this.http.post('/umineplaceimprove/deleteUminePlaceImproveByIds', param);
+    }
+
+    saveOrUpdateUminePlaceImprove(param): any {
+        let url = !param.id ? "/umineplaceimprove/addUminePlaceImprove" : "/umineplaceimprove/modifyUminePlaceImprove";
+        return this.http.post(url, param);
     }
 }

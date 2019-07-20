@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { UmineplaceComponent } from './umineplace.component';
 import { UmineplaceAddComponent } from './umineplace-add/umineplace-add.component';
+import { UmineplaceChildmanageComponent } from './umineplace-childmanage/umineplace-childmanage.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
         path: 'add',
         component: UmineplaceAddComponent
+    },
+     {
+        path: 'childmanage',
+        component: UmineplaceChildmanageComponent
     }
 ];
 
@@ -31,7 +36,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         UmineplaceComponent,
-        UmineplaceAddComponent
+        UmineplaceAddComponent,
+        UmineplaceChildmanageComponent
     ]
 })
 export class UmineplaceModule { }

@@ -22,14 +22,18 @@ export class UmineplaceComponent implements OnInit {
   dataSet: any = [];
 
   name: any = "";
+  umineName: any = "";
+  buildYear: any = "";
+  levelIds: any = [];
+  statusIds: any = [];
+  reviewStatusIds: any = [];
+  permitSituationIds: any = [];
+  have_monitor: any = "";
 
-  umineIds: any = [];
 
-  umineList: any = [];
-  
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private uminePlaceSercice:UminePlaceService) { }
+    private staffSercice: StaffSercice, private uminePlaceService: UminePlaceService) { }
 
   ngOnInit() {
 
@@ -38,17 +42,7 @@ export class UmineplaceComponent implements OnInit {
 
     this.search();
 
-    this.umineSercice.getAllUmine().subscribe((res) => {
-      if (res.code == 200) {
-          this.umineList = [];
-          res.msg.forEach(element => {
-              this.umineList.push({
-                  id: element.id,
-                  name: element.name
-              });
-          });
-      }
-  })
+
   }
 
   search() {
@@ -62,11 +56,35 @@ export class UmineplaceComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    if (this.umineIds.length > 0) {
-      option.conditions.push({ key: "umineIds", value: this.umineIds })
+    if (this.umineName) {
+      option.conditions.push({ key: "umineName", value: this.umineName })
     }
 
-    this.uminePlaceSercice.getUminePlaceList(option).subscribe(
+    if (this.buildYear) {
+      option.conditions.push({ key: "buildYear", value: this.buildYear })
+    }
+
+    if (this.levelIds.length > 0) {
+      option.conditions.push({ key: "levelIds", value: this.levelIds })
+    }
+
+    if (this.statusIds.length > 0) {
+      option.conditions.push({ key: "statusIds", value: this.statusIds })
+    }
+
+    if (this.reviewStatusIds.length > 0) {
+      option.conditions.push({ key: "reviewStatusIds", value: this.reviewStatusIds })
+    }
+
+    if (this.permitSituationIds.length > 0) {
+      option.conditions.push({ key: "permitSituationIds", value: this.permitSituationIds })
+    }
+
+    if (this.have_monitor) {
+      option.conditions.push({ key: "have_monitor", value: this.have_monitor })
+    }
+
+    this.uminePlaceService.getUminePlaceList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -76,11 +94,22 @@ export class UmineplaceComponent implements OnInit {
 
   reset() {
     this.name = "";
-    this.umineIds = [];
+    this.umineName = "";
+    this.buildYear = "";
+    this.levelIds = [];
+    this.statusIds = [];
+    this.reviewStatusIds = [];
+    this.permitSituationIds = [];
+    this.have_monitor = "";
+
   }
 
   add() {
     this.router.navigate(['/unit/umineplace/add']);
+  }
+
+  childmanage(item) {
+    this.router.navigate(['/unit/umineplace/childmanage'], { queryParams: { id: item.id } });
   }
 
   show(item, flag) {
@@ -89,11 +118,13 @@ export class UmineplaceComponent implements OnInit {
 
   delete(item) {
 
-    this.uminePlaceSercice.deleteUminePlaceById(item.id).subscribe((res) => {
+    this.uminePlaceService.deleteUminePlaceById(item.id).subscribe((res) => {
 
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.search();
+      } else if (res.code == 500) {
+        this.msg.create("warning", res.msg);
       } else {
         this.msg.create("error", "删除失败");
       }
