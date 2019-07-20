@@ -25,20 +25,17 @@ export class DailyComponent implements OnInit {
 
   dataSet: any = [];
 
-  name: any = "";
+  serviceDepartName: any = "";
 
-  equipDepartIds: any = [];
+  facName:any="";
 
-  equipDepartList: any = [];
+  facStatusTypeIds:any=[];
 
-  serviceDepartIds: any = [];
+  fileTypeIds:any=[];
 
-  serviceDepartList: any = [];
-
-  facIds: any = [];
-
-  facList: any = [];
-
+  file_name:any="";
+  
+  file_date:any=[];
 
   constructor(private router: Router,
     private msg: NzMessageService, private dailyMonitorSercice: DailyMonitorSercice, private dictionarySercice: DictionarySercice,
@@ -52,31 +49,6 @@ export class DailyComponent implements OnInit {
 
     this.search();
 
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-      if (res.code == 200) {
-        this.serviceDepartList = [];
-        res.msg.forEach(element => {
-          this.serviceDepartList.push({
-            id: element.id,
-            name: element.name
-          });
-        });
-      }
-    })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
   }
 
   search() {
@@ -86,13 +58,35 @@ export class DailyComponent implements OnInit {
       conditions: []
     }
 
-    if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
+    if (this.serviceDepartName) {
+      option.conditions.push({ key: "serviceDepartName", value: this.serviceDepartName })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.facName) {
+      option.conditions.push({ key: "facName", value: this.facName })
+    }
+
+    if (this.facStatusTypeIds.length > 0) {
+      option.conditions.push({ key: "facStatusTypeIds", value: this.facStatusTypeIds })
+    }
+
+    if (this.fileTypeIds.length > 0) {
+      option.conditions.push({ key: "fileTypeIds", value: this.fileTypeIds })
+    }
+
+    if (this.file_name) {
+      option.conditions.push({ key: "file_name", value: this.file_name })
+    }
+
+    if (this.file_date && this.file_date.length > 0) {
+      if (this.file_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.file_date[0] })
+      }
+
+      if (this.file_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.file_date[1] })
+      }
+    }
 
     this.dailyMonitorSercice.getDailyMonitorList(option).subscribe(
       (data) => {
@@ -103,8 +97,12 @@ export class DailyComponent implements OnInit {
   }
 
   reset() {
-    this.name = "";
-    //this.groupIds = [];
+    this.serviceDepartName = "";
+    this.facName="";
+    this.facStatusTypeIds=[];
+    this.fileTypeIds=[];
+    this.file_name="";
+    this.file_date=[];
   }
 
   add() {
