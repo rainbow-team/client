@@ -7,7 +7,7 @@
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>营运单位：
         <nz-select [(ngModel)]="data.serviceId" class="w200" (ngModelChange)="serviceDepartChange($event)"
-          [disabled]="isDisable" nzShowSearch nzAllowClear nzPlaceHolder="请选择营运单位名称">
+          [nzDisabled]="isDisable" nzShowSearch nzAllowClear nzPlaceHolder="请选择营运单位名称">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
