@@ -109,11 +109,11 @@ export class AccidentComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/monitor/accident/add']);
+    this.router.navigate(['/security/accident/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/monitor/accident/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/security/accident/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {
