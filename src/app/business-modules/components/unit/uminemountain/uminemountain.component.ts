@@ -22,14 +22,15 @@ export class UminemountainComponent implements OnInit {
   dataSet: any = [];
 
   name: any = "";
+  umineName: any = "";
+  build_year: any = "";
+  statusIds: any = [];
+  is_record: any = "";
+  is_accept: any = "";
 
-  umineIds: any = [];
-
-  umineList: any = [];
-  
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private umineMountainService:UmineMountainService) { }
+    private staffSercice: StaffSercice, private umineMountainService: UmineMountainService) { }
 
   ngOnInit() {
 
@@ -37,18 +38,6 @@ export class UminemountainComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     this.search();
-
-    this.umineSercice.getAllUmine().subscribe((res) => {
-      if (res.code == 200) {
-          this.umineList = [];
-          res.msg.forEach(element => {
-              this.umineList.push({
-                  id: element.id,
-                  name: element.name
-              });
-          });
-      }
-  })
   }
 
   search() {
@@ -62,8 +51,24 @@ export class UminemountainComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    if (this.umineIds.length > 0) {
-      option.conditions.push({ key: "umineIds", value: this.umineIds })
+    if (this.umineName) {
+      option.conditions.push({ key: "umineName", value: this.umineName })
+    }
+
+    if (this.build_year) {
+      option.conditions.push({ key: "build_year", value: this.build_year })
+    }
+
+    if (this.statusIds.length > 0) {
+      option.conditions.push({ key: "statusIds", value: this.statusIds })
+    }
+
+    if (this.is_record) {
+      option.conditions.push({ key: "is_record", value: this.is_record })
+    }
+
+    if (this.is_accept) {
+      option.conditions.push({ key: "is_accept", value: this.is_accept })
     }
 
     this.umineMountainService.getUmineMountainList(option).subscribe(
@@ -76,11 +81,15 @@ export class UminemountainComponent implements OnInit {
 
   reset() {
     this.name = "";
-    this.umineIds = [];
+    this.statusIds = [];
   }
 
   add() {
     this.router.navigate(['/unit/uminemountain/add']);
+  }
+
+  childmanage(item) {
+    this.router.navigate(['/unit/uminemountain/childmanage'], { queryParams: { id: item.id } });
   }
 
   show(item, flag) {
@@ -94,6 +103,8 @@ export class UminemountainComponent implements OnInit {
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.search();
+      } else if (res.code == 500) {
+        this.msg.create("warning", res.msg);
       } else {
         this.msg.create("error", "删除失败");
       }

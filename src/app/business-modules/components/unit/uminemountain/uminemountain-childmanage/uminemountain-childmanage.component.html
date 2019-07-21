@@ -1,0 +1,77 @@
+<div style="height: 100%;">
+
+  <div nz-row class="div_contain">
+
+    <div class="div_top">
+      <div class="fl div_top_tip">
+
+      </div>
+      <div class="fl" style="color: #0050b3;">
+        安技改信息（共{{totalCount}}条）
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
+      </div>
+
+    </div>
+    <div>
+      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>安技改时间</th>
+            <th>安技改内容</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of nestedTable.data;index as index">
+            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
+            <td>{{data.improveDate|recordtime}}</td>
+            <td>{{data.improveContent}}</td>
+            <td>
+              <a (click)="show(data,true)">查看</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a (click)="show(data,false)">编辑</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+  </div>
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消" (nzOnOk)="save();"
+    (nzOnCancel)="isVisible=false;" nzWidth="700" [nzOkLoading]="isSaving">
+
+    <div style="padding: 10px 30px 50px 0;">
+
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="12" class="ta_r">
+          <span class="clo_r">*</span>安技改时间：
+          <nz-date-picker name="improveDate" [(ngModel)]="data.improveDate" class="w200" [disabled]="isDisable" required
+            [validation]="true">
+          </nz-date-picker>
+        </div>
+      </div>
+      <div nz-row class="ma_b20">
+
+        <div nz-col [nzSpan]="24" class="ta_r">
+          <div class="div_bz" style="width: 107px;"><span class="clo_r">*</span>安技改内容：</div>
+          <textarea nz-input name="improveContent" style="width: calc(100% - 110px);height: 70px;"
+            [(ngModel)]="data.improveContent" [disabled]="isDisable" required [validation]="true"></textarea>
+        </div>
+
+      </div>
+    </div>
+  </nz-modal>
+</div>

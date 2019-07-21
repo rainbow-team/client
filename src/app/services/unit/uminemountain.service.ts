@@ -26,6 +26,28 @@ export class UmineMountainService {
     }
 
     deleteUmineMountainById(id): any {
-        return this.http.post('/uminemountain/deleteUmineMountainById',id);
+        return this.http.post('/uminemountain/deleteUmineMountainById', id);
     }
+
+
+    getUmineMountainImproveList(param): any {
+        return this.http.post('/uminemontainimprove/getUmineMountainImproveList', param);
+    }
+
+    saveOrUpdateUmineMountainImprove(param): any {
+
+        let url = !param.id ? "/uminemontainimprove/addUmineMountainImprove" : "/uminemontainimprove/modifyUmineMountainImprove";
+        return this.http.post(url, param);
+    }
+
+    getUmineMountainImproveById(id): any {
+
+        return this.http.get('/uminemontainimprove/getUmineMountainImproveById?id=' + id);
+
+    }
+
+    deleteUmineMountainImproveByIds(ids): any {
+        return this.http.post('/uminemontainimprove/deleteUmineMountainImproveByIds', ids);
+    }
+
 }

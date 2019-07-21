@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -27,9 +27,15 @@ export class UmineplaceAddComponent implements OnInit {
   staffObj: any = {};
   umineList: any = [];
 
+  pageIndex: any = 1;
+  totalCount: any;
+  pageSize: any = 10;
+  uminePlaceId: any = "";
+  dataSet: any = [];
+
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
-    private attachmentSercice: AttachmentSercice, private umineSercice: UmineService,private uminePlaceService: UminePlaceService) { }
+    private attachmentSercice: AttachmentSercice, private umineSercice: UmineService, private uminePlaceService: UminePlaceService) { }
 
 
   ngOnInit() {
@@ -59,6 +65,12 @@ export class UmineplaceAddComponent implements OnInit {
     }
 
     if (id) {
+
+      if(this.isDisable){
+        this.uminePlaceId = id;
+        this.search();
+      }
+
       this.uminePlaceService.getUminePlaceById(id).subscribe((res) => {
         this.data = res.msg;
       });
@@ -81,6 +93,24 @@ export class UmineplaceAddComponent implements OnInit {
       this.data.creatorId = this.staffObj.id;
     }
 
+  }
+
+  search() {
+
+    var option = {
+      pageNo: this.pageIndex,
+      pageSize: this.pageSize,
+      conditions: []
+    }
+
+    option.conditions.push({ key: "uminePlaceId", value: this.uminePlaceId });
+
+    this.uminePlaceService.getUminePlaceImproveList(option).subscribe(
+      (data) => {
+        this.dataSet = data.msg.currentList;
+        this.totalCount = data.msg.recordCount;
+      }
+    );
   }
 
   save() {
