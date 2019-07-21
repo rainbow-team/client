@@ -145,4 +145,8 @@ export class CheckAddComponent implements OnInit {
     });
     return isValid;
   }
+
+  typeChange(value: string): void {
+    //this.
+  }
 }

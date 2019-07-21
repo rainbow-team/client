@@ -4,7 +4,15 @@
   </div>
   <div class="div_contain_add">
     <div nz-row class="ma_b20" >
-      <div nz-col [nzSpan]="8" class="ta_r" style="visibility: collapse">
+      <div nz-col [nzSpan]="10" class="ta_r">
+        营运单位:
+          <nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="typeChange($event)">
+              <label nz-radio nzValue="A">核设施营运单位</label>
+              <label nz-radio nzValue="B">铀矿冶单位</label>
+              <label nz-radio nzValue="C">核设备单位</label>
+            </nz-radio-group>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r" style="display: none">
         营运单位：
         <nz-select [(ngModel)]="data.serviceId" class="w200" 
           [nzDisabled]="isDisable" nzShowSearch nzAllowClear nzPlaceHolder="请选择核设施营运单位">
