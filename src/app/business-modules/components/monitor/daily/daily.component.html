@@ -12,7 +12,7 @@
 
     <div nz-col [nzSpan]="5">
       设施状态
-      <nz-select [(ngModel)]="facStatusTypeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
