@@ -23,24 +23,17 @@ export class ReportComponent implements OnInit {
 
   dataSet: any = [];
 
-  name: any = "";
+  orgName: any = "";
 
-  equipDepartIds: any = [];
+  typeIds:any=[];
 
-  equipDepartList: any = [];
+  name:any="";
 
-  serviceDepartIds: any = [];
-
-  serviceDepartList: any = [];
-
-  facIds: any = [];
-
-  facList: any = [];
-
+  report_date=[];
 
   constructor(private router: Router,
-    private msg: NzMessageService, private reportMonitorSercice: ReportMonitorSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private orgSercice: OrgSercice) { }
+    private msg: NzMessageService, private reportMonitorSercice: ReportMonitorSercice, 
+    private dictionarySercice: DictionarySercice,private staffSercice: StaffSercice) { }
 
   ngOnInit() {
 
@@ -48,19 +41,6 @@ export class ReportComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     this.search();
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
 
   }
 
@@ -71,13 +51,27 @@ export class ReportComponent implements OnInit {
       conditions: []
     }
 
+    if (this.orgName) {
+      option.conditions.push({ key: "orgName", value: this.orgName })
+    }
+
+    if (this.typeIds.length > 0) {
+      option.conditions.push({ key: "typeIds", value: this.typeIds })
+    }
+
     if (this.name) {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.report_date && this.report_date.length > 0) {
+      if (this.report_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.report_date[0] })
+      }
+
+      if (this.report_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.report_date[1] })
+      }
+    }
 
     this.reportMonitorSercice.getReportMonitorList(option).subscribe(
       (data) => {
@@ -88,8 +82,13 @@ export class ReportComponent implements OnInit {
   }
 
   reset() {
-    this.name = "";
-    //this.groupIds = [];
+    this.orgName= "";
+
+    this.typeIds=[];
+  
+    this.name="";
+  
+    this.report_date=[];
   }
 
   add() {
