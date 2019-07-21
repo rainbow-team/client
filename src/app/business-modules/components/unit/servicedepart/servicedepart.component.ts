@@ -29,7 +29,7 @@ export class ServicedepartComponent implements OnInit {
 
   constructor(private router: Router,
     private msg: NzMessageService, private serviceDepartSercice: ServiceDepartService, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private groupService: GroupService) { }
+    private staffSercice: StaffSercice, private groupService: GroupService) { }
 
   ngOnInit() {
 
@@ -40,15 +40,15 @@ export class ServicedepartComponent implements OnInit {
 
     this.groupService.getAllGroup().subscribe((res) => {
       if (res.code == 200) {
-          this.groupList = [];
-          res.msg.forEach(element => {
-              this.groupList.push({
-                  id: element.id,
-                  name: element.name
-              });
+        this.groupList = [];
+        res.msg.forEach(element => {
+          this.groupList.push({
+            id: element.id,
+            name: element.name
           });
+        });
       }
-  })
+    })
   }
 
   search() {
@@ -81,6 +81,10 @@ export class ServicedepartComponent implements OnInit {
 
   add() {
     this.router.navigate(['/unit/servicedepart/add']);
+  }
+
+  goChildManage(item) {
+    this.router.navigate(['/unit/servicedepart/childmanage'], { queryParams: { id: item.id} });
   }
 
   show(item, flag) {

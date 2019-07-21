@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { ServicedepartComponent } from './servicedepart.component';
 import { ServicedepartAddComponent } from './servicedepart-add/servicedepart-add.component';
+import { ServicedepartReportmanageComponent } from './servicedepart-reportmanage/servicedepart-reportmanage.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
         path: 'add',
         component: ServicedepartAddComponent
+    },
+    {
+        path: 'childmanage',
+        component:ServicedepartReportmanageComponent
     }
 ];
 
@@ -30,7 +35,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         ServicedepartComponent,
-        ServicedepartAddComponent
+        ServicedepartAddComponent,
+        ServicedepartReportmanageComponent
     ]
 })
 export class ServiceDepartModule { }

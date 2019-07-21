@@ -26,10 +26,25 @@ export class ServiceDepartService {
     }
 
     deleteServiceDepartById(ids): any {
-        return this.http.post('/servicedepart/deleteServiceDepartById',ids);
+        return this.http.post('/servicedepart/deleteServiceDepartById', ids);
     }
 
     getAllDepartService(): any {
-        return this.http.post('/servicedepart/getAllServiceDepartList',null);
+        return this.http.post('/servicedepart/getAllServiceDepartList', null);
     }
+
+    getServiceAnnualReportList(param): any {
+        return this.http.post('/serviceannualreport/getServiceAnnualReportList', param);
+    }
+
+    saveOrUpdateServiceAnnualReport(param): any {
+
+        let url = !param.reportId ? "/serviceannualreport/addServiceAnnualReport" : "/serviceannualreport/addServiceAnnualReport";
+        return this.http.post(url, param);
+    }
+
+    deleteServiceAnnualReportByIds(ids): any {
+        return this.http.post('/serviceannualreport/deleteServiceAnnualReportByIds', ids);
+    }
+
 }

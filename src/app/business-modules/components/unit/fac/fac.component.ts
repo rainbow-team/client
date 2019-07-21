@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
+import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 
 @Component({
   selector: 'app-fac',
@@ -21,19 +22,40 @@ export class FacComponent implements OnInit {
   pageSize: any = 10;
 
   dataSet: any = [];
+  ServiceDepartList: any = [];
 
   name: any = "";
-
-  product: any="";
+  code: any = "";
+  ServiceDepartIds: any = [];
+  build_year: any = "";
+  supervisionCategoryIds: any = [];
+  typeIds: any = [];
+  statusId: any = [];
+  reviewStatusId: any = [];
+  facPermitSituationId: any = [];
+  isEarthquake: any = "";
+  isFlood: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private facSercice: FacSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.serviceDepartService.getAllDepartService().subscribe((res) => {
+      if (res.code == 200) {
+        this.ServiceDepartList = [];
+        res.msg.forEach(element => {
+          this.ServiceDepartList.push({
+            id: element.id,
+            name: element.name
+          });
+        });
+      }
+    })
 
     this.search();
   }
@@ -49,10 +71,45 @@ export class FacComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    if (this.product) {
-      option.conditions.push({ key: "product", value: this.product })
+    if (this.code) {
+      option.conditions.push({ key: "code", value: this.code })
     }
 
+    if (this.ServiceDepartIds && this.ServiceDepartIds.length > 0) {
+      option.conditions.push({ key: "ServiceDepartIds", value: this.ServiceDepartIds })
+    }
+
+    if (this.build_year) {
+      option.conditions.push({ key: "build_year", value: this.build_year })
+    }
+
+    if (this.supervisionCategoryIds && this.supervisionCategoryIds.length > 0) {
+      option.conditions.push({ key: "supervisionCategoryIds", value: this.supervisionCategoryIds })
+    }
+
+    if (this.typeIds && this.typeIds.length > 0) {
+      option.conditions.push({ key: "typeIds", value: this.typeIds })
+    }
+
+    if (this.statusId && this.statusId.length > 0) {
+      option.conditions.push({ key: "statusId", value: this.statusId })
+    }
+
+    if (this.reviewStatusId && this.reviewStatusId.length > 0) {
+      option.conditions.push({ key: "reviewStatusId", value: this.reviewStatusId })
+    }
+
+    if (this.facPermitSituationId && this.facPermitSituationId.length > 0) {
+      option.conditions.push({ key: "facPermitSituationId", value: this.facPermitSituationId })
+    }
+
+    if (this.isEarthquake) {
+      option.conditions.push({ key: "isEarthquake", value: this.isEarthquake })
+    }
+
+    if (this.isFlood) {
+      option.conditions.push({ key: "isFlood", value: this.isFlood })
+    }
 
     this.facSercice.getFacList(option).subscribe(
       (data) => {
@@ -64,11 +121,24 @@ export class FacComponent implements OnInit {
 
   reset() {
     this.name = "";
-    this.product = "";
+    this.code = "";
+    this.ServiceDepartIds = [];
+    this.build_year = "";
+    this.supervisionCategoryIds = [];
+    this.typeIds = [];
+    this.statusId = [];
+    this.reviewStatusId = [];
+    this.facPermitSituationId = [];
+    this.isEarthquake = "";
+    this.isFlood = "";
   }
 
   add() {
     this.router.navigate(['/unit/fac/add']);
+  }
+
+  childmanage(item) {
+    this.router.navigate(['/unit/fac/childmanage'], { queryParams: { id: item.id } });
   }
 
   show(item, flag) {
@@ -82,6 +152,8 @@ export class FacComponent implements OnInit {
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.search();
+      } else if (res.code == 500) {
+        this.msg.create("warning", res.msg);
       } else {
         this.msg.create("error", "删除失败");
       }

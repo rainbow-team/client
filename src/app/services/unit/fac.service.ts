@@ -26,10 +26,52 @@ export class FacSercice {
     }
 
     deleteFacById(id): any {
-        return this.http.post('/fac/deleteFacById',id);
+        return this.http.post('/fac/deleteFacById', id);
     }
 
     getFacListByServiceid(id): any {
-        return this.http.post('/fac/getFacListByServiceid',id);
+        return this.http.post('/fac/getFacListByServiceid', id);
+    }
+
+
+    getFacImproveList(param): any {
+        return this.http.post('/facimprove/getFacImproveList', param);
+    }
+
+    saveOrUpdateFacImprove(param): any {
+
+        let url = !param.id ? "/facimprove/addFacImprove" : "/facimprove/modifyFacImprove";
+        return this.http.post(url, param);
+    }
+
+    getFacImproveById(id): any {
+
+        return this.http.get('/facimprove/getFacImproveById?id=' + id);
+
+    }
+
+    deleteFacImproveByIds(ids): any {
+        return this.http.post('/facimprove/deleteFacImproveByIds', ids);
+    }
+
+    
+    getFacReportList(param): any {
+        return this.http.post('/facreport/getFacReportList', param);
+    }
+
+    saveOrUpdateFacReport(param): any {
+
+        let url = !param.id ? "/facreport/addFacReport" : "/facreport/modifyFacReport";
+        return this.http.post(url, param);
+    }
+
+    getFacReportById(id): any {
+
+        return this.http.get('/facreport/getFacReportById?id=' + id);
+
+    }
+
+    deleteFacReportByIds(ids): any {
+        return this.http.post('/facreport/deleteFacReportByIds', ids);
     }
 }

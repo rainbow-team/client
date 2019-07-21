@@ -1,176 +1,135 @@
 <div style="height: 100%;background:#fff">
+  <!-- <div class="div_top_add">
+    核设施营运单位信息  
+  </div> -->
 
   <nz-tabset>
     <nz-tab nzTitle="核设施营运单位信息">
-      <div class="div_contain" style="height:360px;">
-        <div nz-row class="ma_b20"  [nzType]="'flex'" [nzAlign]="'top'">
-
+      <div class="div_contain_add" style="height: calc(100% - 190px);">
+        <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>单位名称：
-            <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"  [disabled]="isDisable" />
+            <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"
+              [disabled]="isDisable" />
           </div>
-
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>所属集团：
-            <nz-select nzAllowClear [(ngModel)]="data.orgId" class="w200" [disabled]="isDisable" required
-              [validation]="true">
-              <nz-option *ngFor="let option of orgList" [nzLabel]="option.name" [nzValue]="option.id">
+            <nz-select [(ngModel)]="data.groupId" class="w200" required [validation]="true" [disabled]="isDisable">
+              <nz-option *ngFor="let option of groupList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
-
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>单位代号：
-            <input nz-input name="code" [(ngModel)]="data.code" class="w200" required [validation]="true" [disabled]="isDisable" />
+            核设施数量：
+            <input nz-input name="facNum" [(ngModel)]="facNum" class="w200" disabled />
           </div>
         </div>
 
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>地址：
-            <input nz-input name="address" [(ngModel)]="data.address" class="w200" required [validation]="true"
-              [disabled]="isDisable" />
+            单位代号：
+            <input nz-input name="code" [(ngModel)]="data.code" class="w200" [disabled]="isDisable" />
           </div>
-
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>应急电话：
-            <input nz-input name="emergencyTel" [(ngModel)]="data.emergencyTel" class="w200" required
-              [validation]="true" [disabled]="isDisable" />
-
+            地址：
+            <input nz-input name="address" [(ngModel)]="data.address" class="w200" [disabled]="isDisable" />
           </div>
-
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>传真：
-            <input nz-input name="fax" [(ngModel)]="data.fax" class="w200" required [validation]="true"
-              [disabled]="isDisable" />
+            应急电话：
+            <input nz-input name="emergencyTel" [(ngModel)]="data.emergencyTel" class="w200" [disabled]="isDisable"
+              [validation]="true" [validationType]="'nullphonenumber'" />
           </div>
         </div>
 
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>基本概况：
-            <input nz-input name="survey" [(ngModel)]="data.survey" class="w200" required [validation]="true"
-              [disabled]="isDisable" />
+            传真：
+            <input nz-input name="fax" [(ngModel)]="data.fax" class="w200" [disabled]="isDisable" />
           </div>
-
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>厂址特征：
-            <input nz-input name="feature" [(ngModel)]="data.feature" class="w200" required [validation]="true"
-              [disabled]="isDisable" />
+            法人代表：
+            <input nz-input name="owner" [(ngModel)]="data.owner" class="w200" [disabled]="isDisable" />
           </div>
-
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>核设施数量：
-            <input nz-input name="facNum" [(ngModel)]="data.facNum" class="w200" required [validation]="true"
-              [disabled]="isDisable" />
+            主管安全领导：
+            <input nz-input name="leader" [(ngModel)]="data.leader" class="w200" [disabled]="isDisable" />
           </div>
-
         </div>
 
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>法人代表：
-            <input nz-input name="owner" [(ngModel)]="data.owner" class="w200" required [validation]="true"
-              [disabled]="isDisable" />
+            主管安全领导电话：
+            <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" class="w200" [disabled]="isDisable"
+              [validation]="true" [validationType]="'nullphonenumber'" />
           </div>
-
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>主管安全领导：
-            <input nz-input name="leader" [(ngModel)]="data.leader" class="w200" required [validation]="true"
-              [disabled]="isDisable" />
+            安全部门领导：
+            <input nz-input name="departLeader" [(ngModel)]="data.departLeader" class="w200" [disabled]="isDisable" />
           </div>
-
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>主管安全领导电话：
-            <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" class="w200" required [validation]="true"
-              [disabled]="isDisable" />
+            安全部门领导电话：
+            <input nz-input name="departLeaderTel" [(ngModel)]="data.departLeaderTel" class="w200"
+              [disabled]="isDisable" [validation]="true" [validationType]="'nullphonenumber'" />
           </div>
-
         </div>
 
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="12" class="ta_r">
-            <span class="clo_r">*</span>安全主管部门领导：
-            <input nz-input name="departLeader" [(ngModel)]="data.departLeader" class="w200" required
-              [validation]="true" [disabled]="isDisable" />
-          </div>
-
-          <div nz-col [nzSpan]="12" class="ta_r">
-            <span class="clo_r">*</span>安全主管部门领导电话：
-            <input nz-input name="departLeaderTel" [(ngModel)]="data.departLeaderTel" class="w200" required
-              [validation]="true" [disabled]="isDisable" />
-          </div>
-
-
-        </div>
-
-        <div nz-row class="ma_b20">
+        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
           <div nz-col [nzSpan]="24" class="ta_r">
-            <span class="clo_r">*</span>备注：
-            <input nz-input name="note" [(ngModel)]="data.note" class="w200" required [validation]="true"
-              [disabled]="isDisable" />
+            <div class="div_bz">基本概况：</div>
+            <textarea nz-input name="survey" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.survey"
+              [disabled]="isDisable"></textarea>
           </div>
+        </div>
+
+        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+          <div nz-col [nzSpan]="24" class="ta_r">
+            <div class="div_bz">厂址特征：</div>
+            <textarea nz-input name="feature" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.feature"
+              [disabled]="isDisable"></textarea>
+          </div>
+        </div>
+
+
+        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+          <div nz-col [nzSpan]="24" class="ta_r">
+            <div class="div_bz">备注：</div>
+            <textarea nz-input name="note" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.note"
+              [disabled]="isDisable"></textarea>
+          </div>
+        </div>
+
+        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+
+      </div>
+    </nz-tab>
+
+    <nz-tab nzTitle="年度报告信息" *ngIf="isDisable">
+      <div style="padding: 0 30px;">
+        <div nz-row>
+          <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzFrontPagination]="false"
+            [nzTotal]="totalCount" [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize"
+            (nzPageIndexChange)="pageIndexChange($event)" class="tablescoll_rainbow">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>年度报告时间</th> 
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of nestedTable.data;index as index ">
+                <td>{{(pageIndex-1)*pageSize+1+index}}</td>
+                <td>{{data.reportYear|recordtime}}</td>
+              </tr>
+            </tbody>
+          </nz-table>
 
         </div>
       </div>
     </nz-tab>
-
-
-
-    <!-- <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>  -->
-
-
-
-    <nz-tab nzTitle="年度报告" *ngIf="isDisable">
-      <!--  <div style="    padding: 0 30px;">
-          <div nz-row style="height: 50px" [nzType]="'flex'" [nzAlign]="'middle'">
-            <div nz-col [nzSpan]="8">
-              <nz-input-group [nzSuffix]="suffixIconSearch1" style="width: 300px;">
-                <input type="text" nz-input placeholder="请输入班次搜索" [(ngModel)]="batchSearch">
-              </nz-input-group>
-              <ng-template #suffixIconSearch1>
-                <i nz-icon type="search" (click)="search()"></i>
-              </ng-template>
-            </div>
-          </div>
-          <div nz-row>
-            <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzFrontPagination]="false" [nzTotal]="totalCount" [nzPageIndex]="pageIndex"
-              nzShowSizeChanger [nzPageSize]="pageSize" (nzPageIndexChange)="pageIndexChange($event)" class="tablescoll_rainbow">
-              <thead>
-                <tr>
-                  <th>序号</th>
-                  <th>培训班次</th>
-                  <th>培训开始时间</th>
-                  <th>培训结束时间</th>
-                  <th>成绩</th>
-                  <th>监督员证号</th>
-                  <th>发证日期</th>
-                  <th>到期时间</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let data of nestedTable.data;index as index ">
-                  <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-                  <td>{{data.trainClass}}</td>
-                  <td>{{data.trainStartDate|recordtime}}</td>
-                  <td>{{data.trainEndDate|recordtime}}</td>
-                  <td>{{data.score}}</td>
-                  <td>{{data.number}}</td>
-                  <td>{{data.issueDate|recordtime}}</td>
-                  <td>{{data.expireDate|recordtime}}</td>
-                </tr>
-              </tbody>
-            </nz-table>
-  
-          </div>
-        </div> -->
-    </nz-tab>
-
   </nz-tabset>
 
 
-
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom" [nzJustify]="'end'">
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
     <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
       [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
