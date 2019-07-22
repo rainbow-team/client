@@ -15,7 +15,7 @@ export class CheckMonitorSercice {
 
     saveOrUpdateCheckMonitor(param): any {
 
-        let url = !param.id ? "/checkmonitor/addCheckMonitor" : "/equipdepart/modifyCheckMonitor";
+        let url = !param.id ? "/checkmonitor/addCheckMonitor" : "/checkmonitor/modifyCheckMonitor";
         return this.http.post(url, param);
     }
 

@@ -9,6 +9,7 @@ import { CheckMonitorSercice } from 'src/app/services/monitor/check.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
+import { OrgSercice } from 'src/app/services/supervision/org.service';
 
 @Component({
   selector: 'app-check-add',
@@ -34,11 +35,18 @@ export class CheckAddComponent implements OnInit {
 
   equipDepartList:any=[];
 
+  orgList:any=[];
+
+  checkData:any=[];
+
+  departType:any="";
+
   constructor(private msg: NzMessageService, private router: Router,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private ActivatedRoute: ActivatedRoute, private attachmentSercice: AttachmentSercice,
     private checkMonitorSercice: CheckMonitorSercice, private serviceDepartService: ServiceDepartService,
-    private umineService: UmineService,private equipDepartService: EquipDepartService) { }
+    private umineService: UmineService,private equipDepartService: EquipDepartService,
+    private orgSercice: OrgSercice,) { }
 
 
   ngOnInit() {
@@ -71,9 +79,23 @@ export class CheckAddComponent implements OnInit {
       this.equipDepartList = res.msg;
     })
 
+    this.orgSercice.getAllOrgList().subscribe((res) => {
+
+      this.orgList = res.msg;
+    })
+
     if (id) {
       this.checkMonitorSercice.getCheckMonitorById(id).subscribe((res) => {
         this.data = res.msg;
+        if(this.data.serviceId){
+          this.departType="fac";
+        }
+        if(this.data.umineId){
+          this.departType="umine";
+        }
+        if(this.data.equipDepartId){
+          this.departType="equip";
+        }
       });
 
       this.attachmentSercice.getFileListById(id).subscribe((res1) => {
@@ -115,6 +137,20 @@ export class CheckAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
+    if (this.departType == "fac") {
+      this.data.umineId = "";
+      this.data.equipDepartId = "";
+    }
+
+    if (this.departType == "umine") {
+      this.data.serviceId = "";
+      this.data.equipDepartId = "";
+    }
+    
+    if (this.departType == "equip") {
+      this.data.serviceId = "";
+      this.data.umineId = "";
+    }
     this.checkMonitorSercice.saveOrUpdateCheckMonitor(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
@@ -144,9 +180,5 @@ export class CheckAddComponent implements OnInit {
       }
     });
     return isValid;
-  }
-
-  typeChange(value: string): void {
-    //this.
   }
 }

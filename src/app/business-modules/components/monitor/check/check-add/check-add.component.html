@@ -3,44 +3,50 @@
     日常监督信息
   </div>
   <div class="div_contain_add">
-    <div nz-row class="ma_b20" >
+    <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="10" class="ta_r">
-        营运单位:
-          <nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="typeChange($event)">
-              <label nz-radio nzValue="A">核设施营运单位</label>
-              <label nz-radio nzValue="B">铀矿冶单位</label>
-              <label nz-radio nzValue="C">核设备单位</label>
-            </nz-radio-group>
+        <nz-radio-group [(ngModel)]="departType" [disabled]="isDisable">
+          <label nz-radio nzValue="fac">核设施营运单位</label>
+          <label nz-radio nzValue="umine">铀矿冶单位</label>
+          <label nz-radio nzValue="equip">核设备单位</label>
+        </nz-radio-group>
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r" style="display: none">
+      <div nz-col [nzSpan]="8" class="ta_r" *ngIf="departType==='fac'">
         营运单位：
-        <nz-select [(ngModel)]="data.serviceId" class="w200" 
-          [nzDisabled]="isDisable" nzShowSearch nzAllowClear nzPlaceHolder="请选择核设施营运单位">
+        <nz-select [(ngModel)]="data.serviceId" class="w200" [nzDisabled]="isDisable" nzShowSearch nzAllowClear
+          nzPlaceHolder="请选择核设施营运单位">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r" >
+      <div nz-col [nzSpan]="8" class="ta_r" *ngIf="departType==='umine'">
         铀矿冶单位：
-        <nz-select [(ngModel)]="data.umineId" class="w200" 
-        [disabled]="isDisable" nzShowSearch nzAllowClear  nzPlaceHolder="请选择铀矿冶单位">
+        <nz-select [(ngModel)]="data.umineId" class="w200" [disabled]="isDisable" nzShowSearch nzAllowClear
+          nzPlaceHolder="请选择铀矿冶单位">
           <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="8" class="ta_r" *ngIf="departType==='equip'">
         核设备单位：
-        <nz-select [(ngModel)]="data.equipDepartId" class="w200" 
-        [disabled]="isDisable" nzShowSearch nzAllowClear  nzPlaceHolder="请选择核设备单位">
+        <nz-select [(ngModel)]="data.equipDepartId" class="w200" [disabled]="isDisable" nzShowSearch nzAllowClear
+          nzPlaceHolder="请选择核设备单位">
           <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
     </div>
-
-    <!-- <div nz-row class="ma_b20">
+     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>授权监管机构：
+        <span class="clo_r">*</span>检查类型：
+        <nz-select [(ngModel)]="data.typeId" class="w200" [disabled]="isDisable">
+          <nz-option *ngFor="let option of dictionary.config_monitor_check_type" [nzLabel]="option.value" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div nz-col [nzSpan]="8" class="ta_r">
+        监督检查机构：
         <nz-select [(ngModel)]="data.orgId" class="w200" [disabled]="isDisable">
           <nz-option *ngFor="let option of orgList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
@@ -48,29 +54,21 @@
       </div>
 
       <div nz-col [nzSpan]="8" class="ta_r">
-        文件类型：
-        <nz-select [(ngModel)]="data.fileTypeId" class="w200" [disabled]="isDisable">
-          <nz-option *ngFor="let option of dictionary.config_monitor_daily_file_type" [nzLabel]="option.value"
-            [nzValue]="option.id">
-          </nz-option>
-        </nz-select>
-      </div>
-
-      <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>文件时间：
-        <nz-date-picker name="fileDate" [(ngModel)]="data.fileDate" class="w200" [validation]="true"
+        <span class="clo_r">*</span>检查时间：
+        <nz-date-picker name="checkData" [(ngModel)]="checkData" class="w200" [validation]="true"
           [disabled]="isDisable">
         </nz-date-picker>
       </div>
     </div>
 
-    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+    <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">文件名称：</div>
-        <textarea nz-input name="fileName" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.fileName"
-          [disabled]="isDisable"></textarea>
+        <div class="div_bz"><span class="clo_r">*</span>检查内容：</div>
+        <textarea nz-input name="content" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.content"
+          required [validation]="true" [disabled]="isDisable">
+          </textarea>
       </div>
-    </div> -->
+    </div>
 
     <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
 
