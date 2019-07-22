@@ -1,0 +1,218 @@
+<div style="height: 100%;background:#fff">
+  <div class="div_top_add">
+    核安全设备许可信息
+  </div>
+  <div class="div_contain_add">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        设备名称：
+        <input
+          nz-input
+          name="name"
+          [(ngModel)]="data.name"
+          class="w200"
+          required
+          [validation]="true"
+          [disabled]="isDisable"
+        />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>单位名称：
+        <nz-select
+          [(ngModel)]="data.equipDepartId"
+          class="w200"
+          [disabled]="isDisable"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="核设备单位信息"
+        >
+          <nz-option
+            *ngFor="let option of unitEquipDeparts"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
+          </nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>所属设施：
+        <nz-select
+          name="serviceId"
+          [(ngModel)]="data.serviceId"
+          class="w200"
+          [disabled]="isDisable"
+          [validation]="true"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="核设施营运单位"
+          (ngModelChange)="changeunitFacs($event)"
+        >
+          <nz-option
+            *ngFor="let option of serviceDeparts"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
+          </nz-option>
+        </nz-select>
+        <nz-select
+          [(ngModel)]="data.facId"
+          class="w200"
+          [disabled]="isDisable"
+          [validation]="true"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="核设施"
+        >
+          <nz-option
+            *ngFor="let option of unitFacs"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>设备类别：
+        <nz-select
+          [(ngModel)]="data.typeId"
+          class="w200"
+          [disabled]="isDisable"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="设备类别"
+        >
+          <nz-option
+            *ngFor="let option of dictionary.config_equip_type"
+            [nzLabel]="option.value"
+            [nzValue]="option.id"
+          >
+          </nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>核安全级别：
+        <nz-select
+          [(ngModel)]="data.levelId"
+          class="w200"
+          [disabled]="isDisable"
+          required
+          [validation]="true"
+        >
+          <nz-option
+            *ngFor="let option of dictionary.config_equip_level"
+            [nzLabel]="option.value"
+            [nzValue]="option.id"
+          >
+          </nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>许可阶段：
+        <nz-select
+          [(ngModel)]="data.stageId"
+          class="w200"
+          [disabled]="isDisable"
+          required
+          [validation]="true"
+        >
+          <nz-option
+            *ngFor="let option of dictionary.config_equip_permit_stage"
+            [nzLabel]="option.value"
+            [nzValue]="option.id"
+          >
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>许可时间：
+        <nz-date-picker
+          name="permissionDate"
+          [(ngModel)]="data.permissionDate"
+          class="w200"
+          required
+          [validation]="true"
+          [disabled]="isDisable"
+        >
+        </nz-date-picker>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>有效期限：
+        <nz-date-picker
+          name="validateTime"
+          [(ngModel)]="data.validateTime"
+          class="w200"
+          [validation]="true"
+          [disabled]="isDisable"
+        >
+        </nz-date-picker>
+      </div>
+
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>许可文号：
+        <input
+          nz-input
+          name="licence"
+          [(ngModel)]="data.licence"
+          class="w200"
+          required
+          [validation]="true"
+          [disabled]="isDisable"
+        />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        许可条件：
+        <input
+          nz-input
+          name="permitCondition"
+          [(ngModel)]="data.permitCondition"
+          class="w200"
+          [disabled]="isDisable"
+        />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>审评承诺：
+        <input
+          nz-input
+          name="promise"
+          [(ngModel)]="data.promise"
+          class="w200"
+          [disabled]="isDisable"
+        />
+      </div>
+    </div>
+
+    <app-attachment
+      [fileList]="fileList"
+      [refid]="data.id"
+      [isDisable]="isDisable"
+    ></app-attachment>
+  </div>
+
+  <div
+    nz-row
+    [nzType]="'flex'"
+    [nzAlign]="'middle'"
+    class="div_bottom_add"
+    [nzJustify]="'end'"
+  >
+    <button
+      nz-button
+      nzType="primary"
+      (click)="save()"
+      *ngIf="!isDisable"
+      style="margin-right: 10px;"
+      [nzLoading]="isSaving"
+    >
+      保存
+    </button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>

@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { EquipService } from 'src/app/services/permit/equip.service';
+import { ActivityService } from 'src/app/services/permit/activity.service';
 
 @Component({
-  selector: 'app-equip',
-  templateUrl: './equip.component.html',
-  styleUrls: ['./equip.component.scss']
+  selector: 'app-activity',
+  templateUrl: './activity.component.html',
+  styleUrls: ['./activity.component.scss']
 })
-export class EquipComponent implements OnInit {
+export class ActivityComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
@@ -22,16 +22,14 @@ export class EquipComponent implements OnInit {
 
   serviceDepartName: any = '';
   name: any = '';
-  equipDepartName: any = '';
-  typeIds: any = [];
-  levelIds: any = [];
-  stageIds: any = [];
+  content: any = '';
+  activityTypeIds: any = [];
   permissionDate: any = [];
 
   constructor(
     private router: Router,
     private msg: NzMessageService,
-    private equipService: EquipService,
+    private activityService: ActivityService,
     private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice
   ) {}
@@ -58,28 +56,13 @@ export class EquipComponent implements OnInit {
     if (this.name) {
       option.conditions.push({ key: 'name', value: this.name });
     }
-    if (this.equipDepartName) {
-      option.conditions.push({
-        key: 'equipDepartName',
-        value: this.equipDepartName
-      });
+    if (this.content) {
+      option.conditions.push({ key: 'content', value: this.content });
     }
-    if (this.typeIds.length > 0) {
+    if (this.activityTypeIds.length > 0) {
       option.conditions.push({
-        key: 'typeIds',
-        value: this.typeIds
-      });
-    }
-    if (this.levelIds.length > 0) {
-      option.conditions.push({
-        key: 'levelIds',
-        value: this.levelIds
-      });
-    }
-    if (this.stageIds.length > 0) {
-      option.conditions.push({
-        key: 'stageIds',
-        value: this.stageIds
+        key: 'activityTypeIds',
+        value: this.activityTypeIds
       });
     }
 
@@ -99,34 +82,32 @@ export class EquipComponent implements OnInit {
       }
     }
 
-    this.equipService.getEquipList(option).subscribe(data => {
+    this.activityService.getActivityList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;
     });
   }
 
   reset() {
-    this.serviceDepartName = '';
     this.name = '';
-    this.equipDepartName = '';
-    this.typeIds = [];
-    this.levelIds = [];
-    this.stageIds = [];
+    this.content = '';
+    this.activityTypeIds = [];
     this.permissionDate = [];
+    this.serviceDepartName = '';
   }
 
   add() {
-    this.router.navigate(['/permit/equip/add']);
+    this.router.navigate(['/permit/activity/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/permit/equip/add'], {
+    this.router.navigate(['/permit/activity/add'], {
       queryParams: { id: item.id, flag: flag }
     });
   }
 
   delete(item) {
-    this.equipService.deleteEquipByIds([item.id]).subscribe(res => {
+    this.activityService.deleteActivityByIds([item.id]).subscribe(res => {
       if (res.code == 200) {
         this.msg.create('success', '删除成功');
         this.search();

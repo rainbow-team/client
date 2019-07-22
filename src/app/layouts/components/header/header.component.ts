@@ -52,10 +52,10 @@ export class HeaderComponent implements OnInit {
       name: '核安全许可', id: 'permit', route: '',
       children: [
         { name: '核设施许可信息', id: 'fac', route: '/permit/fac' },
-        { name: '核安全设备许可信息', id: '', route: '' },
-        { name: '核活动许可信息', id: '', route: '' },
-        { name: '铀尾矿（渣）库许可信息', id: '', route: '' },
-        { name: '铀矿山井下消防许可信息', id: '', route: '' }
+        { name: '核安全设备许可信息', id: 'equip', route: '/permit/equip' },
+        { name: '核活动许可信息', id: 'activity', route: '/permit/activity' },
+        { name: '铀尾矿（渣）库许可信息', id: 'umineplace', route: '/permit/umineplace' },
+        { name: '铀矿山井下消防许可信息', id: 'uminemountain', route: '/permit/uminemountain' }
       ]
     },
     {

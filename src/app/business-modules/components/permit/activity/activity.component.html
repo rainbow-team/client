@@ -1,29 +1,24 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      设备名称
-      <input nz-input nzSize="default" [(ngModel)]="name" class="w200" />
-    </div>
-
-    <div nz-col [nzSpan]="5">
       单位名称
+      <input nz-input nzSize="default" [(ngModel)]="serviceDepartName" class="w200" />
+    </div>
+
+    <div nz-col [nzSpan]="5">
+      许可名称
       <input
         nz-input
-        [(ngModel)]="equipDepartName"
         nzSize="default"
+        [(ngModel)]="name"
         class="w200"
       />
     </div>
 
     <div nz-col [nzSpan]="5">
-      所属设施
-      <input
-        nz-input
-        nzSize="default"
-        [(ngModel)]="serviceDepartName"
-        class="w200"
-      />
-    </div>
+      许可内容
+      <input nz-input nzSize="default" [(ngModel)]="content" class="w200" />
+    </div>    
 
     <div nz-col [nzSpan]="9" class="ta_r">
       <button
@@ -41,32 +36,10 @@
   </div>
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      设备类别
-      <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple">
+      活动类型
+      <nz-select [(ngModel)]="activityTypeIds" class="w200" nzMode="multiple">
         <nz-option
-          *ngFor="let option of dictionary.config_equip_type"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
-        </nz-option>
-      </nz-select>
-    </div>
-    <div nz-col [nzSpan]="5">
-      核安全级别
-      <nz-select [(ngModel)]="levelIds" class="w200" nzMode="multiple">
-        <nz-option
-          *ngFor="let option of dictionary.config_equip_level"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
-        </nz-option>
-      </nz-select>
-    </div>
-    <div nz-col [nzSpan]="5">
-      许可阶段
-      <nz-select [(ngModel)]="stageIds" class="w200" nzMode="multiple">
-        <nz-option
-          *ngFor="let option of dictionary.config_equip_permit_stage"
+          *ngFor="let option of dictionary.config_activity_type"
           [nzLabel]="option.value"
           [nzValue]="option.id"
         >
@@ -75,16 +48,15 @@
     </div>
     <div nz-col [nzSpan]="5">
       许可时间
-      <nz-range-picker class="w200" [(ngModel)]="validateTime">
-      </nz-range-picker>
-    </div>
+      <nz-range-picker class="w200" [(ngModel)]="permissionDate"> </nz-range-picker>
+    </div>    
   </div>
 
   <div nz-row class="div_contain">
     <div class="div_top">
       <div class="fl div_top_tip"></div>
       <div class="fl" style="color: #0050b3;">
-        核设备许可信息（共{{ totalCount }}条）
+        核活动许可信息（共{{ totalCount }}条）
       </div>
 
       <div class="fr">
@@ -114,12 +86,11 @@
       >
         <thead>
           <tr>
-            <th>设备名称</th>
             <th>单位名称</th>
-            <th>所属设施</th>
-            <th>设备类别</th>
-            <th>核安全级别</th>
-            <th>许可阶段</th>
+            <th>设施名称</th>
+            <th>许可名称</th>
+            <th>许可内容</th>
+            <th>活动类型</th>
             <th>许可时间</th>
             <th>有效期限</th>
             <th>许可文号</th>
@@ -128,13 +99,11 @@
         <tbody>
           <tr *ngFor="let data of nestedTable.data; index as index">
             <td>{{ (pageIndex - 1) * pageSize + 1 + index }}</td>
+            <td>{{ data.serviceDepartName }}</td>
+            <td>{{ data.facName }}</td>
             <td>{{ data.name }}</td>
-            <td>{{ data.equipDepartName }}</td>
-            <td>{{ data.serviceDepartName }}/{{ data.facName }}</td>
-            <td>{{ data.typeValue }}</td>
-            <td>{{ data.levelValue }}</td>
-            <td>{{ data.stageValue }}</td>
-            <td>{{ data.validateTime | recordtime }}</td>
+            <td>{{ data.content }}</td>
+            <td>{{ data.permissionDate | recordtime }}</td>
             <td>{{ data.licence }}</td>
             <td>
               <a (click)="show(data, true)">查看</a>
