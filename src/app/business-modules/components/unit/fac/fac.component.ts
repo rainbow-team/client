@@ -27,7 +27,7 @@ export class FacComponent implements OnInit {
   name: any = "";
   code: any = "";
   ServiceDepartIds: any = [];
-  build_year: any = "";
+  build_year: any = [];
   supervisionCategoryIds: any = [];
   typeIds: any = [];
   statusId: any = [];
@@ -79,8 +79,15 @@ export class FacComponent implements OnInit {
       option.conditions.push({ key: "ServiceDepartIds", value: this.ServiceDepartIds })
     }
 
-    if (this.build_year) {
-      option.conditions.push({ key: "build_year", value: this.build_year })
+    if (this.build_year && this.build_year.length > 0) {
+     
+      if (this.build_year[0]) {
+        option.conditions.push({ key: "start_date", value: this.build_year[0] })
+      }
+
+      if (this.build_year[1]) {
+        option.conditions.push({ key: "end_date", value: this.build_year[1] })
+      }
     }
 
     if (this.supervisionCategoryIds && this.supervisionCategoryIds.length > 0) {

@@ -58,7 +58,7 @@ export class FacChildmanageComponent implements OnInit {
     this.facId = id;
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.search();
-    this.saveReport();
+    this.searchReport();
   }
 
 
@@ -165,7 +165,7 @@ export class FacChildmanageComponent implements OnInit {
 
   delete(data) {
 
-    this.facSercice.deleteFacImproveByIds([this.data.id]).subscribe((res) => {
+    this.facSercice.deleteFacImproveByIds([data.id]).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.search();
@@ -177,7 +177,7 @@ export class FacChildmanageComponent implements OnInit {
 
   deleteReport(data) {
 
-    this.facSercice.deleteFacReportByIds([this.data.id]).subscribe((res) => {
+    this.facSercice.deleteFacReportByIds([data.id]).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.searchReport();

@@ -33,6 +33,11 @@ export class UmineplaceAddComponent implements OnInit {
   uminePlaceId: any = "";
   dataSet: any = [];
 
+  sFList: any = [
+    { id: 1, value: "是" },
+    { id: 0, value: "否" },
+  ];
+
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
     private attachmentSercice: AttachmentSercice, private umineSercice: UmineService, private uminePlaceService: UminePlaceService) { }

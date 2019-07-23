@@ -5,13 +5,13 @@
       <input nz-input nzSize="default" [(ngModel)]="umineName" class="w200">
     </div>
     <div nz-col [nzSpan]="5">
-        建造年代：
-        <input nz-input nzSize="default" [(ngModel)]="buildYear" class="w200">
-      </div>
+      建造年代：
+      <nz-range-picker class="w200" [(ngModel)]="build_year" [nzFormat]="yyyy"></nz-range-picker>
+    </div>
     <div nz-col [nzSpan]="5">
       名称
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
-    </div> 
+    </div>
     <div nz-col [nzSpan]="5">
       等别：
       <nz-select [(ngModel)]="levelIds" class="w200" nzMode="multiple">
@@ -99,12 +99,12 @@
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.name}}</td>
             <td>{{data.umineName}}</td>
-            <td>{{data.buildYear|recordtime}}</td>
+            <td>{{data.buildYear|recordtime:'year'}}</td>
             <td>{{data.levelValue}}</td>
             <td>{{data.statusValue}}</td>
             <td>{{data.reviewStatus}}</td>
             <td>{{data.permitSituationValue}}</td>
-            <td>{{data.haveMonitor}}</td>
+            <td>{{data.haveMonitor|isTrue}}</td>
             <td>
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>

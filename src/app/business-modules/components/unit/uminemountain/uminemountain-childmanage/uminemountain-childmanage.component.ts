@@ -87,7 +87,7 @@ export class UminemountainChildmanageComponent implements OnInit {
 
   delete(data) {
 
-    this.umineMountainService.deleteUmineMountainImproveByIds([this.data.id]).subscribe((res) => {
+    this.umineMountainService.deleteUmineMountainImproveByIds([data.id]).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.search();
