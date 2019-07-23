@@ -29,6 +29,9 @@ export class UmineMountainService {
         return this.http.post('/uminemountain/deleteUmineMountainById', id);
     }
 
+    getUminemountinaListByUmineId(umineId): any {
+        return this.http.post('/uminemountain/getUminemountainListByUmineId', umineId);
+    }
 
     getUmineMountainImproveList(param): any {
         return this.http.post('/uminemontainimprove/getUmineMountainImproveList', param);
@@ -49,5 +52,6 @@ export class UmineMountainService {
     deleteUmineMountainImproveByIds(ids): any {
         return this.http.post('/uminemontainimprove/deleteUmineMountainImproveByIds', ids);
     }
+
 
 }
