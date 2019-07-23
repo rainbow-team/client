@@ -1,3 +1,171 @@
-<p>
-  uminemountain-add works!
-</p>
+<div style="height: 100%;background:#fff">
+  <div class="div_top_add">
+    铀矿山井下消防许可信息
+  </div>
+  <div class="div_contain_add">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        营运单位：
+        <nz-select
+          [(ngModel)]="data.umineId"
+          class="w200"
+          [disabled]="isDisable"
+          required
+          nzShowSearch
+          nzAllowClear
+          (ngModelChange)="changeunitUmineMountains($event)"
+          nzPlaceHolder="铀矿冶单位"
+        >
+          <nz-option
+            *ngFor="let option of unitUmines"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
+          </nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>铀矿山名称：
+        <nz-select
+          [(ngModel)]="data.umineMountainId"
+          class="w200"
+          [disabled]="isDisable"
+          required
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="铀矿山"
+        >
+          <nz-option
+            *ngFor="let option of umineMountains"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
+          </nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>备案时间：
+        <nz-date-picker
+          name="recordDate"
+          [(ngModel)]="data.recordDate"
+          class="w200"
+          required
+          [validation]="true"
+          [disabled]="isDisable"
+        >
+        </nz-date-picker>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>备案文号：
+        <input
+          nz-input
+          name="recordNumber"
+          [(ngModel)]="data.recordNumber"
+          class="w200"
+          required
+          [validation]="true"
+          [disabled]="isDisable"
+        />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>主要备案条件：
+        <input
+          nz-input
+          name="recordAttachId"
+          [(ngModel)]="data.recordAttachId"
+          class="w200"
+          [validation]="true"
+          [disabled]="isDisable"
+        />
+      </div>
+
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>审评承诺：
+        <input
+          nz-input
+          name="reviewPromise"
+          [(ngModel)]="data.reviewPromise"
+          class="w200"
+          [validation]="true"
+          [disabled]="isDisable"
+        />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        备案附件：
+        <input
+          nz-input
+          name="recordCondition"
+          [(ngModel)]="data.recordCondition"
+          class="w200"
+          [disabled]="isDisable"
+        />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>验收时间：
+        <nz-date-picker
+          name="acceptDate"
+          [(ngModel)]="data.acceptDate"
+          class="w200"
+          [validation]="true"
+          [disabled]="isDisable"
+        >
+        </nz-date-picker>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        验收文号：
+        <input
+          nz-input
+          name="acceptNumber"
+          [(ngModel)]="data.acceptNumber"
+          class="w200"
+          [disabled]="isDisable"
+        />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        主要验收结论：
+        <input
+          nz-input
+          name="acceptConclusion"
+          [(ngModel)]="data.acceptConclusion"
+          class="w200"
+          [disabled]="isDisable"
+        />
+      </div>
+    </div>
+
+    <app-attachment
+      [fileList]="fileList"
+      [refid]="data.id"
+      [isDisable]="isDisable"
+    ></app-attachment>
+  </div>
+
+  <div
+    nz-row
+    [nzType]="'flex'"
+    [nzAlign]="'middle'"
+    class="div_bottom_add"
+    [nzJustify]="'end'"
+  >
+    <button
+      nz-button
+      nzType="primary"
+      (click)="save()"
+      *ngIf="!isDisable"
+      style="margin-right: 10px;"
+      [nzLoading]="isSaving"
+    >
+      保存
+    </button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>

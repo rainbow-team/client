@@ -8,23 +8,28 @@ export class UminemountainService {
   constructor(private http: HttpClient) {}
 
   getMountainList(param): any {
-    return this.http.post('/uminemountainpermit/getMountainPermitList', param);
+    return this.http.post(
+      '/uminemountainpermit/getUmineMountainPermitList',
+      param
+    );
   }
 
   saveOrUpdateMountain(param): any {
     let url = !param.id
-      ? '/uminemountainpermit/addMountainPermit'
-      : '/uminemountainpermit/modifyMountainPermit';
+      ? '/uminemountainpermit/addUmineMountainPermit'
+      : '/uminemountainpermit/modifyUmineMountainPermit';
     return this.http.post(url, param);
   }
 
   getMountainById(id): any {
-    return this.http.get('/uminemountainpermit/getMountainPermitById?id=' + id);
+    return this.http.get(
+      '/uminemountainpermit/getUmineMountainPermitById?id=' + id
+    );
   }
 
   deleteMountainByIds(ids): any {
     return this.http.post(
-      '/uminemountainpermit/deleteMountainPermitByIds',
+      '/uminemountainpermit/deleteUmineMountainPermitByIds',
       ids
     );
   }

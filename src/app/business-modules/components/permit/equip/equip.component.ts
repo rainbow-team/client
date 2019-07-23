@@ -26,7 +26,7 @@ export class EquipComponent implements OnInit {
   typeIds: any = [];
   levelIds: any = [];
   stageIds: any = [];
-  permissionDate: any = [];
+  permissionDate: any = '';
 
   constructor(
     private router: Router,
@@ -83,20 +83,11 @@ export class EquipComponent implements OnInit {
       });
     }
 
-    if (this.permissionDate && this.permissionDate.length > 0) {
-      if (this.permissionDate[0]) {
-        option.conditions.push({
-          key: 'start_date',
-          value: this.permissionDate[0]
-        });
-      }
-
-      if (this.permissionDate[1]) {
-        option.conditions.push({
-          key: 'end_date',
-          value: this.permissionDate[1]
-        });
-      }
+    if (this.permissionDate) {
+      option.conditions.push({
+        key: 'permissionDate',
+        value: this.permissionDate[0]
+      });
     }
 
     this.equipService.getEquipList(option).subscribe(data => {
@@ -112,7 +103,7 @@ export class EquipComponent implements OnInit {
     this.typeIds = [];
     this.levelIds = [];
     this.stageIds = [];
-    this.permissionDate = [];
+    this.permissionDate = '';
   }
 
   add() {

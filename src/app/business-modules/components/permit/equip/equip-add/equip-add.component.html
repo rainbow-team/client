@@ -23,6 +23,7 @@
           class="w200"
           [disabled]="isDisable"
           nzShowSearch
+          required
           nzAllowClear
           nzPlaceHolder="核设备单位信息"
         >
@@ -43,6 +44,7 @@
           [disabled]="isDisable"
           [validation]="true"
           nzShowSearch
+          required
           nzAllowClear
           nzPlaceHolder="核设施营运单位"
           (ngModelChange)="changeunitFacs($event)"
@@ -81,6 +83,7 @@
           class="w200"
           [disabled]="isDisable"
           nzShowSearch
+          required
           nzAllowClear
           nzPlaceHolder="设备类别"
         >
@@ -146,6 +149,7 @@
           name="validateTime"
           [(ngModel)]="data.validateTime"
           class="w200"
+          required
           [validation]="true"
           [disabled]="isDisable"
         >
