@@ -25,19 +25,12 @@ export class EquipComponent implements OnInit {
   dataSet: any = [];
 
   name: any = "";
-
-  equipDepartIds: any = [];
-
-  equipDepartList: any = [];
-
-  serviceDepartIds: any = [];
-
-  serviceDepartList: any = [];
-
-  facIds: any = [];
-
-  facList: any = [];
-
+  equipDepartName: any = "";
+  serviceDepartName: any = "";
+  facName: any = "";
+  typeIds: any = [];
+  levelIds: any = [];
+  stageIds: any = [];
 
   constructor(private router: Router,
     private msg: NzMessageService, private equipCheckService: EquipCheckService, private dictionarySercice: DictionarySercice,
@@ -51,31 +44,6 @@ export class EquipComponent implements OnInit {
 
     this.search();
 
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-      if (res.code == 200) {
-        this.serviceDepartList = [];
-        res.msg.forEach(element => {
-          this.serviceDepartList.push({
-            id: element.id,
-            name: element.name
-          });
-        });
-      }
-    })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
   }
 
   search() {
@@ -88,10 +56,24 @@ export class EquipComponent implements OnInit {
     if (this.name) {
       option.conditions.push({ key: "name", value: this.name })
     }
-
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.equipDepartName) {
+      option.conditions.push({ key: "equipDepartName", value: this.equipDepartName })
+    }
+    if (this.serviceDepartName) {
+      option.conditions.push({ key: "serviceDepartName", value: this.serviceDepartName })
+    }
+    if (this.facName) {
+      option.conditions.push({ key: "facName", value: this.facName })
+    }
+    if (this.typeIds.length > 0) {
+      option.conditions.push({ key: "typeIds", value: this.typeIds })
+    }
+    if (this.levelIds.length > 0) {
+      option.conditions.push({ key: "levelIds", value: this.levelIds })
+    }
+    if (this.stageIds.length > 0) {
+      option.conditions.push({ key: "stageIds", value: this.stageIds })
+    }
 
     this.equipCheckService.getEquipList(option).subscribe(
       (data) => {
@@ -103,7 +85,12 @@ export class EquipComponent implements OnInit {
 
   reset() {
     this.name = "";
-    //this.groupIds = [];
+    this.equipDepartName = "";
+    this.serviceDepartName = "";
+    this.facName = "";
+    this.typeIds = [];
+    this.levelIds = [];
+    this.stageIds = [];
   }
 
   add() {

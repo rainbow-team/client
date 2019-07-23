@@ -1,3 +1,77 @@
-<p>
-  activity-add works!
-</p>
+<div style="height: 100%;background:#fff">
+  <div class="div_top_add">
+    核活动及其他审评信息
+  </div>
+  <div class="div_contain_add">
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'">
+      <nz-radio-group [(ngModel)]="activityType" [disabled]="isDisable">
+        <label nz-radio nzValue="fac">核设施</label>
+        <label nz-radio nzValue="equip">核设备</label>
+      </nz-radio-group>
+    </div>
+    <div nz-row class="ma_b20" *ngIf="activityType==='fac'" [nzJustify]="'center'" [nzType]="'flex'">
+      <div>
+        <span class="clo_r">*</span>核设施营运单位信息：
+        <nz-select [(ngModel)]="data.serviceId" class="w200" (ngModelChange)="serviceDepartChange($event)"
+          [disabled]="isDisable" nzShowSearch nzAllowClear nzPlaceHolder="请选择铀矿冶单位">
+          <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+      <div>
+        核设施信息：
+        <nz-select [(ngModel)]="data.facId" class="w200" [disabled]="isDisable" nzShowSearch nzAllowClear>
+          <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div nz-row class="ma_b20" *ngIf="activityType==='equip'" [nzJustify]="'center'" [nzType]="'flex'">
+      <div>
+        <span class="clo_r">*</span>核设备单位：
+        <nz-select [(ngModel)]="data.equipDepartId" class="w200" (ngModelChange)="umineChange($event)"
+          [disabled]="isDisable" nzShowSearch nzAllowClear nzPlaceHolder="请选择核设备单位">
+          <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz"><span class="clo_r">*</span>审查内容</div>
+        <textarea nz-input name="checkContent" style="width: calc(100% - 130px);height: 70px;"
+          [(ngModel)]="data.checkContent" required [validation]="true" [disabled]="isDisable">
+        </textarea>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>活动类型：
+        <nz-select [(ngModel)]="data.activityTypeId" class="w200" [disabled]="isDisable">
+          <nz-option *ngFor="let option of dictionary.config_activity_type" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>审评时间：
+        <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate" class="w200" [validation]="true"
+          [disabled]="isDisable">
+        </nz-date-picker>
+      </div>
+    </div>
+    
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+
+  </div>
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+      [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>
+
+
+<!-- </div> -->

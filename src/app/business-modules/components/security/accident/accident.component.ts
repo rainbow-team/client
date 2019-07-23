@@ -25,20 +25,21 @@ export class AccidentComponent implements OnInit {
 
   dataSet: any = [];
 
-  name: any = "";
+  depart: any = "";
 
-  equipDepartIds: any = [];
+  fac: any = "";
 
-  equipDepartList: any = [];
+  facStatusTypeIds:any=[];
 
-  serviceDepartIds: any = [];
+  uminePlaceStatusTypeIds:any=[];
 
-  serviceDepartList: any = [];
+  name:any="";
 
-  facIds: any = [];
+  occur_date:any=[];
 
-  facList: any = [];
+  typeIds:any=[];
 
+  natureIds:any=[];
 
   constructor(private router: Router,
     private msg: NzMessageService, private accidentSecuritySercice: AccidentSecuritySercice, 
@@ -53,31 +54,6 @@ export class AccidentComponent implements OnInit {
 
     this.search();
 
-    // this.serviceDepartService.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
   }
 
   search() {
@@ -87,13 +63,47 @@ export class AccidentComponent implements OnInit {
       conditions: []
     }
 
+    if (this.depart) {
+      // option.conditions.push({ key: "serviceDepartName", value: this.depart })
+      // option.conditions.push({ key: "umineName", value: this.depart })
+      option.conditions.push({ key: "depart", value: this.depart })
+    }
+
+    if (this.fac) {
+      // option.conditions.push({ key: "facName", value: this.fac })
+      // option.conditions.push({ key: "uminePlaceName", value: this.fac })
+      option.conditions.push({ key: "fac", value: this.fac })
+    }
+
+    if (this.facStatusTypeIds.length > 0) {
+      option.conditions.push({ key: "facStatusTypeIds", value: this.facStatusTypeIds })
+    }
+    
+    if (this.uminePlaceStatusTypeIds.length > 0) {
+      option.conditions.push({ key: "uminePlaceStatusTypeIds", value: this.uminePlaceStatusTypeIds })
+    }
+
     if (this.name) {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.occur_date && this.occur_date.length > 0) {
+      if (this.occur_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.occur_date[0] })
+      }
+
+      if (this.occur_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.occur_date[1] })
+      }
+    }
+
+    if (this.typeIds.length > 0) {
+      option.conditions.push({ key: "typeIds", value: this.typeIds })
+    }
+
+    if (this.natureIds.length > 0) {
+      option.conditions.push({ key: "natureIds", value: this.natureIds })
+    }
 
     this.accidentSecuritySercice.getAccidentSecurityList(option).subscribe(
       (data) => {
@@ -104,8 +114,21 @@ export class AccidentComponent implements OnInit {
   }
 
   reset() {
-    this.name = "";
-    //this.groupIds = [];
+    this.depart="";
+
+    this.fac="";
+  
+    this.facStatusTypeIds=[];
+  
+    this.uminePlaceStatusTypeIds=[];
+  
+    this.name="";
+  
+    this.occur_date=[];
+  
+    this.typeIds=[];
+  
+    this.natureIds=[];
   }
 
   add() {
@@ -127,7 +150,5 @@ export class AccidentComponent implements OnInit {
         this.msg.create("error", "删除失败");
       }
     })
-
   }
-
 }

@@ -27,17 +27,11 @@ export class WitnessComponent implements OnInit {
 
   name: any = "";
 
-  equipDepartIds: any = [];
+  obj:any="";
 
-  equipDepartList: any = [];
+  items:any="";
 
-  serviceDepartIds: any = [];
-
-  serviceDepartList: any = [];
-
-  facIds: any = [];
-
-  facList: any = [];
+  witness_date:any=[];
 
 
   constructor(private router: Router,
@@ -52,31 +46,6 @@ export class WitnessComponent implements OnInit {
 
     this.search();
 
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-      if (res.code == 200) {
-        this.serviceDepartList = [];
-        res.msg.forEach(element => {
-          this.serviceDepartList.push({
-            id: element.id,
-            name: element.name
-          });
-        });
-      }
-    })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
   }
 
   search() {
@@ -90,9 +59,23 @@ export class WitnessComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.obj) {
+      option.conditions.push({ key: "witness_obj", value: this.obj })
+    }
+
+    if (this.items) {
+      option.conditions.push({ key: "witness_items", value: this.items })
+    }
+
+    if (this.witness_date && this.witness_date.length > 0) {
+      if (this.witness_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.witness_date[0] })
+      }
+
+      if (this.witness_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.witness_date[1] })
+      }
+    }
 
     this.witnessMonitorSercice.getWitnessMonitorList(option).subscribe(
       (data) => {
@@ -104,15 +87,17 @@ export class WitnessComponent implements OnInit {
 
   reset() {
     this.name = "";
-    //this.groupIds = [];
+    this.obj="";
+    this.items="";
+    this.witness_date=[];
   }
 
   add() {
-    this.router.navigate(['/monitor/check/add']);
+    this.router.navigate(['/monitor/witness/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/monitor/witness/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {

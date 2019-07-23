@@ -24,20 +24,11 @@ export class UminemountainComponent implements OnInit {
 
   dataSet: any = [];
 
-  name: any = "";
+  umineName: any = "";
 
-  equipDepartIds: any = [];
+  umineMountainName: any = "";
 
-  equipDepartList: any = [];
-
-  serviceDepartIds: any = [];
-
-  serviceDepartList: any = [];
-
-  facIds: any = [];
-
-  facList: any = [];
-
+  content: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private uminemountainCheckSercice: UminemountainCheckSercice, private dictionarySercice: DictionarySercice,
@@ -50,32 +41,6 @@ export class UminemountainComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     this.search();
-
-    // this.serviceDepartService.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
   }
 
   search() {
@@ -85,13 +50,17 @@ export class UminemountainComponent implements OnInit {
       conditions: []
     }
 
-    if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
+    if (this.umineName) {
+      option.conditions.push({ key: "umineName", value: this.umineName })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.umineMountainName) {
+      option.conditions.push({ key: "umineMountainName", value: this.umineMountainName })
+    }
+
+    if (this.content) {
+      option.conditions.push({ key: "content", value: this.content })
+    }
 
     this.uminemountainCheckSercice.getUminemountainList(option).subscribe(
       (data) => {
@@ -102,8 +71,9 @@ export class UminemountainComponent implements OnInit {
   }
 
   reset() {
-    this.name = "";
-    //this.groupIds = [];
+    this.umineName = "";
+    this.umineMountainName = "";
+    this.content = "";
   }
 
   add() {

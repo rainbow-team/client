@@ -1,3 +1,50 @@
-<p>
-  uminemountain-add works!
-</p>
+<div style="height: 100%;background:#fff">
+    <div class="div_top_add">
+      铀矿山井下消防审查信息 
+    </div>
+    <div class="div_contain_add">
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="8" class="ta_r">
+          <span class="clo_r">*</span>营运单位：
+          <nz-select [(ngModel)]="data.umineId" class="w200" (ngModelChange)="umineChange($event)" [disabled]="isDisable">
+            <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
+            </nz-option>
+          </nz-select>
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_r">
+          铀矿山名称：
+          <nz-select [(ngModel)]="data.umineMountainId" class="w200" [disabled]="isDisable">
+            <nz-option *ngFor="let option of uminemountainList" [nzLabel]="option.name" [nzValue]="option.id">
+            </nz-option>
+          </nz-select>
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_r">
+          <span class="clo_r">*</span>审评时间：
+          <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate" class="w200" required [validation]="true"
+          [disabled]="isDisable">
+        </nz-date-picker>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20">
+          <div nz-col [nzSpan]="24" class="ta_r">
+              <div class="div_bz"><span class="clo_r">*</span>审查内容</div>
+              <textarea nz-input name="content" style="width: calc(100% - 130px);height: 70px;"
+                [(ngModel)]="data.content" required [validation]="true" [disabled]="isDisable">
+              </textarea>
+            </div>
+       
+      </div>
+      
+      <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+  
+    </div>
+  
+    
+  
+    <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+      <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+        [nzLoading]="isSaving">保存</button>
+      <button nz-button nzType="default" (click)="close()">关闭</button>
+    </div>
+  </div>
