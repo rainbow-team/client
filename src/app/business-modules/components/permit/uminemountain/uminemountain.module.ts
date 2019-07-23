@@ -4,17 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
-import { UminemountainComponent } from './uminemountain.component';
-import { UminemountainAddComponent } from './uminemountain-add/uminemountain-add.component';
+import { UminemountainPermitComponent } from './uminemountain.component';
+import { UminemountainPermitAddComponent } from './uminemountain-add/uminemountain-add.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UminemountainComponent
+    component: UminemountainPermitComponent
   },
   {
     path: 'add',
-    component: UminemountainAddComponent
+    component: UminemountainPermitAddComponent
   }
 ];
 
@@ -28,6 +28,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  declarations: [UminemountainComponent, UminemountainAddComponent]
+  declarations: [UminemountainPermitComponent, UminemountainPermitAddComponent]
 })
-export class UminemountainModule {}
+export class UminemountainPermitModule {}

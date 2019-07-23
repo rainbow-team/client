@@ -4,17 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
-import { ActivityComponent } from './activity.component';
-import { ActivityAddComponent } from './activity-add/activity-add.component';
+import { ActivityPermitComponent } from './activity.component';
+import { ActivityPermitAddComponent } from './activity-add/activity-add.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ActivityComponent
+    component: ActivityPermitComponent
   },
   {
     path: 'add',
-    component: ActivityAddComponent
+    component: ActivityPermitAddComponent
   }
 ];
 
@@ -28,6 +28,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  declarations: [ActivityComponent, ActivityAddComponent]
+  declarations: [ActivityPermitComponent, ActivityPermitAddComponent]
 })
-export class ActivityModule {}
+export class ActivityPermitModule {}

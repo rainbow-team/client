@@ -113,22 +113,22 @@ const appRoutes: Routes = [
       },
       {
         path: 'equip',
-        loadChildren: './components/permit/equip/equip.module#EquipModule'
+        loadChildren: './components/permit/equip/equip.module#EquipPermitModule'
       },
       {
         path: 'activity',
         loadChildren:
-          './components/permit/activity/activity.module#ActivityModule'
+          './components/permit/activity/activity.module#ActivityPermitModule'
       },
       {
         path: 'umineplace',
         loadChildren:
-          './components/permit/umineplace/umineplace.module#UmineplaceModule'
+          './components/permit/umineplace/umineplace.module#UmineplacePermitModule'
       },
       {
         path: 'uminemountain',
         loadChildren:
-          './components/permit/uminemountain/uminemountain.module#UminemountainModule'
+          './components/permit/uminemountain/uminemountain.module#UminemountainPermitModule'
       }
     ]
   },

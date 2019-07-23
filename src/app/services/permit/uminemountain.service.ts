@@ -4,30 +4,30 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class UminemountainService {
+export class UmineMountainPermitService {
   constructor(private http: HttpClient) {}
 
-  getMountainList(param): any {
+  getUmineMountainPermitList(param): any {
     return this.http.post(
       '/uminemountainpermit/getUmineMountainPermitList',
       param
     );
   }
 
-  saveOrUpdateMountain(param): any {
+  saveOrUpdateUmineMountainPermit(param): any {
     let url = !param.id
       ? '/uminemountainpermit/addUmineMountainPermit'
       : '/uminemountainpermit/modifyUmineMountainPermit';
     return this.http.post(url, param);
   }
 
-  getMountainById(id): any {
+  getUmineMountainPermitById(id): any {
     return this.http.get(
       '/uminemountainpermit/getUmineMountainPermitById?id=' + id
     );
   }
 
-  deleteMountainByIds(ids): any {
+  deleteUmineMountainPermitByIds(ids): any {
     return this.http.post(
       '/uminemountainpermit/deleteUmineMountainPermitByIds',
       ids

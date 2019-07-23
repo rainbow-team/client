@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-import { UminemountainService } from 'src/app/services/permit/uminemountain.service';
+import { UmineMountainPermitService } from 'src/app/services/permit/uminemountain.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
 
@@ -14,7 +14,7 @@ import { UmineMountainService } from 'src/app/services/unit/uminemountain.servic
   templateUrl: './uminemountain-add.component.html',
   styleUrls: ['./uminemountain-add.component.scss']
 })
-export class UminemountainAddComponent implements OnInit {
+export class UminemountainPermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
@@ -39,7 +39,7 @@ export class UminemountainAddComponent implements OnInit {
     private attachmentSercice: AttachmentSercice,
     private umineService: UmineService,
     private umineMountainService: UmineMountainService,
-    private uminemountainService: UminemountainService
+    private umineMountainPermitService: UmineMountainPermitService
   ) {}
 
   ngOnInit() {
@@ -60,14 +60,16 @@ export class UminemountainAddComponent implements OnInit {
     });
 
     if (id) {
-      this.uminemountainService.getMountainById(id).subscribe(res => {
-        this.data = res.msg;
-        this.umineMountainService
-          .getumineMountainListByUmineId(this.data.umineId)
-          .subscribe(res1 => {
-            this.umineMountains = res1.msg;
-          });
-      });
+      this.umineMountainPermitService
+        .getUmineMountainPermitById(id)
+        .subscribe(res => {
+          this.data = res.msg;
+          this.umineMountainService
+            .getUminemountinaListByUmineId(this.data.umineId)
+            .subscribe(res1 => {
+              this.umineMountains = res1.msg;
+            });
+        });
 
       this.attachmentSercice.getFileListById(id).subscribe(res1 => {
         if (res1.msg.length > 0) {
@@ -102,16 +104,18 @@ export class UminemountainAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.uminemountainService.saveOrUpdateMountain(this.data).subscribe(res => {
-      if (res.code == 200) {
-        this.msg.create('success', '保存成功');
-        this.router.navigate(['/permit/uminemountain']);
-      } else {
-        this.msg.create('error', '保存失败');
-      }
+    this.umineMountainPermitService
+      .saveOrUpdateUmineMountainPermit(this.data)
+      .subscribe(res => {
+        if (res.code == 200) {
+          this.msg.create('success', '保存成功');
+          this.router.navigate(['/permit/uminemountain']);
+        } else {
+          this.msg.create('error', '保存失败');
+        }
 
-      this.isSaving = false;
-    });
+        this.isSaving = false;
+      });
   }
 
   close() {
@@ -121,7 +125,7 @@ export class UminemountainAddComponent implements OnInit {
   //根据铀矿冶单位获取对应的铀矿山信息
   changeunitUmineMountains(umineId) {
     this.umineMountainService
-      .getumineMountainListByUmineId(umineId)
+      .getUminemountinaListByUmineId(umineId)
       .subscribe(res => {
         this.umineMountains = res.msg;
       });

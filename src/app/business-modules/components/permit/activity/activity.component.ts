@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { ActivityService } from 'src/app/services/permit/activity.service';
+import { ActivityPermitService } from 'src/app/services/permit/activity.service';
 
 @Component({
   selector: 'app-activity',
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.scss']
 })
-export class ActivityComponent implements OnInit {
+export class ActivityPermitComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
@@ -29,7 +29,7 @@ export class ActivityComponent implements OnInit {
   constructor(
     private router: Router,
     private msg: NzMessageService,
-    private activityService: ActivityService,
+    private activityPermitService: ActivityPermitService,
     private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice
   ) {}
@@ -82,7 +82,7 @@ export class ActivityComponent implements OnInit {
       }
     }
 
-    this.activityService.getActivityList(option).subscribe(data => {
+    this.activityPermitService.getActivityPermitList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;
     });
@@ -107,13 +107,15 @@ export class ActivityComponent implements OnInit {
   }
 
   delete(item) {
-    this.activityService.deleteActivityByIds([item.id]).subscribe(res => {
-      if (res.code == 200) {
-        this.msg.create('success', '删除成功');
-        this.search();
-      } else {
-        this.msg.create('error', '删除失败');
-      }
-    });
+    this.activityPermitService
+      .deleteActivityPermitByIds([item.id])
+      .subscribe(res => {
+        if (res.code == 200) {
+          this.msg.create('success', '删除成功');
+          this.search();
+        } else {
+          this.msg.create('error', '删除失败');
+        }
+      });
   }
 }

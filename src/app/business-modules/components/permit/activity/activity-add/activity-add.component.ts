@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-import { ActivityService } from 'src/app/services/permit/activity.service';
+import { ActivityPermitService } from 'src/app/services/permit/activity.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 
@@ -14,7 +14,7 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
   templateUrl: './activity-add.component.html',
   styleUrls: ['./activity-add.component.scss']
 })
-export class ActivityAddComponent implements OnInit {
+export class ActivityPermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
@@ -37,7 +37,7 @@ export class ActivityAddComponent implements OnInit {
     private attachmentSercice: AttachmentSercice,
     private serviceDepartService: ServiceDepartService,
     private facSercice: FacSercice,
-    private activityService: ActivityService
+    private activityPermitService: ActivityPermitService
   ) {}
 
   ngOnInit() {
@@ -62,7 +62,7 @@ export class ActivityAddComponent implements OnInit {
     // });
 
     if (id) {
-      this.activityService.getActivityById(id).subscribe(res => {
+      this.activityPermitService.getActivityPermitById(id).subscribe(res => {
         this.data = res.msg;
       });
 
@@ -100,16 +100,18 @@ export class ActivityAddComponent implements OnInit {
 
     this.data.modifyId = this.staffObj.id;
     // this.data.sex = this.sexValue;
-    this.activityService.saveOrUpdateActivity(this.data).subscribe(res => {
-      if (res.code == 200) {
-        this.msg.create('success', '保存成功');
-        this.router.navigate(['/permit/activity']);
-      } else {
-        this.msg.create('error', '保存失败');
-      }
+    this.activityPermitService
+      .saveOrUpdateActivityPermit(this.data)
+      .subscribe(res => {
+        if (res.code == 200) {
+          this.msg.create('success', '保存成功');
+          this.router.navigate(['/permit/activity']);
+        } else {
+          this.msg.create('error', '保存失败');
+        }
 
-      this.isSaving = false;
-    });
+        this.isSaving = false;
+      });
   }
 
   close() {

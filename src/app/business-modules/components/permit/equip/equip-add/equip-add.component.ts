@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-import { EquipService } from 'src/app/services/permit/equip.service';
+import { EquipPermitService } from 'src/app/services/permit/equip.service';
 import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
@@ -15,7 +15,7 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
   templateUrl: './equip-add.component.html',
   styleUrls: ['./equip-add.component.scss']
 })
-export class EquipAddComponent implements OnInit {
+export class EquipPermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
@@ -40,7 +40,7 @@ export class EquipAddComponent implements OnInit {
     private serviceDepartService: ServiceDepartService,
     private equipDepartService: EquipDepartService,
     private facSercice: FacSercice,
-    private equipService: EquipService
+    private equipPermitService: EquipPermitService
   ) {}
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class EquipAddComponent implements OnInit {
     });
 
     if (id) {
-      this.equipService.getEquipById(id).subscribe(res => {
+      this.equipPermitService.getEquipPermitById(id).subscribe(res => {
         this.data = res.msg;
         this.facSercice
           .getFacListByServiceid(this.data.serviceId)
@@ -107,16 +107,18 @@ export class EquipAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.equipService.saveOrUpdateEquip(this.data).subscribe(res => {
-      if (res.code == 200) {
-        this.msg.create('success', '保存成功');
-        this.router.navigate(['/permit/equip']);
-      } else {
-        this.msg.create('error', '保存失败');
-      }
+    this.equipPermitService
+      .saveOrUpdateEquipPermit(this.data)
+      .subscribe(res => {
+        if (res.code == 200) {
+          this.msg.create('success', '保存成功');
+          this.router.navigate(['/permit/equip']);
+        } else {
+          this.msg.create('error', '保存失败');
+        }
 
-      this.isSaving = false;
-    });
+        this.isSaving = false;
+      });
   }
 
   close() {

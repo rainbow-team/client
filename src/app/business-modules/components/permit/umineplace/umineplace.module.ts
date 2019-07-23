@@ -4,17 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
-import { UmineplaceComponent } from './umineplace.component';
-import { UmineplaceAddComponent } from './umineplace-add/umineplace-add.component';
+import { UmineplacePermitComponent } from './umineplace.component';
+import { UmineplacePermitAddComponent } from './umineplace-add/umineplace-add.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UmineplaceComponent
+    component: UmineplacePermitComponent
   },
   {
     path: 'add',
-    component: UmineplaceAddComponent
+    component: UmineplacePermitAddComponent
   }
 ];
 
@@ -28,6 +28,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  declarations: [UmineplaceComponent, UmineplaceAddComponent]
+  declarations: [UmineplacePermitComponent, UmineplacePermitAddComponent]
 })
-export class UmineplaceModule {}
+export class UmineplacePermitModule {}

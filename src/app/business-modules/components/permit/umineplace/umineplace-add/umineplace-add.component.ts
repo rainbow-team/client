@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-import { UmineplaceService } from 'src/app/services/permit/umineplace.service';
+import { UmineplacePermitService } from 'src/app/services/permit/umineplace.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 
@@ -14,7 +14,7 @@ import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
   templateUrl: './umineplace-add.component.html',
   styleUrls: ['./umineplace-add.component.scss']
 })
-export class UmineplaceAddComponent implements OnInit {
+export class UmineplacePermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
@@ -39,7 +39,7 @@ export class UmineplaceAddComponent implements OnInit {
     private attachmentSercice: AttachmentSercice,
     private umineService: UmineService,
     private uminePlaceService: UminePlaceService,
-    private umineplaceService: UmineplaceService
+    private umineplacePermitService: UmineplacePermitService
   ) {}
 
   ngOnInit() {
@@ -60,7 +60,7 @@ export class UmineplaceAddComponent implements OnInit {
     });
 
     if (id) {
-      this.umineplaceService.getUmineplaceById(id).subscribe(res => {
+      this.umineplacePermitService.getUmineplacePermitById(id).subscribe(res => {
         this.data = res.msg;
         this.uminePlaceService
           .getUmineplaceListByUmineId(this.data.umineId)
@@ -102,16 +102,18 @@ export class UmineplaceAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.umineplaceService.saveOrUpdateUmineplace(this.data).subscribe(res => {
-      if (res.code == 200) {
-        this.msg.create('success', '保存成功');
-        this.router.navigate(['/permit/umineplace']);
-      } else {
-        this.msg.create('error', '保存失败');
-      }
+    this.umineplacePermitService
+      .saveOrUpdateUmineplacePermit(this.data)
+      .subscribe(res => {
+        if (res.code == 200) {
+          this.msg.create('success', '保存成功');
+          this.router.navigate(['/permit/umineplace']);
+        } else {
+          this.msg.create('error', '保存失败');
+        }
 
-      this.isSaving = false;
-    });
+        this.isSaving = false;
+      });
   }
 
   close() {

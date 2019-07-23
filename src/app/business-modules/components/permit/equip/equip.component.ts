@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { EquipService } from 'src/app/services/permit/equip.service';
+import { EquipPermitService } from 'src/app/services/permit/equip.service';
 
 @Component({
   selector: 'app-equip',
   templateUrl: './equip.component.html',
   styleUrls: ['./equip.component.scss']
 })
-export class EquipComponent implements OnInit {
+export class EquipPermitComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
@@ -31,7 +31,7 @@ export class EquipComponent implements OnInit {
   constructor(
     private router: Router,
     private msg: NzMessageService,
-    private equipService: EquipService,
+    private equipPermitService: EquipPermitService,
     private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice
   ) {}
@@ -90,7 +90,7 @@ export class EquipComponent implements OnInit {
       });
     }
 
-    this.equipService.getEquipList(option).subscribe(data => {
+    this.equipPermitService.getEquipPermitList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;
     });
@@ -117,7 +117,7 @@ export class EquipComponent implements OnInit {
   }
 
   delete(item) {
-    this.equipService.deleteEquipByIds([item.id]).subscribe(res => {
+    this.equipPermitService.deleteEquipPermitByIds([item.id]).subscribe(res => {
       if (res.code == 200) {
         this.msg.create('success', '删除成功');
         this.search();

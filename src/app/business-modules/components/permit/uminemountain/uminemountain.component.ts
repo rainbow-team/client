@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { UminemountainService } from 'src/app/services/permit/uminemountain.service';
+import { UmineMountainPermitService } from 'src/app/services/permit/uminemountain.service';
 
 @Component({
   selector: 'app-uminemountain',
   templateUrl: './uminemountain.component.html',
   styleUrls: ['./uminemountain.component.scss']
 })
-export class UminemountainComponent implements OnInit {
+export class UminemountainPermitComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
@@ -28,7 +28,7 @@ export class UminemountainComponent implements OnInit {
   constructor(
     private router: Router,
     private msg: NzMessageService,
-    private uminemountainService: UminemountainService,
+    private umineMountainPermitService: UmineMountainPermitService,
     private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice
   ) {}
@@ -71,10 +71,12 @@ export class UminemountainComponent implements OnInit {
       });
     }
 
-    this.uminemountainService.getMountainList(option).subscribe(data => {
-      this.dataSet = data.msg.currentList;
-      this.totalCount = data.msg.recordCount;
-    });
+    this.umineMountainPermitService
+      .getUmineMountainPermitList(option)
+      .subscribe(data => {
+        this.dataSet = data.msg.currentList;
+        this.totalCount = data.msg.recordCount;
+      });
   }
 
   reset() {
@@ -95,13 +97,15 @@ export class UminemountainComponent implements OnInit {
   }
 
   delete(item) {
-    this.uminemountainService.deleteMountainByIds([item.id]).subscribe(res => {
-      if (res.code == 200) {
-        this.msg.create('success', '删除成功');
-        this.search();
-      } else {
-        this.msg.create('error', '删除失败');
-      }
-    });
+    this.umineMountainPermitService
+      .deleteUmineMountainPermitByIds([item.id])
+      .subscribe(res => {
+        if (res.code == 200) {
+          this.msg.create('success', '删除成功');
+          this.search();
+        } else {
+          this.msg.create('error', '删除失败');
+        }
+      });
   }
 }
