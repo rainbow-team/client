@@ -101,8 +101,11 @@ export class HeaderComponent implements OnInit {
       name: '数据迁移', id: 'sjqy', route: '',
     },
     {
-      name: '查询展示', id: 'cxzs', route: ''
-
+      name: '查询展示', id: 'cxzs', route: '',
+      children: [
+        { name: '综合查询', id: '', route: '' },
+        { name: '模拟展示', id: '', route: '' }
+      ]
     },
     {
       name: '系统设置', id: 'system', route: '/system',
