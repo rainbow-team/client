@@ -24,21 +24,12 @@ export class UmineplaceComponent implements OnInit {
 
   dataSet: any = [];
 
-  name: any = "";
 
-  equipDepartIds: any = [];
-
-  equipDepartList: any = [];
-
-  serviceDepartIds: any = [];
-
-  serviceDepartList: any = [];
-
-  facIds: any = [];
-
-  facList: any = [];
-
-
+  umineName: any = "";
+  uminePlaceName: any = "";
+  typeIds: any = []
+  stageIds: any = [];
+  
   constructor(private router: Router,
     private msg: NzMessageService, private umineplaceCheckSercice: UmineplaceCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineService: UmineService,
@@ -51,31 +42,6 @@ export class UmineplaceComponent implements OnInit {
 
     this.search();
 
-    // this.serviceDepartService.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
   }
 
   search() {
@@ -85,13 +51,19 @@ export class UmineplaceComponent implements OnInit {
       conditions: []
     }
 
-    if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
+    if (this.umineName) {
+      option.conditions.push({ key: "umineName", value: this.umineName })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.uminePlaceName) {
+      option.conditions.push({ key: "uminePlaceName", value: this.uminePlaceName })
+    }
+    if (this.typeIds.length>0) {
+      option.conditions.push({ key: "typeIds", value: this.typeIds })
+    }
+    if (this.stageIds.length > 0) {
+      option.conditions.push({ key: "stageIds", value: this.stageIds })
+    }
 
     this.umineplaceCheckSercice.getUmineplaceList(option).subscribe(
       (data) => {
@@ -102,16 +74,18 @@ export class UmineplaceComponent implements OnInit {
   }
 
   reset() {
-    this.name = "";
-    //this.groupIds = [];
+    this.umineName="";
+    this.uminePlaceName = "";
+    this.typeIds = []
+    this.stageIds = [];
   }
 
   add() {
-    this.router.navigate(['/check/activity/add']);
+    this.router.navigate(['/check/umineplace/add']);
   }
 
   show(item, flag) {
-    this.router.navigate(['/check/activity/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/check/umineplace/add'], { queryParams: { id: item.id, flag: flag } });
   }
 
   delete(item) {

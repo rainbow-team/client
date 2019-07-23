@@ -16,7 +16,7 @@ export class UmineplaceCheckSercice {
 
     saveOrUpdateUmineplace(param): any {
 
-        let url = !param.id ? "/umineplacecheck/addUminePlaceCheck" : "/uminemountaincheck/modifyUminePlaceCheck";
+        let url = !param.id ? "/umineplacecheck/addUminePlaceCheck" : "/umineplacecheck/modifyUminePlaceCheck";
         return this.http.post(url, param);
     }
 
