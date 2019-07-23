@@ -6,6 +6,7 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { FacSecuritySercice } from 'src/app/services/security/fac.service';
+import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 
 @Component({
   selector: 'app-fac',
@@ -41,9 +42,14 @@ export class FacComponent implements OnInit {
 
   reformStatusTypeIds:any=[];
 
+  condition:any="{'tableName':unit_fac,'propertyName':supervision_category_id,'configTableName':config_fac_supervison_category}";
+
+  data:any=[];
+
   constructor(private router: Router,
     private msg: NzMessageService, private facSecuritySercice: FacSecuritySercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private facSercice: FacSercice) { }
+    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, 
+    private facSercice: FacSercice,private statisticsSercice:StatisticsSercice) { }
 
   ngOnInit() {
 
@@ -122,6 +128,11 @@ export class FacComponent implements OnInit {
     this.questionTypeIds=[];
     this.questionNatureIds=[];
     this.reformStatusTypeIds=[];
+
+    this.statisticsSercice.getStatisticsResultByCondition(this.condition).subscribe((res)=>{
+
+      this.data=res.msg;
+    });
   }
 
   add() {
