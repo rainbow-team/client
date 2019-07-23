@@ -87,16 +87,7 @@ export class HeaderComponent implements OnInit {
       ]
     },
     {
-      name: '统计分析', id: 'tjfx', route: '',
-      children: [
-        { name: '核设施统计', id: '', route: '' },
-        { name: '核安全许可统计', id: '', route: '' },
-        { name: '核安全审评统计', id: '', route: '' },
-        { name: '核安全监督统计', id: '', route: '' },
-        { name: '安全问题统计', id: '', route: '' },
-        { name: '安全问题统计', id: '', route: '' },
-        { name: '事故事件统计', id: '', route: '' }
-      ]
+      name: '统计分析', id: 'tjfx', route: ''
     }, {
       name: '数据迁移', id: 'sjqy', route: '',
     },
