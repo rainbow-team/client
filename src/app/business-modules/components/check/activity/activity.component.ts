@@ -26,18 +26,11 @@ export class ActivityComponent implements OnInit {
 
   name: any = "";
 
-  equipDepartIds: any = [];
+  facName:any="";
 
-  equipDepartList: any = [];
-
-  serviceDepartIds: any = [];
-
-  serviceDepartList: any = [];
-
-  facIds: any = [];
-
-  facList: any = [];
-
+  typeIds:any=[];
+  
+  content:any="";
 
   constructor(private router: Router,
     private msg: NzMessageService, private activityCheckSercice: ActivityCheckSercice, private dictionarySercice: DictionarySercice,
@@ -51,30 +44,6 @@ export class ActivityComponent implements OnInit {
 
     this.search();
 
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-      if (res.code == 200) {
-        this.serviceDepartList = [];
-        res.msg.forEach(element => {
-          this.serviceDepartList.push({
-            id: element.id,
-            name: element.name
-          });
-        });
-      }
-    })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
 
   }
 
@@ -89,9 +58,17 @@ export class ActivityComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
+    if (this.facName) {
+      option.conditions.push({ key: "facName", value: this.facName })
+    }
+
+    if (this.typeIds.length > 0) {
+      option.conditions.push({ key: "typeIds", value: this.typeIds })
+    }
+
+    if (this.content) {
+      option.conditions.push({ key: "content", value: this.content })
+    }
 
     this.activityCheckSercice.getActivityList(option).subscribe(
       (data) => {
@@ -103,7 +80,9 @@ export class ActivityComponent implements OnInit {
 
   reset() {
     this.name = "";
-    //this.groupIds = [];
+    this.facName="";
+    this.typeIds=[];
+    this.content="";
   }
 
   add() {

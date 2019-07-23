@@ -25,13 +25,10 @@ export class FacComponent implements OnInit {
 
   name: any = "";
 
-  serviceDepartIds: any = [];
-
-  serviceDepartList: any = [];
-  
-  facIds: any = [];
-
-  facList: any = [];
+  serviceDepartName: any = "";
+  facName: any = "";
+  typeIds: any = []
+  stageIds: any = [];
 
   constructor(private router: Router,
     private msg: NzMessageService, private facService: FacSercice, private dictionarySercice: DictionarySercice,
@@ -43,18 +40,6 @@ export class FacComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     this.search();
-
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-      if (res.code == 200) {
-          this.serviceDepartList = [];
-          res.msg.forEach(element => {
-              this.serviceDepartList.push({
-                  id: element.id,
-                  name: element.name
-              });
-          });
-      }
-  })
   }
 
   search() {
@@ -64,13 +49,28 @@ export class FacComponent implements OnInit {
       conditions: []
     }
 
-    if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
+    if (this.serviceDepartName) {
+      option.conditions.push({ key: "serviceDepartName", value: this.serviceDepartName })
     }
+    if (this.facName) {
+      option.conditions.push({ key: "facName", value: this.facName })
+    }
+    if (this.typeIds.length>0) {
+      option.conditions.push({ key: "typeIds", value: this.typeIds })
+    }
+    if (this.stageIds.length > 0) {
+      option.conditions.push({ key: "stageIds", value: this.stageIds })
+    }
+    // if (this.permission_date && this.permission_date.length > 0) {
+    //   if (this.permission_date[0]) {
+    //     option.conditions.push({ key: "start_date", value: this.permission_date[0] })
+    //   }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
+    //   if (this.permission_date[1]) {
+    //     option.conditions.push({ key: "end_date", value: this.permission_date[1] })
+    //   }
     // }
+
 
     this.facCheckSercice.getFacCheckList(option).subscribe(
       (data) => {
@@ -81,8 +81,10 @@ export class FacComponent implements OnInit {
   }
 
   reset() {
-    this.name = "";
-    //this.groupIds = [];
+    this.serviceDepartName="";
+    this.facName = "";
+    this.typeIds = []
+    this.stageIds = [];
   }
 
   add() {
