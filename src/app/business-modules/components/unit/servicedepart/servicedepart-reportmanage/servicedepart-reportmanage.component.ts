@@ -105,7 +105,7 @@ export class ServicedepartReportmanageComponent implements OnInit {
 
   delete(data) {
 
-    this.serviceDepartSercice.deleteServiceAnnualReportByIds([this.data.id]).subscribe((res) => {
+    this.serviceDepartSercice.deleteServiceAnnualReportByIds([data.id]).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.search();

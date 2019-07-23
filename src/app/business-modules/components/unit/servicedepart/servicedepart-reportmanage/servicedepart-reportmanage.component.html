@@ -33,8 +33,6 @@
             <td>
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
-              <a (click)="show(data,false)">编辑</a>
-              <nz-divider nzType="vertical"></nz-divider>
               <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
             </td>
           </tr>
@@ -61,7 +59,7 @@
           </nz-date-picker>
         </div>
       </div>
-      <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+      <app-attachment [fileList]="fileList" [refid]="data.reportId" [isDisable]="isDisable"></app-attachment>
     </div>
   </nz-modal>
 </div>

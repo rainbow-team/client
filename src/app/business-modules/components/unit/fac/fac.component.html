@@ -1,13 +1,6 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
-      核设施名称:
-      <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
-    </div>
-    <div nz-col [nzSpan]="5">
-      核设施编号:
-      <input nz-input nzSize="default" [(ngModel)]="code" class="w200">
-    </div>
+
     <div nz-col [nzSpan]="5">
       营运单位:
       <nz-select [(ngModel)]="ServiceDepartIds" class="w200" nzMode="multiple">
@@ -17,8 +10,17 @@
     </div>
     <div nz-col [nzSpan]="5">
       建造年代:
-      <nz-year-picker class="w200" [(ngModel)]="build_year"></nz-year-picker>
+      <nz-range-picker class="w200" [(ngModel)]="build_year" [nzFormat]="yyyy"></nz-range-picker>
     </div>
+    <div nz-col [nzSpan]="5">
+      核设施名称:
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
+    </div>
+    <div nz-col [nzSpan]="5">
+      核设施编号:
+      <input nz-input nzSize="default" [(ngModel)]="code" class="w200">
+    </div>
+
 
     <div nz-col [nzSpan]="4" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
@@ -68,14 +70,14 @@
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="8">
+    <div nz-col [nzSpan]="7">
       是否满足防洪要求:
       <nz-select [(ngModel)]="isEarthquake" class="w200">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
         <nz-option nzValue="0" nzLabel="否"></nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="8">
+    <div nz-col [nzSpan]="7">
       是否满足抗震设防等级:
       <nz-select [(ngModel)]="isFlood" class="w200">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
@@ -126,14 +128,14 @@
             <td>{{data.name}}</td>
             <td>{{data.code}}</td>
             <td>{{data.serviceDepart}}</td>
-            <td>{{data.buildYear|recordtime}}</td>
+            <td>{{data.buildYear|recordtime:'year'}}</td>
             <td>{{data.supervisionCategoryValue}}</td>
             <td>{{data.typeValue}}</td>
             <td>{{data.statusValue}}</td>
             <td>{{data.reviewStatusValue}}</td>
             <td>{{data.permitSituationValue}}</td>
-            <td>{{data.isEarthquake}}</td>
-            <td>{{data.isFlood}}</td>
+            <td>{{data.isEarthquake|isTrue}}</td>
+            <td>{{data.isFlood|isTrue}}</td>
             <td>
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>

@@ -87,7 +87,7 @@ export class UmineplaceChildmanageComponent implements OnInit {
 
   delete(data) {
 
-    this.uminePlaceService.deleteUminePlaceImproveByIds([this.data.id]).subscribe((res) => {
+    this.uminePlaceService.deleteUminePlaceImproveByIds([data.id]).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.search();

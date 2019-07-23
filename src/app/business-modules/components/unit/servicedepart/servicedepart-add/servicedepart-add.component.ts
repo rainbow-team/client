@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -14,7 +14,7 @@ import { GroupService } from 'src/app/services/unit/group.service';
   styleUrls: ['./servicedepart-add.component.scss']
 })
 export class ServicedepartAddComponent implements OnInit {
-  
+
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
@@ -27,6 +27,8 @@ export class ServicedepartAddComponent implements OnInit {
   staffObj: any = {};
   groupList: any = [];
 
+  facNum: any = 0;
+
   pageIndex: any = 1;
   totalCount: any;
   pageSize: any = 10;
@@ -35,7 +37,7 @@ export class ServicedepartAddComponent implements OnInit {
 
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
-    private attachmentSercice: AttachmentSercice, private groupService: GroupService,  private serviceDepartSercice: ServiceDepartService) { }
+    private attachmentSercice: AttachmentSercice, private groupService: GroupService, private serviceDepartSercice: ServiceDepartService) { }
 
 
   ngOnInit() {
@@ -73,6 +75,7 @@ export class ServicedepartAddComponent implements OnInit {
 
       this.serviceDepartSercice.getServiceDepartById(id).subscribe((res) => {
         this.data = res.msg;
+        this.facNum = this.data.facNum;
       });
 
       this.attachmentSercice.getFileListById(id).subscribe((res1) => {

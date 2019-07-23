@@ -36,7 +36,7 @@
           </div>
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>监管类别：
-            <nz-select [(ngModel)]="data.serviceId" class="w200" required [validation]="true" [disabled]="isDisable">
+            <nz-select [(ngModel)]="data.supervisionCategoryId" class="w200" required [validation]="true" [disabled]="isDisable">
               <nz-option *ngFor="let option of dictionary.config_fac_supervison_category" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
