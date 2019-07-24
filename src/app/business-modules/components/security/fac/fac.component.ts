@@ -44,7 +44,7 @@ export class FacComponent implements OnInit {
 
   condition={
     tableName:'unit_fac',
-    propertyName:'supervision_category_id',
+    propertyName:'build_year',
     configTableName:'config_fac_supervison_category'
   }
 
@@ -133,7 +133,7 @@ export class FacComponent implements OnInit {
     this.questionNatureIds=[];
     this.reformStatusTypeIds=[];
 
-    this.statisticsSercice.getStatisticsResultByCondition(this.condition).subscribe((res)=>{
+    this.statisticsSercice.getStatisticsResultByYear(this.condition).subscribe((res)=>{
 
       this.data=res.msg;
     });

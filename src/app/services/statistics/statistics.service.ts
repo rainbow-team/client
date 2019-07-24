@@ -12,4 +12,8 @@ export class StatisticsSercice {
     getStatisticsResultByCondition(param): any {
         return this.http.post('/statistics/getStatisticsResultByCondition', param);
     }
+
+    getStatisticsResultByYear(param): any {
+        return this.http.post('/statistics/getStatisticsResultByYear', param);
+    }
 }
