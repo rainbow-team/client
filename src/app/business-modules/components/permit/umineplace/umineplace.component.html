@@ -27,9 +27,7 @@
     </div>
     <div nz-col [nzSpan]="5">
       许可时间
-      <nz-range-picker>
-        name="permitDate" [(ngModel)]="data.permitDate" class="w200" [validation]="true" [disabled]="isDisable"
-      </nz-range-picker>
+      <nz-range-picker class="w200" [(ngModel)]="permitDate"> </nz-range-picker>
     </div>
 
     <div nz-col [nzSpan]="3" class="ta_r">
@@ -81,12 +79,14 @@
       >
         <thead>
           <tr>
+            <th>序号</th>
             <th>营运单位</th>
             <th>铀尾矿（渣）库名称</th>
             <th>许可阶段</th>
             <th>许可时间</th>
             <th>有效期限</th>
             <th>许可文号</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody>
@@ -96,8 +96,8 @@
             <td>{{ data.uminePlaceName }}</td>
             <td>{{ data.stageValue }}</td>
             <td>{{ data.permitDate | recordtime }}</td>
-            <td>{{ data.validateTime | recordtime }}</td>
-            <td>{{ data.permitNumber }}</td>
+            <td>{{ data.validateTime }}</td>
+            <td>{{ data.licence }}</td>
             <td>
               <a (click)="show(data, true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>

@@ -8,19 +8,19 @@ export class UmineplacePermitService {
   constructor(private http: HttpClient) {}
 
   getUmineplacePermitList(param): any {
-    return this.http.post('/umineplacepermit/getUmineplacePermitList', param);
+    return this.http.post('/umineplacepermit/getUminePlacePermitList', param);
   }
 
   saveOrUpdateUmineplacePermit(param): any {
-    let url = !param.id? '/umineplacepermit/addUmineplacePermit': '/umineplacepermit/modifyUmineplacePermit';
+    let url = !param.id? '/umineplacepermit/addUminePlacePermit': '/umineplacepermit/modifyUminePlacePermit';
     return this.http.post(url, param);
   }
 
   getUmineplacePermitById(id): any {
-    return this.http.get('/umineplacepermit/getUmineplacePermitById?id=' + id);
+    return this.http.get('/umineplacepermit/getUminePlacePermitById?id=' + id);
   }
 
   deleteUmineplacePermitByIds(ids): any {
-    return this.http.post('/umineplacepermit/deleteUmineplacePermitByIds', ids);
+    return this.http.post('/umineplacepermit/deleteUminePlacePermitByIds', ids);
   }
 }

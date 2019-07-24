@@ -22,7 +22,7 @@
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>许可阶段：
-        <nz-select [(ngModel)]="data.permitStageId" class="w200" [disabled]="isDisable" required [validation]="true">
+        <nz-select [(ngModel)]="data.stageId" class="w200" [disabled]="isDisable" required [validation]="true">
           <nz-option *ngFor="let option of dictionary.config_umine_place_permit_stage" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
@@ -45,7 +45,7 @@
 
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>许可文号：
-        <input nz-input name="permitNumber" [(ngModel)]="data.permitNumber" class="w200" required [validation]="true"
+        <input nz-input name="licence" [(ngModel)]="data.licence" class="w200" required [validation]="true"
           [disabled]="isDisable" />
       </div>
     </div>

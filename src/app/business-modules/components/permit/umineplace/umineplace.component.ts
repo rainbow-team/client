@@ -64,11 +64,20 @@ export class UmineplacePermitComponent implements OnInit {
         value: this.stageIds
       });
     }
-    if (this.permitDate) {
-      option.conditions.push({
-        key: 'permitDate',
-        value: this.permitDate
-      });
+    if (this.permitDate && this.permitDate.length > 0) {
+      if (this.permitDate[0]) {
+        option.conditions.push({
+          key: 'start_date',
+          value: this.permitDate[0]
+        });
+      }
+
+      if (this.permitDate[1]) {
+        option.conditions.push({
+          key: 'end_date',
+          value: this.permitDate[1]
+        });
+      }
     }
 
     this.umineplacePermitService
