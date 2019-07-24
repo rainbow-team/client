@@ -8,6 +8,7 @@ import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { ActivityPermitService } from 'src/app/services/permit/activity.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
+import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 
 @Component({
   selector: 'app-activity-add',
@@ -25,8 +26,12 @@ export class ActivityPermitAddComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
-  serviceDeparts: any = [];
-  unitFacs: any = [];
+  activityType:any="";
+
+  serviceDepartList: any = [];
+  facList: any = [];
+
+  equipDepartList: any = [];
 
   constructor(
     private msg: NzMessageService,
@@ -37,7 +42,8 @@ export class ActivityPermitAddComponent implements OnInit {
     private attachmentSercice: AttachmentSercice,
     private serviceDepartService: ServiceDepartService,
     private facSercice: FacSercice,
-    private activityPermitService: ActivityPermitService
+    private activityPermitService: ActivityPermitService,
+    private equipDepartService: EquipDepartService
   ) {}
 
   ngOnInit() {
@@ -54,16 +60,30 @@ export class ActivityPermitAddComponent implements OnInit {
     }
 
     this.serviceDepartService.getAllDepartService().subscribe(res => {
-      this.serviceDeparts = res.msg;
+      this.serviceDepartList = res.msg;
     });
 
-    // this.facSercice.getFacList().subscribe(res => {
-    //   this.unitFacs = res.msg;
-    // });
+    this.equipDepartService.getAllEquipDepart().subscribe((res) => {
+
+      this.equipDepartList = res.msg;
+    })
 
     if (id) {
       this.activityPermitService.getActivityPermitById(id).subscribe(res => {
         this.data = res.msg;
+        if (this.data.serviceId) {
+          this.activityType = "fac";
+
+          this.facSercice.getFacListByServiceid(this.data.serviceId).subscribe((res) => {
+            this.facList = res.msg;
+          });
+        }
+        if (this.data.equipDepartId) {
+          this.activityType = "equip";
+          this.equipDepartService.getAllEquipDepart().subscribe((res) => {
+            this.equipDepartList = res.msg;
+          });
+        }
       });
 
       this.attachmentSercice.getFileListById(id).subscribe(res1 => {
@@ -99,7 +119,14 @@ export class ActivityPermitAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    // this.data.sex = this.sexValue;
+    if (this.activityType == "fac") {
+      this.data.equipDepartId = "";
+    }
+
+    if (this.activityType == "equip") {
+      this.data.serviceId = "";
+      this.data.facId = "";
+    }
     this.activityPermitService
       .saveOrUpdateActivityPermit(this.data)
       .subscribe(res => {
@@ -118,12 +145,6 @@ export class ActivityPermitAddComponent implements OnInit {
     this.router.navigate(['/permit/activity']);
   }
 
-  //根据营运单位获取对应的核设施
-  changeunitFacs(serviceid) {
-    this.facSercice.getFacListByServiceid(serviceid).subscribe(res => {
-      this.unitFacs = res.msg;
-    });
-  }
   //表单手动触发验证
   FormValidation() {
     let isValid = true;
@@ -133,5 +154,11 @@ export class ActivityPermitAddComponent implements OnInit {
       }
     });
     return isValid;
+  }
+
+  serviceDepartChange(value: string): void {
+    this.facSercice.getFacListByServiceid(value).subscribe((res) => {
+      this.facList = res.msg;
+    })
   }
 }

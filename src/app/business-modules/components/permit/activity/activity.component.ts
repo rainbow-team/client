@@ -20,11 +20,13 @@ export class ActivityPermitComponent implements OnInit {
 
   dataSet: any = [];
 
-  serviceDepartName: any = '';
+  departName: any = "";
+  facName: any = "";
   name: any = '';
+
   content: any = '';
-  activityTypeIds: any = [];
-  permissionDate: any = [];
+  typeIds: any = [];
+  permitDate: any = [];
 
   constructor(
     private router: Router,
@@ -32,7 +34,7 @@ export class ActivityPermitComponent implements OnInit {
     private activityPermitService: ActivityPermitService,
     private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
@@ -47,37 +49,35 @@ export class ActivityPermitComponent implements OnInit {
       pageSize: this.pageSize,
       conditions: []
     };
-    if (this.serviceDepartName) {
-      option.conditions.push({
-        key: 'serviceDepartName',
-        value: this.serviceDepartName
-      });
+    if (this.departName) {
+      option.conditions.push({ key: 'departName', value: this.departName });
     }
+    if (this.facName) {
+      option.conditions.push({ key: 'facName', value: this.facName });
+    }
+
     if (this.name) {
       option.conditions.push({ key: 'name', value: this.name });
     }
     if (this.content) {
       option.conditions.push({ key: 'content', value: this.content });
     }
-    if (this.activityTypeIds.length > 0) {
-      option.conditions.push({
-        key: 'activityTypeIds',
-        value: this.activityTypeIds
-      });
+    if (this.typeIds.length > 0) {
+      option.conditions.push({ key: 'typeIds', value: this.typeIds });
     }
 
-    if (this.permissionDate && this.permissionDate.length > 0) {
-      if (this.permissionDate[0]) {
+    if (this.permitDate && this.permitDate.length > 0) {
+      if (this.permitDate[0]) {
         option.conditions.push({
           key: 'start_date',
-          value: this.permissionDate[0]
+          value: this.permitDate[0]
         });
       }
 
-      if (this.permissionDate[1]) {
+      if (this.permitDate[1]) {
         option.conditions.push({
           key: 'end_date',
-          value: this.permissionDate[1]
+          value: this.permitDate[1]
         });
       }
     }
@@ -89,11 +89,13 @@ export class ActivityPermitComponent implements OnInit {
   }
 
   reset() {
+
+    this.departName = "";
+    this.facName = "";
     this.name = '';
     this.content = '';
-    this.activityTypeIds = [];
-    this.permissionDate = [];
-    this.serviceDepartName = '';
+    this.typeIds = [];
+    this.permitDate = [];
   }
 
   add() {

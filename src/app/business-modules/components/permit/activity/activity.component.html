@@ -2,17 +2,17 @@
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
       单位名称
-      <input nz-input nzSize="default" [(ngModel)]="serviceDepartName" class="w200" />
+      <input nz-input nzSize="default" [(ngModel)]="departName" class="w200" />
+    </div>
+    
+    <div nz-col [nzSpan]="5">
+      设施名称
+      <input nz-input nzSize="default" [(ngModel)]="facName" class="w200" />
     </div>
 
     <div nz-col [nzSpan]="5">
       许可名称
-      <input
-        nz-input
-        nzSize="default"
-        [(ngModel)]="name"
-        class="w200"
-      />
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w200"/>
     </div>
 
     <div nz-col [nzSpan]="5">
@@ -20,7 +20,7 @@
       <input nz-input nzSize="default" [(ngModel)]="content" class="w200" />
     </div>    
 
-    <div nz-col [nzSpan]="9" class="ta_r">
+    <div nz-col [nzSpan]="4" class="ta_r">
       <button
         nz-button
         nzType="primary"
@@ -37,7 +37,7 @@
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
       活动类型
-      <nz-select [(ngModel)]="activityTypeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple">
         <nz-option
           *ngFor="let option of dictionary.config_activity_type"
           [nzLabel]="option.value"
@@ -48,7 +48,7 @@
     </div>
     <div nz-col [nzSpan]="5">
       许可时间
-      <nz-range-picker class="w200" [(ngModel)]="permissionDate"> </nz-range-picker>
+      <nz-range-picker class="w200" [(ngModel)]="permitDate"> </nz-range-picker>
     </div>    
   </div>
 
@@ -86,6 +86,7 @@
       >
         <thead>
           <tr>
+            <th>序号</th>
             <th>单位名称</th>
             <th>设施名称</th>
             <th>许可名称</th>
@@ -94,16 +95,19 @@
             <th>许可时间</th>
             <th>有效期限</th>
             <th>许可文号</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of nestedTable.data; index as index">
             <td>{{ (pageIndex - 1) * pageSize + 1 + index }}</td>
-            <td>{{ data.serviceDepartName }}</td>
+            <td>{{ data.serviceDepartName }}{{data.equipDepartName}}</td>
             <td>{{ data.facName }}</td>
             <td>{{ data.name }}</td>
             <td>{{ data.content }}</td>
-            <td>{{ data.permissionDate | recordtime }}</td>
+            <td>{{ data.typeValue }}</td>
+            <td>{{ data.permitDate | recordtime }}</td>
+            <td>{{ data.validateTime }}</td>
             <td>{{ data.licence }}</td>
             <td>
               <a (click)="show(data, true)">查看</a>
