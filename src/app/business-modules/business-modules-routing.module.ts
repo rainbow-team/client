@@ -210,6 +210,16 @@ const appRoutes: Routes = [
     ]
   },
   {
+    path:'statistics',
+    component:BusinessModulesComponent,
+    children:[
+      {
+        path:'',
+        loadChildren:'./components/statistics/statistics.module#StatisticsModule'
+      }
+    ]
+  },
+  {
     path: 'system',
     component: BusinessModulesComponent,
     children: [

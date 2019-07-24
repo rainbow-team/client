@@ -1,0 +1,64 @@
+<div nz-row style="height: calc(100% - 60px);padding: 0,15px;">
+
+  <div nz-col [nzSpan]="4" class="div_1">
+
+    <div style="height: 150px;text-align: center;line-height: 150px;">
+      <img src="./../../../../assets/images/统计_11.png"/>
+    </div>
+
+    <div style=" height: calc(100% - 150px);text-align:center;">
+      <div *ngFor="let item of menuItems;index as index" class="div_menu" (click)="clickMenu(item)" [ngClass]="{true:'menu_select',false:''}[selectMenuName==item.name]">
+        {{item.name}}
+      </div>
+    </div>
+
+  </div>
+
+  <div nz-col [nzSpan]="20" style="background: #fff;height: 100%;padding: 10px;">
+      <div class="div_search">
+          <div class="div_search_item">
+            统计对象：所有核设施
+          </div>
+          <div class="div_search_item">
+            统计方式：
+            <nz-radio-group>
+              <label nz-radio nzValue="1">建造年代</label>
+              <label nz-radio nzValue="2">监管类别</label>
+              <label nz-radio nzValue="3">设施类型</label>
+            </nz-radio-group>
+          </div>
+          <div class="div_search_item" style="text-align: right;">
+            <button nz-button nzType="primary" >统计</button>
+          </div>
+      </div>
+
+      <div class="div_tab">
+        <nz-tabset>
+          <nz-tab nzTitle="统计图">
+            <div id="chart3qq" style="height: 230px;">
+
+            </div>
+          </nz-tab>
+          <nz-tab nzTitle="统计表">
+            <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzFrontPagination]="false" [nzShowPagination]="false" [nzNoResult]="">
+            <thead>
+              <tr>
+                <th>建造年代</th>
+                <th>旧设施</th>
+                <th>新设施</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>核设施统计</td>
+                <td>47</td>
+                <td>74</td>
+              </tr>
+            </tbody>
+          </nz-table>
+          </nz-tab>
+        </nz-tabset>
+      </div>
+  </div>
+
+</div>

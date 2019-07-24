@@ -87,7 +87,7 @@ export class HeaderComponent implements OnInit {
       ]
     },
     {
-      name: '统计分析', id: 'tjfx', route: ''
+      name: '统计分析', id: 'statistics', route: '/statistics'
     }, {
       name: '数据迁移', id: 'sjqy', route: '',
     },
