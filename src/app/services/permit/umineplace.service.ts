@@ -12,9 +12,7 @@ export class UmineplacePermitService {
   }
 
   saveOrUpdateUmineplacePermit(param): any {
-    let url = !param.id
-      ? '/umineplacepermit/addUmineplacePermit'
-      : '/umineplacepermit/modifyUmineplacePermit';
+    let url = !param.id? '/umineplacepermit/addUmineplacePermit': '/umineplacepermit/modifyUmineplacePermit';
     return this.http.post(url, param);
   }
 

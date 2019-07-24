@@ -6,57 +6,25 @@
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         营运单位：
-        <nz-select
-          [(ngModel)]="data.umineId"
-          class="w200"
-          [disabled]="isDisable"
-          required
-          nzShowSearch
-          nzAllowClear
-          nzPlaceHolder="铀矿冶单位"
-          (ngModelChange)="changeunitUminePlaces($event)"
-        >
-          <nz-option
-            *ngFor="let option of unitUmines"
-            [nzLabel]="option.name"
-            [nzValue]="option.id"
-          >
+        <nz-select [(ngModel)]="data.umineId" class="w200" [disabled]="isDisable" required nzShowSearch nzAllowClear
+          nzPlaceHolder="铀矿冶单位" (ngModelChange)="changeunitUminePlaces($event)">
+          <nz-option *ngFor="let option of unitUmines" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>铀尾矿（渣）库名称：
-        <nz-select
-          [(ngModel)]="data.uminePlaceId"
-          class="w200"
-          [disabled]="isDisable"
-          required
-          nzShowSearch
-          nzAllowClear
-          nzPlaceHolder="核设备单位信息"
-        >
-          <nz-option
-            *ngFor="let option of unitUminePlaces"
-            [nzLabel]="option.name"
-            [nzValue]="option.id"
-          >
+        <nz-select [(ngModel)]="data.uminePlaceId" class="w200" [disabled]="isDisable" required nzShowSearch
+          nzAllowClear nzPlaceHolder="核设备单位信息">
+          <nz-option *ngFor="let option of unitUminePlaces" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>许可阶段：
-        <nz-select
-          [(ngModel)]="data.permitStageId"
-          class="w200"
-          [disabled]="isDisable"
-          required
-          [validation]="true"
-        >
-          <nz-option
-            *ngFor="let option of dictionary.config_umine_place_permit_stage"
-            [nzLabel]="option.value"
-            [nzValue]="option.id"
-          >
+        <nz-select [(ngModel)]="data.permitStageId" class="w200" [disabled]="isDisable" required [validation]="true">
+          <nz-option *ngFor="let option of dictionary.config_umine_place_permit_stage" [nzLabel]="option.value"
+            [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
@@ -65,87 +33,45 @@
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>许可时间：
-        <nz-date-picker
-          name="permitDate"
-          [(ngModel)]="data.permitDate"
-          class="w200"
-          required
-          [validation]="true"
-          [disabled]="isDisable"
-        >
+        <nz-date-picker name="permitDate" [(ngModel)]="data.permitDate" class="w200" required [validation]="true"
+          [disabled]="isDisable">
         </nz-date-picker>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>有效期限：
-        <nz-date-picker
-          name="validateTime"
-          [(ngModel)]="data.validateTime"
-          class="w200"
-          [validation]="true"
-          [disabled]="isDisable"
-        >
-        </nz-date-picker>
+        <input nz-input name="validateTime" [(ngModel)]="data.validateTime" class="w200" [validation]="true"
+          [disabled]="isDisable" />
       </div>
 
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>许可文号：
-        <input
-          nz-input
-          name="permitNumber"
-          [(ngModel)]="data.permitNumber"
-          class="w200"
-          required
-          [validation]="true"
-          [disabled]="isDisable"
-        />
+        <input nz-input name="permitNumber" [(ngModel)]="data.permitNumber" class="w200" required [validation]="true"
+          [disabled]="isDisable" />
+      </div>
+    </div>
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz">许可条件：</div>
+        <textarea nz-input name="permitCondition" style="width: calc(100% - 130px);height: 70px;"
+          [(ngModel)]="data.permitCondition" class="w200" [disabled]="isDisable">
+        </textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
-        许可条件：
-        <input
-          nz-input
-          name="permitCondition"
-          [(ngModel)]="data.permitCondition"
-          class="w200"
-          [disabled]="isDisable"
-        />
-      </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>审评承诺：
-        <input
-          nz-input
-          name="reviewPromise"
-          [(ngModel)]="data.reviewPromise"
-          class="w200"
-          [disabled]="isDisable"
-        />
+      <div nz-col [nzSpan]="24" class="ta_r">
+        <div class="div_bz"><span class="clo_r">*</span>审评承诺：</div>
+        <textarea nz-input name="reviewPromise" style="width: calc(100% - 130px);height: 70px;"
+          [(ngModel)]="data.reviewPromise" class="w200" [disabled]="isDisable"></textarea>
       </div>
     </div>
 
-    <app-attachment
-      [fileList]="fileList"
-      [refid]="data.id"
-      [isDisable]="isDisable"
-    ></app-attachment>
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
   </div>
 
-  <div
-    nz-row
-    [nzType]="'flex'"
-    [nzAlign]="'middle'"
-    class="div_bottom_add"
-    [nzJustify]="'end'"
-  >
-    <button
-      nz-button
-      nzType="primary"
-      (click)="save()"
-      *ngIf="!isDisable"
-      style="margin-right: 10px;"
-      [nzLoading]="isSaving"
-    >
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+      [nzLoading]="isSaving">
       保存
     </button>
     <button nz-button nzType="default" (click)="close()">关闭</button>

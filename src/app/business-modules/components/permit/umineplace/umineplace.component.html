@@ -5,7 +5,7 @@
       <input nz-input nzSize="default" [(ngModel)]="umineName" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="6">
       铀尾矿（渣）库名称
       <input
         nz-input
@@ -27,16 +27,12 @@
     </div>
     <div nz-col [nzSpan]="5">
       许可时间
-      <nz-date-picker
-        name="permitDate"
-        [(ngModel)]="data.permitDate"
-        class="w200"
-        [validation]="true"
-        [disabled]="isDisable"
-      />
+      <nz-range-picker>
+        name="permitDate" [(ngModel)]="data.permitDate" class="w200" [validation]="true" [disabled]="isDisable"
+      </nz-range-picker>
     </div>
 
-    <div nz-col [nzSpan]="4" class="ta_r">
+    <div nz-col [nzSpan]="3" class="ta_r">
       <button
         nz-button
         nzType="primary"
