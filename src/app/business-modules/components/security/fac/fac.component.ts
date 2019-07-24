@@ -42,7 +42,11 @@ export class FacComponent implements OnInit {
 
   reformStatusTypeIds:any=[];
 
-  condition:any="{'tableName':unit_fac,'propertyName':supervision_category_id,'configTableName':config_fac_supervison_category}";
+  condition={
+    tableName:'unit_fac',
+    propertyName:'supervision_category_id',
+    configTableName:'config_fac_supervison_category'
+  }
 
   data:any=[];
 
