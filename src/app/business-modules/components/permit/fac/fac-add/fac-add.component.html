@@ -6,21 +6,21 @@
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>营运单位：
-        <nz-select [(ngModel)]="data.serviceId" class="w200">
-          <nz-option *ngFor="let option of dictionary.config_check_level" [nzLabel]="option.value" [nzValue]="option.id">
+        <nz-select [(ngModel)]="data.serviceId" class="w200" (ngModelChange)="serviceDepartChange($event)" [disabled]="isDisable">
+          <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         设施名称：
-        <nz-select [(ngModel)]="data.facId" class="w200">
-          <nz-option *ngFor="let option of dictionary.config_check_level" [nzLabel]="option.value" [nzValue]="option.id">
+        <nz-select [(ngModel)]="data.facId" class="w200" [disabled]="isDisable">
+          <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         许可阶段：
-        <nz-select [(ngModel)]="data.stageId" class="w200">
+        <nz-select [(ngModel)]="data.stageId" class="w200" [disabled]="isDisable">
           <nz-option *ngFor="let option of dictionary.config_fac_permit_stage" [nzLabel]="option.value" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -35,7 +35,7 @@
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>许可时间：
-        <nz-date-picker name="permissionDate" [(ngModel)]="data.permissionDate" class="w200" required [validation]="true"
+        <nz-date-picker name="permitDate" [(ngModel)]="data.permitDate" class="w200" required [validation]="true"
         [disabled]="isDisable">
       </nz-date-picker>
       </div>

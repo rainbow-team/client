@@ -20,13 +20,15 @@ export class EquipPermitComponent implements OnInit {
 
   dataSet: any = [];
 
-  serviceDepartName: any = '';
   name: any = '';
   equipDepartName: any = '';
+  serviceDepartName: any = '';
+  facName:any="";
+
   typeIds: any = [];
   levelIds: any = [];
   stageIds: any = [];
-  permissionDate: any = '';
+  permit_date: any = [];
 
   constructor(
     private router: Router,
@@ -49,21 +51,32 @@ export class EquipPermitComponent implements OnInit {
       pageSize: this.pageSize,
       conditions: []
     };
-    if (this.serviceDepartName) {
-      option.conditions.push({
-        key: 'serviceDepartName',
-        value: this.serviceDepartName
-      });
-    }
+
     if (this.name) {
       option.conditions.push({ key: 'name', value: this.name });
     }
+
     if (this.equipDepartName) {
       option.conditions.push({
         key: 'equipDepartName',
         value: this.equipDepartName
       });
     }
+
+    if (this.serviceDepartName) {
+      option.conditions.push({
+        key: 'serviceDepartName',
+        value: this.serviceDepartName
+      });
+    }
+
+    if (this.facName) {
+      option.conditions.push({
+        key: 'facName',
+        value: this.facName
+      });
+    }
+
     if (this.typeIds.length > 0) {
       option.conditions.push({
         key: 'typeIds',
@@ -83,11 +96,14 @@ export class EquipPermitComponent implements OnInit {
       });
     }
 
-    if (this.permissionDate) {
-      option.conditions.push({
-        key: 'permissionDate',
-        value: this.permissionDate[0]
-      });
+    if (this.permit_date && this.permit_date.length > 0) {
+      if (this.permit_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.permit_date[0] })
+      }
+
+      if (this.permit_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.permit_date[1] })
+      }
     }
 
     this.equipPermitService.getEquipPermitList(option).subscribe(data => {
@@ -97,13 +113,15 @@ export class EquipPermitComponent implements OnInit {
   }
 
   reset() {
-    this.serviceDepartName = '';
     this.name = '';
-    this.equipDepartName = '';
+    this.equipDepartName="";
+    this.serviceDepartName = '';
+    this.facName="";
+
     this.typeIds = [];
     this.levelIds = [];
     this.stageIds = [];
-    this.permissionDate = '';
+    this.permit_date = [];
   }
 
   add() {

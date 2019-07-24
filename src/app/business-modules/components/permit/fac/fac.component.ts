@@ -25,7 +25,7 @@ export class FacComponent implements OnInit {
   serviceDepartName: any = "";
   facName: any = "";
   permitStageIds: any = "";
-  permission_date: any = [];
+  permit_date: any = [];
 
   constructor(private router: Router,
     private msg: NzMessageService, private permit_FacSercice: Permit_FacSercice, private dictionarySercice: DictionarySercice,
@@ -55,13 +55,13 @@ export class FacComponent implements OnInit {
     if (this.permitStageIds) {
       option.conditions.push({ key: "permitStageIds", value: this.permitStageIds })
     }
-    if (this.permission_date && this.permission_date.length > 0) {
-      if (this.permission_date[0]) {
-        option.conditions.push({ key: "start_date", value: this.permission_date[0] })
+    if (this.permit_date && this.permit_date.length > 0) {
+      if (this.permit_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.permit_date[0] })
       }
 
-      if (this.permission_date[1]) {
-        option.conditions.push({ key: "end_date", value: this.permission_date[1] })
+      if (this.permit_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.permit_date[1] })
       }
     }
 
@@ -77,7 +77,7 @@ export class FacComponent implements OnInit {
     this.serviceDepartName = "";
     this.facName = "";
     this.permitStageIds = "";
-    this.permission_date = [];
+    this.permit_date = [];
   }
 
   add() {

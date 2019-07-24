@@ -6,6 +6,8 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { Permit_FacSercice } from 'src/app/services/permit/permit_fac.service';
+import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
+import { FacSercice } from 'src/app/services/unit/fac.service';
 
 @Component({
   selector: 'app-fac-add',
@@ -25,9 +27,14 @@ export class FacAddComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
+  serviceDepartList: any = [];
+
+  facList: any = [];
+
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
-    private attachmentSercice: AttachmentSercice, private permit_FacSercice: Permit_FacSercice) { }
+    private attachmentSercice: AttachmentSercice, private permit_FacSercice: Permit_FacSercice,
+    private serviceDepartService: ServiceDepartService,private facSercice: FacSercice) { }
 
 
   ngOnInit() {
@@ -44,9 +51,18 @@ export class FacAddComponent implements OnInit {
       this.isDisable = false;
     }
 
+    this.serviceDepartService.getAllDepartService().subscribe((res) => {
+
+      this.serviceDepartList = res.msg;
+    })
+
+
     if (id) {
       this.permit_FacSercice.getFacPermitById(id).subscribe((res) => {
         this.data = res.msg;
+        this.facSercice.getFacListByServiceid(this.data.serviceId).subscribe((res) => {
+          this.facList = res.msg;
+        });
       });
 
       this.attachmentSercice.getFileListById(id).subscribe((res1) => {
@@ -117,5 +133,9 @@ export class FacAddComponent implements OnInit {
     return isValid;
   }
 
-
+  serviceDepartChange(value: string): void {
+    this.facSercice.getFacListByServiceid(value).subscribe((res) => {
+      this.facList = res.msg;
+    })
+  }
 }

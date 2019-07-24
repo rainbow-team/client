@@ -26,9 +26,9 @@ export class EquipPermitAddComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
-  unitEquipDeparts: any = [];
-  serviceDeparts: any = [];
-  unitFacs: any = [];
+  equipDepartList: any = [];
+  serviceDepartList: any = [];
+  facList: any = [];
 
   constructor(
     private msg: NzMessageService,
@@ -41,7 +41,7 @@ export class EquipPermitAddComponent implements OnInit {
     private equipDepartService: EquipDepartService,
     private facSercice: FacSercice,
     private equipPermitService: EquipPermitService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
@@ -57,11 +57,11 @@ export class EquipPermitAddComponent implements OnInit {
     }
 
     this.equipDepartService.getAllEquipDepart().subscribe(res => {
-      this.unitEquipDeparts = res.msg;
+      this.equipDepartList = res.msg;
     });
 
     this.serviceDepartService.getAllDepartService().subscribe(res => {
-      this.serviceDeparts = res.msg;
+      this.serviceDepartList = res.msg;
     });
 
     if (id) {
@@ -70,7 +70,7 @@ export class EquipPermitAddComponent implements OnInit {
         this.facSercice
           .getFacListByServiceid(this.data.serviceId)
           .subscribe(res1 => {
-            this.unitFacs = res1.msg;
+            this.facList = res1.msg;
           });
       });
 
@@ -125,12 +125,8 @@ export class EquipPermitAddComponent implements OnInit {
     this.router.navigate(['/permit/equip']);
   }
 
-  //根据营运单位获取对应的核设施
-  changeunitFacs(serviceid) {
-    this.facSercice.getFacListByServiceid(serviceid).subscribe(res => {
-      this.unitFacs = res.msg;
-    });
-  }
+
+
   //表单手动触发验证
   FormValidation() {
     let isValid = true;
@@ -141,4 +137,11 @@ export class EquipPermitAddComponent implements OnInit {
     });
     return isValid;
   }
+
+    //根据营运单位获取对应的核设施
+    serviceDepartChange(value: string): void {
+      this.facSercice.getFacListByServiceid(value).subscribe((res) => {
+        this.facList = res.msg;
+      });
+    }
 }

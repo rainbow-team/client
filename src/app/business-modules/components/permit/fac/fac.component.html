@@ -17,7 +17,7 @@
     </div>
     <div nz-col [nzSpan]="5">
       许可时间
-      <nz-range-picker class="w200" [(ngModel)]="permission_date" >
+      <nz-range-picker class="w200" [(ngModel)]="permit_date" >
       </nz-range-picker>
     </div>
 
@@ -63,7 +63,7 @@
             <td>{{data.serviceDepartName}}</td>
             <td>{{data.facName}}</td>
             <td>{{data.permitStageValue}}</td>
-            <td>{{data.permissionDate|recordtime}}</td>
+            <td>{{data.permitDate|recordtime}}</td>
             <td>{{data.licence}}</td>
             <td>
               <a (click)="show(data,true)">查看</a>
