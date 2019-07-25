@@ -5,7 +5,7 @@
   <div class="div_contain_add">
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
-        营运单位：
+        <span class="clo_r">*</span>营运单位：
         <nz-select
           [(ngModel)]="data.umineId"
           class="w200"
@@ -71,7 +71,7 @@
         />
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>主要备案条件：
+        主要备案条件：
         <input
           nz-input
           name="recordAttachId"
@@ -83,7 +83,7 @@
       </div>
 
       <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>审评承诺：
+        审评承诺：
         <input
           nz-input
           name="reviewPromise"
@@ -107,7 +107,7 @@
         />
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>验收时间：
+        验收时间：
         <nz-date-picker
           name="acceptDate"
           [(ngModel)]="data.acceptDate"

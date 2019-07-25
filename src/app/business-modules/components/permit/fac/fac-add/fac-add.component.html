@@ -1,27 +1,54 @@
 <div style="height: 100%;background:#fff">
   <div class="div_top_add">
-    核设施许可信息 
+    核设施许可信息
   </div>
   <div class="div_contain_add">
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>营运单位：
-        <nz-select [(ngModel)]="data.serviceId" class="w200" (ngModelChange)="serviceDepartChange($event)" [disabled]="isDisable">
-          <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
+        <nz-select
+          [(ngModel)]="data.serviceId"
+          class="w200"
+          (ngModelChange)="serviceDepartChange($event)"
+          [disabled]="isDisable"
+        >
+          <nz-option
+            *ngFor="let option of serviceDepartList"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
           </nz-option>
         </nz-select>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
-        设施名称：
-        <nz-select [(ngModel)]="data.facId" class="w200" [disabled]="isDisable">
-          <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
+        <span class="clo_r">*</span>设施名称：
+        <nz-select
+          [(ngModel)]="data.facId"
+          required
+          class="w200"
+          [disabled]="isDisable"
+        >
+          <nz-option
+            *ngFor="let option of facList"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
           </nz-option>
         </nz-select>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
-        许可阶段：
-        <nz-select [(ngModel)]="data.stageId" class="w200" [disabled]="isDisable">
-          <nz-option *ngFor="let option of dictionary.config_fac_permit_stage" [nzLabel]="option.value" [nzValue]="option.id">
+        <span class="clo_r">*</span>许可阶段：
+        <nz-select
+          [(ngModel)]="data.stageId"
+          class="w200"
+          required
+          [disabled]="isDisable"
+        >
+          <nz-option
+            *ngFor="let option of dictionary.config_fac_permit_stage"
+            [nzLabel]="option.value"
+            [nzValue]="option.id"
+          >
           </nz-option>
         </nz-select>
       </div>
@@ -30,47 +57,90 @@
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         许可范围：
-        <input nz-input name="scope" [(ngModel)]="data.scope" class="w200" 
-          [disabled]="isDisable" />
+        <input
+          nz-input
+          name="scope"
+          [(ngModel)]="data.scope"
+          class="w200"
+          [disabled]="isDisable"
+        />
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>许可时间：
-        <nz-date-picker name="permitDate" [(ngModel)]="data.permitDate" class="w200" required [validation]="true"
-        [disabled]="isDisable">
-      </nz-date-picker>
+        <nz-date-picker
+          name="permitDate"
+          [(ngModel)]="data.permitDate"
+          class="w200"
+          required
+          [validation]="true"
+          [disabled]="isDisable"
+        >
+        </nz-date-picker>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>许可文号：
-        <input nz-input name="licence" [(ngModel)]="data.licence" class="w200" required [validation]="true"
-          [disabled]="isDisable" />
+        <input
+          nz-input
+          name="licence"
+          [(ngModel)]="data.licence"
+          class="w200"
+          required
+          [validation]="true"
+          [disabled]="isDisable"
+        />
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
       <div nz-col [nzSpan]="24" class="ta_r">
         <div class="div_bz">许可条件：</div>
-        <textarea nz-input name="condition" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.condition"
-          [disabled]="isDisable"></textarea>
+        <textarea
+          nz-input
+          name="condition"
+          style="width: calc(100% - 130px);height: 70px;"
+          [(ngModel)]="data.condition"
+          [disabled]="isDisable"
+        ></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
       <div nz-col [nzSpan]="24" class="ta_r">
         <div class="div_bz">审评承诺：</div>
-        <textarea nz-input name="promise" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.promise"
-          [disabled]="isDisable"></textarea>
+        <textarea
+          nz-input
+          name="promise"
+          style="width: calc(100% - 130px);height: 70px;"
+          [(ngModel)]="data.promise"
+          [disabled]="isDisable"
+        ></textarea>
       </div>
     </div>
-    
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
 
+    <app-attachment
+      [fileList]="fileList"
+      [refid]="data.id"
+      [isDisable]="isDisable"
+    ></app-attachment>
   </div>
 
-  
-
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
-      [nzLoading]="isSaving">保存</button>
+  <div
+    nz-row
+    [nzType]="'flex'"
+    [nzAlign]="'middle'"
+    class="div_bottom_add"
+    [nzJustify]="'end'"
+  >
+    <button
+      nz-button
+      nzType="primary"
+      (click)="save()"
+      *ngIf="!isDisable"
+      style="margin-right: 10px;"
+      [nzLoading]="isSaving"
+    >
+      保存
+    </button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
 </div>
