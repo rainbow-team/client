@@ -34,3 +34,12 @@
     height: 40px;
     line-height: 40px;
 }
+
+nz-layout{
+    overflow: auto;
+}
+nz-content{
+    background: #fff;
+    min-height: 500px;
+    margin: 0,30px;
+}
