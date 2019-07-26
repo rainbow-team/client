@@ -16,4 +16,8 @@ export class StatisticsSercice {
     getStatisticsResultByYear(param): any {
         return this.http.post('/statistics/getStatisticsResultByYear', param);
     }
+
+    getStatisticsResultByBoolean(param): any {
+        return this.http.post('/statistics/getStatisticsResultByBoolean', param);
+    }
 }

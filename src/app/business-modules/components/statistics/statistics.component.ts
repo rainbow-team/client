@@ -1,5 +1,7 @@
+import { filter } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
+import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 
 @Component({
   selector: 'app-statistics',
@@ -12,79 +14,84 @@ export class StatisticsComponent implements OnInit {
     { name: "核设施统计" }, { name: "铀尾矿(渣)库统计" }, { name: "核安全许可统计" }, { name: "核安全审评统计" }, { name: "核安全监督统计 " }
     , { name: '安全问题统计' }, { name: '事故事件统计' }
   ]
-  myChart3: any;
   dataSet: any = [
     { name: 1 }
   ]
 
   selectMenuName = "核设施统计";
+
+  typeValue: any = "1";
+  typeName: any = "";
+
+  condition: any = [
+    {
+      type: "1", name: "建造年代", con: {
+        tableName: 'unit_fac',
+        propertyName: 'build_year',
+        configTableName: 'config_fac_supervison_category'
+      }
+    }, {
+      type: "2", name: "监管类别", con: {
+        tableName: 'unit_fac',
+        propertyName: 'supervision_category_id',
+        configTableName: 'config_fac_supervison_category'
+      }
+    }, {
+      type: "3", name: "设施类型", con: {
+        tableName: 'unit_fac',
+        propertyName: 'type_id',
+        configTableName: 'config_fac_type'
+      }
+    }, {
+      type: "4", name: "设施状态", con: {
+        tableName: 'unit_fac',
+        propertyName: 'status_id',
+        configTableName: 'config_fac_status'
+      }
+    }, {
+      type: "5", name: "所在区域", con: {
+        tableName: 'unit_fac',
+        propertyName: 'status_id',
+        configTableName: 'config_fac_status'
+      }
+    }, {
+      type: "6", name: "审评状态", con: {
+        tableName: 'unit_fac',
+        propertyName: 'review_status_id',
+        configTableName: 'config_review_status'
+      }
+    }, {
+      type: "7", name: "许可情况", con: {
+        tableName: 'unit_fac',
+        propertyName: 'fac_permit_situation_id',
+        configTableName: 'config_fac_permit_situation'
+      }
+    }, {
+      type: "8", name: "抗震设防", con: {
+        tableName: 'unit_fac',
+        propertyName: 'supervision_category_id',
+        configTableName: 'config_fac_supervison_category'
+      }
+    }, {
+      type: "9", name: "防洪要求", con: {
+        tableName: 'unit_fac',
+        propertyName: 'supervision_category_id',
+        configTableName: 'config_fac_supervison_category'
+      }
+    }
+  ];
+
+
+
+  reportId:any="1";
+
   constructor() { }
 
   ngOnInit() {
 
-    setTimeout(() => {
-      this.initEchart();
-    }, 100);
-
   }
 
-  initEchart() {
-    let option3 = {
-      title: {
-        text: '核设施统计',
-        x: 'center'
-      },
-      tooltip: {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-      },
-      legend: {
-        orient: 'vertical',
-        x: 'bottom',
-        data: ['新设施', '旧设施']
-      },
-      toolbox: {
-        show: true,
-        feature: {
-          mark: { show: true },
-          dataView: { show: true, readOnly: false },
-          magicType: {
-            show: true,
-            type: ['pie', 'funnel'],
-            option: {
-              funnel: {
-                x: '25%',
-                width: '50%',
-                funnelAlign: 'left',
-                max: 1548
-              }
-            }
-          },
-          restore: { show: true },
-          saveAsImage: { show: true }
-        }
-      },
-      calculable: true,
-      series: [
-        {
-          name: '访问来源',
-          type: 'pie',
-          radius: '55%',
-          center: ['50%', '60%'],
-          data: [
-            { value: 47, name: '新设施' },
-            { value: 74, name: '旧设施' },
-          ]
-        }
-      ]
-    };
-
-    this.myChart3 = echarts.init(document.getElementById("chart3qq"));
-    this.myChart3.setOption(option3);
+  click(param){
+    this.reportId=param;
   }
-
-  clickMenu(item) {
-    this.selectMenuName = item.name;
-  }
-
 }

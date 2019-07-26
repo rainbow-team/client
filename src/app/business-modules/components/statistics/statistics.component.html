@@ -14,7 +14,7 @@
 <nz-layout>
   <nz-sider [nzWidth]="260" style="background:#fff">
     <ul nz-menu [nzMode]="'inline'" style="height:100%">
-      <li nz-menu-item>核设施统计</li>
+      <li nz-menu-item click="click(1)">核设施统计</li>
       <li nz-menu-item>铀尾矿(渣)库统计</li>
       <li nz-submenu>
         <span title>核安全许可</span>
@@ -54,13 +54,14 @@
   </nz-sider>
   <!-- </div> -->
   <nz-content>
-    <div class="div_search">
-      <div class="div_search_item">
+    <app-fac-report *ngIf="reportId=='1'"></app-fac-report>
+    <!-- <div class="div_search"> -->
+      <!-- <div class="div_search_item">
         统计对象：所有核设施
-      </div>
-      <div class="div_search_item">
+      </div> -->
+      <!-- <div class="div_search_item">
         统计方式：
-        <nz-radio-group>
+        <nz-radio-group [(ngModel)]="typeValue"> 
           <label nz-radio nzValue="1">建造年代</label>
           <label nz-radio nzValue="2">监管类别</label>
           <label nz-radio nzValue="3">设施类型</label>
@@ -71,39 +72,39 @@
           <label nz-radio nzValue="8">抗震设防</label>
           <label nz-radio nzValue="9">防洪要求 </label>
         </nz-radio-group>
-      </div>
-      <div class="div_search_item" style="text-align: right;">
-        <button nz-button nzType="primary" >统计</button>
-      </div>
-  </div>
+      </div> -->
+      <!-- <div class="div_search_item" style="text-align: right;">
+        <button nz-button nzType="primary" (click)="statistics()">统计</button>
+      </div> -->
+  <!-- </div> -->
 
-  <div class="div_tab">
+  <!-- <div class="div_tab">
     <nz-tabset>
-      <nz-tab nzTitle="统计图">
-        <div id="chart3qq" style="height: 230px;">
+      <nz-tab nzTitle="统计图" style="text-align: center">
+        <div id="chart3qq" style="height: 400px;text-align: center">
 
         </div>
       </nz-tab>
       <nz-tab nzTitle="统计表">
-        <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzFrontPagination]="false" [nzShowPagination]="false" [nzNoResult]="">
+        <nz-table #nestedTable [nzData]="dataSet" class="commontable" 
+        [nzFrontPagination]="false" [nzShowPagination]="false" 
+        [nzNoResult]="" *ngIf="typeValue==='1'">
         <thead>
           <tr>
             <th>建造年代</th>
-            <th>旧设施</th>
-            <th>新设施</th>
+            <th *ngFor="let item of data">{{item.name}}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>核设施统计</td>
-            <td>47</td>
-            <td>74</td>
+            <td *ngFor="let item of data">{{item.value}}</td>
           </tr>
         </tbody>
       </nz-table>
       </nz-tab>
     </nz-tabset>
-  </div>
+  </div> -->
   </nz-content>
 </nz-layout>
 <!-- <div nz-col [nzSpan]="20" style="background: #fff;height: 100%;padding: 10px;">
