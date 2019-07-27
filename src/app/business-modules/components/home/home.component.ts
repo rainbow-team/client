@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
+import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 declare var MapConfig: any;
 
 @Component({
@@ -15,11 +16,51 @@ export class HomeComponent implements OnInit {
     myChart4: any;
     myChart5: any;
 
-    constructor() { }
+    conStatus={
+        tableName: 'unit_fac',
+        propertyName: 'status_id',
+        configTableName: 'config_fac_status',
+        reportName:''
+      }
+    
+      conType={
+        tableName: 'unit_fac',
+        propertyName: 'supervision_category_id',
+        configTableName: 'config_fac_supervison_category',
+        reportName:''
+      }
+      conYear={
+        tableName: 'unit_fac',
+        propertyName: 'build_year',
+        configTableName: 'config_fac_supervison_category',
+        reportName:''
+      }
+
+      statusData:any=[];
+
+      typeData:any=[];
+
+  
+    constructor(private statisticsSercice: StatisticsSercice) { }
 
     ngOnInit() {
         this.initEchart();
+        this.statisticsSercice.getStatisticsResultByCondition(this.conStatus).subscribe(
+            (res) => {
+                this.statusData = res.msg;
+                this.initEchart();
+            }
+        );
+
+        this.statisticsSercice.getStatisticsResultByCondition(this.conStatus).subscribe(
+            (res) => {
+                this.typeData = res.msg;
+                this.initEchart();
+            }
+        );
     }
+
+
 
     initEchart() {
         let option1 = {
@@ -77,7 +118,7 @@ export class HomeComponent implements OnInit {
             xAxis: [
                 {
                     type: 'category',
-                    data: ['XX', '待建', '土建', '建造', '运行', '停运', "调试", "YY"]
+                    data:this.statusData.map(function(v){return v.name})
                 }
             ],
             yAxis: [
@@ -89,7 +130,7 @@ export class HomeComponent implements OnInit {
                 {
                     name: '数量',
                     type: 'bar',
-                    data: [33, 26, 38, 42, 56, 42, 37, 31],
+                    data: this.statusData,
                     barWidth: 10,
                     label: {
                         normal: {
@@ -164,12 +205,8 @@ export class HomeComponent implements OnInit {
                         }
                     },
 
-                    data: [
-                        { value: 12, name: '类型一' },
-                        { value: 24, name: '类型二' },
-                        { value: 23, name: '类型三' },
-                        { value: 45, name: '类型四' }
-                    ]
+                    data: this.typeData
+                    
                 }
             ]
         };
@@ -301,11 +338,4 @@ export class HomeComponent implements OnInit {
     randomData() {
         return Math.round(Math.random() * 500);
     }
-
-
-
-
-
-
-
 }

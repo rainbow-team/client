@@ -20,4 +20,20 @@ export class StatisticsSercice {
     getStatisticsResultByBoolean(param): any {
         return this.http.post('/statistics/getStatisticsResultByBoolean', param);
     }
+
+    searchResultByPermitStageConditon(param): any {
+        return this.http.post('/statistics/searchResultByPermitStageConditon', param);
+    }
+    
+    searchResultByPermitDateConditon(param): any {
+        return this.http.post('/statistics/searchResultByPermitDateConditon', param);
+    }
+
+    getHomeNumer(): any {
+        return this.http.post('/statistics/getHomeNumer',null);
+    }
+
+    searchAccidentReport():any{
+        return this.http.post('/statistics/searchAccidentReport',null);
+    }
 }

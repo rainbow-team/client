@@ -14,12 +14,12 @@
 <nz-layout>
   <nz-sider [nzWidth]="260" style="background:#fff">
     <ul nz-menu [nzMode]="'inline'" style="height:100%">
-      <li nz-menu-item click="click(1)">核设施统计</li>
-      <li nz-menu-item>铀尾矿(渣)库统计</li>
+      <li nz-menu-item (click)="click('fac-report')">核设施统计</li>
+      <li nz-menu-item (click)="click('umineplce-report')">铀尾矿(渣)库统计</li>
       <li nz-submenu>
         <span title>核安全许可</span>
         <ul>
-          <li nz-menu-item>核设施许可统计</li>
+          <li nz-menu-item (click)="click('permit-fac-report')">核设施许可统计</li>
           <li nz-menu-item>核安全设备许可统计</li>
           <li nz-menu-item>核活动许可统计</li>
         </ul>
@@ -49,109 +49,14 @@
           <li nz-menu-item>铀尾矿(渣)库安全问题统计</li>
         </ul>
       </li>
-      <li nz-menu-item>事故事件统计</li>
+      <li nz-menu-item (click)="click('accident-report')">事故事件统计</li>
     </ul>
   </nz-sider>
   <!-- </div> -->
   <nz-content>
-    <app-fac-report *ngIf="reportId=='1'"></app-fac-report>
-    <!-- <div class="div_search"> -->
-      <!-- <div class="div_search_item">
-        统计对象：所有核设施
-      </div> -->
-      <!-- <div class="div_search_item">
-        统计方式：
-        <nz-radio-group [(ngModel)]="typeValue"> 
-          <label nz-radio nzValue="1">建造年代</label>
-          <label nz-radio nzValue="2">监管类别</label>
-          <label nz-radio nzValue="3">设施类型</label>
-          <label nz-radio nzValue="4">设施状态</label>
-          <label nz-radio nzValue="5">所在区域</label>
-          <label nz-radio nzValue="6">审评状态</label>
-          <label nz-radio nzValue="7">许可情况</label>
-          <label nz-radio nzValue="8">抗震设防</label>
-          <label nz-radio nzValue="9">防洪要求 </label>
-        </nz-radio-group>
-      </div> -->
-      <!-- <div class="div_search_item" style="text-align: right;">
-        <button nz-button nzType="primary" (click)="statistics()">统计</button>
-      </div> -->
-  <!-- </div> -->
-
-  <!-- <div class="div_tab">
-    <nz-tabset>
-      <nz-tab nzTitle="统计图" style="text-align: center">
-        <div id="chart3qq" style="height: 400px;text-align: center">
-
-        </div>
-      </nz-tab>
-      <nz-tab nzTitle="统计表">
-        <nz-table #nestedTable [nzData]="dataSet" class="commontable" 
-        [nzFrontPagination]="false" [nzShowPagination]="false" 
-        [nzNoResult]="" *ngIf="typeValue==='1'">
-        <thead>
-          <tr>
-            <th>建造年代</th>
-            <th *ngFor="let item of data">{{item.name}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>核设施统计</td>
-            <td *ngFor="let item of data">{{item.value}}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-      </nz-tab>
-    </nz-tabset>
-  </div> -->
+    <app-fac-report *ngIf="reportId=='fac-report'"></app-fac-report>
+    <app-umineplace-report *ngIf="reportId=='umineplce-report'"></app-umineplace-report>
+    <app-permit-fac-report *ngIf="reportId=='permit-fac-report'"></app-permit-fac-report>
+    <app-accident-report *ngIf="reportId=='accident-report'"></app-accident-report>
   </nz-content>
 </nz-layout>
-<!-- <div nz-col [nzSpan]="20" style="background: #fff;height: 100%;padding: 10px;">
-      <div class="div_search">
-          <div class="div_search_item">
-            统计对象：所有核设施
-          </div>
-          <div class="div_search_item">
-            统计方式：
-            <nz-radio-group>
-              <label nz-radio nzValue="1">建造年代</label>
-              <label nz-radio nzValue="2">监管类别</label>
-              <label nz-radio nzValue="3">设施类型</label>
-            </nz-radio-group>
-          </div>
-          <div class="div_search_item" style="text-align: right;">
-            <button nz-button nzType="primary" >统计</button>
-          </div>
-      </div>
-
-      <div class="div_tab">
-        <nz-tabset>
-          <nz-tab nzTitle="统计图">
-            <div id="chart3qq" style="height: 230px;">
-
-            </div>
-          </nz-tab>
-          <nz-tab nzTitle="统计表">
-            <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzFrontPagination]="false" [nzShowPagination]="false" [nzNoResult]="">
-            <thead>
-              <tr>
-                <th>建造年代</th>
-                <th>旧设施</th>
-                <th>新设施</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>核设施统计</td>
-                <td>47</td>
-                <td>74</td>
-              </tr>
-            </tbody>
-          </nz-table>
-          </nz-tab>
-        </nz-tabset>
-      </div>
-  </div>
-
-</div> -->

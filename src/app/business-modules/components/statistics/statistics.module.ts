@@ -5,7 +5,10 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../layouts/layouts.module';
 import { StatisticsComponent } from './statistics.component';
-import{FacReportComponent} from './fac-report/fac-report.component';
+import { FacReportComponent } from './fac-report/fac-report.component';
+import { UmineplaceReportComponent } from './umineplace-report/umineplace-report.component';
+import { PermitFacReportComponent } from './permit/permit-fac-report/permit-fac-report.component';
+import{AccidentReportComponent} from './accident-report/accident-report.component';
 
 const routes: Routes = [
     {
@@ -22,12 +25,15 @@ const routes: Routes = [
         NgZorroAntdModule,
         LayoutsModule,
         RouterModule.forChild(routes),
-        
+
     ],
     exports: [RouterModule],
     declarations: [
         StatisticsComponent,
-        FacReportComponent
+        FacReportComponent,
+        UmineplaceReportComponent,
+        PermitFacReportComponent,
+        AccidentReportComponent
     ]
 })
 export class StatisticsModule { }

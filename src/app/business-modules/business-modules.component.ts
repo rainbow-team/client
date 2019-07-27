@@ -5,6 +5,7 @@ import { LayoutChangeService } from './../layouts/services/layout-change.service
 import { DictionarySercice } from './../services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { StatisticsSercice } from '../services/statistics/statistics.service';
 
 @Component({
     templateUrl: './business-modules.component.html',
@@ -12,12 +13,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class BusinessModulesComponent implements OnInit {
 
+    facNum:any="0";
+    umineplaceNum:any="0";
+    umineMountainNum:any="0";
+    equipNum:any="0";
+
+    countData:any=[];
+
     //当前位置面包屑
     private breadcrumbList: any = [];
     isIndex: any = true;
 
     constructor(private layoutChangeService: LayoutChangeService, private dictionarySercice: DictionarySercice,
-        private staffSercice: StaffSercice, private router: Router, private activatedRoute: ActivatedRoute) { }
+        private staffSercice: StaffSercice, private router: Router, private activatedRoute: ActivatedRoute,
+        private statisticsSercice: StatisticsSercice) { }
 
     ngOnInit() {
 
@@ -123,6 +132,17 @@ export class BusinessModulesComponent implements OnInit {
 
             this.breadcrumbList = data;
         });
+
+        this.statisticsSercice.getHomeNumer().subscribe(
+            (res) => {
+              this.countData = res.msg;
+              this.facNum=this.countData["fac"];
+              this.umineplaceNum=this.countData["umineplace"];
+              this.umineMountainNum=this.countData["uminemountain"];
+              this.equipNum=this.countData["equip"];
+            }
+          );
+
     }
 
 
