@@ -33,7 +33,11 @@ export class StatisticsSercice {
         return this.http.post('/statistics/getHomeNumer',null);
     }
 
-    searchAccidentReport():any{
-        return this.http.post('/statistics/searchAccidentReport',null);
+    searchSumReportByDateGroup(param):any{
+        return this.http.post('/statistics/searchSumReportByDateGroup',param);
+    }
+
+    searchReportByDateAndSum(param):any{
+        return this.http.post('/statistics/searchReportByDateAndSum', param);
     }
 }

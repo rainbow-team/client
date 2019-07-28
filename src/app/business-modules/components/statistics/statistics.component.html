@@ -20,33 +20,33 @@
         <span title>核安全许可</span>
         <ul>
           <li nz-menu-item (click)="click('permit-fac-report')">核设施许可统计</li>
-          <li nz-menu-item>核安全设备许可统计</li>
-          <li nz-menu-item>核活动许可统计</li>
+          <li nz-menu-item (click)="click('permit-equip-report')">核安全设备许可统计</li>
+          <li nz-menu-item (click)="click('permit-activity-report')">核活动许可统计</li>
         </ul>
       </li>
       <li nz-submenu>
         <span title>核安全审评统计</span>
         <ul>
-          <li nz-menu-item>核设施审评统计</li>
-          <li nz-menu-item>核安全设备审评统计</li>
-          <li nz-menu-item>核活动审评统计</li>
+          <li nz-menu-item (click)="click('check-fac-report')">核设施审评统计</li>
+          <li nz-menu-item (click)="click('check-equip-report')">核安全设备审评统计</li>
+          <li nz-menu-item (click)="click('check-activity-report')">核活动审评统计</li>
         </ul>
       </li>
       <li nz-submenu>
         <span title>核安全监督统计</span>
         <ul>
-          <li nz-menu-item>日常监督统计</li>
-          <li nz-menu-item>监督检查统计</li>
-          <li nz-menu-item>监督见证统计</li>
+          <li nz-menu-item (click)="click('monitor-daily-report')">日常监督统计</li>
+          <li nz-menu-item (click)="click('monitor-check-report')">监督检查统计</li>
+          <li nz-menu-item (click)="click('monitor-witness-report')">监督见证统计</li>
         </ul>
       </li>
       <li nz-submenu>
         <span title>安全问题统计</span>
         <ul>
-          <li nz-menu-item>核社会营运单位安全问题统计</li>
-          <li nz-menu-item>核设施安全问题统计</li>
-          <li nz-menu-item>核安全设备安全问题统计</li>
-          <li nz-menu-item>铀尾矿(渣)库安全问题统计</li>
+          <li nz-menu-item (click)="click('security-servicedepart-report')">核设施营运单位安全问题统计</li>
+          <li nz-menu-item (click)="click('security-fac-problem-report')">核设施安全问题统计</li>
+          <li nz-menu-item (click)="click('security-equip-problem-report')">核安全设备安全问题统计</li>
+          <li nz-menu-item (click)="click('security-umineplace-problem-report')">铀尾矿(渣)库安全问题统计</li>
         </ul>
       </li>
       <li nz-menu-item (click)="click('accident-report')">事故事件统计</li>
@@ -56,7 +56,24 @@
   <nz-content>
     <app-fac-report *ngIf="reportId=='fac-report'"></app-fac-report>
     <app-umineplace-report *ngIf="reportId=='umineplce-report'"></app-umineplace-report>
+
     <app-permit-fac-report *ngIf="reportId=='permit-fac-report'"></app-permit-fac-report>
+    <app-permit-equip-report *ngIf="reportId=='permit-equip-report'"></app-permit-equip-report>
+    <app-permit-activity-report *ngIf="reportId=='permit-activity-report'"></app-permit-activity-report>
+
+    <app-check-fac-report *ngIf="reportId=='check-fac-report'"></app-check-fac-report>
+    <app-check-equip-report *ngIf="reportId=='check-equip-report'"></app-check-equip-report>
+    <app-check-activity-report *ngIf="reportId=='check-activity-report'"></app-check-activity-report>
+
+    <app-monitor-daily-report *ngIf="reportId=='monitor-daily-report'"></app-monitor-daily-report>
+    <app-monitor-check-report *ngIf="reportId=='monitor-check-report'"></app-monitor-check-report>
+    <app-monitor-witness-report *ngIf="reportId=='monitor-witness-report'"></app-monitor-witness-report>
+
+    <app-security-servicedepart-report *ngIf="reportId=='security-servicedepart-report'"></app-security-servicedepart-report>
+    <app-security-fac-problem-report *ngIf="reportId=='security-fac-problem-report'"></app-security-fac-problem-report>
+    <app-security-equip-problem-report *ngIf="reportId=='security-equip-problem-report'"></app-security-equip-problem-report>
+    <app-security-umineplace-problem-report *ngIf="reportId=='security-umineplace-problem-report'"></app-security-umineplace-problem-report>
+
     <app-accident-report *ngIf="reportId=='accident-report'"></app-accident-report>
   </nz-content>
 </nz-layout>

@@ -1,17 +1,17 @@
 <nz-layout>
     <nz-header nzTheme="light">
-        统计时间：
-        <nz-year-picker [(ngModel)]="startDate"  nzPlaceHolder="开始年份">
-        </nz-year-picker>
-        至
-        <nz-year-picker [(ngModel)]="endDate"  nzPlaceHolder="结束年份">
-        </nz-year-picker>
-        
+      统计时间：
+      <nz-year-picker [(ngModel)]="startDate"  nzPlaceHolder="开始年份">
+      </nz-year-picker>
+      至
+      <nz-year-picker [(ngModel)]="endDate"  nzPlaceHolder="结束年份">
+      </nz-year-picker>
       <div style="text-align: right;float:right">
         <button nz-button nzType="primary" (click)="statistics()">统计</button>
       </div>
     </nz-header>
     <nz-content>
+ 
       <nz-tabset>
         <nz-tab nzTitle="统计图">
           <div id="chart" style="height: 400px;text-align: center">

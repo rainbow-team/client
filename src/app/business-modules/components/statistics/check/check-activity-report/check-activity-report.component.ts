@@ -3,21 +3,21 @@ import { StatisticsSercice } from 'src/app/services/statistics/statistics.servic
 import * as echarts from 'echarts';
 
 @Component({
-  selector: 'app-accident-report',
-  templateUrl: './accident-report.component.html',
-  styleUrls: ['./accident-report.component.scss']
+  selector: 'app-check-activity-report',
+  templateUrl: './check-activity-report.component.html',
+  styleUrls: ['./check-activity-report.component.scss']
 })
-export class AccidentReportComponent implements OnInit {
+export class CheckActivityReportComponent implements OnInit {
 
 
   result: any = "";
 
 
   con = {
-    tableName: 'security_accident',
-    propertyName: 'occur_date',
+    tableName: 'check_activity',
+    propertyName: 'check_date',
     configTableName: '',
-    dateProperty:'occur_date'
+    dateProperty:'check_date'
   };
 
   startDate: any = "";
@@ -28,7 +28,7 @@ export class AccidentReportComponent implements OnInit {
 
   data: any = [];
 
-  title: any = "事故事件统计";
+  title: any = "核活动审评统计";
 
   constructor(private statisticsSercice: StatisticsSercice) { }
 

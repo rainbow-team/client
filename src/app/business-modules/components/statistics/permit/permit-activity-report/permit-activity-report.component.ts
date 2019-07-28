@@ -1,34 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
+import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 
 @Component({
-  selector: 'app-accident-report',
-  templateUrl: './accident-report.component.html',
-  styleUrls: ['./accident-report.component.scss']
+  selector: 'app-permit-activity-report',
+  templateUrl: './permit-activity-report.component.html',
+  styleUrls: ['./permit-activity-report.component.scss']
 })
-export class AccidentReportComponent implements OnInit {
+export class PermitActivityReportComponent implements OnInit {
 
-
-  result: any = "";
-
-
-  con = {
-    tableName: 'security_accident',
-    propertyName: 'occur_date',
-    configTableName: '',
-    dateProperty:'occur_date'
-  };
 
   startDate: any = "";
 
   endDate: any = "";
 
-  myChart: any;
+  result: any = "";
+
+
+  con = {
+    tableName: 'permit_activity',
+    propertyName: 'permit_date',
+    configTableName: '',
+    startDate: "",
+    endDate: "",
+    dateProperty:'permit_date'
+  }
+
+
+  catagrayData: any = [];
+  numberData: any = [];
+
+  myChart1: any;
+
+  myChart2: any;
 
   data: any = [];
 
-  title: any = "事故事件统计";
+  title: any = "核活动许可统计";
 
   constructor(private statisticsSercice: StatisticsSercice) { }
 
@@ -39,16 +47,18 @@ export class AccidentReportComponent implements OnInit {
     }, 100);
   }
 
+
   initEchart() {
     var that = this;
 
-    let option = {
+    let option2 = {
       title: {
-        text: that.title,
+        text: this.title,
         x: 'center'
       },
       tooltip: {
         trigger: 'item',
+        //formatter: "{a} <br/>{b} : {c} ({d}%)"
       },
       xAxis: {
         type: 'category',
@@ -62,8 +72,8 @@ export class AccidentReportComponent implements OnInit {
         type: 'bar'
       }]
     };
-    this.myChart = echarts.init(document.getElementById("chart"));
-    this.myChart.setOption(option);
+    this.myChart2 = echarts.init(document.getElementById("chart"));
+    this.myChart2.setOption(option2);
   }
 
   statistics() {
@@ -78,6 +88,6 @@ export class AccidentReportComponent implements OnInit {
 
       }
     );
-
   }
 }
+

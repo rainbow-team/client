@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
 
+
 @Component({
-  selector: 'app-permit-fac-report',
-  templateUrl: './permit-fac-report.component.html',
-  styleUrls: ['./permit-fac-report.component.scss']
+  selector: 'app-check-fac-report',
+  templateUrl: './check-fac-report.component.html',
+  styleUrls: ['./check-fac-report.component.scss']
 })
-export class PermitFacReportComponent implements OnInit {
+export class CheckFacReportComponent implements OnInit {
+
 
   typeValue: any = "1";
 
@@ -20,22 +22,22 @@ export class PermitFacReportComponent implements OnInit {
 
   condition: any = [
     {
-      type: "1", name: "许可阶段", con: {
-        tableName: 'permit_fac',
+      type: "1", name: "审评阶段", con: {
+        tableName: 'check_fac',
         propertyName: 'stage_id',
-        configTableName: 'config_fac_permit_stage',
+        configTableName: 'config_fac_check_stage',
         startDate: "",
         endDate: "",
-        dateProperty:'permit_date'
+        dateProperty:'check_date'
       }
     }, {
-      type: "2", name: "许可阶段", con: {
-        tableName: 'permit_fac',
+      type: "2", name: "审评阶段", con: {
+        tableName: 'check_fac',
         propertyName: 'stage_id',
-        configTableName: 'config_fac_permit_stage',
+        configTableName: 'config_fac_check_stage',
         startDate: "",
         endDate: "",
-        dateProperty:'permit_date'
+        dateProperty:'check_date'
       }
     }
   ];
@@ -165,5 +167,4 @@ export class PermitFacReportComponent implements OnInit {
 
     this.title = this.result[0].name;
   }
-
 }

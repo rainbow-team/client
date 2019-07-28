@@ -1,12 +1,11 @@
 <nz-layout>
     <nz-header nzTheme="light">
-        统计时间：
-        <nz-year-picker [(ngModel)]="startDate"  nzPlaceHolder="开始年份">
-        </nz-year-picker>
-        至
-        <nz-year-picker [(ngModel)]="endDate"  nzPlaceHolder="结束年份">
-        </nz-year-picker>
-        
+      统计时间：
+      <nz-year-picker [(ngModel)]="startDate"  nzPlaceHolder="开始年份">
+      </nz-year-picker>
+      至
+      <nz-year-picker [(ngModel)]="endData"  nzPlaceHolder="结束年份">
+      </nz-year-picker>
       <div style="text-align: right;float:right">
         <button nz-button nzType="primary" (click)="statistics()">统计</button>
       </div>
@@ -20,17 +19,18 @@
         </nz-tab>
         <nz-tab nzTitle="统计表">
           <nz-table #nestedTable [nzData]="data" class="commontable" [nzFrontPagination]="false"
-            [nzShowPagination]="false" [nzNoResult]="">
+            [nzShowPagination]="false" [nzNoResult]="" [nzScroll]="{ y: '240px' }">
             <thead>
               <tr>
-                <th>{{title}}</th>
-                <th *ngFor="let item of data">{{item.name}}</th>
+                <th nzWidth="150px">{{title}}</th>
+                <th nzWidth="150px" *ngFor="let item of data.yearDate">{{item}}</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>数量</td>
-                <td *ngFor="let item of data">{{item.value}}</td>
+              <tr *ngFor="let item of data.numberList">
+                <td>{{item.name}}</td>
+                <td *ngFor="let t of item.data">{{t}}</td>
+                <!-- <td *ngFor="let item of data">{{item.value}}</td> -->
               </tr>
             </tbody>
           </nz-table>
