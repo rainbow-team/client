@@ -39,7 +39,7 @@
         </nz-select>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>发现时间：
+        发现时间：
         <nz-date-picker name="findDate" [(ngModel)]="data.findDate" class="w200"  [validation]="true"
           [disabled]="isDisable">
         </nz-date-picker>
@@ -58,22 +58,22 @@
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
       <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>问题性质：
-        <nz-select [(ngModel)]="data.questionNatureId" class="w200"  [disabled]="isDisable">
-          <nz-option *ngFor="let option of dictionary.config_fac_security_question_nature"
-            [nzLabel]="option.value" [nzValue]="option.id">
-          </nz-option>
-        </nz-select>
-      </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
-        问题类别：
+        <span class="clo_r">*</span>问题类别：
         <nz-select [(ngModel)]="data.questionTypeId" class="w200" [disabled]="isDisable">
           <nz-option *ngFor="let option of dictionary.config_fac_security_question_type" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-    </div> 
+      <div nz-col [nzSpan]="8" class="ta_r">
+        <span class="clo_r">*</span>问题性质：
+        <nz-select [(ngModel)]="data.questionNatureId" class="w200" [disabled]="isDisable">
+          <nz-option *ngFor="let option of dictionary.config_fac_security_question_nature" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
       <div nz-col [nzSpan]="24" class="ta_r">
