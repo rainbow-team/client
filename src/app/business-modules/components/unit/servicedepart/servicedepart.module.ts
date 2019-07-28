@@ -7,6 +7,7 @@ import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { ServicedepartComponent } from './servicedepart.component';
 import { ServicedepartAddComponent } from './servicedepart-add/servicedepart-add.component';
 import { ServicedepartReportmanageComponent } from './servicedepart-reportmanage/servicedepart-reportmanage.component';
+import { ServicedepartSearchShowComponent } from './servicedepart-search-show/servicedepart-search-show.component';
 
 const routes: Routes = [
     {
@@ -19,7 +20,10 @@ const routes: Routes = [
     },
     {
         path: 'childmanage',
-        component:ServicedepartReportmanageComponent
+        component: ServicedepartReportmanageComponent
+    }, {
+        path: 'SearchShow',
+        component:ServicedepartSearchShowComponent
     }
 ];
 
@@ -34,9 +38,10 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        ServicedepartComponent,
+        // ServicedepartComponent,
         ServicedepartAddComponent,
-        ServicedepartReportmanageComponent
+        ServicedepartReportmanageComponent,
+        ServicedepartSearchShowComponent
     ]
 })
 export class ServiceDepartModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
@@ -12,6 +12,8 @@ import { GroupService } from 'src/app/services/unit/group.service';
   styleUrls: ['./servicedepart.component.scss']
 })
 export class ServicedepartComponent implements OnInit {
+
+  @Input() isSearchShow = "0";
   dictionary: any = {};
   staffObj: any = {};
 
@@ -84,11 +86,15 @@ export class ServicedepartComponent implements OnInit {
   }
 
   goChildManage(item) {
-    this.router.navigate(['/unit/servicedepart/childmanage'], { queryParams: { id: item.id} });
+    this.router.navigate(['/unit/servicedepart/childmanage'], { queryParams: { id: item.id } });
   }
 
   show(item, flag) {
     this.router.navigate(['/unit/servicedepart/add'], { queryParams: { id: item.id, flag: flag } });
+  }
+
+  SearchShow(item){
+    this.router.navigate(['/unit/servicedepart/SearchShow'], { queryParams: { id: item.id } });
   }
 
   delete(item) {

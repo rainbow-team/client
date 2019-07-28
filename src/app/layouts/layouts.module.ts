@@ -16,6 +16,7 @@ import { RecordtimePipe } from './_pipes/recordtime.pipe';
 import { IsTruePipe } from './_pipes/istrue.pipe';
 import { TooltipsPipe } from './_pipes/tooltips.pipe';
 import { AttachmentComponent } from './components/attachment/attachment.component';
+import { ServicedepartComponent } from './../../app/business-modules//components/unit/servicedepart/servicedepart.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { AttachmentComponent } from './components/attachment/attachment.componen
     HttpClientModule,
     RouterModule,
     NgZorroAntdModule,
-    ShareModule
+    ShareModule  
   ],
   declarations: [
     LoginComponent,
@@ -35,7 +36,8 @@ import { AttachmentComponent } from './components/attachment/attachment.componen
     TooltipsPipe,
     IsTruePipe,
     ValidationDirective,
-    AttachmentComponent
+    AttachmentComponent,
+    ServicedepartComponent
   ],
   exports: [
     LoginComponent,
@@ -46,7 +48,8 @@ import { AttachmentComponent } from './components/attachment/attachment.componen
     IsTruePipe,
     TooltipsPipe,
     ValidationDirective,
-    AttachmentComponent
+    AttachmentComponent,
+    ServicedepartComponent
   ]
 })
 export class LayoutsModule { }

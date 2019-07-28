@@ -210,12 +210,22 @@ const appRoutes: Routes = [
     ]
   },
   {
-    path:'statistics',
-    component:BusinessModulesComponent,
-    children:[
+    path: 'statistics',
+    component: BusinessModulesComponent,
+    children: [
       {
-        path:'',
-        loadChildren:'./components/statistics/statistics.module#StatisticsModule'
+        path: '',
+        loadChildren: './components/statistics/statistics.module#StatisticsModule'
+      }
+    ]
+  },
+  {
+    path: 'searchShow',
+    component: BusinessModulesComponent,
+    children: [
+      {
+        path: 'integratedAuery',
+        loadChildren: './components/searchShow/integrated-auery/integratedAuery.module#IntegratedAueryModule'
       }
     ]
   },
@@ -236,4 +246,4 @@ const appRoutes: Routes = [
   imports: [RouterModule.forChild(appRoutes)],
   exports: [RouterModule]
 })
-export class BusinessModulesRoutingModule {}
+export class BusinessModulesRoutingModule { }

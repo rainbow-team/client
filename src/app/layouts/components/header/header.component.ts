@@ -92,9 +92,9 @@ export class HeaderComponent implements OnInit {
       name: '数据迁移', id: 'sjqy', route: '',
     },
     {
-      name: '查询展示', id: 'cxzs', route: '',
+      name: '查询展示', id: 'searchShow', route: '',
       children: [
-        { name: '综合查询', id: '', route: '' },
+        { name: '综合查询', id: '', route: '/searchShow/integratedAuery' },
         { name: '模拟展示', id: '', route: '' }
       ]
     },
