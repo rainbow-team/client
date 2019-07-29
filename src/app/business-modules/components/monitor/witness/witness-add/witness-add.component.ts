@@ -140,16 +140,19 @@ export class WitnessAddComponent implements OnInit {
     if (this.departType == "fac") {
       this.data.umineId = "";
       this.data.equipDepartId = "";
+      this.data.departTypeId="0225987e-b1c6-11e9-afa3-507b9dae29a9";
     }
 
     if (this.departType == "umine") {
       this.data.serviceId = "";
       this.data.equipDepartId = "";
+      this.data.departTypeId="08035739-b1c6-11e9-afa3-507b9dae29a9";
     }
     
     if (this.departType == "equip") {
       this.data.serviceId = "";
       this.data.umineId = "";
+      this.data.departTypeId="0d7caeec-b1c6-11e9-afa3-507b9dae29a9";
     }
     this.witnessMonitorSercice.saveOrUpdateWitnessMonitor(this.data).subscribe((res) => {
       if (res.code == 200) {

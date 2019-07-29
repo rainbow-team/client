@@ -53,11 +53,17 @@
         </nz-select>
       </div>
 
-      <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>检查时间：
-        <nz-date-picker name="checkData" [(ngModel)]="checkData" class="w200" [validation]="true"
-          [disabled]="isDisable">
-        </nz-date-picker>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="24" >
+        <div class="div_bz"><span class="clo_r">*</span>检查时间：</div>
+          <nz-date-picker name="startDate" [(ngModel)]="data.startDate" class="w200" [validation]="true" [disabled]="isDisable">
+          </nz-date-picker>
+          至
+          <nz-date-picker name="endDate" [(ngModel)]="data.endDate" class="w200" [validation]="true" [disabled]="isDisable">
+          </nz-date-picker>
+          
       </div>
     </div>
 
