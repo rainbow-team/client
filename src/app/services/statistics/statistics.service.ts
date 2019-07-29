@@ -40,4 +40,13 @@ export class StatisticsSercice {
     searchReportByDateAndSum(param):any{
         return this.http.post('/statistics/searchReportByDateAndSum', param);
     }
+
+
+    searchResultByTypeConditon(param): any {
+        return this.http.post('/statistics/searchResultByTypeConditon', param);
+    }
+    
+    searchResultByDateConditon(param): any {
+        return this.http.post('/statistics/searchResultByDateConditon', param);
+    }
 }
