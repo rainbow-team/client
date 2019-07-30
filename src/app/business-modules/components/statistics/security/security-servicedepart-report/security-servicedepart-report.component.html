@@ -3,7 +3,7 @@
     <div nz-row>
       <div nz-col [nzSpan]="8" class="ta_l">
         营运单位：
-        <nz-select [(ngModel)]="ids" nzMode="multiple"  class="w200" (ngModelChange)="serviceDepartChange($event)"
+        <nz-select [(ngModel)]="ids"   class="w200" (ngModelChange)="serviceDepartChange($event)"
           [disabled]="isDisable" nzShowSearch nzAllowClear nzPlaceHolder="请选择营运单位名称" >
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
@@ -31,7 +31,7 @@
     </div>
   </nz-header>
   <nz-content>
-    <nz-tabset *ngIf="typeValue==1">
+    <nz-tabset *ngIf="typeValue==1||typeValue==3">
       <nz-tab nzTitle="统计图">
         <div id="chart1" style="height: 400px;text-align: center">
 

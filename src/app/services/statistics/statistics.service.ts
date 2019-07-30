@@ -49,4 +49,10 @@ export class StatisticsSercice {
     searchResultByDateConditon(param): any {
         return this.http.post('/statistics/searchResultByDateConditon', param);
     }
+
+    
+
+    searchResultByStatusAndType(param): any {
+        return this.http.post('/statistics/searchResultByStatusAndType', param);
+    }
 }

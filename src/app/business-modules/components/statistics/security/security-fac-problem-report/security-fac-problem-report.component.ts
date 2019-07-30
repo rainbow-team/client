@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
+import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 
 @Component({
   selector: 'app-security-fac-problem-report',
@@ -9,6 +10,9 @@ import * as echarts from 'echarts';
 })
 export class SecurityFacProblemReportComponent implements OnInit {
 
+  serviceDepartList: any = [];
+
+  ids: any = "";
 
   typeValue: any = "1";
 
@@ -21,22 +25,38 @@ export class SecurityFacProblemReportComponent implements OnInit {
 
   condition: any = [
     {
-      type: "1", name: "审评阶段", con: {
-        tableName: 'check_fac',
-        propertyName: 'stage_id',
-        configTableName: 'config_fac_check_stage',
+      type: "1", name: "问题类别", con: {
+        tableName: 'security_fac',
+        propertyName: 'question_type_id',
+        configTableName: 'config_fac_security_question_type',
         startDate: "",
         endDate: "",
-        dateProperty:'check_date'
+        dateProperty: 'find_date',
+        ids: [],
+        idsProperty:"service_id"
       }
     }, {
-      type: "2", name: "审评阶段", con: {
-        tableName: 'check_fac',
-        propertyName: 'stage_id',
-        configTableName: 'config_fac_check_stage',
+      type: "2", name: "问题性质", con: {
+        tableName: 'security_fac',
+        propertyName: 'question_nature_id',
+        configTableName: 'config_fac_security_question_nature',
         startDate: "",
         endDate: "",
-        dateProperty:'check_date'
+        dateProperty: 'find_date',
+        ids: [],
+        idsProperty:"service_id"
+      }
+    },{
+      type: "3", name: "整改状态及问题类别", con: {
+        tableName: 'security_fac',
+        propertyName: 'question_type_id',
+        configTableName: 'config_fac_security_question_type',
+        startDate: "",
+        endDate: "",
+        dateProperty: 'find_date',
+        ids: [],
+        idsProperty:"service_id",
+        isService:'false'
       }
     }
   ];
@@ -54,14 +74,21 @@ export class SecurityFacProblemReportComponent implements OnInit {
 
   des: any = "";
 
-  configList:any=[];
+  configList: any = [];
 
-  constructor(private statisticsSercice: StatisticsSercice) { }
+  constructor(private statisticsSercice: StatisticsSercice,
+    private serviceDepartService: ServiceDepartService, ) { }
 
   ngOnInit() {
 
+    this.serviceDepartService.getAllDepartService().subscribe((res) => {
+
+      this.serviceDepartList = res.msg;
+    })
+
+
     setTimeout(() => {
-      this.initEchart2();
+      this.initEchart1();
     }, 100);
   }
 
@@ -142,23 +169,62 @@ export class SecurityFacProblemReportComponent implements OnInit {
     this.filterCondition();
     this.result[0].con["startDate"] = this.startDate;
     this.result[0].con["endDate"] = this.endData;
+    this.result[0].con["ids"] = this.ids;
+    // if (this.ids == null) {
+    //   this.result[0].con["ids"] = null;
+
+    // }
+    //  else {
+    //    this.result[0].con["ids"] = this.ids;
+      // if (this.typeValue == 1) {
+      //   this.statisticsSercice.searchResultByPermitDateConditon(this.result[0].con).subscribe(
+      //     (res) => {
+      //       this.data = res.msg;
+
+      //       this.configList = this.data.numberList.map(function (v) { return v.name });
+
+      //       this.initEchart1();
+
+      //     }
+      //   );
+      // } else {
+      //   this.statisticsSercice.searchResultByPermitStageConditon(this.result[0].con).subscribe(
+      //     (res) => {
+      //       this.data = res.msg;
+      //       this.initEchart2();
+      //     }
+      //   );
+      // }
+    //  }
+
     if (this.typeValue == 1) {
-      this.statisticsSercice.searchResultByPermitDateConditon(this.result[0].con).subscribe(
+      this.statisticsSercice.searchResultByDateConditon(this.result[0].con).subscribe(
         (res) => {
           this.data = res.msg;
 
-          this.configList=this.data.numberList.map(function(v){return v.name});
+          this.configList = this.data.numberList.map(function (v) { return v.name });
 
           this.initEchart1();
 
         }
       );
-    } else {
+    } else if(this.typeValue==2){
 
-      this.statisticsSercice.searchResultByPermitStageConditon(this.result[0].con).subscribe(
+      this.statisticsSercice.searchResultByTypeConditon(this.result[0].con).subscribe(
         (res) => {
           this.data = res.msg;
           this.initEchart2();
+
+        }
+      );
+    }else{
+      this.statisticsSercice.searchResultByStatusAndType(this.result[0].con).subscribe(
+        (res) => {
+          this.data = res.msg;
+
+          this.configList = this.data.numberList.map(function (v) { return v.name });
+
+          this.initEchart1();
 
         }
       );

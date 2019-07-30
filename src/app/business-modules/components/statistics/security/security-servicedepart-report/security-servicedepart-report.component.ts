@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
@@ -33,7 +34,8 @@ export class SecurityServicedepartReportComponent implements OnInit {
         startDate: "",
         endDate: "",
         dateProperty: 'find_date',
-        ids: []
+        ids: [],
+        idsProperty:"service_id"
       }
     }, {
       type: "2", name: "问题性质", con: {
@@ -43,7 +45,20 @@ export class SecurityServicedepartReportComponent implements OnInit {
         startDate: "",
         endDate: "",
         dateProperty: 'find_date',
-        ids: []
+        ids: [],
+        idsProperty:"service_id"
+      }
+    },{
+      type: "3", name: "整改状态及问题类别", con: {
+        tableName: 'security_fac',
+        propertyName: 'question_type_id',
+        configTableName: 'config_fac_security_question_type',
+        startDate: "",
+        endDate: "",
+        dateProperty: 'find_date',
+        ids: [],
+        idsProperty:"service_id",
+        isService:'true'
       }
     }
   ];
@@ -68,7 +83,6 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
   ngOnInit() {
 
-
     this.serviceDepartService.getAllDepartService().subscribe((res) => {
 
       this.serviceDepartList = res.msg;
@@ -76,7 +90,7 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
 
     setTimeout(() => {
-      this.initEchart2();
+      this.initEchart1();
     }, 100);
   }
 
@@ -154,56 +168,68 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
   statistics() {
 
-
-
     this.filterCondition();
     this.result[0].con["startDate"] = this.startDate;
     this.result[0].con["endDate"] = this.endData;
-    if (this.ids.length > 0) {
-      this.result[0].con["ids"] = this.ids;
-      if (this.typeValue == 1) {
-        this.statisticsSercice.searchResultByPermitDateConditon(this.result[0].con).subscribe(
-          (res) => {
-            this.data = res.msg;
+    this.result[0].con["ids"] = this.ids;
+    // if (this.ids == null) {
+    //   this.result[0].con["ids"] = null;
 
-            this.configList = this.data.numberList.map(function (v) { return v.name });
+    // }
+    //  else {
+    //    this.result[0].con["ids"] = this.ids;
+      // if (this.typeValue == 1) {
+      //   this.statisticsSercice.searchResultByPermitDateConditon(this.result[0].con).subscribe(
+      //     (res) => {
+      //       this.data = res.msg;
 
-            this.initEchart1();
+      //       this.configList = this.data.numberList.map(function (v) { return v.name });
 
-          }
-        );
-      } else {
+      //       this.initEchart1();
 
-        this.statisticsSercice.searchResultByTypeConditon(this.result[0].con).subscribe(
-          (res) => {
-            this.data = res.msg;
-            this.initEchart2();
+      //     }
+      //   );
+      // } else {
+      //   this.statisticsSercice.searchResultByPermitStageConditon(this.result[0].con).subscribe(
+      //     (res) => {
+      //       this.data = res.msg;
+      //       this.initEchart2();
+      //     }
+      //   );
+      // }
+    //  }
 
-          }
-        );
-      }
-    }
+    if (this.typeValue == 1) {
+      this.statisticsSercice.searchResultByDateConditon(this.result[0].con).subscribe(
+        (res) => {
+          this.data = res.msg;
 
-    else {
-      if (this.typeValue == 1) {
-        this.statisticsSercice.searchResultByPermitDateConditon(this.result[0].con).subscribe(
-          (res) => {
-            this.data = res.msg;
+          this.configList = this.data.numberList.map(function (v) { return v.name });
 
-            this.configList = this.data.numberList.map(function (v) { return v.name });
+          this.initEchart1();
 
-            this.initEchart1();
+        }
+      );
+    } else if(this.typeValue==2){
 
-          }
-        );
-      } else {
-        this.statisticsSercice.searchResultByPermitStageConditon(this.result[0].con).subscribe(
-          (res) => {
-            this.data = res.msg;
-            this.initEchart2();
-          }
-        );
-      }
+      this.statisticsSercice.searchResultByTypeConditon(this.result[0].con).subscribe(
+        (res) => {
+          this.data = res.msg;
+          this.initEchart2();
+
+        }
+      );
+    }else{
+      this.statisticsSercice.searchResultByStatusAndType(this.result[0].con).subscribe(
+        (res) => {
+          this.data = res.msg;
+
+          this.configList = this.data.numberList.map(function (v) { return v.name });
+
+          this.initEchart1();
+
+        }
+      );
     }
 
     this.title = this.result[0].name;
