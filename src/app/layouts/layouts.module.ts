@@ -17,6 +17,7 @@ import { IsTruePipe } from './_pipes/istrue.pipe';
 import { TooltipsPipe } from './_pipes/tooltips.pipe';
 import { AttachmentComponent } from './components/attachment/attachment.component';
 import { ServicedepartComponent } from './../../app/business-modules//components/unit/servicedepart/servicedepart.component';
+import { ActivityPermitComponent } from './../../app/business-modules/components/permit/activity/activity.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { ServicedepartComponent } from './../../app/business-modules//components
     HttpClientModule,
     RouterModule,
     NgZorroAntdModule,
-    ShareModule  
+    ShareModule
   ],
   declarations: [
     LoginComponent,
@@ -37,7 +38,8 @@ import { ServicedepartComponent } from './../../app/business-modules//components
     IsTruePipe,
     ValidationDirective,
     AttachmentComponent,
-    ServicedepartComponent
+    ServicedepartComponent,
+    ActivityPermitComponent
   ],
   exports: [
     LoginComponent,
@@ -49,7 +51,8 @@ import { ServicedepartComponent } from './../../app/business-modules//components
     TooltipsPipe,
     ValidationDirective,
     AttachmentComponent,
-    ServicedepartComponent
+    ServicedepartComponent,
+    ActivityPermitComponent
   ]
 })
 export class LayoutsModule { }

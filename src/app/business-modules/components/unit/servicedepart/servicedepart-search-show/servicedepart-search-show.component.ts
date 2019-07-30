@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-servicedepart-search-show',
@@ -8,9 +8,12 @@ import { Router } from '@angular/router';
 })
 export class ServicedepartSearchShowComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  servicedepartId: any;
+  constructor(private router: Router,private ActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.servicedepartId = this.ActivatedRoute.snapshot.queryParams["id"];
   }
 
   close() {

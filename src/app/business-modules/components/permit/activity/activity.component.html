@@ -59,7 +59,7 @@
         核活动许可信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="!servicedepartId">
         <button
           nz-button
           nzType="primary"
@@ -109,7 +109,7 @@
             <td>{{ data.permitDate | recordtime }}</td>
             <td>{{ data.validateTime }}</td>
             <td>{{ data.licence }}</td>
-            <td>
+            <td *ngIf="!servicedepartId">
               <a (click)="show(data, true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data, false)">编辑</a>
@@ -120,6 +120,9 @@
                 (nzOnConfirm)="delete(data)"
                 >删除</a
               >
+            </td>
+            <td *ngIf="servicedepartId">
+              <a (click)="show(data, true)">查看</a>
             </td>
           </tr>
         </tbody>

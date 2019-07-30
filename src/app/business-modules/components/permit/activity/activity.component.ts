@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -11,6 +11,9 @@ import { ActivityPermitService } from 'src/app/services/permit/activity.service'
   styleUrls: ['./activity.component.scss']
 })
 export class ActivityPermitComponent implements OnInit {
+
+  @Input() servicedepartId: any = "";
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -80,6 +83,13 @@ export class ActivityPermitComponent implements OnInit {
           value: this.permitDate[1]
         });
       }
+    }
+
+    if (this.servicedepartId) {
+      option.conditions.push({
+        key: 'servicedepartId',
+        value: this.servicedepartId
+      });
     }
 
     this.activityPermitService.getActivityPermitList(option).subscribe(data => {

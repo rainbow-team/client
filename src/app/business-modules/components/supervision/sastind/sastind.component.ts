@@ -79,4 +79,9 @@ export class SastindComponent implements OnInit {
     })
 
   }
+
+  exportSastind() {
+    var url = AppConfig.serviceAddress + "/sastind/exportSastind?name=" + this.name;
+    window.open(url, "_blank");
+  }
 }
