@@ -76,15 +76,15 @@
   color: red;
 }
 
-// .ma_b20{
-//   margin-bottom: 20px;
-// }
-
 .ma_b20{
   margin-bottom: 20px;
-  width: calc(100% - 150px);
-  float: left;
 }
+
+// .ma_b20{
+//   margin-bottom: 20px;
+//   width: calc(100% - 150px);
+//   float: left;
+// }
 .upload_i {
   font-size: 32px;
   color: #999;
@@ -290,15 +290,15 @@
 }
 
 .showText{
-  float: right;
+  float: left;
   text-align: left;
   height: 30px;
   width: 200px
 }
 
 .showTextArea{
-  float: right;
+  float: left;
   text-align: left;
-  width: calc(100% - 130px);
+  //width: calc(100% - 130px);
   height: 150px;
 }
