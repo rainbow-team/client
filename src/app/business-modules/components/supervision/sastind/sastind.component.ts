@@ -23,6 +23,8 @@ export class SastindComponent implements OnInit {
 
   name: any = "";
 
+  selectId: any = "";
+
   constructor(private router: Router,
     private msg: NzMessageService, private sastindSercice: SastindSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice) { }
@@ -42,10 +44,6 @@ export class SastindComponent implements OnInit {
       conditions: []
     }
 
-    if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
-    }
-
     this.sastindSercice.getSastindList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
@@ -54,34 +52,47 @@ export class SastindComponent implements OnInit {
     );
   }
 
-  reset() {
-    this.name = "";
-  }
-
   add() {
     this.router.navigate(['/supersivion/sastind/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/supersivion/sastind/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/supersivion/sastind/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
+  modify() {
+    if(this.selectId){
+      this.router.navigate(['/supersivion/sastind/add'], { queryParams: { id: this.selectId, isShow: false } });
+    }else{
+      this.msg.create("warning", "请选择修改项");
+    }
+   
+  }
+  delete() {
 
-    this.sastindSercice.deleteSastindById([item.id]).subscribe((res) => {
+    if (this.selectId) {
+      this.sastindSercice.deleteSastindById([this.selectId]).subscribe((res) => {
 
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+    }else{
+      this.msg.create("warning", "请选择删除项");
+    }
 
   }
 
   exportSastind() {
     var url = AppConfig.serviceAddress + "/sastind/exportSastind?name=" + this.name;
     window.open(url, "_blank");
+  }
+
+
+  selectItem(data) {
+    this.selectId = data.id;
   }
 }

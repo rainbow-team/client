@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { NavMenu } from 'src/app/utilities/entities/navMenu';
+import { StaffSercice } from 'src/app/services/common/staff-service';
 
 @Component({
   selector: 'app-header',
@@ -104,11 +105,12 @@ export class HeaderComponent implements OnInit {
     }
   ];
 
+  name:any="";
 
-  constructor(private router: Router,
-    private modal: NzModalService) { }
+  constructor(private router: Router,private modal: NzModalService,private staffSercice: StaffSercice) { }
 
   ngOnInit() {
+    this.name = this.staffSercice.getStaffObj().username;
   }
 
   exitSystem() {

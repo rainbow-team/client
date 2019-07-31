@@ -14,7 +14,7 @@ export class StaffSercice {
         let staffObj = sessionStorage.getItem("staffObj");
 
         if (staffObj) {
-            return JSON.parse(staffObj);
+            return JSON.parse(staffObj).userinfo;
         } else {
             return {};
         }

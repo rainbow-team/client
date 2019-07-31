@@ -28,6 +28,8 @@ export class SupervisorComponent implements OnInit {
 
     orgList: any = [];
 
+    selectId:any="";
+
     constructor(private supervisionSercice: SupervisionSercice, private http: HttpClient, private router: Router,
         private msg: NzMessageService, private orgSercice: OrgSercice) { }
 
@@ -100,25 +102,30 @@ export class SupervisorComponent implements OnInit {
 
     delete() {
 
-        let checkItems = this.dataSet.filter(value => value.checked);
+        // let checkItems = this.dataSet.filter(value => value.checked);
 
-        if (checkItems != null && checkItems.length == 0) {
+        // if (checkItems != null && checkItems.length == 0) {
+        //     this.msg.create("warning", "请选择删除项");
+        //     return;
+        // }
+
+        // checkItems.forEach(element => {
+        //     this.ids.push(element.id);
+        // });
+
+        if(this.selectId){
+            this.supervisionSercice.deleteSupervisionSupervisorByIds([this.selectId]).subscribe((res) => {
+                if (res.code == 200) {
+                    this.msg.create("success", "删除成功");
+                    this.search();
+                } else {
+                    this.msg.create("error", "删除失败");
+                }
+            })
+        }else{
             this.msg.create("warning", "请选择删除项");
-            return;
         }
 
-        checkItems.forEach(element => {
-            this.ids.push(element.id);
-        });
-
-        this.supervisionSercice.deleteSupervisionSupervisorByIds(this.ids).subscribe((res) => {
-            if (res.code == 200) {
-                this.msg.create("success", "删除成功");
-                this.search();
-            } else {
-                this.msg.create("error", "删除失败");
-            }
-        })
     }
 
     pageIndexChange(num) {
@@ -136,6 +143,10 @@ export class SupervisorComponent implements OnInit {
         this.name = "";
         this.orgId = "";
         this.expireDate = "";
+        this.selectId="";
     }
 
+    selectItem(data){
+        this.selectId=data.id;
+    }
 }

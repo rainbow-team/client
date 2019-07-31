@@ -46,15 +46,17 @@
 
 .addbtn{
   width: 70px;
-  background:#1890ff url(./assets/images/add_btn.png) no-repeat 7px center!important;
-  padding-right: 0px;
+  // background:#1890ff url(./assets/images/add_btn.png) no-repeat 7px center!important;
+  background:#1890ff;
+  padding-right: 0px
 }
 
 .delbtn{
   width: 70px;
-  background: #f47264 url(./assets/images/del_btn.png) no-repeat 7px center!important;
+  // background: #f47264 url(./assets/images/del_btn.png) no-repeat 7px center!important;
+  background: #f47264;
   padding-right: 0px;
-  color: #fff!important;
+  color: #fff
 }
 
 .commontable{
@@ -74,10 +76,15 @@
   color: red;
 }
 
+// .ma_b20{
+//   margin-bottom: 20px;
+// }
+
 .ma_b20{
   margin-bottom: 20px;
+  width: calc(100% - 150px);
+  float: left;
 }
-
 .upload_i {
   font-size: 32px;
   color: #999;
@@ -92,7 +99,7 @@
 .div_bz{
   float: left;
   margin-top: 5px;
-  width: 130px;
+  width: 150px;
 }
 
 .ant-upload.ant-upload-select {
@@ -165,12 +172,13 @@
 .tablescoll_rainbow tbody {
   display:block;
   max-height:400px;
-  overflow-y:scroll;
+  overflow-y:auto;
 
   tr{
     display:table;
     width:100%;
     table-layout:fixed;
+    text-align: left
   }
 }
   
@@ -178,6 +186,7 @@
   display:table;
   width:100%;
   table-layout:fixed;
+  text-align: left
 }
   
 .tablescoll_rainbow thead {
@@ -278,4 +287,18 @@
 
 .ant-select-selection__choice{
   display: none;
+}
+
+.showText{
+  float: right;
+  text-align: left;
+  height: 30px;
+  width: 200px
+}
+
+.showTextArea{
+  float: right;
+  text-align: left;
+  width: calc(100% - 130px);
+  height: 150px;
 }

@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
           this.isLogining = false;
 
           if (data.code == 200) {
-            this.staffSercice.setStaffObj(data.msg.userinfo);
+            this.staffSercice.setStaffObj(data.msg);
             this.router.navigate(['/home']);
           } else {
             this.loginMessage = data.msg;
