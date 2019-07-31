@@ -14,7 +14,7 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
   serviceDepartList: any = [];
 
-  ids: any = [];
+  ids: any ;
 
   typeValue: any = "1";
 
@@ -35,7 +35,8 @@ export class SecurityServicedepartReportComponent implements OnInit {
         endDate: "",
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id"
+        idsProperty:"service_id",
+        isService:'true'
       }
     }, {
       type: "2", name: "问题性质", con: {
@@ -46,7 +47,8 @@ export class SecurityServicedepartReportComponent implements OnInit {
         endDate: "",
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id"
+        idsProperty:"service_id",
+        isService:'true'
       }
     },{
       type: "3", name: "整改状态及问题类别", con: {
