@@ -8,7 +8,7 @@
         <span class="clo_r">*</span>司局名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true" />
+        <input nz-input name="name" [(ngModel)]="data.name"  required [validation]="true" />
       </div>
     </div>
 
@@ -17,14 +17,14 @@
         <span class="clo_r">*</span>司领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="leader" [(ngModel)]="data.leader" class="w200" required [validation]="true" />
+        <input nz-input name="leader" [(ngModel)]="data.leader"  required [validation]="true" />
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         司领导电话：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" class="w200" required [validation]="true" />
+        <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel"  />
       </div>
     </div>
 
@@ -33,15 +33,14 @@
         <span class="clo_r">*</span>分管核安全司领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="securityLeader" [(ngModel)]="data.securityLeader" class="w200" required
-          [validation]="true" />
+        <input nz-input name="securityLeader" [(ngModel)]="data.securityLeader"  required  [validation]="true" />
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         分管核安全司领导电话：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="securityLeaderTel" [(ngModel)]="data.securityLeaderTel" class="w200" [validation]="true"
+        <input nz-input name="securityLeaderTel" [(ngModel)]="data.securityLeaderTel" [validation]="true"
           [validationType]="'nullphonenumber'" />
       </div>
     </div>
@@ -51,15 +50,14 @@
         <span class="clo_r">*</span>核安全许可处室领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="permitLeader" [(ngModel)]="data.permitLeader" class="w200" required [validation]="true" />
+        <input nz-input name="permitLeader" [(ngModel)]="data.permitLeader" required [validation]="true" />
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         核安全许可处室领导电话：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="permitLeaderTel" [(ngModel)]="data.permitLeaderTel" class="w200" [validation]="true"
-          [validationType]="'nullphonenumber'" />
+        <input nz-input name="permitLeaderTel" [(ngModel)]="data.permitLeaderTel" [validation]="true" [validationType]="'nullphonenumber'" />
       </div>
     </div>
 
@@ -68,7 +66,7 @@
         <span class="clo_r">*</span>核安全监督处室领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="superviseLeader" [(ngModel)]="data.superviseLeader" class="w200" required
+        <input nz-input name="superviseLeader" [(ngModel)]="data.superviseLeader" required
           [validation]="true" />
       </div>
 
@@ -76,7 +74,7 @@
         核安全监督处室领导电话：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="superviseLeaderTel" [(ngModel)]="data.superviseLeaderTel" class="w200" [validation]="true"
+        <input nz-input name="superviseLeaderTel" [(ngModel)]="data.superviseLeaderTel" [validation]="true"
           [validationType]="'nullphonenumber'" />
       </div>
 

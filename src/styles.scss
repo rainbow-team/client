@@ -286,9 +286,13 @@
   border-top: 1px solid #e5e5e5;
 }
 
-.ant-select-selection__choice{
-  display: none;
-}
+// .ant-select-selection__choice{
+//   display: none;
+// }
+
+// .ant-select-selection__placeholder{
+//   display:inline-block!important
+// }
 
 .showText{
   float: left;
@@ -301,5 +305,5 @@
   float: left;
   text-align: left;
   //width: calc(100% - 130px);
-  height: 150px;
+  height: 100px;
 }

@@ -19,7 +19,7 @@ export class OrgAddComponent implements OnInit {
   staffObj: any = {};
   data: any = {};
   nature: any = [];
-  isDisable: any = false;
+  isShow: any = false;
   isSaving: any = false;
 
   constructor(private router: Router,
@@ -31,18 +31,19 @@ export class OrgAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
     if (id) {
       this.orgSercice.getOrgById(id).subscribe((res) => {
         if (res.code == 200) {
           this.data = res.msg;
+          this.nature=this.data.typeIds
         }
       });
     } else {

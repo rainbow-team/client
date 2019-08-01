@@ -16,14 +16,16 @@ export class OrgComponent implements OnInit {
   staffObj: any = {};
 
   pageIndex: any = 1;
-  totalCount: any;
+  totalCount: any = 0;
   pageSize: any = 10;
 
   dataSet: any = [];
 
   name: any = "";
-  nature: any = [];
-  leader: any = [];
+  natureIds: any = [];
+  leader: any = "";
+
+  selectId: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private orgSercice: OrgSercice, private dictionarySercice: DictionarySercice,
@@ -47,8 +49,8 @@ export class OrgComponent implements OnInit {
     if (this.name) {
       option.conditions.push({ key: "name", value: this.name })
     }
-    if (this.nature && this.nature.length > 0) {
-      option.conditions.push({ key: "nature", value: this.nature })
+    if (this.natureIds && this.natureIds.length > 0) {
+      option.conditions.push({ key: "natureIds", value: this.natureIds })
     }
     if (this.leader) {
       option.conditions.push({ key: "leader", value: this.leader })
@@ -57,20 +59,6 @@ export class OrgComponent implements OnInit {
     this.orgSercice.getOrgList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
-
-        if (this.dataSet || this.dataSet.length > 0) {
-          this.dataSet.forEach(element => {
-
-            if (element.nature && element.nature.length > 0) {
-              element.natureName = "";
-              element.nature.forEach(n => {
-                element.natureName += n.value;
-              });
-            }
-
-          });
-        }
-
         this.totalCount = data.msg.recordCount;
       }
     );
@@ -78,30 +66,51 @@ export class OrgComponent implements OnInit {
 
   reset() {
     this.name = "";
-    this.nature = [];
+    this.natureIds = [];
     this.leader = "";
+    this.selectId="";
   }
 
   add() {
     this.router.navigate(['/supersivion/org/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/supersivion/org/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/supersivion/org/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
-
-    this.orgSercice.deleteOrgByIds([item.id]).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/supersivion/org/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
 
   }
 
+  delete() {
+    if (this.selectId) {
+      this.orgSercice.deleteOrgByIds([this.selectId]).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+    }
+    else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
+
+  export() {
+    var url = AppConfig.serviceAddress + "/sastind/exportSastind?name=" + this.name;
+    window.open(url, "_blank");
+  }
 }
