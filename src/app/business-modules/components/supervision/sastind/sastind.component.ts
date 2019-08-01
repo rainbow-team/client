@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
+import { SastindSercice } from 'src/app/services/supervision/sastind.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { SastindSercice } from 'src/app/services/supervision/sastind.service';
+
 
 @Component({
   selector: 'app-sastind',
@@ -71,7 +72,7 @@ export class SastindComponent implements OnInit {
   delete() {
 
     if (this.selectId) {
-      this.sastindSercice.deleteSastindById([this.selectId]).subscribe((res) => {
+      this.sastindSercice.deleteSastindById(this.selectId).subscribe((res) => {
 
         if (res.code == 200) {
           this.msg.create("success", "删除成功");

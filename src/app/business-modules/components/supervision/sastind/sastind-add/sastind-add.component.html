@@ -4,85 +4,107 @@
   </div>
   <div class="div_contain_add" *ngIf="isShow==false">
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="12" class="ta_r">
-        <span class="clo_r">*</span>司局名称:
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>司局名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true" />
       </div>
     </div>
 
-
-
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="12" class="ta_r">
-        <span class="clo_r">*</span>司领导:
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>司领导：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="leader" [(ngModel)]="data.leader" class="w200" required [validation]="true" />
       </div>
-      <div nz-col [nzSpan]="12" class="ta_r">
-        司领导电话:
-        <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" class="w200" [validation]="true"
-          [validationType]="'nullphonenumber'" />
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        司领导电话：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" class="w200" required [validation]="true" />
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="12" class="ta_r">
-        <span class="clo_r">*</span>分管核安全司领导:
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>分管核安全司领导：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="securityLeader" [(ngModel)]="data.securityLeader" class="w200" required
           [validation]="true" />
       </div>
-      <div nz-col [nzSpan]="12" class="ta_r">
-        分管核安全司领导电话:
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        分管核安全司领导电话：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="securityLeaderTel" [(ngModel)]="data.securityLeaderTel" class="w200" [validation]="true"
           [validationType]="'nullphonenumber'" />
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="12" class="ta_r">
-        <span class="clo_r">*</span>核安全许可处室领导:
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>核安全许可处室领导：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="permitLeader" [(ngModel)]="data.permitLeader" class="w200" required [validation]="true" />
       </div>
-      <div nz-col [nzSpan]="12" class="ta_r">
-        核安全许可处室领导电话:
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        核安全许可处室领导电话：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="permitLeaderTel" [(ngModel)]="data.permitLeaderTel" class="w200" [validation]="true"
           [validationType]="'nullphonenumber'" />
       </div>
-
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="12" class="ta_r">
-        <span class="clo_r">*</span>核安全监督处室领导:
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>核安全监督处室领导：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="superviseLeader" [(ngModel)]="data.superviseLeader" class="w200" required
           [validation]="true" />
-
       </div>
-      <div nz-col [nzSpan]="12" class="ta_r">
-        核安全监督处室领导电话:
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        核安全监督处室领导电话：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="superviseLeaderTel" [(ngModel)]="data.superviseLeaderTel" class="w200" [validation]="true"
           [validationType]="'nullphonenumber'" />
       </div>
+
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">处室设置:</div>
-        <textarea nz-input name="orgSet" style="width: calc(100% - 150px);height: 100px;"
-          [(ngModel)]="data.orgSet"></textarea>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        处室设置：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="orgSet" style="height: 100px;" [(ngModel)]="data.orgSet"></textarea>
       </div>
     </div>
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">工作职责:</div>
-        <textarea nz-input name="duty" style="width: calc(100% - 150px);height: 150px;"
-          [(ngModel)]="data.duty"></textarea>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        工作职责：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="duty" style="height: 150px;" [(ngModel)]="data.duty"></textarea>
       </div>
     </div>
+
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">备注:</div>
-        <textarea nz-input name="note" style="width: calc(100% - 150px);height: 150px;"
-          [(ngModel)]="data.note"></textarea>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        备注：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="note" style="height: 150px;" [(ngModel)]="data.note"></textarea>
       </div>
     </div>
 
@@ -95,8 +117,8 @@
         司局名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-          <div nz-tooltip nzTitle={{data.name}} nzPlacement="topLeft" name="name" class="showText">{{data.name}}</div>
-        </div>
+        <div nz-tooltip nzTitle={{data.name}} nzPlacement="topLeft" name="name" class="showText">{{data.name}}</div>
+      </div>
     </div>
 
     <div nz-row class="ma_b20">
@@ -117,19 +139,20 @@
     </div>
 
     <div nz-row class="ma_b20">
-
       <div nz-col [nzSpan]="4" class="ta_r">
         分管核安全司领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-          <div nz-tooltip nzTitle={{data.securityLeader}} nzPlacement="topLeft" class="showText">{{data.securityLeader}}</div>
+        <div nz-tooltip nzTitle={{data.securityLeader}} nzPlacement="topLeft" class="showText">{{data.securityLeader}}
         </div>
+      </div>
       <div nz-col [nzSpan]="4" class="ta_r">
         分管核安全司领导电话：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-          <div nz-tooltip nzTitle={{data.securityLeaderTel}} nzPlacement="topLeft" class="showText">{{data.securityLeaderTel}}</div>
-        </div>
+        <div nz-tooltip nzTitle={{data.securityLeaderTel}} nzPlacement="topLeft" class="showText">
+          {{data.securityLeaderTel}}</div>
+      </div>
     </div>
 
     <div nz-row class="ma_b20">
@@ -137,66 +160,56 @@
         核安全许可处室领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-          <div nz-tooltip nzTitle={{data.permitLeader}} nzPlacement="topLeft"  class="showText">{{data.permitLeader}}</div>
-        </div>
+        <div nz-tooltip nzTitle={{data.permitLeader}} nzPlacement="topLeft" class="showText">{{data.permitLeader}}</div>
+      </div>
       <div nz-col [nzSpan]="4" class="ta_r">
         核安全许可处室领导电话：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-         <div nz-tooltip nzTitle={{data.permitLeaderTel}} nzPlacement="topLeft"  class="showText">{{data.permitLeaderTel}}</div>
+        <div nz-tooltip nzTitle={{data.permitLeaderTel}} nzPlacement="topLeft" class="showText">{{data.permitLeaderTel}}
         </div>
+      </div>
     </div>
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
         核安全监督处室领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <div nz-tooltip nzTitle={{data.superviseLeader}} nzPlacement="topLeft" class="showText">{{data.superviseLeader}}</div>
+        <div nz-tooltip nzTitle={{data.superviseLeader}} nzPlacement="topLeft" class="showText">{{data.superviseLeader}}
         </div>
+      </div>
       <div nz-col [nzSpan]="4" class="ta_r">
         核安全监督处室领导电话：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-          <div nz-tooltip nzTitle={{data.superviseLeaderTel}} nzPlacement="topLeft"  class="showText">{{data.superviseLeaderTel}}</div>
-        </div>
+        <div nz-tooltip nzTitle={{data.superviseLeaderTel}} nzPlacement="topLeft" class="showText">
+          {{data.superviseLeaderTel}}</div>
+      </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-        <div nz-col [nzSpan]="4" class="ta_r">
-          处室设置：
-        </div>
-        <div nz-col [nzSpan]="20" class="ta_l">
-          <div nz-tooltip nzTitle={{data.orgSet}} nzPlacement="topLeft" class="showTextArea">{{data.orgSet}}</div>
-        </div>
-      <!-- <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">处室设置：</div>
-        <div  nz-tooltip nzTitle={{data.orgSet}} nzPlacement="topLeft" class="showTextArea">{{data.orgSet}}
-        </div>
-      </div> -->
+      <div nz-col [nzSpan]="4" class="ta_r">
+        处室设置：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzTitle={{data.orgSet}} nzPlacement="topLeft" class="showTextArea">{{data.orgSet}}</div>
+      </div>
     </div>
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-        <div nz-col [nzSpan]="4" class="ta_r">
-            工作职责：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzTitle={{data.duty}} nzPlacement="topLeft" class="showTextArea">{{data.duty}}</div>
-          </div>
-      <!-- <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">工作职责：</div>
-        <div  nz-tooltip nzTitle={{data.duty}} nzPlacement="topLeft" class="showTextArea">{{data.duty}}</div>
-      </div> -->
+      <div nz-col [nzSpan]="4" class="ta_r">
+        工作职责：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzTitle={{data.duty}} nzPlacement="topLeft" class="showTextArea">{{data.duty}}</div>
+      </div>
     </div>
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-        <div nz-col [nzSpan]="4" class="ta_r">
-            备注：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzTitle={{data.note}} nzPlacement="topLeft" class="showTextArea">{{data.note}}</div>
-          </div>
-      <!-- <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">备注：</div>
-        <div  nz-tooltip nzTitle={{data.note}} nzPlacement="topLeft" class="showTextArea">{{data.note}}</div>
-      </div> -->
+      <div nz-col [nzSpan]="4" class="ta_r">
+        备注：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzTitle={{data.note}} nzPlacement="topLeft" class="showTextArea">{{data.note}}</div>
+      </div>
     </div>
 
 
