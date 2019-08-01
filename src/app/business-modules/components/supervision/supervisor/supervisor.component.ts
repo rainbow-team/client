@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SupervisionSercice } from '../../../../services/supervision/supervision.service';
+import { SupervisionSercice } from '../../../../services/supervision/supervisor.service';
 import { UploadXHRArgs, UploadFile, NzMessageService } from 'ng-zorro-antd';
 import { HttpRequest, HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { OrgSercice } from 'src/app/services/supervision/org.service';
+import { DictionarySercice } from 'src/app/services/common/dictionary.service';
+import { StaffSercice } from 'src/app/services/common/staff-service';
 
 @Component({
     selector: 'app-supervision-supervisor',
@@ -12,10 +14,13 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
 })
 export class SupervisorComponent implements OnInit {
 
+    dictionary: any = {};
+    staffObj: any = {};
+    
     public dataSet: any;
 
     name: any = "";
-    orgId: any = "";
+    orgName: any = "";
     expireDate: any = "";
 
     pageIndex: any = 1;
@@ -31,21 +36,15 @@ export class SupervisorComponent implements OnInit {
     selectId:any="";
 
     constructor(private supervisionSercice: SupervisionSercice, private http: HttpClient, private router: Router,
-        private msg: NzMessageService, private orgSercice: OrgSercice) { }
+        private msg: NzMessageService, private dictionarySercice: DictionarySercice,
+        private staffSercice: StaffSercice) { }
 
     ngOnInit() {
+
+        this.dictionary = this.dictionarySercice.getAllConfig();
+        this.staffObj = this.staffSercice.getStaffObj();
+
         this.search();
-        this.orgSercice.getAllOrgList().subscribe((res) => {
-            if (res.code == 200) {
-                this.orgList = [];
-                res.msg.forEach(element => {
-                    this.orgList.push({
-                        id: element.id,
-                        name: element.name
-                    });
-                });
-            }
-        })
     }
 
     add() {
@@ -70,8 +69,8 @@ export class SupervisorComponent implements OnInit {
         if (this.name) {
             option.conditions.push({ key: "name", value: this.name })
         }
-        if (this.orgId) {
-            option.conditions.push({ key: "orgId", value: this.orgId })
+        if (this.orgName) {
+            option.conditions.push({ key: "orgName", value: this.orgName })
         }
 
         if (this.expireDate) {
@@ -79,7 +78,7 @@ export class SupervisorComponent implements OnInit {
         }
 
 
-        this.supervisionSercice.getSupervisionSupervisorList(option).subscribe(
+        this.supervisionSercice.getSupervisorList(option).subscribe(
             (data) => {
                 this.dataSet = data.msg.currentList;
                 this.dataSet = this.dataSet.map(r => { return Object.assign(r, { checked: false }) });
@@ -88,17 +87,17 @@ export class SupervisorComponent implements OnInit {
         );
     }
 
-    refreshStatus() {
-        const allChecked = this.dataSet.every(value => value.checked === true);
-        const allUnChecked = this.dataSet.every(value => !value.checked);
-        this.allChecked = allChecked;
-        this.indeterminate = (!allChecked) && (!allUnChecked);
-    }
+    // refreshStatus() {
+    //     const allChecked = this.dataSet.every(value => value.checked === true);
+    //     const allUnChecked = this.dataSet.every(value => !value.checked);
+    //     this.allChecked = allChecked;
+    //     this.indeterminate = (!allChecked) && (!allUnChecked);
+    // }
 
-    checkAll(value: boolean): void {
-        this.dataSet.forEach(data => data.checked = value);
-        this.refreshStatus();
-    }
+    // checkAll(value: boolean): void {
+    //     this.dataSet.forEach(data => data.checked = value);
+    //     this.refreshStatus();
+    // }
 
     delete() {
 
@@ -114,7 +113,7 @@ export class SupervisorComponent implements OnInit {
         // });
 
         if(this.selectId){
-            this.supervisionSercice.deleteSupervisionSupervisorByIds([this.selectId]).subscribe((res) => {
+            this.supervisionSercice.deleteSupervisorById([this.selectId]).subscribe((res) => {
                 if (res.code == 200) {
                     this.msg.create("success", "删除成功");
                     this.search();
@@ -141,7 +140,7 @@ export class SupervisorComponent implements OnInit {
 
     reset() {
         this.name = "";
-        this.orgId = "";
+        this.orgName = "";
         this.expireDate = "";
         this.selectId="";
     }

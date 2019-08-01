@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SupervisionSercice } from 'src/app/services/supervision/supervision.service';
+import { SupervisionSercice } from 'src/app/services/supervision/supervisor.service';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({

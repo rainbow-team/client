@@ -24,6 +24,10 @@ export class LawComponent implements OnInit {
   name: any = "";
   fb_date: any = [];
 
+
+  selectId: any = "";
+
+
   constructor(private router: Router,
     private msg: NzMessageService, private lawSercice: LawSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice) { }
@@ -72,28 +76,45 @@ export class LawComponent implements OnInit {
     this.code = "";
     this.name = "";
     this.fb_date = [];
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/supersivion/law/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/supersivion/law/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/supersivion/law/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
-
-    this.lawSercice.deleteLawByIds([item.id]).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/supersivion/law/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
 
   }
 
+  delete() {
+    if (this.selectId) {
+
+      this.lawSercice.deleteLawByIds([this.selectId]).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
 }

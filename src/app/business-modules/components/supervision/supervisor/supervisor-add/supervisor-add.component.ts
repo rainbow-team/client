@@ -3,7 +3,7 @@ import { NzMessageService, UploadFile, UploadXHRArgs } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from './../../../../../services/common/dictionary.service'
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { SupervisionSercice } from 'src/app/services/supervision/supervision.service';
+import { SupervisionSercice } from 'src/app/services/supervision/supervisor.service';
 import { OrgSercice } from 'src/app/services/supervision/org.service';
 
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -74,7 +74,7 @@ export class SupervisorAddComponent implements OnInit {
     }
 
     if (id) {
-      this.supervisionSercice.getSupervisionSupervisorById(id).subscribe((res) => {
+      this.supervisionSercice.getSupervisorById(id).subscribe((res) => {
         this.data = res.msg;
         this.sexValue = this.data.sex + "";
         this.staffObj.name = this.data.creatorName;

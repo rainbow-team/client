@@ -2,31 +2,49 @@
   <div class="div_top_add">
     监管法规信息
   </div>
-  <div class="div_contain_add" style="height:160px;">
+  <div class="div_contain_add" style="height:160px;" *ngIf="isShow==false">
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>法规文号：
-        <input nz-input name="code" [(ngModel)]="data.code" class="w200" required [validation]="true"
-          [disabled]="isDisable" />
+        <input nz-input name="code" [(ngModel)]="data.code" class="w200" required [validation]="true" />
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>法规名称：
-        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"
-          [disabled]="isDisable" />
+        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true" />
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>发布时间 ：
         <nz-date-picker name="releaseDate" [nzStyle]="dataStyle" [(ngModel)]="data.releaseDate" class="w200" required
-          [validation]="true" [disabled]="isDisable">
+          [validation]="true">
         </nz-date-picker>
+      </div>
+    </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id"></app-attachment>
+  </div>
+
+
+
+
+  <div class="div_contain_add" style="height:160px;" *ngIf="isShow==true">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="8">
+        法规文号：
+        <span nz-tooltip nzTitle={{data.code}} nzPlacement="topLeft" name="code">{{data.code}}</span>
+      </div>
+      <div nz-col [nzSpan]="8" >
+        法规名称：
+        <span nz-tooltip nzTitle={{data.name}} nzPlacement="topLeft" name="name">{{data.name}}</span>
+      </div>
+      <div nz-col [nzSpan]="8" >
+        发布时间 ：
+        <span >{{data.releaseDate|recordtime}}</span>
       </div>
     </div>
   </div>
 
-  <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
-
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
       [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>

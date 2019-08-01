@@ -20,9 +20,7 @@ export class AccidentSecuritySercice {
     }
 
     getAccidentSecurityById(id): any {
-
         return this.http.get('/accidentsecurity/geAccidentSecurityById?id=' + id);
-
     }
 
     deleteAccidentSecurityById(id): any {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from './../../../../../services/common/dictionary.service'
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { SupervisionSercice } from 'src/app/services/supervision/supervision.service';
+import { SupervisionSercice } from 'src/app/services/supervision/supervisor.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Jsonp } from '@angular/http/src/http';
 

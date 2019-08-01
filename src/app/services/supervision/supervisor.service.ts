@@ -13,20 +13,30 @@ export class SupervisionSercice {
     constructor(private http: HttpClient) { }
 
     //核安全监督员
-    getSupervisionSupervisorList(param): any {
-        return this.http.post('/SupervisionSupervisor/getSupervisionSupervisorList', param);
+    addSupervisor(param): any {
+        return this.http.post('/Supervisor/Supervisor', param);
+    }
+
+    modifySupervisor(param): any {
+        return this.http.post('/Supervisor/modifySupervisor', param);
     }
 
     saveOrUpdateSupervisionSupervisor(param): any {
-        return this.http.post('/SupervisionSupervisor/saveOrUpdateSupervisionSupervisor', param);
+
+        let url = !param.id ? "/Supervisor/addSupervisor" : "/Supervisor/modifySupervisor";
+        return this.http.post(url, param);
     }
 
-    deleteSupervisionSupervisorByIds(ids): any {
-        return this.http.post('/SupervisionSupervisor/deleteSupervisionSupervisorByIds', ids);
+    deleteSupervisorById(id): any {
+        return this.http.post('/Supervisor/deleteSupervisorById', id);
     }
 
-    getSupervisionSupervisorById(id): any {
-        return this.http.get('/SupervisionSupervisor/getSupervisionSupervisorById?id=' + id);
+    getSupervisorById(id): any {
+        return this.http.get('/Supervisor/getSupervisorById?id=' + id);
+    }
+
+    getSupervisorList(param): any {
+        return this.http.get('/Supervisor/getSupervisorList?id=', param);
     }
 
     //核安全监督员子项管理

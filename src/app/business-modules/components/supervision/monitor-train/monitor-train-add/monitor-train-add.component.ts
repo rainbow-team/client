@@ -3,7 +3,7 @@ import { NzMessageService, UploadFile, UploadXHRArgs } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
-import { SupervisionSercice } from 'src/app/services/supervision/supervision.service';
+import { SupervisionSercice } from 'src/app/services/supervision/supervisor.service';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { HttpRequest, HttpEventType, HttpResponse, HttpClient } from '@angular/common/http';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
