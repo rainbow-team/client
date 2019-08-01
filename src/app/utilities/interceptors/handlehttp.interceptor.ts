@@ -39,7 +39,7 @@ export class HandleHttpInterceptor implements HttpInterceptor {
             }
         }
 
-        if (requestUrl.indexOf("upload") > -1) {
+        if (requestUrl.indexOf("upload") > -1||requestUrl.indexOf("import") > -1) {
             
         } else {
             // 添加请求头
