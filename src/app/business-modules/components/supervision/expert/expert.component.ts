@@ -25,9 +25,10 @@ export class ExpertComponent implements OnInit {
   name: any = "";
   major: any = "";
 
+  selectId: any = "";
 
   constructor(private router: Router,
-    private msg: NzMessageService, private  expertSercice: ExpertSercice, private dictionarySercice: DictionarySercice,
+    private msg: NzMessageService, private expertSercice: ExpertSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice) { }
 
   ngOnInit() {
@@ -63,28 +64,45 @@ export class ExpertComponent implements OnInit {
   reset() {
     this.name = "";
     this.major = "";
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/supersivion/expert/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/supersivion/expert/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/supersivion/expert/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
-
-    this.expertSercice.deleteExpertByIds([item.id]).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/supersivion/expert/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
 
   }
 
+  delete() {
+    if (this.selectId) {
+
+      this.expertSercice.deleteExpertByIds([this.selectId]).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
 }
