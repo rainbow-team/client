@@ -21,7 +21,7 @@ export class RoleService {
     return this.http.get('/role/getRoleById?id=' + id);
   }
 
-  deleteRoleByIds(id): any {
-    return this.http.post('/role/deleteRoleByIds', id);
+  deleteRoleByIds(ids): any {
+    return this.http.post('/role/deleteRoleByIds', ids);
   }
 }

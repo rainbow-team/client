@@ -23,4 +23,7 @@ export class OrgService {
   deleteOrganizationByIds(ids): any {
     return this.http.post('/org/deleteOrganizationByIds', ids);
   }
+  getAllOrganization(): any {
+    return this.http.post('org/getAllOrganization', null);
+  }
 }

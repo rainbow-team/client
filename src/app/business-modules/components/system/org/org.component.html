@@ -1,3 +1,111 @@
-<p>
-  org works!
-</p>
+<div style="height: 100%;">
+  <div nz-row class="div_title">
+    系统机构信息
+  </div>
+
+  <div nz-row class="div_contain">
+    <div class="div_top">
+      <div class="fr">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          class="addbtn"
+          (click)="show(item, false)"
+        >
+          添加
+        </button>
+      </div>
+    </div>
+    <div>
+      <nz-table #nestedTable [nzData]="dataSet">
+        <thead>
+          <tr>
+            <th>部门名称</th>
+            <th>部门编码</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of nestedTable.data">
+            <ng-container *ngFor="let item of mapOfExpandedData[data.id]">
+              <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
+                <td
+                  [nzIndentSize]="item.level * 20"
+                  [nzShowExpand]="item.children.length > 0"
+                  [(nzExpand)]="item.expand"
+                  (nzExpandChange)="
+                    collapse(mapOfExpandedData[data.id], item, $event)
+                  "
+                >
+                  {{ item.name }}
+                </td>
+                <td>{{ item.code }}</td>
+                <td>
+                  <a (click)="show(item, true)">编辑</a>
+                  <nz-divider nzType="vertical"></nz-divider>
+                  <a
+                    *ngIf="item.children.length == 0"
+                    nz-popconfirm
+                    nzTitle="确定删除吗?"
+                    (nzOnConfirm)="delete(item)"
+                    >删除</a
+                  >
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="Modal Title"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()"
+    [nzOkLoading]="isOkLoading"
+  >
+    <div style="width: 600px;height:400px">
+      <div nz-row style="height: 40px;">
+        <div class="ta_l">
+          <span class="clo_r">*</span>部门名称：
+          <input
+            nz-input
+            required
+            nzSize="default"
+            [(ngModel)]="currentMenu.name"
+            class="w200"
+          />
+        </div>
+      </div>
+
+      <div nz-row style="height: 40px;">
+        <div class="ta_l">
+          <span class="clo_r">*</span>部门编码：
+          <input
+            nz-input
+            nzSize="default"
+            [(ngModel)]="currentMenu.code"
+            class="w200"
+          />
+        </div>
+      </div>
+
+      <div nz-row style="height: 40px;">
+        <div class="ta_l">
+          <span class="clo_r">*</span>上级部门：
+          <nz-tree-select
+            style="width: 250px"
+            [nzDefaultExpandAll]="true"
+            [nzNodes]="menuTreeNodes"
+            nzShowSearch
+            nzPlaceHolder="请选择上级部门"
+            [(ngModel)]="currentMenu.parentId"
+          >
+          </nz-tree-select>
+        </div>
+      </div>
+    </div>
+  </nz-modal>
+</div>

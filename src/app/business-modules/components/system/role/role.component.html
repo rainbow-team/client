@@ -1,3 +1,111 @@
-<p>
-  role works!
-</p>
+<div style="height: 100%;">
+  <div nz-row class="div_title">
+    系统角色信息
+  </div>
+  <div nz-row class="div_contain">
+    <div class="div_top">
+      <div class="fr">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          class="addbtn"
+          (click)="show(data, false)"
+        >
+          添加
+        </button>
+      </div>
+    </div>
+    <div>
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable tablescoll_rainbow"
+        [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+        [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
+      >
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>角色名称</th>
+            <th>角色描述</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of nestedTable.data; index as index">
+            <td>{{ (pageIndex - 1) * pageSize + 1 + index }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.note }}</td>
+            <td>
+              <a (click)="show(data, true)">查看</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a (click)="show(data, true)">编辑</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a
+                nz-popconfirm
+                nzTitle="确定删除吗?"
+                (nzOnConfirm)="delete(data)"
+                >删除</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="Modal Title"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()"
+    [nzOkLoading]="isOkLoading"
+  >
+    <div style="width: 600px;height:400px">
+      <div nz-row style="height: 40px;">
+        <div class="ta_l">
+          <span class="clo_r">*</span>角色名称：
+          <input
+            nz-input
+            required
+            nzSize="default"
+            [(ngModel)]="currentRole.name"
+            class="w200"
+          />
+        </div>
+      </div>
+      <div nz-row style="height: 40px;">
+        <div class="ta_l">
+          <span class="clo_r">*</span>角色描述：
+          <input
+            nz-input
+            required
+            nzSize="default"
+            [(ngModel)]="currentRole.note"
+            class="w200"
+          />
+        </div>
+      </div>
+
+      <div nz-row style="height: 40px;">
+        <div class="ta_l">
+          <span class="clo_r">*</span>菜单权限：
+          <nz-tree-select
+            nzCheckable
+            style="width: 250px"
+            [nzNodes]="menuTreeNodes"
+            nzShowSearch
+            nzPlaceHolder="请选择父级菜单"
+            [(ngModel)]="currentRole.roleMenuList"
+          >
+          </nz-tree-select>
+        </div>
+      </div>
+    </div>
+  </nz-modal>
+</div>

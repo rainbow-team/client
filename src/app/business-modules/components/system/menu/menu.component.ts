@@ -1,18 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
+import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { MenuService } from 'src/app/services/system/menu.service';
-
-export interface TreeNodeInterface {
-  id: number;
-  name: string;
-  code: string;
-  level: number;
-  expand: boolean;
-  children?: TreeNodeInterface[];
-}
+import { NzTreeNodeOptions } from 'ng-zorro-antd';
+import { TreeNodeInterface } from 'src/app/utilities/entities/navMenu';
 
 @Component({
   selector: 'app-menu',
@@ -20,10 +14,12 @@ export interface TreeNodeInterface {
   styleUrls: ['./menu.component.scss']
 })
 export class SystemMenuComponent implements OnInit {
+  @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
   dictionary: any = {};
   staffObj: any = {};
   data: any = {};
   dataSet: any = [];
+  menuTreeNodes: any = [];
   currentMenu: any = {};
   name: any = '';
 
@@ -83,7 +79,7 @@ export class SystemMenuComponent implements OnInit {
 
   visitNode(
     node: TreeNodeInterface,
-    hashMap: { [kidey: string]: any },
+    hashMap: { [key: string]: any },
     array: TreeNodeInterface[]
   ): void {
     if (!hashMap[node.id]) {
@@ -92,32 +88,38 @@ export class SystemMenuComponent implements OnInit {
     }
   }
 
-  getJsonTree(data: any[], parentId: any): any[] {
+  generateTree(data, parentId) {
     const itemArr: any[] = [];
-    for (let i = 0; i < data.length; i++) {
-      let node = data[i];
-      //data.splice(i, 1)
+    for (var i = 0; i < data.length; i++) {
+      var node = data[i];
       if (node.parentId == parentId) {
         let newNode: TreeNodeInterface;
-        let child = this.getJsonTree(data, node.id);
-        if (child) {
-          newNode = {
-            id: node.id,
-            name: node.name,
-            code: node.code,
-            level: 0,
-            expand: false,
-            children: child
-          };
-        } else {
-          newNode = {
-            id: node.id,
-            name: node.name,
-            code: node.code,
-            level: 0,
-            expand: false
-          };
-        }
+        newNode = {
+          id: node.id,
+          name: node.name,
+          parentId: parentId,
+          code: node.code,
+          level: 0,
+          expand: false,
+          children: this.generateTree(data, node.id)
+        };
+        itemArr.push(newNode);
+      }
+    }
+    return itemArr;
+  }
+
+  generateTree2(data, parentId) {
+    const itemArr: any[] = [];
+    for (var i = 0; i < data.length; i++) {
+      var node = data[i];
+      if (node.parentId == parentId) {
+        let newNode: NzTreeNodeOptions;
+        newNode = {
+          key: node.id,
+          title: node.name,
+          children: this.generateTree2(data, node.id)
+        };
         itemArr.push(newNode);
       }
     }
@@ -131,7 +133,7 @@ export class SystemMenuComponent implements OnInit {
   }
 
   search() {
-    var option = {
+    let option = {
       conditions: []
     };
 
@@ -141,25 +143,27 @@ export class SystemMenuComponent implements OnInit {
 
     this.menuService.getAllMenu().subscribe(data => {
       // this.dataSet = data.msg;
-      this.dataSet = this.getJsonTree(data.msg, '0');
+      this.dataSet = this.generateTree(data.msg, '0');
+      this.menuTreeNodes = this.generateTree2(data.msg, '0');
       this.dataSet.forEach(item => {
         this.mapOfExpandedData[item.id] = this.convertTreeToList(item);
       });
     });
   }
 
-  add() {
-    // this.router.navigate(['/permit/equip/add']);
-  }
-
-  show(item) {
+  show(item, flag) {
     this.isVisible = true;
-    this.currentMenu = item;
+
+    if (flag) {
+      this.currentMenu = item;
+    } else {
+      this.currentMenu = {};
+    }
   }
 
   delete(item) {
     this.menuService.deleteMenuByIds([item.id]).subscribe(res => {
-      if (res.code == 200) {
+      if (res.code === 200) {
         this.msg.create('success', '删除成功');
         this.search();
       } else {
@@ -168,14 +172,16 @@ export class SystemMenuComponent implements OnInit {
     });
   }
 
-  showModal(): void {}
-
   handleOk(): void {
+    if (!this.FormValidation()) {
+      return;
+    }
     this.isOkLoading = true;
-    this.menuService.saveOrUpdateMenu(this.data).subscribe(res => {
+    this.menuService.saveOrUpdateMenu(this.currentMenu).subscribe(res => {
       this.isVisible = false;
       this.isOkLoading = false;
-      if (res.code == 200) {
+      this.currentMenu = {};
+      if (res.code === 200) {
         this.msg.create('success', '保存成功');
         this.search();
       } else {
@@ -186,5 +192,14 @@ export class SystemMenuComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+  FormValidation() {
+    let isValid = true;
+    this.directives.forEach(d => {
+      if (!d.validationValue()) {
+        isValid = false;
+      }
+    });
+    return isValid;
   }
 }
