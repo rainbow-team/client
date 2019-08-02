@@ -1,7 +1,7 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
-      培训时间
+    <div nz-col [nzSpan]="7">
+        培训开始时间
       <nz-range-picker class="w200" [(ngModel)]="px_date" >
         </nz-range-picker>
     </div>
@@ -14,7 +14,7 @@
       <input nz-input nzSize="default" [(ngModel)]="place" class="w200">
     </div>
 
-    <div nz-col [nzSpan]="4"  [nzOffset]="5" class="ta_r">
+    <div nz-col [nzSpan]="4"  [nzOffset]="3" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>
@@ -31,7 +31,19 @@
       </div>
 
       <div class="fr">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+      </div>
+      
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+      </div>
+      
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+      </div>
+      
+      <div class="fr">
+        <button nz-button nzType="primary" style="margin-right: 10px;" (click)="export()">导出</button>
       </div>
 
     </div>
@@ -47,27 +59,19 @@
             <th>培训结束日期</th>
             <th>培训地点</th>
             <th>参培人数</th>
-            <th>培训内容及教师</th>
-            <th>备注</th>
             <th>操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index">
+          <tr *ngFor="let data of nestedTable.data;index as index" [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.batch}}</td>
             <td>{{data.beginDate|recordtime}}</td>
             <td>{{data.endDate|recordtime}}</td>
             <td>{{data.place}}</td>
             <td>{{data.number}}</td>
-            <td>{{data.content}}</td>
-            <td>{{data.note}}</td>
             <td>
-              <a (click)="show(data,true)">查看</a>
-              <nz-divider nzType="vertical"></nz-divider>
-              <a (click)="show(data,false)">编辑</a>
-              <nz-divider nzType="vertical"></nz-divider>
-              <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
+              <a (click)="show(data)">查看</a>
             </td>
           </tr>
         </tbody>

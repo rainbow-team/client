@@ -26,6 +26,8 @@ export class ProducetrainComponent implements OnInit {
   batch: any = "";
   place: any = "";
 
+  selectId: any = "";
+
   constructor(private router: Router,
     private msg: NzMessageService, private producetrainSercice: ProducetrainSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice) { }
@@ -73,28 +75,46 @@ export class ProducetrainComponent implements OnInit {
     this.px_date = [];
     this.batch = "";
     this.place = "'";
+    this.selectId="";
   }
 
   add() {
     this.router.navigate(['/supersivion/producetrain/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/supersivion/producetrain/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/supersivion/producetrain/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/supersivion/producetrain/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
 
-    this.producetrainSercice.deleteProduceTrainRecordByIds([item.id]).subscribe((res) => {
+  }
 
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+  delete() {
 
+    if (this.selectId) {
+      this.producetrainSercice.deleteProduceTrainRecordByIds([this.selectId]).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
   }
 
 }
