@@ -19,10 +19,9 @@ export class MonitorTrainAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
+  isShow = false;
 
-  fileList = [
-  ];
+  fileList = [];
 
   uploadUrl: any = AppConfig.serviceAddress + "/fileInfo/upload";
   previewImage = '';
@@ -31,8 +30,8 @@ export class MonitorTrainAddComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
-  constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
-    , private staffSercice: StaffSercice, private supervisionSercice: SupervisionSercice, private ActivatedRoute: ActivatedRoute,
+  constructor(private msg: NzMessageService, private router: Router, private staffSercice: StaffSercice, 
+    private supervisionSercice: SupervisionSercice, private ActivatedRoute: ActivatedRoute,
     private http: HttpClient, private attachmentSercice: AttachmentSercice) { }
 
   handlePreview = (file: UploadFile) => {
@@ -41,16 +40,15 @@ export class MonitorTrainAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
     if (id) {
@@ -98,7 +96,7 @@ export class MonitorTrainAddComponent implements OnInit {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
 
-          this.router.navigate(['/index/supersivion/monitorTrain']);
+          this.router.navigate(['/supersivion/monitorTrain']);
         } else {
 
           this.msg.create('error', '保存失败');

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SupervisionSercice } from 'src/app/services/supervision/supervisor.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { SupervisionTrainService } from 'src/app/services/supervision/supervisortrain.service';
 
 @Component({
   selector: 'app-monitor-train',
@@ -10,7 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 })
 export class MonitorTrainComponent implements OnInit {
 
-  constructor(private router: Router, private supervisionSercice: SupervisionSercice, private msg: NzMessageService) { }
+  constructor(private router: Router, private SupervisionTrainService: SupervisionTrainService, private msg: NzMessageService) { }
 
   dataSet: any = [];
 
@@ -32,6 +32,8 @@ export class MonitorTrainComponent implements OnInit {
   sortBatchValue: any;
   sortBeginDateValue: any;
   sortEndDateValue: any;
+
+  selectId: any = "";
 
   ngOnInit() {
 
@@ -69,10 +71,10 @@ export class MonitorTrainComponent implements OnInit {
 
     }
 
-    this.supervisionSercice.getMonitorTrainList(option).subscribe(
+    this.SupervisionTrainService.getMonitorTrainList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
-        this.dataSet = this.dataSet.map(r => { return Object.assign(r, { checked: false }) });
+        //this.dataSet = this.dataSet.map(r => { return Object.assign(r, { checked: false }) });
         this.totalCount = data.msg.recordCount;
       }
     );
@@ -128,6 +130,7 @@ export class MonitorTrainComponent implements OnInit {
     this.px_date = [];
     this.batch = null;
     this.place = null;
+    this.selectId="";
 
   }
 
@@ -135,42 +138,58 @@ export class MonitorTrainComponent implements OnInit {
     this.router.navigate(['/supersivion/monitorTrain/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/supersivion/monitorTrain/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/supersivion/monitorTrain/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  refreshStatus() {
-    const allChecked = this.dataSet.every(value => value.checked === true);
-    const allUnChecked = this.dataSet.every(value => !value.checked);
-    this.allChecked = allChecked;
-    this.indeterminate = (!allChecked) && (!allUnChecked);
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/supersivion/monitorTrain/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
+
   }
 
-  checkAll(value: boolean): void {
-    this.dataSet.forEach(data => data.checked = value);
-    this.refreshStatus();
-  }
+  // refreshStatus() {
+  //   const allChecked = this.dataSet.every(value => value.checked === true);
+  //   const allUnChecked = this.dataSet.every(value => !value.checked);
+  //   this.allChecked = allChecked;
+  //   this.indeterminate = (!allChecked) && (!allUnChecked);
+  // }
+
+  // checkAll(value: boolean): void {
+  //   this.dataSet.forEach(data => data.checked = value);
+  //   this.refreshStatus();
+  // }
 
   delete() {
 
-    let checkItems = this.dataSet.filter(value => value.checked);
+    // let checkItems = this.dataSet.filter(value => value.checked);
 
-    if (checkItems != null && checkItems.length == 0) {
+    // if (checkItems != null && checkItems.length == 0) {
+    //   this.msg.create("warning", "请选择删除项");
+    //   return;
+    // }
+
+    // checkItems.forEach(element => {
+    //   this.ids.push(element.id);
+    // });
+    if (this.selectId) {
+      this.SupervisionTrainService.deleteMonitorTrainByIds([this.selectId]).subscribe((res) => {
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+    }else {
       this.msg.create("warning", "请选择删除项");
-      return;
     }
+  }
 
-    checkItems.forEach(element => {
-      this.ids.push(element.id);
-    });
-
-    this.supervisionSercice.deleteMonitorTrainByIds(this.ids).subscribe((res) => {
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+  selectItem(data) {
+    this.selectId = data.id;
   }
 }
