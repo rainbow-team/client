@@ -10,8 +10,8 @@
         </div>
         <div nz-col [nzSpan]="5">
             到期时间：
-            <nz-date-picker class="w200" [(ngModel)]="expireDate">
-            </nz-date-picker>
+            <nz-range-picker class="w200" [(ngModel)]="expireDate">
+            </nz-range-picker>
         </div>
     
         <div nz-col [nzSpan]="4" [nzOffset]="5" class="ta_r">
@@ -23,7 +23,7 @@
     <div nz-row style="height: 40px;">
         <div nz-col [nzSpan]="8">
             监督员类别：
-            <nz-select [(ngModel)]="typeIds" class="w200">
+            <nz-select [(ngModel)]="typeIds" style="width: 300px" nzMode="multiple">
                 <nz-option *ngFor="let option of dictionary.config_supervisor_type" [nzLabel]="option.value" [nzValue]="option.id">
                 </nz-option>
             </nz-select>
@@ -52,7 +52,11 @@
             <div class="fr">
                 <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
             </div>
-
+<!-- 
+            <div class="fr">
+                    <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="goChildManage()">子项管理</button>
+                </div>
+     -->
         </div>
         <div>
             <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false" [nzPageIndex]="pageIndex" nzShowSizeChanger
@@ -72,16 +76,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of nestedTable.data;index as index" [ngClass]="{true:'out_valid',false:''}[data.id==selectId]" (click)="selectItem(data)">
+                    <tr *ngFor="let data of nestedTable.data;index as index" [ngClass]="{'itemSeleted':data.id==selectId}" (click)="selectItem(data)">
                         <td>{{index+1}}</td>
                         <td>{{data.name}}</td>
                         <td>{{data.birthday|recordtime}}</td>
                         <td>{{data.orgName}}</td>
-                        <td>{{data.orgName}}</td>
+                        <td>{{data.typeValue}}</td>
                         <td>{{data.entryDate|recordtime}}</td>
                         <td>{{data.titleName}}</td>
                         <td>
-                            <a (click)="show(data,true)">查看</a>
+                            <a (click)="show(data)">查看</a>
                         </td>
                     </tr>
                 </tbody>

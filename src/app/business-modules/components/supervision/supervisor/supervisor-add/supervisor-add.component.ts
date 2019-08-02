@@ -21,11 +21,10 @@ export class SupervisorAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
+  isShow = false;
   sexValue: any = "1";
 
-  fileList = [
-  ];
+  fileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -39,6 +38,8 @@ export class SupervisorAddComponent implements OnInit {
   totalCount: any;
   pageSize: any = 10;
 
+  isShowTrain=false;
+  
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private supervisionSercice: SupervisionSercice, private ActivatedRoute: ActivatedRoute,
     private http: HttpClient, private attachmentSercice: AttachmentSercice, private orgSercice: OrgSercice) { }
@@ -49,6 +50,7 @@ export class SupervisorAddComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
+    this.isShowTrain=false;
     this.orgSercice.getAllOrgList().subscribe((res) => {
       if (res.code == 200) {
         this.orgList = [];
@@ -64,42 +66,47 @@ export class SupervisorAddComponent implements OnInit {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.supervisorId = id;
 
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
-      this.search();
+    if (isShow && isShow == "true") {
+      this.isShow = true;
+    
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
     if (id) {
+      //是否显示培训信息，修改监督员核查看的时候都需要显示
+      this.isShowTrain = true;
+
+      this.searchTrainRecords();
+
       this.supervisionSercice.getSupervisorById(id).subscribe((res) => {
         this.data = res.msg;
         this.sexValue = this.data.sex + "";
         this.staffObj.name = this.data.creatorName;
       });
 
-      this.attachmentSercice.getFileListById(id).subscribe((res1) => {
+      // this.attachmentSercice.getFileListById(id).subscribe((res1) => {
 
-        if (res1.msg.length > 0) {
-          res1.msg.forEach(element => {
-            this.fileList.push({
-              response: {
-                msg: element.fileinfoId
-              },
-              name: element.fileinfoClientFileName
-            });
-          });
-        }
-      })
+      //   if (res1.msg.length > 0) {
+      //     res1.msg.forEach(element => {
+      //       this.fileList.push({
+      //         response: {
+      //           msg: element.fileinfoId
+      //         },
+      //         name: element.fileinfoClientFileName
+      //       });
+      //     });
+      //   }
+      // })
     } else {
       this.data.createDate = new Date();
     }
 
   }
 
-  search() {
+  searchTrainRecords() {
 
     var option = {
       pageNo: this.pageIndex,

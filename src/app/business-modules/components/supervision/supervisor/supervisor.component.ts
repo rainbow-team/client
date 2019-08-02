@@ -21,7 +21,7 @@ export class SupervisorComponent implements OnInit {
 
     name: any = "";
     orgName: any = "";
-    expireDate: any = "";
+    expireDate: any = [];
 
     pageIndex: any = 1;
     pageSize: any = 10;
@@ -31,7 +31,7 @@ export class SupervisorComponent implements OnInit {
     allChecked: any = false;
     indeterminate: any = false;
 
-    orgList: any = [];
+    typeIds:any=[];
 
     selectId:any="";
 
@@ -51,13 +51,23 @@ export class SupervisorComponent implements OnInit {
         this.router.navigate(['/supersivion/supervisor/add']);
     }
 
-    show(item, flag) {
-        this.router.navigate(['/supersivion/supervisor/add'], { queryParams: { id: item.id, flag: flag } });
+    show(item) {
+        this.router.navigate(['/supersivion/supervisor/add'], { queryParams: { id: item.id, isShow: true } });
     }
 
-    goChildManage(item) {
-        this.router.navigate(['/supersivion/supervisor/childmanage'], { queryParams: { id: item.id } });
+
+    modify() {
+        if (this.selectId) {
+            this.router.navigate(['/supersivion/supervisor/add'], { queryParams: { id: this.selectId, isShow: false } });
+        } else {
+            this.msg.create("warning", "请选择修改项");
+        }
+
     }
+
+    // goChildManage() {
+    //     this.router.navigate(['/supersivion/supervisor/childmanage'], { queryParams: { id: this.selectId } });
+    // }
 
     search() {
         var option = {
@@ -73,15 +83,24 @@ export class SupervisorComponent implements OnInit {
             option.conditions.push({ key: "orgName", value: this.orgName })
         }
 
-        if (this.expireDate) {
-            option.conditions.push({ key: "expireDate", value: this.expireDate })
+        if (this.expireDate && this.expireDate.length > 0) {
+            if (this.expireDate[0]) {
+                option.conditions.push({ key: "start_date", value: this.expireDate[0] })
+            }
+
+            if (this.expireDate[1]) {
+                option.conditions.push({ key: "end_date", value: this.expireDate[1] })
+            }
         }
 
+        if (this.typeIds.length > 0) {
+            option.conditions.push({ key: "typeIds", value: this.typeIds })
+        }
 
         this.supervisionSercice.getSupervisorList(option).subscribe(
             (data) => {
                 this.dataSet = data.msg.currentList;
-                this.dataSet = this.dataSet.map(r => { return Object.assign(r, { checked: false }) });
+                //this.dataSet = this.dataSet.map(r => { return Object.assign(r, { checked: false }) });
                 this.totalCount = data.msg.recordCount;
             }
         );
@@ -143,6 +162,7 @@ export class SupervisorComponent implements OnInit {
         this.orgName = "";
         this.expireDate = "";
         this.selectId="";
+        this.typeIds=[];
     }
 
     selectItem(data){

@@ -14,7 +14,7 @@ export class SupervisionSercice {
 
     //核安全监督员
     addSupervisor(param): any {
-        return this.http.post('/Supervisor/Supervisor', param);
+        return this.http.post('/Supervisor/addSupervisor', param);
     }
 
     modifySupervisor(param): any {
@@ -32,11 +32,11 @@ export class SupervisionSercice {
     }
 
     getSupervisorById(id): any {
-        return this.http.get('/Supervisor/getSupervisorById?id=' + id);
+        return this.http.post('/Supervisor/getSupervisorById', id);
     }
 
     getSupervisorList(param): any {
-        return this.http.get('/Supervisor/getSupervisorList?id=', param);
+        return this.http.post('/Supervisor/getSupervisorList?id=', param);
     }
 
     //核安全监督员子项管理
@@ -54,27 +54,5 @@ export class SupervisionSercice {
 
     deleteTrainRecordByIds(param): any {
         return this.http.post('/SupervisionTrainRecord/deleteTrainRecordByIds', param);
-    }
-
-
-    //核安全监督员培训信息
-    addMonitorTrain(param): any {
-        return this.http.post('/supervisiontrain/addMonitorTrain', param)
-    }
-
-    modifyMonitorTrain(param): any {
-        return this.http.post('/supervisiontrain/modifyMonitorTrain', param)
-    }
-
-    getMonitorTrainList(param): any {
-        return this.http.post('/supervisiontrain/getMonitorTrainList', param);
-    }
-
-    getMonitorTrainById(id): any {
-        return this.http.get('/supervisiontrain/getMonitorTrainById?id=' + id);
-    }
-
-    deleteMonitorTrainByIds(ids): any {
-        return this.http.post('/supervisiontrain/deleteMonitorTrainByIds', ids);
     }
 }

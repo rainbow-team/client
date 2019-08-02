@@ -5,6 +5,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { SupervisionSercice } from 'src/app/services/supervision/supervisor.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Jsonp } from '@angular/http/src/http';
+import { SupervisionTrainService } from 'src/app/services/supervision/supervisortrain.service';
 
 @Component({
   selector: 'app-supervisor-childmanage',
@@ -52,8 +53,11 @@ export class SupervisorChildmanageComponent implements OnInit {
   beginDate: any;
   endDate: any;
 
+  selectId:any="";
+  
   constructor(private router: Router, private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
-    private ActivatedRoute: ActivatedRoute, private supervisionSercice: SupervisionSercice, private msg: NzMessageService) { }
+    private ActivatedRoute: ActivatedRoute, private supervisionSercice: SupervisionSercice, 
+    private msg: NzMessageService,private supervisionTrainService: SupervisionTrainService) { }
 
   ngOnInit() {
 
@@ -122,32 +126,35 @@ export class SupervisorChildmanageComponent implements OnInit {
 
   delete() {
 
-    let checkItems = this.dataSet.filter(value => value.checked);
+    // let checkItems = this.dataSet.filter(value => value.checked);
 
-    if (checkItems != null && checkItems.length == 0) {
+    // if (checkItems != null && checkItems.length == 0) {
+    //   this.msg.create("warning", "请选择删除项");
+    //   return;
+    // }
+
+    // checkItems.forEach(element => {
+    //   this.ids.push(element.id);
+    // });
+    if (this.selectId) {
+      this.supervisionSercice.deleteTrainRecordByIds([this.selectId]).subscribe((res) => {
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+    }else{
       this.msg.create("warning", "请选择删除项");
-      return;
     }
-
-    checkItems.forEach(element => {
-      this.ids.push(element.id);
-    });
-
-    this.supervisionSercice.deleteTrainRecordByIds(this.ids).subscribe((res) => {
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
   }
 
-  close() {
-    this.router.navigate(['/supersivion/supervisor']);
-  }
+  // close() {
+  //   this.router.navigate(['/supersivion/supervisor']);
+  // }
 
-  //添加的保存
+  //添加培训记录的保存
   SubmitTrainRecord() {
 
     this.isSaving = true;
@@ -215,7 +222,7 @@ export class SupervisorChildmanageComponent implements OnInit {
       option.conditions.push({ key: "batch", value: this.batchAssociate })
     }
 
-    this.supervisionSercice.getMonitorTrainList(option).subscribe(
+    this.supervisionTrainService.getMonitorTrainList(option).subscribe(
       (data) => {
         this.MonitorList = data.msg.currentList;
         this.totalCountAssociate = data.msg.recordCount;
@@ -238,5 +245,7 @@ export class SupervisorChildmanageComponent implements OnInit {
     this.isAssociateVisible = false;
 
   }
-
-}
+    selectItem(data){
+        this.selectId=data.id;
+    }
+  }

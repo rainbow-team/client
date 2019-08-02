@@ -7,6 +7,7 @@ import { SupervisionSercice } from 'src/app/services/supervision/supervisor.serv
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { HttpRequest, HttpEventType, HttpResponse, HttpClient } from '@angular/common/http';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
+import { SupervisionTrainService } from 'src/app/services/supervision/supervisortrain.service';
 
 @Component({
   selector: 'app-monitor-train-add',
@@ -31,7 +32,7 @@ export class MonitorTrainAddComponent implements OnInit {
   staffObj: any = {};
 
   constructor(private msg: NzMessageService, private router: Router, private staffSercice: StaffSercice, 
-    private supervisionSercice: SupervisionSercice, private ActivatedRoute: ActivatedRoute,
+    private supervisionTrainService: SupervisionTrainService, private ActivatedRoute: ActivatedRoute,
     private http: HttpClient, private attachmentSercice: AttachmentSercice) { }
 
   handlePreview = (file: UploadFile) => {
@@ -52,7 +53,7 @@ export class MonitorTrainAddComponent implements OnInit {
     }
 
     if (id) {
-      this.supervisionSercice.getMonitorTrainById(id).subscribe((res) => {
+      this.supervisionTrainService.getMonitorTrainById(id).subscribe((res) => {
         this.data = res.msg;
         this.staffObj.name = this.data.creatorName;
       });
@@ -92,7 +93,7 @@ export class MonitorTrainAddComponent implements OnInit {
     if (this.data.id) {
 
       this.data.modifyId = this.staffObj.id;
-      this.supervisionSercice.modifyMonitorTrain(this.data).subscribe((res) => {
+      this.supervisionTrainService.modifyMonitorTrain(this.data).subscribe((res) => {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
 
@@ -111,7 +112,7 @@ export class MonitorTrainAddComponent implements OnInit {
 
       this.data.creatorId = this.staffObj.id;
       this.data.modifyId = this.staffObj.id;
-      this.supervisionSercice.addMonitorTrain(this.data).subscribe((res) => {
+      this.supervisionTrainService.addMonitorTrain(this.data).subscribe((res) => {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
           this.router.navigate(['/supersivion/monitorTrain']);

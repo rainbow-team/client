@@ -1,9 +1,8 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
-      培训时间
-      <nz-range-picker class="w200" [(ngModel)]="px_date" >
-        </nz-range-picker>
+    <div nz-col [nzSpan]="7">
+      培训开始时间
+      <nz-range-picker class="w200" [(ngModel)]="px_date" ></nz-range-picker>
     </div>
     <div nz-col [nzSpan]="5">
       培训班次
@@ -13,7 +12,7 @@
       培训地点
       <input nz-input nzSize="default" class="w200" [(ngModel)]="place">
     </div>
-    <div nz-col [nzSpan]="4" [nzOffset]="5" class="ta_r">
+    <div nz-col [nzSpan]="4" [nzOffset]="3" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>
@@ -64,7 +63,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of dataSet" [ngClass]="{true:'out_valid',false:''}[data.id==selectId]" (click)="selectItem(data)">
+          <tr *ngFor="let data of dataSet" [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
             <!-- <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td> -->
             <td>{{data.batch}}</td>
             <td>{{data.beginDate|recordtime}}</td>

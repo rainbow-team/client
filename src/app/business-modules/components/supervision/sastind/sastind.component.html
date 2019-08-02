@@ -51,7 +51,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of nestedTable.data;index as index"
-            [ngClass]="{true:'out_valid',false:''}[data.id==selectId]" (click)="selectItem(data)">
+            [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
             <td>{{data.name}}</td>
             <td>{{data.leader}}</td>
             <td>{{data.securityLeader}}</td>

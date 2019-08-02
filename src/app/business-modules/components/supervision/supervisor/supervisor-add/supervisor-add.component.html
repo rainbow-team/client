@@ -4,21 +4,21 @@
   </div> -->
 
   <nz-tabset>
-    <nz-tab nzTitle="监督员信息">
-      <div class="div_contain_add" style="height: calc(100% - 20px);">
+    <nz-tab nzTitle="监督员信息"  *ngIf="isShow==false">
+      <div class="div_contain_add" style="height: calc(100% - 20px);" >
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>姓名：
-            <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true" [readonly]="isDisable" />
+            <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"/>
           </div>
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>身份证号：
-            <input nz-input name="identity" [(ngModel)]="data.identity" class="w200" required [validation]="true" [validationType]="'idcard'"
-              [disabled]="isDisable" (ngModelChange)="identityChange($event)" />
+            <input nz-input name="identity" [(ngModel)]="data.identity" class="w200" required [validation]="true"
+              [validationType]="'idcard'"  (ngModelChange)="identityChange($event)" />
           </div>
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>性别：
-            <nz-radio-group [(ngModel)]="sexValue" style="width: 200px;text-align: left;" [disabled]="isDisable">
+            <nz-radio-group [(ngModel)]="sexValue" style="width: 200px;text-align: left;">
               <label nz-radio nzValue="1">男</label>
               <label nz-radio nzValue="0">女</label>
             </nz-radio-group>
@@ -28,22 +28,35 @@
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>出生年月：
-            <nz-date-picker name="birthday" [nzStyle]="dataStyle" [(ngModel)]="data.birthday" class="w200" required [validation]="true"
-              [disabled]="isDisable" [disabled]="isDisable">
+            <nz-date-picker name="birthday" [nzStyle]="dataStyle" [(ngModel)]="data.birthday" class="w200" required   [validation]="true">
             </nz-date-picker>
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>所属单位：
-            <nz-select nzAllowClear [(ngModel)]="data.orgId" class="w200" [disabled]="isDisable" required [validation]="true">
+            <nz-select nzAllowClear [(ngModel)]="data.orgId" class="w200"  required  [validation]="true">
               <nz-option *ngFor="let option of orgList" [nzLabel]="option.name" [nzValue]="option.id">
+              </nz-option>
+            </nz-select>
+          </div>
+
+
+        </div>
+
+        <div nz-row class="ma_b20">
+          <div nz-col [nzSpan]="8" class="ta_r">
+            <span class="clo_r">*</span>监督员类别：
+            <nz-select nzAllowClear [(ngModel)]="data.typeId" class="w200" required  [validation]="true">
+              <nz-option *ngFor="let option of dictionary.config_supervisor_type" [nzLabel]="option.value"
+                [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>入职时间：
-            <nz-date-picker name="entryDate" [disabled]="isDisable" [(ngModel)]="data.entryDate" class="w200" required [validation]="true">
+            <nz-date-picker name="entryDate" [(ngModel)]="data.entryDate" class="w200" required
+              [validation]="true">
             </nz-date-picker>
           </div>
 
@@ -53,7 +66,7 @@
 
           <div nz-col [nzSpan]="8" class="ta_r">
             职称：
-            <nz-select nzAllowClear [(ngModel)]="data.titleId" class="w200" [disabled]="isDisable">
+            <nz-select nzAllowClear [(ngModel)]="data.titleId" class="w200">
               <nz-option *ngFor="let option of dictionary.config_title" [nzLabel]="option.value" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -61,13 +74,15 @@
 
           <div nz-col [nzSpan]="8" class="ta_r">
             职务：
-            <input nz-input name="post" [(ngModel)]="data.post" class="w200" [disabled]="isDisable" />
+            <input nz-input name="post" [(ngModel)]="data.post" class="w200"  />
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>政治面貌：
-            <nz-select nzAllowClear [(ngModel)]="data.politicalId" class="w200" [disabled]="isDisable" required [validation]="true">
-              <nz-option *ngFor="let option of dictionary.config_political" [nzLabel]="option.value" [nzValue]="option.id">
+            <nz-select nzAllowClear [(ngModel)]="data.politicalId" class="w200" required
+              [validation]="true">
+              <nz-option *ngFor="let option of dictionary.config_political" [nzLabel]="option.value"
+                [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
@@ -78,19 +93,20 @@
 
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>联系方式：
-            <input nz-input name="contact" [(ngModel)]="data.contact" class="w200" [disabled]="isDisable" required [validation]="true"
-              [validationType]="'phonenumber'" />
+            <input nz-input name="contact" [(ngModel)]="data.contact" class="w200"  required
+              [validation]="true" [validationType]="'phonenumber'" />
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
             从事核安全工作时间：
-            <input nz-input name="continueTime" [(ngModel)]="data.continueTime" class="w200" [disabled]="isDisable" />
+            <input nz-input name="continueTime" [(ngModel)]="data.continueTime" class="w200" />
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
             学历：
-            <nz-select nzAllowClear [(ngModel)]="data.educationId" class="w200" [disabled]="isDisable">
-              <nz-option *ngFor="let option of dictionary.config_education" [nzLabel]="option.value" [nzValue]="option.id">
+            <nz-select nzAllowClear [(ngModel)]="data.educationId" class="w200" >
+              <nz-option *ngFor="let option of dictionary.config_education" [nzLabel]="option.value"
+                [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
@@ -99,7 +115,7 @@
         <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
           <div nz-col [nzSpan]="8" class="ta_r">
             学位：
-            <nz-select nzAllowClear [(ngModel)]="data.degreeId" class="w200" [disabled]="isDisable">
+            <nz-select nzAllowClear [(ngModel)]="data.degreeId" class="w200" >
               <nz-option *ngFor="let option of dictionary.config_degree" [nzLabel]="option.value" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -107,12 +123,12 @@
 
           <div nz-col [nzSpan]="8" class="ta_r">
             毕业学校：
-            <input nz-input name="educationSchool" [(ngModel)]="data.educationSchool" class="w200" [disabled]="isDisable" />
+            <input nz-input name="educationSchool" [(ngModel)]="data.educationSchool" class="w200"/>
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
             毕业时间：
-            <nz-date-picker name="educateDate" [(ngModel)]="data.educateDate" class="w200" [disabled]="isDisable">
+            <nz-date-picker name="educateDate" [(ngModel)]="data.educateDate" class="w200">
             </nz-date-picker>
           </div>
 
@@ -121,36 +137,188 @@
         <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
           <div nz-col [nzSpan]="8" class="ta_r">
             专业：
-            <input nz-input name="major" [(ngModel)]="data.major" class="w200" [disabled]="isDisable" />
+            <input nz-input name="major" [(ngModel)]="data.major" class="w200"  />
           </div>
           <div nz-col [nzSpan]="8" class="ta_r">
             备注：
-            <input nz-input name="note" [(ngModel)]="data.note" class="w200" [disabled]="isDisable" />
+            <input nz-input name="note" [(ngModel)]="data.note" class="w200" />
           </div>
         </div>
 
-        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+        <app-attachment [fileList]="fileList" [refid]="data.id"></app-attachment>
       </div>
-
-     
 
     </nz-tab>
 
-    <nz-tab nzTitle="培训信息" *ngIf="isDisable">
-      <div style="    padding: 0 30px;">
+    <nz-tab nzTitle="监督员信息"  *ngIf="isShow==true">
+        <div class="div_contain_add" style="height: calc(100% - 20px);" >
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="3" class="ta_r">
+              姓名：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.name}}</span>
+            </div>
+          
+            <div nz-col [nzSpan]="3" class="ta_r">
+              身份证号：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.identity}}</span>
+            </div>
+          
+            <div nz-col [nzSpan]="3" class="ta_r">
+              性别：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.sexValue}}</span>
+            </div>
+          </div>
+  
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="3" class="ta_r">
+              出生年月：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.birthday|recordtime}}</span>
+            </div>
+          
+            <div nz-col [nzSpan]="3" class="ta_r">
+              所属单位：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.orgName}}</span>
+            </div>
+          
+            <div nz-col [nzSpan]="3" class="ta_r">
+                监督员类别：
+              </div>
+              <div nz-col [nzSpan]="5" class="ta_l">
+                <span name="name">{{data.typeValue}}</span>
+              </div>
+
+          </div>
+  
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="3" class="ta_r">
+              入职时间：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.entryDate|recordtime}}</span>
+            </div>
+          
+            <div nz-col [nzSpan]="3" class="ta_r">
+              职称：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.titleName}}</span>
+            </div>
+            <div nz-col [nzSpan]="3" class="ta_r">
+              职务：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.post}}</span>
+            </div>
+          
+          </div>
+  
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="3" class="ta_r">
+              政治面貌：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.politicalValue}}</span>
+            </div>
+          
+            <div nz-col [nzSpan]="3" class="ta_r">
+              联系方式：
+            </div>
+            <div nz-col [nzSpan]="4" class="ta_l">
+              <span name="name">{{data.contact}}</span>
+            </div>
+
+            <div nz-col [nzSpan]="4" class="ta_r">
+                从事核安全工作时间：
+              </div>
+              <div nz-col [nzSpan]="5" class="ta_l">
+                <span name="name">{{data.continueTime}}</span>
+              </div>
+          </div>
+  
+          <div nz-row class="ma_b20">
+          
+            <div nz-col [nzSpan]="3" class="ta_r">
+              学历：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.educationValue}}</span>
+            </div>
+          
+            <div nz-col [nzSpan]="3" class="ta_r">
+                学位：
+              </div>
+              <div nz-col [nzSpan]="5" class="ta_l">
+                <span name="name">{{data.degreeValue}}</span>
+              </div>
+            
+              <div nz-col [nzSpan]="3" class="ta_r">
+                毕业学校：
+              </div>
+              <div nz-col [nzSpan]="5" class="ta_l">
+                <span name="name">{{data.educationSchool}}</span>
+              </div>
+
+          </div>
+  
+          <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'"> 
+            <div nz-col [nzSpan]="3" class="ta_r">
+              毕业时间：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.educateDate|recordtime}}</span>
+            </div>
+            
+            <div nz-col [nzSpan]="3" class="ta_r">
+              专业：
+            </div>
+            <div nz-col [nzSpan]="5" class="ta_l">
+              <span name="name">{{data.major}}</span>
+            </div>
+          </div>
+  
+          <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+
+            <div nz-col [nzSpan]="3" class="ta_r">
+              备注：
+            </div>
+            <div nz-col [nzSpan]="21" class="ta_l">
+                <div nz-tooltip nzTitle={{data.note}} nzPlacement="topLeft" class="showTextArea">{{data.note}}</div>
+              </div>
+          </div>
+
+          <app-attachment [fileList]="fileList" [refid]="data.id"></app-attachment>
+        </div>
+
+  
+      </nz-tab>
+
+    <nz-tab nzTitle="培训信息"  *ngIf="isShowTrain">
+        <app-supervisor-childmanage></app-supervisor-childmanage>
+      <!-- <div style="    padding: 0 30px;">
         <div nz-row style="height: 50px" [nzType]="'flex'" [nzAlign]="'middle'">
           <div nz-col [nzSpan]="8">
             <nz-input-group [nzSuffix]="suffixIconSearch1" style="width: 300px;">
               <input type="text" nz-input placeholder="请输入班次搜索" [(ngModel)]="batchSearch">
             </nz-input-group>
             <ng-template #suffixIconSearch1>
-              <i nz-icon type="search" (click)="search()"></i>
+              <i nz-icon type="search" (click)="searchTrainRecords()"></i>
             </ng-template>
           </div>
         </div>
         <div nz-row>
-          <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzFrontPagination]="false" [nzTotal]="totalCount" [nzPageIndex]="pageIndex"
-            nzShowSizeChanger [nzPageSize]="pageSize" (nzPageIndexChange)="pageIndexChange($event)" class="tablescoll_rainbow">
+          <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzFrontPagination]="false"
+            [nzTotal]="totalCount" [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize"
+            (nzPageIndexChange)="pageIndexChange($event)" class="tablescoll_rainbow">
             <thead>
               <tr>
                 <th>序号</th>
@@ -178,7 +346,7 @@
           </nz-table>
 
         </div>
-      </div>
+      </div> -->
     </nz-tab>
 
   </nz-tabset>
@@ -186,7 +354,8 @@
 
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;" [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
+      [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
 </div>
