@@ -80,6 +80,7 @@ export class WelderComponent implements OnInit {
     this.employ_depart = "";
     this.exam_project = "";
     this.expire_date = [];
+    this.selectId="";
   }
 
   add() {
@@ -96,7 +97,6 @@ export class WelderComponent implements OnInit {
     } else {
       this.msg.create("warning", "请选择修改项");
     }
-
   }
 
   delete() {
