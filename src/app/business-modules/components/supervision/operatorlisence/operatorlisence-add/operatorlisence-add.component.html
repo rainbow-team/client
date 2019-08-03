@@ -67,7 +67,7 @@
         发证日期：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <nz-date-picker name="certDate" [(ngModel)]="data.certDate" required [validation]="true">
+        <nz-date-picker name="certDate" [(ngModel)]="data.certDate" (ngModelChange)="changeIssueDate($event)" required [validation]="true">
         </nz-date-picker>
       </div>
 
@@ -75,7 +75,7 @@
         有效期限：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <nz-date-picker name="expireDate" [(ngModel)]="data.expireDate" required [validation]="true">
+        <nz-date-picker name="expireDate" [(ngModel)]="data.expireDate" required [validation]="true" [disabled]="true">
         </nz-date-picker>
       </div>
     </div>

@@ -114,4 +114,17 @@ export class OperatorlisenceAddComponent implements OnInit {
     });
     return isValid;
   }
+
+   //到期时间计算
+   changeIssueDate(param) {
+
+    if (param) {
+
+      let year = param.getFullYear();
+      let month = param.getMonth();
+      let day = param.getDate();
+      this.data.expireDate = new Date(year + 3, month, day);
+    }
+
+  }
 }
