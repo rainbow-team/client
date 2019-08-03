@@ -24,6 +24,8 @@ export class ExpertComponent implements OnInit {
 
   name: any = "";
   major: any = "";
+  startAge:any="";
+  endAge:any="";
 
   selectId: any = "";
 
@@ -52,6 +54,12 @@ export class ExpertComponent implements OnInit {
     if (this.major) {
       option.conditions.push({ key: "major", value: this.major })
     }
+    if (this.startAge) {
+      option.conditions.push({ key: "startAge", value: this.startAge })
+    }
+    if (this.endAge) {
+      option.conditions.push({ key: "endAge", value: this.endAge })
+    }
 
     this.expertSercice.getExpertList(option).subscribe(
       (data) => {
@@ -64,6 +72,8 @@ export class ExpertComponent implements OnInit {
   reset() {
     this.name = "";
     this.major = "";
+    this.startAge = "";
+    this.endAge = "";
     this.selectId = "";
   }
 

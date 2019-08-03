@@ -18,13 +18,14 @@ export class ExpertAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
-  fileList = [
-  ];
+  isShow = false;
+  fileList = [];
   sexValue: any = "";
 
   dictionary: any = {};
   staffObj: any = {};
+
+  age:any="";
 
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
@@ -37,18 +38,19 @@ export class ExpertAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
     if (id) {
       this.expertSercice.getExpertById(id).subscribe((res) => {
         this.data = res.msg;
         this.sexValue = this.data.sex + "";
+        this.getAge();
       });
 
     } else {
@@ -58,22 +60,34 @@ export class ExpertAddComponent implements OnInit {
 
   }
 
-    //身份证变化
-    identityChange(params) {
+  //身份证变化
+  identityChange(params) {
 
-      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-      if (reg.test(params)) {
-  
-        this.data.birthday = new Date(params.substring(6, 10), params.substring(10, 12) - 1, params.substring(12, 14));
-        if (parseInt(params.substr(16, 1)) % 2 == 1) {
-          //男
-          return this.sexValue = "1";
-        } else {
-          //女
-          return this.sexValue = "2";
-        }
+    var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    if (reg.test(params)) {
+
+      this.data.birthday = new Date(params.substring(6, 10), params.substring(10, 12) - 1, params.substring(12, 14));
+      this.getAge();
+      if (parseInt(params.substr(16, 1)) % 2 == 1) {
+        //男
+        return this.sexValue = "1";
+      } else {
+        //女
+        return this.sexValue = "2";
       }
     }
+  }
+
+  getAge() {
+    let nowDateTime = new Date();
+    let birthdayDate = new Date(this.data.birthday);
+    let age = nowDateTime.getFullYear() - birthdayDate.getFullYear();
+    //再考虑月、天的因素;.getMonth()获取的是从0开始的，这里进行比较，不需要加1
+    if (nowDateTime.getMonth() < birthdayDate.getMonth() || (nowDateTime.getMonth() == birthdayDate.getMonth() && nowDateTime.getDate() < birthdayDate.getDate())) {
+      age--;
+    }
+    this.age = age;
+  }
 
   save() {
 

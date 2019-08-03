@@ -12,6 +12,7 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
 import { ShareModule } from '../common-modules/share/share.module';
 import { ValidationDirective } from './_directives/validation.directive';
+import {SexPipe} from './_pipes/sex.pipe';
 import { RecordtimePipe } from './_pipes/recordtime.pipe';
 import { IsTruePipe } from './_pipes/istrue.pipe';
 import { TooltipsPipe } from './_pipes/tooltips.pipe';
@@ -33,6 +34,7 @@ import { ActivityPermitComponent } from './../../app/business-modules/components
     IndexComponent,
     HeaderComponent,
     NavMenuComponent,
+    SexPipe,
     RecordtimePipe,
     TooltipsPipe,
     IsTruePipe,
@@ -46,6 +48,7 @@ import { ActivityPermitComponent } from './../../app/business-modules/components
     IndexComponent,
     HeaderComponent,
     NavMenuComponent,
+    SexPipe,
     RecordtimePipe,
     IsTruePipe,
     TooltipsPipe,
