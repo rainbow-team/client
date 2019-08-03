@@ -7,6 +7,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { RoleService } from 'src/app/services/system/role.service';
 import { MenuService } from 'src/app/services/system/menu.service';
 import { NzTreeNodeOptions } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_ICONS } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-role',
@@ -106,9 +107,11 @@ export class RoleComponent implements OnInit {
     if (flag) {
       this.currentRole = item;
       this.roleService.getRoleById(item.id).subscribe(data => {
-        for (var i = 0; i < data.msg.roleMenuList.length; i++) {
-          this.currentRole.roleMenuList.push(data.msg.roleMenuList[i].id);
+        const meluList: any = [];
+        for (let i = 0; i < data.msg.roleMenuList.length; i++) {
+          meluList.push(data.msg.roleMenuList[i].id);
         }
+        this.currentRole.roleMenuList = meluList;
       });
     } else {
       this.currentRole = {};

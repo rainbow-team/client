@@ -91,17 +91,21 @@
           />
         </div>
       </div>
-
+      <ng-template #omittedPlaceHolder let-omittedValues>
+        and {{ omittedValues.length }} 更多权限...
+      </ng-template>
       <div nz-row style="height: 40px;">
         <div class="ta_l">
           <span class="clo_r">*</span>菜单权限：
           <nz-tree-select
-            nzCheckable
             style="width: 250px"
-            [nzNodes]="menuTreeNodes"
-            nzShowSearch
             nzPlaceHolder="请选择父级菜单"
+            [nzNodes]="menuTreeNodes"
+            [nzDefaultExpandAll]="true"
+            [nzAllowClear]="true"
             [(ngModel)]="currentRole.roleMenuList"
+            nzShowExpand
+            [nzMultiple]="true"
           >
           </nz-tree-select>
         </div>
