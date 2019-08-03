@@ -1,5 +1,5 @@
 <div style="padding: 0 0 0 50px;">
-  <nz-upload [nzAction]="uploadUrl" [nzCustomRequest]="customReq" [nzFileList]="fileList" [nzShowUploadList]="false" [nzDisabled]="isDisable">
+  <nz-upload  *ngIf="!isDisable"  [nzAction]="uploadUrl" [nzCustomRequest]="customReq" [nzFileList]="fileList" [nzShowUploadList]="false" [nzDisabled]="isDisable">
     <i nz-icon type="plus" class="upload_i"></i>
     <div class="ant-upload-text">上传附件</div>
   </nz-upload>

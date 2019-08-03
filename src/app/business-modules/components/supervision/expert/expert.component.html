@@ -10,9 +10,11 @@
     </div>
     <div nz-col [nzSpan]="5">
       年龄：
-      <input nz-input nzSize="default" [(ngModel)]="startAge" style="width: 100px" validation="true" [validationType]="'nullnumber'">
+      <input nz-input nzSize="default" [(ngModel)]="startAge" style="width: 100px" validation="true"
+        [validationType]="'nullnumber'">
       至
-      <input nz-input nzSize="default" [(ngModel)]="endAge"  style="width: 100px" validation="true" [validationType]="'nullnumber'">
+      <input nz-input nzSize="default" [(ngModel)]="endAge" style="width: 100px" validation="true"
+        [validationType]="'nullnumber'">
     </div>
 
     <div nz-col [nzSpan]="4" [nzOffset]="5" class="ta_r">
@@ -33,16 +35,16 @@
 
 
       <div class="fr">
-          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
-        </div>
-  
-        <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
-        </div>
-  
-        <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
-        </div>
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+      </div>
 
     </div>
     <div>
@@ -64,7 +66,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index" [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
+          <tr *ngFor="let data of nestedTable.data;index as index"
+            [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.name}}</td>
             <td>{{data.sex|sex}}</td>
