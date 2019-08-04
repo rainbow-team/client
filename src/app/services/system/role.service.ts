@@ -24,4 +24,8 @@ export class RoleService {
   deleteRoleByIds(ids): any {
     return this.http.post('/role/deleteRoleByIds', ids);
   }
+
+  getAllRoles(): any {
+    return this.http.post('/role/getAllRoles', null);
+  }
 }
