@@ -11,7 +11,7 @@ export class SystemComponent implements OnInit {
     { name: '角色管理' },
     { name: '菜单管理' },
     { name: '机构管理' },
-    { name: '参数设置' },
+    // { name: '参数设置' },
     { name: '日志管理' }
   ];
 

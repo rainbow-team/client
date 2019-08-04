@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id"></app-attachment>
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
   </div>
 
 
@@ -41,6 +41,8 @@
         <span >{{data.releaseDate|recordtime}}</span>
       </div>
     </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
   </div>
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">

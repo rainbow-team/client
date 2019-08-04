@@ -13,15 +13,15 @@
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
-        身份证号：
+        <span class="clo_r">*</span>身份证号：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="identity" [(ngModel)]="data.identity" [validation]="true" [validationType]="'nullidcard'"
-          (ngModelChange)="identityChange($event)" />
+        <input nz-input name="identity" [(ngModel)]="data.identity" required [validation]="true"
+          [validationType]="'nullidcard'" (ngModelChange)="identityChange($event)" />
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
-        聘用单位：
+        <span class="clo_r">*</span>聘用单位：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
         <input nz-input name="employDepart" [(ngModel)]="data.employDepart" required [validation]="true" />
@@ -37,7 +37,7 @@
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
-        执照种类：
+        <span class="clo_r">*</span>执照种类：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
         <nz-select [(ngModel)]="data.licenseTypeId" style="width: 100%" required [validation]="true">
@@ -48,7 +48,7 @@
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
-        执照编号：
+        <span class="clo_r">*</span>执照编号：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
         <input nz-input name="licenseNumber" [(ngModel)]="data.licenseNumber" required [validation]="true" />
@@ -57,17 +57,18 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="3" class="ta_r">
-        <span class="clo_r">*</span>发证单位：
+        发证单位：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
         <input nz-input name="certDepart" [(ngModel)]="data.certDepart" />
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
-        发证日期：
+        <span class="clo_r">*</span>发证日期：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <nz-date-picker name="certDate" [(ngModel)]="data.certDate" (ngModelChange)="changeIssueDate($event)" required [validation]="true">
+        <nz-date-picker name="certDate" [(ngModel)]="data.certDate" (ngModelChange)="changeIssueDate($event)" required
+          [validation]="true">
         </nz-date-picker>
       </div>
 
@@ -128,7 +129,7 @@
       <div nz-col [nzSpan]="3" class="ta_r">
         执照种类：
       </div>
-      <div nz-col [nzSpan]="5"  class="ta_l">
+      <div nz-col [nzSpan]="5" class="ta_l">
         <span name="licenseTypeValue" class="showText">{{data.licenseTypeValue}}</span>
       </div>
 

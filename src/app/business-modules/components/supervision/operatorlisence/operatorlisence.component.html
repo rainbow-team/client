@@ -1,6 +1,11 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    
+
+    <div nz-col [nzSpan]="5">
+      姓名
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
+    </div>
+
     <div nz-col [nzSpan]="5">
       聘用单位
       <input nz-input nzSize="default" [(ngModel)]="employ_depart" class="w200">
@@ -10,25 +15,22 @@
       <input nz-input nzSize="default" [(ngModel)]="heap_name" class="w200">
     </div>
 
-    <div nz-col [nzSpan]="5">
-      执照种类
-      <nz-select [(ngModel)]="lisenceTypeIds" class="w200" nzMode="multiple">
-        <nz-option *ngFor="let option of dictionary.config_operator_license_type" [nzLabel]="option.value"
-          [nzValue]="option.id">
-        </nz-option>
-      </nz-select>
-    </div>
-    <div nz-col [nzSpan]="5">
-        姓名
-        <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
-      </div>
-
-    <div nz-col [nzSpan]="4" class="ta_r">
+    <div nz-col [nzSpan]="4" [nzOffset]="5" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>
   </div>
   <div nz-row style="height: 40px;">
+
+    
+    <div nz-col [nzSpan]="6">
+      执照种类
+      <nz-select [(ngModel)]="lisenceTypeIds" style="width: 300px"  nzMode="multiple">
+        <nz-option *ngFor="let option of dictionary.config_operator_license_type" [nzLabel]="option.value"
+          [nzValue]="option.id">
+        </nz-option>
+      </nz-select>
+    </div>
     <div nz-col [nzSpan]="5">
       有效期限
       <nz-range-picker class="w200" [(ngModel)]="expire_date">
