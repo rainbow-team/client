@@ -33,6 +33,8 @@ export class ServicedepartReportmanageComponent implements OnInit {
 
   fileList = [];
 
+  selectId: any = "";
+  
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService,
     private serviceDepartSercice: ServiceDepartService, private attachmentSercice: AttachmentSercice) { }
@@ -69,6 +71,8 @@ export class ServicedepartReportmanageComponent implements OnInit {
     this.okText = "提交";
     this.isVisible = true;
     this.isSaving = false;
+    this.isDisable=false;
+    this.fileList=[];
   }
 
   //查看与编辑
@@ -76,6 +80,7 @@ export class ServicedepartReportmanageComponent implements OnInit {
 
     this.data = param;
     this.isDisable = flag;
+    this.fileList=[];
 
     this.attachmentSercice.getFileListById(param.reportId).subscribe((res1) => {
 
@@ -105,7 +110,7 @@ export class ServicedepartReportmanageComponent implements OnInit {
 
   delete(data) {
 
-    this.serviceDepartSercice.deleteServiceAnnualReportByIds([data.id]).subscribe((res) => {
+    this.serviceDepartSercice.deleteServiceAnnualReportByIds([data.reportId]).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
         this.search();

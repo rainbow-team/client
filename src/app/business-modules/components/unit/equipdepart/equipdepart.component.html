@@ -24,10 +24,18 @@
         <div class="fl" style="color: #0050b3;">
           核安全设备单位信息（共{{totalCount}}条）
         </div>
-  
+
         <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
-        </div>
+            <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+          </div>
+          
+          <div class="fr">
+            <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+          </div>
+          
+          <div class="fr">
+            <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+          </div>
         
       </div>
       <div>
@@ -45,18 +53,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of nestedTable.data;index as index">
+            <tr *ngFor="let data of nestedTable.data;index as index"
+            [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
              <td>{{(pageIndex-1)*pageSize+1+index}}</td>
               <td>{{data.name}}</td>
               <td>{{data.product}}</td>
               <td>{{data.owner}}</td>
               <td>{{data.emergencyTel}}</td>
               <td>
-                <a (click)="show(data,true)">查看</a>
-                <nz-divider nzType="vertical"></nz-divider>
-                <a (click)="show(data,false)">编辑</a>
-                <nz-divider nzType="vertical"></nz-divider>
-                <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
+                <a (click)="show(data)">查看</a>
               </td>
             </tr>
           </tbody>

@@ -2,102 +2,149 @@
   <div class="div_top_add">
     铀矿冶单位信息
   </div>
-  <div class="div_contain_add">
-    <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
+  <div class="div_contain_add"  *ngIf="isShow==false">
+
+    <div nz-row class="ma_b20" >
+      <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>集团名称：
-        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"
-          [disabled]="isDisable" />
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>所属集团：
-        <nz-select [(ngModel)]="data.groupId" class="w200" required [validation]="true" [disabled]="isDisable">
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.groupId" required [validation]="true" style="width: 100%">
           <nz-option *ngFor="let option of groupList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
+
+      <div nz-col [nzSpan]="4" class="ta_r">
         单位代号：
-        <input nz-input name="code" [(ngModel)]="data.code" class="w200" [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="code" [(ngModel)]="data.code" />
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
-        铀尾矿（渣）库数量：
-        <input nz-input name="umineplaceNum" [(ngModel)]="umineplaceNum" class="w200" disabled />
-      </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
-        铀矿山数量：
-        <input nz-input name="umineMountainNum" [(ngModel)]="umineMountainNum" class="w200" disabled />
-      </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="4" class="ta_r">
         地址：
-        <input nz-input name="address" [(ngModel)]="data.address" class="w200" [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <input nz-input name="address" [(ngModel)]="data.address" />
       </div>
     </div>
 
+
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="4" class="ta_r">
         应急电话：
-        <input nz-input name="emergencyTel" [(ngModel)]="data.emergencyTel" class="w200" [disabled]="isDisable"
-          [validation]="true" [validationType]="'nullphonenumber'" />
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="emergencyTel" [(ngModel)]="data.emergencyTel" [validation]="true"
+          [validationType]="'nullphonenumber'" />
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
         传真：
-        <input nz-input name="fax" [(ngModel)]="data.fax" class="w200" [disabled]="isDisable" />
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="fax" [(ngModel)]="data.fax" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
         法人代表：
-        <input nz-input name="owner" [(ngModel)]="data.owner" class="w200" [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <input nz-input name="owner" [(ngModel)]="data.owner" />
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="4" class="ta_r">
         主管安全领导：
-        <input nz-input name="leader" [(ngModel)]="data.leader" class="w200" [disabled]="isDisable" />
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="leader" [(ngModel)]="data.leader" />
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
         主管安全领导电话：
-        <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" class="w200" [disabled]="isDisable"
-          [validation]="true" [validationType]="'nullphonenumber'" />
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
-        安全部门领导：
-        <input nz-input name="departLeader" [(ngModel)]="data.departLeader" class="w200" [disabled]="isDisable" />
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" [validation]="true"
+          [validationType]="'nullphonenumber'" />
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
-        安全部门领导电话：
-        <input nz-input name="departLeaderTel" [(ngModel)]="data.departLeaderTel" class="w200" [disabled]="isDisable"
-          [validation]="true" [validationType]="'nullphonenumber'" />
+      <div nz-col [nzSpan]="4" class="ta_r">
+        安全主管部门领导：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="departLeader" [(ngModel)]="data.departLeader" />
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        安全主管部门领导电话：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="departLeaderTel" [(ngModel)]="data.departLeaderTel" [validation]="true"
+          [validationType]="'nullphonenumber'" />
+      </div>
+    </div>
+
+
+
+    <div nz-row class="ma_b20" *ngIf="!isAdd">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        铀尾矿（渣）库数量：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="umineplaceNum" [(ngModel)]="umineplaceNum" disabled />
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        铀矿山数量：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="umineMountainNum" [(ngModel)]="umineMountainNum" disabled />
+      </div>
+    </div>
+
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        基本概况：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="survey" style="height: 70px;" [(ngModel)]="data.survey"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">基本概况：</div>
-        <textarea nz-input name="survey" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.survey"
-          [disabled]="isDisable"></textarea>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        厂址特征：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="feature" style="height: 70px;" [(ngModel)]="data.feature"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">厂址特征：</div>
-        <textarea nz-input name="feature" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.feature"
-          [disabled]="isDisable"></textarea>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        备注：
       </div>
-    </div>
-
-    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">备注：</div>
-        <textarea nz-input name="note" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.note"
-          [disabled]="isDisable"></textarea>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="note" style="height: 70px;" [(ngModel)]="data.note"></textarea>
       </div>
     </div>
 
@@ -105,10 +152,152 @@
 
   </div>
 
+  <div class="div_contain_add"  *ngIf="isShow==true">
 
+      <div nz-row class="ma_b20" >
+        <div nz-col [nzSpan]="4" class="ta_r">
+          集团名称：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="name" class="showText">{{data.name}}</span>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          所属集团：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="groupName" class="showText">{{data.groupName}}</span>
+        </div>
+  
+        <div nz-col [nzSpan]="4" class="ta_r">
+          单位代号：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="code" class="showText">{{data.code}}</span>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          地址：
+        </div>
+        <div nz-col [nzSpan]="20" class="ta_l">
+            <span name="address" class="showText">{{data.address}}</span>
+        </div>
+      </div>
+  
+  
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          应急电话：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="emergencyTel" class="showText">{{data.emergencyTel}}</span>
+        </div>
+  
+        <div nz-col [nzSpan]="4" class="ta_r">
+          传真：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="fax" class="showText">{{data.fax}}</span>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          法人代表：
+        </div>
+        <div nz-col [nzSpan]="20" class="ta_l">
+            <span name="owner" class="showText">{{data.owner}}</span>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          主管安全领导：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="leader" class="showText">{{data.leader}}</span>
+        </div>
+  
+        <div nz-col [nzSpan]="4" class="ta_r">
+          主管安全领导电话：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="leaderTel" class="showText">{{data.leaderTel}}</span>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          安全主管部门领导：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="departLeader" class="showText">{{data.departLeader}}</span>
+        </div>
+  
+        <div nz-col [nzSpan]="4" class="ta_r">
+          安全主管部门领导电话：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="departLeaderTel" class="showText">{{data.departLeaderTel}}</span>
+        </div>
+      </div>
+  
+  
+  
+      <div nz-row class="ma_b20" *ngIf="!isAdd">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          铀尾矿（渣）库数量：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="umineplaceNum" class="showText">{{data.umineplaceNum}}</span>
+        </div>
+  
+        <div nz-col [nzSpan]="4" class="ta_r">
+          铀矿山数量：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+            <span name="umineMountainNum" class="showText">{{data.umineMountainNum}}</span>
+        </div>
+      </div>
+  
+  
+      <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          基本概况：
+        </div>
+        <div nz-col [nzSpan]="20" class="ta_l">
+            <div nz-tooltip nzPlacement="survey" class="showTextArea">{{data.survey}}</div>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          厂址特征：
+        </div>
+        <div nz-col [nzSpan]="20" class="ta_l">
+            <div nz-tooltip nzPlacement="feature" class="showTextArea">{{data.feature}}</div>
+        </div>
+      </div>
+  
+      <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          备注：
+        </div>
+        <div nz-col [nzSpan]="20" class="ta_l">
+            <div nz-tooltip nzPlacement="note" class="showTextArea">{{data.note}}</div>
+        </div>
+      </div>
+  
+      <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+  
+    </div>
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
       [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>

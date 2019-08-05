@@ -10,9 +10,18 @@
         年度报告信息（共{{totalCount}}条）
       </div>
 
-      <div class="fr">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
-      </div>
+      <!-- <div class="fr">
+          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+        </div>
+        
+        <div class="fr">
+          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+        </div> -->
+        
+        <div class="fr">
+          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+        </div>
+
 
     </div>
     <div>
@@ -29,9 +38,11 @@
         <tbody>
           <tr *ngFor="let data of nestedTable.data;index as index">
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-            <td>{{data.reportYear|recordtime}}</td>
+            <td>{{data.reportYear|recordtime:'year'}}</td>
             <td>
               <a (click)="show(data,true)">查看</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a (click)="show(data,false)">修改</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
             </td>
@@ -42,10 +53,6 @@
 
   </div>
 
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="default" (click)="close()">关闭</button>
-  </div>
-
   <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消" (nzOnOk)="save();"
     (nzOnCancel)="isVisible=false;" nzWidth="700" [nzOkLoading]="isSaving">
 
@@ -54,9 +61,9 @@
       <div nz-row class="ma_b20">
         <div nz-col [nzSpan]="12" class="ta_r">
           <span class="clo_r">*</span>年度报告时间：
-          <nz-date-picker name="reportYear" [(ngModel)]="data.reportYear" class="w200" [disabled]="isDisable" required
+          <nz-year-picker name="reportYear" [(ngModel)]="data.reportYear" class="w200" [disabled]="isDisable" required
             [validation]="true">
-          </nz-date-picker>
+          </nz-year-picker>
         </div>
       </div>
       <app-attachment [fileList]="fileList" [refid]="data.reportId" [isDisable]="isDisable"></app-attachment>

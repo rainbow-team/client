@@ -29,6 +29,9 @@ export class ServicedepartComponent implements OnInit {
 
   groupList: any = [];
 
+  selectId: any = "";
+
+
   constructor(private router: Router,
     private msg: NzMessageService, private serviceDepartSercice: ServiceDepartService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private groupService: GroupService) { }
@@ -79,6 +82,7 @@ export class ServicedepartComponent implements OnInit {
   reset() {
     this.name = "";
     this.groupIds = [];
+    this.selectId = "";
   }
 
   add() {
@@ -89,26 +93,42 @@ export class ServicedepartComponent implements OnInit {
     this.router.navigate(['/unit/servicedepart/childmanage'], { queryParams: { id: item.id } });
   }
 
-  show(item, flag) {
-    this.router.navigate(['/unit/servicedepart/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/unit/servicedepart/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  SearchShow(item){
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/unit/servicedepart/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
+  }
+
+  SearchShow(item) {
     this.router.navigate(['/unit/servicedepart/SearchShow'], { queryParams: { id: item.id } });
   }
 
-  delete(item) {
+  delete() {
+    if (this.selectId) {
 
-    this.serviceDepartSercice.deleteServiceDepartById([item.id]).subscribe((res) => {
+      this.serviceDepartSercice.deleteServiceDepartById([this.selectId]).subscribe((res) => {
 
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
 
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
   }
 
 }

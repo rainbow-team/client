@@ -27,6 +27,8 @@ export class UmineComponent implements OnInit {
 
   groupList: any = [];
   
+  selectId: any = "";
+
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice,private groupService: GroupService) { }
@@ -88,29 +90,45 @@ export class UmineComponent implements OnInit {
   reset() {
     this.name = "";
     this.groupIds = [];
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/unit/umine/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/unit/umine/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/unit/umine/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/unit/umine/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
+  }
 
-    this.umineSercice.deleteUmineById(item.id).subscribe((res) => {
+  delete() {
+    if (this.selectId) {
+      this.umineSercice.deleteUmineById(this.selectId).subscribe((res) => {
 
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else if(res.code == 500){
-        this.msg.create("warning", res.msg);
-      } else{
-        this.msg.create("error", "删除失败");
-      }
-    })
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else if (res.code == 500) {
+          this.msg.create("warning", res.msg);
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
 
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
   }
 }
