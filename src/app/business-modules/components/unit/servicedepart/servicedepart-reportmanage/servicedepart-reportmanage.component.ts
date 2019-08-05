@@ -143,7 +143,7 @@ export class ServicedepartReportmanageComponent implements OnInit {
       });
     }
 
-    if (!this.data.reportId) {
+   
       this.serviceDepartSercice.saveOrUpdateServiceAnnualReport(this.data).subscribe((res) => {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
@@ -156,7 +156,7 @@ export class ServicedepartReportmanageComponent implements OnInit {
 
         this.isSaving = false;
       });
-    }
+    
   }
 
 
