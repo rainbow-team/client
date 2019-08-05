@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -13,7 +13,8 @@ import { ServiceDepartService } from 'src/app/services/unit/servicedepart.servic
 })
 export class FacComponent implements OnInit {
 
-
+  @Input() isSearchShow = "0";
+  
   dictionary: any = {};
   staffObj: any = {};
 

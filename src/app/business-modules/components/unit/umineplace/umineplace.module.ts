@@ -35,7 +35,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        UmineplaceComponent,
+        // UmineplaceComponent,
         UmineplaceAddComponent,
         UmineplaceChildmanageComponent
     ]

@@ -12,7 +12,7 @@ export class IntegratedAueryComponent implements OnInit {
     { name: "铀矿山" }
   ]
 
-  selectMenuName = "核设施营运单位";
+  selectMenuName = "集团";
   constructor() { }
 
   ngOnInit() {

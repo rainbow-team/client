@@ -1,35 +1,36 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
 
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="7">
       营运单位:
       <nz-select [(ngModel)]="ServiceDepartIds" class="w200" nzMode="multiple">
         <nz-option *ngFor="let option of ServiceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="7">
       建造年代:
       <nz-year-picker class="w200" [(ngModel)]="build_year" [nzFormat]="yyyy"></nz-year-picker>
     </div>
-    <div nz-col [nzSpan]="5">
-      核设施名称:
+    <div nz-col [nzSpan]="7">
+      设施名称:
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
-    <div nz-col [nzSpan]="5">
-      核设施编号:
-      <input nz-input nzSize="default" [(ngModel)]="code" class="w200">
-    </div>
-
-
-    <div nz-col [nzSpan]="4" class="ta_r">
+  
+    <div nz-col [nzSpan]="3" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>
   </div>
 
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
+  
+    <div nz-col [nzSpan]="7">
+      设施编号:
+      <input nz-input nzSize="default" [(ngModel)]="code" class="w200">
+    </div>
+
+    <div nz-col [nzSpan]="7">
       监管类别:
       <nz-select [(ngModel)]="supervisionCategoryIds" class="w200" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_fac_supervison_category" [nzLabel]="option.value"
@@ -37,21 +38,26 @@
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="7">
       设施类型:
       <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_fac_type" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="5">
+  </div>
+
+  <div nz-row style="height: 40px;">
+   
+   
+    <div nz-col [nzSpan]="7">
       设施状态:
       <nz-select [(ngModel)]="statusId" class="w200" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="7">
       审评状态:
       <nz-select [(ngModel)]="reviewStatusId" class="w200" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_review_status" [nzLabel]="option.value"
@@ -59,10 +65,7 @@
         </nz-option>
       </nz-select>
     </div>
-  </div>
-
-  <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="7">
       许可情况:
       <nz-select [(ngModel)]="facPermitSituationId" class="w200" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_fac_permit_situation" [nzLabel]="option.value"
@@ -70,6 +73,10 @@
         </nz-option>
       </nz-select>
     </div>
+  </div>
+
+  <div nz-row style="height: 40px;">
+    
     <div nz-col [nzSpan]="7">
       是否满足防洪要求:
       <nz-select [(ngModel)]="isEarthquake" class="w200">
@@ -96,7 +103,7 @@
         核设施信息（共{{totalCount}}条）
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="isSearchShow=='0'">
         <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
       </div>
 
@@ -136,7 +143,7 @@
             <td>{{data.permitSituationValue}}</td>
             <td>{{data.isEarthquake|isTrue}}</td>
             <td>{{data.isFlood|isTrue}}</td>
-            <td>
+            <td *ngIf="isSearchShow=='0'">
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data,false)">编辑</a>
@@ -144,6 +151,9 @@
               <a (click)="childmanage(data)">子项管理</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
+            </td>
+            <td *ngIf="isSearchShow=='1'">
+              <a (click)="show(data,true)">查看</a>
             </td>
           </tr>
         </tbody>

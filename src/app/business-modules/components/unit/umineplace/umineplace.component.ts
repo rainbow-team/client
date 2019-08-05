@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { UmineService } from 'src/app/services/unit/umine.service';
@@ -12,6 +12,9 @@ import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
   styleUrls: ['./umineplace.component.scss']
 })
 export class UmineplaceComponent implements OnInit {
+
+  @Input() isSearchShow = "0";
+  
   dictionary: any = {};
   staffObj: any = {};
 

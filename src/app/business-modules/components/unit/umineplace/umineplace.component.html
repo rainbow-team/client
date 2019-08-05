@@ -1,18 +1,43 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="7">
       营运单位：
       <input nz-input nzSize="default" [(ngModel)]="umineName" class="w200">
     </div>
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="7">
       建造年代：
       <nz-range-picker class="w200" [(ngModel)]="build_year" [nzFormat]="yyyy"></nz-range-picker>
     </div>
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="7">
       名称
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
-    <div nz-col [nzSpan]="5">
+
+    <div nz-col [nzSpan]="3" class="ta_r">
+      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
+      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
+    </div>
+  </div>
+
+  <div nz-row style="height: 40px;">
+    <div nz-col [nzSpan]="7">
+      设施状态：
+      <nz-select [(ngModel)]="statusIds" class="w200" nzMode="multiple">
+        <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
+          [nzValue]="option.id">
+        </nz-option>
+      </nz-select>
+    </div>
+    <div nz-col [nzSpan]="7">
+      审评状态：
+      <nz-select [(ngModel)]="reviewStatusIds" class="w200" nzMode="multiple">
+        <nz-option *ngFor="let option of dictionary.config_review_status" [nzLabel]="option.value"
+          [nzValue]="option.id">
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <div nz-col [nzSpan]="7">
       等别：
       <nz-select [(ngModel)]="levelIds" class="w200" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_umine_place_level" [nzLabel]="option.value"
@@ -21,30 +46,11 @@
       </nz-select>
     </div>
 
-    <div nz-col [nzSpan]="4" class="ta_r">
-      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
-      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
-    </div>
   </div>
 
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
-      设施状态：
-      <nz-select [(ngModel)]="statusIds" class="w200" nzMode="multiple">
-        <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
-          [nzValue]="option.id">
-        </nz-option>
-      </nz-select>
-    </div>
-    <div nz-col [nzSpan]="5">
-      审评状态：
-      <nz-select [(ngModel)]="reviewStatusIds" class="w200" nzMode="multiple">
-        <nz-option *ngFor="let option of dictionary.config_review_status" [nzLabel]="option.value"
-          [nzValue]="option.id">
-        </nz-option>
-      </nz-select>
-    </div>
-    <div nz-col [nzSpan]="5">
+
+    <div nz-col [nzSpan]="7">
       许可情况：
       <nz-select [(ngModel)]="permitSituationIds" class="w200" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_umine_place_permit_situation" [nzLabel]="option.value"
@@ -61,6 +67,8 @@
     </div>
   </div>
 
+
+
   <div nz-row class="div_contain">
 
     <div class="div_top">
@@ -71,7 +79,7 @@
         铀尾矿(渣)库信息（共{{totalCount}}条）
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="isSearchShow=='0'">
         <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
       </div>
 
@@ -105,7 +113,7 @@
             <td>{{data.reviewStatus}}</td>
             <td>{{data.permitSituationValue}}</td>
             <td>{{data.haveMonitor|isTrue}}</td>
-            <td>
+            <td *ngIf="isSearchShow=='0'">
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data,false)">编辑</a>
@@ -113,6 +121,9 @@
               <a (click)="childmanage(data)">子项管理</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
+            </td>
+            <td *ngIf="isSearchShow=='1'">
+              <a (click)="show(data,true)">查看</a>
             </td>
           </tr>
         </tbody>

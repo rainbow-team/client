@@ -32,7 +32,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        UminemountainComponent,
+        // UminemountainComponent,
         UminemountainAddComponent,
         UminemountainChildmanageComponent
     ]

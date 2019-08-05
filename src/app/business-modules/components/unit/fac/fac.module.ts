@@ -34,7 +34,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        FacComponent,
+        // FacComponent,
         FacAddComponent,
         FacChildmanageComponent
     ]

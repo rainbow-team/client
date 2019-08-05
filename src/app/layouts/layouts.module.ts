@@ -12,13 +12,19 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
 import { ShareModule } from '../common-modules/share/share.module';
 import { ValidationDirective } from './_directives/validation.directive';
-import {SexPipe} from './_pipes/sex.pipe';
+import { SexPipe } from './_pipes/sex.pipe';
 import { RecordtimePipe } from './_pipes/recordtime.pipe';
 import { IsTruePipe } from './_pipes/istrue.pipe';
 import { TooltipsPipe } from './_pipes/tooltips.pipe';
 import { AttachmentComponent } from './components/attachment/attachment.component';
 import { ServicedepartComponent } from './../../app/business-modules//components/unit/servicedepart/servicedepart.component';
 import { ActivityPermitComponent } from './../../app/business-modules/components/permit/activity/activity.component';
+import { GroupComponent } from './../../app/business-modules/components/unit/group/group.component';
+import { UmineComponent } from './../../app/business-modules/components/unit/umine/umine.component';
+import { EquipdepartComponent } from './../../app/business-modules/components/unit/equipdepart/equipdepart.component';
+import { FacComponent } from './../../app/business-modules/components/unit/fac/fac.component';
+import { UmineplaceComponent } from './../../app/business-modules/components/unit/umineplace/umineplace.component';
+import { UminemountainComponent } from './../../app/business-modules/components/unit/uminemountain/uminemountain.component';
 
 @NgModule({
   imports: [
@@ -41,7 +47,13 @@ import { ActivityPermitComponent } from './../../app/business-modules/components
     ValidationDirective,
     AttachmentComponent,
     ServicedepartComponent,
-    ActivityPermitComponent
+    ActivityPermitComponent,
+    GroupComponent,
+    UmineComponent,
+    EquipdepartComponent,
+    FacComponent,
+    UmineplaceComponent,
+    UminemountainComponent
   ],
   exports: [
     LoginComponent,
@@ -55,7 +67,13 @@ import { ActivityPermitComponent } from './../../app/business-modules/components
     ValidationDirective,
     AttachmentComponent,
     ServicedepartComponent,
-    ActivityPermitComponent
+    ActivityPermitComponent,
+    GroupComponent,
+    UmineComponent,
+    EquipdepartComponent,
+    FacComponent,
+    UmineplaceComponent,
+    UminemountainComponent
   ]
 })
 export class LayoutsModule { }

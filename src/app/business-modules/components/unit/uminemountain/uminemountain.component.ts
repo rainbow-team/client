@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -12,6 +12,9 @@ import { UmineMountainService } from 'src/app/services/unit/uminemountain.servic
   styleUrls: ['./uminemountain.component.scss']
 })
 export class UminemountainComponent implements OnInit {
+
+  @Input() isSearchShow = "0";
+  
   dictionary: any = {};
   staffObj: any = {};
 

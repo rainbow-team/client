@@ -3,7 +3,8 @@
   <div nz-col [nzSpan]="4" class="div_1">
 
     <div style="border-right: 1px solid #e2e2e2; height: 100%;">
-      <div *ngFor="let item of menuItems;index as index" class="div_menu" (click)="clickMenu(item)" [ngClass]="{true:'menu_select',false:''}[selectMenuName==item.name]">
+      <div *ngFor="let item of menuItems;index as index" class="div_menu" (click)="clickMenu(item)"
+        [ngClass]="{true:'menu_select',false:''}[selectMenuName==item.name]">
         {{item.name}}
       </div>
     </div>
@@ -11,7 +12,15 @@
   </div>
 
   <div nz-col [nzSpan]="20" style="background: #fff;height: 100%;    padding: 10px;">
-      <app-servicedepart *ngIf="selectMenuName=='核设施营运单位'" [isSearchShow]="'1'"></app-servicedepart>
+
+    <app-group *ngIf="selectMenuName=='集团'" [isSearchShow]="'1'"></app-group>
+    <app-servicedepart *ngIf="selectMenuName=='核设施营运单位'" [isSearchShow]="'1'"></app-servicedepart>
+    <app-umine  *ngIf="selectMenuName=='铀矿冶单位'" [isSearchShow]="'1'"></app-umine>
+    <app-equipdepart *ngIf="selectMenuName=='核设备单位'" [isSearchShow]="'1'"></app-equipdepart>
+    <app-fac *ngIf="selectMenuName=='核设施'" [isSearchShow]="'1'"></app-fac>
+    <app-umineplace *ngIf="selectMenuName=='铀尾矿（渣）库'" [isSearchShow]="'1'"></app-umineplace>
+    <app-uminemountain *ngIf="selectMenuName=='铀矿山'" [isSearchShow]="'1'"></app-uminemountain>
+
   </div>
 
 </div>
