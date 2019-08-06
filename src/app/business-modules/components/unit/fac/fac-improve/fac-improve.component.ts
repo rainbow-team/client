@@ -2,20 +2,21 @@ import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { Router,ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
-import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
+import { FacSercice } from 'src/app/services/unit/fac.service';
 
 @Component({
-  selector: 'app-uminemountain-childmanage',
-  templateUrl: './uminemountain-childmanage.component.html',
-  styleUrls: ['./uminemountain-childmanage.component.scss']
+  selector: 'app-fac-improve',
+  templateUrl: './fac-improve.component.html',
+  styleUrls: ['./fac-improve.component.scss']
 })
-export class UminemountainChildmanageComponent implements OnInit {
+export class FacImproveComponent implements OnInit {
+
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   dataSet: any = [];
   data: any = {};
-  umineMountainId: any = "";
+  facId: any = "";
 
   //是否是显示内容
   isShow: any = false;
@@ -36,12 +37,12 @@ export class UminemountainChildmanageComponent implements OnInit {
   selectId: any = "";
 
   constructor(private router: Router,
-    private ActivatedRoute: ActivatedRoute, private msg: NzMessageService,private umineMountainService: UmineMountainService) { }
+    private ActivatedRoute: ActivatedRoute, private msg: NzMessageService,private facSercice: FacSercice) { }
 
   ngOnInit() {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    this.umineMountainId = id;
+    this.facId = id;
     this.search();
   }
 
@@ -54,9 +55,9 @@ export class UminemountainChildmanageComponent implements OnInit {
       conditions: []
     }
 
-    option.conditions.push({ key: "umineMountainId", value: this.umineMountainId });
+    option.conditions.push({ key: "facId", value: this.facId });
 
-    this.umineMountainService.getUmineMountainImproveList(option).subscribe(
+    this.facSercice.getFacImproveList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -109,7 +110,7 @@ export class UminemountainChildmanageComponent implements OnInit {
 
     if (this.selectId) {
 
-      this.umineMountainService.deleteUmineMountainImproveByIds([this.selectId]).subscribe((res) => {
+      this.facSercice.deleteFacImproveByIds([this.selectId]).subscribe((res) => {
         if (res.code == 200) {
           this.msg.create("success", "删除成功");
           this.search();
@@ -134,9 +135,9 @@ export class UminemountainChildmanageComponent implements OnInit {
     }
     
     this.isSaving = true;
-    this.data.umineMountainId = this.umineMountainId;
+    this.data.facId = this.facId;
     // if (!this.data.id) {
-      this.umineMountainService.saveOrUpdateUmineMountainImprove(this.data).subscribe((res) => {
+      this.facSercice.saveOrUpdateFacImprove(this.data).subscribe((res) => {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
           this.search();
@@ -176,5 +177,4 @@ export class UminemountainChildmanageComponent implements OnInit {
   handleCancel(): void {
     this.isShow = false;
   }
-
 }

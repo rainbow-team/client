@@ -14,7 +14,7 @@ import { UmineMountainService } from 'src/app/services/unit/uminemountain.servic
 export class UminemountainComponent implements OnInit {
 
   @Input() isSearchShow = "0";
-  
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -28,8 +28,10 @@ export class UminemountainComponent implements OnInit {
   umineName: any = "";
   build_year: any = "";
   statusIds: any = [];
-  is_record: any = "";
-  is_accept: any = "";
+  recordIds: any = [];
+  acceptIds: any = [];
+
+  selectId: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
@@ -59,7 +61,7 @@ export class UminemountainComponent implements OnInit {
     }
 
     if (this.build_year && this.build_year.length > 0) {
-     
+
       if (this.build_year[0]) {
         option.conditions.push({ key: "start_date", value: this.build_year[0] })
       }
@@ -73,12 +75,11 @@ export class UminemountainComponent implements OnInit {
       option.conditions.push({ key: "statusIds", value: this.statusIds })
     }
 
-    if (this.is_record) {
-      option.conditions.push({ key: "is_record", value: this.is_record })
+    if (this.recordIds.length > 0) {
+      option.conditions.push({ key: "recordIds", value: this.recordIds })
     }
-
-    if (this.is_accept) {
-      option.conditions.push({ key: "is_accept", value: this.is_accept })
+    if (this.acceptIds.length > 0) {
+      option.conditions.push({ key: "acceptIds", value: this.acceptIds })
     }
 
     this.umineMountainService.getUmineMountainList(option).subscribe(
@@ -91,35 +92,54 @@ export class UminemountainComponent implements OnInit {
 
   reset() {
     this.name = "";
+    this.umineName = "";
+    this.build_year = [];
     this.statusIds = [];
+    this.recordIds = [];
+    this.acceptIds = []
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/unit/uminemountain/add']);
   }
 
-  childmanage(item) {
-    this.router.navigate(['/unit/uminemountain/childmanage'], { queryParams: { id: item.id } });
+  // childmanage(item) {
+  //   this.router.navigate(['/unit/uminemountain/childmanage'], { queryParams: { id: item.id } });
+  // }
+
+  show(item) {
+    this.router.navigate(['/unit/uminemountain/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  show(item, flag) {
-    this.router.navigate(['/unit/uminemountain/add'], { queryParams: { id: item.id, flag: flag } });
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/unit/uminemountain/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
   }
 
-  delete(item) {
+  delete() {
+    if (this.selectId) {
+      this.umineMountainService.deleteUmineMountainById(this.selectId).subscribe((res) => {
 
-    this.umineMountainService.deleteUmineMountainById(item.id).subscribe((res) => {
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else if (res.code == 500) {
+          this.msg.create("warning", res.msg);
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
 
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else if (res.code == 500) {
-        this.msg.create("warning", res.msg);
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
-
+  selectItem(data) {
+    this.selectId = data.id;
   }
 
 }

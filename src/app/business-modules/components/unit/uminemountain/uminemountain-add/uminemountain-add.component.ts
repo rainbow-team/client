@@ -19,9 +19,9 @@ export class UminemountainAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
-  fileList = [
-  ];
+  isShow = false;
+  isAdd=false;
+  fileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -32,15 +32,6 @@ export class UminemountainAddComponent implements OnInit {
   pageSize: any = 10;
   umineMountainId: any = "";
   dataSet: any = [];
-
-  RecordList: any = [
-    { id: 0, value: "未备案" },
-    { id: 1, value: "已备案" }
-  ];
-  AcceptList: any = [
-    { id: 0, value: "未验收" },
-    { id: 1, value: "已验收" }
-  ]
 
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
@@ -65,17 +56,17 @@ export class UminemountainAddComponent implements OnInit {
     })
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
     if (id) {
 
-      if (this.isDisable) {
+      if (this.isShow) {
         this.umineMountainId = id;
         this.search();
       }
@@ -98,6 +89,7 @@ export class UminemountainAddComponent implements OnInit {
         }
       })
     } else {
+      this.isAdd=true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }

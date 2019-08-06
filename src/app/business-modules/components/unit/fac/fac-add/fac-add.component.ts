@@ -19,9 +19,11 @@ export class FacAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
-  fileList = [
-  ];
+
+  isShow = false;
+  isAdd=false;
+
+  fileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -55,7 +57,7 @@ export class FacAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
     this.serviceDepartService.getAllDepartService().subscribe((res) => {
       if (res.code == 200) {
@@ -69,15 +71,15 @@ export class FacAddComponent implements OnInit {
       }
     });
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
     if (id) {
 
-      if (this.isDisable) {
+      if (this.isShow) {
         this.facId = id;
         this.search();
         this.searchReport();
@@ -100,6 +102,7 @@ export class FacAddComponent implements OnInit {
         }
       })
     } else {
+      this.isAdd=true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }

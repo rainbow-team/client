@@ -14,7 +14,7 @@ import { ServiceDepartService } from 'src/app/services/unit/servicedepart.servic
 export class FacComponent implements OnInit {
 
   @Input() isSearchShow = "0";
-  
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -36,6 +36,8 @@ export class FacComponent implements OnInit {
   facPermitSituationId: any = [];
   isEarthquake: any = "";
   isFlood: any = "";
+
+  selectId: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private facSercice: FacSercice, private dictionarySercice: DictionarySercice,
@@ -81,7 +83,7 @@ export class FacComponent implements OnInit {
     }
 
     if (this.build_year && this.build_year.length > 0) {
-     
+
       if (this.build_year[0]) {
         option.conditions.push({ key: "start_date", value: this.build_year[0] })
       }
@@ -139,34 +141,50 @@ export class FacComponent implements OnInit {
     this.facPermitSituationId = [];
     this.isEarthquake = "";
     this.isFlood = "";
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/unit/fac/add']);
   }
 
-  childmanage(item) {
-    this.router.navigate(['/unit/fac/childmanage'], { queryParams: { id: item.id } });
-  }
+  // childmanage(item) {
+  //   this.router.navigate(['/unit/fac/childmanage'], { queryParams: { id: item.id } });
+  // }
 
   show(item, flag) {
-    this.router.navigate(['/unit/fac/add'], { queryParams: { id: item.id, flag: flag } });
+    this.router.navigate(['/unit/fac/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
-
-    this.facSercice.deleteFacById(item.id).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else if (res.code == 500) {
-        this.msg.create("warning", res.msg);
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
-
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/unit/fac/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
   }
 
+  delete() {
+
+    if (this.selectId) {
+      this.facSercice.deleteFacById(this.selectId).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else if (res.code == 500) {
+          this.msg.create("warning", res.msg);
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
 }

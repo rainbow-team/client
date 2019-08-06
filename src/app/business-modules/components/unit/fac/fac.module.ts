@@ -7,6 +7,7 @@ import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { FacComponent } from './fac.component';
 import { FacAddComponent } from './fac-add/fac-add.component';
 import { FacChildmanageComponent } from './fac-childmanage/fac-childmanage.component';
+import {FacImproveComponent} from './fac-improve/fac-improve.component';
 
 const routes: Routes = [
     {
@@ -20,6 +21,11 @@ const routes: Routes = [
     {
         path: 'childmanage',
         component: FacChildmanageComponent
+    }
+    ,
+    {
+        path: 'improve',
+        component: FacImproveComponent
     }
 ];
 
@@ -36,7 +42,8 @@ const routes: Routes = [
     declarations: [
         // FacComponent,
         FacAddComponent,
-        FacChildmanageComponent
+        FacChildmanageComponent,
+        FacImproveComponent
     ]
 })
 export class FacModule { }
