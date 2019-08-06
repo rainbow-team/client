@@ -30,6 +30,8 @@ export class UserComponent implements OnInit {
 
   isVisible = false;
   isOkLoading = false;
+  title: string;
+  isDisable: boolean;
 
   constructor(
     private msg: NzMessageService,
@@ -73,15 +75,20 @@ export class UserComponent implements OnInit {
 
   generateTree2(data, parentId) {
     const itemArr: any[] = [];
-    for (let i = 0; i < data.length; i++) {
-      let node = data[i];
-      if (node.parentId === parentId) {
+    for (var i = 0; i < data.length; i++) {
+      var node = data[i];
+      if (node.parentId == parentId) {
         let newNode: any;
         newNode = {
           key: node.id,
-          title: node.name,
-          children: this.generateTree2(data, node.id)
+          title: node.name
         };
+        let children = this.generateTree2(data, node.id);
+        if (children.length > 0) {
+          newNode.children = children;
+        } else {
+          newNode.isLeaf = true;
+        }
         itemArr.push(newNode);
       }
     }
@@ -104,23 +111,29 @@ export class UserComponent implements OnInit {
   }
 
   add() {
-    // this.router.navigate(['/unit/group/add']);
+    this.title = '添加用户';
+    this.currentUser = {};
+    this.isVisible = true;
+    this.isDisable = false;
   }
 
   show(item, flag) {
     this.isVisible = true;
     if (flag) {
-      this.currentUser = item;
-      this.userService.getUserWithRoleByUserId(item.id).subscribe(data => {
-        const roleList: any = [];
-        for (let i = 0; i < data.msg.roleList.length; i++) {
-          roleList.push(data.msg.roleList[i].id);
-        }
-        this.currentUser.roleList = roleList;
-      });
+      this.title = '编辑用户信息';
+      this.isDisable = false;
     } else {
-      this.currentUser = {};
+      this.isDisable = true;
+      this.title = '查看用户信息';
     }
+    this.currentUser = item;
+    this.userService.getUserWithRoleByUserId(item.id).subscribe(data => {
+      const roleList: any = [];
+      for (let i = 0; i < data.msg.roleList.length; i++) {
+        roleList.push(data.msg.roleList[i].id);
+      }
+      this.currentUser.roleList = roleList;
+    });
   }
 
   delete(item) {

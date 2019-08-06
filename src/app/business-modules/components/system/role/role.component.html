@@ -10,7 +10,7 @@
           nzType="primary"
           style=" margin-right: 10px;"
           class="addbtn"
-          (click)="show(data, false)"
+          (click)="add()"
         >
           添加
         </button>
@@ -43,7 +43,7 @@
             <td>{{ data.name }}</td>
             <td>{{ data.note }}</td>
             <td>
-              <a (click)="show(data, true)">查看</a>
+              <a (click)="show(data, false)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data, true)">编辑</a>
               <nz-divider nzType="vertical"></nz-divider>
@@ -61,30 +61,36 @@
   </div>
   <nz-modal
     [(nzVisible)]="isVisible"
-    nzTitle="Modal Title"
+    nzTitle="{{ title }}"
     (nzOnCancel)="handleCancel()"
     (nzOnOk)="handleOk()"
     [nzOkLoading]="isOkLoading"
   >
-    <div style="width: 600px;height:400px">
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+    <div>
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>角色名称：
           <input
+            style="width:calc(100% - 100px)"
+            [disabled]="isDisable"
             nz-input
             required
+            [validation]="true"
             nzSize="default"
             [(ngModel)]="currentRole.name"
             class="w200"
           />
         </div>
       </div>
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>角色描述：
           <input
             nz-input
+            style="width:calc(100% - 100px)"
+            [disabled]="isDisable"
             required
+            [validation]="true"
             nzSize="default"
             [(ngModel)]="currentRole.note"
             class="w200"
@@ -94,11 +100,12 @@
       <ng-template #omittedPlaceHolder let-omittedValues>
         and {{ omittedValues.length }} 更多权限...
       </ng-template>
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>菜单权限：
           <nz-tree-select
-            style="width: 250px"
+            [disabled]="isDisable"
+            style="width:calc(100% - 100px)"
             nzPlaceHolder="请选择父级菜单"
             [nzNodes]="menuTreeNodes"
             [nzDefaultExpandAll]="true"

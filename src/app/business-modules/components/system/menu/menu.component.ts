@@ -23,6 +23,7 @@ export class SystemMenuComponent implements OnInit {
   currentMenu: any = {};
   name: any = '';
 
+  title: any = '';
   isVisible = false;
   isOkLoading = false;
 
@@ -117,13 +118,18 @@ export class SystemMenuComponent implements OnInit {
         let newNode: NzTreeNodeOptions;
         newNode = {
           key: node.id,
-          title: node.name,
-          children: this.generateTree2(data, node.id)
+          title: node.name
         };
+        let children = this.generateTree2(data, node.id);
+        if (children != null) {
+          newNode.children = children;
+        } else {
+          newNode.isLeaf = true;
+        }
         itemArr.push(newNode);
       }
     }
-    return itemArr;
+    return itemArr.length > 0 ? itemArr : null;
   }
   ngOnInit() {
     // this.dictionary = this.dictionarySercice.getAllConfig();
@@ -155,8 +161,10 @@ export class SystemMenuComponent implements OnInit {
     this.isVisible = true;
 
     if (flag) {
+      this.title = '编辑菜单信息';
       this.currentMenu = item;
     } else {
+      this.title = '添加菜单';
       this.currentMenu = {};
     }
   }

@@ -10,7 +10,7 @@
           nzType="primary"
           style=" margin-right: 10px;"
           class="addbtn"
-          (click)="show(data, false)"
+          (click)="add()"
         >
           添加
         </button>
@@ -47,7 +47,7 @@
             <td>{{ data.mobile }}</td>
             <td>{{ data.email }}</td>
             <td>
-              <a (click)="show(data, true)">查看</a>
+              <a (click)="show(data, false)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data, true)">编辑</a>
               <nz-divider nzType="vertical"></nz-divider>
@@ -65,65 +65,79 @@
   </div>
   <nz-modal
     [(nzVisible)]="isVisible"
-    nzTitle="Modal Title"
+    nzTitle="{{ title }}"
     (nzOnCancel)="handleCancel()"
     (nzOnOk)="handleOk()"
     [nzOkLoading]="isOkLoading"
   >
-    <div style="width: 600px;height:400px">
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+    <div>
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>用户名：
           <input
             nz-input
+            style="width:calc(100% - 100px)"
+            [disabled]="isDisable"
             required
+            [validation]="true"
             nzSize="default"
             [(ngModel)]="currentUser.username"
             class="w200"
           />
         </div>
       </div>
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>真实姓名：
           <input
             nz-input
+            [disabled]="isDisable"
+            style="width:calc(100% - 100px)"
             required
+            [validation]="true"
             nzSize="default"
             [(ngModel)]="currentUser.realname"
             class="w200"
           />
         </div>
       </div>
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>电话：
           <input
             nz-input
+            [disabled]="isDisable"
+            style="width:calc(100% - 100px)"
             required
+            [validation]="true"
+            [validationType]="'phonenumber'"
             nzSize="default"
             [(ngModel)]="currentUser.mobile"
             class="w200"
           />
         </div>
       </div>
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
-          邮箱：
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          <span class="clo_r">*</span>邮箱：
           <input
             nz-input
-            email
+            style="width:calc(100% - 100px)"
+            [disabled]="isDisable"
             nzSize="default"
             [(ngModel)]="currentUser.email"
+            [validation]="true"
+            [validationType]="'email'"
             class="w200"
           />
         </div>
       </div>
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>所在部门：
           <nz-tree-select
-            style="width: 250px"
+            style="width:calc(100% - 100px)"
+            [disabled]="isDisable"
             nzPlaceHolder="请选择部门"
             [nzNodes]="orgTreeNodes"
             [nzDefaultExpandAll]="true"
@@ -134,22 +148,26 @@
           </nz-tree-select>
         </div>
       </div>
-      <div nz-row style="height: 40px;">
-        角色：
-        <nz-select
-          [(ngModel)]="currentUser.roleList"
-          class="w200"
-          nzMode="multiple"
-          [disabled]="isDisable"
-          [validation]="true"
-        >
-          <nz-option
-            *ngFor="let option of allRoles"
-            [nzLabel]="option.name"
-            [nzValue]="option.id"
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          角色：
+          <nz-select
+            style="width:calc(100% - 100px)"
+            [(ngModel)]="currentUser.roleList"
+            [disabled]="isDisable"
+            class="w200"
+            nzMode="multiple"
+            [disabled]="isDisable"
+            [validation]="true"
           >
-          </nz-option>
-        </nz-select>
+            <nz-option
+              *ngFor="let option of allRoles"
+              [nzLabel]="option.name"
+              [nzValue]="option.id"
+            >
+            </nz-option>
+          </nz-select>
+        </div>
       </div>
       <ng-template #omittedPlaceHolder let-omittedValues>
         and {{ omittedValues.length }} 更多权限...
