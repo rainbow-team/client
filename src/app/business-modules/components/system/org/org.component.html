@@ -61,18 +61,20 @@
   </div>
   <nz-modal
     [(nzVisible)]="isVisible"
-    nzTitle="Modal Title"
+    nzTitle="{{ title }}"
     (nzOnCancel)="handleCancel()"
     (nzOnOk)="handleOk()"
     [nzOkLoading]="isOkLoading"
   >
-    <div style="width: 600px;height:400px">
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+    <div>
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>部门名称：
           <input
             nz-input
+            style="width:calc(100% - 100px)"
             required
+            [validation]="true"
             nzSize="default"
             [(ngModel)]="currentMenu.name"
             class="w200"
@@ -80,11 +82,14 @@
         </div>
       </div>
 
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>部门编码：
           <input
             nz-input
+            style="width:calc(100% - 100px)"
+            required
+            [validation]="true"
             nzSize="default"
             [(ngModel)]="currentMenu.code"
             class="w200"
@@ -92,11 +97,11 @@
         </div>
       </div>
 
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
-          <span class="clo_r">*</span>上级部门：
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          上级部门：
           <nz-tree-select
-            style="width: 250px"
+            style="width: 250px;width:calc(100% - 100px)"
             [nzDefaultExpandAll]="true"
             [nzNodes]="menuTreeNodes"
             nzShowSearch

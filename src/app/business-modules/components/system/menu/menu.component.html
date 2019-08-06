@@ -78,30 +78,34 @@
   </div>
   <nz-modal
     [(nzVisible)]="isVisible"
-    nzTitle="Modal Title"
+    nzTitle="{{ title }}"
     (nzOnCancel)="handleCancel()"
     (nzOnOk)="handleOk()"
     [nzOkLoading]="isOkLoading"
   >
-    <div style="width: 600px;height:400px">
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+    <div>
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>菜单名称：
           <input
+            style="width:calc(100% - 100px)"
             nz-input
             required
+            [validation]="true"
             nzSize="default"
             [(ngModel)]="currentMenu.name"
             class="w200"
           />
         </div>
       </div>
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>功能代码：
           <input
+            style="width:calc(100% - 100px)"
             nz-input
             required
+            [validation]="true"
             nzSize="default"
             [(ngModel)]="currentMenu.code"
             class="w200"
@@ -109,11 +113,11 @@
         </div>
       </div>
 
-      <div nz-row style="height: 40px;">
-        <div class="ta_l">
-          <span class="clo_r">*</span>父级菜单：
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          父级菜单：
           <nz-tree-select
-            style="width: 250px"
+            style="width:calc(100% - 100px)"
             [nzDefaultExpandAll]="true"
             [nzNodes]="menuTreeNodes"
             nzShowSearch

@@ -1,7 +1,22 @@
-import { Directive, ElementRef, HostListener, Input, ComponentFactoryResolver, ViewContainerRef, TemplateRef, SimpleChanges, Renderer2, AfterViewInit, AfterContentChecked, AfterViewChecked, OnInit, OnDestroy } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  ComponentFactoryResolver,
+  ViewContainerRef,
+  TemplateRef,
+  SimpleChanges,
+  Renderer2,
+  AfterViewInit,
+  AfterContentChecked,
+  AfterViewChecked,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
 import { NgModel, FormControl } from '@angular/forms';
 import { fakeAsync } from '@angular/core/testing';
-import { Observable, Subject } from "rxjs"
+import { Observable, Subject } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
 
 // declare var $: any;  //定义$
@@ -11,9 +26,7 @@ import * as $ from 'jquery';
   selector: '[ngModel][validation]',
   exportAs: 'validation'
 })
-
 export class ValidationDirective implements AfterViewInit, OnDestroy {
-
   @Input('validation') validation = true;
   @Input('pattern-error') message;
   @Input('validationType') type: string = '';
@@ -24,7 +37,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
 
   //#region  复杂实时比较
 
-  private operators = ["=", ">=", "<=", ">", "<"]
+  private operators = ['=', '>=', '<=', '>', '<'];
 
   /**
    * 多个值的比较关系
@@ -43,23 +56,27 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       dest.valueChanges.subscribe(e => {
         var result = this.complexCompare(dest, operator, opt);
         this.complexCompareErrorsControl(result, dest, v);
-      })
+      });
 
       opt.forEach(m => {
         m.valueChanges.subscribe(e => {
           let result = this.complexCompare(dest, operator, opt);
           this.complexCompareErrorsControl(result, m, v);
-        })
-      })
+        });
+      });
     } else {
       console.error('complex-compare error binding!');
     }
   }
 
-  private complexCompareErrorsControl(result: boolean, curNgModel: NgModel, combine) {
+  private complexCompareErrorsControl(
+    result: boolean,
+    curNgModel: NgModel,
+    combine
+  ) {
     if (result) {
       let destControl: FormControl = combine.dest.control;
-      destControl.setErrors({ "pattern": false }, { emitEvent: true });
+      destControl.setErrors({ pattern: false }, { emitEvent: true });
 
       if (combine.dest.custom) {
         combine.dest.custom.errorTip.hide();
@@ -67,21 +84,23 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       }
 
       combine.opt.forEach(m => {
-        m.control.setErrors({ "pattern": false }, { emitEvent: true });
+        m.control.setErrors({ pattern: false }, { emitEvent: true });
         if (m.custom) {
           m.custom.errorTip.hide();
           m.custom.sourceElement.removeClass('ng2-invalid');
         }
       });
-
     } else {
-      curNgModel.control.setErrors({ "pattern": true });
+      curNgModel.control.setErrors({ pattern: true });
     }
   }
 
   //根据规则比较
-  private complexCompare(dest: NgModel, operator: string, opts: Array<NgModel>): boolean {
-
+  private complexCompare(
+    dest: NgModel,
+    operator: string,
+    opts: Array<NgModel>
+  ): boolean {
     var compareResult = true;
 
     let total = this.transform(dest.value);
@@ -90,7 +109,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
 
     opts.forEach(m => {
       itemSum += this.transform(m.value);
-    })
+    });
 
     if (operator == '=') {
       if (total != itemSum) {
@@ -105,7 +124,6 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
         compareResult = false;
       }
     }
-
 
     return compareResult;
   }
@@ -123,8 +141,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
 
   //#endregion
 
-
-  //#region 
+  //#region
   isLoaded = false;
   tips: any;
 
@@ -141,78 +158,123 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     // ledgerYear:/^(20[0-9]{2})$/,
     // ledgerMonth:/^(1[0-2]|[1-9])$/,
     // phonenumberReg: /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/,
-    areaNumber: function (value) {
-      return value != null && /^\d+(\.\d{1,2})?$/.test(value)
+    email: function(value) {
+      return (
+        value != null &&
+        /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(
+          value
+        )
+      );
     },
-    dylAreaNumber: function (value) {//大于零
-      return value != null && value > 0 && /^\d+(\.\d{1,2})?$/.test(value)
+    areaNumber: function(value) {
+      return value != null && /^\d+(\.\d{1,2})?$/.test(value);
     },
-    zeroAreaNumber: function (value) {
-      return value != null && /^\d+(\.\d{1,2})?$/.test(value)
+    dylAreaNumber: function(value) {
+      //大于零
+      return value != null && value > 0 && /^\d+(\.\d{1,2})?$/.test(value);
     },
-    number: function (value) {
-      return /^\d+$/.test(value)
+    zeroAreaNumber: function(value) {
+      return value != null && /^\d+(\.\d{1,2})?$/.test(value);
     },
-    nullnumber: function (value) {
-      return value == null || value == "" || /^\d+$/.test(value)
+    number: function(value) {
+      return /^\d+$/.test(value);
     },
-    nulldate: function (value) {
-      return value == null || value == "" || /^\d+$/.test(value)
+    nullnumber: function(value) {
+      return value == null || value == '' || /^\d+$/.test(value);
     },
-    phonenumber: function (value) {
-      return /^(0\d{2,3}-?)?\d{7,8}$/.test(value) || /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value);
-
+    nulldate: function(value) {
+      return value == null || value == '' || /^\d+$/.test(value);
     },
-    nullphonenumber: function (value) {
-      return value == null || value == "" || (/^(0\d{2,3}-?)?\d{7,8}$/.test(value) || /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));
-
+    phonenumber: function(value) {
+      return (
+        /^(0\d{2,3}-?)?\d{7,8}$/.test(value) ||
+        /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(
+          value
+        )
+      );
     },
-    idcard: function (value) {
+    nullphonenumber: function(value) {
+      return (
+        value == null ||
+        value == '' ||
+        (/^(0\d{2,3}-?)?\d{7,8}$/.test(value) ||
+          /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(
+            value
+          ))
+      );
+    },
+    idcard: function(value) {
       return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
     },
-    nullidcard: function (value) {
-      return value == null || value == "" || /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
+    nullidcard: function(value) {
+      return (
+        value == null ||
+        value == '' ||
+        /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value)
+      );
     },
     // nullAreaNumber: function (value) {
     //     return value == null || value == "" || /^\d+(\.\d{1,2})?$/.test(value);
 
     // },
-    nullFloorNum: function (value) {
-      return value == null || value == "" || /^[0-9]+([.][0-9]{1}){0,1}$/.test(value);
-
+    nullFloorNum: function(value) {
+      return (
+        value == null || value == '' || /^[0-9]+([.][0-9]{1}){0,1}$/.test(value)
+      );
     },
-    nullAreaNumber: function (value) {
-      return value == null || value == "" || /^\d{1,11}(\.\d{0,2})?$/.test(value);
+    nullAreaNumber: function(value) {
+      return (
+        value == null || value == '' || /^\d{1,11}(\.\d{0,2})?$/.test(value)
+      );
     },
-    AreaNumber: function (value) {
-      return value != null && value != "" && value != "0" && /^\d{1,11}(\.\d{0,2})?$/.test(value);
+    AreaNumber: function(value) {
+      return (
+        value != null &&
+        value != '' &&
+        value != '0' &&
+        /^\d{1,11}(\.\d{0,2})?$/.test(value)
+      );
     },
-    nullMoney: function (value) {
-      return value == null || value == "" || /^\d{1,11}(\.\d{0,4})?$/.test(value);
+    nullMoney: function(value) {
+      return (
+        value == null || value == '' || /^\d{1,11}(\.\d{0,4})?$/.test(value)
+      );
     },
-    Characters: function (value) {
-      return /^([\u2E80-\u9FFF]){3,}$/.test(value)
+    Characters: function(value) {
+      return /^([\u2E80-\u9FFF]){3,}$/.test(value);
     },
-    nullCharacters: function (value) {
-      return value == null || value == "" || /^([\u2E80-\u9FFF]){3,}$/.test(value)
+    nullCharacters: function(value) {
+      return (
+        value == null || value == '' || /^([\u2E80-\u9FFF]){3,}$/.test(value)
+      );
     },
-    SJYTcode: function (value) {
-      return value == null || value == "" || /^\d{4}$/.test(value);
+    SJYTcode: function(value) {
+      return value == null || value == '' || /^\d{4}$/.test(value);
     },
-    tbbsm: function (value) {//更新层图斑标识码，只能输入数字和字母
+    tbbsm: function(value) {
+      //更新层图斑标识码，只能输入数字和字母
       return /^[A-Za-z0-9]+$/.test(value);
     },
-    tbbh: function (value) {
+    tbbh: function(value) {
       return value && value.trim() ? true : false;
     },
-    pzwh: function (value) {//批准文号的验证规则
-      var text = value.replace('(', '〔').replace(')', '〕')
-        .replace('（', '〔').replace('）', '〕')
-        .replace('[', '〔').replace(']', '〕')
-        .replace('【', '〔').replace('】', '〕')
-        .replace('{', '〔').replace('}', '〕')
-        .replace('<', '〔').replace('>', '〕')
-        .replace('《', '〔').replace('》', '〕')
+    pzwh: function(value) {
+      //批准文号的验证规则
+      var text = value
+        .replace('(', '〔')
+        .replace(')', '〕')
+        .replace('（', '〔')
+        .replace('）', '〕')
+        .replace('[', '〔')
+        .replace(']', '〕')
+        .replace('【', '〔')
+        .replace('】', '〕')
+        .replace('{', '〔')
+        .replace('}', '〕')
+        .replace('<', '〔')
+        .replace('>', '〕')
+        .replace('《', '〔')
+        .replace('》', '〕');
       //文号前半段不能输入纯数字
       //如果是纯数字，则让验证不能通过
       if (/^[0-9]+〔20[0-9]{2}〕[0-9]*号$/.test(text)) {
@@ -221,51 +283,58 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
         return /^[a-zA-Z0-9\u4e00-\u9fa5]+〔20[0-9]{2}〕[0-9]*号$/.test(text);
       }
     },
-    password: function (value) {//密码的验证规则
+    password: function(value) {
+      //密码的验证规则
       //必须含数字，字母字符二选一
-      return value == null || value == "" || /^(?![a-zA-z]+$)(?![0-9]+$)(?![!@#$%^&*~()_+{}|:"<>?]+$)(?![a-zA-z!@#$%^&*~()_+{}|:"<>?]+$)[a-zA-Z0-9!@#$%^&*~()_+{}|:"<>?].{0,50}$/.test(value);
+      return (
+        value == null ||
+        value == '' ||
+        /^(?![a-zA-z]+$)(?![0-9]+$)(?![!@#$%^&*~()_+{}|:"<>?]+$)(?![a-zA-z!@#$%^&*~()_+{}|:"<>?]+$)[a-zA-Z0-9!@#$%^&*~()_+{}|:"<>?].{0,50}$/.test(
+          value
+        )
+      );
     }
   };
   defaultMsg = {
     required: {
       error: '必填',
-      success: 'It\'s Required'
+      success: "It's Required"
     },
     requiredCommon: {
       error: '必填',
-      success: 'It\'s RequiredCommon'
+      success: "It's RequiredCommon"
     },
     url: {
       error: '输入必须是Url格式',
-      success: 'It\'s Url'
+      success: "It's Url"
     },
     email: {
       error: '输入必须是Email格式',
-      success: 'It\'s Email'
+      success: "It's Email"
     },
     number: {
       error: '输入必须是数字',
-      success: 'It\'s Number'
+      success: "It's Number"
     },
     nullnumber: {
-      error: "输入必须是数字",
-      success: "It\'s Number"
+      error: '输入必须是数字',
+      success: "It's Number"
     },
     areaNumber: {
       error: '输入必须是数字且最多保留两位小数',
-      success: 'It\'s areaNumber'
+      success: "It's areaNumber"
     },
     zeroAreaNumber: {
       error: '输入必须是数字且最多保留两位小数',
-      success: 'It\'s areaNumber'
+      success: "It's areaNumber"
     },
     wanareaNumber: {
       error: '输入必须是数字且最多保留六位小数',
-      success: 'It\'s wanareaNumber'
+      success: "It's wanareaNumber"
     },
     floorNum: {
       error: '输入必须是数字且最多保留一位小数',
-      success: 'It\'s floorNum'
+      success: "It's floorNum"
     },
     minlength: {
       error: '输入小于最小长度',
@@ -382,26 +451,36 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
   private runCount: number = 0;
 
   ngAfterViewInit() {
-
-    this.defaultMsg.pattern.error = this.message ? this.message : '未指定错误消息';
+    this.defaultMsg.pattern.error = this.message
+      ? this.message
+      : '未指定错误消息';
 
     //父元素设置相对定位
-    $(this.el.nativeElement).parent().css("position", "relative");
-    var name = $(this.el.nativeElement).prop('tagName').toLowerCase();
+    $(this.el.nativeElement)
+      .parent()
+      .css('position', 'relative');
+    var name = $(this.el.nativeElement)
+      .prop('tagName')
+      .toLowerCase();
     var preheight = 0;
     if (name == 'textarea') {
-      preheight = $(this.el.nativeElement).prev().height()
+      preheight = $(this.el.nativeElement)
+        .prev()
+        .height();
     }
     let tipTop = $(this.el.nativeElement).height() + 13 + preheight;
     let prevAllList = $(this.el.nativeElement).prevAll();
     let prevAllWidth = 0;
-    for (var i = 0; i < (prevAllList.length); i++) {
+    for (var i = 0; i < prevAllList.length; i++) {
       prevAllWidth += prevAllList[i].offsetWidth;
     }
     let tipLeft = prevAllWidth + 5;
-    this.tips = $("<div class=\"vtooltip bottom  bottom-left\" style=\"top: " + tipTop + "px; right:0;opacity:1\">"
-      + "<div class=\"vtooltip-arrow\" style=\"position:absolute\"></div>"
-      + "<div class=\"vtooltip-inner\"></div></div>"
+    this.tips = $(
+      '<div class="vtooltip bottom  bottom-left" style="top: ' +
+        tipTop +
+        'px; right:0;opacity:1">' +
+        '<div class="vtooltip-arrow" style="position:absolute"></div>' +
+        '<div class="vtooltip-inner"></div></div>'
     );
     this.tips.hide();
     $(this.el.nativeElement).after(this.tips);
@@ -416,7 +495,6 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       });
     }
     // });
-
   }
 
   ngOnDestroy(): void {
@@ -435,7 +513,10 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     let isValid = true;
     if (this.validation) {
       var ngModelVal = $.trim(this.ngModel.value);
-      if (typeof this.ngModel.value === "string" && ngModelVal != this.ngModel.value) {
+      if (
+        typeof this.ngModel.value === 'string' &&
+        ngModelVal != this.ngModel.value
+      ) {
         this.ngModel.control.setValue(ngModelVal);
       }
       // if(!ngModelVal){
@@ -457,23 +538,31 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
             this.HideErrorTip();
           }
         }
-      }
-      else {
+      } else {
         if (this.type) {
           if (this.expression[this.type](this.ngModel.value)) {
             //value对比
-            let theMaxValue = (this.maxValue || this.maxValue == 0) ? this.maxValue : (isNaN(this.maxValue) ? 0 : null);
-            let theMinValue = (this.minValue || this.minValue == 0) ? this.minValue : (isNaN(this.minValue) ? 0 : null)
+            let theMaxValue =
+              this.maxValue || this.maxValue == 0
+                ? this.maxValue
+                : isNaN(this.maxValue)
+                ? 0
+                : null;
+            let theMinValue =
+              this.minValue || this.minValue == 0
+                ? this.minValue
+                : isNaN(this.minValue)
+                ? 0
+                : null;
             if ((theMinValue || theMinValue == 0) && this.message) {
               if (Number(this.ngModel.model) < Number(theMinValue)) {
-                if (this.type == "nulldate" && !this.ngModel.model) {
+                if (this.type == 'nulldate' && !this.ngModel.model) {
                   //时间格式特殊处理，为空不进行比较
                   this.HideErrorTip();
                 } else {
                   isValid = false;
                   this.ShowErrorTip(this.message);
                 }
-
               } else {
                 if (theMaxValue || theMaxValue == '') {
                   if (Number(this.ngModel.model) > Number(theMaxValue)) {
@@ -485,7 +574,6 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
                 } else {
                   this.HideErrorTip();
                 }
-
               }
             } else if ((theMaxValue || theMaxValue == 0) && this.message) {
               if (Number(this.ngModel.model) > Number(theMaxValue)) {
@@ -494,12 +582,9 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
               } else {
                 this.HideErrorTip();
               }
-            }
-            else {
+            } else {
               this.HideErrorTip();
             }
-
-
           } else {
             isValid = false;
             let errorMessage = this.defaultMsg[this.type].error + '';
@@ -508,7 +593,6 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
         } else {
           this.HideErrorTip();
         }
-
       }
     }
     if (!isTemporary) {
@@ -521,20 +605,22 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     private el: ElementRef,
     renderer2: Renderer2,
     private ngModel: NgModel
-  ) {
-
-  }
+  ) {}
 
   ShowErrorTip(msg) {
-    if (!$(this.el.nativeElement).is(":hidden")) {
+    if (!$(this.el.nativeElement).is(':hidden')) {
       // if(this.el.nativeElement.localName=""){
-      $(this.el.nativeElement).find('input').addClass('ng2-invalid');
-      $(this.el.nativeElement).find('nz-select').addClass('ng2-invalid');
+      $(this.el.nativeElement)
+        .find('input')
+        .addClass('ng2-invalid');
+      $(this.el.nativeElement)
+        .find('nz-select')
+        .addClass('ng2-invalid');
       // }else{
       $(this.el.nativeElement).addClass('ng2-invalid');
       // }
 
-      this.tips.find(".vtooltip-inner").html(msg);
+      this.tips.find('.vtooltip-inner').html(msg);
 
       Object.assign(this.ngModel, {
         custom: {
@@ -547,7 +633,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       //auto location
       if (this.tips && this.tips.length > 0) {
         setTimeout(() => {
-          let first_error_tip = $(".ng2-invalid:first")[0];
+          let first_error_tip = $('.ng2-invalid:first')[0];
           if (first_error_tip) {
             // first_error_tip.parentElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
           }
@@ -567,27 +653,28 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       if (Number(this.connectLess.ngModel.model) > Number(this.ngModel.model)) {
         this.connectLess.ShowErrorTip(this.connectLess.message);
       } else {
-        this.connectLess.HideErrorTip()
+        this.connectLess.HideErrorTip();
       }
-
-    } else
-      if (this.connectMore && this.connectMore.ngModel.model) {
-        if (Number(this.connectMore.ngModel.model) < Number(this.ngModel.model)) {
-          this.connectMore.ShowErrorTip(this.connectMore.message);
-        } else {
-          this.connectMore.HideErrorTip()
-        }
-
+    } else if (this.connectMore && this.connectMore.ngModel.model) {
+      if (Number(this.connectMore.ngModel.model) < Number(this.ngModel.model)) {
+        this.connectMore.ShowErrorTip(this.connectMore.message);
+      } else {
+        this.connectMore.HideErrorTip();
       }
+    }
     $(this.el.nativeElement).removeClass('ng2-invalid');
-    $(this.el.nativeElement).find('input').removeClass('ng2-invalid');
-    $(this.el.nativeElement).find('nz-select').removeClass('ng2-invalid');
+    $(this.el.nativeElement)
+      .find('input')
+      .removeClass('ng2-invalid');
+    $(this.el.nativeElement)
+      .find('nz-select')
+      .removeClass('ng2-invalid');
     if (this.tips) {
       this.tips.hide();
     }
   }
 
   ngModelname() {
-    return this.ngModel.name
+    return this.ngModel.name;
   }
 }

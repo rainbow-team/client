@@ -30,6 +30,8 @@ export class RoleComponent implements OnInit {
 
   isVisible = false;
   isOkLoading = false;
+  title: string;
+  isDisable: boolean;
 
   constructor(
     private msg: NzMessageService,
@@ -71,16 +73,21 @@ export class RoleComponent implements OnInit {
     for (var i = 0; i < data.length; i++) {
       var node = data[i];
       if (node.parentId == parentId) {
-        let newNode: any;
+        let newNode: NzTreeNodeOptions;
         newNode = {
           key: node.id,
-          title: node.name,
-          children: this.generateTree2(data, node.id)
+          title: node.name
         };
+        let children = this.generateTree2(data, node.id);
+        if (children != null) {
+          newNode.children = children;
+        } else {
+          newNode.isLeaf = true;
+        }
         itemArr.push(newNode);
       }
     }
-    return itemArr;
+    return itemArr.length > 0 ? itemArr : null;
   }
 
   pageIndexChange(num) {
@@ -98,24 +105,30 @@ export class RoleComponent implements OnInit {
     // this.name = '';
   }
 
-  add() {
-    // this.router.navigate(['/unit/group/add']);
-  }
-
   show(item, flag) {
     this.isVisible = true;
     if (flag) {
-      this.currentRole = item;
-      this.roleService.getRoleById(item.id).subscribe(data => {
-        const meluList: any = [];
-        for (let i = 0; i < data.msg.roleMenuList.length; i++) {
-          meluList.push(data.msg.roleMenuList[i].id);
-        }
-        this.currentRole.roleMenuList = meluList;
-      });
+      this.title = '编辑角色信息';
+      this.isDisable = false;
     } else {
-      this.currentRole = {};
+      this.isDisable = true;
+      this.title = '查看角色信息';
     }
+    this.currentRole = item;
+    this.roleService.getRoleById(item.id).subscribe(data => {
+      const meluList: any = [];
+      for (let i = 0; i < data.msg.roleMenuList.length; i++) {
+        meluList.push(data.msg.roleMenuList[i].id);
+      }
+      this.currentRole.roleMenuList = meluList;
+    });
+  }
+
+  add() {
+    this.isVisible = true;
+    this.isDisable = false;
+    this.title = '添加角色';
+    this.currentRole = {};
   }
 
   delete(item) {
