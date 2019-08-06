@@ -66,7 +66,6 @@ export class AttachmentComponent implements OnInit {
               break;
             }
           }
-
         }
       }
     );

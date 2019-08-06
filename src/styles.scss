@@ -123,12 +123,22 @@
 }
 
 .file_div{
-  height: 100px;
+  height: 150px;
   float: right;
   width: calc(100% - 100px);
   border: 1px dashed #cccccc;
   border-left: 0;
   background: #fafafa;
+  overflow: auto
+}
+
+.file_div_check{
+  height: 150px;
+  width: calc(100% - 100px);
+  border: 1px dashed #cccccc;
+  border-left: 0;
+  background: #fafafa;
+  overflow: auto
 }
 
 .file_item{
@@ -137,8 +147,8 @@
   line-height: 30px;
   margin: 3px 0px 3px 10px;
   color: #0050b3;
-  width: 32%;
-  float: left;
+  // width: 32%;
+  // float: left;
 }
 
 .file_item_delete{

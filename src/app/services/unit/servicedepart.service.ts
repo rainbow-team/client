@@ -39,7 +39,7 @@ export class ServiceDepartService {
 
     saveOrUpdateServiceAnnualReport(param): any {
 
-        let url = !param.reportId ? "/serviceannualreport/addServiceAnnualReport" : "/serviceannualreport/addServiceAnnualReport";
+        let url = !param.reportId ? "/serviceannualreport/addServiceAnnualReport" : "/serviceannualreport/modifyServiceAnnualReport";
         return this.http.post(url, param);
     }
 

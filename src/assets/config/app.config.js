@@ -34,28 +34,6 @@
         allowMaxSize: 2048
       };
     },
-
-    // 地图配置节点
-    get mapConfig() {
-      return {
-        // arcgis api地址
-        arcgisApi: 'http://192.168.5.73:8003/arcgis_js_api/library/4.9/',
-
-        // arcgis api代理（解决跨域访问）
-        arcgisProxy: 'http://192.168.5.73:8003/arcgis_api_proxy/proxy.ashx',
-
-        // arcgis工具服务地址
-        arcgisTool: 'http://192.168.5.88:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer',
-
-        // 地图服务所在的主机ip
-        serviceHosts: [
-          '192.168.5.88:6080'
-        ],
-
-        // 地图wkid配置
-        mapWkid: ''
-      };
-    }
   };
 
   return AppConfig;

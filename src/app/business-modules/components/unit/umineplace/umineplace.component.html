@@ -80,7 +80,15 @@
       </div>
 
       <div class="fr" *ngIf="isSearchShow=='0'">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+      </div>
+      
+      <div class="fr" *ngIf="isSearchShow=='0'">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+      </div>
+      
+      <div class="fr" *ngIf="isSearchShow=='0'">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
       </div>
 
     </div>
@@ -103,7 +111,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index">
+          <tr *ngFor="let data of nestedTable.data;index as index" [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]"
+          (click)="selectItem(data)">
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.name}}</td>
             <td>{{data.umineName}}</td>
@@ -113,7 +122,10 @@
             <td>{{data.reviewStatus}}</td>
             <td>{{data.permitSituationValue}}</td>
             <td>{{data.haveMonitor|isTrue}}</td>
-            <td *ngIf="isSearchShow=='0'">
+            <td>
+              <a (click)="show(data)">查看</a>
+            </td>
+            <!-- <td *ngIf="isSearchShow=='0'">
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data,false)">编辑</a>
@@ -124,7 +136,8 @@
             </td>
             <td *ngIf="isSearchShow=='1'">
               <a (click)="show(data,true)">查看</a>
-            </td>
+            </td> -->
+
           </tr>
         </tbody>
       </nz-table>

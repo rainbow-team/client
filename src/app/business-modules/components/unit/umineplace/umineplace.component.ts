@@ -33,6 +33,7 @@ export class UmineplaceComponent implements OnInit {
   permitSituationIds: any = [];
   have_monitor: any = "";
 
+  selectId: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
@@ -111,7 +112,7 @@ export class UmineplaceComponent implements OnInit {
     this.reviewStatusIds = [];
     this.permitSituationIds = [];
     this.have_monitor = "";
-
+    this.selectId = "";
   }
 
   add() {
@@ -122,25 +123,41 @@ export class UmineplaceComponent implements OnInit {
     this.router.navigate(['/unit/umineplace/childmanage'], { queryParams: { id: item.id } });
   }
 
-  show(item, flag) {
-    this.router.navigate(['/unit/umineplace/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/unit/umineplace/add'], { queryParams: {id: item.id, isShow: true } });
   }
 
-  delete(item) {
-
-    this.uminePlaceService.deleteUminePlaceById(item.id).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else if (res.code == 500) {
-        this.msg.create("warning", res.msg);
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
-
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/unit/umineplace/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
   }
 
+  delete() {
+
+    if (this.selectId) {
+
+      this.uminePlaceService.deleteUminePlaceById(this.selectId).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else if (res.code == 500) {
+          this.msg.create("warning", res.msg);
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
 
 }
