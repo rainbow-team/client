@@ -39,9 +39,9 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // ServicedepartComponent,
-        ServicedepartAddComponent,
-        ServicedepartReportmanageComponent,
-        ServicedepartSearchShowComponent
+        // ServicedepartAddComponent,
+        // ServicedepartReportmanageComponent,
+        // ServicedepartSearchShowComponent
     ]
 })
 export class ServiceDepartModule { }

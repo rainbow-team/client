@@ -17,7 +17,7 @@ export class ServicedepartSearchShowComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/searchShow/integratedAuery']);
+    this.router.navigate(['/searchShow/integratedAuery'],{ queryParams: { type: 1 } });
   }
 
 }

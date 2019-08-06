@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -16,11 +16,12 @@ import { GroupService } from 'src/app/services/unit/group.service';
 export class ServicedepartAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+  @Input() servicedepartId = "";
 
   data: any = {};
   isSaving = false;
   isShow = false;
-  isAdd=false;
+  isAdd = false;
   fileList = [];
 
   dictionary: any = {};
@@ -60,6 +61,11 @@ export class ServicedepartAddComponent implements OnInit {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
+    if(this.servicedepartId){
+      id = this.servicedepartId;
+      isShow = "true";
+    }
+
     if (isShow && isShow == "true") {
       this.isShow = true;
     } else {
@@ -92,7 +98,7 @@ export class ServicedepartAddComponent implements OnInit {
         }
       })
     } else {
-      this.isAdd=true;
+      this.isAdd = true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }

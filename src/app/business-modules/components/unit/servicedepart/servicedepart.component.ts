@@ -94,7 +94,13 @@ export class ServicedepartComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/unit/servicedepart/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.isSearchShow == "0") {
+      this.router.navigate(['/unit/servicedepart/add'], { queryParams: { id: item.id, isShow: true } });
+    } else {
+      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: item.id } });
+    }
+
   }
 
   modify() {
@@ -103,10 +109,6 @@ export class ServicedepartComponent implements OnInit {
     } else {
       this.msg.create("warning", "请选择修改项");
     }
-  }
-
-  SearchShow(item) {
-    this.router.navigate(['/unit/servicedepart/SearchShow'], { queryParams: { id: item.id } });
   }
 
   delete() {

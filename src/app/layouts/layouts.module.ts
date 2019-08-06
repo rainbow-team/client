@@ -25,6 +25,10 @@ import { EquipdepartComponent } from './../../app/business-modules/components/un
 import { FacComponent } from './../../app/business-modules/components/unit/fac/fac.component';
 import { UmineplaceComponent } from './../../app/business-modules/components/unit/umineplace/umineplace.component';
 import { UminemountainComponent } from './../../app/business-modules/components/unit/uminemountain/uminemountain.component';
+import { GroupAddComponent } from './../../app/business-modules/components/unit/group/group-add/group-add.component';
+import { ServicedepartAddComponent } from './../../app/business-modules/components/unit/servicedepart/servicedepart-add/servicedepart-add.component';
+import { ServicedepartSearchShowComponent } from './../../app/business-modules/components/unit/servicedepart/servicedepart-search-show/servicedepart-search-show.component';
+import { ServicedepartReportmanageComponent } from './../../app/business-modules/components/unit/servicedepart/servicedepart-reportmanage/servicedepart-reportmanage.component';
 
 @NgModule({
   imports: [
@@ -53,7 +57,11 @@ import { UminemountainComponent } from './../../app/business-modules/components/
     EquipdepartComponent,
     FacComponent,
     UmineplaceComponent,
-    UminemountainComponent
+    UminemountainComponent,
+    GroupAddComponent,
+    ServicedepartAddComponent,
+    ServicedepartSearchShowComponent,
+    ServicedepartReportmanageComponent
   ],
   exports: [
     LoginComponent,
@@ -73,7 +81,11 @@ import { UminemountainComponent } from './../../app/business-modules/components/
     EquipdepartComponent,
     FacComponent,
     UmineplaceComponent,
-    UminemountainComponent
+    UminemountainComponent,
+    GroupAddComponent,
+    ServicedepartAddComponent,
+    ServicedepartSearchShowComponent,
+    ServicedepartReportmanageComponent
   ]
 })
 export class LayoutsModule { }

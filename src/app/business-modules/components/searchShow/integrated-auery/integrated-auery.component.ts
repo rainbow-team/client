@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-integrated-auery',
@@ -12,10 +13,18 @@ export class IntegratedAueryComponent implements OnInit {
     { name: "铀矿山" }
   ]
 
-  selectMenuName = "集团";
-  constructor() { }
+  selectMenuName = "";
+  constructor(private ActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+    let type = this.ActivatedRoute.snapshot.queryParams["type"];
+    if (type) {
+      this.selectMenuName = this.menuItems[type].name;
+    } else {
+      this.selectMenuName = "集团";
+    }
+
   }
 
   clickMenu(item) {

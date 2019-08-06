@@ -30,7 +30,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // GroupComponent,
-        GroupAddComponent
+        // GroupAddComponent
     ]
 })
 export class GroupModule { }

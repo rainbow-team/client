@@ -5,11 +5,21 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { IntegratedAueryComponent } from './integrated-auery.component';
+import { GroupAddComponent } from './../../unit/group/group-add/group-add.component';
+import { ServicedepartSearchShowComponent } from './../../unit/servicedepart/servicedepart-search-show/servicedepart-search-show.component';
 
 const routes: Routes = [
     {
         path: '',
         component: IntegratedAueryComponent
+    },
+    {
+        path: 'groupAdd',
+        component: GroupAddComponent
+    },
+    {
+        path: 'servicedepartSearch',
+        component:ServicedepartSearchShowComponent
     }
 ];
 

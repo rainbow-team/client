@@ -79,7 +79,13 @@ export class GroupComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/unit/group/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if(this.isSearchShow=='0'){
+      this.router.navigate(['/unit/group/add'], { queryParams: { id: item.id, isShow: true } });
+    }else{
+      this.router.navigate(['/searchShow/integratedAuery/groupAdd'], { queryParams: { id: item.id, isShow: true } });
+    }
+    
   }
 
   modify() {

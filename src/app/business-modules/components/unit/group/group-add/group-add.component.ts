@@ -19,7 +19,7 @@ export class GroupAddComponent implements OnInit {
   data: any = {};
   isSaving = false;
   isShow = false;
-  isAdd=false;
+  isAdd = false;
   fileList = [];
 
   dictionary: any = {};
@@ -55,7 +55,7 @@ export class GroupAddComponent implements OnInit {
       });
 
     } else {
-      this.isAdd=true;
+      this.isAdd = true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
@@ -87,7 +87,13 @@ export class GroupAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/unit/group']);
+
+    if (this.router.url.indexOf("integratedAuery") > -1) {
+      this.router.navigate(['/searchShow/integratedAuery'], { queryParams: { type: 0 } });
+    } else {
+      this.router.navigate(['/unit/group']);
+    }
+
   }
 
 
