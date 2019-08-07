@@ -29,6 +29,12 @@ import { GroupAddComponent } from './../../app/business-modules/components/unit/
 import { ServicedepartAddComponent } from './../../app/business-modules/components/unit/servicedepart/servicedepart-add/servicedepart-add.component';
 import { ServicedepartSearchShowComponent } from './../../app/business-modules/components/unit/servicedepart/servicedepart-search-show/servicedepart-search-show.component';
 import { ServicedepartReportmanageComponent } from './../../app/business-modules/components/unit/servicedepart/servicedepart-reportmanage/servicedepart-reportmanage.component';
+import { ActivityComponent } from './../../app/business-modules/components/check/activity/activity.component';
+import { DailyComponent } from './../../app/business-modules/components/monitor/daily/daily.component';
+import { CheckComponent } from './../../app/business-modules/components/monitor/check/check.component';
+import { WitnessComponent } from './../../app/business-modules/components/monitor/witness/witness.component';
+import { SecurityFacComponent } from './../../app/business-modules/components/security/fac/fac.component';
+import { AccidentComponent } from './../../app/business-modules/components/security/accident/accident.component';
 
 @NgModule({
   imports: [
@@ -61,7 +67,10 @@ import { ServicedepartReportmanageComponent } from './../../app/business-modules
     GroupAddComponent,
     ServicedepartAddComponent,
     ServicedepartSearchShowComponent,
-    ServicedepartReportmanageComponent
+    ServicedepartReportmanageComponent,
+    ActivityComponent,
+    DailyComponent, CheckComponent, WitnessComponent,
+    SecurityFacComponent,AccidentComponent
   ],
   exports: [
     LoginComponent,
@@ -85,7 +94,10 @@ import { ServicedepartReportmanageComponent } from './../../app/business-modules
     GroupAddComponent,
     ServicedepartAddComponent,
     ServicedepartSearchShowComponent,
-    ServicedepartReportmanageComponent
+    ServicedepartReportmanageComponent,
+    ActivityComponent,
+    DailyComponent, CheckComponent, WitnessComponent,
+    SecurityFacComponent,AccidentComponent
   ]
 })
 export class LayoutsModule { }

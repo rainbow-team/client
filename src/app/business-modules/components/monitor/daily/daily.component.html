@@ -55,7 +55,7 @@
         日常监督信息（共{{totalCount}}条）
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="!servicedepartId">
         <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
       </div>
 
@@ -87,12 +87,15 @@
             <td>{{data.fileTypeValue}}</td>
             <td>{{data.fileName}}</td>
             <td>{{data.fileDate}}</td>
-            <td>
+            <td *ngIf="!servicedepartId">
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data,false)">编辑</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
+            </td>
+            <td *ngIf="servicedepartId">
+              <a (click)="show(data,true)">查看</a>
             </td>
           </tr>
         </tbody>

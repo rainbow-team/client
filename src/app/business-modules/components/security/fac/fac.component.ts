@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
@@ -9,12 +9,14 @@ import { FacSecuritySercice } from 'src/app/services/security/fac.service';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 
 @Component({
-  selector: 'app-fac',
+  selector: 'app-security-fac',
   templateUrl: './fac.component.html',
   styleUrls: ['./fac.component.scss']
 })
-export class FacComponent implements OnInit {
+export class SecurityFacComponent implements OnInit {
 
+  @Input() servicedepartId: any = "";
+  
   dictionary: any = {};
   staffObj: any = {};
 
@@ -113,6 +115,14 @@ export class FacComponent implements OnInit {
     if (this.reformStatusTypeIds.length > 0) {
       option.conditions.push({ key: "reformStatusTypeIds", value: this.reformStatusTypeIds })
     }
+
+    if (this.servicedepartId) {
+      option.conditions.push({
+        key: 'servicedepartId',
+        value: this.servicedepartId
+      });
+    }
+
 
     this.facSecuritySercice.getFacSecurityList(option).subscribe(
       (data) => {

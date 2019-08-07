@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
@@ -15,7 +15,8 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
 })
 export class DailyComponent implements OnInit {
 
-
+  @Input() servicedepartId: any = "";
+  
   dictionary: any = {};
   staffObj: any = {};
 
@@ -86,6 +87,13 @@ export class DailyComponent implements OnInit {
       if (this.file_date[1]) {
         option.conditions.push({ key: "end_date", value: this.file_date[1] })
       }
+    }
+
+    if (this.servicedepartId) {
+      option.conditions.push({
+        key: 'servicedepartId',
+        value: this.servicedepartId
+      });
     }
 
     this.dailyMonitorSercice.getDailyMonitorList(option).subscribe(

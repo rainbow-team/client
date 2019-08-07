@@ -10,22 +10,27 @@
     </nz-tab>
 
     <nz-tab nzTitle="核活动及其他审评信息">
-
+      <app-check-activity [servicedepartId]="servicedepartId"></app-check-activity>
     </nz-tab>
+
     <nz-tab nzTitle="日常监督信息">
-
+      <app-daily [servicedepartId]="servicedepartId"></app-daily>
     </nz-tab>
+
     <nz-tab nzTitle="监督检查信息">
-
+      <app-check [servicedepartId]="servicedepartId"></app-check>
     </nz-tab>
+
     <nz-tab nzTitle="监督见证信息">
-
+      <app-witness [servicedepartId]="servicedepartId"></app-witness>
     </nz-tab>
+
     <nz-tab nzTitle="核设施安全问题">
-
+      <app-security-fac [servicedepartId]="servicedepartId"></app-security-fac>
     </nz-tab>
-    <nz-tab nzTitle="事故事件">
 
+    <nz-tab nzTitle="事故事件">
+      <app-accident [servicedepartId]="servicedepartId"></app-accident>
     </nz-tab>
   </nz-tabset>
 

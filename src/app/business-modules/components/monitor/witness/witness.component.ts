@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
@@ -15,7 +15,8 @@ import { WitnessMonitorSercice } from 'src/app/services/monitor/witness.service'
 })
 export class WitnessComponent implements OnInit {
 
-
+  @Input() servicedepartId: any = "";
+  
   dictionary: any = {};
   staffObj: any = {};
 
@@ -75,6 +76,13 @@ export class WitnessComponent implements OnInit {
       if (this.witness_date[1]) {
         option.conditions.push({ key: "end_date", value: this.witness_date[1] })
       }
+    }
+
+    if (this.servicedepartId) {
+      option.conditions.push({
+        key: 'servicedepartId',
+        value: this.servicedepartId
+      });
     }
 
     this.witnessMonitorSercice.getWitnessMonitorList(option).subscribe(

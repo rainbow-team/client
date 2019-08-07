@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
@@ -15,7 +15,8 @@ import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 })
 export class CheckComponent implements OnInit {
 
-
+  @Input() servicedepartId: any = "";
+  
   dictionary: any = {};
   staffObj: any = {};
 
@@ -93,6 +94,13 @@ export class CheckComponent implements OnInit {
     // if (this.groupIds.length > 0) {
     //   option.conditions.push({ key: "groupIds", value: this.groupIds })
     // }
+
+    if (this.servicedepartId) {
+      option.conditions.push({
+        key: 'servicedepartId',
+        value: this.servicedepartId
+      });
+    }
 
     this.checkMonitorSercice.getCheckMonitorList(option).subscribe(
       (data) => {

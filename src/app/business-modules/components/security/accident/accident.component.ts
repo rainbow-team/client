@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
@@ -16,6 +16,8 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 })
 export class AccidentComponent implements OnInit {
 
+  @Input() servicedepartId: any = "";
+  
   dictionary: any = {};
   staffObj: any = {};
 
@@ -104,6 +106,14 @@ export class AccidentComponent implements OnInit {
     if (this.natureIds.length > 0) {
       option.conditions.push({ key: "natureIds", value: this.natureIds })
     }
+
+    if (this.servicedepartId) {
+      option.conditions.push({
+        key: 'servicedepartId',
+        value: this.servicedepartId
+      });
+    }
+
 
     this.accidentSecuritySercice.getAccidentSecurityList(option).subscribe(
       (data) => {

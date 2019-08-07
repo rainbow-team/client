@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ActivityCheckSercice } from 'src/app/services/check/activity.service';
@@ -9,12 +9,14 @@ import { ServiceDepartService } from 'src/app/services/unit/servicedepart.servic
 import { FacSercice } from 'src/app/services/unit/fac.service';
 
 @Component({
-  selector: 'app-activity',
+  selector: 'app-check-activity',
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.scss']
 })
 export class ActivityComponent implements OnInit {
 
+  @Input() servicedepartId: any = "";
+  
   dictionary: any = {};
   staffObj: any = {};
 
@@ -68,6 +70,13 @@ export class ActivityComponent implements OnInit {
 
     if (this.content) {
       option.conditions.push({ key: "content", value: this.content })
+    }
+
+    if (this.servicedepartId) {
+      option.conditions.push({
+        key: 'servicedepartId',
+        value: this.servicedepartId
+      });
     }
 
     this.activityCheckSercice.getActivityList(option).subscribe(

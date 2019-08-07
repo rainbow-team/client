@@ -4,14 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
-import { FacComponent } from './fac.component';
+import { SecurityFacComponent } from './fac.component';
 import { FacAddComponent } from './fac-add/fac-add.component';
 
 
 const routes: Routes = [
     {
         path: '',
-        component: FacComponent
+        component: SecurityFacComponent
     },
     {
         path: 'add',
@@ -30,7 +30,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        FacComponent,
+        // SecurityFacComponent,
         FacAddComponent
     ]
 })
