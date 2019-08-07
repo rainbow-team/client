@@ -323,6 +323,11 @@
     <nz-tab nzTitle="安技改信息" *ngIf="!isAdd">
       <app-fac-improve></app-fac-improve>
     </nz-tab>
+
+    <nz-tab nzTitle="定期报告信息" *ngIf="!isAdd">
+      <app-fac-report></app-fac-report>
+    </nz-tab>
+
     <!-- <nz-tab nzTitle="安技改信息" *ngIf="!isAdd">
       <div style="padding: 0 30px;">
         <div nz-row>
@@ -380,7 +385,7 @@
 
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
       [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>

@@ -79,11 +79,11 @@ export class FacAddComponent implements OnInit {
 
     if (id) {
 
-      if (this.isShow) {
-        this.facId = id;
-        this.search();
-        this.searchReport();
-      }
+      // if (this.isShow) {
+      //   this.facId = id;
+      //   //this.search();
+      //   //this.searchReport();
+      // }
       this.facSercice.getFacById(id).subscribe((res) => {
         this.data = res.msg;
       });

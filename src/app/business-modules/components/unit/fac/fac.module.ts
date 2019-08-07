@@ -8,6 +8,7 @@ import { FacComponent } from './fac.component';
 import { FacAddComponent } from './fac-add/fac-add.component';
 import { FacChildmanageComponent } from './fac-childmanage/fac-childmanage.component';
 import {FacImproveComponent} from './fac-improve/fac-improve.component';
+import{FacReportComponent} from './fac-report/fac-report.component'
 
 const routes: Routes = [
     {
@@ -21,12 +22,15 @@ const routes: Routes = [
     {
         path: 'childmanage',
         component: FacChildmanageComponent
-    }
-    ,
+    },
     {
         path: 'improve',
         component: FacImproveComponent
+    },{
+        path: 'report',
+        component: FacReportComponent
     }
+
 ];
 
 @NgModule({
@@ -43,7 +47,8 @@ const routes: Routes = [
         // FacComponent,
         FacAddComponent,
         FacChildmanageComponent,
-        FacImproveComponent
+        FacImproveComponent,
+        FacReportComponent
     ]
 })
 export class FacModule { }

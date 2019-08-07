@@ -73,7 +73,7 @@ export class UmineplaceAddComponent implements OnInit {
 
       if(this.isShow){
         this.uminePlaceId = id;
-        this.search();
+        //this.search();
       }
 
       this.uminePlaceService.getUminePlaceById(id).subscribe((res) => {

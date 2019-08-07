@@ -20,10 +20,11 @@ export class ServicedepartReportmanageComponent implements OnInit {
 
 
   isVisible: any = false;
-
+  isShow = false;
+  
   //保存控制
   isSaving = false;
-  isDisable = false;
+
   modalTitle = "";
   okText = "";
 
@@ -63,26 +64,79 @@ export class ServicedepartReportmanageComponent implements OnInit {
         this.totalCount = data.msg.recordCount;
       }
     );
+
+    this.reset();
+  }
+
+  reset(){
+    this.selectId="";
+    this.data=[];
+    this.fileList=[];
   }
 
   add() {
-    this.data = {};
+    this.data = {};    
+    this.fileList=[];
     this.modalTitle = "添加年度报告信息";
     this.okText = "提交";
     this.isVisible = true;
+    this.isShow=false;
     this.isSaving = false;
-    this.isDisable=false;
-    this.fileList=[];
+    this.selectId="";
   }
 
+  
+  modify(){
+    if (this.selectId) {
+      this.modalTitle = "修改年度报告信息";
+      this.okText = "提交";
+      this.isVisible = true;
+      this.isShow=false;
+      this.isSaving = false;
+
+      this.fileList=[];
+
+      this.attachmentSercice.getFileListById(this.data.reportId).subscribe((res1) => {
+
+        if (res1.msg.length > 0) {
+          res1.msg.forEach(element => {
+            this.fileList.push({
+              response: {
+                msg: element.fileinfoId
+              },
+              name: element.fileinfoClientFileName
+            });
+          });
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
+  }
+
+  delete() {
+    if (this.selectId) {
+      this.serviceDepartSercice.deleteServiceAnnualReportByIds([this.selectId]).subscribe((res) => {
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+  
   //查看与编辑
-  show(param, flag) {
+  show(param) {
 
     this.data = param;
-    this.isDisable = flag;
     this.fileList=[];
 
-    this.attachmentSercice.getFileListById(param.reportId).subscribe((res1) => {
+    this.attachmentSercice.getFileListById(this.data.reportId).subscribe((res1) => {
 
       if (res1.msg.length > 0) {
         res1.msg.forEach(element => {
@@ -96,40 +150,16 @@ export class ServicedepartReportmanageComponent implements OnInit {
       }
     })
 
-    if (flag) {
-      this.modalTitle = "查看年度报告信息";
-      this.okText = null;
-    } else {
-      this.modalTitle = "编辑年度报告信息";
-      this.okText = "提交";
-    }
-
-    this.isVisible = true;
-  }
-
-
-  delete(data) {
-
-    this.serviceDepartSercice.deleteServiceAnnualReportByIds([data.reportId]).subscribe((res) => {
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
-  }
-
-  close() {
-    this.router.navigate(['/unit/servicedepart']);
+    this.isVisible = false;
+    this.isShow = true;
   }
 
   //添加的保存
   save() {
 
-    if (!this.FormValidation()) {
-      return;
-    }
+    // if (!this.FormValidation()) {
+    //   return;
+    // }
 
     this.isSaving = true;
     this.data.serviceId = this.serviceId;
@@ -160,15 +190,28 @@ export class ServicedepartReportmanageComponent implements OnInit {
   }
 
 
-  //表单手动触发验证
-  FormValidation() {
-    let isValid = true;
-    this.directives.forEach(d => {
-      if (!d.validationValue()) {
-        isValid = false;
-      }
-    });
-    return isValid;
+  // //表单手动触发验证
+  // FormValidation() {
+  //   let isValid = true;
+  //   this.directives.forEach(d => {
+  //     if (!d.validationValue()) {
+  //       isValid = false;
+  //     }
+  //   });
+  //   return isValid;
+  // }
+
+  selectItem(data) {
+    this.selectId = data.reportId;
+    this.data = data;
+  }
+
+  handleOk(): void {
+    this.isShow = false;
+  }
+
+  handleCancel(): void {
+    this.isShow = false;
   }
 
 }

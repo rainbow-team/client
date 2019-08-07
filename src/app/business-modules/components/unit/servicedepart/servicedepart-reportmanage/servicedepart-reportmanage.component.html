@@ -10,17 +10,17 @@
         年度报告信息（共{{totalCount}}条）
       </div>
 
-      <!-- <div class="fr">
-          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
-        </div>
-        
-        <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
-        </div> -->
-        
-        <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
-        </div>
+      <div class="fr">
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+      </div>
+      
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+      </div>
+      
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+      </div>
 
 
     </div>
@@ -36,15 +36,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index">
+          <tr *ngFor="let data of nestedTable.data;index as index" [ngClass]="{true:'itemSeleted',false:''}[data.reportId==selectId]" (click)="selectItem(data)">
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.reportYear|recordtime:'year'}}</td>
             <td>
-              <a (click)="show(data,true)">查看</a>
-              <nz-divider nzType="vertical"></nz-divider>
+              <a (click)="show(data)">查看</a>
+              <!-- <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data,false)">修改</a>
               <nz-divider nzType="vertical"></nz-divider>
-              <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
+              <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a> -->
             </td>
           </tr>
         </tbody>
@@ -54,19 +54,40 @@
   </div>
 
   <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消" (nzOnOk)="save();"
-    (nzOnCancel)="isVisible=false;" nzWidth="700" [nzOkLoading]="isSaving">
+    (nzOnCancel)="isVisible=false;" nzWidth="800px" [nzOkLoading]="isSaving">
 
     <div style="padding: 10px 30px 50px 0;">
 
-      <div nz-row class="ma_b20">
-        <div nz-col [nzSpan]="12" class="ta_r">
-          <span class="clo_r">*</span>年度报告时间：
-          <nz-year-picker name="reportYear" [(ngModel)]="data.reportYear" class="w200" [disabled]="isDisable" required
-            [validation]="true">
-          </nz-year-picker>
-        </div>
-      </div>
-      <app-attachment [fileList]="fileList" [refid]="data.reportId" [isDisable]="isDisable"></app-attachment>
+        <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="4" class="ta_r">
+                年度报告时间：
+            </div>
+            <div nz-col [nzSpan]="8" class="ta_l">
+              <nz-year-picker name="reportDate" [(ngModel)]="data.reportYear">
+              </nz-year-picker>
+            </div>
+          </div>
+
+      <app-attachment [fileList]="fileList" [refid]="data.reportId"  [isDisable]="isShow"></app-attachment>
     </div>
   </nz-modal>
+
+  <nz-modal [(nzVisible)]="isShow" nzTitle="年度报告详情" nzOkText="关闭" nzWidth="800px" (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()">
+
+  <div style="padding: 10px 20px;">
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+          年度报告时间：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="reportYear">{{data.reportYear|recordtime:'year'}}</span>
+      </div>
+    </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+  
+  </div>
+</nz-modal>
 </div>
