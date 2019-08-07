@@ -7,6 +7,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { MenuService } from 'src/app/services/system/menu.service';
 import { NzTreeNodeOptions } from 'ng-zorro-antd';
 import { TreeNodeInterface } from 'src/app/utilities/entities/navMenu';
+import { nodeChildrenAsMap } from '@angular/router/src/utils/tree';
 
 @Component({
   selector: 'app-menu',
@@ -26,6 +27,7 @@ export class SystemMenuComponent implements OnInit {
   title: any = '';
   isVisible = false;
   isOkLoading = false;
+  isAddNew: boolean;
 
   constructor(
     private router: Router,
@@ -159,10 +161,16 @@ export class SystemMenuComponent implements OnInit {
 
   show(item, flag) {
     this.isVisible = true;
-
+    this.isAddNew = !flag;
     if (flag) {
       this.title = '编辑菜单信息';
       this.currentMenu = item;
+      // let nodeToDisable = this.traverseBF(
+      //   this.menuTreeNodes[0],
+      //   node => node.key === item.id
+      // );
+      // nodeToDisable.disabled = true;
+      // this.setDisable(nodeToDisable);
     } else {
       this.title = '添加菜单';
       this.currentMenu = {};
@@ -185,6 +193,9 @@ export class SystemMenuComponent implements OnInit {
       return;
     }
     this.isOkLoading = true;
+    if (this.isAddNew && this.currentMenu.parentId == null) {
+      this.currentMenu.parentId = '0';
+    }
     this.menuService.saveOrUpdateMenu(this.currentMenu).subscribe(res => {
       this.isVisible = false;
       this.isOkLoading = false;
@@ -210,4 +221,34 @@ export class SystemMenuComponent implements OnInit {
     });
     return isValid;
   }
+
+  // traverseBF(tree, callback) {
+  //   let queue = [],
+  //     found = false;
+  //   queue.push(tree);
+  //   let currentNode = queue.shift();
+  //   while (!found && currentNode) {
+  //     found = callback(currentNode) === true ? true : false;
+  //     if (found) {
+  //       break;
+  //     } else {
+  //       queue.push(...currentNode.children);
+  //       currentNode = queue.shift();
+  //     }
+  //   }
+  //   return currentNode;
+  // }
+
+  // setDisable(tree) {
+  //   let queue = [],
+  //     found = false;
+  //   queue.push(tree);
+  //   tree.disabled = true;
+  //   let currentNode = queue.shift();
+  //   while (currentNode) {
+  //     currentNode.disabled = true;
+  //     queue.push(...currentNode.children);
+  //     currentNode = queue.shift();
+  //   }
+  // }
 }

@@ -20,12 +20,13 @@ export class OrgComponent implements OnInit {
   data: any = {};
   dataSet: any = [];
   menuTreeNodes: any = [];
-  currentMenu: any = {};
+  currentOrg: any = {};
   name: any = '';
 
   title: any = '';
   isVisible = false;
   isOkLoading = false;
+  isAddNew: boolean;
 
   constructor(
     private router: Router,
@@ -172,13 +173,13 @@ export class OrgComponent implements OnInit {
 
   show(item, flag) {
     this.isVisible = true;
-
+    this.isAddNew = !flag;
     if (flag) {
       this.title = '编辑机构信息';
-      this.currentMenu = item;
+      this.currentOrg = item;
     } else {
       this.title = '添加机构';
-      this.currentMenu = {};
+      this.currentOrg = {};
     }
   }
 
@@ -198,12 +199,15 @@ export class OrgComponent implements OnInit {
       return;
     }
     this.isOkLoading = true;
+    if (this.isAddNew && this.currentOrg.parentId == null) {
+      this.currentOrg.parentId = '0';
+    }
     this.orgService
-      .saveOrUpdateOrganization(this.currentMenu)
+      .saveOrUpdateOrganization(this.currentOrg)
       .subscribe(res => {
         this.isVisible = false;
         this.isOkLoading = false;
-        this.currentMenu = {};
+        this.currentOrg = {};
         if (res.code === 200) {
           this.msg.create('success', '保存成功');
           this.search();

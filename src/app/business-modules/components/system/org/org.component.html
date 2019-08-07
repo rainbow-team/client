@@ -76,7 +76,7 @@
             required
             [validation]="true"
             nzSize="default"
-            [(ngModel)]="currentMenu.name"
+            [(ngModel)]="currentOrg.name"
             class="w200"
           />
         </div>
@@ -91,7 +91,7 @@
             required
             [validation]="true"
             nzSize="default"
-            [(ngModel)]="currentMenu.code"
+            [(ngModel)]="currentOrg.code"
             class="w200"
           />
         </div>
@@ -106,7 +106,7 @@
             [nzNodes]="menuTreeNodes"
             nzShowSearch
             nzPlaceHolder="请选择上级部门"
-            [(ngModel)]="currentMenu.parentId"
+            [(ngModel)]="currentOrg.parentId"
           >
           </nz-tree-select>
         </div>
