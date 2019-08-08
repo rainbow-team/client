@@ -19,8 +19,10 @@ export class UminemountainPermitAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
-  fileList = [];
+  isShow = false;
+  isAdd = false;
+  backupFileList = [];
+  acceptFileList=[];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -47,12 +49,12 @@ export class UminemountainPermitAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams['id'];
-    let flag = this.ActivatedRoute.snapshot.queryParams['flag'];
+    let isShow = this.ActivatedRoute.snapshot.queryParams['isShow'];
 
-    if (flag && flag == 'true') {
-      this.isDisable = true;
+    if (isShow && isShow == 'true') {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
     this.umineService.getAllUmine().subscribe(res => {
@@ -60,30 +62,42 @@ export class UminemountainPermitAddComponent implements OnInit {
     });
 
     if (id) {
-      this.umineMountainPermitService
-        .getUmineMountainPermitById(id)
-        .subscribe(res => {
+      this.umineMountainPermitService.getUmineMountainPermitById(id).subscribe(res => {
           this.data = res.msg;
-          this.umineMountainService
-            .getUminemountinaListByUmineId(this.data.umineId)
-            .subscribe(res1 => {
-              this.umineMountains = res1.msg;
+          this.umineMountainService.getUminemountinaListByUmineId(this.data.umineId).subscribe(res1 => {
+            this.umineMountains = res1.msg;
+          });
+          //获取备案附件
+          this.attachmentSercice.getFileListById(this.data.recordAttachId).subscribe(res1 => {
+            if (res1.msg.length > 0) {
+              res1.msg.forEach(element => {
+                this.backupFileList.push({
+                  response: {
+                    msg: element.fileinfoId
+                  },
+                  name: element.fileinfoClientFileName
+                });
+              });
+            }
+          });
+
+        //获取验收附件
+        this.attachmentSercice.getFileListById(this.data.acceptAttachId).subscribe(res1 => {
+          if (res1.msg.length > 0) {
+            res1.msg.forEach(element => {
+              this.acceptFileList.push({
+                response: {
+                  msg: element.fileinfoId
+                },
+                name: element.fileinfoClientFileName
+              });
             });
+          }
         });
 
-      this.attachmentSercice.getFileListById(id).subscribe(res1 => {
-        if (res1.msg.length > 0) {
-          res1.msg.forEach(element => {
-            this.fileList.push({
-              response: {
-                msg: element.fileinfoId
-              },
-              name: element.fileinfoClientFileName
-            });
-          });
-        }
-      });
+        });
     } else {
+      this.isAdd = true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
@@ -95,18 +109,23 @@ export class UminemountainPermitAddComponent implements OnInit {
     }
 
     this.isSaving = true;
-    this.data.attachmentList = [];
+    this.data.backupAttachmentList = [];
+    this.data.acceptpAttachmentList = [];
 
-    if (this.fileList.length > 0) {
-      this.fileList.forEach(element => {
-        this.data.attachmentList.push({ fileinfoId: element.response.msg });
+    if (this.backupFileList.length > 0) {
+      this.backupFileList.forEach(element => {
+        this.data.backupAttachmentList.push({ fileinfoId: element.response.msg });
+      });
+    }
+
+    if (this.acceptFileList.length > 0) {
+      this.acceptFileList.forEach(element => {
+        this.data.acceptpAttachmentList.push({ fileinfoId: element.response.msg });
       });
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.umineMountainPermitService
-      .saveOrUpdateUmineMountainPermit(this.data)
-      .subscribe(res => {
+    this.umineMountainPermitService.saveOrUpdateUmineMountainPermit(this.data).subscribe(res => {
         if (res.code == 200) {
           this.msg.create('success', '保存成功');
           this.router.navigate(['/permit/uminemountain']);

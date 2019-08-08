@@ -4,7 +4,7 @@
       单位名称
       <input nz-input nzSize="default" [(ngModel)]="departName" class="w200" />
     </div>
-    
+
     <div nz-col [nzSpan]="5">
       设施名称
       <input nz-input nzSize="default" [(ngModel)]="facName" class="w200" />
@@ -12,21 +12,16 @@
 
     <div nz-col [nzSpan]="5">
       许可名称
-      <input nz-input nzSize="default" [(ngModel)]="name" class="w200"/>
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w200" />
     </div>
 
     <div nz-col [nzSpan]="5">
       许可内容
       <input nz-input nzSize="default" [(ngModel)]="content" class="w200" />
-    </div>    
+    </div>
 
     <div nz-col [nzSpan]="4" class="ta_r">
-      <button
-        nz-button
-        nzType="primary"
-        style="width: 70px; margin-right: 10px;"
-        (click)="search()"
-      >
+      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">
         查询
       </button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
@@ -38,18 +33,15 @@
     <div nz-col [nzSpan]="5">
       活动类型
       <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple">
-        <nz-option
-          *ngFor="let option of dictionary.config_activity_type"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
+        <nz-option *ngFor="let option of dictionary.config_activity_type" [nzLabel]="option.value"
+          [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="5">
       许可时间
       <nz-range-picker class="w200" [(ngModel)]="permitDate"> </nz-range-picker>
-    </div>    
+    </div>
   </div>
 
   <div nz-row class="div_contain">
@@ -59,31 +51,23 @@
         核活动许可信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="!servicedepartId">
-        <button
-          nz-button
-          nzType="primary"
-          style=" margin-right: 10px;"
-          class="addbtn"
-          (click)="add()"
-        >
-          添加
-        </button>
-      </div>
+      <div class="fr">
+          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+        </div>
+        
+        <div class="fr">
+          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+        </div>
+        
+        <div class="fr">
+          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+        </div>
+        
     </div>
     <div>
-      <nz-table
-        #nestedTable
-        [nzData]="dataSet"
-        class="commontable tablescoll_rainbow"
-        [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex"
-        nzShowSizeChanger
-        [nzPageSize]="pageSize"
-        [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)"
-        (nzPageSizeChange)="pageSizeChange($event)"
-      >
+      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
         <thead>
           <tr>
             <th>序号</th>
@@ -99,7 +83,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data; index as index">
+          <tr *ngFor="let data of nestedTable.data; index as index" [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
             <td>{{ (pageIndex - 1) * pageSize + 1 + index }}</td>
             <td>{{ data.serviceDepartName }}{{data.equipDepartName}}</td>
             <td>{{ data.facName }}</td>
@@ -109,21 +93,19 @@
             <td>{{ data.permitDate | recordtime }}</td>
             <td>{{ data.validateTime }}</td>
             <td>{{ data.licence }}</td>
-            <td *ngIf="!servicedepartId">
+            <td>
+                <a (click)="show(data)">查看</a>
+            </td>
+            <!-- <td *ngIf="!servicedepartId">
               <a (click)="show(data, true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data, false)">编辑</a>
               <nz-divider nzType="vertical"></nz-divider>
-              <a
-                nz-popconfirm
-                nzTitle="确定删除吗?"
-                (nzOnConfirm)="delete(data)"
-                >删除</a
-              >
+              <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
             </td>
             <td *ngIf="servicedepartId">
               <a (click)="show(data, true)">查看</a>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </nz-table>

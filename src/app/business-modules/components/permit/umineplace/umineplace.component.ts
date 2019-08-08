@@ -25,13 +25,15 @@ export class UmineplacePermitComponent implements OnInit {
   stageIds: any = [];
   permitDate: any = '';
 
+  selectId: any = "";
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
     private umineplacePermitService: UmineplacePermitService,
     private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
@@ -93,28 +95,46 @@ export class UmineplacePermitComponent implements OnInit {
     this.uminePlaceName = '';
     this.stageIds = [];
     this.permitDate = '';
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/permit/umineplace/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/permit/umineplace/add'], {
-      queryParams: { id: item.id, flag: flag }
-    });
+  show(item) {
+    this.router.navigate(['/permit/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
-    this.umineplacePermitService
-      .deleteUmineplacePermitByIds([item.id])
-      .subscribe(res => {
-        if (res.code == 200) {
-          this.msg.create('success', '删除成功');
-          this.search();
-        } else {
-          this.msg.create('error', '删除失败');
-        }
-      });
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/permit/umineplace/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
   }
+
+
+  delete() {
+    if (this.selectId) {
+
+      this.umineplacePermitService
+        .deleteUmineplacePermitByIds([this.selectId])
+        .subscribe(res => {
+          if (res.code == 200) {
+            this.msg.create('success', '删除成功');
+            this.search();
+          } else {
+            this.msg.create('error', '删除失败');
+          }
+        });
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
+
 }

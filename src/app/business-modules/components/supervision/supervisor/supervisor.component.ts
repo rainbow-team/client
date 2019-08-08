@@ -137,7 +137,7 @@ export class SupervisorComponent implements OnInit {
                     this.msg.create("success", "删除成功");
                     this.search();
                 } else {
-                    this.msg.create("error", "删除失败");
+                    this.msg.create("error", res.msg);
                 }
             })
         }else{

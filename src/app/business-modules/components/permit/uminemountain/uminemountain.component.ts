@@ -25,13 +25,15 @@ export class UminemountainPermitComponent implements OnInit {
   recordtime: any = '';
   acceptDate: any = '';
 
+  selectId: any = "";
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
     private umineMountainPermitService: UmineMountainPermitService,
     private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
@@ -84,28 +86,45 @@ export class UminemountainPermitComponent implements OnInit {
     this.umineMountainName = '';
     this.recordtime = '';
     this.acceptDate = '';
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/permit/uminemountain/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/permit/uminemountain/add'], {
-      queryParams: { id: item.id, flag: flag }
-    });
+  show(item) {
+    this.router.navigate(['/permit/uminemountain/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
-    this.umineMountainPermitService
-      .deleteUmineMountainPermitByIds([item.id])
-      .subscribe(res => {
-        if (res.code == 200) {
-          this.msg.create('success', '删除成功');
-          this.search();
-        } else {
-          this.msg.create('error', '删除失败');
-        }
-      });
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/permit/uminemountain/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
   }
+
+  delete() {
+    if (this.selectId) {
+
+      this.umineMountainPermitService
+        .deleteUmineMountainPermitByIds([this.selectId])
+        .subscribe(res => {
+          if (res.code == 200) {
+            this.msg.create('success', '删除成功');
+            this.search();
+          } else {
+            this.msg.create('error', '删除失败');
+          }
+        });
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
+
 }
