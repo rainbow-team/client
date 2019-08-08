@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { FacComponent } from './fac.component';
 import { FacAddComponent } from './fac-add/fac-add.component';
+import {FacFileComponent} from './fac-file/fac-file.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
         path: 'add',
         component: FacAddComponent
+    },
+    {
+        path: 'facfile',
+        component: FacFileComponent
     }
 ];
 
@@ -30,7 +35,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         FacComponent,
-        FacAddComponent
+        FacAddComponent,
+        FacFileComponent
     ]
 })
 export class FacModule { }

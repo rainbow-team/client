@@ -18,15 +18,13 @@ import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 })
 export class EquipAddComponent implements OnInit {
 
-
-
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
-  fileList = [
-  ];
+  isShow = false;
+  isAdd=false;
+  fileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -50,7 +48,7 @@ export class EquipAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
     this.serviceDepartService.getAllDepartService().subscribe((res) => {
 
@@ -64,10 +62,10 @@ export class EquipAddComponent implements OnInit {
 
     })
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
     if (id) {
@@ -96,12 +94,11 @@ export class EquipAddComponent implements OnInit {
         }
       })
     } else {
+      this.isAdd=true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
-
   }
-
 
   save() {
 

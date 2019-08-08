@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { EquipComponent } from './equip.component';
 import { EquipAddComponent } from './equip-add/equip-add.component';
+import { EquipFileComponent } from './equip-file/equip-file.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,11 @@ const routes: Routes = [
     {
         path: 'add',
         component: EquipAddComponent
+    }
+    ,
+    {
+        path: 'equipfile',
+        component: EquipFileComponent
     }
 ];
 
@@ -30,7 +36,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         EquipComponent,
-        EquipAddComponent
+        EquipAddComponent,
+        EquipFileComponent
     ]
 })
 export class EquipModule { }

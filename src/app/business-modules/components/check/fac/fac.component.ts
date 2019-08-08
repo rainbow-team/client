@@ -30,9 +30,11 @@ export class FacComponent implements OnInit {
   typeIds: any = []
   stageIds: any = [];
 
+  selectId: any = "";
+
   constructor(private router: Router,
     private msg: NzMessageService, private facService: FacSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private serviceDepartService: ServiceDepartService,private facCheckSercice: FacCheckSercice) { }
+    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private facCheckSercice: FacCheckSercice) { }
 
   ngOnInit() {
 
@@ -55,7 +57,7 @@ export class FacComponent implements OnInit {
     if (this.facName) {
       option.conditions.push({ key: "facName", value: this.facName })
     }
-    if (this.typeIds.length>0) {
+    if (this.typeIds.length > 0) {
       option.conditions.push({ key: "typeIds", value: this.typeIds })
     }
     if (this.stageIds.length > 0) {
@@ -81,31 +83,49 @@ export class FacComponent implements OnInit {
   }
 
   reset() {
-    this.serviceDepartName="";
+    this.serviceDepartName = "";
     this.facName = "";
     this.typeIds = []
     this.stageIds = [];
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/check/fac/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/check/fac/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/check/fac/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/check/fac/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
+  }
 
-    this.facCheckSercice.deleteFacCheckById(item.id).subscribe((res) => {
+  delete() {
 
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+    if (this.selectId) {
 
+      this.facCheckSercice.deleteFacCheckById(this.selectId).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
   }
 }

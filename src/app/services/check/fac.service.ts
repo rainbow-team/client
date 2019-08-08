@@ -20,12 +20,29 @@ export class FacCheckSercice {
     }
 
     getFacCheckById(id): any {
-
         return this.http.get('/faccheck/geFacCheckById?id=' + id);
-
     }
 
     deleteFacCheckById(id): any {
         return this.http.post('/faccheck/deleteFacCheckById',id);
+    }
+
+    //核安全审评附件
+    
+    saveOrUpdateFacFileCheck(param): any {
+        let url = !param.id ? "/facfilecheck/addFacFileCheck" : "/facfilecheck/modifyFacFileCheck";
+        return this.http.post(url, param);
+    }
+
+    getFacFileCheckList(param): any {
+        return this.http.post('/facfilecheck/getFacFileCheckList', param);
+    }
+
+    getFacFileCheckById(id): any {
+        return this.http.post('/facfilecheck/getFacFileCheckById',id);
+    }
+
+    deleteFacFileCheckByIds(param): any {
+        return this.http.post('/facfilecheck/deleteFacFileCheckByIds',param);
     }
 }

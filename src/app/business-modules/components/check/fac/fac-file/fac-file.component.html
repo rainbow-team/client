@@ -1,0 +1,179 @@
+<div style="height: 100%;">
+  <div nz-row style="height: 40px;">
+    <div nz-col [nzSpan]="5">
+      文件名称：
+      <input nz-input nzSize="default" [(ngModel)]="file_name" class="w200">
+    </div>
+    <div nz-col [nzSpan]="5">
+      文件类型：
+      <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple">
+        <nz-option *ngFor="let option of dictionary.config_fac_check_file_type" [nzLabel]="option.value"
+          [nzValue]="option.id">
+        </nz-option>
+      </nz-select>
+    </div>
+
+
+    <div nz-col [nzSpan]="5">
+      文件时间：
+      <nz-range-picker class="w200" [(ngModel)]="fileDate"> </nz-range-picker>
+    </div>
+
+
+    <div nz-col [nzSpan]="3" nzOffset="6">
+      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
+      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
+    </div>
+
+  </div>
+
+  <div nz-row class="div_contain">
+    <div class="div_top">
+      <div class="fl div_top_tip">
+
+      </div>
+      <div class="fl" style="color: #0050b3;">
+        审评文件信息（共{{totalCount}}条）
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+      </div>
+
+    </div>
+
+    <div>
+      <nz-table #nestedTable1 [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>文件名称</th>
+            <th>文件类型</th>
+            <th>文件时间</th>
+            <th>文件文号</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of nestedTable1.data;index as index"
+            [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
+            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
+            <td>{{data.fileName}}</td>
+            <td>{{data.facCheckFileTypeValue}}</td>
+            <td>{{data.fileDate|recordtime}}</td>
+            <td>{{data.fileNo}}</td>
+            <td>
+              <a (click)="show(data)">查看</a>
+              <!-- <nz-divider nzType="vertical"></nz-divider>
+            <a (click)="showReport(data,false)">编辑</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="deleteReport(data)">删除</a> -->
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+
+
+      <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消"
+        (nzOnOk)="save();" (nzOnCancel)="isVisible=false;" nzWidth="800px" [nzOkLoading]="isSaving">
+
+        <div style="padding: 10px 30px 50px 0;">
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="4" class="ta_r">
+              文件名称：
+            </div>
+            <div nz-col [nzSpan]="20" class="ta_l">
+              <input nz-input name="fileName" [(ngModel)]="data.fileName" required [validation]="true" />
+            </div>
+          </div>
+
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="4" class="ta_r">
+              文件类型：
+            </div>
+            <div nz-col [nzSpan]="20" class="ta_l">
+              <nz-select [(ngModel)]="data.facCheckFileTypeId" style="width: 100%">
+                <nz-option *ngFor="let option of dictionary.config_fac_check_file_type" [nzLabel]="option.value"
+                  [nzValue]="option.id">
+                </nz-option>
+              </nz-select>
+            </div>
+          </div>
+
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="4" class="ta_r">
+              文件文号：
+            </div>
+            <div nz-col [nzSpan]="8" class="ta_l">
+              <input nz-input name="fileNo" [(ngModel)]="data.fileNo" required [validation]="true" />
+            </div>
+            <div nz-col [nzSpan]="4" class="ta_r">
+              文件时间：
+            </div>
+            <div nz-col [nzSpan]="8" class="ta_l">
+              <nz-date-picker name="fileDate" [(ngModel)]="data.fileDate">
+              </nz-date-picker>
+            </div>
+          </div>
+
+          <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
+        </div>
+      </nz-modal>
+
+      <nz-modal [(nzVisible)]="isShow" nzTitle="定期报告详情" nzOkText="关闭" nzWidth="800px" (nzOnCancel)="handleCancel()"
+        (nzOnOk)="handleOk()">
+
+        <div style="padding: 10px 20px;">
+
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="4" class="ta_r">
+              文件名称：
+            </div>
+            <div nz-col [nzSpan]="20" class="ta_l">
+              <span name="fileName">{{data.fileName}}</span>
+            </div>
+          </div>
+
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="4" class="ta_r">
+              文件类型：
+            </div>
+            <div nz-col [nzSpan]="20" class="ta_l">
+              <span name="facCheckFileTypeValue">{{data.facCheckFileTypeValue}}</span>
+            </div>
+          </div>
+
+          <div nz-row class="ma_b20">
+            <div nz-col [nzSpan]="4" class="ta_r">
+              文件文号：
+            </div>
+            <div nz-col [nzSpan]="8" class="ta_l">
+              <span name="fileNo">{{data.fileNo}}</span>
+            </div>
+            <div nz-col [nzSpan]="4" class="ta_r">
+              文件时间：
+            </div>
+            <div nz-col [nzSpan]="8" class="ta_l">
+              <span name="fileDate">{{data.fileDate|recordtime}}</span>
+            </div>
+          </div>
+
+          <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
+        </div>
+      </nz-modal>
+
+    </div>
+  </div>
+</div>

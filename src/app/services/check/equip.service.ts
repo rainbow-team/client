@@ -28,4 +28,23 @@ export class EquipCheckService {
     deleteEquipById(id): any {
         return this.http.post('/equipcheck/deleteEquipCheckById',id);
     }
+
+    //核安全审评附件
+    
+    saveOrUpdateEquipFileCheck(param): any {
+        let url = !param.id ? "/eqiupfilecheck/addEquipFileCheck" : "/eqiupfilecheck/modifyEquipFileCheck";
+        return this.http.post(url, param);
+    }
+
+    getEquipFileCheckList(param): any {
+        return this.http.post('/eqiupfilecheck/getEquipFileCheckList', param);
+    }
+
+    getEquipFileCheckById(id): any {
+        return this.http.post('/eqiupfilecheck/getEquipFileCheckById',id);
+    }
+
+    deleteEquipFileCheckByIds(param): any {
+        return this.http.post('/eqiupfilecheck/deleteEquipFileCheckByIds',param);
+    }
 }
