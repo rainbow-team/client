@@ -7,6 +7,7 @@ import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { IntegratedAueryComponent } from './integrated-auery.component';
 import { GroupAddComponent } from './../../unit/group/group-add/group-add.component';
 import { ServicedepartSearchShowComponent } from './../../unit/servicedepart/servicedepart-search-show/servicedepart-search-show.component';
+import { UmineSearchShowComponent } from './../../unit/umine/umine-search-show/umine-search-show.component';
 
 const routes: Routes = [
     {
@@ -19,7 +20,11 @@ const routes: Routes = [
     },
     {
         path: 'servicedepartSearch',
-        component:ServicedepartSearchShowComponent
+        component: ServicedepartSearchShowComponent
+    },
+    {
+        path: 'umineSearch',
+        component: UmineSearchShowComponent
     }
 ];
 

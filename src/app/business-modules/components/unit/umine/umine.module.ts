@@ -30,7 +30,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // UmineComponent,
-        UmineAddComponent
+        // UmineAddComponent
     ]
 })
 export class UmineModule { }

@@ -37,7 +37,7 @@
         核活动及其他审评信息（共{{totalCount}}条）
       </div>
 
-      <div class="fr" *ngIf="!servicedepartId">
+      <div class="fr" *ngIf="!isSearchShow">
         <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
       </div>
 
@@ -65,14 +65,14 @@
             <td>{{data.checkContent}}</td>
             <td>{{data.typeValue}}</td>
             <td>{{data.checkDate}}</td>
-            <td *ngIf="!servicedepartId">
+            <td *ngIf="!isSearchShow">
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data,false)">编辑</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
             </td>
-            <td *ngIf="servicedepartId">
+            <td *ngIf="isSearchShow">
               <a (click)="show(data,true)">查看</a>
             </td>
           </tr>

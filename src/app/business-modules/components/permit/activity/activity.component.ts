@@ -13,6 +13,9 @@ import { ActivityPermitService } from 'src/app/services/permit/activity.service'
 export class ActivityPermitComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
+  @Input() umineId: any = "";
+
+  isSearchShow: any = false;
 
   dictionary: any = {};
   staffObj: any = {};
@@ -44,6 +47,10 @@ export class ActivityPermitComponent implements OnInit {
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    if (this.servicedepartId || this.umineId) {
+      this.isSearchShow = true;
+    }
 
     this.search();
   }
@@ -91,6 +98,13 @@ export class ActivityPermitComponent implements OnInit {
       option.conditions.push({
         key: 'servicedepartId',
         value: this.servicedepartId
+      });
+    }
+
+    if (this.umineId) {
+      option.conditions.push({
+        key: 'umineId',
+        value: this.umineId
       });
     }
 

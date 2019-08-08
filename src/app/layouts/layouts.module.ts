@@ -36,6 +36,11 @@ import { WitnessComponent } from './../../app/business-modules/components/monito
 import { SecurityFacComponent } from './../../app/business-modules/components/security/fac/fac.component';
 import { AccidentComponent } from './../../app/business-modules/components/security/accident/accident.component';
 
+import { UmineSearchShowComponent } from './../../app/business-modules/components/unit/umine/umine-search-show/umine-search-show.component';
+import { UmineAddComponent } from './../../app/business-modules/components/unit/umine/umine-add/umine-add.component';
+
+import { SecurityUmineplaceComponent } from './../../app/business-modules/components/security/umineplace/umineplace.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -70,7 +75,8 @@ import { AccidentComponent } from './../../app/business-modules/components/secur
     ServicedepartReportmanageComponent,
     ActivityComponent,
     DailyComponent, CheckComponent, WitnessComponent,
-    SecurityFacComponent,AccidentComponent
+    SecurityFacComponent, AccidentComponent,
+    UmineSearchShowComponent, UmineAddComponent,SecurityUmineplaceComponent
   ],
   exports: [
     LoginComponent,
@@ -97,7 +103,8 @@ import { AccidentComponent } from './../../app/business-modules/components/secur
     ServicedepartReportmanageComponent,
     ActivityComponent,
     DailyComponent, CheckComponent, WitnessComponent,
-    SecurityFacComponent,AccidentComponent
+    SecurityFacComponent, AccidentComponent,
+    UmineSearchShowComponent, UmineAddComponent,SecurityUmineplaceComponent
   ]
 })
 export class LayoutsModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
@@ -8,13 +8,14 @@ import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 import { UmineplaceSecuritySercice } from 'src/app/services/security/umineplace.service';
 
 @Component({
-  selector: 'app-umineplace',
+  selector: 'app-security-umineplace',
   templateUrl: './umineplace.component.html',
   styleUrls: ['./umineplace.component.scss']
 })
-export class UmineplaceComponent implements OnInit {
+export class SecurityUmineplaceComponent implements OnInit {
 
-
+  @Input() umineId: any = "";
+  
   dictionary: any = {};
   staffObj: any = {};
 
@@ -133,6 +134,10 @@ export class UmineplaceComponent implements OnInit {
     // if (this.groupIds.length > 0) {
     //   option.conditions.push({ key: "groupIds", value: this.groupIds })
     // }
+
+    if (this.umineId) {
+      option.conditions.push({ key: "umineId", value: this.umineId })
+    }
 
     this.umineplaceSecuritySercice.getUmineplaceSecurityList(option).subscribe(
       (data) => {

@@ -14,7 +14,7 @@ import { GroupService } from 'src/app/services/unit/group.service';
 export class UmineComponent implements OnInit {
 
   @Input() isSearchShow = "0";
-  
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -29,12 +29,12 @@ export class UmineComponent implements OnInit {
   groupIds: any = [];
 
   groupList: any = [];
-  
+
   selectId: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private groupService: GroupService) { }
+    private staffSercice: StaffSercice, private groupService: GroupService) { }
 
   ngOnInit() {
 
@@ -45,15 +45,15 @@ export class UmineComponent implements OnInit {
 
     this.groupService.getAllGroup().subscribe((res) => {
       if (res.code == 200) {
-          this.groupList = [];
-          res.msg.forEach(element => {
-              this.groupList.push({
-                  id: element.id,
-                  name: element.name
-              });
+        this.groupList = [];
+        res.msg.forEach(element => {
+          this.groupList.push({
+            id: element.id,
+            name: element.name
           });
+        });
       }
-  })
+    })
   }
 
   search() {
@@ -101,7 +101,13 @@ export class UmineComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/unit/umine/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.isSearchShow == "0") {
+      this.router.navigate(['/unit/umine/add'], { queryParams: { id: item.id, isShow: true } });
+    } else {
+      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: item.id } });
+    }
+
   }
 
   modify() {

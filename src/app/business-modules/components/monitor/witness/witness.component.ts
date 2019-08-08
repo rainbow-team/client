@@ -16,7 +16,10 @@ import { WitnessMonitorSercice } from 'src/app/services/monitor/witness.service'
 export class WitnessComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
-  
+  @Input() umineId: any = "";
+
+  isSearchShow: any = false;
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -44,6 +47,10 @@ export class WitnessComponent implements OnInit {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    if (this.servicedepartId || this.umineId) {
+      this.isSearchShow = true;
+    }
 
     this.search();
 
@@ -82,6 +89,13 @@ export class WitnessComponent implements OnInit {
       option.conditions.push({
         key: 'servicedepartId',
         value: this.servicedepartId
+      });
+    }
+
+    if (this.umineId) {
+      option.conditions.push({
+        key: 'umineId',
+        value: this.umineId
       });
     }
 

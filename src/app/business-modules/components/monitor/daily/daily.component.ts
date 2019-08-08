@@ -16,7 +16,8 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
 export class DailyComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
-  
+
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -95,6 +96,8 @@ export class DailyComponent implements OnInit {
         value: this.servicedepartId
       });
     }
+
+
 
     this.dailyMonitorSercice.getDailyMonitorList(option).subscribe(
       (data) => {

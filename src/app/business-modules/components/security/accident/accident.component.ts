@@ -17,7 +17,9 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 export class AccidentComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
-  
+  @Input() umineId: any = "";
+
+  isSearchShow: any = false;
   dictionary: any = {};
   staffObj: any = {};
 
@@ -54,6 +56,9 @@ export class AccidentComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
+    if (this.servicedepartId || this.umineId) {
+      this.isSearchShow = true;
+    }
     this.search();
 
   }
@@ -114,6 +119,12 @@ export class AccidentComponent implements OnInit {
       });
     }
 
+    if (this.umineId) {
+      option.conditions.push({
+        key: 'umineId',
+        value: this.umineId
+      });
+    }
 
     this.accidentSecuritySercice.getAccidentSecurityList(option).subscribe(
       (data) => {

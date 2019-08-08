@@ -16,7 +16,10 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 export class ActivityComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
-  
+  @Input() umineId: any = "";
+
+  isSearchShow: any = false;
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -28,11 +31,11 @@ export class ActivityComponent implements OnInit {
 
   name: any = "";
 
-  facName:any="";
+  facName: any = "";
 
-  typeIds:any=[];
-  
-  content:any="";
+  typeIds: any = [];
+
+  content: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private activityCheckSercice: ActivityCheckSercice, private dictionarySercice: DictionarySercice,
@@ -43,6 +46,10 @@ export class ActivityComponent implements OnInit {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    if (this.servicedepartId || this.umineId) {
+      this.isSearchShow = true;
+    }
 
     this.search();
 
@@ -79,6 +86,13 @@ export class ActivityComponent implements OnInit {
       });
     }
 
+    if (this.umineId) {
+      option.conditions.push({
+        key: 'umineId',
+        value: this.umineId
+      });
+    }
+
     this.activityCheckSercice.getActivityList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
@@ -89,9 +103,9 @@ export class ActivityComponent implements OnInit {
 
   reset() {
     this.name = "";
-    this.facName="";
-    this.typeIds=[];
-    this.content="";
+    this.facName = "";
+    this.typeIds = [];
+    this.content = "";
   }
 
   add() {
