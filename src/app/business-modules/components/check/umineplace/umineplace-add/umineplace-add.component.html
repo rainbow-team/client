@@ -1,58 +1,119 @@
 <div style="height: 100%;background:#fff">
-    <div class="div_top_add">
-      铀尾矿(渣)库审评信息 
-    </div>
-    <div class="div_contain_add">
-      <div nz-row class="ma_b20">
-        <div nz-col [nzSpan]="8" class="ta_r">
-          <span class="clo_r">*</span>营运单位：
-          <nz-select [(ngModel)]="data.umineId" class="w200" (ngModelChange)="umineChange($event)" [disabled]="isDisable">
-            <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
-            </nz-option>
-          </nz-select>
+
+  <nz-tabset>
+    <nz-tab nzTitle="铀尾矿(渣)库审评信息 ">
+      <div class="div_contain_add_tab" *ngIf="isShow==false">
+
+        <div nz-row class="ma_b20">
+          <div nz-col [nzSpan]="3" class="ta_r">
+            <span class="clo_r">*</span>营运单位：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <nz-select [(ngModel)]="data.umineId" style="width: 100%" (ngModelChange)="umineChange($event)">
+              <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
+              </nz-option>
+            </nz-select>
+          </div>
+          <div nz-col [nzSpan]="3" class="ta_r">
+            设施名称：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <nz-select [(ngModel)]="data.uminePlaceId" style="width: 100%">
+              <nz-option *ngFor="let option of umineplaceList" [nzLabel]="option.name" [nzValue]="option.id">
+              </nz-option>
+            </nz-select>
+          </div>
         </div>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          设施名称：
-          <nz-select [(ngModel)]="data.uminePlaceId" class="w200" [disabled]="isDisable">
-            <nz-option *ngFor="let option of umineplaceList" [nzLabel]="option.name" [nzValue]="option.id">
-            </nz-option>
-          </nz-select>
+
+
+        <div nz-row class="ma_b20">
+          <div nz-col [nzSpan]="3" class="ta_r">
+            <span class="clo_r">*</span>审评类型：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <nz-select [(ngModel)]="data.typeId" style="width: 100%">
+              <nz-option *ngFor="let option of dictionary.config_umine_place_check_type" [nzLabel]="option.value"
+                [nzValue]="option.id">
+              </nz-option>
+            </nz-select>
+          </div>
+          <div nz-col [nzSpan]="3" class="ta_r">
+            审评阶段：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <nz-select [(ngModel)]="data.stageId" style="width: 100%">
+              <nz-option *ngFor="let option of dictionary.config_umine_place_check_stage" [nzLabel]="option.value"
+                [nzValue]="option.id">
+              </nz-option>
+            </nz-select>
+          </div>
+          <div nz-col [nzSpan]="3" class="ta_r">
+            审评时间：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate" required [validation]="true">
+            </nz-date-picker>
+          </div>
         </div>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          审评类型：
-          <nz-select [(ngModel)]="data.typeId" class="w200" [disabled]="isDisable">
-            <nz-option *ngFor="let option of dictionary.config_umine_place_check_type" [nzLabel]="option.value" [nzValue]="option.id">
-            </nz-option>
-          </nz-select>
-        </div>
+
+        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
       </div>
-  
-      <div nz-row class="ma_b20">
-        <div nz-col [nzSpan]="8" class="ta_r">
-          审评阶段：
-          <nz-select [(ngModel)]="data.stageId" class="w200" [disabled]="isDisable">
-            <nz-option *ngFor="let option of dictionary.config_umine_place_check_stage" [nzLabel]="option.value" [nzValue]="option.id">
-            </nz-option>
-          </nz-select>
+
+      <div class="div_contain_add_tab" *ngIf="isShow==true">
+
+        <div nz-row class="ma_b20">
+          <div nz-col [nzSpan]="3" class="ta_r">
+            <span class="clo_r">*</span>营运单位：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <span name="umineName" class="showText">{{data.umineName}}</span>
+          </div>
+          <div nz-col [nzSpan]="3" class="ta_r">
+            设施名称：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <span name="uminePlaceName" class="showText">{{data.uminePlaceName}}</span>
+          </div>
         </div>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          <span class="clo_r">*</span>审评时间：
-          <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate" class="w200" required [validation]="true"
-          [disabled]="isDisable">
-        </nz-date-picker>
+
+
+        <div nz-row class="ma_b20">
+          <div nz-col [nzSpan]="3" class="ta_r">
+            <span class="clo_r">*</span>审评类型：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <span name="typeValue" class="showText">{{data.typeValue}}</span>
+          </div>
+          <div nz-col [nzSpan]="3" class="ta_r">
+            审评阶段：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <span name="stageValue" class="showText">{{data.stageValue}}</span>
+          </div>
+          <div nz-col [nzSpan]="3" class="ta_r">
+            审评时间：
+          </div>
+          <div nz-col [nzSpan]="5" class="ta_l">
+            <span name="checkDate" class="showText">{{data.checkDate|recordtime}}</span>
+          </div>
         </div>
-       
+
+        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
       </div>
-      
-      <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
-  
-    </div>
-  
-    
-  
-    <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-      <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
-        [nzLoading]="isSaving">保存</button>
-      <button nz-button nzType="default" (click)="close()">关闭</button>
-    </div>
+    </nz-tab>
+
+    <nz-tab nzTitle="审评文件" *ngIf="!isAdd">
+      <app-umineplace-file></app-umineplace-file>
+    </nz-tab>
+
+  </nz-tabset>
+
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
+      [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
+</div>

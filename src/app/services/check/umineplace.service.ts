@@ -27,6 +27,25 @@ export class UmineplaceCheckSercice {
     }
 
     deleteUmineplaceById(id): any {
-        return this.http.post('/umineplacecheck/deleteUminePlaceCheckById',id);
+        return this.http.post('/umineplacecheck/deleteUminePlaceCheckById', id);
+    }
+
+    //核安全审评附件
+
+    saveOrUpdateUminePlaceFileCheck(param): any {
+        let url = !param.id ? "/umineplacefilecheck/addUminePlaceFileCheck" : "/umineplacefilecheck/modifyUminePlaceFileCheck";
+        return this.http.post(url, param);
+    }
+
+    getUminePlaceFileCheckList(param): any {
+        return this.http.post('/umineplacefilecheck/getUminePlaceFileCheckList', param);
+    }
+
+    getUminePlaceFileCheckById(id): any {
+        return this.http.post('/umineplacefilecheck/getUminePlaceFileCheckById', id);
+    }
+
+    deleteUminePlaceFileCheckByIds(param): any {
+        return this.http.post('/umineplacefilecheck/deleteUminePlaceFileCheckByIds', param);
     }
 }

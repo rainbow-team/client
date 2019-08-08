@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { UminemountainComponent } from './uminemountain.component';
 import { UminemountainAddComponent } from './uminemountain-add/uminemountain-add.component';
+import { UminemountainFileComponent } from "./uminemountain-file/uminemountain-file.component";
 
 const routes: Routes = [
     {
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
         path: 'add',
         component: UminemountainAddComponent
+    },
+    {
+        path: 'uminemountainfile',
+        component: UminemountainFileComponent
     }
 ];
 
@@ -30,7 +35,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         UminemountainComponent,
-        UminemountainAddComponent
+        UminemountainAddComponent,
+        UminemountainFileComponent
     ]
 })
 export class UminemountainModule { }

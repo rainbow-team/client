@@ -29,7 +29,9 @@ export class UmineplaceComponent implements OnInit {
   uminePlaceName: any = "";
   typeIds: any = []
   stageIds: any = [];
-  
+
+  selectId: any = "";
+
   constructor(private router: Router,
     private msg: NzMessageService, private umineplaceCheckSercice: UmineplaceCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineService: UmineService,
@@ -58,7 +60,7 @@ export class UmineplaceComponent implements OnInit {
     if (this.uminePlaceName) {
       option.conditions.push({ key: "uminePlaceName", value: this.uminePlaceName })
     }
-    if (this.typeIds.length>0) {
+    if (this.typeIds.length > 0) {
       option.conditions.push({ key: "typeIds", value: this.typeIds })
     }
     if (this.stageIds.length > 0) {
@@ -74,33 +76,51 @@ export class UmineplaceComponent implements OnInit {
   }
 
   reset() {
-    this.umineName="";
+    this.umineName = "";
     this.uminePlaceName = "";
     this.typeIds = []
     this.stageIds = [];
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/check/umineplace/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/check/umineplace/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/check/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
-
-    this.umineplaceCheckSercice.deleteUmineplaceById(item.id).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
-
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/check/umineplace/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
   }
 
+  delete() {
+
+    if (this.selectId) {
+
+
+      this.umineplaceCheckSercice.deleteUmineplaceById(this.selectId).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
 
 }

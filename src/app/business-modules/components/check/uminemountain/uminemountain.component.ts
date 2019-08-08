@@ -30,6 +30,8 @@ export class UminemountainComponent implements OnInit {
 
   content: any = "";
 
+  selectId: any = "";
+
   constructor(private router: Router,
     private msg: NzMessageService, private uminemountainCheckSercice: UminemountainCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineService: UmineService,
@@ -74,27 +76,45 @@ export class UminemountainComponent implements OnInit {
     this.umineName = "";
     this.umineMountainName = "";
     this.content = "";
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/check/uminemountain/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/check/uminemountain/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/check/uminemountain/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
-
-    this.uminemountainCheckSercice.deleteUminemountainById(item.id).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
-
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/check/uminemountain/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
   }
+
+  delete() {
+    if (this.selectId) {
+      this.uminemountainCheckSercice.deleteUminemountainById(this.selectId).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
+
 }
+

@@ -28,4 +28,24 @@ export class UminemountainCheckSercice {
     deleteUminemountainById(id): any {
         return this.http.post('/uminemountaincheck/deleteUmineMountainCheckById',id);
     }
+
+    
+    //核安全审评附件
+
+    saveOrUpdateUmineMountainFileCheck(param): any {
+        let url = !param.id ? "/uminemountainfilecheck/addUmineMountainFileCheck" : "/uminemountainfilecheck/modifyUmineMountainFileCheck";
+        return this.http.post(url, param);
+    }
+
+    getUmineMountainFileCheckList(param): any {
+        return this.http.post('/uminemountainfilecheck/getUmineMountainFileCheckList', param);
+    }
+
+    getUmineMountainFileCheckById(id): any {
+        return this.http.post('/uminemountainfilecheck/getUmineMountainFileCheckById', id);
+    }
+
+    deleteUmineMountainFileCheckByIds(param): any {
+        return this.http.post('/uminemountainfilecheck/deleteUmineMountainFileCheckByIds', param);
+    }
 }
