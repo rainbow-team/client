@@ -33,7 +33,7 @@ export class EquipFileComponent implements OnInit {
   isShow:any=false;
   isSaving:any=false;
 
-  file_name:any="";
+  // file_name:any="";
   typeIds:any=[];
   fileDate:any=[];
 
@@ -59,9 +59,9 @@ export class EquipFileComponent implements OnInit {
 
     option.conditions.push({ key: "equipId", value: this.equipId });
 
-    if (this.file_name) {
-      option.conditions.push({ key: "file_name", value: this.file_name })
-    }
+    // if (this.file_name) {
+    //   option.conditions.push({ key: "file_name", value: this.file_name })
+    // }
 
     if (this.typeIds.length > 0) {
       option.conditions.push({ key: "typeIds", value: this.typeIds })
@@ -96,7 +96,7 @@ export class EquipFileComponent implements OnInit {
     this.selectId = "";
     this.data = [];
     this.fileList = [];
-    this.file_name = "";
+    // this.file_name = "";
     this.typeIds = [];
     this.fileDate = [];
   }
