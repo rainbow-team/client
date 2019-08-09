@@ -77,7 +77,7 @@ export class EquipComponent implements OnInit {
       option.conditions.push({ key: "stageIds", value: this.stageIds })
     }
 
-    this.equipCheckService.getEquipList(option).subscribe(
+    this.equipCheckService.getEquipCheckList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -115,7 +115,7 @@ export class EquipComponent implements OnInit {
   delete() {
     if (this.selectId) {
 
-      this.equipCheckService.deleteEquipById(this.selectId).subscribe((res) => {
+      this.equipCheckService.deleteEquipCheckById(this.selectId).subscribe((res) => {
 
         if (res.code == 200) {
           this.msg.create("success", "删除成功");

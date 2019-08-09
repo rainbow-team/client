@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { FacCheckSercice } from 'src/app/services/check/fac.service';
+import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 
 @Component({
   selector: 'app-fac-file',
@@ -13,6 +14,8 @@ import { FacCheckSercice } from 'src/app/services/check/fac.service';
 })
 export class FacFileComponent implements OnInit {
 
+
+  @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   facId: any = "";
   dictionary: any = [];
@@ -24,22 +27,25 @@ export class FacFileComponent implements OnInit {
   dataSet: any = [];
   data: any = {};
 
-  selectId:any="";
+  selectId: any = "";
   fileList = [];
 
-  modalTitle:any="";
-  okText:any="";
+  modalTitle: any = "";
+  okText: any = "";
   isVisible: any = false;
-  isShow:any=false;
-  isSaving:any=false;
+  isShow: any = false;
+  isSaving: any = false;
 
-  file_name:any="";
-  typeIds:any=[];
-  fileDate:any=[];
+  file_name: any = "";
+  typeIds: any = [];
+  fileDate: any = [];
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private facCheckSercice: FacCheckSercice,
     private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice) { }
+
+
+
 
   ngOnInit() {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
@@ -48,7 +54,7 @@ export class FacFileComponent implements OnInit {
     this.search();
   }
 
-  
+
   search() {
 
     var option = {
@@ -90,8 +96,10 @@ export class FacFileComponent implements OnInit {
       }
     );
 
-    this.reset();
-
+    // this.reset();
+    this.selectId = "";
+    this.data = [];
+    this.fileList = [];
   }
 
   reset() {
@@ -105,25 +113,25 @@ export class FacFileComponent implements OnInit {
 
   add() {
     this.data = {};
-    this.fileList=[];
+    this.fileList = [];
     this.modalTitle = "添加审评文件";
     this.okText = "提交";
     this.isVisible = true;
-    this.isShow=false;
+    this.isShow = false;
     this.isSaving = false;
-    this.selectId="";
+    this.selectId = "";
 
   }
 
-  modify(){
+  modify() {
     if (this.selectId) {
       this.modalTitle = "修改审评文件";
       this.okText = "提交";
       this.isVisible = true;
-      this.isShow=false;
+      this.isShow = false;
       this.isSaving = false;
 
-      this.fileList=[];
+      this.fileList = [];
 
       this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
 
@@ -162,6 +170,8 @@ export class FacFileComponent implements OnInit {
   //查看与编辑
   show(param) {
 
+    this.fileList = [];
+
     this.data = param;
 
     this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
@@ -184,6 +194,10 @@ export class FacFileComponent implements OnInit {
 
   save() {
 
+    if (!this.FormValidation()) {
+      return;
+    }
+    
     this.isSaving = true;
     this.data.checkFacId = this.facId;
 
@@ -195,19 +209,19 @@ export class FacFileComponent implements OnInit {
       });
     }
 
-      this.facCheckSercice.saveOrUpdateFacFileCheck(this.data).subscribe((res) => {
-        if (res.code == 200) {
-          this.msg.create('success', '保存成功');
-          this.search();
-          this.isVisible = false;
-        } else {
+    this.facCheckSercice.saveOrUpdateFacFileCheck(this.data).subscribe((res) => {
+      if (res.code == 200) {
+        this.msg.create('success', '保存成功');
+        this.search();
+        this.isVisible = false;
+      } else {
 
-          this.msg.create('error', '保存失败');
-        }
+        this.msg.create('error', '保存失败');
+      }
 
-        this.isSaving = false;
-      });
-    }
+      this.isSaving = false;
+    });
+  }
 
   selectItem(data) {
     this.selectId = data.id;
@@ -222,5 +236,14 @@ export class FacFileComponent implements OnInit {
     this.isShow = false;
   }
 
-
+  //表单手动触发验证
+  FormValidation() {
+    let isValid = true;
+    this.directives.forEach(d => {
+      if (!d.validationValue()) {
+        isValid = false;
+      }
+    });
+    return isValid;
+  }
 }

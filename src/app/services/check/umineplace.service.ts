@@ -10,23 +10,23 @@ export class UmineplaceCheckSercice {
     constructor(private http: HttpClient) { }
 
 
-    getUmineplaceList(param): any {
+    getUmineplaceCheckList(param): any {
         return this.http.post('/umineplacecheck/getUminePlaceCheckList', param);
     }
 
-    saveOrUpdateUmineplace(param): any {
+    saveOrUpdateUmineplaceCheck(param): any {
 
         let url = !param.id ? "/umineplacecheck/addUminePlaceCheck" : "/umineplacecheck/modifyUminePlaceCheck";
         return this.http.post(url, param);
     }
 
-    getUmineplaceById(id): any {
+    getUmineplaceCheckById(id): any {
 
         return this.http.get('/umineplacecheck/geUminePlaceCheckById?id=' + id);
 
     }
 
-    deleteUmineplaceById(id): any {
+    deleteUmineplaceCheckById(id): any {
         return this.http.post('/umineplacecheck/deleteUminePlaceCheckById', id);
     }
 

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { UminemountainCheckSercice } from 'src/app/services/check/uminemountain.service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
+import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 
 @Component({
   selector: 'app-uminemountain-file',
@@ -12,6 +13,7 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 })
 export class UminemountainFileComponent implements OnInit {
 
+  @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   uminemountainId: any = "";
   dictionary: any = [];
@@ -183,6 +185,11 @@ export class UminemountainFileComponent implements OnInit {
 
   save() {
 
+    if (!this.FormValidation()) {
+      return;
+    }
+
+
     this.isSaving = true;
     this.data.checkUmineMountainId = this.uminemountainId;
 
@@ -220,4 +227,15 @@ export class UminemountainFileComponent implements OnInit {
   handleCancel(): void {
     this.isShow = false;
   }
+
+    //表单手动触发验证
+    FormValidation() {
+      let isValid = true;
+      this.directives.forEach(d => {
+        if (!d.validationValue()) {
+          isValid = false;
+        }
+      });
+      return isValid;
+    }
 }

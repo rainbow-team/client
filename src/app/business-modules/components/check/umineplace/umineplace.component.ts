@@ -67,7 +67,7 @@ export class UmineplaceComponent implements OnInit {
       option.conditions.push({ key: "stageIds", value: this.stageIds })
     }
 
-    this.umineplaceCheckSercice.getUmineplaceList(option).subscribe(
+    this.umineplaceCheckSercice.getUmineplaceCheckList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -104,7 +104,7 @@ export class UmineplaceComponent implements OnInit {
     if (this.selectId) {
 
 
-      this.umineplaceCheckSercice.deleteUmineplaceById(this.selectId).subscribe((res) => {
+      this.umineplaceCheckSercice.deleteUmineplaceCheckById(this.selectId).subscribe((res) => {
 
         if (res.code == 200) {
           this.msg.create("success", "删除成功");

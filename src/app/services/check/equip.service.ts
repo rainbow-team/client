@@ -9,23 +9,23 @@ export class EquipCheckService {
 
     constructor(private http: HttpClient) { }
 
-    getEquipList(param): any {
+    getEquipCheckList(param): any {
         return this.http.post('/equipcheck/getEquipCheckList', param);
     }
 
-    saveOrUpdateEquip(param): any {
+    saveOrUpdateEquipCheck(param): any {
 
         let url = !param.id ? "/equipcheck/addEquipCheck" : "/equipcheck/modifyEquipCheck";
         return this.http.post(url, param);
     }
 
-    getEquipById(id): any {
+    getEquipCheckById(id): any {
 
         return this.http.get('/equipcheck/geEquipCheckById?id=' + id);
 
     }
 
-    deleteEquipById(id): any {
+    deleteEquipCheckById(id): any {
         return this.http.post('/equipcheck/deleteEquipCheckById',id);
     }
 

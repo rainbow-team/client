@@ -69,7 +69,7 @@ export class EquipAddComponent implements OnInit {
     }
 
     if (id) {
-      this.equipCheckService.getEquipById(id).subscribe((res) => {
+      this.equipCheckService.getEquipCheckById(id).subscribe((res) => {
         this.data = res.msg;
 
         if (this.data.serviceId) {
@@ -116,7 +116,7 @@ export class EquipAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.equipCheckService.saveOrUpdateEquip(this.data).subscribe((res) => {
+    this.equipCheckService.saveOrUpdateEquipCheck(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
         this.router.navigate(['/check/equip']);

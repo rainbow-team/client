@@ -25,9 +25,9 @@ export class ActivityAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
-  fileList = [
-  ];
+  isShow = false;
+  isAdd=false;
+  fileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -54,12 +54,12 @@ export class ActivityAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
 
@@ -74,7 +74,7 @@ export class ActivityAddComponent implements OnInit {
     })
 
     if (id) {
-      this.activityCheckSercice.getActivityById(id).subscribe((res) => {
+      this.activityCheckSercice.getActivityCheckById(id).subscribe((res) => {
         this.data = res.msg;
         if (this.data.serviceId) {
           this.activityType = "fac";
@@ -107,6 +107,8 @@ export class ActivityAddComponent implements OnInit {
 
 
     } else {
+      this.activityType = "fac";
+      this.isAdd=true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
@@ -139,7 +141,7 @@ export class ActivityAddComponent implements OnInit {
       this.data.facId = "";
     }
 
-    this.activityCheckSercice.saveOrUpdateActivity(this.data).subscribe((res) => {
+    this.activityCheckSercice.saveOrUpdateActivityCheck(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
         this.router.navigate(['/check/activity']);

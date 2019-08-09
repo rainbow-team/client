@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { ActivityComponent } from './activity.component';
 import { ActivityAddComponent } from './activity-add/activity-add.component';
+import { ActivityFileComponent } from './activity-file/activity-file.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
         path: 'add',
         component: ActivityAddComponent
+    },
+    {
+        path: 'activityfile',
+        component: ActivityFileComponent
     }
 ];
 
@@ -30,7 +35,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // ActivityComponent,
-        ActivityAddComponent
+        ActivityAddComponent,
+        ActivityFileComponent
     ]
 })
 export class ActivityModule { }

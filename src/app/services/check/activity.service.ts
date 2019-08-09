@@ -9,23 +9,42 @@ export class ActivityCheckSercice {
 
     constructor(private http: HttpClient) { }
 
-    getActivityList(param): any {
+    getActivityCheckList(param): any {
         return this.http.post('/activitycheck/getActivityCheckList', param);
     }
 
-    saveOrUpdateActivity(param): any {
+    saveOrUpdateActivityCheck(param): any {
 
         let url = !param.id ? "/activitycheck/addActivityCheck" : "/activitycheck/modifyActivityCheck";
         return this.http.post(url, param);
     }
 
-    getActivityById(id): any {
+    getActivityCheckById(id): any {
 
         return this.http.get('/activitycheck/geActivityCheckById?id=' + id);
 
     }
 
-    deleteActivityById(id): any {
-        return this.http.post('/activitycheck/deleteActivityCheckById',id);
+    deleteActivityCheckById(id): any {
+        return this.http.post('/activitycheck/deleteActivityCheckById', id);
+    }
+
+    //核安全审评附件
+
+    saveOrUpdateActivityFileCheck(param): any {
+        let url = !param.id ? "/activityfilecheck/addActivityFileCheck" : "/activityfilecheck/modifyActivityFileCheck";
+        return this.http.post(url, param);
+    }
+
+    getActivityFileCheckList(param): any {
+        return this.http.post('/activityfilecheck/getActivityFileCheckList', param);
+    }
+
+    getActivityFileCheckById(id): any {
+        return this.http.post('/activityfilecheck/getActivityFileCheckById', id);
+    }
+
+    deleteActivityFileCheckByIds(param): any {
+        return this.http.post('/activityfilecheck/deleteActivityFileCheckByIds', param);
     }
 }

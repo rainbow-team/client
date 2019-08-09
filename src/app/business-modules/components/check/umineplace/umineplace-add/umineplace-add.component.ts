@@ -61,7 +61,7 @@ export class UmineplaceAddComponent implements OnInit {
     }
 
     if (id) {
-      this.umineplaceCheckService.getUmineplaceById(id).subscribe((res) => {
+      this.umineplaceCheckService.getUmineplaceCheckById(id).subscribe((res) => {
         this.data = res.msg;
 
         if (this.data.umineId) {
@@ -110,7 +110,7 @@ export class UmineplaceAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.umineplaceCheckService.saveOrUpdateUmineplace(this.data).subscribe((res) => {
+    this.umineplaceCheckService.saveOrUpdateUmineplaceCheck(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
         this.router.navigate(['/check/umineplace']);

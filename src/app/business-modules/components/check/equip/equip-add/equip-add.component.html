@@ -4,8 +4,8 @@
   </div> -->
   <nz-tabset>
     <nz-tab nzTitle="核设施审评信息">
-      <div class="div_contain_add" *ngIf="isShow==false">
-  
+      <div class="div_contain_add_tab" *ngIf="isShow==false">
+
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
             <span class="clo_r">*</span>设备名称：
@@ -14,66 +14,66 @@
             <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
           </div>
           <div nz-col [nzSpan]="4" class="ta_r">
-            单位名称：
+              <span class="clo_r">*</span>单位名称：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%">
+            <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" required [validation]="true" >
               <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
         </div>
-  
+
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
             <span class="clo_r">*</span>营运单位：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)">
+            <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)"  required [validation]="true" >
               <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
           <div nz-col [nzSpan]="4" class="ta_r">
-            设施名称：
+              <span class="clo_r">*</span>设施名称：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.facId" style="width: 100%">
+            <nz-select [(ngModel)]="data.facId" style="width: 100%" required [validation]="true" >
               <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
         </div>
-  
+
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
             <span class="clo_r">*</span>设备类别：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.typeId" style="width: 100%">
+            <nz-select [(ngModel)]="data.typeId" style="width: 100%" required [validation]="true" >
               <nz-option *ngFor="let option of dictionary.config_equip_type" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
           <div nz-col [nzSpan]="4" class="ta_r">
-            核安全级别：
+              <span class="clo_r">*</span>核安全级别：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.levelId" style="width: 100%">
+            <nz-select [(ngModel)]="data.levelId" style="width: 100%" required [validation]="true" >
               <nz-option *ngFor="let option of dictionary.config_equip_level" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
         </div>
-  
+
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
             <span class="clo_r">*</span>审评阶段：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.stageId" style="width: 100%">
+            <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [validation]="true" >
               <nz-option *ngFor="let option of dictionary.config_equip_check_stage" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
@@ -83,19 +83,19 @@
             审评时间：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate" required [validation]="true">
+            <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate">
             </nz-date-picker>
           </div>
         </div>
         <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
-  
+
       </div>
-  
-      <div class="div_contain_add" *ngIf="isShow==true">
-  
+
+      <div class="div_contain_add_tab" *ngIf="isShow==true">
+
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>设备名称：
+            设备名称：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
             <span name="name" class="showText">{{data.name}}</span>
@@ -107,10 +107,10 @@
             <span name="equipDepartName" class="showText">{{data.equipDepartName}}</span>
           </div>
         </div>
-  
+
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>营运单位：
+            营运单位：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
             <span name="serviceDepartName" class="showText">{{data.serviceDepartName}}</span>
@@ -122,10 +122,10 @@
             <span name="facName" class="showText">{{data.facName}}</span>
           </div>
         </div>
-  
+
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>设备类别：
+            设备类别：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
             <span name="typeValue" class="showText">{{data.typeValue}}</span>
@@ -137,10 +137,10 @@
             <span name="levelValue" class="showText">{{data.levelValue}}</span>
           </div>
         </div>
-  
+
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>审评阶段：
+            审评阶段：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
             <span name="stageValue" class="showText">{{data.stageValue}}</span>
@@ -153,10 +153,10 @@
           </div>
         </div>
         <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
-  
+
       </div>
     </nz-tab>
-  
+
     <nz-tab nzTitle="审评文件" *ngIf="!isAdd">
       <app-equip-file></app-equip-file>
     </nz-tab>

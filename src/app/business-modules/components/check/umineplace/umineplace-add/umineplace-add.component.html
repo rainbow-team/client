@@ -9,16 +9,16 @@
             <span class="clo_r">*</span>营运单位：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-select [(ngModel)]="data.umineId" style="width: 100%" (ngModelChange)="umineChange($event)">
+            <nz-select [(ngModel)]="data.umineId" style="width: 100%" (ngModelChange)="umineChange($event)" required [validation]="true">
               <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
           <div nz-col [nzSpan]="3" class="ta_r">
-            设施名称：
+              <span class="clo_r">*</span>设施名称：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-select [(ngModel)]="data.uminePlaceId" style="width: 100%">
+            <nz-select [(ngModel)]="data.uminePlaceId" style="width: 100%" required [validation]="true">
               <nz-option *ngFor="let option of umineplaceList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -31,17 +31,17 @@
             <span class="clo_r">*</span>审评类型：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-select [(ngModel)]="data.typeId" style="width: 100%">
+            <nz-select [(ngModel)]="data.typeId" style="width: 100%" required [validation]="true">
               <nz-option *ngFor="let option of dictionary.config_umine_place_check_type" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
             </nz-select>
           </div>
           <div nz-col [nzSpan]="3" class="ta_r">
-            审评阶段：
+              <span class="clo_r">*</span>审评阶段：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-select [(ngModel)]="data.stageId" style="width: 100%">
+            <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [validation]="true">
               <nz-option *ngFor="let option of dictionary.config_umine_place_check_stage" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
@@ -51,7 +51,7 @@
             审评时间：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate" required [validation]="true">
+            <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate">
             </nz-date-picker>
           </div>
         </div>
@@ -64,7 +64,7 @@
 
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="3" class="ta_r">
-            <span class="clo_r">*</span>营运单位：
+            营运单位：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
             <span name="umineName" class="showText">{{data.umineName}}</span>
@@ -80,7 +80,7 @@
 
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="3" class="ta_r">
-            <span class="clo_r">*</span>审评类型：
+            审评类型：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
             <span name="typeValue" class="showText">{{data.typeValue}}</span>

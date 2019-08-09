@@ -64,7 +64,7 @@ export class UminemountainComponent implements OnInit {
       option.conditions.push({ key: "content", value: this.content })
     }
 
-    this.uminemountainCheckSercice.getUminemountainList(option).subscribe(
+    this.uminemountainCheckSercice.getUminemountainCheckList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -97,7 +97,7 @@ export class UminemountainComponent implements OnInit {
 
   delete() {
     if (this.selectId) {
-      this.uminemountainCheckSercice.deleteUminemountainById(this.selectId).subscribe((res) => {
+      this.uminemountainCheckSercice.deleteUminemountainCheckById(this.selectId).subscribe((res) => {
 
         if (res.code == 200) {
           this.msg.create("success", "删除成功");

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { EquipCheckService } from 'src/app/services/check/equip.service';
+import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 
 @Component({
   selector: 'app-equip-file',
@@ -12,7 +13,7 @@ import { EquipCheckService } from 'src/app/services/check/equip.service';
 })
 export class EquipFileComponent implements OnInit {
 
-
+  @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   equipId: any = "";
   dictionary: any = [];
@@ -160,6 +161,8 @@ export class EquipFileComponent implements OnInit {
   //查看与编辑
   show(param) {
 
+    this.fileList=[];
+    
     this.data = param;
 
     this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
@@ -181,6 +184,10 @@ export class EquipFileComponent implements OnInit {
   }
 
   save() {
+
+    if (!this.FormValidation()) {
+      return;
+    }
 
     this.isSaving = true;
     this.data.checkEquipId = this.equipId;
@@ -220,5 +227,14 @@ export class EquipFileComponent implements OnInit {
     this.isShow = false;
   }
 
-
+    //表单手动触发验证
+    FormValidation() {
+      let isValid = true;
+      this.directives.forEach(d => {
+        if (!d.validationValue()) {
+          isValid = false;
+        }
+      });
+      return isValid;
+    }
 }

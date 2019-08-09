@@ -95,7 +95,7 @@ export class ActivityComponent implements OnInit {
       });
     }
 
-    this.activityCheckSercice.getActivityList(option).subscribe(
+    this.activityCheckSercice.getActivityCheckList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
@@ -132,7 +132,7 @@ export class ActivityComponent implements OnInit {
     if (this.selectId) {
 
 
-      this.activityCheckSercice.deleteActivityById(this.selectId).subscribe((res) => {
+      this.activityCheckSercice.deleteActivityCheckById(this.selectId).subscribe((res) => {
 
         if (res.code == 200) {
           this.msg.create("success", "删除成功");

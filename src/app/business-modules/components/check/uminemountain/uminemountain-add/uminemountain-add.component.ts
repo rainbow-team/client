@@ -61,7 +61,7 @@ export class UminemountainAddComponent implements OnInit {
     }
 
     if (id) {
-      this.uminemountainCheckSercice.getUminemountainById(id).subscribe((res) => {
+      this.uminemountainCheckSercice.getUminemountainCheckById(id).subscribe((res) => {
         this.data = res.msg;
 
         if (this.data.umineId) {
@@ -110,7 +110,7 @@ export class UminemountainAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.uminemountainCheckSercice.saveOrUpdateUminemountain(this.data).subscribe((res) => {
+    this.uminemountainCheckSercice.saveOrUpdateUminemountainCheck(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');
         this.router.navigate(['/check/uminemountain']);
