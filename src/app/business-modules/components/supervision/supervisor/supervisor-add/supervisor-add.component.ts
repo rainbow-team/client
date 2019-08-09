@@ -152,7 +152,7 @@ export class SupervisorAddComponent implements OnInit {
 
     this.isSaving = true;
     this.data.attachmentList = [];
-
+    this.data.expireDate="";
     if (this.fileList.length > 0) {
       this.fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });

@@ -23,6 +23,10 @@ export class SupervisionTrainService {
         return this.http.post('/supervisiontrain/getMonitorTrainList', param);
     }
 
+    getAllMonitorTrain(): any {
+        return this.http.post('/supervisiontrain/getAllMonitorTrain',null);
+    }
+
     getMonitorTrainById(id): any {
         return this.http.get('/supervisiontrain/getMonitorTrainById?id=' + id);
     }

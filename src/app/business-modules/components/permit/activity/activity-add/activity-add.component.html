@@ -2,7 +2,7 @@
   <div class="div_top_add">
     核活动许可信息
   </div>
-  <div class="div_contain_add">
+  <div class="div_contain_add" *ngIf="isShow==false">
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'">
       <nz-radio-group [(ngModel)]="activityType">
         <label nz-radio nzValue="fac">核设施</label>
@@ -10,19 +10,19 @@
       </nz-radio-group>
     </div>
 
-    
+
     <div nz-row class="ma_b20" *ngIf="activityType === 'fac'">
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>核设施营运单位信息：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)"
-          nzShowSearch required nzAllowClear nzPlaceHolder="请选择铀矿冶单位">
+          nzShowSearch required nzAllowClear >
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-    
+
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>核设施信息：
       </div>
@@ -33,14 +33,13 @@
         </nz-select>
       </div>
     </div>
-      
+
     <div nz-row class="ma_b20" *ngIf="activityType === 'equip'">
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>核设备单位：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" nzShowSearch required nzAllowClear
-          nzPlaceHolder="请选择核设备单位">
+        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" nzShowSearch required nzAllowClear>
           <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -118,6 +117,112 @@
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
         <textarea nz-input name="promise" [(ngModel)]="data.promise" required [validation]="true"></textarea>
+      </div>
+    </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+  </div>
+
+  <div class="div_contain_add" *ngIf="isShow==true">
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'" *ngIf="!isShow">
+      <nz-radio-group [(ngModel)]="activityType">
+        <label nz-radio nzValue="fac">核设施</label>
+        <label nz-radio nzValue="equip">核设备</label>
+      </nz-radio-group>
+    </div>
+
+
+    <div nz-row class="ma_b20" *ngIf="activityType === 'fac'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        核设施营运单位信息：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="serviceDepartName" class="showText">{{data.serviceDepartName}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        核设施信息：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="facName" class="showText">{{data.facName}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" *ngIf="activityType === 'equip'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        核设备单位：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <span name="equipDepartName" class="showText">{{data.equipDepartName}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        许可名称：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <span name="name" class="showText">{{data.name}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        活动类型：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="typeValue" class="showText">{{data.typeValue}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        许可时间：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="permitDate" class="showText">{{data.permitDate|recordtime}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        有效期限：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="validateTime" class="showText">{{data.validateTime|recordtime}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        许可文号：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="licence" class="showText">{{data.licence}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        许可内容：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+
+        <div nz-tooltip nzPlacement="content" class="showTextArea">{{data.content}}</div>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        许可条件：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="permitCondition" class="showTextArea">{{data.permitCondition}}</div>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        审评承诺：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="promise" class="showTextArea">{{data.promise}}</div>
       </div>
     </div>
 

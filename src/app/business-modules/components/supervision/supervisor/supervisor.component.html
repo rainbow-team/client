@@ -72,6 +72,7 @@
                         <th>监督员类别</th>
                         <th>入职时间</th>
                         <th>职称</th>
+                        <th>过期时间</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -84,6 +85,7 @@
                         <td>{{data.typeValue}}</td>
                         <td>{{data.entryDate|recordtime}}</td>
                         <td>{{data.titleName}}</td>
+                        <td [ngClass]="{'expire':data.isExpire== '1'}">{{data.expireDate|recordtime}}</td>
                         <td>
                             <a (click)="show(data)">查看</a>
                         </td>

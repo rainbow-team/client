@@ -14,9 +14,9 @@
         <div class="fr">
           <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
         </div>
-        <!-- <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="show(false);">编辑</button>
-        </div> -->
+        <div class="fr">
+            <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+        </div>
         <div class="fr">
           <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
         </div>
@@ -37,7 +37,7 @@
             <th>监督员证号</th>
             <th>发证日期</th>
             <th>到期时间</th>
-            <th>操作</th>
+            <!-- <th>操作</th> -->
           </tr>
         </thead>
         <tbody>
@@ -52,11 +52,11 @@
             <td>{{data.number}}</td>
             <td>{{data.issueDate|recordtime}}</td>
             <td>{{data.expireDate|recordtime}}</td>
-            <td>
-              <!-- <a (click)="show(data,true);">查看</a>
-              <nz-divider nzType="vertical"></nz-divider> -->
+            <!-- <td>
+              <a (click)="show(data,true);">查看</a>
+              <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data,false);">编辑</a>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </nz-table>
@@ -68,37 +68,47 @@
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div> -->
 
-  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消" (nzOnOk)="SubmitTrainRecord();"
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消" (nzOnOk)="save();"
     (nzOnCancel)="isVisible=false;" nzWidth="700" [nzOkLoading]="isSaving">
 
     <div style="padding: 10px 30px 50px 0;">
       <div nz-row class="ma_b20">
+          <!-- <div nz-col [nzSpan]="4" class="ta_r">
+              <span class="clo_r">*</span>培训班次：
+          </div>
+            <div nz-col [nzSpan]="20" class="ta_r">
+                <nz-select nzAllowClear [(ngModel)]="data.classId" style="width: 100%"  required  [validation]="true">
+                    <nz-option *ngFor="let option of batchRecordList" [nzLabel]="option.batch" [nzValue]="option.id">
+                    </nz-option>
+                  </nz-select>
+            </div> -->
+
         <div nz-col [nzSpan]="12" class="ta_r">
-          培训班次：
-          <input nz-input name="batch" [(ngModel)]="batch" style="width: 140px;" disabled/>
+            <span class="clo_r">*</span>培训班次：
+          <input nz-input name="batch" [(ngModel)]="batch" style="width: 140px;"  required [validation]="true" readonly="true" />
           <button nz-button nzType="primary" style=" margin-left: 10px;width: 50px;padding-left: 10px;" (click)="Associate()">选择</button>
         </div>
       </div>
       <div nz-row class="ma_b20">
         <div nz-col [nzSpan]="12" class="ta_r">
-          培训开始时间：
-          <nz-date-picker name="beginDate" [(ngModel)]="beginDate" class="w200" [disabled]="true">
+            <span class="clo_r">*</span>培训开始时间：
+          <nz-date-picker name="beginDate" [(ngModel)]="beginDate" class="w200"  required [validation]="true" [disabled]="true">
           </nz-date-picker>
         </div>
         <div nz-col [nzSpan]="12" class="ta_r">
-          培训结束时间：
-          <nz-date-picker name="endDate" [(ngModel)]="endDate" class="w200" [disabled]="true">
+            <span class="clo_r">*</span>培训结束时间：
+          <nz-date-picker name="endDate" [(ngModel)]="endDate" class="w200"  required [validation]="true" [disabled]="true">
           </nz-date-picker>
         </div>
       </div>
       <div nz-row class="ma_b20">
         <div nz-col [nzSpan]="12" class="ta_r">
           成绩：
-          <input nz-input name="score" [(ngModel)]="data.score" class="w200" [disabled]="isDisable" />
+          <input nz-input name="score" [(ngModel)]="data.score" class="w200"  />
         </div>
         <div nz-col [nzSpan]="12" class="ta_r">
           监督员证号：
-          <input nz-input name="number" [(ngModel)]="data.number" class="w200" [disabled]="isDisable" />
+          <input nz-input name="number" [(ngModel)]="data.number" class="w200" />
         </div>
       </div>
       <div nz-row>

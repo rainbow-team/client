@@ -40,13 +40,12 @@ export class SupervisionSercice {
     }
 
     //核安全监督员子项管理
-    addTrainRecord(param): any {
-        return this.http.post('/SupervisionTrainRecord/addTrainRecord', param);
+
+    saveOrUpdateSupervisorTrainRecord(param): any {
+        let url = !param.id ? "/SupervisionTrainRecord/addTrainRecord" : "/SupervisionTrainRecord/modifyTrainRecord";
+        return this.http.post(url, param);
     }
 
-    modifyTrainRecord(param): any {
-        return this.http.post('/SupervisionTrainRecord/modifyTrainRecord', param);
-    }
 
     getTrainRecordList(param): any {
         return this.http.post('/SupervisionTrainRecord/getTrainRecordList', param);

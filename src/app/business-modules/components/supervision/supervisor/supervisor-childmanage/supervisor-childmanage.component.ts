@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from './../../../../../services/common/dictionary.service'
 import { StaffSercice } from 'src/app/services/common/staff-service';
@@ -6,6 +6,7 @@ import { SupervisionSercice } from 'src/app/services/supervision/supervisor.serv
 import { NzMessageService } from 'ng-zorro-antd';
 import { Jsonp } from '@angular/http/src/http';
 import { SupervisionTrainService } from 'src/app/services/supervision/supervisortrain.service';
+import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 
 @Component({
   selector: 'app-supervisor-childmanage',
@@ -15,10 +16,14 @@ import { SupervisionTrainService } from 'src/app/services/supervision/supervisor
 export class SupervisorChildmanageComponent implements OnInit {
 
 
+  @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+
+  supervisorId: any = "";
+
   dataSet: any = [];
   MonitorList: any = [];
   data: any = {};
-  supervisorId: any = "";
+
 
   //多选框控制
   ids: any = [];
@@ -53,11 +58,11 @@ export class SupervisorChildmanageComponent implements OnInit {
   beginDate: any;
   endDate: any;
 
-  selectId:any="";
-  
+  selectId: any = "";
+
   constructor(private router: Router, private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
-    private ActivatedRoute: ActivatedRoute, private supervisionSercice: SupervisionSercice, 
-    private msg: NzMessageService,private supervisionTrainService: SupervisionTrainService) { }
+    private ActivatedRoute: ActivatedRoute, private supervisionSercice: SupervisionSercice,
+    private msg: NzMessageService, private supervisionTrainService: SupervisionTrainService) { }
 
   ngOnInit() {
 
@@ -86,7 +91,7 @@ export class SupervisorChildmanageComponent implements OnInit {
     this.supervisionSercice.getTrainRecordList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
-        this.dataSet = this.dataSet.map(r => { return Object.assign(r, { checked: false }) });
+        // this.dataSet = this.dataSet.map(r => { return Object.assign(r, { checked: false }) });
         this.totalCount = data.msg.recordCount;
       }
     );
@@ -100,29 +105,44 @@ export class SupervisorChildmanageComponent implements OnInit {
     this.batch = "";
     this.beginDate = "";
     this.endDate = "";
+    this.selectId = "";
     this.isVisible = true;
   }
 
-  //查看与编辑
-  show(param, flag) {
+  // //查看与编辑
+  // show(param, flag) {
 
-    this.data = param;
-    this.batch = param.trainClass;
-    this.beginDate = param.trainStartDate;
-    this.endDate = param.trainEndDate;
+  //   this.data = param;
+  //   this.batch = param.trainClass;
+  //   this.beginDate = param.trainStartDate;
+  //   this.endDate = param.trainEndDate;
 
-    this.isDisable = flag;
-    if (flag) {
-      this.modalTitle = "查看培训信息";
-      this.okText = null;
-    } else {
-      this.modalTitle = "编辑培训信息";
+  //   this.isDisable = flag;
+  //   if (flag) {
+  //     this.modalTitle = "查看培训信息";
+  //     this.okText = null;
+  //   } else {
+  //     this.modalTitle = "编辑培训信息";
+  //     this.okText = "提交";
+  //   }
+
+  //   this.isVisible = true;
+  // }
+
+  modify() {
+    if (this.selectId) {
+      this.modalTitle = "修改培训信息";
       this.okText = "提交";
+      this.batch = this.data.trainClass;
+      this.beginDate = this.data.trainStartDate;
+      this.endDate = this.data.trainEndDate;
+      this.isVisible = true;
+      this.isSaving = false;
+
+    } else {
+      this.msg.create("warning", "请选择修改项");
     }
-
-    this.isVisible = true;
   }
-
 
   delete() {
 
@@ -145,7 +165,7 @@ export class SupervisorChildmanageComponent implements OnInit {
           this.msg.create("error", "删除失败");
         }
       })
-    }else{
+    } else {
       this.msg.create("warning", "请选择删除项");
     }
   }
@@ -155,37 +175,33 @@ export class SupervisorChildmanageComponent implements OnInit {
   // }
 
   //添加培训记录的保存
-  SubmitTrainRecord() {
+  save() {
+
+    if (!this.FormValidation()) {
+      return;
+    }
 
     this.isSaving = true;
     this.data.supervisorId = this.supervisorId;
-    if (!this.data.id) {
-      this.supervisionSercice.addTrainRecord(this.data).subscribe((res) => {
-        if (res.code == 200) {
-          this.msg.create('success', '保存成功');
-          this.search();
-          this.isVisible = false;
-        } else {
+    this.supervisionSercice.saveOrUpdateSupervisorTrainRecord(this.data).subscribe((res) => {
+      if (res.code == 200) {
+        this.msg.create('success', '保存成功');
+        this.search();
+        this.isVisible = false;
+      } else {
 
-          this.msg.create('error', '保存失败');
-        }
+        this.msg.create('error', '保存失败');
+      }
 
-        this.isSaving = false;
-      });
-    } else {
-      this.supervisionSercice.modifyTrainRecord(this.data).subscribe((res) => {
-        if (res.code == 200) {
-          this.msg.create('success', '保存成功');
-          this.search();
-          this.isVisible = false;
-        } else {
+      this.isSaving = false;
+    });
 
-          this.msg.create('error', '保存失败');
-        }
+    this.data = {};
+    this.batch = "";
+    this.beginDate = "";
+    this.endDate = "";
+    this.selectId = "";
 
-        this.isSaving = false;
-      });
-    }
   }
 
   //到期时间计算
@@ -210,8 +226,6 @@ export class SupervisorChildmanageComponent implements OnInit {
   }
 
   selectMonitorList() {
-
-
     var option = {
       pageNo: this.pageIndexAssociate,
       pageSize: this.pageSizeAssociate,
@@ -245,7 +259,20 @@ export class SupervisorChildmanageComponent implements OnInit {
     this.isAssociateVisible = false;
 
   }
-    selectItem(data){
-        this.selectId=data.id;
-    }
+  selectItem(data) {
+    this.selectId = data.id;
+    this.data = data;
   }
+
+
+  //表单手动触发验证
+  FormValidation() {
+    let isValid = true;
+    this.directives.forEach(d => {
+      if (!d.validationValue()) {
+        isValid = false;
+      }
+    });
+    return isValid;
+  }
+}
