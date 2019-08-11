@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -6,11 +6,14 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { UmineMountainPermitService } from 'src/app/services/permit/uminemountain.service';
 
 @Component({
-  selector: 'app-uminemountain',
+  selector: 'app-permit-uminemountain',
   templateUrl: './uminemountain.component.html',
   styleUrls: ['./uminemountain.component.scss']
 })
 export class UminemountainPermitComponent implements OnInit {
+
+  @Input() uminemountainId: any = "";
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -70,6 +73,12 @@ export class UminemountainPermitComponent implements OnInit {
       option.conditions.push({
         key: 'acceptDate',
         value: this.acceptDate
+      });
+    }
+    if (this.uminemountainId) {
+      option.conditions.push({
+        key: 'uminemountainId',
+        value: this.uminemountainId
       });
     }
 

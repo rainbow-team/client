@@ -109,7 +109,13 @@ export class UminemountainComponent implements OnInit {
   // }
 
   show(item) {
-    this.router.navigate(['/unit/uminemountain/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.isSearchShow == "0") {
+      this.router.navigate(['/unit/uminemountain/add'], { queryParams: { id: item.id, isShow: true } });
+    } else {
+      this.router.navigate(['/searchShow/integratedAuery/uminmountainSearch'], { queryParams: { id: item.id } });
+    }
+
   }
 
   modify() {

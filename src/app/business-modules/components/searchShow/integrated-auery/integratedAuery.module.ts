@@ -11,6 +11,7 @@ import { UmineSearchShowComponent } from './../../unit/umine/umine-search-show/u
 import { EquipdepartSearchShowComponent } from './../../unit/equipdepart/equipdepart-search-show/equipdepart-search-show.component';
 import { FacSearchShowComponent } from './../../unit/fac/fac-search-show/fac-search-show.component';
 import { UmineplaceSearchShowComponent } from './../../unit/umineplace/umineplace-search-show/umineplace-search-show.component';
+import { UminemountainSearchShowComponent } from './../../unit/uminemountain/uminemountain-search-show/uminemountain-search-show.component';
 
 const routes: Routes = [
     {
@@ -39,7 +40,11 @@ const routes: Routes = [
     },
     {
         path: 'umineplaceSearch',
-        component:UmineplaceSearchShowComponent
+        component: UmineplaceSearchShowComponent
+    },
+    {
+        path: 'uminmountainSearch',
+        component:UminemountainSearchShowComponent
     }
 ];
 

@@ -4,14 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
-import { UminemountainComponent } from './uminemountain.component';
+import { CheckUminemountainComponent } from './uminemountain.component';
 import { UminemountainAddComponent } from './uminemountain-add/uminemountain-add.component';
 import { UminemountainFileComponent } from "./uminemountain-file/uminemountain-file.component";
 
 const routes: Routes = [
     {
         path: '',
-        component: UminemountainComponent
+        component: CheckUminemountainComponent
     },
     {
         path: 'add',
@@ -34,7 +34,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        UminemountainComponent,
+        // CheckUminemountainComponent,
         UminemountainAddComponent,
         UminemountainFileComponent
     ]

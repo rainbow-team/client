@@ -1,189 +1,15 @@
-<div style="height: 100%;background:#fff">
+<div style="height: 100%;background:#fff" *ngIf="!uminemountainSearchId">
   <!-- <div class="div_top_add">
     铀矿山信息 
   </div> -->
 
   <nz-tabset>
     <nz-tab nzTitle="铀矿山信息">
-      <div class="div_contain_add" style="height: calc(100% - 200px);" *ngIf="isShow==false">
 
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>铀矿山名称：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>营运单位：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.umineId" required [validation]="true" style="width: 100%">
-              <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            建造年代：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-year-picker name="buildYear" [(ngModel)]="data.buildYear">
-            </nz-year-picker>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>设施状态：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.statusId" required [validation]="true" style="width: 100%">
-              <nz-option *ngFor="let option of dictionary.config_umine_mountain_status" [nzLabel]="option.value"
-                [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            消防水池容积：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <input nz-input name="waterVolumn" [(ngModel)]="data.waterVolumn" />
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>井下消防审查备案情况：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.recordId" required [validation]="true" style="width: 100%">
-              <nz-option *ngFor="let option of dictionary.config_umine_mountain_record" [nzLabel]="option.value"
-                [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            井下消防验收情况：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.acceptId" style="width: 100%">
-              <nz-option *ngFor="let option of dictionary.config_umine_mountain_accept" [nzLabel]="option.value"
-                [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            井下消防设计简介：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <textarea nz-input name="survey" style="height: 70px;" [(ngModel)]="data.survey"></textarea>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            井下重点火灾危险源：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <textarea nz-input name="dangerFirepoint" style="height: 70px;"   [(ngModel)]="data.dangerFirepoint"></textarea>
-          </div>
-        </div>
-
-
-        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+      <div *ngIf="uminemountainSearchId;else uminemountainContent">
 
       </div>
 
-      <div class="div_contain_add" style="height: calc(100% - 200px);" *ngIf="isShow==true">
-
-          <div nz-row class="ma_b20">
-            <div nz-col [nzSpan]="4" class="ta_r">
-              铀矿山名称：
-            </div>
-            <div nz-col [nzSpan]="8" class="ta_l">
-                <span name="name" class="showText">{{data.name}}</span>
-            </div>
-          </div>
-  
-          <div nz-row class="ma_b20">
-            <div nz-col [nzSpan]="4" class="ta_r">
-              <span class="clo_r">*</span>营运单位：
-            </div>
-            <div nz-col [nzSpan]="8" class="ta_l">
-                <span name="umineName" class="showText">{{data.umineName}}</span>
-            </div>
-  
-            <div nz-col [nzSpan]="4" class="ta_r">
-              建造年代：
-            </div>
-            <div nz-col [nzSpan]="8" class="ta_l">
-                <span name="buildYear" class="showText">{{data.buildYear|recordtime}}</span>
-            </div>
-          </div>
-  
-          <div nz-row class="ma_b20">
-            <div nz-col [nzSpan]="4" class="ta_r">
-              <span class="clo_r">*</span>设施状态：
-            </div>
-            <div nz-col [nzSpan]="8" class="ta_l">
-                <span name="statusValue" class="showText">{{data.statusValue}}</span>
-            </div>
-  
-            <div nz-col [nzSpan]="4" class="ta_r">
-              消防水池容积：
-            </div>
-            <div nz-col [nzSpan]="8" class="ta_l">
-                <span name="waterVolumn" class="showText">{{data.waterVolumn}}</span>
-            </div>
-          </div>
-  
-          <div nz-row class="ma_b20">
-            <div nz-col [nzSpan]="4" class="ta_r">
-              <span class="clo_r">*</span>井下消防审查备案情况：
-            </div>
-            <div nz-col [nzSpan]="8" class="ta_l">
-                <span name="recordValue" class="showText">{{data.recordValue}}</span>
-            </div>
-  
-            <div nz-col [nzSpan]="4" class="ta_r">
-              井下消防验收情况：
-            </div>
-            <div nz-col [nzSpan]="8" class="ta_l">
-                <span name="acceptValue" class="showText">{{data.acceptValue}}</span>
-            </div>
-          </div>
-  
-          <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-            <div nz-col [nzSpan]="4" class="ta_r">
-              井下消防设计简介：
-            </div>
-            <div nz-col [nzSpan]="20" class="ta_l">
-                <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.survey}}</div>
-            </div>
-          </div>
-  
-          <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-            <div nz-col [nzSpan]="4" class="ta_r">
-              井下重点火灾危险源：
-            </div>
-            <div nz-col [nzSpan]="20" class="ta_l">
-                <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.dangerFirepoint}}</div>
-            </div>
-          </div>
-  
-  
-          <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
-  
-        </div>
 
     </nz-tab>
 
@@ -222,3 +48,189 @@
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
 </div>
+
+<div *ngIf="!uminemountainSearchId;else uminemountainContent">
+
+</div>
+
+<ng-template #uminemountainContent>
+  <div class="div_contain_add" style="height: calc(100% - 200px);" *ngIf="isShow==false">
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>铀矿山名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>营运单位：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.umineId" required [validation]="true" style="width: 100%">
+          <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        建造年代：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-year-picker name="buildYear" [(ngModel)]="data.buildYear">
+        </nz-year-picker>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>设施状态：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.statusId" required [validation]="true" style="width: 100%">
+          <nz-option *ngFor="let option of dictionary.config_umine_mountain_status" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        消防水池容积：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="waterVolumn" [(ngModel)]="data.waterVolumn" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>井下消防审查备案情况：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.recordId" required [validation]="true" style="width: 100%">
+          <nz-option *ngFor="let option of dictionary.config_umine_mountain_record" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        井下消防验收情况：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.acceptId" style="width: 100%">
+          <nz-option *ngFor="let option of dictionary.config_umine_mountain_accept" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        井下消防设计简介：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="survey" style="height: 70px;" [(ngModel)]="data.survey"></textarea>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        井下重点火灾危险源：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="dangerFirepoint" style="height: 70px;" [(ngModel)]="data.dangerFirepoint"></textarea>
+      </div>
+    </div>
+
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
+  </div>
+
+  <div class="div_contain_add" style="height: calc(100% - 200px);" *ngIf="isShow==true">
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        铀矿山名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="name" class="showText">{{data.name}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>营运单位：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="umineName" class="showText">{{data.umineName}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        建造年代：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="buildYear" class="showText">{{data.buildYear|recordtime}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>设施状态：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="statusValue" class="showText">{{data.statusValue}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        消防水池容积：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="waterVolumn" class="showText">{{data.waterVolumn}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>井下消防审查备案情况：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="recordValue" class="showText">{{data.recordValue}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        井下消防验收情况：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="acceptValue" class="showText">{{data.acceptValue}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        井下消防设计简介：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.survey}}</div>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        井下重点火灾危险源：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.dangerFirepoint}}</div>
+      </div>
+    </div>
+
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
+  </div>
+</ng-template>

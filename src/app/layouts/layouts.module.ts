@@ -62,6 +62,12 @@ import { UmineplaceChildmanageComponent } from './../../app/business-modules/com
 import { UmineplacePermitComponent } from './../../app/business-modules/components/permit/umineplace/umineplace.component';
 import { CheckUmineplaceComponent } from './../../app/business-modules/components/check/umineplace/umineplace.component';
 
+import { UminemountainSearchShowComponent } from './../../app/business-modules/components/unit/uminemountain/uminemountain-search-show/uminemountain-search-show.component';
+import { UminemountainAddComponent } from './../../app/business-modules/components/unit/uminemountain/uminemountain-add/uminemountain-add.component';
+import { UminemountainChildmanageComponent } from './../../app/business-modules/components/unit/uminemountain/uminemountain-childmanage/uminemountain-childmanage.component';
+
+import { UminemountainPermitComponent } from './../../app/business-modules/components/permit/uminemountain/uminemountain.component';
+import { CheckUminemountainComponent } from './../../app/business-modules/components/check/uminemountain/uminemountain.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -103,7 +109,9 @@ import { CheckUmineplaceComponent } from './../../app/business-modules/component
     FacSearchShowComponent, FacAddComponent, FacImproveComponent,
     FacReportComponent, PermitFacComponent, CheckFacComponent,
     UmineplaceSearchShowComponent, UmineplaceAddComponent, UmineplacePermitComponent,
-    CheckUmineplaceComponent,UmineplaceChildmanageComponent
+    CheckUmineplaceComponent, UmineplaceChildmanageComponent,
+    UminemountainSearchShowComponent, UminemountainAddComponent,
+    UminemountainChildmanageComponent, UminemountainPermitComponent,CheckUminemountainComponent
   ],
   exports: [
     LoginComponent,
@@ -137,7 +145,9 @@ import { CheckUmineplaceComponent } from './../../app/business-modules/component
     FacSearchShowComponent, FacAddComponent, FacImproveComponent,
     FacReportComponent, PermitFacComponent, CheckFacComponent,
     UmineplaceSearchShowComponent, UmineplaceAddComponent, UmineplacePermitComponent,
-    CheckUmineplaceComponent,UmineplaceChildmanageComponent
+    CheckUmineplaceComponent, UmineplaceChildmanageComponent,
+    UminemountainSearchShowComponent, UminemountainAddComponent,
+    UminemountainChildmanageComponent, UminemountainPermitComponent,CheckUminemountainComponent
   ]
 })
 export class LayoutsModule { }

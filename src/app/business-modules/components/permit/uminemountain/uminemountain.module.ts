@@ -28,6 +28,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  declarations: [UminemountainPermitComponent, UminemountainPermitAddComponent]
+  declarations: [
+    // UminemountainPermitComponent,
+     UminemountainPermitAddComponent]
 })
 export class UminemountainPermitModule {}

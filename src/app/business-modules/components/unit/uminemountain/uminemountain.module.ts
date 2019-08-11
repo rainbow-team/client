@@ -33,8 +33,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // UminemountainComponent,
-        UminemountainAddComponent,
-        UminemountainChildmanageComponent
+        // UminemountainAddComponent,
+        // UminemountainChildmanageComponent
     ]
 })
 export class UminemountainModule { }

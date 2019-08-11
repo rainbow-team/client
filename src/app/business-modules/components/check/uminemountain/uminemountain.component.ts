@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -8,12 +8,13 @@ import { UminemountainCheckSercice } from 'src/app/services/check/uminemountain.
 import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
 
 @Component({
-  selector: 'app-uminemountain',
+  selector: 'app-check-uminemountain',
   templateUrl: './uminemountain.component.html',
   styleUrls: ['./uminemountain.component.scss']
 })
-export class UminemountainComponent implements OnInit {
+export class CheckUminemountainComponent implements OnInit {
 
+  @Input() uminemountainId: any = "";
 
   dictionary: any = {};
   staffObj: any = {};
@@ -63,6 +64,11 @@ export class UminemountainComponent implements OnInit {
     if (this.content) {
       option.conditions.push({ key: "content", value: this.content })
     }
+
+    if (this.uminemountainId) {
+      option.conditions.push({ key: "uminemountainId", value: this.uminemountainId })
+    }
+    
 
     this.uminemountainCheckSercice.getUminemountainCheckList(option).subscribe(
       (data) => {

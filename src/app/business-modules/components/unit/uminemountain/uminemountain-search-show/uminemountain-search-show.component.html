@@ -1,3 +1,22 @@
-<p>
-  uminemountain-search-show works!
-</p>
+<div style="height: 100%;background:#fff;padding: 10px;">
+  <nz-tabset>
+
+    <nz-tab nzTitle="铀矿山信息">
+      <app-uminemountain-add [uminemountainSearchId]="uminemountainId"></app-uminemountain-add>
+    </nz-tab>
+
+    <nz-tab nzTitle="铀矿山井下消防许可信息">
+      <app-permit-uminemountain [uminemountainId]="uminemountainId"></app-permit-uminemountain>
+    </nz-tab>
+
+    <nz-tab nzTitle="铀矿山井下消防审查信息 ">
+      <app-check-uminemountain [uminemountainId]="uminemountainId"></app-check-uminemountain>
+    </nz-tab>
+
+  </nz-tabset>
+
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>
