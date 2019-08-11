@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -14,6 +14,7 @@ import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 })
 export class EquipdepartAddComponent implements OnInit {
 
+  @Input() equipdepartId: any = "";
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
@@ -26,7 +27,7 @@ export class EquipdepartAddComponent implements OnInit {
 
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
-    private attachmentSercice: AttachmentSercice,private equipDepartService: EquipDepartService) { }
+    private attachmentSercice: AttachmentSercice, private equipDepartService: EquipDepartService) { }
 
 
   ngOnInit() {
@@ -36,6 +37,12 @@ export class EquipdepartAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
+
+
+    if(this.equipdepartId){
+      id = this.equipdepartId;
+      isShow = "true";
+    }
 
     if (isShow && isShow == "true") {
       this.isShow = true;

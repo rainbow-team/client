@@ -1,7 +1,25 @@
-<div style="height: 100%;background:#fff">
+<div style="height: 100%;background:#fff" *ngIf="!equipdepartId">
   <div class="div_top_add">
     核设备单位信息
   </div>
+
+  <div *ngIf="equipdepartId;else equipdepartContent">
+       
+  </div>
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
+      [nzLoading]="isSaving">保存</button>
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>
+
+<div *ngIf="!equipdepartId;else equipdepartContent">
+
+</div>
+
+<ng-template #equipdepartContent>
+
   <div class="div_contain_add" *ngIf="isShow==false">
 
     <div nz-row class="ma_b20">
@@ -227,9 +245,4 @@
     <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
   </div>
 
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
-      [nzLoading]="isSaving">保存</button>
-    <button nz-button nzType="default" (click)="close()">关闭</button>
-  </div>
-</div>
+</ng-template>

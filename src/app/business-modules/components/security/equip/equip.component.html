@@ -78,7 +78,7 @@
         核设施安全问题信息（共{{totalCount}}条）
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="!equipdepartId">
         <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">添加</button>
       </div>
 

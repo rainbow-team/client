@@ -28,6 +28,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  declarations: [EquipPermitComponent, EquipPermitAddComponent]
+  declarations: [
+    // EquipPermitComponent, 
+    EquipPermitAddComponent]
 })
 export class EquipPermitModule {}

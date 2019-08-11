@@ -30,7 +30,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // EquipdepartComponent,
-        EquipdepartAddComponent
+        // EquipdepartAddComponent
     ]
 })
 export class EquipDepartModule { }

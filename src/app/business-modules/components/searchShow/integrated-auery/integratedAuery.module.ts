@@ -8,6 +8,7 @@ import { IntegratedAueryComponent } from './integrated-auery.component';
 import { GroupAddComponent } from './../../unit/group/group-add/group-add.component';
 import { ServicedepartSearchShowComponent } from './../../unit/servicedepart/servicedepart-search-show/servicedepart-search-show.component';
 import { UmineSearchShowComponent } from './../../unit/umine/umine-search-show/umine-search-show.component';
+import { EquipdepartSearchShowComponent } from './../../unit/equipdepart/equipdepart-search-show/equipdepart-search-show.component';
 
 const routes: Routes = [
     {
@@ -25,6 +26,10 @@ const routes: Routes = [
     {
         path: 'umineSearch',
         component: UmineSearchShowComponent
+    },
+    {
+        path: 'equipdepartSearch',
+        component: EquipdepartSearchShowComponent
     }
 ];
 

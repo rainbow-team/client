@@ -13,7 +13,7 @@ import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 export class EquipdepartComponent implements OnInit {
 
   @Input() isSearchShow = "0";
-  
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -86,7 +86,12 @@ export class EquipdepartComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/unit/equipdepart/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.isSearchShow == "0") {
+      this.router.navigate(['/unit/equipdepart/add'], { queryParams: { id: item.id, isShow: true } });
+    } else {
+      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: item.id } });
+    }
   }
 
   modify() {

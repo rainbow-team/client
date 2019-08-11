@@ -17,6 +17,7 @@ export class ActivityComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
   @Input() umineId: any = "";
+  @Input() equipdepartId: any = "";
 
   isSearchShow: any = false;
 
@@ -49,7 +50,7 @@ export class ActivityComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    if (this.servicedepartId || this.umineId) {
+    if (this.servicedepartId || this.umineId || this.equipdepartId) {
       this.isSearchShow = true;
     }
 
@@ -92,6 +93,13 @@ export class ActivityComponent implements OnInit {
       option.conditions.push({
         key: 'umineId',
         value: this.umineId
+      });
+    }
+
+    if (this.equipdepartId) {
+      option.conditions.push({
+        key: 'equipdepartId',
+        value: this.equipdepartId
       });
     }
 

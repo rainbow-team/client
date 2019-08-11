@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -9,11 +9,13 @@ import { ServiceDepartService } from 'src/app/services/unit/servicedepart.servic
 import { FacSercice } from 'src/app/services/unit/fac.service';
 
 @Component({
-  selector: 'app-equip',
+  selector: 'app-check-equip',
   templateUrl: './equip.component.html',
   styleUrls: ['./equip.component.scss']
 })
 export class EquipComponent implements OnInit {
+
+  @Input() equipdepartId: any = "";
 
   dictionary: any = {};
   staffObj: any = {};
@@ -75,6 +77,10 @@ export class EquipComponent implements OnInit {
     }
     if (this.stageIds.length > 0) {
       option.conditions.push({ key: "stageIds", value: this.stageIds })
+    }
+
+    if (this.equipdepartId) {
+      option.conditions.push({ key: "equipdepartId", value: this.equipdepartId })
     }
 
     this.equipCheckService.getEquipCheckList(option).subscribe(

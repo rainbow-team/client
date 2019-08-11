@@ -35,7 +35,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        EquipComponent,
+        // EquipComponent,
         EquipAddComponent,
         EquipFileComponent
     ]

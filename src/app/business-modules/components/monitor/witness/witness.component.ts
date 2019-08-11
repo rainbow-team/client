@@ -17,6 +17,7 @@ export class WitnessComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
   @Input() umineId: any = "";
+  @Input() equipdepartId: any = "";
 
   isSearchShow: any = false;
 
@@ -31,11 +32,11 @@ export class WitnessComponent implements OnInit {
 
   name: any = "";
 
-  obj:any="";
+  obj: any = "";
 
-  items:any="";
+  items: any = "";
 
-  witness_date:any=[];
+  witness_date: any = [];
 
 
   constructor(private router: Router,
@@ -48,7 +49,7 @@ export class WitnessComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    if (this.servicedepartId || this.umineId) {
+    if (this.servicedepartId || this.umineId || this.equipdepartId) {
       this.isSearchShow = true;
     }
 
@@ -98,7 +99,13 @@ export class WitnessComponent implements OnInit {
         value: this.umineId
       });
     }
-
+    
+    if (this.equipdepartId) {
+      option.conditions.push({
+        key: 'equipdepartId',
+        value: this.equipdepartId
+      });
+    }
     this.witnessMonitorSercice.getWitnessMonitorList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
@@ -109,9 +116,9 @@ export class WitnessComponent implements OnInit {
 
   reset() {
     this.name = "";
-    this.obj="";
-    this.items="";
-    this.witness_date=[];
+    this.obj = "";
+    this.items = "";
+    this.witness_date = [];
   }
 
   add() {

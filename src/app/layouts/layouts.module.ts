@@ -41,6 +41,13 @@ import { UmineAddComponent } from './../../app/business-modules/components/unit/
 
 import { SecurityUmineplaceComponent } from './../../app/business-modules/components/security/umineplace/umineplace.component';
 
+import { EquipdepartSearchShowComponent } from './../../app/business-modules/components/unit/equipdepart/equipdepart-search-show/equipdepart-search-show.component';
+import { EquipdepartAddComponent } from './../../app/business-modules/components/unit/equipdepart/equipdepart-add/equipdepart-add.component';
+import { EquipPermitComponent } from './../../app/business-modules/components/permit/equip/equip.component';
+
+import { EquipComponent } from './../../app/business-modules/components/check/equip/equip.component';
+import { SecurityEquipComponent } from './../../app/business-modules/components/security/equip/equip.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -76,7 +83,9 @@ import { SecurityUmineplaceComponent } from './../../app/business-modules/compon
     ActivityComponent,
     DailyComponent, CheckComponent, WitnessComponent,
     SecurityFacComponent, AccidentComponent,
-    UmineSearchShowComponent, UmineAddComponent,SecurityUmineplaceComponent
+    UmineSearchShowComponent, UmineAddComponent, SecurityUmineplaceComponent,
+    EquipdepartSearchShowComponent, EquipdepartAddComponent,
+    EquipPermitComponent, EquipComponent,SecurityEquipComponent
   ],
   exports: [
     LoginComponent,
@@ -104,7 +113,9 @@ import { SecurityUmineplaceComponent } from './../../app/business-modules/compon
     ActivityComponent,
     DailyComponent, CheckComponent, WitnessComponent,
     SecurityFacComponent, AccidentComponent,
-    UmineSearchShowComponent, UmineAddComponent,SecurityUmineplaceComponent
+    UmineSearchShowComponent, UmineAddComponent, SecurityUmineplaceComponent,
+    EquipdepartSearchShowComponent, EquipdepartAddComponent,
+    EquipPermitComponent, EquipComponent,SecurityEquipComponent
   ]
 })
 export class LayoutsModule { }

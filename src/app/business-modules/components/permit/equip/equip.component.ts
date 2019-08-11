@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -11,6 +11,9 @@ import { EquipPermitService } from 'src/app/services/permit/equip.service';
   styleUrls: ['./equip.component.scss']
 })
 export class EquipPermitComponent implements OnInit {
+
+  @Input() equipdepartId: any = "";
+  
   dictionary: any = {};
   staffObj: any = {};
 
@@ -106,6 +109,13 @@ export class EquipPermitComponent implements OnInit {
       if (this.permit_date[1]) {
         option.conditions.push({ key: "end_date", value: this.permit_date[1] })
       }
+    }
+
+    if (this.equipdepartId) {
+      option.conditions.push({
+        key: 'equipdepartId',
+        value: this.equipdepartId
+      });
     }
 
     this.equipPermitService.getEquipPermitList(option).subscribe(data => {

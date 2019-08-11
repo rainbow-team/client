@@ -17,6 +17,7 @@ export class CheckComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
   @Input() umineId: any = "";
+  @Input() equipdepartId: any = "";
 
   isSearchShow: any = false;
 
@@ -54,7 +55,7 @@ export class CheckComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    if (this.servicedepartId || this.umineId) {
+    if (this.servicedepartId || this.umineId || this.equipdepartId) {
       this.isSearchShow = true;
     }
 
@@ -115,6 +116,14 @@ export class CheckComponent implements OnInit {
         value: this.umineId
       });
     }
+    
+    if (this.equipdepartId) {
+      option.conditions.push({
+        key: 'equipdepartId',
+        value: this.equipdepartId
+      });
+    }
+    
 
     this.checkMonitorSercice.getCheckMonitorList(option).subscribe(
       (data) => {
