@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -6,11 +6,13 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { Permit_FacSercice } from 'src/app/services/permit/permit_fac.service';
 
 @Component({
-  selector: 'app-fac',
+  selector: 'app-permit-fac',
   templateUrl: './fac.component.html',
   styleUrls: ['./fac.component.scss']
 })
-export class FacComponent implements OnInit {
+export class PermitFacComponent implements OnInit {
+
+  @Input() facId: any = "";
 
   dictionary: any = {};
   staffObj: any = {};
@@ -65,6 +67,10 @@ export class FacComponent implements OnInit {
       if (this.permit_date[1]) {
         option.conditions.push({ key: "end_date", value: this.permit_date[1] })
       }
+    }
+
+    if (this.facId) {
+      option.conditions.push({ key: "facId", value: this.facId })
     }
 
     this.permit_FacSercice.getFacPermitList(option).subscribe(

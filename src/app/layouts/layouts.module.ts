@@ -48,6 +48,14 @@ import { EquipPermitComponent } from './../../app/business-modules/components/pe
 import { EquipComponent } from './../../app/business-modules/components/check/equip/equip.component';
 import { SecurityEquipComponent } from './../../app/business-modules/components/security/equip/equip.component';
 
+import { FacSearchShowComponent } from './../../app/business-modules/components/unit/fac/fac-search-show/fac-search-show.component';
+import { FacAddComponent } from './../../app/business-modules/components/unit/fac/fac-add/fac-add.component';
+import { FacImproveComponent } from './../../app/business-modules/components/unit/fac/fac-improve/fac-improve.component';
+import { FacReportComponent } from './../../app/business-modules/components/unit/fac/fac-report/fac-report.component';
+
+import { PermitFacComponent } from './../../app/business-modules/components/permit/fac/fac.component';
+import { CheckFacComponent } from './../../app/business-modules/components/check/fac/fac.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -85,7 +93,9 @@ import { SecurityEquipComponent } from './../../app/business-modules/components/
     SecurityFacComponent, AccidentComponent,
     UmineSearchShowComponent, UmineAddComponent, SecurityUmineplaceComponent,
     EquipdepartSearchShowComponent, EquipdepartAddComponent,
-    EquipPermitComponent, EquipComponent,SecurityEquipComponent
+    EquipPermitComponent, EquipComponent, SecurityEquipComponent,
+    FacSearchShowComponent, FacAddComponent, FacImproveComponent,
+    FacReportComponent, PermitFacComponent,CheckFacComponent
   ],
   exports: [
     LoginComponent,
@@ -115,7 +125,9 @@ import { SecurityEquipComponent } from './../../app/business-modules/components/
     SecurityFacComponent, AccidentComponent,
     UmineSearchShowComponent, UmineAddComponent, SecurityUmineplaceComponent,
     EquipdepartSearchShowComponent, EquipdepartAddComponent,
-    EquipPermitComponent, EquipComponent,SecurityEquipComponent
+    EquipPermitComponent, EquipComponent, SecurityEquipComponent,
+    FacSearchShowComponent, FacAddComponent, FacImproveComponent,
+    FacReportComponent, PermitFacComponent,CheckFacComponent
   ]
 })
 export class LayoutsModule { }

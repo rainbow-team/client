@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -15,13 +15,14 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 })
 export class FacAddComponent implements OnInit {
 
+  @Input() facSearchId: any = "";
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
   isSaving = false;
 
   isShow = false;
-  isAdd=false;
+  isAdd = false;
 
   fileList = [];
 
@@ -71,11 +72,19 @@ export class FacAddComponent implements OnInit {
       }
     });
 
+
+    if(this.facSearchId){
+      id = this.facSearchId;
+      isShow = "true";
+    }
+    
     if (isShow && isShow == "true") {
       this.isShow = true;
     } else {
       this.isShow = false;
     }
+
+   
 
     if (id) {
 
@@ -102,7 +111,7 @@ export class FacAddComponent implements OnInit {
         }
       })
     } else {
-      this.isAdd=true;
+      this.isAdd = true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }

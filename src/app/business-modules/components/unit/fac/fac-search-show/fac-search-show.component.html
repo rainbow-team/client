@@ -1,0 +1,34 @@
+<div style="height: 100%;background:#fff;padding: 10px;">
+  <nz-tabset>
+
+    <nz-tab nzTitle="核设施信息">
+      <app-fac-add [facSearchId]="facId"></app-fac-add>
+    </nz-tab>
+
+    <nz-tab nzTitle="核设施许可信息">
+      <app-permit-fac [facId]="facId"></app-permit-fac>
+    </nz-tab>
+
+    <nz-tab nzTitle="核设施审评信息">
+      <app-check-fac [facId]="facId"></app-check-fac>
+    </nz-tab>
+
+    <nz-tab nzTitle="核活动及其他审评信息">
+      <app-check-activity [facId]="facId"></app-check-activity>
+    </nz-tab>
+
+    <nz-tab nzTitle="日常监督信息">
+      <app-daily [facId]="facId"></app-daily>
+    </nz-tab>
+
+    <nz-tab nzTitle="核设施安全问题">
+      <app-security-fac [facId]="facId"></app-security-fac>
+    </nz-tab>
+
+  </nz-tabset>
+
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>

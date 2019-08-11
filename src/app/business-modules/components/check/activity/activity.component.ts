@@ -18,6 +18,7 @@ export class ActivityComponent implements OnInit {
   @Input() servicedepartId: any = "";
   @Input() umineId: any = "";
   @Input() equipdepartId: any = "";
+  @Input() facId: any = "";
 
   isSearchShow: any = false;
 
@@ -50,7 +51,7 @@ export class ActivityComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    if (this.servicedepartId || this.umineId || this.equipdepartId) {
+    if (this.servicedepartId || this.umineId || this.equipdepartId||this.facId) {
       this.isSearchShow = true;
     }
 
@@ -102,6 +103,14 @@ export class ActivityComponent implements OnInit {
         value: this.equipdepartId
       });
     }
+
+    if (this.facId) {
+      option.conditions.push({
+        key: 'facId',
+        value: this.facId
+      });
+    }
+    
 
     this.activityCheckSercice.getActivityCheckList(option).subscribe(
       (data) => {

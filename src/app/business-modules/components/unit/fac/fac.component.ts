@@ -153,7 +153,12 @@ export class FacComponent implements OnInit {
   // }
 
   show(item, flag) {
-    this.router.navigate(['/unit/fac/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.isSearchShow == "0") {
+      this.router.navigate(['/unit/fac/add'], { queryParams: { id: item.id, isShow: true } });
+    } else {
+      this.router.navigate(['/searchShow/integratedAuery/facSearch'], { queryParams: { id: item.id } });
+    }
   }
 
   modify() {

@@ -45,10 +45,10 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // FacComponent,
-        FacAddComponent,
+        // FacAddComponent,
         FacChildmanageComponent,
-        FacImproveComponent,
-        FacReportComponent
+        // FacImproveComponent,
+        // FacReportComponent
     ]
 })
 export class FacModule { }

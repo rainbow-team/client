@@ -16,7 +16,10 @@ import { StatisticsSercice } from 'src/app/services/statistics/statistics.servic
 export class SecurityFacComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
-  
+  @Input() facId: any = "";
+
+  isSearchShow: any = false;
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -28,39 +31,43 @@ export class SecurityFacComponent implements OnInit {
 
   serviceDepartName: any = "";
 
-  facName:any="";
+  facName: any = "";
 
-  facStatusTypeIds:any=[];
+  facStatusTypeIds: any = [];
 
-  checkTypeIds:any=[];
+  checkTypeIds: any = [];
 
-  content:any="";
-  
-  find_date:any=[];
+  content: any = "";
 
-  questionTypeIds:any=[];
+  find_date: any = [];
 
-  questionNatureIds:any=[];
+  questionTypeIds: any = [];
 
-  reformStatusTypeIds:any=[];
+  questionNatureIds: any = [];
 
-  condition={
-    tableName:'unit_fac',
-    propertyName:'build_year',
-    configTableName:'config_fac_supervison_category'
+  reformStatusTypeIds: any = [];
+
+  condition = {
+    tableName: 'unit_fac',
+    propertyName: 'build_year',
+    configTableName: 'config_fac_supervison_category'
   }
 
-  data:any=[];
+  data: any = [];
 
   constructor(private router: Router,
     private msg: NzMessageService, private facSecuritySercice: FacSecuritySercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, 
-    private facSercice: FacSercice,private statisticsSercice:StatisticsSercice) { }
+    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService,
+    private facSercice: FacSercice, private statisticsSercice: StatisticsSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    if (this.servicedepartId || this.facId) {
+      this.isSearchShow = true;
+    }
 
     this.search();
 
@@ -71,7 +78,7 @@ export class SecurityFacComponent implements OnInit {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
       conditions: []
-      
+
     }
 
     if (this.serviceDepartName) {
@@ -123,7 +130,12 @@ export class SecurityFacComponent implements OnInit {
       });
     }
 
-
+    if (this.facId) {
+      option.conditions.push({
+        key: 'facId',
+        value: this.facId
+      });
+    }
     this.facSecuritySercice.getFacSecurityList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
@@ -133,19 +145,19 @@ export class SecurityFacComponent implements OnInit {
   }
 
   reset() {
-    this.serviceDepartName= "";
-    this.facName="";
-    this.facStatusTypeIds=[];
-    this.checkTypeIds=[];
-    this.content="";
-    this.find_date=[];
-    this.questionTypeIds=[];
-    this.questionNatureIds=[];
-    this.reformStatusTypeIds=[];
+    this.serviceDepartName = "";
+    this.facName = "";
+    this.facStatusTypeIds = [];
+    this.checkTypeIds = [];
+    this.content = "";
+    this.find_date = [];
+    this.questionTypeIds = [];
+    this.questionNatureIds = [];
+    this.reformStatusTypeIds = [];
 
-    this.statisticsSercice.getStatisticsResultByYear(this.condition).subscribe((res)=>{
+    this.statisticsSercice.getStatisticsResultByYear(this.condition).subscribe((res) => {
 
-      this.data=res.msg;
+      this.data = res.msg;
     });
   }
 

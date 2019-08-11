@@ -16,7 +16,10 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
 export class DailyComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
+  @Input() facId: any = "";
 
+
+  isSearchShow: any = false;
 
   dictionary: any = {};
   staffObj: any = {};
@@ -48,6 +51,10 @@ export class DailyComponent implements OnInit {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    if (this.servicedepartId ||this.facId) {
+      this.isSearchShow = true;
+    }
 
     this.search();
 
@@ -97,7 +104,12 @@ export class DailyComponent implements OnInit {
       });
     }
 
-
+    if (this.facId) {
+      option.conditions.push({
+        key: 'facId',
+        value: this.facId
+      });
+    }
 
     this.dailyMonitorSercice.getDailyMonitorList(option).subscribe(
       (data) => {

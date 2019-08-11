@@ -9,6 +9,7 @@ import { GroupAddComponent } from './../../unit/group/group-add/group-add.compon
 import { ServicedepartSearchShowComponent } from './../../unit/servicedepart/servicedepart-search-show/servicedepart-search-show.component';
 import { UmineSearchShowComponent } from './../../unit/umine/umine-search-show/umine-search-show.component';
 import { EquipdepartSearchShowComponent } from './../../unit/equipdepart/equipdepart-search-show/equipdepart-search-show.component';
+import { FacSearchShowComponent } from './../../unit/fac/fac-search-show/fac-search-show.component';
 
 const routes: Routes = [
     {
@@ -30,6 +31,10 @@ const routes: Routes = [
     {
         path: 'equipdepartSearch',
         component: EquipdepartSearchShowComponent
+    },
+    {
+        path: 'facSearch',
+        component:FacSearchShowComponent
     }
 ];
 
