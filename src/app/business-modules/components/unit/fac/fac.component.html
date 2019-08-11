@@ -2,21 +2,20 @@
   <div nz-row style="height: 40px;">
 
     <div nz-col [nzSpan]="7">
-      营运单位:
-      <nz-select [(ngModel)]="ServiceDepartIds" class="w200" nzMode="multiple">
-        <nz-option *ngFor="let option of ServiceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
-        </nz-option>
-      </nz-select>
-    </div>
-    <div nz-col [nzSpan]="7">
-      建造年代:
-      <nz-year-picker class="w200" [(ngModel)]="build_year" [nzFormat]="yyyy"></nz-year-picker>
-    </div>
-    <div nz-col [nzSpan]="7">
       设施名称:
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
-  
+
+    <div nz-col [nzSpan]="7">
+      设施编号:
+      <input nz-input nzSize="default" [(ngModel)]="code" class="w200">
+    </div>
+
+    <div nz-col [nzSpan]="7">
+      营运单位:
+      <input nz-input nzSize="default" [(ngModel)]="serviceDepart" class="w200">
+    </div>
+
     <div nz-col [nzSpan]="3" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
@@ -24,15 +23,15 @@
   </div>
 
   <div nz-row style="height: 40px;">
-  
+
     <div nz-col [nzSpan]="7">
-      设施编号:
-      <input nz-input nzSize="default" [(ngModel)]="code" class="w200">
+      建造年代:
+      <nz-year-picker class="w200" [(ngModel)]="build_year"></nz-year-picker>
     </div>
 
     <div nz-col [nzSpan]="7">
       监管类别:
-      <nz-select [(ngModel)]="supervisionCategoryIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="supervisionCategoryIds" class="w200" nzMode="multiple" >
         <nz-option *ngFor="let option of dictionary.config_fac_supervison_category" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -40,7 +39,7 @@
     </div>
     <div nz-col [nzSpan]="7">
       设施类型:
-      <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple" >
         <nz-option *ngFor="let option of dictionary.config_fac_type" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
@@ -48,18 +47,18 @@
   </div>
 
   <div nz-row style="height: 40px;">
-   
-   
+
+
     <div nz-col [nzSpan]="7">
       设施状态:
-      <nz-select [(ngModel)]="statusId" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="statusIds" class="w200" nzMode="multiple" >
         <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="7">
       审评状态:
-      <nz-select [(ngModel)]="reviewStatusId" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="reviewStatusIds" class="w200" nzMode="multiple" >
         <nz-option *ngFor="let option of dictionary.config_review_status" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -67,7 +66,7 @@
     </div>
     <div nz-col [nzSpan]="7">
       许可情况:
-      <nz-select [(ngModel)]="facPermitSituationId" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="permitSituationIds" class="w200" nzMode="multiple" >
         <nz-option *ngFor="let option of dictionary.config_fac_permit_situation" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -76,17 +75,17 @@
   </div>
 
   <div nz-row style="height: 40px;">
-    
+
     <div nz-col [nzSpan]="7">
       是否满足防洪要求:
-      <nz-select [(ngModel)]="isEarthquake" class="w200">
+      <nz-select [(ngModel)]="is_earthquake" class="w200">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
         <nz-option nzValue="0" nzLabel="否"></nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="7">
       是否满足抗震设防等级:
-      <nz-select [(ngModel)]="isFlood" class="w200">
+      <nz-select [(ngModel)]="is_flood" class="w200">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
         <nz-option nzValue="0" nzLabel="否"></nz-option>
       </nz-select>
@@ -104,16 +103,16 @@
       </div>
 
       <div class="fr" *ngIf="isSearchShow=='0'">
-          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
-        </div>
-        
-        <div class="fr" *ngIf="isSearchShow=='0'">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
-        </div>
-        
-        <div class="fr" *ngIf="isSearchShow=='0'">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
-        </div>
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+      </div>
+
+      <div class="fr" *ngIf="isSearchShow=='0'">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+      </div>
+
+      <div class="fr" *ngIf="isSearchShow=='0'">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+      </div>
 
     </div>
     <div>
@@ -138,8 +137,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index"  [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]"
-          (click)="selectItem(data)">
+          <tr *ngFor="let data of nestedTable.data;index as index"
+            [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.name}}</td>
             <td>{{data.code}}</td>
@@ -153,8 +152,8 @@
             <td>{{data.isEarthquake|isTrue}}</td>
             <td>{{data.isFlood|isTrue}}</td>
             <td>
-                <a (click)="show(data)">查看</a>
-              </td>
+              <a (click)="show(data)">查看</a>
+            </td>
             <!-- <td *ngIf="isSearchShow=='0'">
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
