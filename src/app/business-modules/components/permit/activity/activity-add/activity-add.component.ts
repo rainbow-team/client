@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -18,6 +18,8 @@ import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 export class ActivityPermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
+  @Input() servicedepartId: any = "";
+
   data: any = {};
   isSaving = false;
   isShow = false;
@@ -27,7 +29,7 @@ export class ActivityPermitAddComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
-  activityType:any="";
+  activityType: any = "";
 
   serviceDepartList: any = [];
   facList: any = [];
@@ -45,7 +47,7 @@ export class ActivityPermitAddComponent implements OnInit {
     private facSercice: FacSercice,
     private activityPermitService: ActivityPermitService,
     private equipDepartService: EquipDepartService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
@@ -143,7 +145,13 @@ export class ActivityPermitAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/permit/activity']);
+
+    if (this.servicedepartId) {
+      this.router.navigate(['/permit/activity']);
+    } else {
+      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id:this.data.serviceId,idx: 1 } });
+    }
+
   }
 
   //表单手动触发验证

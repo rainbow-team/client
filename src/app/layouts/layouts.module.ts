@@ -68,6 +68,8 @@ import { UminemountainChildmanageComponent } from './../../app/business-modules/
 
 import { UminemountainPermitComponent } from './../../app/business-modules/components/permit/uminemountain/uminemountain.component';
 import { CheckUminemountainComponent } from './../../app/business-modules/components/check/uminemountain/uminemountain.component';
+import { ActivityPermitAddComponent } from './../../app/business-modules/components/permit/activity/activity-add/activity-add.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -111,7 +113,8 @@ import { CheckUminemountainComponent } from './../../app/business-modules/compon
     UmineplaceSearchShowComponent, UmineplaceAddComponent, UmineplacePermitComponent,
     CheckUmineplaceComponent, UmineplaceChildmanageComponent,
     UminemountainSearchShowComponent, UminemountainAddComponent,
-    UminemountainChildmanageComponent, UminemountainPermitComponent,CheckUminemountainComponent
+    UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
+    ActivityPermitAddComponent
   ],
   exports: [
     LoginComponent,
@@ -147,7 +150,8 @@ import { CheckUminemountainComponent } from './../../app/business-modules/compon
     UmineplaceSearchShowComponent, UmineplaceAddComponent, UmineplacePermitComponent,
     CheckUmineplaceComponent, UmineplaceChildmanageComponent,
     UminemountainSearchShowComponent, UminemountainAddComponent,
-    UminemountainChildmanageComponent, UminemountainPermitComponent,CheckUminemountainComponent
+    UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
+    ActivityPermitAddComponent
   ]
 })
 export class LayoutsModule { }

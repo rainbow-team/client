@@ -30,6 +30,7 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [
     // ActivityPermitComponent, 
-    ActivityPermitAddComponent]
+    // ActivityPermitAddComponent
+  ]
 })
 export class ActivityPermitModule {}

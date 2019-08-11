@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-servicedepart-search-show',
@@ -9,15 +9,21 @@ import { Router,ActivatedRoute } from '@angular/router';
 export class ServicedepartSearchShowComponent implements OnInit {
 
   servicedepartId: any;
-  constructor(private router: Router,private ActivatedRoute: ActivatedRoute) { }
+  idx: any = 0;
+  constructor(private router: Router, private ActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
     this.servicedepartId = this.ActivatedRoute.snapshot.queryParams["id"];
+    let idx = this.ActivatedRoute.snapshot.queryParams["idx"];
+
+    if (idx) {
+      this.idx = idx;
+    }
   }
 
   close() {
-    this.router.navigate(['/searchShow/integratedAuery'],{ queryParams: { type: 1 } });
+    this.router.navigate(['/searchShow/integratedAuery'], { queryParams: { type: 1 } });
   }
 
 }

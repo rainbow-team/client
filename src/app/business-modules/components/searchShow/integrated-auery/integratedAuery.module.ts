@@ -12,6 +12,7 @@ import { EquipdepartSearchShowComponent } from './../../unit/equipdepart/equipde
 import { FacSearchShowComponent } from './../../unit/fac/fac-search-show/fac-search-show.component';
 import { UmineplaceSearchShowComponent } from './../../unit/umineplace/umineplace-search-show/umineplace-search-show.component';
 import { UminemountainSearchShowComponent } from './../../unit/uminemountain/uminemountain-search-show/uminemountain-search-show.component';
+import { ActivityPermitAddComponent } from './../../permit/activity/activity-add/activity-add.component';
 
 const routes: Routes = [
     {
@@ -44,7 +45,11 @@ const routes: Routes = [
     },
     {
         path: 'uminmountainSearch',
-        component:UminemountainSearchShowComponent
+        component: UminemountainSearchShowComponent
+    },
+    {
+        path: 'permitActivityAdd',
+        component:ActivityPermitAddComponent
     }
 ];
 
