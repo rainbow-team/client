@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -8,12 +8,13 @@ import { UmineService } from 'src/app/services/unit/umine.service';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 
 @Component({
-  selector: 'app-umineplace',
+  selector: 'app-check-umineplace',
   templateUrl: './umineplace.component.html',
   styleUrls: ['./umineplace.component.scss']
 })
-export class UmineplaceComponent implements OnInit {
+export class CheckUmineplaceComponent implements OnInit {
 
+  @Input() umineplaceId: any = "";
 
   dictionary: any = {};
   staffObj: any = {};
@@ -67,6 +68,11 @@ export class UmineplaceComponent implements OnInit {
       option.conditions.push({ key: "stageIds", value: this.stageIds })
     }
 
+    if (this.umineplaceId) {
+      option.conditions.push({ key: "umineplaceId", value: this.umineplaceId })
+    }
+
+    
     this.umineplaceCheckSercice.getUmineplaceCheckList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;

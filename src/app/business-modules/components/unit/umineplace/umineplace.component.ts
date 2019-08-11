@@ -14,7 +14,7 @@ import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 export class UmineplaceComponent implements OnInit {
 
   @Input() isSearchShow = "0";
-  
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -65,7 +65,7 @@ export class UmineplaceComponent implements OnInit {
     }
 
     if (this.build_year && this.build_year.length > 0) {
-     
+
       if (this.build_year[0]) {
         option.conditions.push({ key: "start_date", value: this.build_year[0] })
       }
@@ -124,7 +124,13 @@ export class UmineplaceComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/unit/umineplace/add'], { queryParams: {id: item.id, isShow: true } });
+
+    if (this.isSearchShow == '0') {
+      this.router.navigate(['/unit/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
+    } else {
+      this.router.navigate(['/searchShow/integratedAuery/umineplaceSearch'], { queryParams: { id: item.id} });
+    }
+
   }
 
   modify() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-umineplace-search-show',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UmineplaceSearchShowComponent implements OnInit {
 
-  constructor() { }
+  umineplaceId: any;
+  constructor(private router: Router,private ActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.umineplaceId = this.ActivatedRoute.snapshot.queryParams["id"];
+  }
+
+  close() {
+    this.router.navigate(['/searchShow/integratedAuery'],{ queryParams: { type: 5 } });
   }
 
 }

@@ -1,313 +1,14 @@
-<div style="height: 100%;background:#fff">
+<div style="height: 100%;background:#fff" *ngIf="!umineplaceSearchId">
   <!-- <div class="div_top_add">
     铀尾矿（渣）库信息
   </div> -->
 
   <nz-tabset>
     <nz-tab nzTitle="铀尾矿（渣）库信息">
-      <div class="div_contain_add" style="height: calc(100% - 243px);" *ngIf="isShow==false">
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>铀尾矿（渣）库名称：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>营运单位：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.umineId" required [validation]="true" style="width: 100%">
-              <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            建造年代：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-year-picker name="buildYear" [(ngModel)]="data.buildYear" required [validation]="true">
-            </nz-year-picker>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>铀尾矿（渣）库等别：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.levelId" required [validation]="true" style="width: 100%">
-              <nz-option *ngFor="let option of dictionary.config_umine_place_level" [nzLabel]="option.value"
-                [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            设施状态：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.statusId" required [validation]="true" style="width: 100%">
-              <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
-                [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-        </div>
-
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>审评状态：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.reviewStatusId" required [validation]="true" style="width: 100%">
-              <nz-option *ngFor="let option of dictionary.config_review_status" [nzLabel]="option.value"
-                [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            许可情况：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.permitSituationId" required [validation]="true" style="width: 100%">
-              <nz-option *ngFor="let option of dictionary.config_umine_place_permit_situation" [nzLabel]="option.value"
-                [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>校核洪水重现期：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <input nz-input name="checkFloodReproduce" [(ngModel)]="data.checkFloodReproduce" />
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            设计洪水重现期：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <input nz-input name="designFloodReproduce" [(ngModel)]="data.designFloodReproduce" />
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>设计有效库容：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <input nz-input name="capacity" [(ngModel)]="data.capacity" />
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            是否设置坝体监测设施：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.haveMonitor"  required [validation]="true"  style="width: 100%">
-              <nz-option *ngFor="let option of sFList" [nzLabel]="option.value" [nzValue]="option.id">
-              </nz-option>
-            </nz-select>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>初期坝型：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <input nz-input name="earlyDamType" [(ngModel)]="data.earlyDamType" />
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            初期坝高：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <input nz-input name="earlyDamHeight" [(ngModel)]="data.earlyDamHeight" />
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            设施简介：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <textarea nz-input name="survey" style="height: 70px;" [(ngModel)]="data.survey"></textarea>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            厂址特征：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <textarea nz-input name="feature" style="height: 70px;" [(ngModel)]="data.feature"></textarea>
-          </div>
-        </div>
-
-
-        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            备注：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <textarea nz-input name="note" style="height: 70px;" [(ngModel)]="data.note"></textarea>
-          </div>
-        </div>
-
-        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
-
+    
+      <div *ngIf="umineplaceSearchId;else umineplaceContent">
+       
       </div>
-
-      <div class="div_contain_add" style="height: calc(100% - 243px);" *ngIf="isShow==true">
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            铀尾矿（渣）库名称：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="name" class="showText">{{data.name}}</span>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            营运单位：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="umineName" class="showText">{{data.umineName}}</span>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            建造年代：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="buildYear" class="showText">{{data.buildYear|recordtime}}</span>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            铀尾矿（渣）库等别：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="levelValue" class="showText">{{data.levelValue}}</span>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            设施状态：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="statusValue" class="showText">{{data.statusValue}}</span>
-          </div>
-        </div>
-
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            审评状态：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="reviewStatus" class="showText">{{data.reviewStatus}}</span>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            许可情况：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="permitSituationValue" class="showText">{{data.permitSituationValue}}</span>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            校核洪水重现期：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="checkFloodReproduce" class="showText">{{data.checkFloodReproduce}}</span>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            设计洪水重现期：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="designFloodReproduce" class="showText">{{data.designFloodReproduce}}</span>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            设计有效库容：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="capacity" class="showText">{{data.capacity}}</span>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            是否设置坝体监测设施：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="haveMonitor" class="showText">{{data.haveMonitor}}</span>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            初期坝型：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="earlyDamType" class="showText">{{data.earlyDamType}}</span>
-          </div>
-
-          <div nz-col [nzSpan]="4" class="ta_r">
-            初期坝高：
-          </div>
-          <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="earlyDamHeight" class="showText">{{data.earlyDamHeight}}</span>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            设施简介：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.survey}}</div>
-          </div>
-        </div>
-
-        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            厂址特征：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.feature}}</div>
-          </div>
-        </div>
-
-
-        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-          <div nz-col [nzSpan]="4" class="ta_r">
-            备注：
-          </div>
-          <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.note}}</div>
-          </div>
-        </div>
-
-        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
-
-      </div>
-
     </nz-tab>
 
     <nz-tab nzTitle="安技改信息" *ngIf="!isAdd">
@@ -345,3 +46,312 @@
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
 </div>
+
+<div *ngIf="!umineplaceSearchId;else umineplaceContent">
+
+</div>
+
+<ng-template #umineplaceContent>
+  <div class="div_contain_add" style="height: calc(100% - 243px);" *ngIf="isShow==false">
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>铀尾矿（渣）库名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>营运单位：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.umineId" required [validation]="true" style="width: 100%">
+          <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        建造年代：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-year-picker name="buildYear" [(ngModel)]="data.buildYear" required [validation]="true">
+        </nz-year-picker>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>铀尾矿（渣）库等别：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.levelId" required [validation]="true" style="width: 100%">
+          <nz-option *ngFor="let option of dictionary.config_umine_place_level" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        设施状态：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.statusId" required [validation]="true" style="width: 100%">
+          <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>审评状态：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.reviewStatusId" required [validation]="true" style="width: 100%">
+          <nz-option *ngFor="let option of dictionary.config_review_status" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        许可情况：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.permitSituationId" required [validation]="true" style="width: 100%">
+          <nz-option *ngFor="let option of dictionary.config_umine_place_permit_situation" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>校核洪水重现期：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="checkFloodReproduce" [(ngModel)]="data.checkFloodReproduce" />
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        设计洪水重现期：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="designFloodReproduce" [(ngModel)]="data.designFloodReproduce" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>设计有效库容：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="capacity" [(ngModel)]="data.capacity" />
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        是否设置坝体监测设施：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.haveMonitor"  required [validation]="true"  style="width: 100%">
+          <nz-option *ngFor="let option of sFList" [nzLabel]="option.value" [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>初期坝型：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="earlyDamType" [(ngModel)]="data.earlyDamType" />
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        初期坝高：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="earlyDamHeight" [(ngModel)]="data.earlyDamHeight" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        设施简介：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="survey" style="height: 70px;" [(ngModel)]="data.survey"></textarea>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        厂址特征：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="feature" style="height: 70px;" [(ngModel)]="data.feature"></textarea>
+      </div>
+    </div>
+
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        备注：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="note" style="height: 70px;" [(ngModel)]="data.note"></textarea>
+      </div>
+    </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+
+  </div>
+
+  <div class="div_contain_add" style="height: calc(100% - 243px);" *ngIf="isShow==true">
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        铀尾矿（渣）库名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="name" class="showText">{{data.name}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        营运单位：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="umineName" class="showText">{{data.umineName}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        建造年代：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="buildYear" class="showText">{{data.buildYear|recordtime}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        铀尾矿（渣）库等别：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="levelValue" class="showText">{{data.levelValue}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        设施状态：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="statusValue" class="showText">{{data.statusValue}}</span>
+      </div>
+    </div>
+
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        审评状态：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="reviewStatus" class="showText">{{data.reviewStatus}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        许可情况：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="permitSituationValue" class="showText">{{data.permitSituationValue}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        校核洪水重现期：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="checkFloodReproduce" class="showText">{{data.checkFloodReproduce}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        设计洪水重现期：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="designFloodReproduce" class="showText">{{data.designFloodReproduce}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        设计有效库容：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="capacity" class="showText">{{data.capacity}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        是否设置坝体监测设施：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="haveMonitor" class="showText">{{data.haveMonitor}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        初期坝型：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="earlyDamType" class="showText">{{data.earlyDamType}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        初期坝高：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="earlyDamHeight" class="showText">{{data.earlyDamHeight}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        设施简介：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.survey}}</div>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        厂址特征：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.feature}}</div>
+      </div>
+    </div>
+
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        备注：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.note}}</div>
+      </div>
+    </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
+  </div>
+</ng-template>

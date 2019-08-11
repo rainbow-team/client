@@ -15,7 +15,10 @@ import { UmineplaceSecuritySercice } from 'src/app/services/security/umineplace.
 export class SecurityUmineplaceComponent implements OnInit {
 
   @Input() umineId: any = "";
-  
+  @Input() umineplaceId: any = "";
+
+  isSearchShow: any = false;
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -27,31 +30,36 @@ export class SecurityUmineplaceComponent implements OnInit {
 
   umineName: any = "";
 
-  uminePlaceName:any="";
+  uminePlaceName: any = "";
 
-  statusTypeIds:any=[];
+  statusTypeIds: any = [];
 
-  checkTypeIds:any=[];
+  checkTypeIds: any = [];
 
-  content:any="";
-  
-  find_date:any=[];
+  content: any = "";
 
-  questionTypeIds:any=[];
+  find_date: any = [];
 
-  questionNatureIds:any=[];
+  questionTypeIds: any = [];
 
-  reformStatusTypeIds:any=[];
+  questionNatureIds: any = [];
+
+  reformStatusTypeIds: any = [];
 
   constructor(private router: Router,
-    private msg: NzMessageService, private umineService: UmineService, 
-    private dictionarySercice: DictionarySercice,private staffSercice: StaffSercice,
-     private umineplaceSecuritySercice: UmineplaceSecuritySercice) { }
+    private msg: NzMessageService, private umineService: UmineService,
+    private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
+    private umineplaceSecuritySercice: UmineplaceSecuritySercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+
+    if (this.umineId || this.umineplaceId) {
+      this.isSearchShow = true;
+    }
 
     this.search();
 
@@ -138,6 +146,10 @@ export class SecurityUmineplaceComponent implements OnInit {
     if (this.umineId) {
       option.conditions.push({ key: "umineId", value: this.umineId })
     }
+    if (this.umineplaceId) {
+      option.conditions.push({ key: "umineplaceId", value: this.umineplaceId })
+    }
+    
 
     this.umineplaceSecuritySercice.getUmineplaceSecurityList(option).subscribe(
       (data) => {
@@ -148,15 +160,15 @@ export class SecurityUmineplaceComponent implements OnInit {
   }
 
   reset() {
-    this.umineName="";
-    this.uminePlaceName="";
-    this.statusTypeIds=[];
-    this.checkTypeIds=[];
-    this.content="";
-    this.find_date=[];
-    this.questionTypeIds=[];
-    this.questionNatureIds=[];
-    this.reformStatusTypeIds=[];
+    this.umineName = "";
+    this.uminePlaceName = "";
+    this.statusTypeIds = [];
+    this.checkTypeIds = [];
+    this.content = "";
+    this.find_date = [];
+    this.questionTypeIds = [];
+    this.questionNatureIds = [];
+    this.reformStatusTypeIds = [];
   }
 
   add() {

@@ -10,6 +10,7 @@ import { ServicedepartSearchShowComponent } from './../../unit/servicedepart/ser
 import { UmineSearchShowComponent } from './../../unit/umine/umine-search-show/umine-search-show.component';
 import { EquipdepartSearchShowComponent } from './../../unit/equipdepart/equipdepart-search-show/equipdepart-search-show.component';
 import { FacSearchShowComponent } from './../../unit/fac/fac-search-show/fac-search-show.component';
+import { UmineplaceSearchShowComponent } from './../../unit/umineplace/umineplace-search-show/umineplace-search-show.component';
 
 const routes: Routes = [
     {
@@ -34,7 +35,11 @@ const routes: Routes = [
     },
     {
         path: 'facSearch',
-        component:FacSearchShowComponent
+        component: FacSearchShowComponent
+    },
+    {
+        path: 'umineplaceSearch',
+        component:UmineplaceSearchShowComponent
     }
 ];
 

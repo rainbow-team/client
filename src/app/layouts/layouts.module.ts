@@ -56,6 +56,12 @@ import { FacReportComponent } from './../../app/business-modules/components/unit
 import { PermitFacComponent } from './../../app/business-modules/components/permit/fac/fac.component';
 import { CheckFacComponent } from './../../app/business-modules/components/check/fac/fac.component';
 
+import { UmineplaceSearchShowComponent } from './../../app/business-modules/components/unit/umineplace/umineplace-search-show/umineplace-search-show.component';
+import { UmineplaceAddComponent } from './../../app/business-modules/components/unit/umineplace/umineplace-add/umineplace-add.component';
+import { UmineplaceChildmanageComponent } from './../../app/business-modules/components/unit/umineplace/umineplace-childmanage/umineplace-childmanage.component';
+import { UmineplacePermitComponent } from './../../app/business-modules/components/permit/umineplace/umineplace.component';
+import { CheckUmineplaceComponent } from './../../app/business-modules/components/check/umineplace/umineplace.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -95,7 +101,9 @@ import { CheckFacComponent } from './../../app/business-modules/components/check
     EquipdepartSearchShowComponent, EquipdepartAddComponent,
     EquipPermitComponent, EquipComponent, SecurityEquipComponent,
     FacSearchShowComponent, FacAddComponent, FacImproveComponent,
-    FacReportComponent, PermitFacComponent,CheckFacComponent
+    FacReportComponent, PermitFacComponent, CheckFacComponent,
+    UmineplaceSearchShowComponent, UmineplaceAddComponent, UmineplacePermitComponent,
+    CheckUmineplaceComponent,UmineplaceChildmanageComponent
   ],
   exports: [
     LoginComponent,
@@ -127,7 +135,9 @@ import { CheckFacComponent } from './../../app/business-modules/components/check
     EquipdepartSearchShowComponent, EquipdepartAddComponent,
     EquipPermitComponent, EquipComponent, SecurityEquipComponent,
     FacSearchShowComponent, FacAddComponent, FacImproveComponent,
-    FacReportComponent, PermitFacComponent,CheckFacComponent
+    FacReportComponent, PermitFacComponent, CheckFacComponent,
+    UmineplaceSearchShowComponent, UmineplaceAddComponent, UmineplacePermitComponent,
+    CheckUmineplaceComponent,UmineplaceChildmanageComponent
   ]
 })
 export class LayoutsModule { }

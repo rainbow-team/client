@@ -28,6 +28,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  declarations: [UmineplacePermitComponent, UmineplacePermitAddComponent]
+  declarations: [
+    // UmineplacePermitComponent,
+    UmineplacePermitAddComponent]
 })
-export class UmineplacePermitModule {}
+export class UmineplacePermitModule { }

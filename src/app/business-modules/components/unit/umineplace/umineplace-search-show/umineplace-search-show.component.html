@@ -1,3 +1,26 @@
-<p>
-  umineplace-search-show works!
-</p>
+<div style="height: 100%;background:#fff;padding: 10px;">
+  <nz-tabset>
+
+    <nz-tab nzTitle="铀尾矿（渣）库信息">
+      <app-umineplace-add [umineplaceSearchId]="umineplaceId"></app-umineplace-add>
+    </nz-tab>
+
+    <nz-tab nzTitle="铀尾矿（渣）库许可信息">
+      <app-permit-umineplace [umineplaceId]="umineplaceId"></app-permit-umineplace>
+    </nz-tab>
+
+    <nz-tab nzTitle="铀尾矿（渣）库审评信息">
+      <app-check-umineplace [umineplaceId]="umineplaceId"></app-check-umineplace>
+    </nz-tab>
+
+    <nz-tab nzTitle="铀尾矿 （渣）库安全问题">
+      <app-security-umineplace [umineplaceId]="umineplaceId"></app-security-umineplace>
+    </nz-tab>
+
+  </nz-tabset>
+
+
+  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
+    <button nz-button nzType="default" (click)="close()">关闭</button>
+  </div>
+</div>

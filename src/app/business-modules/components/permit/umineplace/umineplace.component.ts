@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -6,11 +6,14 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { UmineplacePermitService } from 'src/app/services/permit/umineplace.service';
 
 @Component({
-  selector: 'app-umineplace',
+  selector: 'app-permit-umineplace',
   templateUrl: './umineplace.component.html',
   styleUrls: ['./umineplace.component.scss']
 })
 export class UmineplacePermitComponent implements OnInit {
+
+  @Input() umineplaceId: any = "";
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -82,6 +85,13 @@ export class UmineplacePermitComponent implements OnInit {
       }
     }
 
+    if (this.umineplaceId) {
+      option.conditions.push({
+        key: 'umineplaceId',
+        value: this.umineplaceId
+      });
+    }
+    
     this.umineplacePermitService
       .getUmineplacePermitList(option)
       .subscribe(data => {

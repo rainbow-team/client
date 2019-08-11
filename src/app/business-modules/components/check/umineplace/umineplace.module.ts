@@ -4,14 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
-import { UmineplaceComponent } from './umineplace.component';
+import { CheckUmineplaceComponent } from './umineplace.component';
 import { UmineplaceAddComponent } from './umineplace-add/umineplace-add.component';
 import { UmineplaceFileComponent } from './umineplace-file/umineplace-file.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: UmineplaceComponent
+        component: CheckUmineplaceComponent
     },
     {
         path: 'add',
@@ -34,7 +34,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        UmineplaceComponent,
+        // CheckUmineplaceComponent,
         UmineplaceAddComponent,
         UmineplaceFileComponent
     ]
