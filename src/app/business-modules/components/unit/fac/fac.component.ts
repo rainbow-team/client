@@ -27,15 +27,15 @@ export class FacComponent implements OnInit {
 
   name: any = "";
   code: any = "";
-  ServiceDepartIds: any = [];
+  serviceDepart: any = "";
   build_year: any = [];
   supervisionCategoryIds: any = [];
   typeIds: any = [];
-  statusId: any = [];
-  reviewStatusId: any = [];
-  facPermitSituationId: any = [];
-  isEarthquake: any = "";
-  isFlood: any = "";
+  statusIds: any = [];
+  reviewStatusIds: any = [];
+  permitSituationIds: any = [];
+  is_earthquake: any = "";
+  is_flood: any = "";
 
   selectId: any = "";
 
@@ -78,9 +78,10 @@ export class FacComponent implements OnInit {
       option.conditions.push({ key: "code", value: this.code })
     }
 
-    if (this.ServiceDepartIds && this.ServiceDepartIds.length > 0) {
-      option.conditions.push({ key: "ServiceDepartIds", value: this.ServiceDepartIds })
+    if (this.serviceDepart) {
+      option.conditions.push({ key: "serviceDepart", value: this.serviceDepart })
     }
+
 
     if (this.build_year && this.build_year.length > 0) {
 
@@ -101,24 +102,24 @@ export class FacComponent implements OnInit {
       option.conditions.push({ key: "typeIds", value: this.typeIds })
     }
 
-    if (this.statusId && this.statusId.length > 0) {
-      option.conditions.push({ key: "statusId", value: this.statusId })
+    if (this.statusIds && this.statusIds.length > 0) {
+      option.conditions.push({ key: "statusIds", value: this.statusIds })
     }
 
-    if (this.reviewStatusId && this.reviewStatusId.length > 0) {
-      option.conditions.push({ key: "reviewStatusId", value: this.reviewStatusId })
+    if (this.reviewStatusIds && this.reviewStatusIds.length > 0) {
+      option.conditions.push({ key: "reviewStatusIds", value: this.reviewStatusIds })
     }
 
-    if (this.facPermitSituationId && this.facPermitSituationId.length > 0) {
-      option.conditions.push({ key: "facPermitSituationId", value: this.facPermitSituationId })
+    if (this.permitSituationIds && this.permitSituationIds.length > 0) {
+      option.conditions.push({ key: "permitSituationIds", value: this.permitSituationIds })
     }
 
-    if (this.isEarthquake) {
-      option.conditions.push({ key: "isEarthquake", value: this.isEarthquake })
+    if (this.is_earthquake) {
+      option.conditions.push({ key: "is_earthquake", value: this.is_earthquake })
     }
 
-    if (this.isFlood) {
-      option.conditions.push({ key: "isFlood", value: this.isFlood })
+    if (this.is_flood) {
+      option.conditions.push({ key: "is_flood", value: this.is_flood })
     }
 
     this.facSercice.getFacList(option).subscribe(
@@ -132,15 +133,15 @@ export class FacComponent implements OnInit {
   reset() {
     this.name = "";
     this.code = "";
-    this.ServiceDepartIds = [];
+    this.serviceDepart = "";
     this.build_year = "";
     this.supervisionCategoryIds = [];
     this.typeIds = [];
-    this.statusId = [];
-    this.reviewStatusId = [];
-    this.facPermitSituationId = [];
-    this.isEarthquake = "";
-    this.isFlood = "";
+    this.statusIds = [];
+    this.reviewStatusIds = [];
+    this.permitSituationIds = [];
+    this.is_earthquake = "";
+    this.is_flood = "";
     this.selectId = "";
   }
 

@@ -29,15 +29,17 @@ export class DailyComponent implements OnInit {
 
   serviceDepartName: any = "";
 
-  facName:any="";
+  facName: any = "";
 
-  facStatusTypeIds:any=[];
+  facStatusTypeIds: any = [];
 
-  fileTypeIds:any=[];
+  fileTypeIds: any = [];
 
-  file_name:any="";
-  
-  file_date:any=[];
+  file_name: any = "";
+
+  file_date: any = [];
+
+  selectId: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private dailyMonitorSercice: DailyMonitorSercice, private dictionarySercice: DictionarySercice,
@@ -109,33 +111,51 @@ export class DailyComponent implements OnInit {
 
   reset() {
     this.serviceDepartName = "";
-    this.facName="";
-    this.facStatusTypeIds=[];
-    this.fileTypeIds=[];
-    this.file_name="";
-    this.file_date=[];
+    this.facName = "";
+    this.facStatusTypeIds = [];
+    this.fileTypeIds = [];
+    this.file_name = "";
+    this.file_date = [];
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/monitor/daily/add']);
   }
 
-  show(item, flag) {
-    this.router.navigate(['/monitor/daily/add'], { queryParams: { id: item.id, flag: flag } });
+  show(item) {
+    this.router.navigate(['/monitor/daily/add'], { queryParams: { id: item.id, isShow: true } });
   }
 
-  delete(item) {
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/monitor/daily/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
+  }
 
-    this.dailyMonitorSercice.deleteDailyMonitorById(item.id).subscribe((res) => {
+  delete() {
 
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+    if (this.selectId) {
 
+      this.dailyMonitorSercice.deleteDailyMonitorById(this.selectId).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
   }
 
 }

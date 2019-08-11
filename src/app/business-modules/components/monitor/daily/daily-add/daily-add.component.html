@@ -2,73 +2,156 @@
   <div class="div_top_add">
     日常监督信息
   </div>
-  <div class="div_contain_add">
+
+  <div class="div_contain_add" *ngIf="isShow==false">
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>营运单位：
-        <nz-select [(ngModel)]="data.serviceId" class="w200" (ngModelChange)="serviceDepartChange($event)"
-          [nzDisabled]="isDisable" nzShowSearch nzAllowClear nzPlaceHolder="请选择营运单位名称">
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
-        设施名称：
-        <nz-select [(ngModel)]="data.facId" class="w200" [disabled]="isDisable" nzShowSearch nzAllowClear>
+    </div>
+
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>设施名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.facId" style="width: 100%">
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r">
-        设施状态：
-        <nz-select [(ngModel)]="data.statusId" class="w200" [disabled]="isDisable">
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>设施状态：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.statusId" style="width: 100%">
           <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
     </div>
-    
+
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>授权监管机构：
-        <nz-select [(ngModel)]="data.orgId" class="w200" [disabled]="isDisable">
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.orgId" style="width: 100%">
           <nz-option *ngFor="let option of orgList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-    
-      <div nz-col [nzSpan]="8" class="ta_r">
-        文件类型：
-        <nz-select [(ngModel)]="data.fileTypeId" class="w200" [disabled]="isDisable">
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>文件名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="fileName" [(ngModel)]="data.fileName" required [validation]="true" />
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>文件类型：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.fileTypeId" style="width: 100%">
           <nz-option *ngFor="let option of dictionary.config_monitor_daily_file_type" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-    
-      <div nz-col [nzSpan]="8" class="ta_r">
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>文件时间：
-        <nz-date-picker name="fileDate" [(ngModel)]="data.fileDate" class="w200" [validation]="true" [disabled]="isDisable">
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-date-picker name="fileDate" [(ngModel)]="data.fileDate" [validation]="true">
         </nz-date-picker>
       </div>
     </div>
 
-    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz">文件名称：</div>
-        <textarea nz-input name="fileName" style="width: calc(100% - 130px);height: 70px;"
-          [(ngModel)]="data.fileName" [disabled]="isDisable"></textarea>
-      </div>
-    </div>
-
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
 
   </div>
 
+  <div class="div_contain_add" *ngIf="isShow==true">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        营运单位：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="serviceDepartName" class="showText">{{data.serviceDepartName}}</span>
+      </div>
+    </div>
 
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>设施名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="facName" class="showText">{{data.facName}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>设施状态：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="statusValue" class="showText">{{data.statusValue}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>授权监管机构：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="orgName" class="showText">{{data.orgName}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>文件名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="fileName" class="showText">{{data.fileName}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>文件类型：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="fileTypeValue" class="showText">{{data.fileTypeValue}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>文件时间：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="fileDate" class="showText">{{data.fileDate|recordtime}}</span>
+      </div>
+    </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
+  </div>
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
       [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
