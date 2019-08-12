@@ -30,7 +30,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // WitnessComponent,
-        WitnessAddComponent
+        // WitnessAddComponent
     ]
 })
 export class WitnessModule { }

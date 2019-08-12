@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
@@ -17,7 +17,7 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
 })
 export class DailyAddComponent implements OnInit {
 
-
+  servicedepartId_Router: any = "";
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -33,13 +33,13 @@ export class DailyAddComponent implements OnInit {
 
   facList: any = [];
 
-  orgList:any=[];
+  orgList: any = [];
 
   constructor(private msg: NzMessageService, private router: Router,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private ActivatedRoute: ActivatedRoute, private attachmentSercice: AttachmentSercice,
     private dailyMonitorSercice: DailyMonitorSercice, private serviceDepartService: ServiceDepartService,
-    private facSercice: FacSercice,private orgSercice: OrgSercice) { }
+    private facSercice: FacSercice, private orgSercice: OrgSercice) { }
 
 
   ngOnInit() {
@@ -49,6 +49,8 @@ export class DailyAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
+
+    this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
 
     if (isShow && isShow == "true") {
       this.isShow = true;
@@ -129,7 +131,13 @@ export class DailyAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/monitor/daily']);
+
+    if (this.servicedepartId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 3 } });
+    } else {
+      this.router.navigate(['/monitor/daily']);
+    }
+
   }
 
 

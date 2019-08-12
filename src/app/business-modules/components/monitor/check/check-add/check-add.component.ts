@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -18,7 +18,7 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
 })
 export class CheckAddComponent implements OnInit {
 
-
+  servicedepartId_Router: any = "";
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
@@ -33,20 +33,20 @@ export class CheckAddComponent implements OnInit {
 
   umineList: any = [];
 
-  equipDepartList:any=[];
+  equipDepartList: any = [];
 
-  orgList:any=[];
+  orgList: any = [];
 
-  checkData:any=[];
+  checkData: any = [];
 
-  departType:any="";
+  departType: any = "";
 
   constructor(private msg: NzMessageService, private router: Router,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private ActivatedRoute: ActivatedRoute, private attachmentSercice: AttachmentSercice,
     private checkMonitorSercice: CheckMonitorSercice, private serviceDepartService: ServiceDepartService,
-    private umineService: UmineService,private equipDepartService: EquipDepartService,
-    private orgSercice: OrgSercice,) { }
+    private umineService: UmineService, private equipDepartService: EquipDepartService,
+    private orgSercice: OrgSercice, ) { }
 
 
   ngOnInit() {
@@ -56,6 +56,8 @@ export class CheckAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+
+    this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
 
     if (flag && flag == "true") {
       this.isDisable = true;
@@ -87,14 +89,14 @@ export class CheckAddComponent implements OnInit {
     if (id) {
       this.checkMonitorSercice.getCheckMonitorById(id).subscribe((res) => {
         this.data = res.msg;
-        if(this.data.serviceId){
-          this.departType="fac";
+        if (this.data.serviceId) {
+          this.departType = "fac";
         }
-        if(this.data.umineId){
-          this.departType="umine";
+        if (this.data.umineId) {
+          this.departType = "umine";
         }
-        if(this.data.equipDepartId){
-          this.departType="equip";
+        if (this.data.equipDepartId) {
+          this.departType = "equip";
         }
       });
 
@@ -146,7 +148,7 @@ export class CheckAddComponent implements OnInit {
       this.data.serviceId = "";
       this.data.equipDepartId = "";
     }
-    
+
     if (this.departType == "equip") {
       this.data.serviceId = "";
       this.data.umineId = "";
@@ -166,7 +168,12 @@ export class CheckAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/monitor/check']);
+    if (this.servicedepartId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 4 } });
+    } else {
+      this.router.navigate(['/monitor/check']);
+    }
+
   }
 
 

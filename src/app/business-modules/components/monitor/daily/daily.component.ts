@@ -54,7 +54,7 @@ export class DailyComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    if (this.servicedepartId ||this.facId) {
+    if (this.servicedepartId || this.facId) {
       this.isSearchShow = true;
     }
 
@@ -136,7 +136,13 @@ export class DailyComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/monitor/daily/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.servicedepartId) {
+      this.router.navigate(['/searchShow/integratedAuery/monitordailyAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
+    } else {
+      this.router.navigate(['/monitor/daily/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+
   }
 
   modify() {

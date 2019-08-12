@@ -35,8 +35,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // ActivityComponent,
-        ActivityAddComponent,
-        ActivityFileComponent
+        // ActivityAddComponent,
+        // ActivityFileComponent
     ]
 })
 export class ActivityModule { }

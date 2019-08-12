@@ -30,7 +30,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // AccidentComponent,
-        AccidentAddComponent
+        // AccidentAddComponent
     ]
 })
 export class AccidentSecurityModule { }

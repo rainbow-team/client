@@ -116,14 +116,14 @@ export class CheckComponent implements OnInit {
         value: this.umineId
       });
     }
-    
+
     if (this.equipdepartId) {
       option.conditions.push({
         key: 'equipdepartId',
         value: this.equipdepartId
       });
     }
-    
+
 
     this.checkMonitorSercice.getCheckMonitorList(option).subscribe(
       (data) => {
@@ -143,7 +143,13 @@ export class CheckComponent implements OnInit {
   }
 
   show(item, flag) {
-    this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, flag: flag } });
+
+    if (this.servicedepartId) {
+      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, flag: flag, servicedepartId: this.servicedepartId } });
+    } else {
+      this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, flag: flag } });
+    }
+
   }
 
   delete(item) {

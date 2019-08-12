@@ -30,7 +30,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // DailyComponent,
-        DailyAddComponent
+        // DailyAddComponent
     ]
 })
 export class DailyModule { }

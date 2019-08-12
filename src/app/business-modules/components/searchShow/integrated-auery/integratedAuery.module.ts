@@ -13,6 +13,12 @@ import { FacSearchShowComponent } from './../../unit/fac/fac-search-show/fac-sea
 import { UmineplaceSearchShowComponent } from './../../unit/umineplace/umineplace-search-show/umineplace-search-show.component';
 import { UminemountainSearchShowComponent } from './../../unit/uminemountain/uminemountain-search-show/uminemountain-search-show.component';
 import { ActivityPermitAddComponent } from './../../permit/activity/activity-add/activity-add.component';
+import { ActivityAddComponent } from './../../check/activity/activity-add/activity-add.component';
+import { DailyAddComponent } from './../../monitor/daily/daily-add/daily-add.component';
+import { CheckAddComponent } from './../../monitor/check/check-add/check-add.component';
+import { WitnessAddComponent } from './../../monitor/witness/witness-add/witness-add.component';
+import { SecurityFacAddComponent } from './../../security/fac/fac-add/fac-add.component';
+import { AccidentAddComponent } from './../../security/accident/accident-add/accident-add.component';
 
 const routes: Routes = [
     {
@@ -49,7 +55,31 @@ const routes: Routes = [
     },
     {
         path: 'permitActivityAdd',
-        component:ActivityPermitAddComponent
+        component: ActivityPermitAddComponent
+    },
+    {
+        path: 'checkActivityAdd',
+        component: ActivityAddComponent
+    },
+    {
+        path: 'monitordailyAdd',
+        component: DailyAddComponent
+    },
+    {
+        path: 'monitorcheckAdd',
+        component: CheckAddComponent
+    },
+    {
+        path: 'monitorwitnessAdd',
+        component: WitnessAddComponent
+    },
+    {
+        path: 'securityfacAdd',
+        component:SecurityFacAddComponent
+    },
+    {
+        path: 'securityaccidentAdd',
+        component:AccidentAddComponent
     }
 ];
 

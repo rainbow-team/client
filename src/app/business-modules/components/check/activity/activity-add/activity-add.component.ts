@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { AccidentSecuritySercice } from 'src/app/services/security/accident.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -20,19 +20,20 @@ import { ActivityCheckSercice } from 'src/app/services/check/activity.service';
 })
 export class ActivityAddComponent implements OnInit {
 
+  servicedepartId_Router: any = "";
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
   isSaving = false;
   isShow = false;
-  isAdd=false;
+  isAdd = false;
   fileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
 
-  activityType:any="";
+  activityType: any = "";
 
   serviceDepartList: any = [];
 
@@ -44,7 +45,7 @@ export class ActivityAddComponent implements OnInit {
   constructor(private msg: NzMessageService, private router: Router,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private ActivatedRoute: ActivatedRoute, private attachmentSercice: AttachmentSercice,
-    private activityCheckSercice: ActivityCheckSercice, private equipDepartService: EquipDepartService, 
+    private activityCheckSercice: ActivityCheckSercice, private equipDepartService: EquipDepartService,
     private serviceDepartService: ServiceDepartService, private facSercice: FacSercice) { }
 
 
@@ -55,6 +56,8 @@ export class ActivityAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
+
+    this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
 
     if (isShow && isShow == "true") {
       this.isShow = true;
@@ -108,7 +111,7 @@ export class ActivityAddComponent implements OnInit {
 
     } else {
       this.activityType = "fac";
-      this.isAdd=true;
+      this.isAdd = true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
@@ -156,7 +159,14 @@ export class ActivityAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/check/activity']);
+
+    if (this.servicedepartId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 2 } });
+    }
+    else {
+      this.router.navigate(['/check/activity']);
+    }
+
   }
 
 

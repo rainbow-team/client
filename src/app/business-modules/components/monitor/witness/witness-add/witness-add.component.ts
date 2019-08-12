@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -20,6 +20,7 @@ import { WitnessMonitorSercice } from 'src/app/services/monitor/witness.service'
 export class WitnessAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+  servicedepartId_Router: any = "";
 
   data: any = {};
   isSaving = false;
@@ -33,20 +34,20 @@ export class WitnessAddComponent implements OnInit {
 
   umineList: any = [];
 
-  equipDepartList:any=[];
+  equipDepartList: any = [];
 
-  orgList:any=[];
+  orgList: any = [];
 
-  checkData:any=[];
+  checkData: any = [];
 
-  departType:any="";
+  departType: any = "";
 
   constructor(private msg: NzMessageService, private router: Router,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private ActivatedRoute: ActivatedRoute, private attachmentSercice: AttachmentSercice,
     private witnessMonitorSercice: WitnessMonitorSercice, private serviceDepartService: ServiceDepartService,
-    private umineService: UmineService,private equipDepartService: EquipDepartService,
-    private orgSercice: OrgSercice,) { }
+    private umineService: UmineService, private equipDepartService: EquipDepartService,
+    private orgSercice: OrgSercice, ) { }
 
 
   ngOnInit() {
@@ -56,6 +57,8 @@ export class WitnessAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+
+    this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
 
     if (flag && flag == "true") {
       this.isDisable = true;
@@ -87,14 +90,14 @@ export class WitnessAddComponent implements OnInit {
     if (id) {
       this.witnessMonitorSercice.getWitnessMonitorById(id).subscribe((res) => {
         this.data = res.msg;
-        if(this.data.serviceId){
-          this.departType="fac";
+        if (this.data.serviceId) {
+          this.departType = "fac";
         }
-        if(this.data.umineId){
-          this.departType="umine";
+        if (this.data.umineId) {
+          this.departType = "umine";
         }
-        if(this.data.equipDepartId){
-          this.departType="equip";
+        if (this.data.equipDepartId) {
+          this.departType = "equip";
         }
       });
 
@@ -140,19 +143,19 @@ export class WitnessAddComponent implements OnInit {
     if (this.departType == "fac") {
       this.data.umineId = "";
       this.data.equipDepartId = "";
-      this.data.departTypeId="0225987e-b1c6-11e9-afa3-507b9dae29a9";
+      this.data.departTypeId = "0225987e-b1c6-11e9-afa3-507b9dae29a9";
     }
 
     if (this.departType == "umine") {
       this.data.serviceId = "";
       this.data.equipDepartId = "";
-      this.data.departTypeId="08035739-b1c6-11e9-afa3-507b9dae29a9";
+      this.data.departTypeId = "08035739-b1c6-11e9-afa3-507b9dae29a9";
     }
-    
+
     if (this.departType == "equip") {
       this.data.serviceId = "";
       this.data.umineId = "";
-      this.data.departTypeId="0d7caeec-b1c6-11e9-afa3-507b9dae29a9";
+      this.data.departTypeId = "0d7caeec-b1c6-11e9-afa3-507b9dae29a9";
     }
     this.witnessMonitorSercice.saveOrUpdateWitnessMonitor(this.data).subscribe((res) => {
       if (res.code == 200) {
@@ -169,7 +172,13 @@ export class WitnessAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/monitor/witness']);
+
+    if (this.servicedepartId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 5 } });
+    } else {
+      this.router.navigate(['/monitor/witness']);
+    }
+
   }
 
 

@@ -18,7 +18,7 @@ import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 export class ActivityPermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
-  @Input() servicedepartId: any = "";
+  servicedepartId_Router: any = "";
 
   data: any = {};
   isSaving = false;
@@ -55,6 +55,8 @@ export class ActivityPermitAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams['id'];
     let isShow = this.ActivatedRoute.snapshot.queryParams['isShow'];
+
+    this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams['servicedepartId'];
 
     if (isShow && isShow == 'true') {
       this.isShow = true;
@@ -146,10 +148,10 @@ export class ActivityPermitAddComponent implements OnInit {
 
   close() {
 
-    if (this.servicedepartId) {
+    if (!this.servicedepartId_Router) {
       this.router.navigate(['/permit/activity']);
     } else {
-      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id:this.data.serviceId,idx: 1 } });
+      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 1 } });
     }
 
   }

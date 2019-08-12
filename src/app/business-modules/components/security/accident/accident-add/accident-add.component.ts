@@ -19,6 +19,7 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 })
 export class AccidentAddComponent implements OnInit {
 
+  servicedepartId_Router: any = "";
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
@@ -56,6 +57,8 @@ export class AccidentAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+
+    this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
 
     if (flag && flag == "true") {
       this.isDisable = true;
@@ -158,7 +161,12 @@ export class AccidentAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/security/accident']);
+    if (this.servicedepartId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 7 } });
+    } else{
+      this.router.navigate(['/security/accident']);
+    }
+   
   }
 
 

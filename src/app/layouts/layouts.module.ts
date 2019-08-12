@@ -70,6 +70,15 @@ import { UminemountainPermitComponent } from './../../app/business-modules/compo
 import { CheckUminemountainComponent } from './../../app/business-modules/components/check/uminemountain/uminemountain.component';
 import { ActivityPermitAddComponent } from './../../app/business-modules/components/permit/activity/activity-add/activity-add.component';
 
+import { ActivityAddComponent } from './../../app/business-modules/components/check/activity/activity-add/activity-add.component';
+import { ActivityFileComponent } from './../../app/business-modules/components/check/activity/activity-file/activity-file.component';
+import { DailyAddComponent } from './../../app/business-modules/components/monitor/daily/daily-add/daily-add.component';
+import { CheckAddComponent } from './../../app/business-modules/components/monitor/check/check-add/check-add.component';
+import { WitnessAddComponent } from './../../app/business-modules/components/monitor/witness/witness-add/witness-add.component';
+
+import { SecurityFacAddComponent } from './../../app/business-modules/components/security/fac/fac-add/fac-add.component';
+import { AccidentAddComponent } from './../../app/business-modules/components/security/accident/accident-add/accident-add.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -114,7 +123,8 @@ import { ActivityPermitAddComponent } from './../../app/business-modules/compone
     CheckUmineplaceComponent, UmineplaceChildmanageComponent,
     UminemountainSearchShowComponent, UminemountainAddComponent,
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
-    ActivityPermitAddComponent
+    ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
+    DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent,AccidentAddComponent
   ],
   exports: [
     LoginComponent,
@@ -151,7 +161,8 @@ import { ActivityPermitAddComponent } from './../../app/business-modules/compone
     CheckUmineplaceComponent, UmineplaceChildmanageComponent,
     UminemountainSearchShowComponent, UminemountainAddComponent,
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
-    ActivityPermitAddComponent
+    ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
+    DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent,AccidentAddComponent
   ]
 })
 export class LayoutsModule { }

@@ -51,7 +51,7 @@ export class ActivityComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    if (this.servicedepartId || this.umineId || this.equipdepartId||this.facId) {
+    if (this.servicedepartId || this.umineId || this.equipdepartId || this.facId) {
       this.isSearchShow = true;
     }
 
@@ -110,7 +110,7 @@ export class ActivityComponent implements OnInit {
         value: this.facId
       });
     }
-    
+
 
     this.activityCheckSercice.getActivityCheckList(option).subscribe(
       (data) => {
@@ -133,7 +133,12 @@ export class ActivityComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/check/activity/add'], { queryParams: { id: item.id, isShow: true } });
+    if (this.servicedepartId) {
+      this.router.navigate(['/searchShow/integratedAuery/checkActivityAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
+    } else {
+      this.router.navigate(['/check/activity/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+
   }
 
   modify() {

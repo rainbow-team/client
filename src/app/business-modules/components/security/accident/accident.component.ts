@@ -33,21 +33,21 @@ export class AccidentComponent implements OnInit {
 
   fac: any = "";
 
-  facStatusTypeIds:any=[];
+  facStatusTypeIds: any = [];
 
-  uminePlaceStatusTypeIds:any=[];
+  uminePlaceStatusTypeIds: any = [];
 
-  name:any="";
+  name: any = "";
 
-  occur_date:any=[];
+  occur_date: any = [];
 
-  typeIds:any=[];
+  typeIds: any = [];
 
-  natureIds:any=[];
+  natureIds: any = [];
 
   constructor(private router: Router,
-    private msg: NzMessageService, private accidentSecuritySercice: AccidentSecuritySercice, 
-    private dictionarySercice: DictionarySercice,private staffSercice: StaffSercice,
+    private msg: NzMessageService, private accidentSecuritySercice: AccidentSecuritySercice,
+    private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private uminePlaceService: UminePlaceService, private serviceDepartService: ServiceDepartService,
     private umineService: UmineService, private facSercice: FacSercice) { }
 
@@ -85,7 +85,7 @@ export class AccidentComponent implements OnInit {
     if (this.facStatusTypeIds.length > 0) {
       option.conditions.push({ key: "facStatusTypeIds", value: this.facStatusTypeIds })
     }
-    
+
     if (this.uminePlaceStatusTypeIds.length > 0) {
       option.conditions.push({ key: "uminePlaceStatusTypeIds", value: this.uminePlaceStatusTypeIds })
     }
@@ -135,21 +135,21 @@ export class AccidentComponent implements OnInit {
   }
 
   reset() {
-    this.depart="";
+    this.depart = "";
 
-    this.fac="";
-  
-    this.facStatusTypeIds=[];
-  
-    this.uminePlaceStatusTypeIds=[];
-  
-    this.name="";
-  
-    this.occur_date=[];
-  
-    this.typeIds=[];
-  
-    this.natureIds=[];
+    this.fac = "";
+
+    this.facStatusTypeIds = [];
+
+    this.uminePlaceStatusTypeIds = [];
+
+    this.name = "";
+
+    this.occur_date = [];
+
+    this.typeIds = [];
+
+    this.natureIds = [];
   }
 
   add() {
@@ -157,7 +157,11 @@ export class AccidentComponent implements OnInit {
   }
 
   show(item, flag) {
-    this.router.navigate(['/security/accident/add'], { queryParams: { id: item.id, flag: flag } });
+    if (this.servicedepartId) {
+      this.router.navigate(['/searchShow/integratedAuery/securityaccidentAdd'], { queryParams: { id: item.id, flag: flag, servicedepartId: this.servicedepartId } });
+    } else {
+      this.router.navigate(['/security/accident/add'], { queryParams: { id: item.id, flag: flag } });
+    }
   }
 
   delete(item) {

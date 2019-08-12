@@ -99,7 +99,7 @@ export class WitnessComponent implements OnInit {
         value: this.umineId
       });
     }
-    
+
     if (this.equipdepartId) {
       option.conditions.push({
         key: 'equipdepartId',
@@ -126,7 +126,13 @@ export class WitnessComponent implements OnInit {
   }
 
   show(item, flag) {
-    this.router.navigate(['/monitor/witness/add'], { queryParams: { id: item.id, flag: flag } });
+
+    if (this.servicedepartId) {
+      this.router.navigate(['/searchShow/integratedAuery/monitorwitnessAdd'], { queryParams: { id: item.id, flag: flag, servicedepartId: this.servicedepartId } });
+    } else {
+      this.router.navigate(['/monitor/witness/add'], { queryParams: { id: item.id, flag: flag } });
+    }
+
   }
 
   delete(item) {
