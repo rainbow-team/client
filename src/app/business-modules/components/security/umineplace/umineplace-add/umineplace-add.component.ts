@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -10,12 +10,14 @@ import { UmineService } from 'src/app/services/unit/umine.service';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 
 @Component({
-  selector: 'app-umineplace-add',
+  selector: 'app-security-umineplace-add',
   templateUrl: './umineplace-add.component.html',
   styleUrls: ['./umineplace-add.component.scss']
 })
-export class UmineplaceAddComponent implements OnInit {
+export class SecurityUmineplaceAddComponent implements OnInit {
 
+
+  umineId_Router: any = "";
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -48,6 +50,7 @@ export class UmineplaceAddComponent implements OnInit {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
 
+    this.umineId_Router = this.ActivatedRoute.snapshot.queryParams["umineId"];
     if (flag && flag == "true") {
       this.isDisable = true;
     } else {
@@ -122,7 +125,12 @@ export class UmineplaceAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/security/umineplace']);
+    if(this.umineId_Router){
+      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 5 } });
+    }else{
+      this.router.navigate(['/security/umineplace']);
+    }
+   
   }
 
 

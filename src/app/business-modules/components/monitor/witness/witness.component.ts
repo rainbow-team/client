@@ -129,7 +129,9 @@ export class WitnessComponent implements OnInit {
 
     if (this.servicedepartId) {
       this.router.navigate(['/searchShow/integratedAuery/monitorwitnessAdd'], { queryParams: { id: item.id, flag: flag, servicedepartId: this.servicedepartId } });
-    } else {
+    } else if(this.umineId){
+      this.router.navigate(['/searchShow/integratedAuery/monitorwitnessAdd'], { queryParams: { id: item.id, flag: flag, umineId: this.umineId } });
+    }else{
       this.router.navigate(['/monitor/witness/add'], { queryParams: { id: item.id, flag: flag } });
     }
 

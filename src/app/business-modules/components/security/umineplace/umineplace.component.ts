@@ -149,7 +149,7 @@ export class SecurityUmineplaceComponent implements OnInit {
     if (this.umineplaceId) {
       option.conditions.push({ key: "umineplaceId", value: this.umineplaceId })
     }
-    
+
 
     this.umineplaceSecuritySercice.getUmineplaceSecurityList(option).subscribe(
       (data) => {
@@ -176,7 +176,13 @@ export class SecurityUmineplaceComponent implements OnInit {
   }
 
   show(item, flag) {
-    this.router.navigate(['/security/umineplace/add'], { queryParams: { id: item.id, flag: flag } });
+
+    if (this.umineId) {
+      this.router.navigate(['/searchShow/integratedAuery/securityUmineplaceAdd'], { queryParams: { id: item.id, flag: flag, umineId: this.umineId } });
+    } else {
+      this.router.navigate(['/security/umineplace/add'], { queryParams: { id: item.id, flag: flag } });
+    }
+
   }
 
   delete(item) {

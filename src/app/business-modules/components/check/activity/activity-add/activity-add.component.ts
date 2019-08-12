@@ -21,6 +21,7 @@ import { ActivityCheckSercice } from 'src/app/services/check/activity.service';
 export class ActivityAddComponent implements OnInit {
 
   servicedepartId_Router: any = "";
+  umineId_Router: any = "";
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -58,6 +59,7 @@ export class ActivityAddComponent implements OnInit {
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
     this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
+    this.umineId_Router = this.ActivatedRoute.snapshot.queryParams["umineId"];
 
     if (isShow && isShow == "true") {
       this.isShow = true;
@@ -163,7 +165,9 @@ export class ActivityAddComponent implements OnInit {
     if (this.servicedepartId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 2 } });
     }
-    else {
+    else if(this.umineId_Router){
+      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 2 } });
+    }else{
       this.router.navigate(['/check/activity']);
     }
 

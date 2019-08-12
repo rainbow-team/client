@@ -5,7 +5,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { SecurityUmineplaceComponent } from './umineplace.component';
-import { UmineplaceAddComponent } from './umineplace-add/umineplace-add.component';
+import { SecurityUmineplaceAddComponent } from './umineplace-add/umineplace-add.component';
 
 const routes: Routes = [
     {
@@ -14,7 +14,7 @@ const routes: Routes = [
     },
     {
         path: 'add',
-        component: UmineplaceAddComponent
+        component: SecurityUmineplaceAddComponent
     }
 ];
 
@@ -30,7 +30,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // SecurityUmineplaceComponent,
-        UmineplaceAddComponent
+        // SecurityUmineplaceAddComponent
     ]
 })
 export class UmineplaceSecurityModule { }

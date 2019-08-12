@@ -21,6 +21,7 @@ export class WitnessAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
   servicedepartId_Router: any = "";
+  umineId_Router: any = "";
 
   data: any = {};
   isSaving = false;
@@ -59,6 +60,7 @@ export class WitnessAddComponent implements OnInit {
     let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
 
     this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
+    this.umineId_Router = this.ActivatedRoute.snapshot.queryParams["umineId"];
 
     if (flag && flag == "true") {
       this.isDisable = true;
@@ -175,7 +177,9 @@ export class WitnessAddComponent implements OnInit {
 
     if (this.servicedepartId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 5 } });
-    } else {
+    } else if(this.umineId_Router){
+      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 4} });
+    }else{
       this.router.navigate(['/monitor/witness']);
     }
 

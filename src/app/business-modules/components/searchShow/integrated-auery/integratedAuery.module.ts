@@ -19,6 +19,7 @@ import { CheckAddComponent } from './../../monitor/check/check-add/check-add.com
 import { WitnessAddComponent } from './../../monitor/witness/witness-add/witness-add.component';
 import { SecurityFacAddComponent } from './../../security/fac/fac-add/fac-add.component';
 import { AccidentAddComponent } from './../../security/accident/accident-add/accident-add.component';
+import { SecurityUmineplaceAddComponent } from './../../security/umineplace/umineplace-add/umineplace-add.component';
 
 const routes: Routes = [
     {
@@ -75,11 +76,15 @@ const routes: Routes = [
     },
     {
         path: 'securityfacAdd',
-        component:SecurityFacAddComponent
+        component: SecurityFacAddComponent
     },
     {
         path: 'securityaccidentAdd',
-        component:AccidentAddComponent
+        component: AccidentAddComponent
+    },
+    {
+        path: 'securityUmineplaceAdd',
+        component:SecurityUmineplaceAddComponent
     }
 ];
 

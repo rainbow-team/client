@@ -78,6 +78,7 @@ import { WitnessAddComponent } from './../../app/business-modules/components/mon
 
 import { SecurityFacAddComponent } from './../../app/business-modules/components/security/fac/fac-add/fac-add.component';
 import { AccidentAddComponent } from './../../app/business-modules/components/security/accident/accident-add/accident-add.component';
+import { SecurityUmineplaceAddComponent } from './../../app/business-modules/components/security/umineplace/umineplace-add/umineplace-add.component';
 
 @NgModule({
   imports: [
@@ -124,7 +125,8 @@ import { AccidentAddComponent } from './../../app/business-modules/components/se
     UminemountainSearchShowComponent, UminemountainAddComponent,
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
-    DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent,AccidentAddComponent
+    DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
+    SecurityUmineplaceAddComponent
   ],
   exports: [
     LoginComponent,
@@ -162,7 +164,8 @@ import { AccidentAddComponent } from './../../app/business-modules/components/se
     UminemountainSearchShowComponent, UminemountainAddComponent,
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
-    DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent,AccidentAddComponent
+    DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
+    SecurityUmineplaceAddComponent
   ]
 })
 export class LayoutsModule { }

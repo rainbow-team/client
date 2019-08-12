@@ -133,6 +133,8 @@ export class ActivityPermitComponent implements OnInit {
   show(item) {
     if (this.servicedepartId) {
       this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
+    } else if (this.umineId) {
+      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
     } else {
       this.router.navigate(['/permit/activity/add'], { queryParams: { id: item.id, isShow: true } });
     }
