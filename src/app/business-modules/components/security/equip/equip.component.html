@@ -112,12 +112,15 @@
             <td>{{data.findDate}}</td>
             <td>{{data.questionTypeValue}}</td>
             <td>{{data.reformStatusTypeValue}}</td>
-            <td>
+            <td *ngIf="!equipdepartId">
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data,false)">编辑</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
+            </td>
+            <td *ngIf="equipdepartId">
+              <a (click)="show(data,true)">查看</a> 
             </td>
           </tr>
         </tbody>

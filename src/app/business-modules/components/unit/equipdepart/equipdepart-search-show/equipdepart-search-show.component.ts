@@ -9,11 +9,19 @@ import { Router,ActivatedRoute } from '@angular/router';
 export class EquipdepartSearchShowComponent implements OnInit {
 
   equipdepartId: any;
+  idx: any = 0;
+  
   constructor(private router: Router,private ActivatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
     this.equipdepartId = this.ActivatedRoute.snapshot.queryParams["id"];
+
+    let idx = this.ActivatedRoute.snapshot.queryParams["idx"];
+
+    if (idx) {
+      this.idx = idx;
+    }
   }
 
   close() {

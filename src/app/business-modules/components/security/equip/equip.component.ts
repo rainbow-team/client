@@ -15,7 +15,7 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 export class SecurityEquipComponent implements OnInit {
 
   @Input() equipdepartId: any = "";
-  
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -27,22 +27,22 @@ export class SecurityEquipComponent implements OnInit {
 
   equipDepartName: any = "";
 
-  name:any="";
+  name: any = "";
 
   serviceDepartName: any = "";
 
-  facName:any="";
+  facName: any = "";
 
-  checkTypeIds:any=[];
+  checkTypeIds: any = [];
 
-  content:any="";
-  
-  find_date:any=[];
+  content: any = "";
 
-  questionTypeIds:any=[];
+  find_date: any = [];
 
-  reformStatusTypeIds:any=[];
-  
+  questionTypeIds: any = [];
+
+  reformStatusTypeIds: any = [];
+
 
   // equipDepartIds: any = [];
 
@@ -88,7 +88,7 @@ export class SecurityEquipComponent implements OnInit {
       conditions: []
     }
 
-    
+
     if (this.equipDepartName) {
       option.conditions.push({ key: "equipDepartName", value: this.equipDepartName })
     }
@@ -145,15 +145,15 @@ export class SecurityEquipComponent implements OnInit {
   }
 
   reset() {
-    this.equipDepartName="";
-    this.name="";
-    this.serviceDepartName="";
-    this.facName="";
-    this.checkTypeIds=[];
-    this.content="";
-    this.find_date=[];
-    this.questionTypeIds=[];
-    this.reformStatusTypeIds=[];
+    this.equipDepartName = "";
+    this.name = "";
+    this.serviceDepartName = "";
+    this.facName = "";
+    this.checkTypeIds = [];
+    this.content = "";
+    this.find_date = [];
+    this.questionTypeIds = [];
+    this.reformStatusTypeIds = [];
   }
 
   add() {
@@ -161,7 +161,13 @@ export class SecurityEquipComponent implements OnInit {
   }
 
   show(item, flag) {
-    this.router.navigate(['/security/equip/add'], { queryParams: { id: item.id, flag: flag } });
+
+    if (this.equipdepartId) {
+      this.router.navigate(['/searchShow/integratedAuery/securityequipAdd'], { queryParams: { id: item.id, flag: flag, equipdepartId: this.equipdepartId } });
+    } else {
+      this.router.navigate(['/security/equip/add'], { queryParams: { id: item.id, flag: flag } });
+    }
+
   }
 
   delete(item) {

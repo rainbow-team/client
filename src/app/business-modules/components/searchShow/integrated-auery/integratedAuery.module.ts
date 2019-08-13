@@ -20,6 +20,9 @@ import { WitnessAddComponent } from './../../monitor/witness/witness-add/witness
 import { SecurityFacAddComponent } from './../../security/fac/fac-add/fac-add.component';
 import { AccidentAddComponent } from './../../security/accident/accident-add/accident-add.component';
 import { SecurityUmineplaceAddComponent } from './../../security/umineplace/umineplace-add/umineplace-add.component';
+import { EquipPermitAddComponent } from './../../permit/equip/equip-add/equip-add.component';
+import { CheckEquipAddComponent } from './../../../components/check/equip/equip-add/equip-add.component';
+import { SecurityEquipAddComponent } from './../../security/equip/equip-add/equip-add.component';
 
 const routes: Routes = [
     {
@@ -84,7 +87,19 @@ const routes: Routes = [
     },
     {
         path: 'securityUmineplaceAdd',
-        component:SecurityUmineplaceAddComponent
+        component: SecurityUmineplaceAddComponent
+    },
+    {
+        path: 'permitequipAdd',
+        component: EquipPermitAddComponent
+    },
+    {
+        path: 'checkequipAdd',
+        component: CheckEquipAddComponent
+    },
+    {
+        path: 'securityequipAdd',
+        component:SecurityEquipAddComponent
     }
 ];
 

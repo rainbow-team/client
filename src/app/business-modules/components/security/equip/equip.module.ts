@@ -5,7 +5,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { SecurityEquipComponent } from './equip.component';
-import { EquipAddComponent } from './equip-add/equip-add.component';
+import { SecurityEquipAddComponent } from './equip-add/equip-add.component';
 
 const routes: Routes = [
     {
@@ -14,7 +14,7 @@ const routes: Routes = [
     },
     {
         path: 'add',
-        component: EquipAddComponent
+        component: SecurityEquipAddComponent
     }
 ];
 
@@ -30,7 +30,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // SecurityEquipComponent,
-        EquipAddComponent
+        // SecurityEquipAddComponent
     ]
 })
 export class EquipSecurityModule { }

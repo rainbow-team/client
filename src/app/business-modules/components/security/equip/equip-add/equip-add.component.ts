@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -11,13 +11,13 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 
 @Component({
-  selector: 'app-equip-add',
+  selector: 'app-securuty-equip-add',
   templateUrl: './equip-add.component.html',
   styleUrls: ['./equip-add.component.scss']
 })
-export class EquipAddComponent implements OnInit {
+export class SecurityEquipAddComponent implements OnInit {
 
-
+  equipdepartId_Router: any = "";
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -33,7 +33,7 @@ export class EquipAddComponent implements OnInit {
   equipDepartList: any = [];
 
   serviceDepartList: any = [];
-  
+
   facList: any = [];
 
 
@@ -41,7 +41,7 @@ export class EquipAddComponent implements OnInit {
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private ActivatedRoute: ActivatedRoute, private attachmentSercice: AttachmentSercice,
     private equipSecuritySercice: EquipSecuritySercice, private equipDepartService: EquipDepartService,
-    private facSercice: FacSercice,private serviceDepartService: ServiceDepartService) { }
+    private facSercice: FacSercice, private serviceDepartService: ServiceDepartService) { }
 
 
   ngOnInit() {
@@ -51,6 +51,8 @@ export class EquipAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+
+    this.equipdepartId_Router = this.ActivatedRoute.snapshot.queryParams["equipdepartId"];
 
     if (flag && flag == "true") {
       this.isDisable = true;
@@ -68,7 +70,7 @@ export class EquipAddComponent implements OnInit {
     this.serviceDepartService.getAllDepartService().subscribe((res) => {
 
       this.serviceDepartList = res.msg;
-      
+
     })
 
     if (id) {
@@ -133,7 +135,14 @@ export class EquipAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/security/equip']);
+
+    if (this.equipdepartId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: this.equipdepartId_Router, idx: 6 } });
+
+    } else {
+      this.router.navigate(['/security/equip']);
+    }
+
   }
 
 

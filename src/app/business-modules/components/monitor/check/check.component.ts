@@ -148,6 +148,8 @@ export class CheckComponent implements OnInit {
       this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, flag: flag, servicedepartId: this.servicedepartId } });
     } else if (this.umineId) {
       this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, flag: flag, umineId: this.umineId } });
+    } else if (this.equipdepartId) {
+      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, flag: flag, equipdepartId: this.equipdepartId } });
     } else {
       this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, flag: flag } });
     }

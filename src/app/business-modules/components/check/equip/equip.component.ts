@@ -107,7 +107,13 @@ export class EquipComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/check/equip/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if(this.equipdepartId){
+      this.router.navigate(['/searchShow/integratedAuery/checkequipAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
+    }else{
+      this.router.navigate(['/check/equip/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+   
   }
 
   modify() {

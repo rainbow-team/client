@@ -143,7 +143,13 @@ export class EquipPermitComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/permit/equip/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if(this.equipdepartId){
+      this.router.navigate(['/searchShow/integratedAuery/permitequipAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
+    }else{
+      this.router.navigate(['/permit/equip/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+   
   }
 
   modify() {

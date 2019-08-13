@@ -22,6 +22,7 @@ export class WitnessAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
   servicedepartId_Router: any = "";
   umineId_Router: any = "";
+  equipdepartId_Router: any = "";
 
   data: any = {};
   isSaving = false;
@@ -61,6 +62,7 @@ export class WitnessAddComponent implements OnInit {
 
     this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
     this.umineId_Router = this.ActivatedRoute.snapshot.queryParams["umineId"];
+    this.equipdepartId_Router = this.ActivatedRoute.snapshot.queryParams["equipdepartId"];
 
     if (flag && flag == "true") {
       this.isDisable = true;
@@ -177,9 +179,11 @@ export class WitnessAddComponent implements OnInit {
 
     if (this.servicedepartId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 5 } });
-    } else if(this.umineId_Router){
-      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 4} });
-    }else{
+    } else if (this.umineId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 4 } });
+    } else if (this.equipdepartId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: this.equipdepartId_Router, idx: 5 } });
+    } else {
       this.router.navigate(['/monitor/witness']);
     }
 

@@ -30,6 +30,7 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [
     // EquipPermitComponent, 
-    EquipPermitAddComponent]
+    // EquipPermitAddComponent
+  ]
 })
 export class EquipPermitModule {}

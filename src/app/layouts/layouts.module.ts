@@ -80,6 +80,12 @@ import { SecurityFacAddComponent } from './../../app/business-modules/components
 import { AccidentAddComponent } from './../../app/business-modules/components/security/accident/accident-add/accident-add.component';
 import { SecurityUmineplaceAddComponent } from './../../app/business-modules/components/security/umineplace/umineplace-add/umineplace-add.component';
 
+import { EquipPermitAddComponent } from './../../app/business-modules/components/permit/equip/equip-add/equip-add.component';
+import { CheckEquipAddComponent } from './../../app/business-modules/components/check/equip/equip-add/equip-add.component';
+import { EquipFileComponent } from './../../app/business-modules/components/check/equip/equip-file/equip-file.component';
+
+import { SecurityEquipAddComponent } from './../../app/business-modules/components/security/equip/equip-add/equip-add.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -126,7 +132,8 @@ import { SecurityUmineplaceAddComponent } from './../../app/business-modules/com
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
     DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
-    SecurityUmineplaceAddComponent
+    SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
+    EquipFileComponent,SecurityEquipAddComponent
   ],
   exports: [
     LoginComponent,
@@ -165,7 +172,8 @@ import { SecurityUmineplaceAddComponent } from './../../app/business-modules/com
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
     DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
-    SecurityUmineplaceAddComponent
+    SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
+    EquipFileComponent,SecurityEquipAddComponent
   ]
 })
 export class LayoutsModule { }

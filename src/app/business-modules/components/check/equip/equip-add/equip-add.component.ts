@@ -12,13 +12,15 @@ import { EquipCheckService } from 'src/app/services/check/equip.service';
 import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 
 @Component({
-  selector: 'app-equip-add',
+  selector: 'app-check-equip-add',
   templateUrl: './equip-add.component.html',
   styleUrls: ['./equip-add.component.scss']
 })
-export class EquipAddComponent implements OnInit {
+export class CheckEquipAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+
+  equipdepartId_Router: any = "";
 
   data: any = {};
   isSaving = false;
@@ -49,6 +51,8 @@ export class EquipAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
+
+    this.equipdepartId_Router = this.ActivatedRoute.snapshot.queryParams["equipdepartId"];
 
     this.serviceDepartService.getAllDepartService().subscribe((res) => {
 
@@ -131,7 +135,13 @@ export class EquipAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/check/equip']);
+
+    if(this.equipdepartId_Router){
+      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: this.equipdepartId_Router, idx: 2 } });
+    }else{
+      this.router.navigate(['/check/equip']);
+    }
+    
   }
 
 

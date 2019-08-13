@@ -18,10 +18,12 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 export class EquipPermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
+  equipdepartId_Router: any = "";
+
   data: any = {};
   isSaving = false;
   isShow = false;
-  isAdd=false;
+  isAdd = false;
   fileList = [];
 
   dictionary: any = {};
@@ -50,6 +52,8 @@ export class EquipPermitAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams['id'];
     let isShow = this.ActivatedRoute.snapshot.queryParams['isShow'];
+
+    this.equipdepartId_Router =this.ActivatedRoute.snapshot.queryParams['equipdepartId'];
 
     if (isShow && isShow == 'true') {
       this.isShow = true;
@@ -88,7 +92,7 @@ export class EquipPermitAddComponent implements OnInit {
         }
       });
     } else {
-      this.isAdd=true;
+      this.isAdd = true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
@@ -124,7 +128,13 @@ export class EquipPermitAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/permit/equip']);
+
+    if(this.equipdepartId_Router){
+      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: this.equipdepartId_Router, idx: 1 } });
+    }else{
+      this.router.navigate(['/permit/equip']);
+    }
+   
   }
 
 
@@ -140,10 +150,10 @@ export class EquipPermitAddComponent implements OnInit {
     return isValid;
   }
 
-    //根据营运单位获取对应的核设施
-    serviceDepartChange(value: string): void {
-      this.facSercice.getFacListByServiceid(value).subscribe((res) => {
-        this.facList = res.msg;
-      });
-    }
+  //根据营运单位获取对应的核设施
+  serviceDepartChange(value: string): void {
+    this.facSercice.getFacListByServiceid(value).subscribe((res) => {
+      this.facList = res.msg;
+    });
+  }
 }
