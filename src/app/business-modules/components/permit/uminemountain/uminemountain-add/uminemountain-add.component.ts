@@ -10,19 +10,21 @@ import { UmineService } from 'src/app/services/unit/umine.service';
 import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
 
 @Component({
-  selector: 'app-uminemountain-add',
+  selector: 'app-permit-uminemountain-add',
   templateUrl: './uminemountain-add.component.html',
   styleUrls: ['./uminemountain-add.component.scss']
 })
 export class UminemountainPermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
+  uminemountainId_Roter: any = "";
+
   data: any = {};
   isSaving = false;
   isShow = false;
   isAdd = false;
   backupFileList = [];
-  acceptFileList=[];
+  acceptFileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -42,7 +44,7 @@ export class UminemountainPermitAddComponent implements OnInit {
     private umineService: UmineService,
     private umineMountainService: UmineMountainService,
     private umineMountainPermitService: UmineMountainPermitService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
@@ -50,6 +52,8 @@ export class UminemountainPermitAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams['id'];
     let isShow = this.ActivatedRoute.snapshot.queryParams['isShow'];
+
+    this.uminemountainId_Roter = this.ActivatedRoute.snapshot.queryParams['uminemountainId'];
 
     if (isShow && isShow == 'true') {
       this.isShow = true;
@@ -63,23 +67,23 @@ export class UminemountainPermitAddComponent implements OnInit {
 
     if (id) {
       this.umineMountainPermitService.getUmineMountainPermitById(id).subscribe(res => {
-          this.data = res.msg;
-          this.umineMountainService.getUminemountinaListByUmineId(this.data.umineId).subscribe(res1 => {
-            this.umineMountains = res1.msg;
-          });
-          //获取备案附件
-          this.attachmentSercice.getFileListById(this.data.recordAttachId).subscribe(res1 => {
-            if (res1.msg.length > 0) {
-              res1.msg.forEach(element => {
-                this.backupFileList.push({
-                  response: {
-                    msg: element.fileinfoId
-                  },
-                  name: element.fileinfoClientFileName
-                });
+        this.data = res.msg;
+        this.umineMountainService.getUminemountinaListByUmineId(this.data.umineId).subscribe(res1 => {
+          this.umineMountains = res1.msg;
+        });
+        //获取备案附件
+        this.attachmentSercice.getFileListById(this.data.recordAttachId).subscribe(res1 => {
+          if (res1.msg.length > 0) {
+            res1.msg.forEach(element => {
+              this.backupFileList.push({
+                response: {
+                  msg: element.fileinfoId
+                },
+                name: element.fileinfoClientFileName
               });
-            }
-          });
+            });
+          }
+        });
 
         //获取验收附件
         this.attachmentSercice.getFileListById(this.data.acceptAttachId).subscribe(res1 => {
@@ -95,7 +99,7 @@ export class UminemountainPermitAddComponent implements OnInit {
           }
         });
 
-        });
+      });
     } else {
       this.isAdd = true;
       this.data.createDate = new Date();
@@ -126,19 +130,25 @@ export class UminemountainPermitAddComponent implements OnInit {
 
     this.data.modifyId = this.staffObj.id;
     this.umineMountainPermitService.saveOrUpdateUmineMountainPermit(this.data).subscribe(res => {
-        if (res.code == 200) {
-          this.msg.create('success', '保存成功');
-          this.router.navigate(['/permit/uminemountain']);
-        } else {
-          this.msg.create('error', '保存失败');
-        }
+      if (res.code == 200) {
+        this.msg.create('success', '保存成功');
+        this.router.navigate(['/permit/uminemountain']);
+      } else {
+        this.msg.create('error', '保存失败');
+      }
 
-        this.isSaving = false;
-      });
+      this.isSaving = false;
+    });
   }
 
   close() {
-    this.router.navigate(['/permit/uminemountain']);
+
+    if (this.uminemountainId_Roter) {
+      this.router.navigate(['/searchShow/integratedAuery/uminmountainSearch'], { queryParams: { id: this.uminemountainId_Roter, idx: 1 } });
+    } else {
+      this.router.navigate(['/permit/uminemountain']);
+    }
+
   }
 
   //根据铀矿冶单位获取对应的铀矿山信息

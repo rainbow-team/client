@@ -68,7 +68,7 @@ export class CheckUminemountainComponent implements OnInit {
     if (this.uminemountainId) {
       option.conditions.push({ key: "uminemountainId", value: this.uminemountainId })
     }
-    
+
 
     this.uminemountainCheckSercice.getUminemountainCheckList(option).subscribe(
       (data) => {
@@ -90,7 +90,13 @@ export class CheckUminemountainComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/check/uminemountain/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.uminemountainId) {
+      this.router.navigate(['/searchShow/integratedAuery/checkuminemountainAdd'], { queryParams: { id: item.id, isShow: true, uminemountainId: this.uminemountainId } });
+    } else {
+      this.router.navigate(['/check/uminemountain/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+
   }
 
   modify() {

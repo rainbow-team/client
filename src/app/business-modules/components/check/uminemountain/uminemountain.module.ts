@@ -5,7 +5,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { CheckUminemountainComponent } from './uminemountain.component';
-import { UminemountainAddComponent } from './uminemountain-add/uminemountain-add.component';
+import { CheckUminemountainAddComponent } from './uminemountain-add/uminemountain-add.component';
 import { UminemountainFileComponent } from "./uminemountain-file/uminemountain-file.component";
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
     },
     {
         path: 'add',
-        component: UminemountainAddComponent
+        component: CheckUminemountainAddComponent
     },
     {
         path: 'uminemountainfile',
@@ -35,8 +35,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // CheckUminemountainComponent,
-        UminemountainAddComponent,
-        UminemountainFileComponent
+        // CheckUminemountainAddComponent,
+        // UminemountainFileComponent
     ]
 })
 export class UminemountainModule { }

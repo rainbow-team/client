@@ -91,6 +91,9 @@ import { CheckFacFileComponent } from './../../app/business-modules/components/c
 import { UmineplacePermitAddComponent } from './../../app/business-modules/components/permit/umineplace/umineplace-add/umineplace-add.component';
 import { CheckUmineplaceAddComponent } from './../../app/business-modules/components/check/umineplace/umineplace-add/umineplace-add.component';
 import { UmineplaceFileComponent } from './../../app/business-modules/components/check/umineplace/umineplace-file/umineplace-file.component';
+import { UminemountainPermitAddComponent } from './../../app/business-modules/components/permit/uminemountain/uminemountain-add/uminemountain-add.component';
+import { CheckUminemountainAddComponent } from './../../app/business-modules/components/check/uminemountain/uminemountain-add/uminemountain-add.component';
+import { UminemountainFileComponent } from './../../app/business-modules/components/check/uminemountain/uminemountain-file/uminemountain-file.component';
 
 @NgModule({
   imports: [
@@ -141,7 +144,8 @@ import { UmineplaceFileComponent } from './../../app/business-modules/components
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
-    CheckUmineplaceAddComponent,UmineplaceFileComponent
+    CheckUmineplaceAddComponent, UmineplaceFileComponent, UminemountainPermitAddComponent,
+    CheckUminemountainAddComponent,UminemountainFileComponent
   ],
   exports: [
     LoginComponent,
@@ -183,7 +187,8 @@ import { UmineplaceFileComponent } from './../../app/business-modules/components
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
-    CheckUmineplaceAddComponent,UmineplaceFileComponent
+    CheckUmineplaceAddComponent, UmineplaceFileComponent, UminemountainPermitAddComponent,
+    CheckUminemountainAddComponent,UminemountainFileComponent
   ]
 })
 export class LayoutsModule { }

@@ -27,6 +27,8 @@ import { PermitFacAddComponent } from './../../permit/fac/fac-add/fac-add.compon
 import { CheckFacAddComponent } from './../../check/fac/fac-add/fac-add.component';
 import { UmineplacePermitAddComponent } from './../../permit/umineplace/umineplace-add/umineplace-add.component';
 import { CheckUmineplaceAddComponent } from './../../check/umineplace/umineplace-add/umineplace-add.component';
+import { UminemountainPermitAddComponent } from './../../permit/uminemountain/uminemountain-add/uminemountain-add.component';
+import { CheckUminemountainAddComponent } from './../../check/uminemountain/uminemountain-add/uminemountain-add.component';
 
 const routes: Routes = [
     {
@@ -119,7 +121,15 @@ const routes: Routes = [
     },
     {
         path: 'checkumineplaceAdd',
-        component:CheckUmineplaceAddComponent
+        component: CheckUmineplaceAddComponent
+    },
+    {
+        path: 'permituminemountainAdd',
+        component: UminemountainPermitAddComponent
+    },
+    {
+        path: 'checkuminemountainAdd',
+        component:CheckUminemountainAddComponent
     }
 ];
 

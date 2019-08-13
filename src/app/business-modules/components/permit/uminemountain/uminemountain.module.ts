@@ -30,6 +30,7 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [
     // UminemountainPermitComponent,
-     UminemountainPermitAddComponent]
+    //  UminemountainPermitAddComponent
+    ]
 })
 export class UminemountainPermitModule {}

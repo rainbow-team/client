@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -12,19 +12,21 @@ import { UminemountainCheckSercice } from 'src/app/services/check/uminemountain.
 import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
 
 @Component({
-  selector: 'app-uminemountain-add',
+  selector: 'app-check-uminemountain-add',
   templateUrl: './uminemountain-add.component.html',
   styleUrls: ['./uminemountain-add.component.scss']
 })
-export class UminemountainAddComponent implements OnInit {
+export class CheckUminemountainAddComponent implements OnInit {
 
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
+  uminemountainId_Roter: any = "";
+
   data: any = {};
   isSaving = false;
   isShow = false;
-  isAdd=false;
+  isAdd = false;
   fileList = [];
 
   dictionary: any = {};
@@ -47,6 +49,8 @@ export class UminemountainAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
+
+    this.uminemountainId_Roter = this.ActivatedRoute.snapshot.queryParams["uminemountainId"];
 
     this.umineService.getAllUmine().subscribe((res) => {
 
@@ -86,7 +90,7 @@ export class UminemountainAddComponent implements OnInit {
         }
       })
     } else {
-      this.isAdd=true;
+      this.isAdd = true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
@@ -125,7 +129,13 @@ export class UminemountainAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/check/uminemountain']);
+
+    if (this.uminemountainId_Roter) {
+      this.router.navigate(['/searchShow/integratedAuery/uminmountainSearch'], { queryParams: { id: this.uminemountainId_Roter, idx: 2 } });
+    } else {
+      this.router.navigate(['/check/uminemountain']);
+    }
+
   }
 
 

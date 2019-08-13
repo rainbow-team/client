@@ -103,7 +103,13 @@ export class UminemountainPermitComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/permit/uminemountain/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.uminemountainId) {
+      this.router.navigate(['/searchShow/integratedAuery/permituminemountainAdd'], { queryParams: { id: item.id, isShow: true, uminemountainId: this.uminemountainId } });
+    } else {
+      this.router.navigate(['/permit/uminemountain/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+
   }
 
   modify() {
