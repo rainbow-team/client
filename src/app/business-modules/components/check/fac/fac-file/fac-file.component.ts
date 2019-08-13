@@ -8,11 +8,11 @@ import { FacCheckSercice } from 'src/app/services/check/fac.service';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 
 @Component({
-  selector: 'app-fac-file',
+  selector: 'app-check-fac-file',
   templateUrl: './fac-file.component.html',
   styleUrls: ['./fac-file.component.scss']
 })
-export class FacFileComponent implements OnInit {
+export class CheckFacFileComponent implements OnInit {
 
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;

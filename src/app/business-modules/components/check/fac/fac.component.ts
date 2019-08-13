@@ -15,7 +15,7 @@ import { FacCheckSercice } from 'src/app/services/check/fac.service';
 export class CheckFacComponent implements OnInit {
 
   @Input() facId: any = "";
-  
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -100,7 +100,13 @@ export class CheckFacComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/check/fac/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.facId) {
+      this.router.navigate(['/searchShow/integratedAuery/checkfacAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
+    } else {
+      this.router.navigate(['/check/fac/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+
   }
 
   modify() {

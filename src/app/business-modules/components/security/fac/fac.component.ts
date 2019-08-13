@@ -167,11 +167,13 @@ export class SecurityFacComponent implements OnInit {
 
   show(item, flag) {
     if (this.servicedepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/securityfacAdd'], { queryParams: { id: item.id,  flag: flag, servicedepartId: this.servicedepartId } });
-    }else{
+      this.router.navigate(['/searchShow/integratedAuery/securityfacAdd'], { queryParams: { id: item.id, flag: flag, servicedepartId: this.servicedepartId } });
+    } else if (this.facId) {
+      this.router.navigate(['/searchShow/integratedAuery/securityfacAdd'], { queryParams: { id: item.id, flag: flag, facId: this.facId } });
+    } else {
       this.router.navigate(['/security/fac/add'], { queryParams: { id: item.id, flag: flag } });
     }
-   
+
   }
 
   delete(item) {

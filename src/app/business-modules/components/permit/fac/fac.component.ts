@@ -94,7 +94,13 @@ export class PermitFacComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/permit/fac/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.facId) {
+      this.router.navigate(['/searchShow/integratedAuery/permitfacAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
+    } else {
+      this.router.navigate(['/permit/fac/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+
   }
 
   modify() {

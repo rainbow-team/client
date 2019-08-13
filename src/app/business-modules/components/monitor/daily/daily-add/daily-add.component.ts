@@ -18,6 +18,7 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
 export class DailyAddComponent implements OnInit {
 
   servicedepartId_Router: any = "";
+  facId_Router: any = "";
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -51,6 +52,7 @@ export class DailyAddComponent implements OnInit {
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
     this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
+    this.facId_Router = this.ActivatedRoute.snapshot.queryParams["facId"];
 
     if (isShow && isShow == "true") {
       this.isShow = true;
@@ -134,6 +136,8 @@ export class DailyAddComponent implements OnInit {
 
     if (this.servicedepartId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 3 } });
+    } else if (this.facId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/facSearch'], { queryParams: { id: this.facId_Router, idx: 4 } });
     } else {
       this.router.navigate(['/monitor/daily']);
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -10,19 +10,21 @@ import { ServiceDepartService } from 'src/app/services/unit/servicedepart.servic
 import { FacSercice } from 'src/app/services/unit/fac.service';
 
 @Component({
-  selector: 'app-fac-add',
+  selector: 'app-check-fac-add',
   templateUrl: './fac-add.component.html',
   styleUrls: ['./fac-add.component.scss']
 })
-export class FacAddComponent implements OnInit {
+export class CheckFacAddComponent implements OnInit {
 
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
+  facId_Router: any = "";
+
   data: any = {};
   isSaving = false;
   isShow = false;
-  isAdd=false;
+  isAdd = false;
   fileList = [];
 
   dictionary: any = {};
@@ -45,6 +47,7 @@ export class FacAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
+    this.facId_Router = this.ActivatedRoute.snapshot.queryParams["facId"];
 
     this.serviceDepartService.getAllDepartService().subscribe((res) => {
 
@@ -84,7 +87,7 @@ export class FacAddComponent implements OnInit {
         }
       })
     } else {
-      this.isAdd=true;
+      this.isAdd = true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
@@ -123,7 +126,13 @@ export class FacAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/check/fac']);
+
+    if (this.facId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/facSearch'], { queryParams: { id: this.facId_Router, idx: 2 } });
+    } else {
+      this.router.navigate(['/check/fac']);
+    }
+
   }
 
 

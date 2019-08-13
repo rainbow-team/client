@@ -139,6 +139,8 @@ export class DailyComponent implements OnInit {
 
     if (this.servicedepartId) {
       this.router.navigate(['/searchShow/integratedAuery/monitordailyAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
+    } else if (this.facId) {
+      this.router.navigate(['/searchShow/integratedAuery/monitordailyAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
     } else {
       this.router.navigate(['/monitor/daily/add'], { queryParams: { id: item.id, isShow: true } });
     }

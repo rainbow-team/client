@@ -5,8 +5,8 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { CheckFacComponent } from './fac.component';
-import { FacAddComponent } from './fac-add/fac-add.component';
-import {FacFileComponent} from './fac-file/fac-file.component';
+import { CheckFacAddComponent } from './fac-add/fac-add.component';
+import { CheckFacFileComponent } from './fac-file/fac-file.component';
 
 const routes: Routes = [
     {
@@ -15,11 +15,11 @@ const routes: Routes = [
     },
     {
         path: 'add',
-        component: FacAddComponent
+        component: CheckFacAddComponent
     },
     {
         path: 'facfile',
-        component: FacFileComponent
+        component: CheckFacFileComponent
     }
 ];
 
@@ -35,8 +35,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // CheckFacComponent,
-        FacAddComponent,
-        FacFileComponent
+        // CheckFacAddComponent,
+        // CheckFacFileComponent
     ]
 })
 export class FacModule { }

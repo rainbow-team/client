@@ -137,9 +137,11 @@ export class ActivityComponent implements OnInit {
       this.router.navigate(['/searchShow/integratedAuery/checkActivityAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
     } else if (this.umineId) {
       this.router.navigate(['/searchShow/integratedAuery/checkActivityAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
-    } else if(this.equipdepartId){
+    } else if (this.equipdepartId) {
       this.router.navigate(['/searchShow/integratedAuery/checkActivityAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
-    }else{
+    } else if (this.facId) {
+      this.router.navigate(['/searchShow/integratedAuery/checkActivityAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
+    } else {
       this.router.navigate(['/check/activity/add'], { queryParams: { id: item.id, isShow: true } });
     }
 

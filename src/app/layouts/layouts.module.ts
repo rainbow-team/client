@@ -85,6 +85,9 @@ import { CheckEquipAddComponent } from './../../app/business-modules/components/
 import { EquipFileComponent } from './../../app/business-modules/components/check/equip/equip-file/equip-file.component';
 
 import { SecurityEquipAddComponent } from './../../app/business-modules/components/security/equip/equip-add/equip-add.component';
+import { PermitFacAddComponent } from './../../app/business-modules/components/permit/fac/fac-add/fac-add.component';
+import { CheckFacAddComponent } from './../../app/business-modules/components/check/fac/fac-add/fac-add.component';
+import { CheckFacFileComponent } from './../../app/business-modules/components/check/fac/fac-file/fac-file.component';
 
 @NgModule({
   imports: [
@@ -133,7 +136,8 @@ import { SecurityEquipAddComponent } from './../../app/business-modules/componen
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
     DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
-    EquipFileComponent,SecurityEquipAddComponent
+    EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
+    CheckFacAddComponent,CheckFacFileComponent
   ],
   exports: [
     LoginComponent,
@@ -173,7 +177,8 @@ import { SecurityEquipAddComponent } from './../../app/business-modules/componen
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
     DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
-    EquipFileComponent,SecurityEquipAddComponent
+    EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
+    CheckFacAddComponent,CheckFacFileComponent
   ]
 })
 export class LayoutsModule { }

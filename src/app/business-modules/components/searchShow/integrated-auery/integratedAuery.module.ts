@@ -23,6 +23,8 @@ import { SecurityUmineplaceAddComponent } from './../../security/umineplace/umin
 import { EquipPermitAddComponent } from './../../permit/equip/equip-add/equip-add.component';
 import { CheckEquipAddComponent } from './../../../components/check/equip/equip-add/equip-add.component';
 import { SecurityEquipAddComponent } from './../../security/equip/equip-add/equip-add.component';
+import { PermitFacAddComponent } from './../../permit/fac/fac-add/fac-add.component';
+import { CheckFacAddComponent } from './../../check/fac/fac-add/fac-add.component';
 
 const routes: Routes = [
     {
@@ -99,7 +101,15 @@ const routes: Routes = [
     },
     {
         path: 'securityequipAdd',
-        component:SecurityEquipAddComponent
+        component: SecurityEquipAddComponent
+    },
+    {
+        path: 'permitfacAdd',
+        component: PermitFacAddComponent
+    },
+    {
+        path: 'checkfacAdd',
+        component:CheckFacAddComponent
     }
 ];
 

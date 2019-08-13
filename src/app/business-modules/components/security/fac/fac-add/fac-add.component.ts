@@ -17,6 +17,7 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 export class SecurityFacAddComponent implements OnInit {
 
   servicedepartId_Router: any = "";
+  facId_Router: any = "";
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   data: any = {};
@@ -48,7 +49,8 @@ export class SecurityFacAddComponent implements OnInit {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
     this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
-    
+    this.facId_Router = this.ActivatedRoute.snapshot.queryParams["facId"];
+
     if (flag && flag == "true") {
       this.isDisable = true;
     } else {
@@ -126,10 +128,12 @@ export class SecurityFacAddComponent implements OnInit {
 
     if (this.servicedepartId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 6 } });
+    } else if (this.facId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/facSearch'], { queryParams: { id: this.facId_Router, idx: 5 } });
     } else {
       this.router.navigate(['/security/fac']);
     }
-    
+
   }
 
 

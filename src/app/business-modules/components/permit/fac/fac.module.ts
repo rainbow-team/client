@@ -5,7 +5,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from './../../../../layouts/layouts.module';
 import { PermitFacComponent } from './fac.component';
-import { FacAddComponent } from './fac-add/fac-add.component';
+import { PermitFacAddComponent } from './fac-add/fac-add.component';
 
 const routes: Routes = [
     {
@@ -14,7 +14,7 @@ const routes: Routes = [
     },
     {
         path: 'add',
-        component: FacAddComponent
+        component: PermitFacAddComponent
     }
 ];
 
@@ -30,7 +30,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // PermitFacComponent,
-        FacAddComponent
+        // PermitFacAddComponent
     ]
 })
 export class FacModule { }
