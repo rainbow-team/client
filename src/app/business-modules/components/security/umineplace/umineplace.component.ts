@@ -179,6 +179,8 @@ export class SecurityUmineplaceComponent implements OnInit {
 
     if (this.umineId) {
       this.router.navigate(['/searchShow/integratedAuery/securityUmineplaceAdd'], { queryParams: { id: item.id, flag: flag, umineId: this.umineId } });
+    } else if (this.umineplaceId) {
+      this.router.navigate(['/searchShow/integratedAuery/securityUmineplaceAdd'], { queryParams: { id: item.id, flag: flag, umineplaceId: this.umineplaceId } });
     } else {
       this.router.navigate(['/security/umineplace/add'], { queryParams: { id: item.id, flag: flag } });
     }

@@ -91,7 +91,7 @@ export class UmineplacePermitComponent implements OnInit {
         value: this.umineplaceId
       });
     }
-    
+
     this.umineplacePermitService
       .getUmineplacePermitList(option)
       .subscribe(data => {
@@ -113,7 +113,14 @@ export class UmineplacePermitComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/permit/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.umineplaceId) {
+      this.router.navigate(['/searchShow/integratedAuery/permitumineplaceAdd'], { queryParams: { id: item.id, isShow: true, umineplaceId: this.umineplaceId } });
+
+    } else {
+      this.router.navigate(['/permit/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+
   }
 
   modify() {

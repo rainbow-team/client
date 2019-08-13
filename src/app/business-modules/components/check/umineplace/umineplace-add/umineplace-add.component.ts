@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -13,19 +13,20 @@ import { UmineService } from 'src/app/services/unit/umine.service';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 
 @Component({
-  selector: 'app-umineplace-add',
+  selector: 'app-check-umineplace-add',
   templateUrl: './umineplace-add.component.html',
   styleUrls: ['./umineplace-add.component.scss']
 })
-export class UmineplaceAddComponent implements OnInit {
+export class CheckUmineplaceAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
+  umineplaceId_Router: any = "";
   data: any = {};
   isSaving = false;
   isShow = false;
-  isAdd=false;
-  fileList = [  ];
+  isAdd = false;
+  fileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -47,6 +48,7 @@ export class UmineplaceAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
+    this.umineplaceId_Router = this.ActivatedRoute.snapshot.queryParams["umineplaceId"];
 
     this.umineService.getAllUmine().subscribe((res) => {
 
@@ -86,7 +88,7 @@ export class UmineplaceAddComponent implements OnInit {
         }
       })
     } else {
-      this.isAdd=true;
+      this.isAdd = true;
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
@@ -125,7 +127,13 @@ export class UmineplaceAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/check/umineplace']);
+
+    if (this.umineplaceId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/umineplaceSearch'], { queryParams: { id: this.umineplaceId_Router, idx: 2 } });
+    } else {
+      this.router.navigate(['/check/umineplace']);
+    }
+
   }
 
 

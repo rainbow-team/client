@@ -88,6 +88,9 @@ import { SecurityEquipAddComponent } from './../../app/business-modules/componen
 import { PermitFacAddComponent } from './../../app/business-modules/components/permit/fac/fac-add/fac-add.component';
 import { CheckFacAddComponent } from './../../app/business-modules/components/check/fac/fac-add/fac-add.component';
 import { CheckFacFileComponent } from './../../app/business-modules/components/check/fac/fac-file/fac-file.component';
+import { UmineplacePermitAddComponent } from './../../app/business-modules/components/permit/umineplace/umineplace-add/umineplace-add.component';
+import { CheckUmineplaceAddComponent } from './../../app/business-modules/components/check/umineplace/umineplace-add/umineplace-add.component';
+import { UmineplaceFileComponent } from './../../app/business-modules/components/check/umineplace/umineplace-file/umineplace-file.component';
 
 @NgModule({
   imports: [
@@ -137,7 +140,8 @@ import { CheckFacFileComponent } from './../../app/business-modules/components/c
     DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
-    CheckFacAddComponent,CheckFacFileComponent
+    CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
+    CheckUmineplaceAddComponent,UmineplaceFileComponent
   ],
   exports: [
     LoginComponent,
@@ -178,7 +182,8 @@ import { CheckFacFileComponent } from './../../app/business-modules/components/c
     DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
-    CheckFacAddComponent,CheckFacFileComponent
+    CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
+    CheckUmineplaceAddComponent,UmineplaceFileComponent
   ]
 })
 export class LayoutsModule { }

@@ -18,6 +18,7 @@ export class SecurityUmineplaceAddComponent implements OnInit {
 
 
   umineId_Router: any = "";
+  umineplaceId_Router: any = "";
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -51,6 +52,8 @@ export class SecurityUmineplaceAddComponent implements OnInit {
     let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
 
     this.umineId_Router = this.ActivatedRoute.snapshot.queryParams["umineId"];
+    this.umineplaceId_Router = this.ActivatedRoute.snapshot.queryParams["umineplaceId"];
+
     if (flag && flag == "true") {
       this.isDisable = true;
     } else {
@@ -125,12 +128,14 @@ export class SecurityUmineplaceAddComponent implements OnInit {
   }
 
   close() {
-    if(this.umineId_Router){
+    if (this.umineId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 5 } });
-    }else{
+    } else if (this.umineplaceId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/umineplaceSearch'], { queryParams: { id: this.umineplaceId_Router, idx: 3 } });
+    } else {
       this.router.navigate(['/security/umineplace']);
     }
-   
+
   }
 
 

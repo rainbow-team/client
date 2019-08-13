@@ -30,6 +30,7 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [
     // UmineplacePermitComponent,
-    UmineplacePermitAddComponent]
+    // UmineplacePermitAddComponent
+  ]
 })
 export class UmineplacePermitModule { }

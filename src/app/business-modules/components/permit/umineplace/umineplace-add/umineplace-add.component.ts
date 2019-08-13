@@ -10,12 +10,14 @@ import { UmineService } from 'src/app/services/unit/umine.service';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 
 @Component({
-  selector: 'app-umineplace-add',
+  selector: 'app-permit-umineplace-add',
   templateUrl: './umineplace-add.component.html',
   styleUrls: ['./umineplace-add.component.scss']
 })
 export class UmineplacePermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+
+  umineplaceId_Router: any = "";
 
   data: any = {};
   isSaving = false;
@@ -49,6 +51,7 @@ export class UmineplacePermitAddComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams['id'];
     let isShow = this.ActivatedRoute.snapshot.queryParams['isShow'];
+    this.umineplaceId_Router = this.ActivatedRoute.snapshot.queryParams['umineplaceId'];
 
     if (isShow && isShow == 'true') {
       this.isShow = true;
@@ -119,7 +122,14 @@ export class UmineplacePermitAddComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['/permit/umineplace']);
+
+    if (this.umineplaceId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/umineplaceSearch'], { queryParams: { id: this.umineplaceId_Router, idx: 1 } });
+
+    } else {
+      this.router.navigate(['/permit/umineplace']);
+    }
+
   }
 
   //根据铀矿冶单位获取对应的铀尾矿（渣）库信息

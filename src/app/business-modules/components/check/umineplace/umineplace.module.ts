@@ -5,7 +5,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { CheckUmineplaceComponent } from './umineplace.component';
-import { UmineplaceAddComponent } from './umineplace-add/umineplace-add.component';
+import { CheckUmineplaceAddComponent } from './umineplace-add/umineplace-add.component';
 import { UmineplaceFileComponent } from './umineplace-file/umineplace-file.component';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
     },
     {
         path: 'add',
-        component: UmineplaceAddComponent
+        component: CheckUmineplaceAddComponent
     },
     {
         path: 'umineplacefile',
@@ -35,8 +35,8 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [
         // CheckUmineplaceComponent,
-        UmineplaceAddComponent,
-        UmineplaceFileComponent
+        // CheckUmineplaceAddComponent,
+        // UmineplaceFileComponent
     ]
 })
 export class UmineplaceModule { }

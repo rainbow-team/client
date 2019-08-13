@@ -72,7 +72,7 @@ export class CheckUmineplaceComponent implements OnInit {
       option.conditions.push({ key: "umineplaceId", value: this.umineplaceId })
     }
 
-    
+
     this.umineplaceCheckSercice.getUmineplaceCheckList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
@@ -94,7 +94,14 @@ export class CheckUmineplaceComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/check/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
+
+    if (this.umineplaceId) {
+      this.router.navigate(['/searchShow/integratedAuery/checkumineplaceAdd'], { queryParams: { id: item.id, isShow: true, umineplaceId: this.umineplaceId } });
+
+    } else {
+      this.router.navigate(['/check/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
+    }
+    
   }
 
   modify() {

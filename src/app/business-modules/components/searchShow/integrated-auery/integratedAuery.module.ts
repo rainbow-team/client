@@ -25,6 +25,8 @@ import { CheckEquipAddComponent } from './../../../components/check/equip/equip-
 import { SecurityEquipAddComponent } from './../../security/equip/equip-add/equip-add.component';
 import { PermitFacAddComponent } from './../../permit/fac/fac-add/fac-add.component';
 import { CheckFacAddComponent } from './../../check/fac/fac-add/fac-add.component';
+import { UmineplacePermitAddComponent } from './../../permit/umineplace/umineplace-add/umineplace-add.component';
+import { CheckUmineplaceAddComponent } from './../../check/umineplace/umineplace-add/umineplace-add.component';
 
 const routes: Routes = [
     {
@@ -109,7 +111,15 @@ const routes: Routes = [
     },
     {
         path: 'checkfacAdd',
-        component:CheckFacAddComponent
+        component: CheckFacAddComponent
+    },
+    {
+        path: 'permitumineplaceAdd',
+        component: UmineplacePermitAddComponent
+    },
+    {
+        path: 'checkumineplaceAdd',
+        component:CheckUmineplaceAddComponent
     }
 ];
 
