@@ -38,6 +38,7 @@ export class WitnessComponent implements OnInit {
 
   witness_date: any = [];
 
+  selectId: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private witnessMonitorSercice: WitnessMonitorSercice, private dictionarySercice: DictionarySercice,
@@ -119,37 +120,55 @@ export class WitnessComponent implements OnInit {
     this.obj = "";
     this.items = "";
     this.witness_date = [];
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/monitor/witness/add']);
   }
 
-  show(item, flag) {
+  show(item) {
 
     if (this.servicedepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitorwitnessAdd'], { queryParams: { id: item.id, flag: flag, servicedepartId: this.servicedepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitorwitnessAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
     } else if (this.umineId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitorwitnessAdd'], { queryParams: { id: item.id, flag: flag, umineId: this.umineId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitorwitnessAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
     } else if (this.equipdepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitorwitnessAdd'], { queryParams: { id: item.id, flag: flag, equipdepartId: this.equipdepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitorwitnessAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
     } else {
-      this.router.navigate(['/monitor/witness/add'], { queryParams: { id: item.id, flag: flag } });
+      this.router.navigate(['/monitor/witness/add'], { queryParams: { id: item.id, isShow: true } });
     }
 
   }
 
-  delete(item) {
-
-    this.witnessMonitorSercice.deleteWitnessMonitorById(item.id).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
-
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/monitor/witness/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
   }
+
+  delete() {
+
+    if (this.selectId) {
+
+      this.witnessMonitorSercice.deleteWitnessMonitorById(this.selectId).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+    } else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
+
 }

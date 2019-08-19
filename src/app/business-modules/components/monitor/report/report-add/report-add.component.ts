@@ -20,7 +20,7 @@ export class ReportAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
+  isShow = false;
   fileList = [];
 
   dictionary: any = {};
@@ -40,12 +40,12 @@ export class ReportAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
     this.orgSercice.getAllOrgList().subscribe((res) => {

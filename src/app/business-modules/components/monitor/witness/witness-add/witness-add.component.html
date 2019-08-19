@@ -2,105 +2,225 @@
   <div class="div_top_add">
     监督见证信息
   </div>
-  <div class="div_contain_add">
-    <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="10" class="ta_r">
-        <nz-radio-group [(ngModel)]="departType" [disabled]="isDisable">
-          <label nz-radio nzValue="fac">核设施营运单位</label>
-          <label nz-radio nzValue="umine">铀矿冶单位</label>
-          <label nz-radio nzValue="equip">核设备单位</label>
-        </nz-radio-group>
+  <div class="div_contain_add" *ngIf="isShow==false">
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'">
+      <nz-radio-group [(ngModel)]="departType" [disabled]="isDisable">
+        <label nz-radio nzValue="fac">核设施营运单位</label>
+        <label nz-radio nzValue="umine">铀矿冶单位</label>
+        <label nz-radio nzValue="equip">核设备单位</label>
+      </nz-radio-group>
+    </div>
+
+    <div nz-row class="ma_b20" *ngIf="departType==='fac'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>营运单位：
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r" *ngIf="departType==='fac'">
-        营运单位：
-        <nz-select [(ngModel)]="data.serviceId" class="w200" [nzDisabled]="isDisable" nzShowSearch nzAllowClear
-          nzPlaceHolder="请选择核设施营运单位">
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" nzShowSearch nzAllowClear>
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r" *ngIf="departType==='umine'">
-        铀矿冶单位：
-        <nz-select [(ngModel)]="data.umineId" class="w200" [disabled]="isDisable" nzShowSearch nzAllowClear
-          nzPlaceHolder="请选择铀矿冶单位">
+    </div>
+
+    <div nz-row class="ma_b20" *ngIf="departType==='umine'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>铀矿冶单位：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <nz-select [(ngModel)]="data.umineId" style="width: 100%" nzShowSearch nzAllowClear>
           <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
-      <div nz-col [nzSpan]="8" class="ta_r" *ngIf="departType==='equip'">
-        核设备单位：
-        <nz-select [(ngModel)]="data.equipDepartId" class="w200" [disabled]="isDisable" nzShowSearch nzAllowClear
-          nzPlaceHolder="请选择核设备单位">
+    </div>
+
+    <div nz-row class="ma_b20" *ngIf="departType==='equip'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>核设备单位：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" nzShowSearch nzAllowClear>
           <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
     </div>
+
     <div nz-row class="ma_b20">
-    
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>见证对象：
-        <input nz-input name="witnessObject" [(ngModel)]="data.witnessObject" class="w200" required [validation]="true"
-          [disabled]="isDisable" />
       </div>
-    
-      <div nz-col [nzSpan]="8" class="ta_r">
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <input nz-input name="witnessObject" [(ngModel)]="data.witnessObject" style="width: 100%" required
+          [validation]="true" />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>见证时间：
-        <nz-date-picker name="witnessDate" [(ngModel)]="data.witnessDate" class="w200" [validation]="true"
-          [disabled]="isDisable">
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-date-picker name="witnessDate" [(ngModel)]="data.witnessDate" style="width: 100%" [validation]="true">
         </nz-date-picker>
       </div>
-    
-      <div nz-col [nzSpan]="8" class="ta_r">
+
+      <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>见证人：
-        <input nz-input name="witness" [(ngModel)]="data.witness" class="w200" required [validation]="true"
-          [disabled]="isDisable" />
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="witness" [(ngModel)]="data.witness" style="width: 100%" [validation]="true" />
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz"><span class="clo_r">*</span>见证事项：</div>
-        <textarea nz-input name="witnessItems" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.witnessItems"
-          required [validation]="true" [disabled]="isDisable">
-          </textarea>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>见证事项：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="witnessItems" style="height: 70px;" [(ngModel)]="data.witnessItems" required
+          [validation]="true"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz"><span class="clo_r">*</span>见证结论：</div>
-        <textarea nz-input name="witnessResult" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.witnessResult"
-          required [validation]="true" [disabled]="isDisable">
-          </textarea>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>见证结论：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="witnessResult" style="height: 70px;" [(ngModel)]="data.witnessResult" required
+          [validation]="true"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz"><span class="clo_r">*</span>存在问题：</div>
-        <textarea nz-input name="witnessQuestion" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.witnessQuestion"
-          required [validation]="true" [disabled]="isDisable">
-          </textarea>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>存在问题：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="witnessQuestion" style="height: 70px;" [(ngModel)]="data.witnessQuestion" required
+          [validation]="true"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="24" class="ta_r">
-        <div class="div_bz"><span class="clo_r">*</span>整改情况：</div>
-        <textarea nz-input name="reform" style="width: calc(100% - 130px);height: 70px;" [(ngModel)]="data.reform"
-          required [validation]="true" [disabled]="isDisable">
-          </textarea>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>整改情况：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <textarea nz-input name="reform" style="height: 70px;" [(ngModel)]="data.reform" required
+          [validation]="true"></textarea>
       </div>
     </div>
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
 
   </div>
 
+  <div class="div_contain_add" *ngIf="isShow==true">
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'" *ngIf="!isShow">
+      <nz-radio-group [(ngModel)]="departType">
+        <label nz-radio nzValue="fac">核设施营运单位</label>
+        <label nz-radio nzValue="umine">铀矿冶单位</label>
+        <label nz-radio nzValue="equip">核设备单位</label>
+      </nz-radio-group>
+    </div>
 
+    <div nz-row class="ma_b20" *ngIf="departType==='fac'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        营运单位：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <span name="serviceDepartName" class="showText">{{data.serviceDepartName}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" *ngIf="departType==='umine'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        铀矿冶单位：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <span name="umineName" class="showText">{{data.umineName}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" *ngIf="departType==='equip'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        核设备单位：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <span name="equipDepartName" class="showText">{{data.equipDepartName}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        见证对象：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <span name="witnessObject" class="showText">{{data.witnessObject}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        见证时间：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="witnessDate" class="showText">{{data.witnessDate|recordtime}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        见证人：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="witness" class="showText">{{data.witness}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        见证事项：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="witnessItems" class="showTextArea">{{data.witnessItems}}</div>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        见证结论：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="witnessResult" class="showTextArea">{{data.witnessResult}}</div>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        存在问题：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="witnessQuestion" class="showTextArea">{{data.witnessQuestion}}</div>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        整改情况：
+      </div>
+      <div nz-col [nzSpan]="20" class="ta_l">
+        <div nz-tooltip nzPlacement="reform" class="showTextArea">{{data.reform}}</div>
+      </div>
+    </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
+  </div>
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
       [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>

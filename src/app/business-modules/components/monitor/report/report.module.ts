@@ -29,8 +29,8 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        ReportComponent,
-        ReportAddComponent
+        // ReportComponent,
+        // ReportAddComponent
     ]
 })
 export class ReportModule { }

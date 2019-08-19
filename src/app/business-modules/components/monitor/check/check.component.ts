@@ -44,6 +44,7 @@ export class CheckComponent implements OnInit {
 
   facList: any = [];
 
+  selectId: any = "";
 
   constructor(private router: Router,
     private msg: NzMessageService, private checkMonitorSercice: CheckMonitorSercice, private dictionarySercice: DictionarySercice,
@@ -72,20 +73,6 @@ export class CheckComponent implements OnInit {
         });
       }
     })
-
-
-    // this.facSercice.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
-
   }
 
   search() {
@@ -99,9 +86,6 @@ export class CheckComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
-    // if (this.groupIds.length > 0) {
-    //   option.conditions.push({ key: "groupIds", value: this.groupIds })
-    // }
 
     if (this.servicedepartId) {
       option.conditions.push({
@@ -142,23 +126,31 @@ export class CheckComponent implements OnInit {
     this.router.navigate(['/monitor/check/add']);
   }
 
-  show(item, flag) {
+  show(item) {
 
     if (this.servicedepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, flag: flag, servicedepartId: this.servicedepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
     } else if (this.umineId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, flag: flag, umineId: this.umineId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
     } else if (this.equipdepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, flag: flag, equipdepartId: this.equipdepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
     } else {
-      this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, flag: flag } });
+      this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, isShow: true } });
     }
 
   }
 
-  delete(item) {
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/monitor/check/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
+  }
 
-    this.checkMonitorSercice.deleteCheckMonitorById(item.id).subscribe((res) => {
+  delete() {
+
+    this.checkMonitorSercice.deleteCheckMonitorById(this.selectId).subscribe((res) => {
 
       if (res.code == 200) {
         this.msg.create("success", "删除成功");
@@ -168,5 +160,9 @@ export class CheckComponent implements OnInit {
       }
     })
 
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
   }
 }

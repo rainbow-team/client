@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { CheckComponent } from './check.component';
 import { CheckAddComponent } from './check-add/check-add.component';
+import { CheckFileComponent } from './check-file/check-file.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
         path: 'add',
         component: CheckAddComponent
+    },
+    {
+        path: 'checkfile',
+        component: CheckFileComponent
     }
 ];
 

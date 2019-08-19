@@ -2,49 +2,90 @@
   <div class="div_top_add">
     监督报告信息
   </div>
-  <div class="div_contain_add">    
+  <div class="div_contain_add" *ngIf="isShow==false">
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>授权监管机构:
-        <nz-select [(ngModel)]="data.orgId" class="w200" [disabled]="isDisable">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>授权监管机构：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.orgId" style="width: 100%">
           <nz-option *ngFor="let option of orgList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
 
-      <div nz-col [nzSpan]="8" class="ta_r">
-        报告类型:
-        <nz-select [(ngModel)]="data.reportTypeId" class="w200" [disabled]="isDisable">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>报告类型：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select [(ngModel)]="data.reportTypeId" style="width: 100%">
           <nz-option *ngFor="let option of dictionary.config_monitor_report_type" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
+    </div>
 
-      <div nz-col [nzSpan]="8" class="ta_r">
-        <span class="clo_r">*</span>报告时间:
-        <nz-date-picker name="reportDate" [(ngModel)]="data.reportDate" class="w200" [validation]="true" [disabled]="isDisable">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>报告时间：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-date-picker name="reportDate" [(ngModel)]="data.reportDate" style="width: 100%" [validation]="true">
         </nz-date-picker>
       </div>
 
-    </div>
-
-    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="8" class="ta_r">
-        <div class="div_bz">报告名称:</div>
-        <input nz-input name="name" [(ngModel)]="data.name" class="w200" [disabled]="isDisable"/>
+      <div nz-col [nzSpan]="4" class="ta_r">
+        <span class="clo_r">*</span>报告名称：
       </div>
-
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="name" [(ngModel)]="data.name" style="width: 100%" />
+      </div>
     </div>
 
     <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
 
   </div>
 
+  <div class="div_contain_add" *ngIf="isShow==true">
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        授权监管机构：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="orgName" class="showText">{{data.orgName}}</span>
+      </div>
 
+      <div nz-col [nzSpan]="4" class="ta_r">
+        报告类型：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="reportTypeValue" class="showText">{{data.reportTypeValue}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        报告时间：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="reportDate" class="showText">{{data.reportDate|recordtime}}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">
+        报告名称：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="name" class="showText">{{data.name}}</span>
+      </div>
+    </div>
+
+    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
+  </div>
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isDisable" style="margin-right: 10px;"
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
       [nzLoading]="isSaving">保存</button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>

@@ -33,6 +33,7 @@ import { ActivityComponent } from './../../app/business-modules/components/check
 import { DailyComponent } from './../../app/business-modules/components/monitor/daily/daily.component';
 import { CheckComponent } from './../../app/business-modules/components/monitor/check/check.component';
 import { WitnessComponent } from './../../app/business-modules/components/monitor/witness/witness.component';
+import { ReportComponent } from './../../app/business-modules/components/monitor/report/report.component';
 import { SecurityFacComponent } from './../../app/business-modules/components/security/fac/fac.component';
 import { AccidentComponent } from './../../app/business-modules/components/security/accident/accident.component';
 
@@ -75,6 +76,8 @@ import { ActivityFileComponent } from './../../app/business-modules/components/c
 import { DailyAddComponent } from './../../app/business-modules/components/monitor/daily/daily-add/daily-add.component';
 import { CheckAddComponent } from './../../app/business-modules/components/monitor/check/check-add/check-add.component';
 import { WitnessAddComponent } from './../../app/business-modules/components/monitor/witness/witness-add/witness-add.component';
+import { ReportAddComponent } from './../../app/business-modules/components/monitor/report/report-add/report-add.component';
+import { CheckFileComponent } from './../../app/business-modules/components/monitor/check/check-file/check-file.component';
 
 import { SecurityFacAddComponent } from './../../app/business-modules/components/security/fac/fac-add/fac-add.component';
 import { AccidentAddComponent } from './../../app/business-modules/components/security/accident/accident-add/accident-add.component';
@@ -128,7 +131,7 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
     ServicedepartSearchShowComponent,
     ServicedepartReportmanageComponent,
     ActivityComponent,
-    DailyComponent, CheckComponent, WitnessComponent,
+    DailyComponent, CheckComponent, WitnessComponent,ReportComponent,
     SecurityFacComponent, AccidentComponent,
     UmineSearchShowComponent, UmineAddComponent, SecurityUmineplaceComponent,
     EquipdepartSearchShowComponent, EquipdepartAddComponent,
@@ -140,7 +143,8 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
     UminemountainSearchShowComponent, UminemountainAddComponent,
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
-    DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
+    DailyAddComponent, CheckAddComponent, WitnessAddComponent, ReportAddComponent,CheckFileComponent,
+    SecurityFacAddComponent, AccidentAddComponent,
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
@@ -171,7 +175,7 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
     ServicedepartSearchShowComponent,
     ServicedepartReportmanageComponent,
     ActivityComponent,
-    DailyComponent, CheckComponent, WitnessComponent,
+    DailyComponent, CheckComponent, WitnessComponent,ReportComponent,
     SecurityFacComponent, AccidentComponent,
     UmineSearchShowComponent, UmineAddComponent, SecurityUmineplaceComponent,
     EquipdepartSearchShowComponent, EquipdepartAddComponent,
@@ -183,7 +187,8 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
     UminemountainSearchShowComponent, UminemountainAddComponent,
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
-    DailyAddComponent, CheckAddComponent, WitnessAddComponent, SecurityFacAddComponent, AccidentAddComponent,
+    DailyAddComponent, CheckAddComponent, WitnessAddComponent, ReportAddComponent,CheckFileComponent,
+    SecurityFacAddComponent, AccidentAddComponent,
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,

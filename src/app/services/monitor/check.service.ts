@@ -28,4 +28,25 @@ export class CheckMonitorSercice {
     deleteCheckMonitorById(id): any {
         return this.http.post('/checkmonitor/deleteCheckMonitorById',id);
     }
+
+
+    //监督检查文件管理
+    
+    saveOrUpdateMonitorCheckFileCheck(param): any {
+        let url = !param.id ? "/checkfilemonitor/addCheckFileMonitor" : "/checkfilemonitor/modifyCheckFileMonitor";
+        return this.http.post(url, param);
+    }
+
+    getMonitorCheckFileList(param): any {
+        return this.http.post('/checkfilemonitor/getCheckFileMonitorList', param);
+    }
+
+    getMonitorCheckFileById(id): any {
+        return this.http.post('/checkfilemonitor/geCheckFileMonitorById',id);
+    }
+
+    deleteMonitorCheckFileByIds(param): any {
+        return this.http.post('/checkfilemonitor/deleteCheckFileMonitorByIds',param);
+    }
+
 }
