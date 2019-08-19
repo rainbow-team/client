@@ -46,6 +46,8 @@ export class SecurityUmineplaceComponent implements OnInit {
 
   reformStatusTypeIds: any = [];
 
+  selectId: any = "";
+
   constructor(private router: Router,
     private msg: NzMessageService, private umineService: UmineService,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
@@ -169,35 +171,52 @@ export class SecurityUmineplaceComponent implements OnInit {
     this.questionTypeIds = [];
     this.questionNatureIds = [];
     this.reformStatusTypeIds = [];
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/security/umineplace/add']);
   }
 
-  show(item, flag) {
+  show(item) {
 
     if (this.umineId) {
-      this.router.navigate(['/searchShow/integratedAuery/securityUmineplaceAdd'], { queryParams: { id: item.id, flag: flag, umineId: this.umineId } });
+      this.router.navigate(['/searchShow/integratedAuery/securityUmineplaceAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
     } else if (this.umineplaceId) {
-      this.router.navigate(['/searchShow/integratedAuery/securityUmineplaceAdd'], { queryParams: { id: item.id, flag: flag, umineplaceId: this.umineplaceId } });
+      this.router.navigate(['/searchShow/integratedAuery/securityUmineplaceAdd'], { queryParams: { id: item.id, isShow: true, umineplaceId: this.umineplaceId } });
     } else {
-      this.router.navigate(['/security/umineplace/add'], { queryParams: { id: item.id, flag: flag } });
+      this.router.navigate(['/security/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
     }
 
   }
 
-  delete(item) {
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/security/umineplace/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
+  }
 
-    this.umineplaceSecuritySercice.deleteUmineplaceSecurityById(item.id).subscribe((res) => {
+  delete() {
 
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
+    if (this.selectId) {
+      this.umineplaceSecuritySercice.deleteUmineplaceSecurityById(this.selectId).subscribe((res) => {
 
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+    }else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
   }
 }
+

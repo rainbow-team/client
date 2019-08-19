@@ -23,7 +23,7 @@ export class SecurityEquipAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
+  isShow = false;
   fileList = [
   ];
 
@@ -50,14 +50,14 @@ export class SecurityEquipAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
     this.equipdepartId_Router = this.ActivatedRoute.snapshot.queryParams["equipdepartId"];
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
 

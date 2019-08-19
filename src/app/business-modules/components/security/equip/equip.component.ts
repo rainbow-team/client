@@ -43,7 +43,7 @@ export class SecurityEquipComponent implements OnInit {
 
   reformStatusTypeIds: any = [];
 
-
+  selectId: any = "";
   // equipDepartIds: any = [];
 
   // equipDepartList: any = [];
@@ -154,33 +154,53 @@ export class SecurityEquipComponent implements OnInit {
     this.find_date = [];
     this.questionTypeIds = [];
     this.reformStatusTypeIds = [];
+    this.selectId = "";
   }
 
   add() {
     this.router.navigate(['/security/equip/add']);
   }
 
-  show(item, flag) {
+  show(item) {
 
     if (this.equipdepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/securityequipAdd'], { queryParams: { id: item.id, flag: flag, equipdepartId: this.equipdepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/securityequipAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
     } else {
-      this.router.navigate(['/security/equip/add'], { queryParams: { id: item.id, flag: flag } });
+      this.router.navigate(['/security/equip/add'], { queryParams: { id: item.id, isShow: true } });
     }
 
   }
 
-  delete(item) {
-
-    this.equipSecuritySercice.deleteEquipSecurityById(item.id).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", "删除成功");
-        this.search();
-      } else {
-        this.msg.create("error", "删除失败");
-      }
-    })
-
+  modify() {
+    if (this.selectId) {
+      this.router.navigate(['/security/equip/add'], { queryParams: { id: this.selectId, isShow: false } });
+    } else {
+      this.msg.create("warning", "请选择修改项");
+    }
   }
+
+  delete() {
+
+    if (this.selectId) {
+
+      this.equipSecuritySercice.deleteEquipSecurityById(this.selectId).subscribe((res) => {
+
+        if (res.code == 200) {
+          this.msg.create("success", "删除成功");
+          this.search();
+        } else {
+          this.msg.create("error", "删除失败");
+        }
+      })
+
+    }
+    else {
+      this.msg.create("warning", "请选择删除项");
+    }
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
+
 }

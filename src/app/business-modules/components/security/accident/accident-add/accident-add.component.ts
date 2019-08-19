@@ -26,7 +26,7 @@ export class AccidentAddComponent implements OnInit {
 
   data: any = {};
   isSaving = false;
-  isDisable = false;
+  isShow = false;
   fileList = [
   ];
 
@@ -58,15 +58,15 @@ export class AccidentAddComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let flag = this.ActivatedRoute.snapshot.queryParams["flag"];
+    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
 
     this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
     this.umineId_Router = this.ActivatedRoute.snapshot.queryParams["umineId"];
 
-    if (flag && flag == "true") {
-      this.isDisable = true;
+    if (isShow && isShow == "true") {
+      this.isShow = true;
     } else {
-      this.isDisable = false;
+      this.isShow = false;
     }
 
 
@@ -114,6 +114,7 @@ export class AccidentAddComponent implements OnInit {
 
 
     } else {
+      this.accidentType="fac";
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
