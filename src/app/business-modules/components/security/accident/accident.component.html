@@ -1,30 +1,31 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="4">
       单位名称
-      <input nz-input nzSize="default" [(ngModel)]="depart" class="w200">
+      <input nz-input nzSize="default" [(ngModel)]="depart" class="w150">
     </div>
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="4">
       设施名称
-      <input nz-input nzSize="default" [(ngModel)]="fac" class="w200">
+      <input nz-input nzSize="default" [(ngModel)]="fac" class="w150">
     </div>
     <div nz-col [nzSpan]="5">
       核设施状态
-      <nz-select [(ngModel)]="facStatusTypeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="facStatusTypeIds" class="w150" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       铀尾矿(渣)库设施状态
-      <nz-select [(ngModel)]="uminePlaceStatusTypeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="uminePlaceStatusTypeIds" class="w150" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="2" class="ta_r">
-      <button nz-button nzType="primary" style="width: 70px;" (click)="search()">查询</button>
+    <div nz-col [nzSpan]="5" class="ta_r">
+      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
+      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div> 
   </div>
 
@@ -56,9 +57,6 @@
         [nzValue]="option.id">
       </nz-option>
     </nz-select>
-  </div>
-  <div nz-col [nzSpan]="3" class="ta_r">
-    <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
   </div>
 </div>
   <div nz-row class="div_contain">

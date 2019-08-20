@@ -6,7 +6,7 @@ import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 
 @Component({
-  selector: 'app-fac-report',
+  selector: 'app-unit-fac-report',
   templateUrl: './fac-report.component.html',
   styleUrls: ['./fac-report.component.scss']
 })
