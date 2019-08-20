@@ -62,7 +62,7 @@
         许可范围：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="scope" style="height: 70px;" [(ngModel)]="data.scope"></textarea>
+        <textarea nz-input name="scope" style="height: 40px;" [(ngModel)]="data.scope"></textarea>
       </div>
     </div>
 
@@ -135,7 +135,7 @@
         许可范围：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="scope" class="showTextArea">{{data.scope}}</div>
+        <div nz-tooltip nzPlacement="scope" style="height: 40px;" class="showTextArea">{{data.scope}}</div>
       </div>
     </div>
 
@@ -144,7 +144,7 @@
         许可条件：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="condition" class="showTextArea">{{data.notconditione}}</div>
+        <div nz-tooltip nzPlacement="condition"  class="showTextArea">{{data.condition}}</div>
       </div>
     </div>
 

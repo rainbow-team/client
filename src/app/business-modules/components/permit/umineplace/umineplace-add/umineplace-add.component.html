@@ -9,8 +9,7 @@
         <span class="clo_r">*</span>营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.umineId" style="width: 100%" required nzShowSearch nzAllowClear
-          nzPlaceHolder="铀矿冶单位" (ngModelChange)="changeunitUminePlaces($event)">
+        <nz-select [(ngModel)]="data.umineId" style="width: 100%" required nzShowSearch nzAllowClear (ngModelChange)="changeunitUminePlaces($event)">
           <nz-option *ngFor="let option of unitUmines" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -20,8 +19,7 @@
         <span class="clo_r">*</span>铀尾矿（渣）库名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.uminePlaceId" style="width: 100%" required nzShowSearch nzAllowClear
-          nzPlaceHolder="核设备单位信息">
+        <nz-select [(ngModel)]="data.uminePlaceId" style="width: 100%" required nzShowSearch nzAllowClear>
           <nz-option *ngFor="let option of unitUminePlaces" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -62,7 +60,8 @@
         <span class="clo_r">*</span>有效期限：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="validateTime" [(ngModel)]="data.validateTime" [validation]="true" />
+        <nz-date-picker name="validateTime" [(ngModel)]="data.validateTime" [validation]="true" >
+        </nz-date-picker>
       </div>
     </div>
 
@@ -134,7 +133,7 @@
         <span class="clo_r">*</span>有效期限：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="validateTime" class="showText">{{data.validateTime}}</span>
+        <span name="validateTime" class="showText">{{data.validateTime|recordtime}}</span>
       </div>
     </div>
 

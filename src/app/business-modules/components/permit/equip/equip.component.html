@@ -95,6 +95,7 @@
             <th>许可时间</th>
             <th>有效期限</th>
             <th>许可文号</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody>
@@ -106,6 +107,7 @@
             <td>{{ data.typeValue }}</td>
             <td>{{ data.levelValue }}</td>
             <td>{{ data.stageValue }}</td>
+            <td>{{ data.permitDate | recordtime }}</td>
             <td>{{ data.validateTime | recordtime }}</td>
             <td>{{ data.licence }}</td>
             <td>

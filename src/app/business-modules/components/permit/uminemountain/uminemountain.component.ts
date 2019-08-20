@@ -25,8 +25,8 @@ export class UminemountainPermitComponent implements OnInit {
 
   umineName: any = '';
   umineMountainName: any = '';
-  recordtime: any = '';
-  acceptDate: any = '';
+  recordtime: any = [];
+  acceptDate: any = [];
 
   selectId: any = "";
 
@@ -63,18 +63,26 @@ export class UminemountainPermitComponent implements OnInit {
         value: this.umineMountainName
       });
     }
-    if (this.recordtime) {
-      option.conditions.push({
-        key: 'recordtime',
-        value: this.recordtime
-      });
+    if (this.recordtime && this.recordtime.length > 0) {
+      if (this.recordtime[0]) {
+        option.conditions.push({ key: "record_start_date", value: this.recordtime[0] })
+      }
+
+      if (this.recordtime[1]) {
+        option.conditions.push({ key: "record_end_date", value: this.recordtime[1] })
+      }
     }
-    if (this.acceptDate) {
-      option.conditions.push({
-        key: 'acceptDate',
-        value: this.acceptDate
-      });
+
+    if (this.acceptDate && this.acceptDate.length > 0) {
+      if (this.acceptDate[0]) {
+        option.conditions.push({ key: "accept_start_date", value: this.acceptDate[0] })
+      }
+
+      if (this.acceptDate[1]) {
+        option.conditions.push({ key: "accept_end_date", value: this.acceptDate[1] })
+      }
     }
+    
     if (this.uminemountainId) {
       option.conditions.push({
         key: 'uminemountainId',

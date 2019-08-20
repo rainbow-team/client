@@ -12,7 +12,7 @@
     <div nz-col [nzSpan]="5">
       许可阶段
       <nz-select [(ngModel)]="stageIds" class="w200" nzMode="multiple">
-        <nz-option *ngFor="let option of dictionary.config_equip_permit_stage" [nzLabel]="option.value"
+        <nz-option *ngFor="let option of dictionary.config_umine_place_permit_stage" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
       </nz-select>
@@ -75,7 +75,7 @@
             <td>{{ data.uminePlaceName }}</td>
             <td>{{ data.stageValue }}</td>
             <td>{{ data.permitDate | recordtime }}</td>
-            <td>{{ data.validateTime }}</td>
+            <td>{{ data.validateTime | recordtime }}</td>
             <td>{{ data.licence }}</td>
             <td>
               <a (click)="show(data)">查看</a>

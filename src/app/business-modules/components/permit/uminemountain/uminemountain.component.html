@@ -11,11 +11,11 @@
     </div>
     <div nz-col [nzSpan]="5">
       备案时间
-      <nz-date-picker class="w200" [(ngModel)]="recordtime"> </nz-date-picker>
+      <nz-range-picker class="w200" [nzFormat]="yyyy/MM/dd" [(ngModel)]="recordtime"> </nz-range-picker>
     </div>
     <div nz-col [nzSpan]="5">
       验收时间
-      <nz-date-picker class="w200" [(ngModel)]="acceptDate"> </nz-date-picker>
+      <nz-range-picker class="w200" [nzFormat]="yyyy/MM/dd" [(ngModel)]="acceptDate"> </nz-range-picker>
     </div>
 
     <div nz-col [nzSpan]="4" class="ta_r">

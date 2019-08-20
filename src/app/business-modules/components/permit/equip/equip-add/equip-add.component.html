@@ -16,8 +16,7 @@
         <span class="clo_r">*</span>核设备单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.equipDepartId" style="width:100%" nzShowSearch required nzAllowClear
-          nzPlaceHolder="核设备单位信息">
+        <nz-select [(ngModel)]="data.equipDepartId" style="width:100%" nzShowSearch required nzAllowClear>
           <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -30,7 +29,7 @@
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select name="serviceId" [(ngModel)]="data.serviceId" style="width: 100%" [validation]="true" nzShowSearch
-          required nzAllowClear nzPlaceHolder="核设施营运单位" (ngModelChange)="serviceDepartChange($event)">
+          required nzAllowClear  (ngModelChange)="serviceDepartChange($event)">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -40,8 +39,7 @@
         <span class="clo_r">*</span>核设施：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.facId" style="width: 100%" [validation]="true" nzShowSearch nzAllowClear
-          nzPlaceHolder="核设施">
+        <nz-select [(ngModel)]="data.facId" style="width: 100%" [validation]="true" nzShowSearch nzAllowClear>
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -53,8 +51,7 @@
         <span class="clo_r">*</span>设备类别：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.typeId" style="width: 100%" nzShowSearch required nzAllowClear
-          nzPlaceHolder="设备类别">
+        <nz-select [(ngModel)]="data.typeId" style="width: 100%" nzShowSearch required nzAllowClear>
           <nz-option *ngFor="let option of dictionary.config_equip_type" [nzLabel]="option.value" [nzValue]="option.id">
           </nz-option>
         </nz-select>

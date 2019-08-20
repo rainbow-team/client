@@ -87,11 +87,11 @@
             <td>{{ (pageIndex - 1) * pageSize + 1 + index }}</td>
             <td>{{ data.serviceDepartName }}{{data.equipDepartName}}</td>
             <td>{{ data.facName }}</td>
-            <td>{{ data.name }}</td>
-            <td>{{ data.content }}</td>
+            <td nz-tooltip nzTitle={{data.name}}>{{ data.name|tooltips:5 }}</td>
+            <td nz-tooltip nzTitle={{data.content}}>{{ data.content|tooltips:5 }}</td>
             <td>{{ data.typeValue }}</td>
             <td>{{ data.permitDate | recordtime }}</td>
-            <td>{{ data.validateTime }}</td>
+            <td>{{ data.validateTime | recordtime }}</td>
             <td>{{ data.licence }}</td>
             <td>
                 <a (click)="show(data)">查看</a>
