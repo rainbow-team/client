@@ -1,12 +1,12 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="7">
-      培训开始时间
-      <nz-range-picker class="w200" [(ngModel)]="px_date" ></nz-range-picker>
-    </div>
     <div nz-col [nzSpan]="5">
       培训班次
       <input nz-input nzSize="default" class="w200" [(ngModel)]="batch">
+    </div>
+    <div nz-col [nzSpan]="7">
+      培训开始时间
+      <nz-range-picker class="w200" [(ngModel)]="px_date" ></nz-range-picker>
     </div>
     <div nz-col [nzSpan]="5">
       培训地点
@@ -25,7 +25,7 @@
 
       </div>
       <div class="fl" style="color: #0050b3;">
-        核安全监管员培训列表（共{{totalCount}}条）
+        核安全监督员培训列表（共{{totalCount}}条）
       </div>
 
       <div class="fr">

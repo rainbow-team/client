@@ -104,11 +104,11 @@ export class OperatorlisenceComponent implements OnInit {
     }
   }
 
-  delete(item) {
+  delete() {
 
     if (this.selectId) {
 
-      this.operatorLisenceSercice.deleteOperatorLisenceByIds([item.id]).subscribe((res) => {
+      this.operatorLisenceSercice.deleteOperatorLisenceByIds([this.selectId]).subscribe((res) => {
 
         if (res.code == 200) {
           this.msg.create("success", "删除成功");

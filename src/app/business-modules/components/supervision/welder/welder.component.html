@@ -53,23 +53,23 @@
         (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
         <thead>
           <tr>
-            <th>序号</th>
-            <th>人员姓名</th>
-            <th>聘用单位</th>
-            <th>考试合格项目代号</th>
-            <th>有效期限</th>
-            <th>操作</th>
+            <th style="width: 5%">序号</th>
+            <th style="width: 10%">姓名</th>
+            <th style="width: 10%">聘用单位</th>
+            <th style="width: 50%">考试合格项目代号</th>
+            <th style="width: 10%">有效期限</th>
+            <th style="width: 5%">操作</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of nestedTable.data;index as index"
           [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
-            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-            <td>{{data.name}}</td>
-            <td>{{data.employDepart}}</td>
-            <td>{{data.examProject}}</td>
-            <td>{{data.expireDate|recordtime}}</td>
-            <td>
+            <td style="width: 5%">{{(pageIndex-1)*pageSize+1+index}}</td>
+            <td style="width: 10%">{{data.name}}</td>
+            <td style="width: 10%">{{data.employDepart}}</td>
+            <td style="width: 50%" nz-tooltip nzTitle={{data.examProject}}>{{data.examProject|tooltips:40 }}</td>
+            <td style="width: 10%">{{data.expireDate|recordtime}}</td>
+            <td style="width: 5%">
               <a (click)="show(data)">查看</a>
             </td>
           </tr>

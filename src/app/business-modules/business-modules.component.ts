@@ -58,13 +58,13 @@ export class BusinessModulesComponent implements OnInit {
                 this.breadcrumbList = ["监管信息", "核安全监管机构信息", "授权监管机构基本信息", "添加"];
                 break;
             case "/supersivion/supervisor":
-                this.breadcrumbList = ["监管信息", "核安全监管员信息"];
+                this.breadcrumbList = ["监管信息", "核安全监督员信息"];
                 break;
             case "/supersivion/supervisor/add":
-                this.breadcrumbList = ["监管信息", "核安全监管员信息", "添加"];
+                this.breadcrumbList = ["监管信息", "核安全监督员信息", "添加"];
                 break;
             case "/supersivion/supervisor/childmanage":
-                this.breadcrumbList = ["监管信息", "核安全监管员信息", "子项管理"];
+                this.breadcrumbList = ["监管信息", "核安全监督员信息", "子项管理"];
                 break;
             case "/supersivion/monitorTrain":
                 this.breadcrumbList = ["监管信息", "核安全监督培训信息"];

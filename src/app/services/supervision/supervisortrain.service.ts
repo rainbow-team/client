@@ -31,7 +31,13 @@ export class SupervisionTrainService {
         return this.http.get('/supervisiontrain/getMonitorTrainById?id=' + id);
     }
 
-    deleteMonitorTrainByIds(ids): any {
-        return this.http.post('/supervisiontrain/deleteMonitorTrainByIds', ids);
+    // deleteMonitorTrainByIds(ids): any {
+    //     return this.http.post('/supervisiontrain/deleteMonitorTrainByIds', ids);
+    // }
+
+    deleteMonitorTrainById(id): any {
+        return this.http.post('/supervisiontrain/deleteMonitorTrainById', id);
     }
+
+    
 }

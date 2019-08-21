@@ -1,13 +1,13 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
+    <div nz-col [nzSpan]="5">
+      培训班次
+      <input nz-input nzSize="default" [(ngModel)]="batch" class="w200">
+    </div>
     <div nz-col [nzSpan]="7">
         培训开始时间
       <nz-range-picker class="w200" [(ngModel)]="px_date" >
         </nz-range-picker>
-    </div>
-    <div nz-col [nzSpan]="5">
-      培训班次
-      <input nz-input nzSize="default" [(ngModel)]="batch" class="w200">
     </div>
     <div nz-col [nzSpan]="5">
       培训地点

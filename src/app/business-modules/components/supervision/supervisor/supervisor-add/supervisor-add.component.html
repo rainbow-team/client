@@ -45,7 +45,7 @@
 
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
-            <span class="clo_r">*</span>监督员类别：
+            <span class="clo_r">*</span>证件类别：
             <nz-select nzAllowClear [(ngModel)]="data.typeId" class="w200" required  [validation]="true">
               <nz-option *ngFor="let option of dictionary.config_supervisor_type" [nzLabel]="option.value"
                 [nzValue]="option.id">
@@ -139,9 +139,14 @@
             专业：
             <input nz-input name="major" [(ngModel)]="data.major" class="w200"  />
           </div>
-          <div nz-col [nzSpan]="8" class="ta_r">
+        </div>
+
+        <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+          <div nz-col [nzSpan]="4" class="ta_r">
             备注：
-            <input nz-input name="note" [(ngModel)]="data.note" class="w200" />
+          </div>
+          <div nz-col [nzSpan]="20" class="ta_l">
+            <input nz-input name="note" style="height: 70px;" [(ngModel)]="data.note"/>
           </div>
         </div>
 
@@ -191,7 +196,7 @@
             </div>
           
             <div nz-col [nzSpan]="3" class="ta_r">
-                监督员类别：
+                证件类别：
               </div>
               <div nz-col [nzSpan]="5" class="ta_l">
                 <span name="name">{{data.typeValue}}</span>

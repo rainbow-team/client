@@ -128,7 +128,7 @@
 
 
   <nz-modal [(nzVisible)]="isAssociateVisible" nzTitle="关联培训信息" nzOkText="确定" nzCancelText="取消" (nzOnOk)="ConfirmAssociate()"
-    (nzOnCancel)="isAssociateVisible=false;" nzWidth="900">
+    (nzOnCancel)="isAssociateVisible=false;" nzWidth="1000px">
 
     <div style="position:relative;min-height:300px;">
       <div nz-row style="height: 50px" [nzType]="'flex'" [nzAlign]="'middle'">
@@ -147,25 +147,25 @@
           (nzPageIndexChange)="pageIndexAssociateChange($event)">
           <thead>
             <tr>
-              <th nzWidth="67px">序号</th>
-              <th nzWidth="98px">培训班次</th>
-              <th nzWidth="129px">培训开始日期</th>
-              <th nzWidth="130px">培训结束日期</th>
-              <th nzWidth="98px">培训地点</th>
-              <th nzWidth="99px">参培人数</th>
-              <th nzWidth="146px">培训内容及讲师</th>
+              <th style="width: 5%">序号</th>
+              <th style="width: 15%">培训班次</th>
+              <th style="width: 15%">培训开始日期</th>
+              <th style="width: 15%">培训结束日期</th>
+              <th style="width: 15%">培训地点</th>
+              <th style="width: 10%">参培人数</th>
+              <th style="width: 25%">培训内容及讲师</th>
               <!-- <th nzWidth="68px">备注</th> -->
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let data of nestedTableAssociate.data;index as index" (click)="clickAssociateItem(data)" [ngClass]="{true:'table_select',false:''}[selectAssociateItem.id==data.id]">
-              <td>{{(pageIndexAssociate-1)*pageSizeAssociate+1+index}}</td>
-              <td>{{data.batch}}</td>
-              <td>{{data.beginDate|recordtime}}</td>
-              <td>{{data.endDate|recordtime}}</td>
-              <td>{{data.place}}</td>
-              <td>{{data.number}}</td>
-              <td>{{data.content}}</td>
+              <td style="width: 5%">{{(pageIndexAssociate-1)*pageSizeAssociate+1+index}}</td>
+              <td style="width: 15%">{{data.batch}}</td>
+              <td style="width: 15%">{{data.beginDate|recordtime}}</td>
+              <td style="width: 15%">{{data.endDate|recordtime}}</td>
+              <td style="width: 15%">{{data.place}}</td>
+              <td style="width: 10%">{{data.number}}</td>
+              <td style="width: 25%" nz-tooltip nzTitle={{data.content}}>{{data.content|tooltips:10}}</td>
               <!-- <td>{{data.note}}</td> -->
             </tr>
           </tbody>
