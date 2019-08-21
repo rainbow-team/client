@@ -75,7 +75,7 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        建造年代：
+        <span class="clo_r">*</span>建造年代：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-year-picker name="buildYear" [(ngModel)]="data.buildYear" required [validation]="true">
@@ -96,7 +96,7 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        设施状态：
+        <span class="clo_r">*</span>设施状态：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.statusId" required [validation]="true" style="width: 100%">
@@ -121,7 +121,7 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        许可情况：
+        <span class="clo_r">*</span>许可情况：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.permitSituationId" required [validation]="true" style="width: 100%">
@@ -134,7 +134,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>校核洪水重现期：
+        校核洪水重现期：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="checkFloodReproduce" [(ngModel)]="data.checkFloodReproduce" />
@@ -150,14 +150,14 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>设计有效库容：
+        设计有效库容：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="capacity" [(ngModel)]="data.capacity" />
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        是否设置坝体监测设施：
+        <span class="clo_r">*</span>是否设置坝体监测设施：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.haveMonitor"  required [validation]="true"  style="width: 100%">
@@ -169,7 +169,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>初期坝型：
+        初期坝型：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="earlyDamType" [(ngModel)]="data.earlyDamType" />

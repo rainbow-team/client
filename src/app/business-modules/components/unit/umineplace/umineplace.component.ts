@@ -26,7 +26,8 @@ export class UmineplaceComponent implements OnInit {
 
   name: any = "";
   umineName: any = "";
-  build_year: any = [];
+  build_start_year: any = "";
+  build_end_year: any = "";
   levelIds: any = [];
   statusIds: any = [];
   reviewStatusIds: any = [];
@@ -64,15 +65,12 @@ export class UmineplaceComponent implements OnInit {
       option.conditions.push({ key: "umineName", value: this.umineName })
     }
 
-    if (this.build_year && this.build_year.length > 0) {
+    if (this.build_start_year) {
+      option.conditions.push({ key: "build_start_year", value: this.build_start_year })
+    }
 
-      if (this.build_year[0]) {
-        option.conditions.push({ key: "start_date", value: this.build_year[0] })
-      }
-
-      if (this.build_year[1]) {
-        option.conditions.push({ key: "end_date", value: this.build_year[1] })
-      }
+    if (this.build_end_year) {
+      option.conditions.push({ key: "build_end_year", value: this.build_end_year })
     }
 
     if (this.levelIds.length > 0) {
@@ -106,7 +104,8 @@ export class UmineplaceComponent implements OnInit {
   reset() {
     this.name = "";
     this.umineName = "";
-    this.build_year = [];
+    this.build_start_year = "";
+    this.build_end_year="";
     this.levelIds = [];
     this.statusIds = [];
     this.reviewStatusIds = [];

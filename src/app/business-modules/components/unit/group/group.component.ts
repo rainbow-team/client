@@ -96,10 +96,10 @@ export class GroupComponent implements OnInit {
     }
   }
 
-  delete(item) {
+  delete() {
 
     if (this.selectId) {
-      this.groupSercice.deleteGroupById(item.id).subscribe((res) => {
+      this.groupSercice.deleteGroupById(this.selectId).subscribe((res) => {
 
         if (res.code == 200) {
           this.msg.create("success", "删除成功");

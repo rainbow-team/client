@@ -53,13 +53,16 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>参建单位：
+        参建单位：
       </div>
-      <div nz-col [nzSpan]="8" class="ta_l">
+      <div nz-col [nzSpan]="20" class="ta_l">
         <input nz-input name="builder" [(ngModel)]="data.builder" />
       </div>
+    </div>
+
+    <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        营运单位：
+        <span class="clo_r">*</span>营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.serviceId" style="width: 100%" required [validation]="true">
@@ -71,13 +74,13 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>建造年代：
+        建造年代：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-year-picker [(ngModel)]="data.buildYear"></nz-year-picker>
       </div>
       <div nz-col [nzSpan]="4" class="ta_r">
-        监管类别：
+        <span class="clo_r">*</span>监管类别：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.supervisionCategoryId" style="width: 100%" required [validation]="true">
@@ -100,7 +103,7 @@
         </nz-select>
       </div>
       <div nz-col [nzSpan]="4" class="ta_r">
-        设施状态：
+        <span class="clo_r">*</span>设施状态：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.statusId" style="width: 100%" required [validation]="true">
@@ -123,7 +126,7 @@
         </nz-select>
       </div>
       <div nz-col [nzSpan]="4" class="ta_r">
-        许可情况：
+        <span class="clo_r">*</span>许可情况：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.facPermitSituationId" style="width: 100%" required [validation]="true">
@@ -145,13 +148,23 @@
         </nz-select>
       </div>
       <div nz-col [nzSpan]="4" class="ta_r">
-        是否满足防洪要求：
+        <span class="clo_r">*</span>是否满足防洪要求：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.isFlood" style="width: 100%" required [validation]="true">
           <nz-option *ngFor="let option of sFList" [nzLabel]="option.value" [nzValue]="option.id">
           </nz-option>
         </nz-select>
+      </div>
+    </div>
+
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        工作人员剂量约束：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input nz-input name="measure" [(ngModel)]="data.measure"/>
       </div>
     </div>
 
@@ -194,14 +207,6 @@
       </div>
     </div>
 
-    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        工作人员剂量约束：
-      </div>
-      <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="measure" style="height: 70px;" [(ngModel)]="data.measure"></textarea>
-      </div>
-    </div>
 
     <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
 
@@ -211,7 +216,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>核设施名称：
+        核设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="name" class="showText">{{data.name}}</span>
@@ -226,11 +231,14 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>参建单位：
+        参建单位：
       </div>
-      <div nz-col [nzSpan]="8" class="ta_l">
+      <div nz-col [nzSpan]="20" class="ta_l">
         <span name="builder" class="showText">{{data.builder}}</span>
       </div>
+    </div>
+
+    <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
         营运单位：
       </div>
@@ -241,7 +249,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>建造年代：
+        建造年代：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="buildYear" class="showText">{{data.buildYear|recordtime}}</span>
@@ -256,7 +264,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>设施类型：
+        设施类型：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="typeValue" class="showText">{{data.typeValue}}</span>
@@ -271,7 +279,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>审评状态：
+        审评状态：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="reviewStatusValue" class="showText">{{data.reviewStatusValue}}</span>
@@ -286,7 +294,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>是否满足抗震设防等级：
+        是否满足抗震设防等级：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="isEarthquake" class="showText">{{data.isEarthquake|isTrue}}</span>
@@ -296,6 +304,15 @@
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="isFlood" class="showText">{{data.isFlood|isTrue}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" class="ta_r">
+        工作人员剂量约束：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <div class="showText">{{data.measure}}</div>
       </div>
     </div>
 
@@ -336,14 +353,7 @@
       </div>
     </div>
 
-    <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        工作人员剂量约束：
-      </div>
-      <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.measure}}</div>
-      </div>
-    </div>
+
 
     <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
   </div>

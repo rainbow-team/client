@@ -59,7 +59,7 @@
     </div> -->
   
     <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消" (nzOnOk)="save();"
-      (nzOnCancel)="isVisible=false;" nzWidth="700" [nzOkLoading]="isSaving">
+      (nzOnCancel)="isVisible=false;" nzWidth="700px" [nzOkLoading]="isSaving">
   
       <div style="padding: 10px 30px 50px 0;">
   
@@ -75,7 +75,7 @@
   
           <div nz-col [nzSpan]="24" class="ta_r">
             <div class="div_bz" style="width: 107px;"><span class="clo_r">*</span>安技改内容：</div>
-            <textarea nz-input name="improveContent" style="width: calc(100% - 110px);height: 70px;"
+            <textarea nz-input name="improveContent" style="width: calc(100% - 110px);height: 100px;"
               [(ngModel)]="data.improveContent"  required [validation]="true"></textarea>
           </div>
   
@@ -83,7 +83,7 @@
       </div>
     </nz-modal>
   
-    <nz-modal [(nzVisible)]="isShow" nzTitle="安技改信息详情" nzOkText="关闭" nzWidth="700" (nzOnCancel)="handleCancel()"
+    <nz-modal [(nzVisible)]="isShow" nzTitle="安技改信息详情" nzOkText="关闭" nzWidth="700px" (nzOnCancel)="handleCancel()"
     (nzOnOk)="handleOk()">
   
     <div style="padding: 10px 30px 50px 0;">

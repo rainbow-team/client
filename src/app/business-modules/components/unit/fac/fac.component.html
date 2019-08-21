@@ -24,9 +24,11 @@
 
   <div nz-row style="height: 40px;">
 
-    <div nz-col [nzSpan]="7">
-      建造年代:
-      <nz-year-picker class="w200" [(ngModel)]="build_year"></nz-year-picker>
+    <div nz-col [nzSpan]="10">
+      建造年代：
+      <nz-year-picker [nzSize]="small" [(ngModel)]="build_start_year" ></nz-year-picker>
+      至
+      <nz-year-picker  [nzSize]="small"  [(ngModel)]="build_end_year" ></nz-year-picker>
     </div>
 
     <div nz-col [nzSpan]="7">

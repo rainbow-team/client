@@ -31,7 +31,7 @@
         <thead>
           <tr>
             <th>序号</th>
-            <th>年度报告时间</th>
+            <th>报告年度</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -60,7 +60,7 @@
 
         <div nz-row class="ma_b20">
             <div nz-col [nzSpan]="4" class="ta_r">
-                年度报告时间：
+              报告年度：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
               <nz-year-picker name="reportDate" [(ngModel)]="data.reportYear">
@@ -79,7 +79,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-          年度报告时间：
+        报告年度：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="reportYear">{{data.reportYear|recordtime:'year'}}</span>

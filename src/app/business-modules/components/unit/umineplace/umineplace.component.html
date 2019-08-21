@@ -1,17 +1,22 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="7">
-      营运单位：
-      <input nz-input nzSize="default" [(ngModel)]="umineName" class="w180">
-    </div>
-    <div nz-col [nzSpan]="7">
-      建造年代：
-      <nz-range-picker class="w180" [(ngModel)]="build_year" [nzFormat]="yyyy"></nz-range-picker>
-    </div>
     <div nz-col [nzSpan]="6">
-      名称
-      <input nz-input nzSize="default" [(ngModel)]="name" class="w180">
+      铀尾矿（渣）库名称
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w150">
     </div>
+
+    <div nz-col [nzSpan]="5">
+      营运单位：
+      <input nz-input nzSize="default" [(ngModel)]="umineName" class="w150">
+    </div>
+
+    <div nz-col [nzSpan]="9">
+      建造年代：
+      <nz-year-picker [nzSize]="small" [(ngModel)]="build_start_year" ></nz-year-picker>
+      至
+      <nz-year-picker  [nzSize]="small"  [(ngModel)]="build_end_year" ></nz-year-picker>
+    </div>
+
 
     <div nz-col [nzSpan]="4" class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
@@ -20,6 +25,16 @@
   </div>
 
   <div nz-row style="height: 40px;">
+
+    <div nz-col [nzSpan]="7">
+      铀尾矿(渣)等别：
+      <nz-select [(ngModel)]="levelIds" class="w200" nzMode="multiple">
+        <nz-option *ngFor="let option of dictionary.config_umine_place_level" [nzLabel]="option.value"
+          [nzValue]="option.id">
+        </nz-option>
+      </nz-select>
+    </div>
+
     <div nz-col [nzSpan]="7">
       设施状态：
       <nz-select [(ngModel)]="statusIds" class="w200" nzMode="multiple">
@@ -37,14 +52,7 @@
       </nz-select>
     </div>
 
-    <div nz-col [nzSpan]="7">
-      等别：
-      <nz-select [(ngModel)]="levelIds" class="w200" nzMode="multiple">
-        <nz-option *ngFor="let option of dictionary.config_umine_place_level" [nzLabel]="option.value"
-          [nzValue]="option.id">
-        </nz-option>
-      </nz-select>
-    </div>
+
 
   </div>
 

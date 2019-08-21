@@ -129,6 +129,7 @@ export class FacReportComponent implements OnInit {
   //查看与编辑
   show(param) {
 
+    this.fileList = [];
     this.data = param;
 
     this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {

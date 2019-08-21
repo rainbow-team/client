@@ -28,7 +28,8 @@ export class FacComponent implements OnInit {
   name: any = "";
   code: any = "";
   serviceDepart: any = "";
-  build_year: any = [];
+  build_start_year: any = "";
+  build_end_year: any = "";
   supervisionCategoryIds: any = [];
   typeIds: any = [];
   statusIds: any = [];
@@ -82,17 +83,14 @@ export class FacComponent implements OnInit {
       option.conditions.push({ key: "serviceDepart", value: this.serviceDepart })
     }
 
-
-    if (this.build_year && this.build_year.length > 0) {
-
-      if (this.build_year[0]) {
-        option.conditions.push({ key: "start_date", value: this.build_year[0] })
-      }
-
-      if (this.build_year[1]) {
-        option.conditions.push({ key: "end_date", value: this.build_year[1] })
-      }
+    if (this.build_start_year) {
+      option.conditions.push({ key: "build_start_year", value: this.build_start_year })
     }
+
+    if (this.build_end_year) {
+      option.conditions.push({ key: "build_end_year", value: this.build_end_year })
+    }
+
 
     if (this.supervisionCategoryIds && this.supervisionCategoryIds.length > 0) {
       option.conditions.push({ key: "supervisionCategoryIds", value: this.supervisionCategoryIds })
@@ -134,7 +132,8 @@ export class FacComponent implements OnInit {
     this.name = "";
     this.code = "";
     this.serviceDepart = "";
-    this.build_year = "";
+    this.build_start_year = "";
+    this.build_end_year="";
     this.supervisionCategoryIds = [];
     this.typeIds = [];
     this.statusIds = [];
