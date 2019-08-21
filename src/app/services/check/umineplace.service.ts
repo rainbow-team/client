@@ -22,7 +22,7 @@ export class UmineplaceCheckSercice {
 
     getUmineplaceCheckById(id): any {
 
-        return this.http.get('/umineplacecheck/geUminePlaceCheckById?id=' + id);
+        return this.http.post('/umineplacecheck/geUminePlaceCheckById' , id);
 
     }
 

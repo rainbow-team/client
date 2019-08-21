@@ -3,7 +3,7 @@
     核安全设备审评信息
   </div> -->
   <nz-tabset>
-    <nz-tab nzTitle="核设施审评信息">
+    <nz-tab nzTitle="核安全设备审评信息">
       <div class="div_contain_add_tab" *ngIf="isShow==false">
 
         <div nz-row class="ma_b20">
@@ -87,7 +87,7 @@
             </nz-date-picker>
           </div>
         </div>
-        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+        <!-- <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment> -->
 
       </div>
 
@@ -152,7 +152,7 @@
             <span name="checkDate" class="showText">{{data.checkDate|recordtime}}</span>
           </div>
         </div>
-        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+        <!-- <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment> -->
 
       </div>
     </nz-tab>

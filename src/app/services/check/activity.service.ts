@@ -21,7 +21,7 @@ export class ActivityCheckSercice {
 
     getActivityCheckById(id): any {
 
-        return this.http.get('/activitycheck/geActivityCheckById?id=' + id);
+        return this.http.post('/activitycheck/geActivityCheckById',id);
 
     }
 

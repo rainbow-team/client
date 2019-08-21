@@ -21,7 +21,7 @@ export class EquipCheckService {
 
     getEquipCheckById(id): any {
 
-        return this.http.get('/equipcheck/geEquipCheckById?id=' + id);
+        return this.http.post('/equipcheck/geEquipCheckById', id);
 
     }
 

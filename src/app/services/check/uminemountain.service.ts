@@ -21,7 +21,7 @@ export class UminemountainCheckSercice {
 
     getUminemountainCheckById(id): any {
 
-        return this.http.get('/uminemountaincheck/geUmineMountainCheckById?id=' + id);
+        return this.http.post('/uminemountaincheck/geUmineMountainCheckById' , id);
 
     }
 

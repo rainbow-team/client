@@ -26,7 +26,7 @@ export class CheckEquipAddComponent implements OnInit {
   isSaving = false;
   isShow = false;
   isAdd=false;
-  fileList = [];
+  // fileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -84,19 +84,19 @@ export class CheckEquipAddComponent implements OnInit {
         }
       });
 
-      this.attachmentSercice.getFileListById(id).subscribe((res1) => {
+      // this.attachmentSercice.getFileListById(id).subscribe((res1) => {
 
-        if (res1.msg.length > 0) {
-          res1.msg.forEach(element => {
-            this.fileList.push({
-              response: {
-                msg: element.fileinfoId
-              },
-              name: element.fileinfoClientFileName
-            });
-          });
-        }
-      })
+      //   if (res1.msg.length > 0) {
+      //     res1.msg.forEach(element => {
+      //       this.fileList.push({
+      //         response: {
+      //           msg: element.fileinfoId
+      //         },
+      //         name: element.fileinfoClientFileName
+      //       });
+      //     });
+      //   }
+      // })
     } else {
       this.isAdd=true;
       this.data.createDate = new Date();
@@ -113,11 +113,11 @@ export class CheckEquipAddComponent implements OnInit {
     this.isSaving = true;
     this.data.attachmentList = [];
 
-    if (this.fileList.length > 0) {
-      this.fileList.forEach(element => {
-        this.data.attachmentList.push({ fileinfoId: element.response.msg });
-      });
-    }
+    // if (this.fileList.length > 0) {
+    //   this.fileList.forEach(element => {
+    //     this.data.attachmentList.push({ fileinfoId: element.response.msg });
+    //   });
+    // }
 
     this.data.modifyId = this.staffObj.id;
     this.equipCheckService.saveOrUpdateEquipCheck(this.data).subscribe((res) => {

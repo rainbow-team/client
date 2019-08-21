@@ -11,17 +11,17 @@
       </div>
 
       <div class="fr">
-          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
-        </div>
-  
-        <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
-        </div>
-  
-        <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
-        </div>
-  
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+      </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+      </div>
+
     </div>
     <div>
       <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
@@ -29,18 +29,19 @@
         (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
         <thead>
           <tr>
-            <th>序号</th>
-            <th>安技改时间</th>
-            <th>安技改内容</th>
-            <th>操作</th>
+            <th style="width: 10%">序号</th>
+            <th style="width: 20%">安技改时间</th>
+            <th style="width: 50%">安技改内容</th>
+            <th style="width: 10%">操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index"  [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
-            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-            <td>{{data.improveDate|recordtime}}</td>
-            <td>{{data.improveContent}}</td>
-            <td>
+          <tr *ngFor="let data of nestedTable.data;index as index"
+            [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
+            <td style="width: 10%">{{(pageIndex-1)*pageSize+1+index}}</td>
+            <td style="width: 20%">{{data.improveDate|recordtime}}</td>
+            <td style="width: 50%" nz-tooltip nzTitle={{data.improveContent}}>{{data.improveContent|tooltips:30}}</td>
+            <td style="width: 10%">
               <a (click)="show(data)">查看</a>
               <!-- <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data,false)">编辑</a>
@@ -84,29 +85,29 @@
   </nz-modal>
 
   <nz-modal [(nzVisible)]="isShow" nzTitle="安技改信息详情" nzOkText="关闭" nzWidth="700" (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()">
+    (nzOnOk)="handleOk()">
 
-  <div style="padding: 10px 30px 50px 0;">
+    <div style="padding: 10px 30px 50px 0;">
 
-    <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        安技改时间：
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          安技改时间：
+        </div>
+        <div nz-col [nzSpan]="8" class="ta_l">
+          <span name="improveDate">{{data.improveDate|recordtime}}</span>
+        </div>
       </div>
-      <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="improveDate">{{data.improveDate|recordtime}}</span>
+
+
+      <div nz-row class="ma_b20">
+        <div nz-col [nzSpan]="4" class="ta_r">
+          安技改内容：
+        </div>
+        <div nz-col [nzSpan]="20" class="ta_l">
+          <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.improveContent}}</div>
+        </div>
       </div>
     </div>
-
-
-    <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        安技改内容：
-      </div>
-      <div nz-col [nzSpan]="8" class="ta_l">
-        <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.improveContent}}</div>
-      </div>
-    </div>
-  </div>
-</nz-modal>
+  </nz-modal>
 
 </div>

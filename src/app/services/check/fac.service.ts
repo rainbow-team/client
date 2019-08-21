@@ -20,7 +20,7 @@ export class FacCheckSercice {
     }
 
     getFacCheckById(id): any {
-        return this.http.get('/faccheck/geFacCheckById?id=' + id);
+        return this.http.post('/faccheck/geFacCheckById',id);
     }
 
     deleteFacCheckById(id): any {
