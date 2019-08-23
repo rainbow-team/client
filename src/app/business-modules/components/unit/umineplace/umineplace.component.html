@@ -1,6 +1,6 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="6">
+    <div nz-col [nzSpan]="7">
       铀尾矿（渣）库名称
       <input nz-input nzSize="default" [(ngModel)]="name" class="w150">
     </div>
@@ -9,16 +9,18 @@
       营运单位：
       <input nz-input nzSize="default" [(ngModel)]="umineName" class="w150">
     </div>
-
-    <div nz-col [nzSpan]="9">
-      建造年代：
-      <nz-year-picker [nzSize]="small" [(ngModel)]="build_start_year" ></nz-year-picker>
-      至
-      <nz-year-picker  [nzSize]="small"  [(ngModel)]="build_end_year" ></nz-year-picker>
+    
+    <div nz-col [nzSpan]="7">
+      铀尾矿(渣)等别：
+      <nz-select [(ngModel)]="levelIds" class="w180" nzMode="multiple">
+        <nz-option *ngFor="let option of dictionary.config_umine_place_level" [nzLabel]="option.value"
+          [nzValue]="option.id">
+        </nz-option>
+      </nz-select>
     </div>
 
 
-    <div nz-col [nzSpan]="4" class="ta_r">
+    <div nz-col [nzSpan]="5"  class="ta_r">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
     </div>
@@ -26,13 +28,11 @@
 
   <div nz-row style="height: 40px;">
 
-    <div nz-col [nzSpan]="7">
-      铀尾矿(渣)等别：
-      <nz-select [(ngModel)]="levelIds" class="w200" nzMode="multiple">
-        <nz-option *ngFor="let option of dictionary.config_umine_place_level" [nzLabel]="option.value"
-          [nzValue]="option.id">
-        </nz-option>
-      </nz-select>
+    <div nz-col [nzSpan]="14">
+      建造年代：
+      <nz-year-picker [nzSize]="small" [(ngModel)]="build_start_year" ></nz-year-picker>
+      至
+      <nz-year-picker  [nzSize]="small"  [(ngModel)]="build_end_year" ></nz-year-picker>
     </div>
 
     <div nz-col [nzSpan]="7">
@@ -43,20 +43,19 @@
         </nz-option>
       </nz-select>
     </div>
+
+  </div>
+
+  <div nz-row style="height: 40px;">
+
     <div nz-col [nzSpan]="7">
       审评状态：
-      <nz-select [(ngModel)]="reviewStatusIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="reviewStatusIds" class="w150" nzMode="multiple">
         <nz-option *ngFor="let option of dictionary.config_review_status" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
-
-
-
-  </div>
-
-  <div nz-row style="height: 40px;">
 
     <div nz-col [nzSpan]="7">
       许可情况：

@@ -24,7 +24,7 @@
 
   <div nz-row style="height: 40px;">
 
-    <div nz-col [nzSpan]="10">
+    <div nz-col [nzSpan]="14">
       建造年代：
       <nz-year-picker [nzSize]="small" [(ngModel)]="build_start_year" ></nz-year-picker>
       至
@@ -39,6 +39,11 @@
         </nz-option>
       </nz-select>
     </div>
+
+  </div>
+
+  <div nz-row style="height: 40px;">
+
     <div nz-col [nzSpan]="7">
       设施类型:
       <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple" >
@@ -46,10 +51,6 @@
         </nz-option>
       </nz-select>
     </div>
-  </div>
-
-  <div nz-row style="height: 40px;">
-
 
     <div nz-col [nzSpan]="7">
       设施状态:
@@ -66,6 +67,11 @@
         </nz-option>
       </nz-select>
     </div>
+
+  </div>
+
+  <div nz-row style="height: 40px;">
+
     <div nz-col [nzSpan]="7">
       许可情况:
       <nz-select [(ngModel)]="permitSituationIds" class="w200" nzMode="multiple" >
@@ -74,18 +80,15 @@
         </nz-option>
       </nz-select>
     </div>
-  </div>
 
-  <div nz-row style="height: 40px;">
-
-    <div nz-col [nzSpan]="10">
+    <div nz-col [nzSpan]="8">
       是否满足防洪要求:
       <nz-select [(ngModel)]="is_earthquake" class="w200">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
         <nz-option nzValue="0" nzLabel="否"></nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="10">
+    <div nz-col [nzSpan]="8">
       是否满足抗震设防等级:
       <nz-select [(ngModel)]="is_flood" class="w200">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
