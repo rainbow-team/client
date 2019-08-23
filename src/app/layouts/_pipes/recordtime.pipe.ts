@@ -20,6 +20,10 @@ export class RecordtimePipe implements PipeTransform {
             result = result.split("-")[0];
         }
 
+        if (type == "month") {
+            result = result.split("-")[0]+"/"+result.split("-")[1];
+        }
+
         return result;
     }
 

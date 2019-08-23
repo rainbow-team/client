@@ -139,7 +139,7 @@ export class SupervisorAddComponent implements OnInit {
         return this.sexValue = "1";
       } else {
         //女
-        return this.sexValue = "2";
+        return this.sexValue = "0";
       }
     }
   }

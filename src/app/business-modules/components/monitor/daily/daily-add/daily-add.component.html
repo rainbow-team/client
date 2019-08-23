@@ -9,7 +9,7 @@
         <span class="clo_r">*</span>营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)">
+        <nz-select [(ngModel)]="data.serviceId" style="width: 100%"  required [validation]="true" (ngModelChange)="serviceDepartChange($event)">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -19,7 +19,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>设施名称：
+        设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.facId" style="width: 100%">
@@ -29,7 +29,7 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>设施状态：
+        设施状态：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.statusId" style="width: 100%">
@@ -44,7 +44,7 @@
         <span class="clo_r">*</span>授权监管机构：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.orgId" style="width: 100%">
+        <nz-select name="org" [(ngModel)]="data.orgId" style="width: 100%"  required [validation]="true">
           <nz-option *ngFor="let option of orgList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -53,17 +53,17 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>文件名称：
+        文件名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="fileName" [(ngModel)]="data.fileName" required [validation]="true" />
+        <input nz-input name="fileName" [(ngModel)]="data.fileName"/>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>文件类型：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.fileTypeId" style="width: 100%">
+        <nz-select [(ngModel)]="data.fileTypeId" style="width: 100%"  required [validation]="true">
           <nz-option *ngFor="let option of dictionary.config_monitor_daily_file_type" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
@@ -76,8 +76,8 @@
         <span class="clo_r">*</span>文件时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="fileDate" [(ngModel)]="data.fileDate" [validation]="true">
-        </nz-date-picker>
+        <nz-month-picker name="fileDate" [(ngModel)]="data.fileDate" [nzFormat]="yyyy/MM"  required [validation]="true">
+        </nz-month-picker>
       </div>
     </div>
 

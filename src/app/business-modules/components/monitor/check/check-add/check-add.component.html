@@ -16,7 +16,7 @@
             <span class="clo_r">*</span>营运单位：
           </div>
           <div nz-col [nzSpan]="20" class="ta_l">
-            <nz-select [(ngModel)]="data.serviceId" style="width: 100%" nzShowSearch nzAllowClear>
+            <nz-select [(ngModel)]="data.serviceId" style="width: 100%"  required [validation]="true">
               <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -28,7 +28,7 @@
             <span class="clo_r">*</span>铀矿冶单位：
           </div>
           <div nz-col [nzSpan]="20" class="ta_l">
-            <nz-select [(ngModel)]="data.umineId" style="width: 100%" nzShowSearch nzAllowClear>
+            <nz-select [(ngModel)]="data.umineId" style="width: 100%"  required [validation]="true">
               <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -40,7 +40,7 @@
             <span class="clo_r">*</span>核设备单位：
           </div>
           <div nz-col [nzSpan]="20" class="ta_l">
-            <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" nzShowSearch nzAllowClear>
+            <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" required [validation]="true">
               <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -52,7 +52,7 @@
             <span class="clo_r">*</span>检查类型：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.typeId" style="width: 100%">
+            <nz-select [(ngModel)]="data.typeId" style="width: 100%" required [validation]="true">
               <nz-option *ngFor="let option of dictionary.config_monitor_check_type" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
@@ -75,25 +75,27 @@
             <span class="clo_r">*</span>检查时间：
           </div>
           <div nz-col [nzSpan]="20" class="ta_l">
-            <nz-date-picker name="startDate" [(ngModel)]="data.startDate" class="w200" [validation]="true">
-            </nz-date-picker>
-            至
-            <nz-date-picker name="endDate" [(ngModel)]="data.endDate" class="w200" [validation]="true">
-            </nz-date-picker>
+            <nz-range-picker class="w200" [(ngModel)]="checkData" nzFormat="yyyy-MM-dd">
+            </nz-range-picker>
+            <!-- <nz-date-picker name="startDate" [(ngModel)]="data.startDate" class="w200"  required [validation]="true">
+                    </nz-date-picker>
+                    至
+                    <nz-date-picker name="endDate" [(ngModel)]="data.endDate" class="w200"  required [validation]="true">
+                    </nz-date-picker>
+                  </div> -->
           </div>
         </div>
 
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>检查内容：
+            检查内容：
           </div>
           <div nz-col [nzSpan]="20" class="ta_l">
-            <textarea nz-input name="content" style="height: 70px;" [(ngModel)]="data.content" required
-              [validation]="true"></textarea>
+            <textarea nz-input name="content" style="height: 70px;" [(ngModel)]="data.content"></textarea>
           </div>
         </div>
 
-        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+        <!-- <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment> -->
 
       </div>
 
@@ -154,7 +156,7 @@
             检查时间：
           </div>
           <div nz-col [nzSpan]="20" class="ta_l">
-            <span class="showText">{{data.startDate|recordtime}}至{{data.endDate|recordtime}}</span>
+            <span class="showText">{{checkData[0]|recordtime}}至{{checkData[1]|recordtime}}</span>
           </div>
         </div>
 
@@ -163,11 +165,11 @@
             检查内容：
           </div>
           <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzPlacement="content" class="showTextArea">{{data.content}}</div>
+            <div  class="showTextArea">{{data.content}}</div>
           </div>
         </div>
 
-        <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+        <!-- <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment> -->
 
       </div>
     </nz-tab>

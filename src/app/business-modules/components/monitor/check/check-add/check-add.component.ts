@@ -28,7 +28,7 @@ export class CheckAddComponent implements OnInit {
   isSaving = false;
   isShow = false;
   isAdd = false;
-  fileList = [];
+  // fileList = [];
 
   dictionary: any = {};
   staffObj: any = {};
@@ -104,21 +104,23 @@ export class CheckAddComponent implements OnInit {
         if (this.data.equipDepartId) {
           this.departType = "equip";
         }
+        this.checkData[0]=this.data.startDate;
+        this.checkData[1]=this.data.endDate;
       });
 
-      this.attachmentSercice.getFileListById(id).subscribe((res1) => {
+      // this.attachmentSercice.getFileListById(id).subscribe((res1) => {
 
-        if (res1.msg.length > 0) {
-          res1.msg.forEach(element => {
-            this.fileList.push({
-              response: {
-                msg: element.fileinfoId
-              },
-              name: element.fileinfoClientFileName
-            });
-          });
-        }
-      })
+      //   if (res1.msg.length > 0) {
+      //     res1.msg.forEach(element => {
+      //       this.fileList.push({
+      //         response: {
+      //           msg: element.fileinfoId
+      //         },
+      //         name: element.fileinfoClientFileName
+      //       });
+      //     });
+      //   }
+      // })
 
 
     } else {
@@ -140,11 +142,11 @@ export class CheckAddComponent implements OnInit {
     this.isSaving = true;
     this.data.attachmentList = [];
 
-    if (this.fileList.length > 0) {
-      this.fileList.forEach(element => {
-        this.data.attachmentList.push({ fileinfoId: element.response.msg });
-      });
-    }
+    // if (this.fileList.length > 0) {
+    //   this.fileList.forEach(element => {
+    //     this.data.attachmentList.push({ fileinfoId: element.response.msg });
+    //   });
+    // }
 
     this.data.modifyId = this.staffObj.id;
     if (this.departType == "fac") {
@@ -161,6 +163,19 @@ export class CheckAddComponent implements OnInit {
       this.data.serviceId = "";
       this.data.umineId = "";
     }
+
+    if (this.checkData && this.checkData.length > 0) {
+      if (this.checkData[0]) {
+        this.data.startDate=this.checkData[0];
+        //option.conditions.push({ key: "start_date", value: this.witness_date[0] })
+      }
+
+      if (this.checkData[1]) {
+        this.data.endDate=this.checkData[1];
+        //option.conditions.push({ key: "end_date", value: this.witness_date[1] })
+      }
+    }
+
     this.checkMonitorSercice.saveOrUpdateCheckMonitor(this.data).subscribe((res) => {
       if (res.code == 200) {
         this.msg.create('success', '保存成功');

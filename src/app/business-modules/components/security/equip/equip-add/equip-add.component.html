@@ -1,6 +1,6 @@
 <div style="height: 100%;background:#fff">
   <div class="div_top_add">
-    核设施设备安全问题
+    核安全设备安全问题
   </div>
   <div class="div_contain_add" *ngIf="isShow==false">
 
@@ -9,27 +9,26 @@
         <span class="clo_r">*</span>单位名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%">
+        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" required [validation]="true">
           <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>设备名称：
+        设备名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" style="width: 100%" required [validation]="true" />
+        <input nz-input name="name" [(ngModel)]="data.name" style="width: 100%"/>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>营运单位：
+        营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)"
-          nzShowSearch nzAllowClear>
+        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -51,7 +50,7 @@
         <span class="clo_r">*</span>检查类型：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.checkTypeId" style="width: 100%">
+        <nz-select [(ngModel)]="data.checkTypeId" style="width: 100%" required [validation]="true">
           <nz-option *ngFor="let option of dictionary.config_security_check_type" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
@@ -59,10 +58,10 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        问题类别：
+        <span class="clo_r">*</span>问题类别：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.questionTypeId" style="width: 100%" nzShowSearch nzAllowClear>
+        <nz-select [(ngModel)]="data.questionTypeId" style="width: 100%"  required [validation]="true">
           <nz-option *ngFor="let option of dictionary.config_equip_security_question_type" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
@@ -72,41 +71,38 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>发现时间：
+        发现时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="findDate" [(ngModel)]="data.findDate" style="width: 100%" [validation]="true">
+        <nz-date-picker name="findDate" [(ngModel)]="data.findDate" style="width: 100%">
         </nz-date-picker>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>问题内容：
+        问题内容：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="content" style="height: 70px;" [(ngModel)]="data.content" required
-          [validation]="true"></textarea>
+        <textarea nz-input name="content" style="height: 70px;" [(ngModel)]="data.content"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>监督要求：
+        监督要求：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="superviseRequire" style="height: 70px;" [(ngModel)]="data.superviseRequire" required
-          [validation]="true"></textarea>
+        <textarea nz-input name="superviseRequire" style="height: 70px;" [(ngModel)]="data.superviseRequire"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>整改方案：
+        整改方案：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="reformPlan" style="height: 70px;" [(ngModel)]="data.reformPlan" required
-          [validation]="true"></textarea>
+        <textarea nz-input name="reformPlan" style="height: 70px;" [(ngModel)]="data.reformPlan"></textarea>
       </div>
     </div>
 
@@ -116,7 +112,7 @@
         <span class="clo_r">*</span>整改状态：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.reformStatusId" style="width: 100%">
+        <nz-select [(ngModel)]="data.reformStatusId" style="width: 100%" required [validation]="true">
           <nz-option *ngFor="let option of dictionary.config_security_reform_status" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
@@ -124,11 +120,10 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>完成时间：
+        整改完成时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="reformCompleteDate" [(ngModel)]="data.reformCompleteDate" style="width: 100%"
-          [validation]="true">
+        <nz-date-picker name="reformCompleteDate" [(ngModel)]="data.reformCompleteDate" style="width: 100%">
         </nz-date-picker>
       </div>
     </div>
@@ -200,7 +195,7 @@
         问题内容：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="content" class="showTextArea">{{data.content}}</div>
+        <div  class="showTextArea">{{data.content}}</div>
       </div>
     </div>
 
@@ -209,7 +204,7 @@
         监督要求：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="superviseRequire" class="showTextArea">{{data.superviseRequire}}</div>
+        <div  class="showTextArea">{{data.superviseRequire}}</div>
       </div>
     </div>
 
@@ -218,7 +213,7 @@
         整改方案：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="reformPlan" class="showTextArea">{{data.reformPlan}}</div>
+        <div  class="showTextArea">{{data.reformPlan}}</div>
       </div>
     </div>
 
@@ -232,7 +227,7 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        完成时间：
+        整改完成时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="reformCompleteDate" class="showText">{{data.reformCompleteDate|recordtime}}</span>

@@ -16,7 +16,7 @@
         <span class="clo_r">*</span>核设施营运单位信息：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)"
+        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" required [validation]="true"  (ngModelChange)="serviceDepartChange($event)"
           nzShowSearch required nzAllowClear >
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
@@ -27,7 +27,7 @@
         <span class="clo_r">*</span>核设施信息：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.facId" style="width: 100%" nzShowSearch nzAllowClear>
+        <nz-select [(ngModel)]="data.facId" style="width: 100%"  required [validation]="true" >
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -39,7 +39,7 @@
         <span class="clo_r">*</span>核设备单位：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" nzShowSearch required nzAllowClear>
+        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" required [validation]="true" >
           <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -78,10 +78,10 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>有效期限：
+        有效期限：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="validateTime" [(ngModel)]="data.validateTime" [validation]="true" />
+        <nz-date-picker name="validateTime" [(ngModel)]="data.validateTime"></nz-date-picker>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -106,8 +106,7 @@
         许可条件：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="permitCondition" [(ngModel)]="data.permitCondition" required
-          [validation]="true"></textarea>
+        <textarea nz-input name="permitCondition" [(ngModel)]="data.permitCondition"></textarea>
       </div>
     </div>
 
@@ -116,7 +115,7 @@
         审评承诺：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="promise" [(ngModel)]="data.promise" required [validation]="true"></textarea>
+        <textarea nz-input name="promise" [(ngModel)]="data.promise"></textarea>
       </div>
     </div>
 
@@ -204,7 +203,7 @@
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
 
-        <div nz-tooltip nzPlacement="content" class="showTextArea">{{data.content}}</div>
+        <div  class="showTextArea">{{data.content}}</div>
       </div>
     </div>
 
@@ -213,7 +212,7 @@
         许可条件：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="permitCondition" class="showTextArea">{{data.permitCondition}}</div>
+        <div  class="showTextArea">{{data.permitCondition}}</div>
       </div>
     </div>
 
@@ -222,7 +221,7 @@
         审评承诺：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="promise" class="showTextArea">{{data.promise}}</div>
+        <div  class="showTextArea">{{data.promise}}</div>
       </div>
     </div>
 

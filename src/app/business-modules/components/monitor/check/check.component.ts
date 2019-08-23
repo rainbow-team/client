@@ -32,6 +32,12 @@ export class CheckComponent implements OnInit {
 
   name: any = "";
 
+  content:any="";
+
+  typeIds:any=[];
+
+  check_date:any=[];
+
   equipDepartIds: any = [];
 
   equipDepartList: any = [];
@@ -86,6 +92,23 @@ export class CheckComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
+    if (this.content) {
+      option.conditions.push({ key: "content", value: this.content })
+    }
+
+    if (this.typeIds.length > 0) {
+      option.conditions.push({ key: "typeIds", value: this.typeIds })
+    }
+
+    if (this.check_date && this.check_date.length > 0) {
+      if (this.check_date[0]) {
+        option.conditions.push({ key: "start_date", value: this.check_date[0] })
+      }
+
+      if (this.check_date[1]) {
+        option.conditions.push({ key: "end_date", value: this.check_date[1] })
+      }
+    }
 
     if (this.servicedepartId) {
       option.conditions.push({
@@ -119,6 +142,9 @@ export class CheckComponent implements OnInit {
 
   reset() {
     this.name = "";
+    this.content="";
+    this.typeIds=[];
+    this.check_date=[];
     //this.groupIds = [];
   }
 
@@ -153,10 +179,10 @@ export class CheckComponent implements OnInit {
     this.checkMonitorSercice.deleteCheckMonitorById(this.selectId).subscribe((res) => {
 
       if (res.code == 200) {
-        this.msg.create("success", "删除成功");
+        this.msg.create("success", res.msg);
         this.search();
       } else {
-        this.msg.create("error", "删除失败");
+        this.msg.create("error", res.msg);
       }
     })
 

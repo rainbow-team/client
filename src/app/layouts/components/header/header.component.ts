@@ -83,7 +83,7 @@ export class HeaderComponent implements OnInit {
       children: [
         { name: '核设施安全问题', id: 'fac', route: '/security/fac' },
         { name: '核安全设备安全问题', id: 'equip', route: '/security/equip' },
-        { name: '单位及铀尾矿（渣）库安全问题', id: 'umineplace', route: '/security/umineplace' },
+        { name: '铀尾矿(渣)库安全问题', id: 'umineplace', route: '/security/umineplace' },
         { name: '事故事件', id: 'accident', route: '/security/accident' }
       ]
     },

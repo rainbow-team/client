@@ -9,7 +9,7 @@
         <span class="clo_r">*</span>营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.umineId" style="width: 100%" required nzShowSearch nzAllowClear (ngModelChange)="changeunitUminePlaces($event)">
+        <nz-select [(ngModel)]="data.umineId" style="width: 100%"  required [validation]="true" (ngModelChange)="changeunitUmineMountains($event)">
           <nz-option *ngFor="let option of unitUmines" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -19,7 +19,7 @@
         <span class="clo_r">*</span>铀矿山名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.umineMountainId" style="width: 100%" required nzShowSearch nzAllowClear>
+        <nz-select [(ngModel)]="data.umineMountainId" style="width: 100%"  required [validation]="true">
           <nz-option *ngFor="let option of umineMountains" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -45,15 +45,15 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>验收时间：
+        验收时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="acceptDate" [(ngModel)]="data.acceptDate" [validation]="true">
+        <nz-date-picker name="acceptDate" [(ngModel)]="data.acceptDate">
         </nz-date-picker>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>验收文号：
+        验收文号：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="acceptNumber" [(ngModel)]="data.acceptNumber" />
@@ -153,7 +153,7 @@
         主要备案条件：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="recordCondition" class="showTextArea">{{data.recordCondition}}</div>
+        <div  class="showTextArea">{{data.recordCondition}}</div>
       </div>
     </div>
 
@@ -162,7 +162,7 @@
         审评承诺：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="reviewPromise" class="showTextArea">{{data.reviewPromise}}</div>
+        <div  class="showTextArea">{{data.reviewPromise}}</div>
       </div>
     </div>
 
@@ -171,7 +171,7 @@
         主要验收结论：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="acceptConclusion" class="showTextArea">{{data.acceptConclusion}}</div>
+        <div  class="showTextArea">{{data.acceptConclusion}}</div>
       </div>
     </div>
 

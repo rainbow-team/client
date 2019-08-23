@@ -131,12 +131,12 @@ export class UminemountainComponent implements OnInit {
       this.umineMountainService.deleteUmineMountainById(this.selectId).subscribe((res) => {
 
         if (res.code == 200) {
-          this.msg.create("success", "删除成功");
+          this.msg.create("success", res.msg);
           this.search();
         } else if (res.code == 500) {
           this.msg.create("warning", res.msg);
         } else {
-          this.msg.create("error", "删除失败");
+          this.msg.create("error", res.msg);
         }
       })
     } else {

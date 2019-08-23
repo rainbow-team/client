@@ -25,7 +25,7 @@
 
       </div>
       <div class="fl" style="color: #0050b3;">
-        铀矿山井下消防审评信息（共{{totalCount}}条）
+        铀矿山井下消防审查信息（共{{totalCount}}条）
       </div>
 
 
@@ -62,8 +62,8 @@
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.umineName}}</td>
             <td>{{data.umineMountainName}}</td>
-            <td>{{data.content}}</td>
-            <td>{{data.checkDate|recordtime}}</td>
+            <td nz-tooltip nzTitle={{data.content}}>{{data.content|tooltips:10}}</td>
+            <td>{{data.checkDate|recordtime:'month'}}</td>
             <td>
               <a (click)="show(data)">查看</a>
             </td>

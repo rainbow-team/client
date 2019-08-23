@@ -25,7 +25,7 @@
 
       </div>
       <div class="fl" style="color: #0050b3;">
-        核安全监督员培训列表（共{{totalCount}}条）
+        核安全监督培训信息列表（共{{totalCount}}条）
       </div>
 
       <div class="fr">
@@ -46,25 +46,29 @@
 
     </div>
     <div>
-      <nz-table #nestedTable1 [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
-      (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)" [nzFrontPagination]="false">
+        <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
         <thead>
           <tr>
             <!-- <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
             <th nzShowSort (nzSortChange)="sortBatch($event)" [nzSort]="sortBatchValue" style="width: 125px;">培训班次</th>
             <th nzShowSort (nzSortChange)="sortBeginDate($event)" [nzSort]="sortBeginDateValue" style="width: 150px;">培训开始日期</th>
             <th nzShowSort (nzSortChange)="sortEndDate($event)" [nzSort]="sortEndDateValue" style="width: 150px;">培训结束日期</th> -->
-            <th nzShowSort (nzSortChange)="sortBatch($event)" [nzSort]="sortBatchValue">培训班次</th>
-            <th nzShowSort (nzSortChange)="sortBeginDate($event)" [nzSort]="sortBeginDateValue">培训开始日期</th>
-            <th nzShowSort (nzSortChange)="sortEndDate($event)" [nzSort]="sortEndDateValue">培训结束日期</th>
+            <th>序号</th>
+            <th>培训班次</th>
+            <th>培训开始日期</th>
+            <th>培训结束日期</th>
+            <!-- <th nzShowSort (nzSortChange)="sortEndDate($event)" [nzSort]="sortEndDateValue">培训结束日期</th> -->
             <th>培训地点</th>
             <th>参培人数</th>
             <th>操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of dataSet" [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
+          <tr *ngFor="let data of dataSet;index as index" [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
             <!-- <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td> -->
+            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.batch}}</td>
             <td>{{data.beginDate|recordtime}}</td>
             <td>{{data.endDate|recordtime}}</td>

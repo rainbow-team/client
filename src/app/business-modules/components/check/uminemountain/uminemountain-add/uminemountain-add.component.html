@@ -25,11 +25,11 @@
           </div>
 
           <div nz-col [nzSpan]="3" class="ta_r">
-            审评时间：
+            审查时间：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate">
-            </nz-date-picker>
+            <nz-month-picker name="checkDate" [(ngModel)]="data.checkDate">
+            </nz-month-picker>
           </div>
 
         </div>
@@ -78,7 +78,7 @@
             <span class="clo_r">*</span>审查内容：
           </div>
           <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzPlacement="content" class="showTextArea">{{data.content}}</div>
+            <div  class="showTextArea">{{data.content}}</div>
           </div>
         </div>
 
@@ -87,7 +87,7 @@
       </div>
     </nz-tab>
 
-    <nz-tab nzTitle="审评文件" *ngIf="!isAdd">
+    <nz-tab nzTitle="审查文件" *ngIf="!isAdd">
       <app-uminemountain-file></app-uminemountain-file>
     </nz-tab>
 

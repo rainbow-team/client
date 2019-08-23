@@ -21,7 +21,7 @@ export class CheckMonitorSercice {
 
     getCheckMonitorById(id): any {
 
-        return this.http.get('/checkmonitor/geCheckMonitorById?id=' + id);
+        return this.http.post('/checkmonitor/geCheckMonitorById' , id);
 
     }
 

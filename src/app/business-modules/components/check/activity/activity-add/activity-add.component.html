@@ -5,14 +5,14 @@
       <div class="div_contain_add_tab" *ngIf="isShow==false">
         <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'">
           <nz-radio-group [(ngModel)]="activityType">
-            <label nz-radio nzValue="fac">核设施</label>
-            <label nz-radio nzValue="equip">核设备</label>
+            <label nz-radio nzValue="fac">核设施营运单位</label>
+            <label nz-radio nzValue="equip">核设备单位</label>
           </nz-radio-group>
         </div>
 
         <div nz-row class="ma_b20" *ngIf="activityType==='fac'">
           <div nz-col [nzSpan]="4" class="ta_r">
-            <span class="clo_r">*</span>核设施营运单位信息：
+            <span class="clo_r">*</span>核设施营运单位：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
             <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)"
@@ -23,7 +23,7 @@
           </div>
 
           <div nz-col [nzSpan]="4" class="ta_r">
-            核设施信息：
+              核设施名称：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
             <nz-select [(ngModel)]="data.facId" style="width: 100%" nzShowSearch nzAllowClear>
@@ -61,8 +61,8 @@
             审评时间：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate">
-            </nz-date-picker>
+            <nz-month-picker name="checkDate" [(ngModel)]="data.checkDate">
+            </nz-month-picker>
           </div>
         </div>
 
@@ -134,7 +134,7 @@
             审查内容：
           </div>
           <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzPlacement="checkContent" class="showTextArea">{{data.checkContent}}</div>
+            <div  class="showTextArea">{{data.checkContent}}</div>
           </div>
         </div>
 

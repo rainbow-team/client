@@ -68,8 +68,7 @@
       <div nz-row class="ma_b20">
         <div nz-col [nzSpan]="12" class="ta_r">
           <span class="clo_r">*</span>安技改时间：
-          <nz-date-picker name="improveDate" [(ngModel)]="data.improveDate" class="w200" [disabled]="isDisable" required
-            [validation]="true">
+          <nz-date-picker name="improveDate" [(ngModel)]="data.improveDate" class="w200"  required [validation]="true">
           </nz-date-picker>
         </div>
       </div>
@@ -77,8 +76,8 @@
 
         <div nz-col [nzSpan]="24" class="ta_r">
           <div class="div_bz" style="width: 107px;"><span class="clo_r">*</span>安技改内容：</div>
-          <textarea nz-input name="improveContent" style="width: calc(100% - 110px);height: 70px;"
-            [(ngModel)]="data.improveContent" [disabled]="isDisable" required [validation]="true"></textarea>
+          <textarea nz-input name="improveContent" style="width: calc(100% - 110px);height: 150px;"
+            [(ngModel)]="data.improveContent"  required [validation]="true"></textarea>
         </div>
 
       </div>
@@ -105,7 +104,7 @@
           安技改内容：
         </div>
         <div nz-col [nzSpan]="20" class="ta_l">
-          <div nz-tooltip nzPlacement="topLeft" class="showTextArea">{{data.improveContent}}</div>
+          <div  nzPlacement="topLeft" class="showTextArea">{{data.improveContent}}</div>
         </div>
       </div>
     </div>

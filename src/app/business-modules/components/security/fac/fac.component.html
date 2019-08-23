@@ -122,7 +122,7 @@
             <td>{{data.facName}}</td>
             <td>{{data.facStatusTypeValue}}</td>
             <td>{{data.checkTypeValue}}</td>
-            <td>{{data.content}}</td>
+            <td nz-tooltip nzTitle={{data.content}}>{{data.content|tooltips:5 }}</td>
             <td>{{data.findDate|recordtime}}</td>
             <td>{{data.questionTypeValue}}</td>
             <td>{{data.questionNatureValue}}</td>

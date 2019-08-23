@@ -167,10 +167,10 @@ export class FacChildmanageComponent implements OnInit {
 
     this.facSercice.deleteFacImproveByIds([data.id]).subscribe((res) => {
       if (res.code == 200) {
-        this.msg.create("success", "删除成功");
+        this.msg.create("success", res.msg);
         this.search();
       } else {
-        this.msg.create("error", "删除失败");
+        this.msg.create("error", res.msg);
       }
     })
   }
@@ -179,10 +179,10 @@ export class FacChildmanageComponent implements OnInit {
 
     this.facSercice.deleteFacReportByIds([data.id]).subscribe((res) => {
       if (res.code == 200) {
-        this.msg.create("success", "删除成功");
+        this.msg.create("success", res.msg);
         this.searchReport();
       } else {
-        this.msg.create("error", "删除失败");
+        this.msg.create("error", res.msg);
       }
     })
   }

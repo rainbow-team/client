@@ -8,7 +8,7 @@
         <span class="clo_r">*</span>授权监管机构：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.orgId" style="width: 100%">
+        <nz-select [(ngModel)]="data.orgId" style="width: 100%" required [validation]="true">
           <nz-option *ngFor="let option of orgList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -18,7 +18,7 @@
         <span class="clo_r">*</span>报告类型：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.reportTypeId" style="width: 100%">
+        <nz-select [(ngModel)]="data.reportTypeId" style="width: 100%" required [validation]="true">
           <nz-option *ngFor="let option of dictionary.config_monitor_report_type" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
@@ -31,7 +31,7 @@
         <span class="clo_r">*</span>报告时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="reportDate" [(ngModel)]="data.reportDate" style="width: 100%" [validation]="true">
+        <nz-date-picker name="reportDate" [(ngModel)]="data.reportDate" style="width: 100%" required [validation]="true">
         </nz-date-picker>
       </div>
 
@@ -39,7 +39,7 @@
         <span class="clo_r">*</span>报告名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" style="width: 100%" />
+        <input nz-input name="name" [(ngModel)]="data.name" style="width: 100%"  required [validation]="true"/>
       </div>
     </div>
 

@@ -9,7 +9,7 @@
         <span class="clo_r">*</span>营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.umineId" style="width: 100%" required nzShowSearch nzAllowClear (ngModelChange)="changeunitUminePlaces($event)">
+        <nz-select [(ngModel)]="data.umineId" style="width: 100%"  required [validation]="true" (ngModelChange)="changeunitUminePlaces($event)">
           <nz-option *ngFor="let option of unitUmines" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -19,7 +19,7 @@
         <span class="clo_r">*</span>铀尾矿（渣）库名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.uminePlaceId" style="width: 100%" required nzShowSearch nzAllowClear>
+        <nz-select [(ngModel)]="data.uminePlaceId" style="width: 100%"  required [validation]="true">
           <nz-option *ngFor="let option of unitUminePlaces" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -57,10 +57,10 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>有效期限：
+        有效期限：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="validateTime" [(ngModel)]="data.validateTime" [validation]="true" >
+        <nz-date-picker name="validateTime" [(ngModel)]="data.validateTime">
         </nz-date-picker>
       </div>
     </div>
@@ -142,7 +142,7 @@
         许可条件：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="permitCondition" class="showTextArea">{{data.permitCondition}}</div>
+        <div  class="showTextArea">{{data.permitCondition}}</div>
       </div>
     </div>
 
@@ -151,7 +151,7 @@
         审评承诺：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="reviewPromise" class="showTextArea">{{data.reviewPromise}}</div>
+        <div  class="showTextArea">{{data.reviewPromise}}</div>
       </div>
     </div>
 

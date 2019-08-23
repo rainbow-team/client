@@ -31,7 +31,7 @@
   
         </div>
         <div class="fl" style="color: #0050b3;">
-          审评文件信息（共{{totalCount}}条）
+            审评文件信息（共{{totalCount}}条）
         </div>
   
         <div class="fr">
@@ -110,17 +110,17 @@
   
             <div nz-row class="ma_b20">
               <div nz-col [nzSpan]="4" class="ta_r">
-                  <span class="clo_r">*</span>文件文号：
+                  文件文号：
               </div>
               <div nz-col [nzSpan]="8" class="ta_l">
-                <input nz-input name="fileNo" [(ngModel)]="data.fileNo" required [validation]="true" />
+                <input nz-input name="fileNo" [(ngModel)]="data.fileNo"/>
               </div>
               <div nz-col [nzSpan]="4" class="ta_r">
-                文件时间：
+                  <span class="clo_r">*</span>文件时间：
               </div>
               <div nz-col [nzSpan]="8" class="ta_l">
-                <nz-date-picker name="fileDate" [(ngModel)]="data.fileDate">
-                </nz-date-picker>
+                <nz-month-picker name="fileDate" [(ngModel)]="data.fileDate" required [validation]="true" >
+                </nz-month-picker>
               </div>
             </div>
   
@@ -163,7 +163,7 @@
                 文件时间：
               </div>
               <div nz-col [nzSpan]="8" class="ta_l">
-                <span name="fileDate">{{data.fileDate|recordtime}}</span>
+                <span name="fileDate">{{data.fileDate|recordtime:'month'}}</span>
               </div>
             </div>
   

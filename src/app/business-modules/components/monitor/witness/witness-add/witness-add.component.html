@@ -16,7 +16,7 @@
         <span class="clo_r">*</span>营运单位：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" nzShowSearch nzAllowClear>
+        <nz-select [(ngModel)]="data.serviceId" style="width: 100%"  required [validation]="true">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -28,7 +28,7 @@
         <span class="clo_r">*</span>铀矿冶单位：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <nz-select [(ngModel)]="data.umineId" style="width: 100%" nzShowSearch nzAllowClear>
+        <nz-select [(ngModel)]="data.umineId" style="width: 100%" required [validation]="true">
           <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -40,7 +40,7 @@
         <span class="clo_r">*</span>核设备单位：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" nzShowSearch nzAllowClear>
+        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%"  required [validation]="true">
           <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -49,11 +49,10 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>见证对象：
+        见证对象：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <input nz-input name="witnessObject" [(ngModel)]="data.witnessObject" style="width: 100%" required
-          [validation]="true" />
+        <input nz-input name="witnessObject" [(ngModel)]="data.witnessObject" style="width: 100%" />
       </div>
     </div>
 
@@ -62,55 +61,51 @@
         <span class="clo_r">*</span>见证时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="witnessDate" [(ngModel)]="data.witnessDate" style="width: 100%" [validation]="true">
+        <nz-date-picker name="witnessDate" [(ngModel)]="data.witnessDate" style="width: 100%"  required [validation]="true">
         </nz-date-picker>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>见证人：
+        见证人：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="witness" [(ngModel)]="data.witness" style="width: 100%" [validation]="true" />
+        <input nz-input name="witness" [(ngModel)]="data.witness" style="width: 100%"  />
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>见证事项：
+        见证事项：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="witnessItems" style="height: 70px;" [(ngModel)]="data.witnessItems" required
-          [validation]="true"></textarea>
+        <textarea nz-input name="witnessItems" style="height: 70px;" [(ngModel)]="data.witnessItems" ></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>见证结论：
+        见证结论：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="witnessResult" style="height: 70px;" [(ngModel)]="data.witnessResult" required
-          [validation]="true"></textarea>
+        <textarea nz-input name="witnessResult" style="height: 70px;" [(ngModel)]="data.witnessResult"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>存在问题：
+        存在问题：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="witnessQuestion" style="height: 70px;" [(ngModel)]="data.witnessQuestion" required
-          [validation]="true"></textarea>
+        <textarea nz-input name="witnessQuestion" style="height: 70px;" [(ngModel)]="data.witnessQuestion" ></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>整改情况：
+        整改情况：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="reform" style="height: 70px;" [(ngModel)]="data.reform" required
-          [validation]="true"></textarea>
+        <textarea nz-input name="reform" style="height: 70px;" [(ngModel)]="data.reform" ></textarea>
       </div>
     </div>
 
@@ -184,7 +179,7 @@
         见证事项：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="witnessItems" class="showTextArea">{{data.witnessItems}}</div>
+        <div  class="showTextArea">{{data.witnessItems}}</div>
       </div>
     </div>
 
@@ -193,7 +188,7 @@
         见证结论：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="witnessResult" class="showTextArea">{{data.witnessResult}}</div>
+        <div  class="showTextArea">{{data.witnessResult}}</div>
       </div>
     </div>
 
@@ -202,7 +197,7 @@
         存在问题：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="witnessQuestion" class="showTextArea">{{data.witnessQuestion}}</div>
+        <div  class="showTextArea">{{data.witnessQuestion}}</div>
       </div>
     </div>
 
@@ -211,7 +206,7 @@
         整改情况：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="reform" class="showTextArea">{{data.reform}}</div>
+        <div  class="showTextArea">{{data.reform}}</div>
       </div>
     </div>
 

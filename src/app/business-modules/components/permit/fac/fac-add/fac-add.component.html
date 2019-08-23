@@ -9,7 +9,7 @@
         <span class="clo_r">*</span>营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)"
+        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" required [validation]="true" (ngModelChange)="serviceDepartChange($event)"
           [disabled]="isDisable">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
@@ -22,7 +22,7 @@
         <span class="clo_r">*</span>设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.facId" style="width: 100%" required [disabled]="isDisable">
+        <nz-select [(ngModel)]="data.facId" style="width: 100%" required [validation]="true">
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -32,7 +32,7 @@
         <span class="clo_r">*</span>许可阶段：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [disabled]="isDisable">
+        <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [validation]="true">
           <nz-option *ngFor="let option of dictionary.config_fac_permit_stage" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
@@ -91,7 +91,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>营运单位：
+        营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="serviceDepartName" class="showText">{{data.serviceDepartName}}</span>
@@ -100,14 +100,14 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>设施名称：
+        设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="facName" class="showText">{{data.facName}}</span>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>许可阶段：
+        许可阶段：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="permitStageValue" class="showText">{{data.permitStageValue}}</span>
@@ -116,14 +116,14 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>许可时间：
+        许可时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="permitDate" class="showText">{{data.permitDate|recordtime}}</span>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>许可文号：
+        许可文号：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="licence" class="showText">{{data.licence}}</span>
@@ -135,7 +135,7 @@
         许可范围：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="scope" style="height: 40px;" class="showTextArea">{{data.scope}}</div>
+        <div  style="height: 40px;" class="showTextArea">{{data.scope}}</div>
       </div>
     </div>
 
@@ -144,7 +144,7 @@
         许可条件：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="condition"  class="showTextArea">{{data.condition}}</div>
+        <div  class="showTextArea">{{data.condition}}</div>
       </div>
     </div>
 
@@ -153,7 +153,7 @@
         审评承诺：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div nz-tooltip nzPlacement="promise" class="showTextArea">{{data.promise}}</div>
+        <div  class="showTextArea">{{data.promise}}</div>
       </div>
     </div>
 

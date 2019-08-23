@@ -105,7 +105,7 @@ export class UminemountainFileComponent implements OnInit {
   add() {
     this.data = {};
     this.fileList=[];
-    this.modalTitle = "添加审评文件";
+    this.modalTitle = "添加审查文件";
     this.okText = "提交";
     this.isVisible = true;
     this.isShow=false;
@@ -116,7 +116,7 @@ export class UminemountainFileComponent implements OnInit {
 
   modify(){
     if (this.selectId) {
-      this.modalTitle = "修改审评文件";
+      this.modalTitle = "修改审查文件";
       this.okText = "提交";
       this.isVisible = true;
       this.isShow=false;
@@ -147,10 +147,10 @@ export class UminemountainFileComponent implements OnInit {
     if (this.selectId) {
       this.uminemountainCheckSercice.deleteUmineMountainFileCheckByIds([this.selectId]).subscribe((res) => {
         if (res.code == 200) {
-          this.msg.create("success", "删除成功");
+          this.msg.create("success", res.msg);
           this.search();
         } else {
-          this.msg.create("error", "删除失败");
+          this.msg.create("error", res.msg);
         }
       })
     } else {

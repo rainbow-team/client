@@ -7,7 +7,7 @@
     <div nz-col [nzSpan]="5">
       文件类型：
       <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple" nzPlaceHolder="请选择文件类型">
-        <nz-option *ngFor="let option of dictionary.config_fac_check_file_type" [nzLabel]="option.value"
+        <nz-option *ngFor="let option of dictionary.config_umine_mountain_check_file_type" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
       </nz-select>
@@ -16,7 +16,7 @@
 
     <div nz-col [nzSpan]="5">
       文件时间：
-      <nz-range-picker class="w200" [(ngModel)]="fileDate"> </nz-range-picker>
+      <nz-range-picker [(ngModel)]="fileDate" [nzFormat]="yyyy/MM"> </nz-range-picker>
     </div>
 
 
@@ -33,7 +33,7 @@
 
       </div>
       <div class="fl" style="color: #0050b3;">
-        审评文件信息（共{{totalCount}}条）
+        审查文件信息（共{{totalCount}}条）
       </div>
 
       <div class="fr">
@@ -70,7 +70,7 @@
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <!-- <td>{{data.fileName}}</td> -->
             <td>{{data.umineMountainCheckFileTypeValue}}</td>
-            <td>{{data.fileDate|recordtime}}</td>
+            <td>{{data.fileDate|recordtime:'month'}}</td>
             <td>{{data.fileNo}}</td>
             <td>
               <a (click)="show(data)">查看</a>
@@ -121,8 +121,8 @@
                 <span class="clo_r">*</span>文件时间：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <nz-date-picker name="fileDate" [(ngModel)]="data.fileDate" required [validation]="true">
-              </nz-date-picker>
+              <nz-month-picker name="fileDate" [(ngModel)]="data.fileDate" required [validation]="true">
+              </nz-month-picker>
             </div>
           </div>
 
@@ -131,7 +131,7 @@
         </div>
       </nz-modal>
 
-      <nz-modal [(nzVisible)]="isShow" nzTitle="审评文件详情" nzOkText="关闭" nzWidth="800px" (nzOnCancel)="handleCancel()"
+      <nz-modal [(nzVisible)]="isShow" nzTitle="审查文件详情" nzOkText="关闭" nzWidth="800px" (nzOnCancel)="handleCancel()"
         (nzOnOk)="handleOk()">
 
         <div style="padding: 10px 20px;">
@@ -165,7 +165,7 @@
               文件时间：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <span name="fileDate">{{data.fileDate|recordtime}}</span>
+              <span name="fileDate">{{data.fileDate|recordtime:'month'}}</span>
             </div>
           </div>
 

@@ -33,7 +33,7 @@
 
       </div>
       <div class="fl" style="color: #0050b3;">
-        审评文件信息（共{{totalCount}}条）
+          审评文件信息（共{{totalCount}}条）
       </div>
 
       <div class="fr">
@@ -70,7 +70,7 @@
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <!-- <td>{{data.fileName}}</td> -->
             <td>{{data.uminePlaceCheckFileTypeValue}}</td>
-            <td>{{data.fileDate|recordtime}}</td>
+            <td>{{data.fileDate|recordtime:'month'}}</td>
             <td>{{data.fileNo}}</td>
             <td>
               <a (click)="show(data)">查看</a>
@@ -121,8 +121,8 @@
                 <span class="clo_r">*</span>文件时间：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <nz-date-picker name="fileDate" [(ngModel)]="data.fileDate" required [validation]="true">
-              </nz-date-picker>
+              <nz-month-picker name="fileDate" [(ngModel)]="data.fileDate" required [validation]="true">
+              </nz-month-picker>
             </div>
           </div>
 

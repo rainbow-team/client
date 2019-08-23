@@ -16,7 +16,7 @@
         <span class="clo_r">*</span>核设备单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.equipDepartId" style="width:100%" nzShowSearch required nzAllowClear>
+        <nz-select [(ngModel)]="data.equipDepartId" style="width:100%"  required [validation]="true" >
           <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -28,18 +28,17 @@
         <span class="clo_r">*</span>营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select name="serviceId" [(ngModel)]="data.serviceId" style="width: 100%" [validation]="true" nzShowSearch
-          required nzAllowClear  (ngModelChange)="serviceDepartChange($event)">
+        <nz-select name="serviceId" [(ngModel)]="data.serviceId" style="width: 100%"  required [validation]="true"  (ngModelChange)="serviceDepartChange($event)">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>核设施：
+        <span class="clo_r">*</span>设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.facId" style="width: 100%" [validation]="true" nzShowSearch nzAllowClear>
+        <nz-select [(ngModel)]="data.facId" style="width: 100%"  required [validation]="true" >
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -51,7 +50,7 @@
         <span class="clo_r">*</span>设备类别：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.typeId" style="width: 100%" nzShowSearch required nzAllowClear>
+        <nz-select [(ngModel)]="data.typeId" style="width: 100%"  required [validation]="true" >
           <nz-option *ngFor="let option of dictionary.config_equip_type" [nzLabel]="option.value" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -75,7 +74,7 @@
         <span class="clo_r">*</span>许可阶段：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.stageId" style="width: 100%" required>
+        <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [validation]="true" >
           <nz-option *ngFor="let option of dictionary.config_equip_permit_stage" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
@@ -221,7 +220,7 @@
           许可条件：
         </div>
         <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzPlacement="condition" class="showTextArea">{{data.condition}}</div>
+            <div  class="showTextArea">{{data.condition}}</div>
         </div>
       </div>
   
@@ -230,7 +229,7 @@
           审评承诺：
         </div>
         <div nz-col [nzSpan]="20" class="ta_l">
-            <div nz-tooltip nzPlacement="promise" class="showTextArea">{{data.promise}}</div>
+            <div  class="showTextArea">{{data.promise}}</div>
         </div>
       </div>
   

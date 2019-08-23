@@ -46,10 +46,10 @@
             <tr>
               <th style="width: 10%">序号</th>
               <th style="width: 20%">单位名称</th>
-              <th style="width: 45%">主要产品</th>
-              <th style="width: 5%">法人代表</th>
-              <th style="width: 5%">应急电话</th>
-              <th style="width: 5%">操作</th>
+              <th style="width: 40%">主要产品</th>
+              <th style="width: 10%">法人代表</th>
+              <th style="width: 10%">应急电话</th>
+              <th style="width: 10%">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -57,10 +57,10 @@
             [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
              <td style="width: 10%">{{(pageIndex-1)*pageSize+1+index}}</td>
               <td style="width: 20%">{{data.name}}</td>
-              <td style="width: 45%" nz-tooltip nzTitle={{data.product}} >{{data.product|tooltips:30 }}</td>
-              <td style="width: 5%">{{data.owner}}</td>
-              <td style="width: 5%">{{data.emergencyTel}}</td>
-              <td style="width: 5%">
+              <td style="width: 40%" nz-tooltip nzTitle={{data.product}} >{{data.product|tooltips:30 }}</td>
+              <td style="width: 10%">{{data.owner}}</td>
+              <td style="width: 10%">{{data.emergencyTel}}</td>
+              <td style="width: 10%">
                 <a (click)="show(data)">查看</a>
               </td>
             </tr>
