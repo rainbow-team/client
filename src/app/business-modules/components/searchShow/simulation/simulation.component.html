@@ -17,13 +17,7 @@
       </nz-radio-group>
     </div>
   </div>
-  <!-- <div nz-col [nzSpan]="8">
-    <div>
-      <label nz-checkbox [(ngModel)]="canAddMaker"
-        >点击地图区域添加“核设施营运单”/“铀矿冶单位”</label
-      >
-    </div>
-  </div> -->
+
   <nz-modal
     [(nzVisible)]="isEditorVisible"
     nzTitle="编辑单位平面图的热区信息"
@@ -123,7 +117,7 @@
     nzCancelDisabled="true"
     nzWidth="960"
   >
-    <div>
+    <div style="height: 460px">
       <div nz-col [nzSpan]="14">
         <img
           style="width: 100%;height:440px;"
@@ -140,10 +134,8 @@
         </map>
       </div>
       <div nz-col [nzSpan]="10">
-        <div nz-row>
-          <div nz-col [nzSpan]="10" style="text-align: center;">
-            单位基本信息
-          </div>
+        <div nz-row style="text-align:center">
+          <h3>单位基本信息</h3>
         </div>
         <div nz-row>
           <div nz-col [nzSpan]="8" class="ta_r">
