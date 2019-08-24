@@ -268,7 +268,7 @@ export class SimulationComponent implements OnInit {
           if (that.actionType === 'view') {
             that.unitImageUrl =
               AppConfig.serviceAddress +
-              '/fileInfo/download？id=' +
+              '/fileInfo/download?id=' +
               params.data.picId;
             that.showViewerDialog(unitType, unitId);
           }
