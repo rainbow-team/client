@@ -1,0 +1,23 @@
+.ret {
+  z-index: 999;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  display: block;
+}
+.act {
+  z-index: 999;
+  position: absolute;
+  top: 30px;
+  left: 150px;
+  display: block;
+}
+
+i[nz-icon] {
+  font-size: 32px;
+  color: #999;
+}
+.ant-upload-text {
+  margin-top: 8px;
+  color: #666;
+}
