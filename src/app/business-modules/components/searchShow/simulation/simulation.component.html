@@ -127,7 +127,170 @@
             coords="{{ item.hotRegion }}"
             href="{{ item.previewUrl }}"
             target="_blank"
+            nz-popover
+            nzPlacement="bottomRight"
+            nzTitle="{{ subjectTitle }}"
+            [(nzVisible)]="isSubjectVisible"
+            nzTrigger="click"
+            (click)="showSubjectDetail(item)"
+            [nzContent]="contentTemplate"
           />
+          <ng-template #contentTemplate>
+            <div *ngIf="markerType === '0'" style="width: 400px">
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  设施名称：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{ selectedSubject.name }}</span>
+                </div>
+              </div>
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  营运单位：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{
+                    selectedSubject.serviceDepart
+                  }}</span>
+                </div>
+              </div>
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  建造年代：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{ selectedSubject.buildYear }}</span>
+                </div>
+              </div>
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  监管类别：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{
+                    selectedSubject.supervisionCategoryValue
+                  }}</span>
+                </div>
+              </div>
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  设施状态：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{
+                    selectedSubject.statusValue
+                  }}</span>
+                </div>
+              </div>
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  审评状态：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{
+                    selectedSubject.reviewStatusValue
+                  }}</span>
+                </div>
+              </div>
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  许可情况：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{
+                    selectedSubject.permitSituationValue
+                  }}</span>
+                </div>
+              </div>
+              <div nz-row>
+                <a
+                  nz-button
+                  style="margin-left:65px"
+                  nzType="primary"
+                  this.isSubjectVisible="true;"
+                  target="_blank"
+                  href="{{ selectedRegion.previewUrl }}"
+                  >三维动态展示</a
+                >
+                <a
+                  style="margin-left: 50px"
+                  nz-button
+                  nzType="primary"
+                  target="_blank"
+                  href="/#/searchShow/integratedAuery/facSearch?id={{
+                    selectedSubject.id
+                  }}"
+                  >详细信息</a
+                >
+                <!-- <a nz-button nzType="primary">核安全审评信息</a>
+                <a nz-button nzType="primary">核安全监督信息</a>
+                <a nz-button nzType="primary">安全问题和事故事件</a> -->
+              </div>
+            </div>
+            <div *ngIf="markerType === '1'" style="width: 400px">
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  铀矿山名称：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{ selectedSubject.name }}</span>
+                </div>
+              </div>
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  营运单位：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{ selectedSubject.umineName }}</span>
+                </div>
+              </div>
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  建造年代：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{ selectedSubject.buildYear }}</span>
+                </div>
+              </div>
+
+              <div nz-row>
+                <div nz-col [nzSpan]="8" class="ta_r">
+                  设施状态：
+                </div>
+                <div nz-col [nzSpan]="16" class="ta_l">
+                  <span class="showText">{{
+                    selectedSubject.statusValue
+                  }}</span>
+                </div>
+              </div>
+
+              <div nz-row>
+                <a
+                  nz-button
+                  style="margin-left:65px"
+                  nzType="primary"
+                  this.isSubjectVisible="true;"
+                  target="_blank"
+                  href="{{ selectedRegion.previewUrl }}"
+                  >三维动态展示</a
+                >
+                <a
+                  style="margin-left: 50px"
+                  nz-button
+                  nzType="primary"
+                  target="_blank"
+                  href="/#/searchShow/integratedAuery/uminmountainSearch?id={{
+                    selectedSubject.id
+                  }}"
+                  >详细信息</a
+                >
+                <!-- <a nz-button nzType="primary">核安全审评信息</a>
+                  <a nz-button nzType="primary">核安全监督信息</a>
+                  <a nz-button nzType="primary">安全问题和事故事件</a> -->
+              </div>
+            </div>
+          </ng-template>
         </map>
       </div>
       <div nz-col [nzSpan]="10">

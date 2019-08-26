@@ -33,6 +33,10 @@ export class SimulationComponent implements OnInit {
   isViewerLoading: boolean;
   isEditorLoading: boolean;
 
+  isSubjectVisible = false;
+  subjectTitle: any = '';
+  selectedSubject: any = {};
+
   //图片上传start
   showUploadList = {
     showPreviewIcon: true,
@@ -58,6 +62,7 @@ export class SimulationComponent implements OnInit {
   unitImageUrl = '';
 
   unitId: any;
+  markerType: any = '';
   geo: any;
   myChartProe: any;
   province: any = '';
@@ -66,6 +71,7 @@ export class SimulationComponent implements OnInit {
   listOfData: any[] = [];
   unit_subjects: any = [];
   fileList = [];
+  selectedRegion: any = {};
 
   constructor(
     private msg: NzMessageService,
@@ -260,6 +266,7 @@ export class SimulationComponent implements OnInit {
           that.marker = params.data;
           let unitId = params.data.unitId;
           let unitType = params.data.unitType;
+          that.markerType = unitType;
           // 点击到了 markPoint 上,编辑热区
           if (that.actionType === 'edit') {
             that.showEditorDialog(unitType, unitId);
@@ -306,7 +313,7 @@ export class SimulationComponent implements OnInit {
     }
     this.isMarkerLoading = true;
     let unit: any = {};
-    unit.unitId = this.unitId;
+    unit.unitId = this.unitId; //用户选择的单位ID
     if (this.unitType === 'unit_umine') {
       unit.unitType = '1';
       unit.name = this.unit_umines.find(obj => obj.id === unit.unitId).name;
@@ -465,6 +472,25 @@ export class SimulationComponent implements OnInit {
   //     }
   //   ];
   // }
+
+  showSubjectDetail(item) {
+    this.isSubjectVisible = true;
+    this.selectedRegion = item;
+    if (this.markerType === '0') {
+      this.subjectTitle = '核设施详细信息';
+      this.facSercice.getFacById(item.subjectId).subscribe(res => {
+        this.selectedSubject = res.msg;
+      });
+    }
+    if (this.markerType === '1') {
+      this.subjectTitle = '铀矿山详细信息';
+      this.umineMountainService
+        .getUmineMountainById(item.subjectId)
+        .subscribe(res => {
+          this.selectedSubject = res.msg;
+        });
+    }
+  }
 
   FormValidation() {
     let isValid = true;
