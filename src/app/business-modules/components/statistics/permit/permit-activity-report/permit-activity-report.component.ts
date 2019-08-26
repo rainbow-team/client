@@ -45,6 +45,10 @@ export class PermitActivityReportComponent implements OnInit {
     setTimeout(() => {
       this.initEchart();
     }, 100);
+
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.statistics();
   }
 
 

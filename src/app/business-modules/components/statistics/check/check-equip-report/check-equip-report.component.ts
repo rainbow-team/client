@@ -12,7 +12,7 @@ export class CheckEquipReportComponent implements OnInit {
 
   startDate: any = "";
 
-  endData: any = "";
+  endDate: any = "";
 
   result: any = "";
 
@@ -47,6 +47,10 @@ export class CheckEquipReportComponent implements OnInit {
     setTimeout(() => {
       this.initEchart1();
     }, 100);
+
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.statistics();
   }
 
   initEchart1() {
@@ -87,7 +91,7 @@ export class CheckEquipReportComponent implements OnInit {
   statistics() {
 
     this.con["startDate"] = this.startDate;
-    this.con["endDate"] = this.endData;
+    this.con["endDate"] = this.endDate;
       this.statisticsSercice.searchResultByPermitDateConditon(this.con).subscribe(
         (res) => {
           this.data = res.msg;

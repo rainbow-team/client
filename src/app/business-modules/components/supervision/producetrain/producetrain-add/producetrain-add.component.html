@@ -66,6 +66,9 @@
               <textarea nz-input name="note" style="height: 70px;" [(ngModel)]="data.note"></textarea>
             </div>
           </div>
+          
+          <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
     </div>
 
   </div>
@@ -131,9 +134,12 @@
           <div class="showTextArea">{{data.note}}</div>
         </div>
       </div>
+
+      <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+
     </div>
 
-  <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
+
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
     <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"

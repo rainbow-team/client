@@ -1,10 +1,10 @@
 <nz-layout>
     <nz-header nzTheme="light">
-      统计时间：
+      请选择统计时间范围：
       <nz-year-picker [(ngModel)]="startDate"  nzPlaceHolder="开始年份">
       </nz-year-picker>
       至
-      <nz-year-picker [(ngModel)]="endData"  nzPlaceHolder="结束年份">
+      <nz-year-picker [(ngModel)]="endDate"  nzPlaceHolder="结束年份">
       </nz-year-picker>
       <div style="text-align: right;float:right">
         <button nz-button nzType="primary" (click)="statistics()">统计</button>

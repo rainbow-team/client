@@ -17,14 +17,18 @@ export class UmineplaceReportComponent implements OnInit {
 
   condition: any = [
     {
-      type: "1", name: "建造年代", con: {
+      type: "1", 
+      name: "建造年代", 
+      con: {
         tableName: 'unit_umine_place',
         propertyName: 'build_year',
         configTableName: 'config_fac_supervison_category',
         reportName: ''
       }
     }, {
-      type: "2", name: "有尾矿(渣)库等别", con: {
+      type: "2", 
+      name: "铀尾矿(渣)库等别", 
+      con: {
         tableName: 'unit_umine_place',
         propertyName: 'level_id',
         configTableName: 'config_umine_place_level',
@@ -68,6 +72,7 @@ export class UmineplaceReportComponent implements OnInit {
     setTimeout(() => {
       this.initEchart();
     }, 100);
+    this.statistics();
   }
 
   filterCondition() {

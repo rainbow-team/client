@@ -7,10 +7,11 @@
           <label nz-radio nzValue="1">问题类别</label>
           <label nz-radio nzValue="3">整改状态及类别</label>
         </nz-radio-group>
+        请选择统计时间范围：
         <nz-year-picker [(ngModel)]="startDate" nzPlaceHolder="开始年份">
         </nz-year-picker>
         至
-        <nz-year-picker [(ngModel)]="endData" nzPlaceHolder="结束年份">
+        <nz-year-picker [(ngModel)]="endDate" nzPlaceHolder="结束年份">
         </nz-year-picker>
       </div>
       <div nz-col [nzSpan]="4" class="ta_r">

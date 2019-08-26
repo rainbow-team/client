@@ -13,7 +13,7 @@ export class PermitFacReportComponent implements OnInit {
 
   startDate: any = "";
 
-  endData: any = "";
+  endDate: any = "";
 
   result: any = "";
 
@@ -26,7 +26,7 @@ export class PermitFacReportComponent implements OnInit {
         configTableName: 'config_fac_permit_stage',
         startDate: "",
         endDate: "",
-        dateProperty:'permit_date'
+        dateProperty: 'permit_date'
       }
     }, {
       type: "2", name: "许可阶段", con: {
@@ -35,7 +35,7 @@ export class PermitFacReportComponent implements OnInit {
         configTableName: 'config_fac_permit_stage',
         startDate: "",
         endDate: "",
-        dateProperty:'permit_date'
+        dateProperty: 'permit_date'
       }
     }
   ];
@@ -53,7 +53,7 @@ export class PermitFacReportComponent implements OnInit {
 
   des: any = "";
 
-  configList:any=[];
+  configList: any = [];
 
   constructor(private statisticsSercice: StatisticsSercice) { }
 
@@ -62,6 +62,9 @@ export class PermitFacReportComponent implements OnInit {
     setTimeout(() => {
       this.initEchart2();
     }, 100);
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.statistics();
   }
 
   filterCondition() {
@@ -140,13 +143,13 @@ export class PermitFacReportComponent implements OnInit {
 
     this.filterCondition();
     this.result[0].con["startDate"] = this.startDate;
-    this.result[0].con["endDate"] = this.endData;
+    this.result[0].con["endDate"] = this.endDate;
     if (this.typeValue == 1) {
       this.statisticsSercice.searchResultByPermitDateConditon(this.result[0].con).subscribe(
         (res) => {
           this.data = res.msg;
 
-          this.configList=this.data.numberList.map(function(v){return v.name});
+          this.configList = this.data.numberList.map(function (v) { return v.name });
 
           this.initEchart1();
 

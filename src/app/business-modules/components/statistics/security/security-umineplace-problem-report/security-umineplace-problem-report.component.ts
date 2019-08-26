@@ -17,7 +17,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
 
   startDate: any = "";
 
-  endData: any = "";
+  endDate: any = "";
 
   result: any = "";
 
@@ -25,36 +25,36 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
   condition: any = [
     {
       type: "1", name: "问题类别", con: {
-        tableName: 'security_equip',
+        tableName: 'security_umine_place',
         propertyName: 'question_type_id',
-        configTableName: 'config_equip_security_question_type',
+        configTableName: 'config_umine_place_security_question_type',
         startDate: "",
         endDate: "",
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id"
+        idsProperty:""
       }
     }, {
       type: "2", name: "问题性质", con: {
-        tableName: 'security_fac',
+        tableName: 'security_umine_place',
         propertyName: 'question_nature_id',
-        configTableName: 'config_fac_security_question_nature',
+        configTableName: 'config_umine_place_security_question_nature',
         startDate: "",
         endDate: "",
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id"
+        idsProperty:""
       }
     },{
       type: "3", name: "整改状态及问题类别", con: {
-        tableName: 'security_fac',
+        tableName: 'security_umine_place',
         propertyName: 'question_type_id',
-        configTableName: 'config_fac_security_question_type',
+        configTableName: 'config_umine_place_security_question_type',
         startDate: "",
         endDate: "",
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id"
+        idsProperty:""
       }
     }
   ];
@@ -81,6 +81,10 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
     setTimeout(() => {
       this.initEchart1();
     }, 100);
+
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.statistics();
   }
 
   filterCondition() {
@@ -159,7 +163,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
 
     this.filterCondition();
     this.result[0].con["startDate"] = this.startDate;
-    this.result[0].con["endDate"] = this.endData;
+    this.result[0].con["endDate"] = this.endDate;
     this.result[0].con["ids"] = this.ids;
 
 

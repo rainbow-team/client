@@ -20,7 +20,7 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
   startDate: any = "";
 
-  endData: any = "";
+  endDate: any = "";
 
   result: any = "";
 
@@ -94,6 +94,10 @@ export class SecurityServicedepartReportComponent implements OnInit {
     setTimeout(() => {
       this.initEchart1();
     }, 100);
+
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.statistics();
   }
 
   filterCondition() {
@@ -172,7 +176,7 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
     this.filterCondition();
     this.result[0].con["startDate"] = this.startDate;
-    this.result[0].con["endDate"] = this.endData;
+    this.result[0].con["endDate"] = this.endDate;
     this.result[0].con["ids"] = this.ids;
     // if (this.ids == null) {
     //   this.result[0].con["ids"] = null;

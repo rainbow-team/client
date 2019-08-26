@@ -95,6 +95,8 @@ export class FacReportComponent implements OnInit {
     setTimeout(() => {
       this.initEchart();
     }, 100);
+
+    this.statistics();
   }
 
   filterCondition() {

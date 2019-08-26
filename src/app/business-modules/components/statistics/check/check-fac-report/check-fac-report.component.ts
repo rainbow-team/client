@@ -15,7 +15,7 @@ export class CheckFacReportComponent implements OnInit {
 
   startDate: any = "";
 
-  endData: any = "";
+  endDate: any = "";
 
   result: any = "";
 
@@ -64,6 +64,10 @@ export class CheckFacReportComponent implements OnInit {
     setTimeout(() => {
       this.initEchart2();
     }, 100);
+    
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.statistics();
   }
 
   filterCondition() {
@@ -142,7 +146,7 @@ export class CheckFacReportComponent implements OnInit {
 
     this.filterCondition();
     this.result[0].con["startDate"] = this.startDate;
-    this.result[0].con["endDate"] = this.endData;
+    this.result[0].con["endDate"] = this.endDate;
     if (this.typeValue == 1) {
       this.statisticsSercice.searchResultByPermitDateConditon(this.result[0].con).subscribe(
         (res) => {
