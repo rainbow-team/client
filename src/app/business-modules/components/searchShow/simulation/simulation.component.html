@@ -117,13 +117,9 @@
     nzCancelDisabled="true"
     nzWidth="960"
   >
-    <div style="height: 460px">
-      <div nz-col [nzSpan]="14">
-        <img
-          style="max-width:520px;height:auto;"
-          src="{{ unitImageUrl }}"
-          usermap="#myMap"
-        />
+    <div style="height: 460px;">
+      <div nz-col [nzSpan]="14" style="height:460px;overflow:scroll;">
+        <img src="{{ unitImageUrl }}" usemap="#myMap" />
         <map name="myMap" id="myMap">
           <area
             *ngFor="let item of unit_regions"
@@ -135,9 +131,6 @@
         </map>
       </div>
       <div nz-col [nzSpan]="10">
-        <div nz-row style="text-align:center">
-          <h3>单位基本信息</h3>
-        </div>
         <div nz-row>
           <div nz-col [nzSpan]="8" class="ta_r">
             单位名称：
@@ -184,7 +177,7 @@
             法人代表：
           </div>
           <div nz-col [nzSpan]="16" class="ta_l">
-            <span class="showText">{{ selectedUnit.code }}</span>
+            <span class="showText">{{ selectedUnit.owner }}</span>
           </div>
         </div>
         <div nz-row>
