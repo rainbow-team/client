@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import * as echarts from 'echarts';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
+import { UnitAddressService } from 'src/app/services/unit/unitaddress.service';
 declare var MapConfig: any;
 
 @Component({
@@ -42,6 +44,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private statisticsSercice: StatisticsSercice,
+    private unitAddressService: UnitAddressService,
+    private http: HttpClient,
     private router: Router
   ) {}
 
@@ -277,106 +281,76 @@ export class HomeComponent implements OnInit {
     this.myChart4 = echarts.init(document.getElementById('chart4'));
     this.myChart4.setOption(option4);
 
-    let mydata = [
-      { name: '北京市', value: '100' },
-      { name: '天津市', value: this.randomData() },
-      { name: '上海市', value: this.randomData() },
-      { name: '重庆市', value: this.randomData() },
-      { name: '河北省', value: this.randomData() },
-      { name: '河南省', value: this.randomData() },
-      { name: '云南省', value: this.randomData() },
-      { name: '辽宁省', value: this.randomData() },
-      { name: '黑龙江省', value: this.randomData() },
-      { name: '湖南省', value: this.randomData() },
-      { name: '安徽省', value: this.randomData() },
-      { name: '山东省', value: this.randomData() },
-      { name: '新疆维吾尔自治区', value: this.randomData() },
-      { name: '江苏省', value: this.randomData() },
-      { name: '浙江省', value: this.randomData() },
-      { name: '江西省', value: this.randomData() },
-      { name: '湖北省', value: this.randomData() },
-      { name: '广西省', value: this.randomData() },
-      { name: '甘肃省', value: this.randomData() },
-      { name: '山西省', value: this.randomData() },
-      { name: '内蒙古自治区', value: this.randomData() },
-      { name: '陕西省', value: this.randomData() },
-      { name: '吉林省', value: this.randomData() },
-      { name: '福建省', value: this.randomData() },
-      { name: '贵州省', value: this.randomData() },
-      { name: '广东省', value: this.randomData() },
-      { name: '青海省', value: this.randomData() },
-      { name: '西藏自治区', value: this.randomData() },
-      { name: '四川省', value: this.randomData() },
-      { name: '宁夏回族自治区', value: this.randomData() },
-      { name: '海南省', value: this.randomData() },
-      { name: '台湾省', value: this.randomData() },
-      { name: '香港特别行政区', value: this.randomData() },
-      { name: '澳门特别行政区', value: this.randomData() }
-    ];
+    this.LoadChinaMap();
+  }
 
-    var optionMap = {
-      backgroundColor: '#FFFFFF',
-      title: {
-        text: '',
-        subtext: '',
-        x: 'center'
-      },
-      tooltip: {
-        trigger: 'item'
-      },
-
-      //左侧小导航图标
-      visualMap: {
-        show: true,
-        x: 'left',
-        y: 'center',
-        splitList: [
-          { start: 500, end: 600 },
-          { start: 400, end: 500 },
-          { start: 300, end: 400 },
-          { start: 200, end: 300 },
-          { start: 100, end: 200 },
-          { start: 0, end: 100 }
-        ],
-        color: [
-          '#5475f5',
-          '#9feaa5',
-          '#85daef',
-          '#74e2ca',
-          '#e6ac53',
-          '#9fb5ea'
-        ]
-      },
-
-      //配置属性
-      series: [
-        {
-          name: '数据',
-          type: 'map',
-          mapType: 'china',
-          roam: true,
-          label: {
-            normal: {
-              show: true //省份名称
-            },
-            emphasis: {
-              show: false
-            }
+  LoadChinaMap() {
+    this.http.get('./assets/json/china.json').subscribe(mapData => {
+      let chianMap = echarts.init(document.getElementById('map'));
+      echarts.registerMap('china', mapData);
+      this.unitAddressService.getChinaMapData().subscribe(result => {
+        let mydata = result.msg;
+        let mapOption = {
+          backgroundColor: '#FFFFFF',
+          title: {
+            text: '',
+            subtext: '',
+            x: 'center'
           },
-          data: mydata //数据
-        }
-      ]
-    };
-    //初始化echarts实例
-    this.myChart5 = echarts.init(document.getElementById('map'));
-    echarts.registerMap('china', MapConfig.Configuration.chinaMap);
+          tooltip: {
+            trigger: 'item'
+          },
 
-    //使用制定的配置项和数据显示图表
-    this.myChart5.setOption(optionMap);
+          //左侧小导航图标
+          visualMap: {
+            show: true,
+            x: 'left',
+            y: 'center',
+            splitList: [
+              { start: 25, end: 50 },
+              { start: 15, end: 25 },
+              { start: 8, end: 15 },
+              { start: 4, end: 8 },
+              { start: 2, end: 4 },
+              { start: 0, end: 2 }
+            ],
+            color: [
+              '#5475f5',
+              '#9feaa5',
+              '#85daef',
+              '#74e2ca',
+              '#e6ac53',
+              '#9fb5ea'
+            ]
+          },
 
-    this.myChart5.on('click', result => {
-      this.router.navigate(['/searchShow/simulation'], {
-        queryParams: { id: result.name }
+          //配置属性
+          series: [
+            {
+              name: '数据',
+              type: 'map',
+              mapType: 'china',
+              zoom: 1.2,
+              roam: true,
+              label: {
+                normal: {
+                  show: true //省份名称
+                },
+                emphasis: {
+                  show: false
+                }
+              },
+              data: mydata //数据
+            }
+          ]
+        };
+        chianMap.setOption(mapOption);
+      });
+
+      chianMap.on('click', result => {
+        this.router.navigate(['/searchShow/simulation'], {
+          queryParams: { id: result.name }
+        });
       });
     });
   }
