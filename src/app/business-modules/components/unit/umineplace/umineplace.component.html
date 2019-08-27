@@ -12,7 +12,7 @@
     
     <div nz-col [nzSpan]="7">
       铀尾矿(渣)等别：
-      <nz-select [(ngModel)]="levelIds" class="w180" nzMode="multiple">
+      <nz-select [(ngModel)]="levelIds" class="w180" >
         <nz-option *ngFor="let option of dictionary.config_umine_place_level" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -37,7 +37,7 @@
 
     <div nz-col [nzSpan]="7">
       设施状态：
-      <nz-select [(ngModel)]="statusIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="statusIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -50,7 +50,7 @@
 
     <div nz-col [nzSpan]="7">
       审评状态：
-      <nz-select [(ngModel)]="reviewStatusIds" class="w150" nzMode="multiple">
+      <nz-select [(ngModel)]="reviewStatusIds" class="w150" >
         <nz-option *ngFor="let option of dictionary.config_review_status" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -59,7 +59,7 @@
 
     <div nz-col [nzSpan]="7">
       许可情况：
-      <nz-select [(ngModel)]="permitSituationIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="permitSituationIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_umine_place_permit_situation" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>

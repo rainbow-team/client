@@ -9,7 +9,8 @@
             <span class="clo_r">*</span>营运单位：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-select [(ngModel)]="data.umineId" style="width: 100%" (ngModelChange)="umineChange($event)" required [validation]="true">
+            <nz-select [(ngModel)]="data.umineId" style="width: 100%" (ngModelChange)="umineChange($event)" 
+            required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择营运单位">
               <nz-option *ngFor="let option of umineList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -18,7 +19,7 @@
               <span class="clo_r">*</span>铀矿山名称：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-select [(ngModel)]="data.umineMountainId" style="width: 100%" required [validation]="true">
+            <nz-select [(ngModel)]="data.umineMountainId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择铀矿山">
               <nz-option *ngFor="let option of uminemountainList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>

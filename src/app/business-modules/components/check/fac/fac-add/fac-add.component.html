@@ -13,7 +13,7 @@
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
             <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)"
-              required [validation]="true">
+              required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择核设施营运单位">
               <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -22,7 +22,7 @@
             <span class="clo_r">*</span>设施名称：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-select [(ngModel)]="data.facId" style="width: 100%" required [validation]="true">
+            <nz-select [(ngModel)]="data.facId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择核设施">
               <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -35,7 +35,7 @@
             <span class="clo_r">*</span>审评类型：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-select [(ngModel)]="data.typeId" style="width: 100%" required [validation]="true">
+            <nz-select [(ngModel)]="data.typeId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择审评类型">
               <nz-option *ngFor="let option of dictionary.config_fac_check_type" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
@@ -45,7 +45,7 @@
             <span class="clo_r">*</span>审评阶段：
           </div>
           <div nz-col [nzSpan]="5" class="ta_l">
-            <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [validation]="true">
+            <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择审评阶段">
               <nz-option *ngFor="let option of dictionary.config_fac_check_stage" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>

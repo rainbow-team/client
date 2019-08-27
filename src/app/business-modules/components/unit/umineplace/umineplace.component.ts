@@ -74,19 +74,19 @@ export class UmineplaceComponent implements OnInit {
     }
 
     if (this.levelIds.length > 0) {
-      option.conditions.push({ key: "levelIds", value: this.levelIds })
+      option.conditions.push({ key: "levelIds", value: [this.levelIds] })
     }
 
     if (this.statusIds.length > 0) {
-      option.conditions.push({ key: "statusIds", value: this.statusIds })
+      option.conditions.push({ key: "statusIds", value: [this.statusIds] })
     }
 
     if (this.reviewStatusIds.length > 0) {
-      option.conditions.push({ key: "reviewStatusIds", value: this.reviewStatusIds })
+      option.conditions.push({ key: "reviewStatusIds", value: [this.reviewStatusIds] })
     }
 
     if (this.permitSituationIds.length > 0) {
-      option.conditions.push({ key: "permitSituationIds", value: this.permitSituationIds })
+      option.conditions.push({ key: "permitSituationIds", value: [this.permitSituationIds] })
     }
 
     if (this.have_monitor) {

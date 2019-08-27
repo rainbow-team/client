@@ -58,7 +58,7 @@ export class OperatorlisenceComponent implements OnInit {
       option.conditions.push({ key: "heap_name", value: this.heap_name })
     }
     if (this.lisenceTypeIds.length > 0) {
-      option.conditions.push({ key: "lisenceTypeIds", value: this.lisenceTypeIds })
+      option.conditions.push({ key: "lisenceTypeIds", value: [this.lisenceTypeIds] })
     }
     if (this.expire_date && this.expire_date.length > 0) {
       if (this.expire_date[0]) {

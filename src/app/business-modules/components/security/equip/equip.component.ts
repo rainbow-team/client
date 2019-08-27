@@ -106,7 +106,7 @@ export class SecurityEquipComponent implements OnInit {
     }
 
     if (this.checkTypeIds.length > 0) {
-      option.conditions.push({ key: "checkTypeIds", value: this.checkTypeIds })
+      option.conditions.push({ key: "checkTypeIds", value: [this.checkTypeIds] })
     }
 
     if (this.content) {
@@ -124,11 +124,11 @@ export class SecurityEquipComponent implements OnInit {
     }
 
     if (this.questionTypeIds.length > 0) {
-      option.conditions.push({ key: "questionTypeIds", value: this.questionTypeIds })
+      option.conditions.push({ key: "questionTypeIds", value: [this.questionTypeIds] })
     }
 
     if (this.reformStatusTypeIds.length > 0) {
-      option.conditions.push({ key: "reformStatusTypeIds", value: this.reformStatusTypeIds })
+      option.conditions.push({ key: "reformStatusTypeIds", value: [this.reformStatusTypeIds] })
     }
 
 

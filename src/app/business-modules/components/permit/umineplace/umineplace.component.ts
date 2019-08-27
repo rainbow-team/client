@@ -66,7 +66,7 @@ export class UmineplacePermitComponent implements OnInit {
     if (this.stageIds.length > 0) {
       option.conditions.push({
         key: 'stageIds',
-        value: this.stageIds
+        value: [this.stageIds]
       });
     }
     if (this.permitDate && this.permitDate.length > 0) {

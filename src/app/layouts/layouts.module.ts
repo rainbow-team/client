@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { LoginComponent } from './components/login/login.component';
-import { IndexComponent } from './components/index/index.component';
+
 import { HeaderComponent } from './components/header/header.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
@@ -109,7 +109,6 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
   ],
   declarations: [
     LoginComponent,
-    IndexComponent,
     HeaderComponent,
     NavMenuComponent,
     SexPipe,
@@ -153,7 +152,6 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
   ],
   exports: [
     LoginComponent,
-    IndexComponent,
     HeaderComponent,
     NavMenuComponent,
     SexPipe,

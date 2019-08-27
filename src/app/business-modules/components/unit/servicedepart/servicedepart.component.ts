@@ -68,7 +68,7 @@ export class ServicedepartComponent implements OnInit {
     }
 
     if (this.groupIds.length > 0) {
-      option.conditions.push({ key: "groupIds", value: this.groupIds })
+      option.conditions.push({ key: "groupIds", value: [this.groupIds] })
     }
 
     this.serviceDepartSercice.getServiceDepartList(option).subscribe(

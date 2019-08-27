@@ -32,7 +32,7 @@
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
       活动类型
-      <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="typeIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_activity_type" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>

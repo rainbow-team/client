@@ -6,7 +6,7 @@
     </div>
     <div nz-col [nzSpan]="5">
       文件类型：
-      <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple" nzPlaceHolder="请选择文件类型">
+      <nz-select [(ngModel)]="typeIds" class="w200"  nzPlaceHolder="请选择文件类型">
         <nz-option *ngFor="let option of dictionary.config_fac_check_file_type" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -101,7 +101,7 @@
               <span class="clo_r">*</span>文件类型：
             </div>
             <div nz-col [nzSpan]="20" class="ta_l">
-              <nz-select [(ngModel)]="data.facCheckFileTypeId" style="width: 100%" required [validation]="true">
+              <nz-select [(ngModel)]="data.facCheckFileTypeId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择文件类型">
                 <nz-option *ngFor="let option of dictionary.config_fac_check_file_type" [nzLabel]="option.value"
                   [nzValue]="option.id">
                 </nz-option>

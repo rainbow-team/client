@@ -10,7 +10,7 @@
     </div>
     <div nz-col [nzSpan]="6">
       许可阶段
-      <nz-select [(ngModel)]="permitStageIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="permitStageIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_fac_permit_stage" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>

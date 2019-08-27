@@ -93,23 +93,23 @@ export class FacComponent implements OnInit {
 
 
     if (this.supervisionCategoryIds && this.supervisionCategoryIds.length > 0) {
-      option.conditions.push({ key: "supervisionCategoryIds", value: this.supervisionCategoryIds })
+      option.conditions.push({ key: "supervisionCategoryIds", value: [this.supervisionCategoryIds] })
     }
 
     if (this.typeIds && this.typeIds.length > 0) {
-      option.conditions.push({ key: "typeIds", value: this.typeIds })
+      option.conditions.push({ key: "typeIds", value: [this.typeIds] })
     }
 
     if (this.statusIds && this.statusIds.length > 0) {
-      option.conditions.push({ key: "statusIds", value: this.statusIds })
+      option.conditions.push({ key: "statusIds", value: [this.statusIds] })
     }
 
     if (this.reviewStatusIds && this.reviewStatusIds.length > 0) {
-      option.conditions.push({ key: "reviewStatusIds", value: this.reviewStatusIds })
+      option.conditions.push({ key: "reviewStatusIds", value: [this.reviewStatusIds] })
     }
 
     if (this.permitSituationIds && this.permitSituationIds.length > 0) {
-      option.conditions.push({ key: "permitSituationIds", value: this.permitSituationIds })
+      option.conditions.push({ key: "permitSituationIds", value: [this.permitSituationIds] })
     }
 
     if (this.is_earthquake) {

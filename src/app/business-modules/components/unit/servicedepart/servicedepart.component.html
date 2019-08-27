@@ -6,7 +6,7 @@
     </div>
     <div nz-col [nzSpan]="7">
       所属集团
-      <nz-select [(ngModel)]="groupIds" class="w200" nzMode="multiple" nzPlaceHolder="请选择所属集团">
+      <nz-select [(ngModel)]="groupIds" class="w200"  nzPlaceHolder="请选择所属集团">
         <nz-option *ngFor="let option of groupList" [nzLabel]="option.name" [nzValue]="option.id">
         </nz-option>
       </nz-select>

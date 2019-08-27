@@ -11,7 +11,7 @@
     </div>
     <div nz-col [nzSpan]="5">
       许可阶段
-      <nz-select [(ngModel)]="stageIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="stageIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_umine_place_permit_stage" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>

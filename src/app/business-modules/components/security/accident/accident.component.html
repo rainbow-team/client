@@ -10,14 +10,14 @@
     </div>
     <div nz-col [nzSpan]="5">
       核设施状态
-      <nz-select [(ngModel)]="facStatusTypeIds" class="w150" nzMode="multiple">
+      <nz-select [(ngModel)]="facStatusTypeIds" class="w150" >
         <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="6">
       铀尾矿(渣)库设施状态
-      <nz-select [(ngModel)]="uminePlaceStatusTypeIds" class="w150" nzMode="multiple">
+      <nz-select [(ngModel)]="uminePlaceStatusTypeIds" class="w150" >
         <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -43,7 +43,7 @@
 
   <div nz-col [nzSpan]="5">
     问题类别
-    <nz-select [(ngModel)]="typeIds" class="w200" nzMode="multiple">
+    <nz-select [(ngModel)]="typeIds" class="w200" >
       <nz-option *ngFor="let option of dictionary.config_accident_type" [nzLabel]="option.value"
         [nzValue]="option.id">
       </nz-option>
@@ -52,7 +52,7 @@
 
   <div nz-col [nzSpan]="5">
     问题性质
-    <nz-select [(ngModel)]="natureIds" class="w200" nzMode="multiple">
+    <nz-select [(ngModel)]="natureIds" class="w200" >
       <nz-option *ngFor="let option of dictionary.config_accident_nature" [nzLabel]="option.value"
         [nzValue]="option.id">
       </nz-option>

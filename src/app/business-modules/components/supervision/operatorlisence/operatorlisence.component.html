@@ -25,7 +25,7 @@
     
     <div nz-col [nzSpan]="8">
       执照种类
-      <nz-select [(ngModel)]="lisenceTypeIds" style="width: 300px"  nzMode="multiple">
+      <nz-select [(ngModel)]="lisenceTypeIds" style="width: 300px"  >
         <nz-option *ngFor="let option of dictionary.config_operator_license_type" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>

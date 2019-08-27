@@ -27,7 +27,7 @@
 
     <div nz-col [nzSpan]="7">
       设施状态：
-      <nz-select [(ngModel)]="statusIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="statusIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_umine_mountain_status" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -36,7 +36,7 @@
 
     <div nz-col [nzSpan]="8">
       井下消防审查备案情况：
-      <nz-select [(ngModel)]="recordIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="recordIds" class="w200" >
           <nz-option *ngFor="let option of dictionary.config_umine_mountain_record" [nzLabel]="option.value"  [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -44,7 +44,7 @@
 
     <div nz-col [nzSpan]="9">
       铀矿山井下消防验收情况：
-      <nz-select [(ngModel)]="acceptIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="acceptIds" class="w200" >
           <nz-option *ngFor="let option of dictionary.config_umine_mountain_accept" [nzLabel]="option.value" [nzValue]="option.id">
           </nz-option>
         </nz-select>

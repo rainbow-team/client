@@ -78,11 +78,11 @@ export class DailyComponent implements OnInit {
     }
 
     if (this.facStatusTypeIds.length > 0) {
-      option.conditions.push({ key: "facStatusTypeIds", value: this.facStatusTypeIds })
+      option.conditions.push({ key: "facStatusTypeIds", value: [this.facStatusTypeIds] })
     }
 
     if (this.fileTypeIds.length > 0) {
-      option.conditions.push({ key: "fileTypeIds", value: this.fileTypeIds })
+      option.conditions.push({ key: "fileTypeIds", value: [this.fileTypeIds] })
     }
 
     if (this.file_name) {

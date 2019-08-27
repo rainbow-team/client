@@ -12,7 +12,7 @@
 
     <div nz-col [nzSpan]="5">
       设施状态
-      <nz-select [(ngModel)]="facStatusTypeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="facStatusTypeIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
@@ -20,7 +20,7 @@
 
     <div nz-col [nzSpan]="5">
       检查类型
-      <nz-select [(ngModel)]="checkTypeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="checkTypeIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_security_check_type" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -47,7 +47,7 @@
 
     <div nz-col [nzSpan]="5">
       问题类别
-      <nz-select [(ngModel)]="questionTypeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="questionTypeIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_fac_security_question_type" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
@@ -55,7 +55,7 @@
 
     <div nz-col [nzSpan]="5">
       问题性质
-      <nz-select [(ngModel)]="questionNatureIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="questionNatureIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_fac_security_question_nature" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -64,7 +64,7 @@
 
     <div nz-col [nzSpan]="5">
       整改状态
-      <nz-select [(ngModel)]="reformStatusTypeIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="reformStatusTypeIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_security_reform_status" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>

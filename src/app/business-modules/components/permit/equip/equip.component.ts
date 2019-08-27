@@ -85,19 +85,19 @@ export class EquipPermitComponent implements OnInit {
     if (this.typeIds.length > 0) {
       option.conditions.push({
         key: 'typeIds',
-        value: this.typeIds
+        value: [this.typeIds]
       });
     }
     if (this.levelIds.length > 0) {
       option.conditions.push({
         key: 'levelIds',
-        value: this.levelIds
+        value: [this.levelIds]
       });
     }
     if (this.stageIds.length > 0) {
       option.conditions.push({
         key: 'stageIds',
-        value: this.stageIds
+        value: [this.stageIds]
       });
     }
 

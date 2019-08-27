@@ -13,12 +13,12 @@ import { StatisticsSercice } from '../services/statistics/statistics.service';
 })
 export class BusinessModulesComponent implements OnInit {
 
-    facNum:any="0";
-    umineplaceNum:any="0";
-    umineMountainNum:any="0";
-    equipNum:any="0";
+    facNum: any = "0";
+    umineplaceNum: any = "0";
+    umineMountainNum: any = "0";
+    equipNum: any = "0";
 
-    countData:any=[];
+    countData: any = [];
 
     //当前位置面包屑
     private breadcrumbList: any = [];
@@ -34,11 +34,12 @@ export class BusinessModulesComponent implements OnInit {
         if (!logUser.id) {
             this.router.navigate(['/login'])
         }
-        //初始化字典
-        this.dictionarySercice.getAllConfig(true);
+
 
         if (this.router.url == "/home") {
             this.isIndex = true;
+            //初始化字典
+            this.dictionarySercice.getAllConfig(true);
         } else {
             this.isIndex = false;
         };
@@ -133,16 +134,17 @@ export class BusinessModulesComponent implements OnInit {
             this.breadcrumbList = data;
         });
 
-        this.statisticsSercice.getHomeNumer().subscribe(
-            (res) => {
-              this.countData = res.msg;
-              this.facNum=this.countData["fac"];
-              this.umineplaceNum=this.countData["umineplace"];
-              this.umineMountainNum=this.countData["uminemountain"];
-              this.equipNum=this.countData["equip"];
-            }
-          );
-
+        if (this.isIndex) {
+            this.statisticsSercice.getHomeNumer().subscribe(
+                (res) => {
+                    this.countData = res.msg;
+                    this.facNum = this.countData["fac"];
+                    this.umineplaceNum = this.countData["umineplace"];
+                    this.umineMountainNum = this.countData["uminemountain"];
+                    this.equipNum = this.countData["equip"];
+                }
+            );
+        }
     }
 
 

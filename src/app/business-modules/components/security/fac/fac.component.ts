@@ -92,11 +92,11 @@ export class SecurityFacComponent implements OnInit {
     }
 
     if (this.facStatusTypeIds.length > 0) {
-      option.conditions.push({ key: "facStatusTypeIds", value: this.facStatusTypeIds })
+      option.conditions.push({ key: "facStatusTypeIds", value: [this.facStatusTypeIds] })
     }
 
     if (this.checkTypeIds.length > 0) {
-      option.conditions.push({ key: "checkTypeIds", value: this.checkTypeIds })
+      option.conditions.push({ key: "checkTypeIds", value: [this.checkTypeIds] })
     }
 
     if (this.content) {
@@ -114,15 +114,15 @@ export class SecurityFacComponent implements OnInit {
     }
 
     if (this.questionTypeIds.length > 0) {
-      option.conditions.push({ key: "questionTypeIds", value: this.questionTypeIds })
+      option.conditions.push({ key: "questionTypeIds", value: [this.questionTypeIds] })
     }
 
     if (this.questionNatureIds.length > 0) {
-      option.conditions.push({ key: "questionNatureIds", value: this.questionNatureIds })
+      option.conditions.push({ key: "questionNatureIds", value: [this.questionNatureIds] })
     }
 
     if (this.reformStatusTypeIds.length > 0) {
-      option.conditions.push({ key: "reformStatusTypeIds", value: this.reformStatusTypeIds })
+      option.conditions.push({ key: "reformStatusTypeIds", value: [this.reformStatusTypeIds] })
     }
 
     if (this.servicedepartId) {

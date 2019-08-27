@@ -71,14 +71,14 @@ export class UminemountainComponent implements OnInit {
     }
 
     if (this.statusIds.length > 0) {
-      option.conditions.push({ key: "statusIds", value: this.statusIds })
+      option.conditions.push({ key: "statusIds", value: [this.statusIds] })
     }
 
     if (this.recordIds.length > 0) {
-      option.conditions.push({ key: "recordIds", value: this.recordIds })
+      option.conditions.push({ key: "recordIds", value: [this.recordIds] })
     }
     if (this.acceptIds.length > 0) {
-      option.conditions.push({ key: "acceptIds", value: this.acceptIds })
+      option.conditions.push({ key: "acceptIds", value: [this.acceptIds] })
     }
 
     this.umineMountainService.getUmineMountainList(option).subscribe(

@@ -54,10 +54,10 @@ export class BreakcheckerComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
     if (this.checkMethodIds.length > 0) {
-      option.conditions.push({ key: "checkMethodIds", value: this.checkMethodIds })
+      option.conditions.push({ key: "checkMethodIds", value: [this.checkMethodIds] })
     }
     if (this.checkLevelIds.length > 0) {
-      option.conditions.push({ key: "checkLevelIds", value: this.checkLevelIds })
+      option.conditions.push({ key: "checkLevelIds", value: [this.checkLevelIds] })
     }
     if (this.employ_depart) {
       option.conditions.push({ key: "employ_depart", value: this.employ_depart })

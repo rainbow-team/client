@@ -23,7 +23,7 @@
     <div nz-row style="height: 40px;">
         <div nz-col [nzSpan]="8">
             监督员类别：
-            <nz-select [(ngModel)]="typeIds" style="width: 300px" nzMode="multiple">
+            <nz-select [(ngModel)]="typeIds" style="width: 300px">
                 <nz-option *ngFor="let option of dictionary.config_supervisor_type" [nzLabel]="option.value" [nzValue]="option.id">
                 </nz-option>
             </nz-select>

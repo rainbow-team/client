@@ -94,7 +94,7 @@ export class SupervisorComponent implements OnInit {
         }
 
         if (this.typeIds.length > 0) {
-            option.conditions.push({ key: "typeIds", value: this.typeIds })
+            option.conditions.push({ key: "typeIds", value: [this.typeIds] })
         }
 
         this.supervisionSercice.getSupervisorList(option).subscribe(

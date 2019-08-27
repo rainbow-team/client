@@ -8,7 +8,7 @@
 
     <div nz-col [nzSpan]="5">
       报告类型:
-      <nz-select [(ngModel)]="typeIds" class="w200"  nzMode="multiple">
+      <nz-select [(ngModel)]="typeIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_monitor_report_type" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>

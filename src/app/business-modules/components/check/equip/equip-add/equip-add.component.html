@@ -17,7 +17,7 @@
               <span class="clo_r">*</span>单位名称：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" required [validation]="true" >
+            <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择核安全设备单位">
               <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -29,7 +29,7 @@
             <span class="clo_r">*</span>营运单位：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)"  required [validation]="true" >
+            <nz-select [(ngModel)]="data.serviceId" style="width: 100%" (ngModelChange)="serviceDepartChange($event)"  required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择营运单位">
               <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -38,7 +38,7 @@
               <span class="clo_r">*</span>设施名称：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.facId" style="width: 100%" required [validation]="true" >
+            <nz-select [(ngModel)]="data.facId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择核设施">
               <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
               </nz-option>
             </nz-select>
@@ -50,7 +50,7 @@
             <span class="clo_r">*</span>设备类别：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.typeId" style="width: 100%" required [validation]="true" >
+            <nz-select [(ngModel)]="data.typeId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择设备类别">
               <nz-option *ngFor="let option of dictionary.config_equip_type" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
@@ -60,7 +60,7 @@
               <span class="clo_r">*</span>核安全级别：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.levelId" style="width: 100%" required [validation]="true" >
+            <nz-select [(ngModel)]="data.levelId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择核安全级别">
               <nz-option *ngFor="let option of dictionary.config_equip_level" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>
@@ -73,7 +73,7 @@
             <span class="clo_r">*</span>审评阶段：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [validation]="true" >
+            <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [validation]="true" nzAllowClear nzShowSearch nzPlaceHolder="请选择审评阶段">
               <nz-option *ngFor="let option of dictionary.config_equip_check_stage" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>

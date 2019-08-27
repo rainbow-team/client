@@ -62,10 +62,10 @@ export class CheckUmineplaceComponent implements OnInit {
       option.conditions.push({ key: "uminePlaceName", value: this.uminePlaceName })
     }
     if (this.typeIds.length > 0) {
-      option.conditions.push({ key: "typeIds", value: this.typeIds })
+      option.conditions.push({ key: "typeIds", value: [this.typeIds] })
     }
     if (this.stageIds.length > 0) {
-      option.conditions.push({ key: "stageIds", value: this.stageIds })
+      option.conditions.push({ key: "stageIds", value: [this.stageIds] })
     }
 
     if (this.umineplaceId) {

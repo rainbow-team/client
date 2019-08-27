@@ -65,7 +65,7 @@ export class ActivityFileComponent implements OnInit {
     // }
 
     if (this.typeIds.length > 0) {
-      option.conditions.push({ key: "typeIds", value: this.typeIds })
+      option.conditions.push({ key: "typeIds", value: [this.typeIds] })
     }
 
     if (this.fileDate && this.fileDate.length > 0) {

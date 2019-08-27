@@ -12,7 +12,7 @@
 
     <div nz-col [nzSpan]="5">
       检验方法
-      <nz-select [(ngModel)]="checkMethodIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="checkMethodIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_check_method" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
@@ -20,7 +20,7 @@
 
     <div nz-col [nzSpan]="5">
       等级
-      <nz-select [(ngModel)]="checkLevelIds" class="w200" nzMode="multiple">
+      <nz-select [(ngModel)]="checkLevelIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_check_level" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>

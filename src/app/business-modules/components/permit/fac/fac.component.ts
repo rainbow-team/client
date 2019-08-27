@@ -57,7 +57,7 @@ export class PermitFacComponent implements OnInit {
       option.conditions.push({ key: "facName", value: this.facName })
     }
     if (this.permitStageIds) {
-      option.conditions.push({ key: "permitStageIds", value: this.permitStageIds })
+      option.conditions.push({ key: "permitStageIds", value: [this.permitStageIds] })
     }
     if (this.permit_date && this.permit_date.length > 0) {
       if (this.permit_date[0]) {

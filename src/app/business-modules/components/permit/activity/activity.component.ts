@@ -75,7 +75,7 @@ export class ActivityPermitComponent implements OnInit {
       option.conditions.push({ key: 'content', value: this.content });
     }
     if (this.typeIds.length > 0) {
-      option.conditions.push({ key: 'typeIds', value: this.typeIds });
+      option.conditions.push({ key: 'typeIds', value: [this.typeIds] });
     }
 
     if (this.permitDate && this.permitDate.length > 0) {

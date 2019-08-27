@@ -2,17 +2,17 @@
     <div nz-row style="height: 40px;">
       <div nz-col [nzSpan]="5">
         单位名称
-        <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
+        <input nz-input nzSize="default" [(ngModel)]="name" class="w200"  placeholder="请输入单位名称">
       </div>
   
       <div nz-col [nzSpan]="5">
           检查内容
-          <input nz-input nzSize="default" [(ngModel)]="content" class="w200">
+          <input nz-input nzSize="default" [(ngModel)]="content" class="w200"  placeholder="请输入检查内容">
         </div>
 
       <div nz-col [nzSpan]="5">
           检查类型:
-          <nz-select [(ngModel)]="typeIds" class="w200"  nzMode="multiple">
+          <nz-select [(ngModel)]="typeIds" class="w200"    nzAllowClear nzShowSearch nzPlaceHolder="请选择检查类型">
             <nz-option *ngFor="let option of dictionary.config_monitor_check_type" [nzLabel]="option.value"
               [nzValue]="option.id">
             </nz-option>
@@ -74,7 +74,7 @@
             <tr *ngFor="let data of nestedTable.data;index as index"  [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
               <td>{{(pageIndex-1)*pageSize+1+index}}</td>
               <td>{{data.serviceDepartName}}{{data.umineName}}{{data.equipDepartName}}</td>
-              <td>{{data.content}}</td>
+              <td  nz-tooltip nzTitle={{data.content}}>{{data.content|tooltips:10 }}</td>
               <td>{{data.typeValue}}</td>
               <td>{{data.startDate|recordtime}}至{{data.endDate|recordtime}}</td>
               <td>{{data.orgName}}</td>

@@ -85,11 +85,11 @@ export class AccidentComponent implements OnInit {
     }
 
     if (this.facStatusTypeIds.length > 0) {
-      option.conditions.push({ key: "facStatusTypeIds", value: this.facStatusTypeIds })
+      option.conditions.push({ key: "facStatusTypeIds", value: [this.facStatusTypeIds] })
     }
 
     if (this.uminePlaceStatusTypeIds.length > 0) {
-      option.conditions.push({ key: "uminePlaceStatusTypeIds", value: this.uminePlaceStatusTypeIds })
+      option.conditions.push({ key: "uminePlaceStatusTypeIds", value: [this.uminePlaceStatusTypeIds] })
     }
 
     if (this.name) {
@@ -107,11 +107,11 @@ export class AccidentComponent implements OnInit {
     }
 
     if (this.typeIds.length > 0) {
-      option.conditions.push({ key: "typeIds", value: this.typeIds })
+      option.conditions.push({ key: "typeIds", value: [this.typeIds] })
     }
 
     if (this.natureIds.length > 0) {
-      option.conditions.push({ key: "natureIds", value: this.natureIds })
+      option.conditions.push({ key: "natureIds", value: [this.natureIds] })
     }
 
     if (this.servicedepartId) {

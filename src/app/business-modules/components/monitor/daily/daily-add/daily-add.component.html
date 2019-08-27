@@ -9,7 +9,8 @@
         <span class="clo_r">*</span>营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.serviceId" style="width: 100%"  required [validation]="true" (ngModelChange)="serviceDepartChange($event)">
+        <nz-select [(ngModel)]="data.serviceId" style="width: 100%"   (ngModelChange)="serviceDepartChange($event)"
+         required [validation]="true"   nzAllowClear nzShowSearch nzPlaceHolder="请选择营运单位">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -22,7 +23,7 @@
         设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.facId" style="width: 100%">
+        <nz-select [(ngModel)]="data.facId" style="width: 100%"   nzAllowClear nzShowSearch nzPlaceHolder="请选择设施名称">
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -32,7 +33,7 @@
         设施状态：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.statusId" style="width: 100%">
+        <nz-select [(ngModel)]="data.statusId" style="width: 100%"   nzAllowClear nzShowSearch nzPlaceHolder="请选择设施状态">
           <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -44,7 +45,7 @@
         <span class="clo_r">*</span>授权监管机构：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select name="org" [(ngModel)]="data.orgId" style="width: 100%"  required [validation]="true">
+        <nz-select name="org" [(ngModel)]="data.orgId" style="width: 100%"  required [validation]="true"   nzAllowClear nzShowSearch nzPlaceHolder="请选择授权监管机构">
           <nz-option *ngFor="let option of orgList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -56,14 +57,14 @@
         文件名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="fileName" [(ngModel)]="data.fileName"/>
+        <input nz-input name="fileName" [(ngModel)]="data.fileName" placeholder="请输入文件名称"/>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>文件类型：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.fileTypeId" style="width: 100%"  required [validation]="true">
+        <nz-select [(ngModel)]="data.fileTypeId" style="width: 100%"  required [validation]="true"   nzAllowClear nzShowSearch nzPlaceHolder="请选择文件类型">
           <nz-option *ngFor="let option of dictionary.config_monitor_daily_file_type" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
