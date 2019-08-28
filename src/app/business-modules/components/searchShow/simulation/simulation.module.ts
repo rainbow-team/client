@@ -5,10 +5,15 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { SimulationComponent } from './simulation.component';
+import { UnitShowComponent } from './unit-show/unit-show.component';
 const routes: Routes = [
   {
     path: '',
     component: SimulationComponent
+  },
+  {
+    path: 'unit-show',
+    component: UnitShowComponent
   }
 ];
 @NgModule({
@@ -23,7 +28,8 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [
     // PermitFacComponent,
-    SimulationComponent
+    SimulationComponent,
+    UnitShowComponent
   ]
 })
 export class SimulationModule {}

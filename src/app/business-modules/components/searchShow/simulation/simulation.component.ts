@@ -273,11 +273,14 @@ export class SimulationComponent implements OnInit {
           }
           // 点击到了 markPoint 上,查看详情
           if (that.actionType === 'view') {
-            that.unitImageUrl =
-              AppConfig.serviceAddress +
-              '/fileInfo/download?id=' +
-              params.data.picId;
-            that.showViewerDialog(unitType, unitId);
+            that.router.navigate(['/searchShow/simulation/unit-show'], {
+              queryParams: { id: params.data.id, province: that.province }
+            });
+            // that.unitImageUrl =
+            //   AppConfig.serviceAddress +
+            //   '/fileInfo/download?id=' +
+            //   params.data.picId;
+            // that.showViewerDialog(unitType, unitId);
           }
 
           // alert('markpoint clicked!\n' + params.toString());

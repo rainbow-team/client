@@ -21,7 +21,9 @@ export class UnitAddressService {
   deleteUnitAddressById(id): any {
     return this.http.post('/unitaddress/deleteUnitAddressById', id);
   }
-
+  getUnitAddressById(id): any {
+    return this.http.post('/unitaddress/getUnitAddressById', id);
+  }
   getAllUnitAddress(): any {
     return this.http.post('/unitaddress/getAllUnitAddress', null);
   }
