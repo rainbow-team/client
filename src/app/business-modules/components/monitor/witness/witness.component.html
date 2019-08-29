@@ -71,7 +71,7 @@
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.serviceDepartName}}{{data.umineName}}{{data.equipDepartName}}</td>
             <td>{{data.witnessObject}}</td>
-            <td>{{data.witnessDate|recordtime}}</td>
+            <td>{{data.witnessDate|recordtime:'month'}}</td>
             <td nz-tooltip nzTitle={{data.witnessItems}}>{{data.witnessItems|tooltips:5}}</td>
             <td>
               <a (click)="show(data)">查看</a>

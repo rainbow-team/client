@@ -159,22 +159,18 @@ export class SystemMenuComponent implements OnInit {
     });
   }
 
-  show(item, flag) {
+  add() {
     this.isVisible = true;
-    this.isAddNew = !flag;
-    if (flag) {
-      this.title = '编辑菜单信息';
-      this.currentMenu = item;
-      // let nodeToDisable = this.traverseBF(
-      //   this.menuTreeNodes[0],
-      //   node => node.key === item.id
-      // );
-      // nodeToDisable.disabled = true;
-      // this.setDisable(nodeToDisable);
-    } else {
-      this.title = '添加菜单';
-      this.currentMenu = {};
-    }
+    this.isAddNew = true;
+    this.title = '添加菜单';
+    this.currentMenu = {};
+  }
+
+  modify(item) {
+    this.isVisible = true;
+    this.isAddNew = false;
+    this.title = '编辑菜单信息';
+    this.currentMenu = item;
   }
 
   delete(item) {

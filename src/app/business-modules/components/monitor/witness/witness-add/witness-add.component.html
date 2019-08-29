@@ -61,8 +61,8 @@
         <span class="clo_r">*</span>见证时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="witnessDate" [(ngModel)]="data.witnessDate" style="width: 100%"  required [validation]="true">
-        </nz-date-picker>
+        <nz-month-picker name="witnessDate" [(ngModel)]="data.witnessDate" style="width: 100%"  required [validation]="true">
+        </nz-month-picker>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -163,7 +163,7 @@
         见证时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="witnessDate" class="showText">{{data.witnessDate|recordtime}}</span>
+        <span name="witnessDate" class="showText">{{data.witnessDate|recordtime:'month'}}</span>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">

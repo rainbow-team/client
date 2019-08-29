@@ -21,7 +21,7 @@ export class ServicedepartReportmanageComponent implements OnInit {
 
   isVisible: any = false;
   isShow = false;
-  
+
   //保存控制
   isSaving = false;
 
@@ -35,7 +35,7 @@ export class ServicedepartReportmanageComponent implements OnInit {
   fileList = [];
 
   selectId: any = "";
-  
+
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService,
     private serviceDepartSercice: ServiceDepartService, private attachmentSercice: AttachmentSercice) { }
@@ -68,33 +68,33 @@ export class ServicedepartReportmanageComponent implements OnInit {
     this.reset();
   }
 
-  reset(){
-    this.selectId="";
-    this.data=[];
-    this.fileList=[];
+  reset() {
+    this.selectId = "";
+    this.data = [];
+    this.fileList = [];
   }
 
   add() {
-    this.data = {};    
-    this.fileList=[];
+    this.data = {};
+    this.fileList = [];
     this.modalTitle = "添加年度报告信息";
     this.okText = "提交";
     this.isVisible = true;
-    this.isShow=false;
+    this.isShow = false;
     this.isSaving = false;
-    this.selectId="";
+    this.selectId = "";
   }
 
-  
-  modify(){
+
+  modify() {
     if (this.selectId) {
       this.modalTitle = "修改年度报告信息";
       this.okText = "提交";
       this.isVisible = true;
-      this.isShow=false;
+      this.isShow = false;
       this.isSaving = false;
 
-      this.fileList=[];
+      this.fileList = [];
 
       this.attachmentSercice.getFileListById(this.data.reportId).subscribe((res1) => {
 
@@ -129,12 +129,12 @@ export class ServicedepartReportmanageComponent implements OnInit {
       this.msg.create("warning", "请选择删除项");
     }
   }
-  
+
   //查看与编辑
   show(param) {
 
     this.data = param;
-    this.fileList=[];
+    this.fileList = [];
 
     this.attachmentSercice.getFileListById(this.data.reportId).subscribe((res1) => {
 
@@ -173,20 +173,20 @@ export class ServicedepartReportmanageComponent implements OnInit {
       });
     }
 
-   
-      this.serviceDepartSercice.saveOrUpdateServiceAnnualReport(this.data).subscribe((res) => {
-        if (res.code == 200) {
-          this.msg.create('success', '保存成功');
-          this.search();
-          this.isVisible = false;
-        } else {
 
-          this.msg.create('error', '保存失败');
-        }
+    this.serviceDepartSercice.saveOrUpdateServiceAnnualReport(this.data).subscribe((res) => {
+      if (res.code == 200) {
+        this.msg.create('success', '保存成功');
+        this.search();
+        this.isVisible = false;
+      } else {
 
-        this.isSaving = false;
-      });
-    
+        this.msg.create('error', '保存失败');
+      }
+
+      this.isSaving = false;
+    });
+
   }
 
 
@@ -212,6 +212,17 @@ export class ServicedepartReportmanageComponent implements OnInit {
 
   handleCancel(): void {
     this.isShow = false;
+  }
+
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
   }
 
 }

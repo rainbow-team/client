@@ -69,7 +69,7 @@
             <td>{{(pageIndex-1)*pageSize+1+index}}</td>
             <td>{{data.fileName}}</td>
             <td>{{data.facCheckFileTypeValue}}</td>
-            <td>{{data.fileDate|recordtime}}</td>
+            <td>{{data.fileDate|recordtime:'month'}}</td>
             <td>{{data.fileNo}}</td>
             <td>
               <a (click)="show(data)">查看</a>
@@ -164,7 +164,7 @@
               文件时间：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <span name="fileDate">{{data.fileDate|recordtime}}</span>
+              <span name="fileDate">{{data.fileDate|recordtime:'month'}}</span>
             </div>
           </div>
 

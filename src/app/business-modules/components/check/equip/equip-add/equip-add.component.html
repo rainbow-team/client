@@ -83,8 +83,8 @@
             审评时间：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-date-picker name="checkDate" [(ngModel)]="data.checkDate">
-            </nz-date-picker>
+            <nz-month-picker name="checkDate" [(ngModel)]="data.checkDate">
+            </nz-month-picker>
           </div>
         </div>
         <!-- <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment> -->
@@ -149,7 +149,7 @@
             审评时间：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <span name="checkDate" class="showText">{{data.checkDate|recordtime}}</span>
+            <span name="checkDate" class="showText">{{data.checkDate|recordtime:'month'}}</span>
           </div>
         </div>
         <!-- <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment> -->

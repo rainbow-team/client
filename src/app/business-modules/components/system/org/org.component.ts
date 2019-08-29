@@ -171,16 +171,18 @@ export class OrgComponent implements OnInit {
     });
   }
 
-  show(item, flag) {
+  add(){
     this.isVisible = true;
-    this.isAddNew = !flag;
-    if (flag) {
-      this.title = '编辑机构信息';
-      this.currentOrg = item;
-    } else {
-      this.title = '添加机构';
-      this.currentOrg = {};
-    }
+    this.isAddNew = true;
+    this.title = '添加机构';
+    this.currentOrg = {};
+  }
+  
+  modify(item) {
+    this.isVisible = true;
+    this.isAddNew = false;
+    this.title = '编辑机构信息';
+    this.currentOrg = item;
   }
 
   delete(item) {

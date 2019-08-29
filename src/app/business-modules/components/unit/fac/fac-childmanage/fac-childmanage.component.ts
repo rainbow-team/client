@@ -241,4 +241,25 @@ export class FacChildmanageComponent implements OnInit {
     }
   }
  
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
+  }
+
+  pageIndexChangeReport(num) {
+    this.pageIndex = num;
+    this.searchReport();
+  }
+
+  pageSizeChangeReport(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.searchReport();
+  }
 }

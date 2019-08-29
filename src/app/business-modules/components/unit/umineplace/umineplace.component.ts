@@ -105,7 +105,7 @@ export class UmineplaceComponent implements OnInit {
     this.name = "";
     this.umineName = "";
     this.build_start_year = "";
-    this.build_end_year="";
+    this.build_end_year = "";
     this.levelIds = [];
     this.statusIds = [];
     this.reviewStatusIds = [];
@@ -127,7 +127,7 @@ export class UmineplaceComponent implements OnInit {
     if (this.isSearchShow == '0') {
       this.router.navigate(['/unit/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
     } else {
-      this.router.navigate(['/searchShow/integratedAuery/umineplaceSearch'], { queryParams: { id: item.id} });
+      this.router.navigate(['/searchShow/integratedAuery/umineplaceSearch'], { queryParams: { id: item.id } });
     }
 
   }
@@ -163,6 +163,17 @@ export class UmineplaceComponent implements OnInit {
 
   selectItem(data) {
     this.selectId = data.id;
+  }
+
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
   }
 
 }

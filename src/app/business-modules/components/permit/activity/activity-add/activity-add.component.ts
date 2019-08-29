@@ -20,6 +20,7 @@ export class ActivityPermitAddComponent implements OnInit {
 
   servicedepartId_Router: any = "";
   umineId_Router: any = "";
+  facId_Router: any = "";
 
   data: any = {};
   isSaving = false;
@@ -59,6 +60,7 @@ export class ActivityPermitAddComponent implements OnInit {
 
     this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams['servicedepartId'];
     this.umineId_Router = this.ActivatedRoute.snapshot.queryParams['umineId'];
+    this.facId_Router = this.ActivatedRoute.snapshot.queryParams['facId'];
 
     if (isShow && isShow == 'true') {
       this.isShow = true;

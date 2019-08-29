@@ -16,6 +16,8 @@ export class SecurityEquipComponent implements OnInit {
 
   @Input() equipdepartId: any = "";
 
+  isSearchShow: any = false;
+
   dictionary: any = {};
   staffObj: any = {};
 
@@ -65,6 +67,10 @@ export class SecurityEquipComponent implements OnInit {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    if (this.equipdepartId) {
+      this.isSearchShow = true;
+    }
 
     this.search();
 
@@ -203,4 +209,14 @@ export class SecurityEquipComponent implements OnInit {
     this.selectId = data.id;
   }
 
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
+  }
 }

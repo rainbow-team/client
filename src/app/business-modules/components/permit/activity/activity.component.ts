@@ -14,6 +14,7 @@ export class ActivityPermitComponent implements OnInit {
 
   @Input() servicedepartId: any = "";
   @Input() umineId: any = "";
+  @Input() facId: any = "";
 
   isSearchShow: any = false;
 
@@ -108,6 +109,13 @@ export class ActivityPermitComponent implements OnInit {
       });
     }
 
+    if (this.facId) {
+      option.conditions.push({
+        key: 'facId',
+        value: this.facId
+      });
+    }
+
     this.activityPermitService.getActivityPermitList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;
@@ -135,7 +143,9 @@ export class ActivityPermitComponent implements OnInit {
       this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
     } else if (this.umineId) {
       this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
-    } else {
+    } else if (this.facId) {
+      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
+    }else {
       this.router.navigate(['/permit/activity/add'], { queryParams: { id: item.id, isShow: true } });
     }
 
@@ -170,6 +180,17 @@ export class ActivityPermitComponent implements OnInit {
 
   selectItem(data) {
     this.selectId = data.id;
+  }
+
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
   }
 
 }

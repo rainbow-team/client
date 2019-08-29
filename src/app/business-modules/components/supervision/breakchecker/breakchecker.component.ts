@@ -129,4 +129,15 @@ export class BreakcheckerComponent implements OnInit {
     this.selectId = data.id;
   }
 
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
+  }
+
 }

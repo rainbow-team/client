@@ -177,4 +177,14 @@ export class UminemountainChildmanageComponent implements OnInit {
     this.isShow = false;
   }
 
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
+  }
 }
