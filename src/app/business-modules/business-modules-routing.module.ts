@@ -221,6 +221,16 @@ const appRoutes: Routes = [
     ]
   },
   {
+    path: 'dataMigration',
+    component: BusinessModulesComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: './components/data-migration/data-migration.module#DataMigrationModule'
+      }
+    ]
+  },
+  {
     path: 'searchShow',
     component: BusinessModulesComponent,
     children: [
@@ -253,4 +263,4 @@ const appRoutes: Routes = [
   imports: [RouterModule.forChild(appRoutes)],
   exports: [RouterModule]
 })
-export class BusinessModulesRoutingModule {}
+export class BusinessModulesRoutingModule { }

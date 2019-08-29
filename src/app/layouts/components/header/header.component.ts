@@ -182,8 +182,8 @@ export class HeaderComponent implements OnInit {
     },
     {
       name: '数据迁移',
-      id: 'sjqy',
-      route: ''
+      id: 'dataMigration',
+      route: '/dataMigration'
     },
     {
       name: '查询展示',
