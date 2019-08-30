@@ -6,7 +6,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { ActivityPermitService } from 'src/app/services/permit/activity.service';
 
 @Component({
-  selector: 'app-activity',
+  selector: 'app-permit-activity',
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.scss']
 })
@@ -49,7 +49,7 @@ export class ActivityPermitComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    if (this.servicedepartId || this.umineId) {
+    if (this.servicedepartId || this.umineId||this.facId) {
       this.isSearchShow = true;
     }
 

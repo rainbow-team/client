@@ -152,7 +152,7 @@ export class FacComponent implements OnInit {
   //   this.router.navigate(['/unit/fac/childmanage'], { queryParams: { id: item.id } });
   // }
 
-  show(item, flag) {
+  show(item) {
 
     if (this.isSearchShow == "0") {
       this.router.navigate(['/unit/fac/add'], { queryParams: { id: item.id, isShow: true } });

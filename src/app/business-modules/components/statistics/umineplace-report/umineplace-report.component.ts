@@ -44,7 +44,7 @@ export class UmineplaceReportComponent implements OnInit {
     }, {
       type: "4", name: "审评状态", con: {
         tableName: 'unit_umine_place',
-        propertyName: 'review_status',
+        propertyName: 'review_status_id',
         configTableName: 'config_review_status',
         reportName: ''
       }
