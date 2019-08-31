@@ -4,14 +4,19 @@
       <div class="div_font">导入</div>
       <div>
         <div class="fr">
-          <button nz-button nzType="primary">导入</button>
+          <nz-upload [nzAction]="uploadUrl" [nzCustomRequest]="customReq"  [nzAccept]="'.zip'"
+            [nzShowUploadList]="false">
+            <button nz-button class="importBtn">
+              <i nz-icon type="upload"></i><span>导入</span>
+            </button>
+          </nz-upload>
         </div>
       </div>
     </div>
   </div>
   <div nz-col [nzSpan]="12" class="div1">
     <div style="height: 40px;">
-      <div class="div_font">导入</div>
+      <div class="div_font">导出</div>
       <div>
         <div class="fr">
           <button nz-button nzType="primary" (click)="exportData()">导出</button>
