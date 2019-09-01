@@ -5,14 +5,17 @@ import {
 
 import { Observable, of, throwError } from 'rxjs';
 import { tap, catchError, finalize, map } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class HandleHttpInterceptor implements HttpInterceptor {
 
-    constructor() { }
+    constructor(private cookieService: CookieService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {
+
+         let authID =this.cookieService.get('AUTH_ID');
 
         let authReq = req;
         let requestUrl = req.url;
@@ -40,11 +43,14 @@ export class HandleHttpInterceptor implements HttpInterceptor {
         }
 
         if (requestUrl.indexOf("upload") > -1||requestUrl.indexOf("import") > -1) {
-            
+            authReq = authReq.clone({
+                headers: req.headers.append("AUTH_ID",authID)
+            });
         } else {
             // 添加请求头
             authReq = authReq.clone({
                 headers: req.headers.set('Content-Type', "application/json;charset=UTF-8")
+                .append("AUTH_ID",authID)
             });
         }
 
