@@ -64,9 +64,18 @@ export class HomeComponent implements OnInit {
         this.typeData = res.msg;
         this.initEchart();
       });
-  }
 
-  initEchart() {
+    this.statisticsSercice.statisticsFacilitiesByRegion().subscribe(res => {
+      let names = [],
+        values = [];
+      res.msg.forEach(element => {
+        names.push(element.name);
+        values.push(element.value);
+      });
+      this.initStatistiscByRegionsChart(names, values);
+    });
+  }
+  initStatistiscByRegionsChart(names: any[], values: any[]) {
     let option1 = {
       tooltip: {
         trigger: 'axis'
@@ -75,7 +84,7 @@ export class HomeComponent implements OnInit {
       xAxis: [
         {
           type: 'category',
-          data: ['华北', '东北', '西北', '西南', '华东', '华南']
+          data: names
         }
       ],
       yAxis: [
@@ -87,7 +96,7 @@ export class HomeComponent implements OnInit {
         {
           name: '数量',
           type: 'bar',
-          data: [22, 16, 23, 35, 23, 24],
+          data: values,
           barWidth: 20,
           label: {
             normal: {
@@ -118,7 +127,11 @@ export class HomeComponent implements OnInit {
         }
       ]
     };
+    this.myChart1 = echarts.init(document.getElementById('chart1'));
+    this.myChart1.setOption(option1);
+  }
 
+  initEchart() {
     let option2 = {
       tooltip: {
         trigger: 'axis'
@@ -268,9 +281,6 @@ export class HomeComponent implements OnInit {
         }
       ]
     };
-
-    this.myChart1 = echarts.init(document.getElementById('chart1'));
-    this.myChart1.setOption(option1);
 
     this.myChart2 = echarts.init(document.getElementById('chart2'));
     this.myChart2.setOption(option2);

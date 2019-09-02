@@ -3,56 +3,62 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class StatisticsSercice {
+  constructor(private http: HttpClient) {}
 
-    constructor(private http: HttpClient) { }
+  getStatisticsResultByCondition(param): any {
+    return this.http.post('/statistics/getStatisticsResultByCondition', param);
+  }
 
-    getStatisticsResultByCondition(param): any {
-        return this.http.post('/statistics/getStatisticsResultByCondition', param);
-    }
+  getStatisticsResultByYear(param): any {
+    return this.http.post('/statistics/getStatisticsResultByYear', param);
+  }
 
-    getStatisticsResultByYear(param): any {
-        return this.http.post('/statistics/getStatisticsResultByYear', param);
-    }
+  getStatisticsResultByBoolean(param): any {
+    return this.http.post('/statistics/getStatisticsResultByBoolean', param);
+  }
 
-    getStatisticsResultByBoolean(param): any {
-        return this.http.post('/statistics/getStatisticsResultByBoolean', param);
-    }
+  searchResultByPermitStageConditon(param): any {
+    return this.http.post(
+      '/statistics/searchResultByPermitStageConditon',
+      param
+    );
+  }
 
-    searchResultByPermitStageConditon(param): any {
-        return this.http.post('/statistics/searchResultByPermitStageConditon', param);
-    }
-    
-    searchResultByPermitDateConditon(param): any {
-        return this.http.post('/statistics/searchResultByPermitDateConditon', param);
-    }
+  searchResultByPermitDateConditon(param): any {
+    return this.http.post(
+      '/statistics/searchResultByPermitDateConditon',
+      param
+    );
+  }
 
-    getHomeNumer(): any {
-        return this.http.post('/statistics/getHomeNumer',null);
-    }
+  getHomeNumer(): any {
+    return this.http.post('/statistics/getHomeNumer', null);
+  }
 
-    searchSumReportByDateGroup(param):any{
-        return this.http.post('/statistics/searchSumReportByDateGroup',param);
-    }
+  searchSumReportByDateGroup(param): any {
+    return this.http.post('/statistics/searchSumReportByDateGroup', param);
+  }
 
-    searchReportByDateAndSum(param):any{
-        return this.http.post('/statistics/searchReportByDateAndSum', param);
-    }
+  searchReportByDateAndSum(param): any {
+    return this.http.post('/statistics/searchReportByDateAndSum', param);
+  }
 
+  searchResultByTypeConditon(param): any {
+    return this.http.post('/statistics/searchResultByTypeConditon', param);
+  }
 
-    searchResultByTypeConditon(param): any {
-        return this.http.post('/statistics/searchResultByTypeConditon', param);
-    }
-    
-    searchResultByDateConditon(param): any {
-        return this.http.post('/statistics/searchResultByDateConditon', param);
-    }
+  searchResultByDateConditon(param): any {
+    return this.http.post('/statistics/searchResultByDateConditon', param);
+  }
 
-    
+  searchResultByStatusAndType(param): any {
+    return this.http.post('/statistics/searchResultByStatusAndType', param);
+  }
 
-    searchResultByStatusAndType(param): any {
-        return this.http.post('/statistics/searchResultByStatusAndType', param);
-    }
+  statisticsFacilitiesByRegion(): any {
+    return this.http.post('/statistics/statisticsFacilitiesByRegion', null);
+  }
 }
