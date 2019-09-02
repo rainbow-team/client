@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { NavMenu } from 'src/app/utilities/entities/navMenu';
 import { StaffSercice } from 'src/app/services/common/staff-service';
+import { SystemService } from 'src/app/services/system/system.service';
 
 @Component({
   selector: 'app-header',
@@ -207,8 +208,9 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private modal: NzModalService,
-    private staffSercice: StaffSercice
-  ) {}
+    private staffSercice: StaffSercice,
+    private systemService: SystemService
+  ) { }
 
   ngOnInit() {
     this.name = this.staffSercice.getStaffObj().username;
@@ -218,7 +220,18 @@ export class HeaderComponent implements OnInit {
     this.modal.confirm({
       nzTitle: '<i>提示</i>',
       nzContent: '<b>确定退出系统？</b>',
-      nzOnOk: () => this.router.navigate(['/login'])
+      nzOnOk: () => this.loginOut()
     });
+  }
+
+  loginOut() {
+
+    this.systemService.loginout().subscribe(res => {
+      sessionStorage.removeItem("staffObj");
+      sessionStorage.removeItem("permission");
+      
+      this.router.navigate(['/login']);
+    })
+
   }
 }

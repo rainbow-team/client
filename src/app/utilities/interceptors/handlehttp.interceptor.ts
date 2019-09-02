@@ -7,15 +7,17 @@ import { Observable, of, throwError } from 'rxjs';
 import { tap, catchError, finalize, map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 
+
 @Injectable()
 export class HandleHttpInterceptor implements HttpInterceptor {
+
 
     constructor(private cookieService: CookieService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {
 
-         let authID =this.cookieService.get('AUTH_ID');
+        let authID = this.cookieService.get('AUTH_ID');
 
         let authReq = req;
         let requestUrl = req.url;
@@ -42,15 +44,15 @@ export class HandleHttpInterceptor implements HttpInterceptor {
             }
         }
 
-        if (requestUrl.indexOf("upload") > -1||requestUrl.indexOf("import") > -1) {
+        if (requestUrl.indexOf("upload") > -1 || requestUrl.indexOf("import") > -1) {
             authReq = authReq.clone({
-                headers: req.headers.append("AUTH_ID",authID)
+                headers: req.headers.append("AUTH_ID", authID)
             });
         } else {
             // 添加请求头
             authReq = authReq.clone({
                 headers: req.headers.set('Content-Type', "application/json;charset=UTF-8")
-                .append("AUTH_ID",authID)
+                    .append("AUTH_ID", authID)
             });
         }
 
@@ -62,13 +64,22 @@ export class HandleHttpInterceptor implements HttpInterceptor {
             ), catchError(this.handleError));
     }
 
-    private handleError(error: HttpErrorResponse) {
+    handleError(error: HttpErrorResponse) {
+
         let errorMsg;
         if (error instanceof Error) {
             // A client-side or network error occurred. Handle it accordingly.
             errorMsg = error.message;
+
+
             console.error(`接口逻辑异常:` + error.message);
         } else if (error instanceof HttpErrorResponse) {
+
+            if (error.status == 403) {
+                sessionStorage.removeItem("staffObj");
+                location.reload();
+            }
+
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
             errorMsg = error.statusText;

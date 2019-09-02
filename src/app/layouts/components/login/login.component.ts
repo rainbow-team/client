@@ -70,6 +70,8 @@ export class LoginComponent implements OnInit {
           if (data.code == 200) {
             this.staffSercice.setStaffObj(data.msg);
 
+            sessionStorage.setItem("permission",data.msg.permission);
+
             this.cookieService.set('AUTH_ID', data.msg.ticket);
 
             this.router.navigate(['/home']);

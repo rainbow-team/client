@@ -27,6 +27,13 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    let pers = sessionStorage.getItem("permission");
+    if (pers != null && pers.length > 0) {
+        
+
+    }
+
     // 默认打开第一个菜单
     let currentUrl = this.router.url;
 
