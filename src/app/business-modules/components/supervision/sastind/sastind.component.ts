@@ -5,6 +5,7 @@ import { SastindSercice } from 'src/app/services/supervision/sastind.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { HttpRequest, HttpEventType, HttpResponse, HttpClient } from '@angular/common/http';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 
 @Component({
@@ -27,15 +28,18 @@ export class SastindComponent implements OnInit {
 
   selectId: any = "";
   uploadUrl: any = AppConfig.serviceAddress + "/sastind/import";
+  canManage: any = false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private sastindSercice: SastindSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice,private http: HttpClient) { }
+    private staffSercice: StaffSercice, private http: HttpClient, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("sastind:manage");
 
     this.search();
   }
@@ -64,12 +68,12 @@ export class SastindComponent implements OnInit {
   }
 
   modify() {
-    if(this.selectId){
+    if (this.selectId) {
       this.router.navigate(['/supersivion/sastind/add'], { queryParams: { id: this.selectId, isShow: false } });
-    }else{
+    } else {
       this.msg.create("warning", "请选择修改项");
     }
-   
+
   }
   delete() {
 
@@ -83,7 +87,7 @@ export class SastindComponent implements OnInit {
           this.msg.create("error", res.msg);
         }
       })
-    }else{
+    } else {
       this.msg.create("warning", "请选择删除项");
     }
 

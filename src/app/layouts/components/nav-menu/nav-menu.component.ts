@@ -21,6 +21,8 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
   subRouterEvent: Subscription;
 
+  permissionList: any = [];
+
   constructor(private router: Router,
     private zone: NgZone,
     private layoutService: LayoutChangeService) {
@@ -29,8 +31,12 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     let pers = sessionStorage.getItem("permission");
-    if (pers != null && pers.length > 0) {
-        
+    if (pers) {
+      this.permissionList = JSON.parse(pers);
+
+      this.navMenu.forEach(element => {
+        this.handleMenu(element);
+      });
 
     }
 
@@ -43,6 +49,37 @@ export class NavMenuComponent implements OnInit, OnDestroy {
         break;
       }
     }
+  }
+
+  handleMenu(item, parent = null) {
+
+    if (item.children && item.children.length > 0) {
+
+      item.children.forEach(element => {
+        this.handleMenu(element, item);
+      });
+    } else {
+
+      this.permissionList.forEach(element => {
+        if (element.indexOf(":") != element.lastIndexOf(":")) {
+
+          if (element.indexOf(parent?parent.id:"" + ":" + item.id) > -1) {
+            item.isShow = true;
+            parent.isShow= true;
+          }
+
+        } else {
+          if (element.indexOf(item.id) > -1) {
+            item.isShow = true;
+            if(parent){
+              parent.isShow= true;
+            }
+           
+          }
+        }
+      });
+    }
+
   }
 
   // 菜单项选中

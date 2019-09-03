@@ -124,7 +124,7 @@ export class UnitEditorComponent implements OnInit {
       this.unithotregionService
         .getUnitHotRegionById(this.selectId)
         .subscribe(res1 => {
-          this.subject = res1.msg;
+          // this.subject = res1.msg;
         });
       // this.router.navigate(['/permit/equip/add'], {
       //   queryParams: { id: this.selectId, isShow: false }

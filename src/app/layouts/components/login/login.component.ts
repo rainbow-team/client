@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
           if (data.code == 200) {
             this.staffSercice.setStaffObj(data.msg);
 
-            sessionStorage.setItem("permission",data.msg.permission);
+            sessionStorage.setItem("permission",JSON.stringify(data.msg.permission));
 
             this.cookieService.set('AUTH_ID', data.msg.ticket);
 
