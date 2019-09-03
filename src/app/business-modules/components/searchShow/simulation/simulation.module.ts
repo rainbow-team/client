@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutsModule } from '../../../../layouts/layouts.module';
 import { SimulationComponent } from './simulation.component';
 import { UnitShowComponent } from './unit-show/unit-show.component';
+import { UnitEditorComponent } from './unit-editor/unit-editor.component';
 const routes: Routes = [
   {
     path: '',
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'unit-show',
     component: UnitShowComponent
+  },
+  {
+    path: 'unit-editor',
+    component: UnitEditorComponent
   }
 ];
 @NgModule({
@@ -29,7 +34,8 @@ const routes: Routes = [
   declarations: [
     // PermitFacComponent,
     SimulationComponent,
-    UnitShowComponent
+    UnitShowComponent,
+    UnitEditorComponent
   ]
 })
 export class SimulationModule {}

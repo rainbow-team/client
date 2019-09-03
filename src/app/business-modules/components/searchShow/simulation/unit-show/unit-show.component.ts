@@ -22,6 +22,7 @@ export class UnitShowComponent implements OnInit {
   selectedSubject: any = {};
   unitAddress: any = {};
   unitImageUrl = '';
+  subjectImageUrl = '';
   province = '';
 
   constructor(
@@ -69,6 +70,8 @@ export class UnitShowComponent implements OnInit {
   showSubjectDetail(item) {
     this.isSubjectVisible = true;
     this.selectedRegion = item;
+    this.subjectImageUrl =
+      AppConfig.serviceAddress + '/fileInfo/download?id=' + item.picId;
     if (this.unitAddress.unitType === '0') {
       this.subjectTitle = '核设施详细信息';
       this.facSercice.getFacById(item.subjectId).subscribe(res => {

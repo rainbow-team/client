@@ -278,7 +278,15 @@ export class SimulationComponent implements OnInit {
           that.markerType = unitType;
           // 点击到了 markPoint 上,编辑热区
           if (that.actionType === 'edit') {
-            that.showEditorDialog(unitType, unitId);
+            that.router.navigate(['/searchShow/simulation/unit-editor'], {
+              queryParams: {
+                mid: params.data.id,
+                uid: params.data.unitId,
+                province: that.province,
+                unitType: unitType
+              }
+            });
+            // that.showEditorDialog(unitType, unitId);
           }
           // 点击到了 markPoint 上,查看详情
           if (that.actionType === 'view') {

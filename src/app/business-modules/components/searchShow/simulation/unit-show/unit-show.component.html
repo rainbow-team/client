@@ -1,5 +1,5 @@
 <div style="height: 100%;background:#fff">
-  <div nz-col [nzSpan]="16" style="height:100%;overflow:scroll;">
+  <div nz-col [nzSpan]="16" style="height:520px;overflow:scroll;">
     <img src="{{ unitImageUrl }}" usemap="#myMap" />
     <map name="myMap" id="myMap">
       <area
@@ -148,147 +148,172 @@
     (nzOnCancel)="unitShowCancel()"
     (nzOnOk)="unitShowOK()"
     nzCancelDisabled="true"
-    nzWidth="460"
+    nzWidth="800px"
     [nzFooter]="null"
   >
-    <div *ngIf="unitAddress.unitType === '0'" style="width: 400px">
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          设施名称：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{ selectedSubject.name }}</span>
-        </div>
+    <div nz-row>
+      <div
+        nz-col
+        [nzSpan]="16"
+        style="width: 480px; height:360px;overflow:scroll;"
+      >
+        <img src="{{ subjectImageUrl }}" />
       </div>
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          营运单位：
+      <div nz-col [nzSpan]="8">
+        <div *ngIf="unitAddress.unitType === '0'">
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              设施名称：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{ selectedSubject.name }}</span>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              营运单位：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{ selectedSubject.serviceDepart }}</span>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              建造年代：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{
+                selectedSubject.buildYear | recordtime
+              }}</span>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              监管类别：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{
+                selectedSubject.supervisionCategoryValue
+              }}</span>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              设施状态：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{ selectedSubject.statusValue }}</span>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              审评状态：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{
+                selectedSubject.reviewStatusValue
+              }}</span>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              许可情况：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{
+                selectedSubject.permitSituationValue
+              }}</span>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col nzSpan="16">
+              <a
+                nz-button
+                style="margin-left:25px"
+                nzType="primary"
+                this.isSubjectVisible="true;"
+                target="_blank"
+                href="{{ selectedRegion.previewUrl }}"
+                >三维动态展示</a
+              >
+            </div>
+            <div nz-col nzSpan="8">
+              <a
+                style="margin-left: 10px;"
+                nz-button
+                nzType="primary"
+                target="_blank"
+                href="/#/searchShow/integratedAuery/facSearch?id={{
+                  selectedSubject.id
+                }}"
+                >详细信息</a
+              >
+            </div>
+          </div>
         </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{ selectedSubject.serviceDepart }}</span>
-        </div>
-      </div>
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          建造年代：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{ selectedSubject.buildYear }}</span>
-        </div>
-      </div>
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          监管类别：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{
-            selectedSubject.supervisionCategoryValue
-          }}</span>
-        </div>
-      </div>
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          设施状态：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{ selectedSubject.statusValue }}</span>
-        </div>
-      </div>
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          审评状态：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{ selectedSubject.reviewStatusValue }}</span>
-        </div>
-      </div>
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          许可情况：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{
-            selectedSubject.permitSituationValue
-          }}</span>
-        </div>
-      </div>
-      <div nz-row>
-        <a
-          nz-button
-          style="margin-left:65px"
-          nzType="primary"
-          this.isSubjectVisible="true;"
-          target="_blank"
-          href="{{ selectedRegion.previewUrl }}"
-          >三维动态展示</a
-        >
-        <a
-          style="margin-left: 50px"
-          nz-button
-          nzType="primary"
-          target="_blank"
-          href="/#/searchShow/integratedAuery/facSearch?id={{
-            selectedSubject.id
-          }}"
-          >详细信息</a
-        >
-      </div>
-    </div>
-    <div *ngIf="unitAddress.unitType === '1'" style="width: 400px">
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          铀矿山名称：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{ selectedSubject.name }}</span>
-        </div>
-      </div>
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          营运单位：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{ selectedSubject.umineName }}</span>
-        </div>
-      </div>
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          建造年代：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{ selectedSubject.buildYear }}</span>
-        </div>
-      </div>
+        <div *ngIf="unitAddress.unitType === '1'">
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              铀矿山名称：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{ selectedSubject.name }}</span>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              营运单位：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{ selectedSubject.umineName }}</span>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              建造年代：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{
+                selectedSubject.buildYear | recordtime
+              }}</span>
+            </div>
+          </div>
 
-      <div nz-row>
-        <div nz-col [nzSpan]="8" class="ta_r">
-          设施状态：
-        </div>
-        <div nz-col [nzSpan]="16" class="ta_l">
-          <span class="showText">{{ selectedSubject.statusValue }}</span>
-        </div>
-      </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="8" class="ta_r">
+              设施状态：
+            </div>
+            <div nz-col [nzSpan]="16" class="ta_l">
+              <span class="showText">{{ selectedSubject.statusValue }}</span>
+            </div>
+          </div>
 
-      <div nz-row>
-        <a
-          nz-button
-          style="margin-left:65px"
-          nzType="primary"
-          this.isSubjectVisible="true;"
-          target="_blank"
-          href="{{ selectedRegion.previewUrl }}"
-          >三维动态展示</a
-        >
-        <a
-          style="margin-left: 50px"
-          nz-button
-          nzType="primary"
-          target="_blank"
-          href="/#/searchShow/integratedAuery/uminmountainSearch?id={{
-            selectedSubject.id
-          }}"
-          >详细信息</a
-        >
+          <div nz-row>
+            <div nz-col nzSpan="16">
+              <a
+                nz-button
+                style="margin-left:25px"
+                nzType="primary"
+                this.isSubjectVisible="true;"
+                target="_blank"
+                href="{{ selectedRegion.previewUrl }}"
+                >三维动态展示</a
+              >
+            </div>
+            <div nz-col nzSpan="8">
+              <a
+                style="margin-left: 10px"
+                nz-button
+                nzType="primary"
+                target="_blank"
+                href="/#/searchShow/integratedAuery/uminmountainSearch?id={{
+                  selectedSubject.id
+                }}"
+                >详细信息</a
+              >
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </nz-modal>

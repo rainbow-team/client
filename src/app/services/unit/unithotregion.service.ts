@@ -5,10 +5,17 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UnithotregionService {
+  getUnitHotRegionById(id: any) {
+    return this.http.post('/unithotregion/getUnitHotRegionById', id);
+  }
   constructor(private http: HttpClient) {}
 
   insertRegionsBatch(param): any {
     return this.http.post('/unithotregion/insertRegionsBatch', param);
+  }
+
+  getUnitHotRegionList(parma): any {
+    return this.http.post('/unithotregion/getUnitHotRegionList', parma);
   }
 
   getUnitHotRegionListByUnitId(unitId): any {
@@ -16,5 +23,15 @@ export class UnithotregionService {
       '/unithotregion/getUnitHotRegionListByUnitId',
       unitId
     );
+  }
+  saveOrUpdateUnitHotRegion(param): any {
+    let url = !param.id
+      ? '/unithotregion/addUnitHotRegion'
+      : '/unithotregion/modifyUnitHotRegion';
+    return this.http.post(url, param);
+  }
+
+  deleteUnitHotRegionById(id): any {
+    return this.http.post('/unithotregion/deleteUnitHotRegionById', id);
   }
 }

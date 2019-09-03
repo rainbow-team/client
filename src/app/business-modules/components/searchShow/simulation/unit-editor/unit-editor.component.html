@@ -1,0 +1,148 @@
+<div style="height: 100%;background:#fff">
+  <div nz-row class="div_contain">
+    <div class="div_top">
+      <div class="fl div_top_tip"></div>
+      <div class="fl" style="color: #0050b3;">
+        核设备许可信息（共{{ totalCount }}条）
+      </div>
+
+      <div class="fr" *ngIf="!subjectId">
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除吗?"
+          (nzOnConfirm)="delete()"
+        >
+          删除
+        </button>
+      </div>
+
+      <div class="fr" *ngIf="!subjectId">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="modify()"
+        >
+          编辑
+        </button>
+      </div>
+
+      <div class="fr" *ngIf="!subjectId">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="add()"
+        >
+          添加
+        </button>
+      </div>
+    </div>
+    <div>
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable tablescoll_rainbow"
+        [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+        [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
+      >
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>核设施/矿山名称</th>
+            <th>对应热区坐标</th>
+            <th>三维展示链接</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
+            (click)="selectItem(data)"
+          >
+            <td>{{ (pageIndex - 1) * pageSize + 1 + index }}</td>
+            <td>{{ data.subjectName }}</td>
+            <td>{{ data.hotRegion }}</td>
+            <td>{{ data.previewUrl }}</td>
+            <!-- <td>
+              <a (click)="show(data)">查看</a>
+            </td> -->
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+
+  <div
+    nz-row
+    [nzType]="'flex'"
+    [nzAlign]="'middle'"
+    class="div_bottom_add"
+    [nzJustify]="'end'"
+  >
+    <button nz-button nzType="default" (click)="back()">返回</button>
+  </div>
+
+  <nz-modal
+    [(nzVisible)]="isEditorVisible"
+    nzTitle="{{ title }}"
+    (nzOnCancel)="editorCancel()"
+    (nzOnOk)="editorOk()"
+    [nzOkLoading]="isEditorLoading"
+  >
+    <div style="height:360px">
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          <span class="clo_r">*</span>核设施/铀矿山：
+          <nz-select
+            style="width:calc(100% - 120px)"
+            [(ngModel)]="subject.subjectId"
+            class="w200"
+          >
+            <nz-option
+              *ngFor="let option of unit_subjects"
+              [nzLabel]="option.name"
+              [nzValue]="option.id"
+            >
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          <span class="clo_r">*</span>热区坐标：
+          <input
+            style="width:calc(100% - 120px)"
+            type="text"
+            nz-input
+            [(ngModel)]="subject.hotRegion"
+          />
+        </div>
+      </div>
+
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          <span class="clo_r">*</span>三维预览地址：
+          <input
+            style="width:calc(100% - 120px)"
+            type="text"
+            nz-input
+            [(ngModel)]="subject.previewUrl"
+          />
+        </div>
+      </div>
+      <app-attachment
+        [fileList]="fileList"
+        [refid]="subject.id"
+      ></app-attachment>
+    </div>
+  </nz-modal>
+</div>
