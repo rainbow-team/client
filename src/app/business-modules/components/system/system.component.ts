@@ -15,7 +15,7 @@ export class SystemComponent implements OnInit {
     { name: '日志管理' }
   ];
 
-  selectMenuName = '参数设置';
+  selectMenuName = '人员管理';
   constructor() {}
 
   ngOnInit() {}

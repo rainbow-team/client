@@ -136,6 +136,7 @@
         <div class="ta_r">
           <span class="clo_r">*</span>所在部门：
           <nz-tree-select
+            [nzDropdownStyle]="{ 'max-height': '300px' }"
             style="width:calc(100% - 100px)"
             [disabled]="isDisable"
             nzPlaceHolder="请选择部门"
@@ -152,6 +153,7 @@
         <div class="ta_r">
           角色：
           <nz-select
+            [nzDropdownStyle]="{ 'max-height': '200px' }"
             style="width:calc(100% - 100px)"
             [(ngModel)]="currentUser.roleList"
             [disabled]="isDisable"

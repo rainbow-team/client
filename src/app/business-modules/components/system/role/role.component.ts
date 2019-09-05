@@ -32,6 +32,8 @@ export class RoleComponent implements OnInit {
   isOkLoading = false;
   title: string;
   isDisable: boolean;
+  ckeckedRoleMenuList: any = [];
+  roleMenuList1: any = [];
 
   constructor(
     private msg: NzMessageService,
@@ -120,7 +122,7 @@ export class RoleComponent implements OnInit {
       for (let i = 0; i < data.msg.roleMenuList.length; i++) {
         meluList.push(data.msg.roleMenuList[i].id);
       }
-      this.currentRole.roleMenuList = meluList;
+      this.ckeckedRoleMenuList = meluList;
     });
   }
 
@@ -133,10 +135,10 @@ export class RoleComponent implements OnInit {
 
   delete(item) {
     this.roleService.deleteRoleByIds([item.id]).subscribe(res => {
-      if (res.code == 200) {
+      if (res.code === 200) {
         this.msg.create('success', '删除成功');
         this.search();
-      } else if (res.code == 500) {
+      } else if (res.code === 500) {
         this.msg.create('warning', res.msg);
       } else {
         this.msg.create('error', '删除失败');
@@ -145,16 +147,21 @@ export class RoleComponent implements OnInit {
   }
 
   handleOk(): void {
+    if (this.isDisable) {
+      this.isVisible = false;
+      return;
+    }
     if (!this.FormValidation()) {
       return;
     }
+    // this.roleMenuList = menuTree.getCheckedNodeList();
     this.isOkLoading = true;
-    for (let i = 0; i < this.currentRole.roleMenuList.length; i++) {
-      let id = this.currentRole.roleMenuList[i];
-      this.currentRole.roleMenuList[i] = this.allMenuList.find(
-        myObj => myObj.id === id
-      );
+    let list = [];
+    for (let i = 0; i < this.roleMenuList1.length; i++) {
+      let id = this.roleMenuList1[i].key;
+      list.push(this.allMenuList.find(myObj => myObj.id === id));
     }
+    this.currentRole.roleMenuList = list;
     this.roleService.saveOrUpdateRole(this.currentRole).subscribe(res => {
       this.isOkLoading = false;
       this.isVisible = false;
@@ -179,5 +186,38 @@ export class RoleComponent implements OnInit {
       }
     });
     return isValid;
+  }
+
+  updateRoleMenuList($event) {
+    this.roleMenuList1 = [];
+    $event.checkedKeys.forEach(element => {
+      let list = this.convertTreeToList(element);
+      this.roleMenuList1 = this.roleMenuList1.concat(list);
+    });
+  }
+
+  convertTreeToList(root) {
+    var stack = [],
+      array = [],
+      hashMap = {};
+    stack.push(root);
+
+    while (stack.length !== 0) {
+      var node = stack.pop();
+      this.visitNode(node, hashMap, array);
+      if (node.children) {
+        for (var i = node.children.length - 1; i >= 0; i--) {
+          stack.push(node.children[i]);
+        }
+      }
+    }
+
+    return array;
+  }
+  visitNode(node, hashMap, array) {
+    if (!hashMap[node.key]) {
+      hashMap[node.key] = true;
+      array.push(node);
+    }
   }
 }

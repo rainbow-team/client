@@ -68,8 +68,10 @@
   >
     <div>
       <div nz-row style="height: 60px;">
-        <div class="ta_r">
+        <div nz-col [nzSpan]="6" class="ta_r">
           <span class="clo_r">*</span>角色名称：
+        </div>
+        <div nz-col [nzSpan]="18" class="ta_l">
           <input
             style="width:calc(100% - 100px)"
             [disabled]="isDisable"
@@ -83,8 +85,10 @@
         </div>
       </div>
       <div nz-row style="height: 60px;">
-        <div class="ta_r">
+        <div nz-col [nzSpan]="6" class="ta_r">
           <span class="clo_r">*</span>角色描述：
+        </div>
+        <div nz-col [nzSpan]="18" class="ta_l">
           <input
             nz-input
             style="width:calc(100% - 100px)"
@@ -100,10 +104,12 @@
       <ng-template #omittedPlaceHolder let-omittedValues>
         and {{ omittedValues.length }} 更多权限...
       </ng-template>
-      <div nz-row style="height: 60px;">
-        <div class="ta_r">
+      <div nz-row>
+        <div nz-col [nzSpan]="6" class="ta_r">
           <span class="clo_r">*</span>菜单权限：
-          <nz-tree-select
+        </div>
+        <div nz-col [nzSpan]="18" class="ta_l">
+          <!-- <nz-tree-select
             [disabled]="isDisable"
             style="width:calc(100% - 100px)"
             nzPlaceHolder="请选择父级菜单"
@@ -114,7 +120,17 @@
             nzShowExpand
             [nzMultiple]="true"
           >
-          </nz-tree-select>
+          </nz-tree-select> -->
+          <div class="ta_l" style="height: 200px;overflow: scroll">
+            <nz-tree
+              (nzCheckBoxChange)="updateRoleMenuList($event)"
+              [nzData]="menuTreeNodes"
+              nzCheckable="true"
+              nzMultiple="true"
+              [(nzCheckedKeys)]="ckeckedRoleMenuList"
+            >
+            </nz-tree>
+          </div>
         </div>
       </div>
     </div>
