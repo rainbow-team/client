@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService, UploadXHRArgs } from 'ng-zorro-antd';
 import { HttpRequest, HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-data-migration',
@@ -20,9 +21,10 @@ export class DataMigrationComponent implements OnInit {
 
   uploadUrl: any = AppConfig.serviceAddress + "/dataMigration/importData";
 
-  constructor(private msg: NzMessageService,private http: HttpClient) { }
+  constructor(private msg: NzMessageService,private http: HttpClient,private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
+    this.uploadUrl=this.utilitiesSercice.wrapUrl(this.uploadUrl);
   }
 
   exportData() {
@@ -33,7 +35,10 @@ export class DataMigrationComponent implements OnInit {
     }
 
     let str = this.types.join(",");
-    window.open( AppConfig.serviceAddress+"/dataMigration/exportData?type="+str, "_blank");
+
+    let url =AppConfig.serviceAddress+"/dataMigration/exportData?type="+str;
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url , "_blank");
 
   }
 
