@@ -1,19 +1,56 @@
 <div style="height: 100%;">
-  <div nz-row class="div_title">
-    系统用户信息
+  <div nz-row style="height: 40px;">
+    <div nz-col [nzSpan]="6">
+      账号
+      <input
+        nz-input
+        nzSize="default"
+        [(ngModel)]="username"
+        class="w200"
+        placeholder="请输入账号"
+      />
+    </div>
+    <div nz-col [nzSpan]="6">
+      姓名
+      <input
+        nz-input
+        nzSize="default"
+        [(ngModel)]="realname"
+        class="w200"
+        placeholder="请输入姓名"
+      />
+    </div>
+
+    <div nz-col [nzSpan]="6">
+      电话
+      <input
+        nz-input
+        nzSize="default"
+        [(ngModel)]="mobile"
+        class="w200"
+        placeholder="请输入电话"
+      />
+    </div>
+
+    <div nz-col [nzSpan]="4" nzOffset="2" class="ta_r">
+      <button
+        nz-button
+        nzType="primary"
+        style="width: 70px; margin-right: 10px;"
+        (click)="search()"
+      >
+        查询
+      </button>
+      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
+        重置
+      </button>
+    </div>
   </div>
   <div nz-row class="div_contain">
     <div class="div_top">
-      <div class="fr">
-        <button
-          nz-button
-          nzType="primary"
-          style=" margin-right: 10px;"
-          class="addbtn"
-          (click)="add()"
-        >
-          添加
-        </button>
+      <div class="fl div_top_tip"></div>
+      <div class="fl" style="color: #0050b3;">
+        用户信息（共{{ totalCount }}条）
       </div>
     </div>
     <div>
