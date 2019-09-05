@@ -88,6 +88,7 @@ export class UnitEditorComponent implements OnInit {
   add() {
     this.isEditorVisible = true;
     this.title = '添加';
+    this.subject = {};
   }
   editorOk() {
     this.isEditorLoading = true;
@@ -124,7 +125,7 @@ export class UnitEditorComponent implements OnInit {
       this.unithotregionService
         .getUnitHotRegionById(this.selectId)
         .subscribe(res1 => {
-          // this.subject = res1.msg;
+          this.subject = res1.msg;
         });
       // this.router.navigate(['/permit/equip/add'], {
       //   queryParams: { id: this.selectId, isShow: false }

@@ -32,6 +32,9 @@ export class UserComponent implements OnInit {
   isOkLoading = false;
   title: string;
   isDisable: boolean;
+  username: string;
+  realname: string;
+  mobile: string;
 
   constructor(
     private msg: NzMessageService,
@@ -53,9 +56,15 @@ export class UserComponent implements OnInit {
       conditions: []
     };
 
-    // if (this.name) {
-    //   option.conditions.push({ key: 'name', value: this.name });
-    // }
+    if (this.username) {
+      option.conditions.push({ key: 'username', value: this.username });
+    }
+    if (this.mobile) {
+      option.conditions.push({ key: 'mobile', value: this.mobile });
+    }
+    if (this.realname) {
+      option.conditions.push({ key: 'realname', value: this.realname });
+    }
 
     this.userService.getUserList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
@@ -107,7 +116,9 @@ export class UserComponent implements OnInit {
   }
 
   reset() {
-    // this.name = '';
+    this.username = '';
+    this.mobile = '';
+    this.realname = '';
   }
 
   add() {

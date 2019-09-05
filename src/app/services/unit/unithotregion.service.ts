@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UnithotregionService {
-  getUnitHotRegionById(id: any) {
+  getUnitHotRegionById(id: any): any {
     return this.http.post('/unithotregion/getUnitHotRegionById', id);
   }
   constructor(private http: HttpClient) {}
