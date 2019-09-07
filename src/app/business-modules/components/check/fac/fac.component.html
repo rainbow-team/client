@@ -1,22 +1,22 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      营运单位
+      营运单位：
       <input nz-input nzSize="default" [(ngModel)]="serviceDepartName" class="w200" placeholder="请输入运营单位">
     </div>
     <div nz-col [nzSpan]="5">
-      设施名称
+      设施名称：
       <input nz-input nzSize="default" [(ngModel)]="facName" class="w200" placeholder="请输入设施名称">
     </div>
     <div nz-col [nzSpan]="5">
-      审评类型
+      审评类型：
       <nz-select [(ngModel)]="typeIds" class="w200"  nzPlaceHolder="请选择审评类型">
         <nz-option *ngFor="let option of dictionary.config_fac_check_type" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="6">
-      审评阶段
+      审评阶段：
       <nz-select [(ngModel)]="stageIds" class="w200"  nzPlaceHolder="请选择审评阶段">
         <nz-option *ngFor="let option of dictionary.config_fac_check_stage" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>

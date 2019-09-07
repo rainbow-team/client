@@ -1,18 +1,18 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      监管机构
+      监管机构：
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
     <div nz-col [nzSpan]="7">
-      机构性质
+      机构性质：
       <nz-select [(ngModel)]="natureIds" style="width: 250px" nzMode="multiple" nzPlaceHolder="请选择机构性质">
         <nz-option *ngFor="let option of dictionary.config_supervision_org_nature" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="5">
-      机构领导
+      机构领导：
       <input nz-input nzSize="default" [(ngModel)]="leader" class="w200">
     </div>
 

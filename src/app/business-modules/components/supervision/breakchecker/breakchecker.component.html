@@ -1,17 +1,17 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      姓名
+      姓名：
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
 
     <div nz-col [nzSpan]="5">
-      聘用单位
+      聘用单位：
       <input nz-input nzSize="default" [(ngModel)]="employ_depart" class="w200">
     </div>
 
     <div nz-col [nzSpan]="5">
-      检验方法
+      检验方法：
       <nz-select [(ngModel)]="checkMethodIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_check_method" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
@@ -19,7 +19,7 @@
     </div>
 
     <div nz-col [nzSpan]="5">
-      等级
+      等级：
       <nz-select [(ngModel)]="checkLevelIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_check_level" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
@@ -34,12 +34,12 @@
   </div>
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      有效期限
+      有效期限：
       <nz-range-picker class="w200" [(ngModel)]="valid_date">
       </nz-range-picker>
     </div>
     <div nz-col [nzSpan]="5">
-      证书编号
+      证书编号：
       <input nz-input nzSize="default" [(ngModel)]="cert_number" class="w200">
     </div>
 
