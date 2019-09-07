@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { OrgSercice } from 'src/app/services/supervision/org.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
     selector: 'app-supervision-supervisor',
@@ -16,7 +17,7 @@ export class SupervisorComponent implements OnInit {
 
     dictionary: any = {};
     staffObj: any = {};
-    
+
     public dataSet: any;
 
     name: any = "";
@@ -31,13 +32,13 @@ export class SupervisorComponent implements OnInit {
     allChecked: any = false;
     indeterminate: any = false;
 
-    typeIds:any=[];
+    typeIds: any = [];
 
-    selectId:any="";
+    selectId: any = "";
 
     constructor(private supervisionSercice: SupervisionSercice, private http: HttpClient, private router: Router,
         private msg: NzMessageService, private dictionarySercice: DictionarySercice,
-        private staffSercice: StaffSercice) { }
+        private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
 
     ngOnInit() {
 
@@ -65,9 +66,28 @@ export class SupervisorComponent implements OnInit {
 
     }
 
-    // goChildManage() {
-    //     this.router.navigate(['/supersivion/supervisor/childmanage'], { queryParams: { id: this.selectId } });
-    // }
+    //导出
+    exportData() {
+
+        let start_date = "", end_date = "";
+        if (this.expireDate && this.expireDate.length > 0) {
+            if (this.expireDate[0]) {
+                start_date = this.expireDate[0];
+            }
+
+            if (this.expireDate[1]) {
+                end_date = this.expireDate[1];
+            }
+        }
+
+        let url = AppConfig.serviceAddress + "/Supervisor/exportSupervisor?name=" + this.name
+            + "&orgName=" + this.orgName + "&start_date=" +encodeURIComponent(start_date)+"&end_date="+encodeURIComponent(end_date)
+            +"&typeIds="+this.typeIds;
+
+        url = this.utilitiesSercice.wrapUrl(url);
+        window.open(url, "_blank");
+
+    }
 
     search() {
         var option = {
@@ -131,7 +151,7 @@ export class SupervisorComponent implements OnInit {
         //     this.ids.push(element.id);
         // });
 
-        if(this.selectId){
+        if (this.selectId) {
             this.supervisionSercice.deleteSupervisorById(this.selectId).subscribe((res) => {
                 if (res.code == 200) {
                     this.msg.create("success", res.msg);
@@ -140,7 +160,7 @@ export class SupervisorComponent implements OnInit {
                     this.msg.create("error", res.msg);
                 }
             })
-        }else{
+        } else {
             this.msg.create("warning", "请选择删除项");
         }
 
@@ -161,11 +181,11 @@ export class SupervisorComponent implements OnInit {
         this.name = "";
         this.orgName = "";
         this.expireDate = "";
-        this.selectId="";
-        this.typeIds=[];
+        this.selectId = "";
+        this.typeIds = [];
     }
 
-    selectItem(data){
-        this.selectId=data.id;
+    selectItem(data) {
+        this.selectId = data.id;
     }
 }
