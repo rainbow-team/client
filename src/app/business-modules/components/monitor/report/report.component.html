@@ -2,12 +2,12 @@
   <div nz-row style="height: 40px;">
 
     <div nz-col [nzSpan]="5">
-      监管机构
+      监管机构：
       <input nz-input nzSize="default" [(ngModel)]="orgName" class="w200">
     </div>
 
     <div nz-col [nzSpan]="5">
-      报告类型:
+      报告类型：
       <nz-select [(ngModel)]="typeIds" class="w200" >
         <nz-option *ngFor="let option of dictionary.config_monitor_report_type" [nzLabel]="option.value"
           [nzValue]="option.id">
@@ -16,12 +16,12 @@
     </div>
 
     <div nz-col [nzSpan]="5">
-      报告名称
+      报告名称：
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
 
     <div nz-col [nzSpan]="5">
-      报告时间
+      报告时间：
       <nz-range-picker class="w200" [(ngModel)]="report_date" >
       </nz-range-picker>
     </div>

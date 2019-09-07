@@ -1,17 +1,17 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      营运单位
+      营运单位：
       <input nz-input nzSize="default" [(ngModel)]="serviceDepartName" class="w200" placeholder="请输入营运单位">
     </div>
 
     <div nz-col [nzSpan]="5">
-      设施名称
+      设施名称：
       <input nz-input nzSize="default" [(ngModel)]="facName" class="w200" placeholder="请输入设施名称">
     </div>
 
     <div nz-col [nzSpan]="5">
-      设施状态
+      设施状态：
       <nz-select [(ngModel)]="facStatusTypeIds" class="w200"  nzAllowClear nzShowSearch nzPlaceHolder="请选择设施状态" >
         <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
@@ -27,7 +27,7 @@
   <div nz-row style="height: 40px;">
 
     <div nz-col [nzSpan]="5">
-      文件类型
+      文件类型：
       <nz-select [(ngModel)]="fileTypeIds" class="w200"  nzAllowClear nzShowSearch nzPlaceHolder="请选择文件类型">
         <nz-option *ngFor="let option of dictionary.config_monitor_daily_file_type" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
@@ -35,12 +35,12 @@
     </div>
 
     <div nz-col [nzSpan]="5">
-      文件名称
+      文件名称：
       <input nz-input nzSize="default" [(ngModel)]="file_name" class="w200" placeholder="请输入文件名称">
     </div>
   
     <div nz-col [nzSpan]="5">
-      文件时间
+      文件时间：
       <nz-range-picker class="w200" [(ngModel)]="file_date" >
       </nz-range-picker>
     </div>

@@ -1,19 +1,19 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      姓名
+      姓名：
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
     </div>
     <div nz-col [nzSpan]="5">
-      聘用单位
+      聘用单位：
       <input nz-input nzSize="default" [(ngModel)]="employ_depart" class="w200">
     </div>
     <div nz-col [nzSpan]="6">
-      考试合格项目代号
+      考试合格项目代号：
       <input nz-input nzSize="default" [(ngModel)]="exam_project" class="w200">
     </div>
     <div nz-col [nzSpan]="5">
-      有效期限
+      有效期限：
       <nz-range-picker class="w200" [(ngModel)]="expire_date" >
       </nz-range-picker>
     </div>
