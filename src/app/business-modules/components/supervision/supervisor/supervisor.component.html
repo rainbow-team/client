@@ -55,6 +55,15 @@
                 <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="exportData()">导出</button>
             </div>
 
+            <div class="fr">
+                <nz-upload [nzAction]="uploadUrl" [nzCustomRequest]="customReq" [nzAccept]="'.xls'"
+                    [nzShowUploadList]="false">
+                    <button nz-button class="importBtn">
+                        <i nz-icon type="upload"></i><span>导入</span>
+                    </button>
+                </nz-upload>
+            </div>
+
         </div>
         <div>
             <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
