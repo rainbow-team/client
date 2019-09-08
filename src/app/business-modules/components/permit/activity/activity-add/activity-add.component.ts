@@ -157,7 +157,7 @@ export class ActivityPermitAddComponent implements OnInit {
     } else if (this.umineId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 1 } });
     } else if (this.facId_Router) {
-      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 1 } });
+      this.router.navigate(['/searchShow/integratedAuery/facSearch'], { queryParams: { id: this.facId_Router, idx: 2 } });
     }else {
       this.router.navigate(['/permit/activity']);
     }

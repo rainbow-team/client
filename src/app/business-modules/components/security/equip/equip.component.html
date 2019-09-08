@@ -1,7 +1,7 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
-      单位名称：
+      核设备单位：
       <input
         nz-input
         nzSize="default"
@@ -150,9 +150,10 @@
         <thead>
           <tr>
             <th style="width: 5%">序号</th>
-            <th style="width: 15%">单位名称</th>
+            <th style="width: 15%">核设备单位</th>
             <th style="width: 15%">设备名称</th>
-            <th style="width: 20%">所属设施</th>
+            <th style="width: 10%">营运单位</th>
+            <th style="width: 10%">设施名称</th>
             <th style="width: 10%">检查类型</th>
             <th style="width: 10%">问题内容</th>
             <th style="width: 10%">发现时间</th>
@@ -180,9 +181,12 @@
             <td style="width: 15%" nz-tooltip nzTitle="{{ data.name }}">
               {{ data.name | tooltips: 15 }}
             </td>
-            <td style="width: 20%">
-              {{ data.serviceDepartName }}/{{ data.facName }}
+            <td style="width: 10%">
+              {{ data.serviceDepartName }}
             </td>
+            <td style="width: 10%">
+              {{ data.facName }}
+              </td>
             <td style="width: 10%">{{ data.checkTypeValue }}</td>
             <td style="width: 10%" nz-tooltip nzTitle="{{ data.content }}">
               {{ data.content | tooltips: 5 }}

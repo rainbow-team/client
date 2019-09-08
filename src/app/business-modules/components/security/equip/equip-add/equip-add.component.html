@@ -6,7 +6,7 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>单位名称：
+        <span class="clo_r">*</span>核设备单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" required [validation]="true">
@@ -135,7 +135,7 @@
   <div class="div_contain_add" *ngIf="isShow==true">
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        单位名称：
+          核设备单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="equipDepartName" class="showText">{{data.equipDepartName}}</span>

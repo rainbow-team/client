@@ -5,6 +5,7 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-fac',
@@ -40,9 +41,11 @@ export class FacComponent implements OnInit {
 
   selectId: any = "";
 
+  uploadUrl: any = AppConfig.serviceAddress + "/fac/importFac";
+
   constructor(private router: Router,
     private msg: NzMessageService, private facSercice: FacSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService) { }
+    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
@@ -133,7 +136,7 @@ export class FacComponent implements OnInit {
     this.code = "";
     this.serviceDepart = "";
     this.build_start_year = "";
-    this.build_end_year="";
+    this.build_end_year = "";
     this.supervisionCategoryIds = [];
     this.typeIds = [];
     this.statusIds = [];
@@ -202,5 +205,19 @@ export class FacComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  exportData() {
+
+
+    let url = AppConfig.serviceAddress + "/fac/exportFac?name=" + this.name
+      + "&code=" + this.code + "&serviceDepart=" + this.serviceDepart + "&build_start_year=" + encodeURIComponent(this.build_start_year)
+      + "&build_end_year=" + encodeURIComponent(this.build_end_year) + "&supervisionCategoryIds=" + this.supervisionCategoryIds
+      + "&typeIds=" + this.typeIds + "&statusIds=" + this.statusIds + "&reviewStatusIds=" + this.reviewStatusIds
+      + "&permitSituationIds=" + this.permitSituationIds + "&is_earthquake=" + this.is_earthquake
+      + "&is_flood=" + this.is_flood;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
 }
