@@ -2,88 +2,139 @@
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
       姓名：
-      <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w200" />
     </div>
     <div nz-col [nzSpan]="5">
       专业：
-      <input nz-input nzSize="default" [(ngModel)]="major" class="w200">
+      <input nz-input nzSize="default" [(ngModel)]="major" class="w200" />
     </div>
     <div nz-col [nzSpan]="5">
       年龄：
-      <input nz-input nzSize="default" [(ngModel)]="startAge" style="width: 100px" validation="true"
-        [validationType]="'nullnumber'">
+      <input
+        nz-input
+        nzSize="default"
+        [(ngModel)]="startAge"
+        style="width: 100px"
+        validation="true"
+        [validationType]="'nullnumber'"
+      />
       至
-      <input nz-input nzSize="default" [(ngModel)]="endAge" style="width: 100px" validation="true"
-        [validationType]="'nullnumber'">
+      <input
+        nz-input
+        nzSize="default"
+        [(ngModel)]="endAge"
+        style="width: 100px"
+        validation="true"
+        [validationType]="'nullnumber'"
+      />
     </div>
 
     <div nz-col [nzSpan]="4" [nzOffset]="5" class="ta_r">
-      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
-      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
+      <button
+        nz-button
+        nzType="primary"
+        style="width: 70px; margin-right: 10px;"
+        (click)="search()"
+      >
+        查询
+      </button>
+      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
+        重置
+      </button>
     </div>
   </div>
 
   <div nz-row class="div_contain">
-
     <div class="div_top">
-      <div class="fl div_top_tip">
-
-      </div>
+      <div class="fl div_top_tip"></div>
       <div class="fl" style="color: #0050b3;">
-        核安全监督专家信息（共{{totalCount}}条）
-      </div>
-
-
-      <div class="fr">
-        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
+        核安全监督专家信息（共{{ totalCount }}条）
       </div>
 
       <div class="fr">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除吗?"
+          (nzOnConfirm)="delete()"
+        >
+          删除
+        </button>
       </div>
 
       <div class="fr">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="modify()"
+        >
+          编辑
+        </button>
       </div>
 
+      <div class="fr">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="add()"
+        >
+          添加
+        </button>
+      </div>
     </div>
     <div>
-      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable tablescoll_rainbow"
+        [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+        [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
+      >
         <thead>
           <tr>
-            <th>序号</th>
-            <th>姓名</th>
-            <th>性别</th>
-            <th>专业</th>
-            <th>职称</th>
-            <th>身份证号</th>
-            <th>年龄</th>
-            <th>联系方式</th>
-            <th>所属单位</th>
-            <th>操作</th>
+            <th style="width: 5%">序号</th>
+            <th style="width: 10%">姓名</th>
+            <th style="width: 5%">性别</th>
+            <th style="width: 10%">专业</th>
+            <th style="width: 10%">职称</th>
+            <th style="width: 20%">身份证号</th>
+            <th style="width: 10%">年龄</th>
+            <th style="width: 10%">联系方式</th>
+            <th style="width: 10%">所属单位</th>
+            <th style="width: 10%">操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index"
-            [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
-            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-            <td>{{data.name}}</td>
-            <td>{{data.sex|sex}}</td>
-            <td>{{data.major}}</td>
-            <td>{{data.titleValue}}</td>
-            <td>{{data.identity}}</td>
-            <td>{{data.age}}</td>
-            <td>{{data.contact}}</td>
-            <td>{{data.org}}</td>
-            <td>
+          <tr
+            *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
+            (click)="selectItem(data)"
+          >
+            <td style="width: 5%">
+              {{ (pageIndex - 1) * pageSize + 1 + index }}
+            </td>
+            <td style="width: 10%">{{ data.name }}</td>
+            <td style="width: 5%">{{ data.sex | sex }}</td>
+            <td style="width: 10%">{{ data.major }}</td>
+            <td style="width: 10%">{{ data.titleValue }}</td>
+            <td style="width: 20%">{{ data.identity }}</td>
+            <td style="width: 10%">{{ data.age }}</td>
+            <td style="width: 10%">{{ data.contact }}</td>
+            <td style="width: 10%">{{ data.org }}</td>
+            <td style="width: 10%">
               <a (click)="show(data)">查看</a>
             </td>
           </tr>
         </tbody>
       </nz-table>
     </div>
-
   </div>
 </div>

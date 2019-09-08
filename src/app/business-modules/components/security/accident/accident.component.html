@@ -2,120 +2,181 @@
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="4">
       单位名称：
-      <input nz-input nzSize="default" [(ngModel)]="depart" class="w150">
+      <input nz-input nzSize="default" [(ngModel)]="depart" class="w150" />
     </div>
     <div nz-col [nzSpan]="4">
       设施名称：
-      <input nz-input nzSize="default" [(ngModel)]="fac" class="w150">
+      <input nz-input nzSize="default" [(ngModel)]="fac" class="w150" />
     </div>
     <div nz-col [nzSpan]="5">
       核设施状态：
-      <nz-select [(ngModel)]="facStatusTypeIds" class="w150" >
-        <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
+      <nz-select [(ngModel)]="facStatusTypeIds" class="w150">
+        <nz-option
+          *ngFor="let option of dictionary.config_fac_status"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="6">
       铀尾矿(渣)库设施状态：
-      <nz-select [(ngModel)]="uminePlaceStatusTypeIds" class="w150" >
-        <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
-          [nzValue]="option.id">
+      <nz-select [(ngModel)]="uminePlaceStatusTypeIds" class="w150">
+        <nz-option
+          *ngFor="let option of dictionary.config_umine_place_status"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="5" class="ta_r">
-      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
-      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
-    </div> 
+      <button
+        nz-button
+        nzType="primary"
+        style="width: 70px; margin-right: 10px;"
+        (click)="search()"
+      >
+        查询
+      </button>
+      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
+        重置
+      </button>
+    </div>
   </div>
 
-<div nz-row style="height: 40px;">
-  <div nz-col [nzSpan]="6">
-    事故事件名称：
-    <input nz-input nzSize="default" [(ngModel)]="name" class="w200">
-  </div>
+  <div nz-row style="height: 40px;">
+    <div nz-col [nzSpan]="6">
+      事故事件名称：
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w200" />
+    </div>
 
-  <div nz-col [nzSpan]="5">
-    发生时间：
-    <nz-range-picker class="w200" [(ngModel)]="occur_date">
-    </nz-range-picker>
-  </div>
+    <div nz-col [nzSpan]="5">
+      发生时间：
+      <nz-range-picker class="w200" [(ngModel)]="occur_date"> </nz-range-picker>
+    </div>
 
-  <div nz-col [nzSpan]="5">
-    问题类别：
-    <nz-select [(ngModel)]="typeIds" class="w200" >
-      <nz-option *ngFor="let option of dictionary.config_accident_type" [nzLabel]="option.value"
-        [nzValue]="option.id">
-      </nz-option>
-    </nz-select>
-  </div>
+    <div nz-col [nzSpan]="5">
+      问题类别：
+      <nz-select [(ngModel)]="typeIds" class="w200">
+        <nz-option
+          *ngFor="let option of dictionary.config_accident_type"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
+        </nz-option>
+      </nz-select>
+    </div>
 
-  <div nz-col [nzSpan]="5">
-    问题性质：
-    <nz-select [(ngModel)]="natureIds" class="w200" >
-      <nz-option *ngFor="let option of dictionary.config_accident_nature" [nzLabel]="option.value"
-        [nzValue]="option.id">
-      </nz-option>
-    </nz-select>
+    <div nz-col [nzSpan]="5">
+      问题性质：
+      <nz-select [(ngModel)]="natureIds" class="w200">
+        <nz-option
+          *ngFor="let option of dictionary.config_accident_nature"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
+        </nz-option>
+      </nz-select>
+    </div>
   </div>
-</div>
   <div nz-row class="div_contain">
-
     <div class="div_top">
-      <div class="fl div_top_tip">
-
-      </div>
+      <div class="fl div_top_tip"></div>
       <div class="fl" style="color: #0050b3;">
-        事故事件（共{{totalCount}}条）
+        事故事件（共{{ totalCount }}条）
       </div>
 
       <div class="fr" *ngIf="!isSearchShow">
-          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
-        </div>
-        
-        <div class="fr" *ngIf="!isSearchShow">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
-        </div>
-        
-        <div class="fr" *ngIf="!isSearchShow">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
-        </div>
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除吗?"
+          (nzOnConfirm)="delete()"
+        >
+          删除
+        </button>
+      </div>
 
+      <div class="fr" *ngIf="!isSearchShow">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="modify()"
+        >
+          编辑
+        </button>
+      </div>
+
+      <div class="fr" *ngIf="!isSearchShow">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="add()"
+        >
+          添加
+        </button>
+      </div>
     </div>
     <div>
-      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable tablescoll_rainbow"
+        [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+        [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
+      >
         <thead>
           <tr>
-            <th>序号</th>
-            <th>单位名称</th>
-            <th>设施名称</th>
-            <th>设施状态</th>
-            <th>事故事件名称</th>
-            <th>事故事件发生时间</th>
-            <th>事故事件类别</th>
-            <th>事故事件性质</th>
-            <th>操作</th>
+            <th style="width: 5%">序号</th>
+            <th style="width: 20%">单位名称</th>
+            <th style="width: 15%">设施名称</th>
+            <th style="width: 10%">设施状态</th>
+            <th style="width: 15%">事故事件名称</th>
+            <th style="width: 10%">事故事件发生时间</th>
+            <th style="width: 10%">事故事件类别</th>
+            <th style="width: 10%">事故事件性质</th>
+            <th style="width: 5%">操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index" [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
-            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-            <td>{{data.serviceDepartName}}{{data.umineName}}</td>
-            <td>{{data.facName}}{{data.uminePlaceName}}</td>
-            <td>{{data.facStatusValue}}{{data.uminePlaceStatusValue}}</td>
-            <td>{{data.name}}</td>
-            <td>{{data.occurDate|recordtime}}</td>
-            <td>{{data.typeValue}}</td>
-            <td>{{data.natureValue}}</td>
-            <td>
+          <tr
+            *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
+            (click)="selectItem(data)"
+          >
+            <td style="width: 5%">
+              {{ (pageIndex - 1) * pageSize + 1 + index }}
+            </td>
+            <td style="width: 20%">
+              {{ data.serviceDepartName }}{{ data.umineName }}
+            </td>
+            <td style="width: 15%">
+              {{ data.facName }}{{ data.uminePlaceName }}
+            </td>
+            <td style="width: 10%">
+              {{ data.facStatusValue }}{{ data.uminePlaceStatusValue }}
+            </td>
+            <td style="width: 15%" nz-tooltip nzTitle="{{ data.name }}">
+              {{ data.name | tooltips: 12 }}
+            </td>
+            <td style="width: 10%">{{ data.occurDate | recordtime }}</td>
+            <td style="width: 10%">{{ data.typeValue }}</td>
+            <td style="width: 10%">{{ data.natureValue }}</td>
+            <td style="width: 5%">
               <a (click)="show(data)">查看</a>
             </td>
           </tr>
         </tbody>
       </nz-table>
     </div>
-
   </div>
 </div>
