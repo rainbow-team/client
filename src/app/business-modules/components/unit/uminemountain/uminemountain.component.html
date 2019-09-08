@@ -2,108 +2,160 @@
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
       铀矿山名称：
-      <input nz-input nzSize="default" [(ngModel)]="name" class="w150">
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w150" />
     </div>
 
     <div nz-col [nzSpan]="5">
       营运单位：
-      <input nz-input nzSize="default" [(ngModel)]="umineName" class="w150">
+      <input nz-input nzSize="default" [(ngModel)]="umineName" class="w150" />
     </div>
 
     <div nz-col [nzSpan]="11">
       建造年代：
-      <nz-year-picker  [(ngModel)]="build_start_year" ></nz-year-picker>
+      <nz-year-picker [(ngModel)]="build_start_year"></nz-year-picker>
       至
-      <nz-year-picker    [(ngModel)]="build_end_year" ></nz-year-picker>
+      <nz-year-picker [(ngModel)]="build_end_year"></nz-year-picker>
     </div>
 
     <div nz-col [nzSpan]="3" class="ta_r">
-      <button nz-button nzType="primary" style="width: 60px; margin-right: 10px;" (click)="search()">查询</button>
-      <button nz-button nzType="default" style="width: 60px;" (click)="reset()">重置</button>
+      <button
+        nz-button
+        nzType="primary"
+        style="width: 60px; margin-right: 10px;"
+        (click)="search()"
+      >
+        查询
+      </button>
+      <button nz-button nzType="default" style="width: 60px;" (click)="reset()">
+        重置
+      </button>
     </div>
   </div>
 
   <div nz-row style="height: 40px;">
-
     <div nz-col [nzSpan]="7">
       设施状态：
-      <nz-select [(ngModel)]="statusIds" class="w200" >
-        <nz-option *ngFor="let option of dictionary.config_umine_mountain_status" [nzLabel]="option.value"
-          [nzValue]="option.id">
+      <nz-select [(ngModel)]="statusIds" class="w200">
+        <nz-option
+          *ngFor="let option of dictionary.config_umine_mountain_status"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
 
     <div nz-col [nzSpan]="8">
       井下消防审查备案情况：
-      <nz-select [(ngModel)]="recordIds" class="w200" >
-          <nz-option *ngFor="let option of dictionary.config_umine_mountain_record" [nzLabel]="option.value"  [nzValue]="option.id">
-          </nz-option>
-        </nz-select>
+      <nz-select [(ngModel)]="recordIds" class="w200">
+        <nz-option
+          *ngFor="let option of dictionary.config_umine_mountain_record"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
+        </nz-option>
+      </nz-select>
     </div>
 
     <div nz-col [nzSpan]="9">
       铀矿山井下消防验收情况：
-      <nz-select [(ngModel)]="acceptIds" class="w200" >
-          <nz-option *ngFor="let option of dictionary.config_umine_mountain_accept" [nzLabel]="option.value" [nzValue]="option.id">
-          </nz-option>
-        </nz-select>
+      <nz-select [(ngModel)]="acceptIds" class="w200">
+        <nz-option
+          *ngFor="let option of dictionary.config_umine_mountain_accept"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
+        </nz-option>
+      </nz-select>
     </div>
-
   </div>
 
   <div nz-row class="div_contain">
-
     <div class="div_top">
-      <div class="fl div_top_tip">
-
-      </div>
+      <div class="fl div_top_tip"></div>
       <div class="fl" style="color: #0050b3;">
-        铀矿山信息（共{{totalCount}}条）
+        铀矿山信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="isSearchShow=='0'">
-          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
-        </div>
-        
-        <div class="fr" *ngIf="isSearchShow=='0'">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
-        </div>
-        
-        <div class="fr" *ngIf="isSearchShow=='0'">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
-        </div>
+      <div class="fr" *ngIf="isSearchShow == '0'">
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除吗?"
+          (nzOnConfirm)="delete()"
+        >
+          删除
+        </button>
+      </div>
 
+      <div class="fr" *ngIf="isSearchShow == '0'">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="modify()"
+        >
+          编辑
+        </button>
+      </div>
+
+      <div class="fr" *ngIf="isSearchShow == '0'">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="add()"
+        >
+          添加
+        </button>
+      </div>
     </div>
     <div>
-      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable tablescoll_rainbow"
+        [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+        [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
+      >
         <thead>
           <tr>
-            <th>序号</th>
-            <th>铀矿山名称</th>
-            <th>营运单位</th>
-            <th>建造年代</th>
-            <th>设施状态</th>
-            <th>井下消防审查备案情况</th>
-            <th>铀矿山井下消防验收情况</th>
-            <th>操作</th>
+            <th style="width: 5%">序号</th>
+            <th style="width: 15%">铀矿山名称</th>
+            <th style="width: 15%">营运单位</th>
+            <th style="width: 15%">建造年代</th>
+            <th style="width: 15%">设施状态</th>
+            <th style="width: 15%">井下消防审查备案情况</th>
+            <th style="width: 15%">铀矿山井下消防验收情况</th>
+            <th style="width: 5%">操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index" [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]"
-          (click)="selectItem(data)">
-            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-            <td>{{data.name}}</td>
-            <td>{{data.umineName}}</td>
-            <td>{{data.buildYear|recordtime:'year'}}</td>
-            <td>{{data.statusValue}}</td>
-            <td>{{data.recordValue}}</td>
-            <td>{{data.acceptValue}}</td>
-            <td>
-                <a (click)="show(data)">查看</a>
-              </td>
+          <tr
+            *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
+            (click)="selectItem(data)"
+          >
+            <td style="width: 5%">
+              {{ (pageIndex - 1) * pageSize + 1 + index }}
+            </td>
+            <td style="width: 15%">{{ data.name }}</td>
+            <td style="width: 15%">{{ data.umineName }}</td>
+            <td style="width: 15%">
+              {{ data.buildYear | recordtime: 'year' }}
+            </td>
+            <td style="width: 15%">{{ data.statusValue }}</td>
+            <td style="width: 15%">{{ data.recordValue }}</td>
+            <td style="width: 15%">{{ data.acceptValue }}</td>
+            <td style="width: 5%">
+              <a (click)="show(data)">查看</a>
+            </td>
             <!-- <td *ngIf="isSearchShow=='0'">
               <a (click)="show(data,true)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
@@ -120,6 +172,5 @@
         </tbody>
       </nz-table>
     </div>
-
   </div>
 </div>

@@ -25,58 +25,63 @@
 }
 
 //日历长度
-.ant-calendar-picker-input{
-  outline:0;
-  width:200px;
+.ant-calendar-picker-input {
+  outline: 0;
+  width: 200px;
 }
 
 //修改下拉菜单宽度
-.ant-menu-horizontal.ant-menu-sub, .ant-menu-vertical-left.ant-menu-sub, .ant-menu-vertical-right.ant-menu-sub, .ant-menu-vertical.ant-menu-sub {
+.ant-menu-horizontal.ant-menu-sub,
+.ant-menu-vertical-left.ant-menu-sub,
+.ant-menu-vertical-right.ant-menu-sub,
+.ant-menu-vertical.ant-menu-sub {
   min-width: 190px;
 }
 
 .ant-breadcrumb a {
   color: black;
-  transition: color .3s;
+  transition: color 0.3s;
 }
 
-.fl{
+.fl {
   float: left;
 }
 
-.addbtn{
+.addbtn {
   width: 70px;
   // background:#1890ff url(./assets/images/add_btn.png) no-repeat 7px center!important;
-  background:#1890ff;
-  padding-right: 0px
+  background: #1890ff;
+  padding-right: 0px;
 }
 
-.delbtn{
+.delbtn {
   width: 70px;
   // background: #f47264 url(./assets/images/del_btn.png) no-repeat 7px center!important;
   background: #f47264;
   padding-right: 0px;
-  color: #fff
+  color: #fff;
 }
 
-.commontable{
-  th{
-    color: #0050b3!important;
+.commontable {
+  th {
+    color: #0050b3 !important;
   }
+  table-layout: fixed;
+  word-break: break-all;
 }
 
-.ta_r{
+.ta_r {
   text-align: right;
 }
 
-.ta_l{
+.ta_l {
   text-align: left;
 }
-.clo_r{
+.clo_r {
   color: red;
 }
 
-.ma_b20{
+.ma_b20 {
   margin-bottom: 20px;
 }
 
@@ -95,19 +100,20 @@
   color: #666;
 }
 
-
-.div_bz{
+.div_bz {
   float: left;
   margin-top: 5px;
   width: 150px;
 }
 
 .ant-upload.ant-upload-select {
-  font-family: "Monospaced Number","Chinese Quote",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: 'Monospaced Number', 'Chinese Quote', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-variant: tabular-nums;
   line-height: 1.5;
-  color: rgba(0,0,0,.65);
+  color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
   margin: 0;
   list-style: none;
@@ -118,30 +124,30 @@
   text-align: center;
   vertical-align: middle;
   padding: 8px;
-  border:1px dashed #cccccc;
+  border: 1px dashed #cccccc;
   background: #fafafa;
 }
 
-.file_div{
+.file_div {
   height: 150px;
   float: right;
   width: calc(100% - 100px);
   border: 1px dashed #cccccc;
   border-left: 0;
   background: #fafafa;
-  overflow: auto
+  overflow: auto;
 }
 
-.file_div_check{
+.file_div_check {
   height: 200px;
   // width: calc(100% - 100px);
   border: 1px dashed #cccccc;
   border-left: 0;
   background: #fafafa;
-  overflow: auto
+  overflow: auto;
 }
 
-.file_item{
+.file_item {
   background: #e4f4ff;
   height: 30px;
   line-height: 30px;
@@ -151,118 +157,125 @@
   // float: left;
 }
 
-.file_item_delete{
+.file_item_delete {
   float: right;
   margin-top: 9px;
   margin-right: 10px;
 }
 
-.flie_item_pic{
+.flie_item_pic {
   margin-left: 10px;
   margin-right: 20px;
 }
 
-.pagination_pos{
+.pagination_pos {
   position: absolute;
   bottom: 10px;
   right: 10px;
 }
 
-.table_select{
+.table_select {
   background: #4cb5ff;
 }
 
-.itemSeleted{
-  background:#1778b957!important;
+.itemSeleted {
+  background: #1778b957 !important;
 }
-
 
 .tablescoll_rainbow tbody {
-  display:block;
-  max-height:400px;
-  overflow-y:auto;
+  display: block;
+  max-height: 400px;
+  overflow-y: auto;
 
-  tr{
-    display:table;
-    width:100%;
-    table-layout:fixed;
-    text-align: left
+  tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    text-align: left;
   }
 }
-  
+
 .tablescoll_rainbow thead {
-  display:table;
-  width:100%;
-  table-layout:fixed;
-  text-align: left
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  text-align: left;
 }
-  
+
 .tablescoll_rainbow thead {
-  width:100%;
+  width: 100%;
+}
+
+.tablescoll_rainbow td:first-child {
+  width: 5%;
+}
+.tablescoll_rainbow td:last-child {
+  width: 5%;
+}
+.tablescoll_rainbow th:first-child {
+  width: 5%;
+}
+.tablescoll_rainbow th:last-child {
+  width: 5%;
 }
 
 //列表
-.fr{
+.fr {
   float: right;
 }
 
-.mr{
+.mr {
   margin-right: 10px;
 }
 
-
-.searchContion{
+.searchContion {
   float: right;
   margin-top: 5px;
   margin-right: 10px;
 }
 
-.selected{
+.selected {
   background-color: #4cb5ff;
 }
 
-.tableC{
-  
-  tr{
-      text-align: center;
-      margin-bottom: 20px;
+.tableC {
+  tr {
+    text-align: center;
+    margin-bottom: 20px;
   }
 
-  td{
-      width: 200px;
-      text-align: center;
-      border: 1px solid #cccccc;
+  td {
+    width: 200px;
+    text-align: center;
+    border: 1px solid #cccccc;
   }
-
-
 }
 
-
-.w200{
+.w200 {
   width: 200px;
 }
 
-.w180{
+.w180 {
   width: 180px;
 }
 
-.w150{
+.w150 {
   width: 150px;
 }
 
-.div_contain{
+.div_contain {
   height: calc(100% - 100px);
   background: #fff;
-  padding: 0,10px;
+  padding: 0, 10px;
 }
 
-.div_top{
+.div_top {
   height: 50px;
   line-height: 50px;
   padding: 0 10px;
 }
 
-.div_top_tip{
+.div_top_tip {
   width: 3px;
   background: #0050b3;
   height: 15px;
@@ -270,16 +283,15 @@
   margin-right: 5px;
 }
 
-
 //添加
-.div_top_add{
+.div_top_add {
   height: 50px;
   padding: 15px 0px 15px 20px;
   color: #666666;
   border-bottom: 1px solid #e5e5e5;
 }
 
-.div_contain_add{
+.div_contain_add {
   height: calc(100% - 160px);
   padding-right: 130px;
   padding-left: 130px;
@@ -287,14 +299,14 @@
   overflow: auto;
 }
 
-.div_contain_add_tab{
+.div_contain_add_tab {
   padding-right: 130px;
   padding-left: 130px;
   padding-top: 30px;
   overflow: auto;
 }
 
-.div_bottom_add{
+.div_bottom_add {
   height: 50px;
   position: absolute;
   bottom: 0;
@@ -313,34 +325,34 @@
 //   display:inline-block!important
 // }
 
-.showText{
+.showText {
   float: left;
   text-align: left;
   height: 30px;
-  overflow:auto;
-  word-break:break-all;
+  overflow: auto;
+  word-break: break-all;
   //width: 200px
 }
 
-.showTextArea{
+.showTextArea {
   float: left;
   text-align: left;
   //width: calc(100% - 130px);
   height: 100px;
-  overflow:auto;
-  word-break:break-all;
+  overflow: auto;
+  word-break: break-all;
 }
 
-.importBtn{
+.importBtn {
   color: #fff;
-    background-color: #1890ff;
-    border-color: #1890ff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.12);
-    box-shadow: 0 2px 0 rgba(0,0,0,.045);
+  background-color: #1890ff;
+  border-color: #1890ff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 
-.ant-upload.ant-upload-select{
+.ant-upload.ant-upload-select {
   width: 100%;
   height: auto;
-  border:none
+  border: none;
 }

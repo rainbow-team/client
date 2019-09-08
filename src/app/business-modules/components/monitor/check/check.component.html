@@ -1,90 +1,157 @@
 <div style="height: 100%;">
-    <div nz-row style="height: 40px;">
-      <div nz-col [nzSpan]="5">
-        单位名称：
-        <input nz-input nzSize="default" [(ngModel)]="name" class="w200"  placeholder="请输入单位名称">
-      </div>
-  
-      <div nz-col [nzSpan]="5">
-          检查内容：
-          <input nz-input nzSize="default" [(ngModel)]="content" class="w200"  placeholder="请输入检查内容">
-        </div>
-
-      <div nz-col [nzSpan]="5">
-          检查类型：
-          <nz-select [(ngModel)]="typeIds" class="w200"    nzAllowClear nzShowSearch nzPlaceHolder="请选择检查类型">
-            <nz-option *ngFor="let option of dictionary.config_monitor_check_type" [nzLabel]="option.value"
-              [nzValue]="option.id">
-            </nz-option>
-          </nz-select>
-        </div>
-    
-        <div nz-col [nzSpan]="5">
-          检查时间：
-          <nz-range-picker class="w200" [(ngModel)]="check_date" >
-          </nz-range-picker>
-        </div>
-
-        
-      <div nz-col [nzSpan]="4" class="ta_r">
-        <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
-        <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
-      </div>
+  <div nz-row style="height: 40px;">
+    <div nz-col [nzSpan]="5">
+      单位名称：
+      <input
+        nz-input
+        nzSize="default"
+        [(ngModel)]="name"
+        class="w200"
+        placeholder="请输入单位名称"
+      />
     </div>
-  
-    <div nz-row class="div_contain">
-  
-      <div class="div_top">
-        <div class="fl div_top_tip">
-  
-        </div>
-        <div class="fl" style="color: #0050b3;">
-          监督检查信息（共{{totalCount}}条）
-        </div>
-  
-        <div class="fr" *ngIf="!isSearchShow">
-          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
-        </div>
-        
-        <div class="fr" *ngIf="!isSearchShow">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
-        </div>
-        
-        <div class="fr" *ngIf="!isSearchShow">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
-        </div>
 
-      </div>
-      <div>
-        <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
-          [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
-          (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
-          <thead>
-            <tr>
-              <th>序号</th>
-              <th>单位名称</th>
-              <th>检查内容</th>
-              <th>检查类型</th>
-              <th>检查时间</th>
-              <th>监督检查机构</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let data of nestedTable.data;index as index"  [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
-              <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-              <td>{{data.serviceDepartName}}{{data.umineName}}{{data.equipDepartName}}</td>
-              <td  nz-tooltip nzTitle={{data.content}}>{{data.content|tooltips:10 }}</td>
-              <td>{{data.typeValue}}</td>
-              <td>{{data.startDate|recordtime}}至{{data.endDate|recordtime}}</td>
-              <td>{{data.orgName}}</td>
-              <td>
-                <a (click)="show(data)">查看</a>
-              </td>
-            </tr>
-          </tbody>
-        </nz-table>
-      </div>
-  
+    <div nz-col [nzSpan]="5">
+      检查内容：
+      <input
+        nz-input
+        nzSize="default"
+        [(ngModel)]="content"
+        class="w200"
+        placeholder="请输入检查内容"
+      />
+    </div>
+
+    <div nz-col [nzSpan]="5">
+      检查类型：
+      <nz-select
+        [(ngModel)]="typeIds"
+        class="w200"
+        nzAllowClear
+        nzShowSearch
+        nzPlaceHolder="请选择检查类型"
+      >
+        <nz-option
+          *ngFor="let option of dictionary.config_monitor_check_type"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <div nz-col [nzSpan]="5">
+      检查时间：
+      <nz-range-picker class="w200" [(ngModel)]="check_date"> </nz-range-picker>
+    </div>
+
+    <div nz-col [nzSpan]="4" class="ta_r">
+      <button
+        nz-button
+        nzType="primary"
+        style="width: 70px; margin-right: 10px;"
+        (click)="search()"
+      >
+        查询
+      </button>
+      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
+        重置
+      </button>
     </div>
   </div>
+
+  <div nz-row class="div_contain">
+    <div class="div_top">
+      <div class="fl div_top_tip"></div>
+      <div class="fl" style="color: #0050b3;">
+        监督检查信息（共{{ totalCount }}条）
+      </div>
+
+      <div class="fr" *ngIf="!isSearchShow">
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除吗?"
+          (nzOnConfirm)="delete()"
+        >
+          删除
+        </button>
+      </div>
+
+      <div class="fr" *ngIf="!isSearchShow">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="modify()"
+        >
+          编辑
+        </button>
+      </div>
+
+      <div class="fr" *ngIf="!isSearchShow">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="add()"
+        >
+          添加
+        </button>
+      </div>
+    </div>
+    <div>
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable tablescoll_rainbow"
+        [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+        [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
+      >
+        <thead>
+          <tr>
+            <th style="width: 5%">序号</th>
+            <th style="width: 20%">单位名称</th>
+            <th style="width: 20%">检查内容</th>
+            <th style="width: 10%">检查类型</th>
+            <th style="width: 15%">检查时间</th>
+            <th style="width: 20%">监督检查机构</th>
+            <th style="width: 5%">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
+            (click)="selectItem(data)"
+          >
+            <td style="width: 5%">
+              {{ (pageIndex - 1) * pageSize + 1 + index }}
+            </td>
+            <td style="width: 20%">
+              {{ data.serviceDepartName }}{{ data.umineName
+              }}{{ data.equipDepartName }}
+            </td>
+            <td style="width: 20%" nz-tooltip nzTitle="{{ data.content }}">
+              {{ data.content | tooltips: 30 }}
+            </td>
+            <td style="width: 10%">{{ data.typeValue }}</td>
+            <td style="width: 15%">
+              {{ data.startDate | recordtime }}至{{ data.endDate | recordtime }}
+            </td>
+            <td style="width: 20%">{{ data.orgName }}</td>
+            <td style="width: 5%">
+              <a (click)="show(data)">查看</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>
