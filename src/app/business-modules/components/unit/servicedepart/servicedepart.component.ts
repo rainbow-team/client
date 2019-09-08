@@ -5,6 +5,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { GroupService } from 'src/app/services/unit/group.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-servicedepart',
@@ -31,15 +32,19 @@ export class ServicedepartComponent implements OnInit {
 
   selectId: any = "";
 
+  uploadUrl: any = AppConfig.serviceAddress + "/servicedepart/importServiceDepart";
+
 
   constructor(private router: Router,
     private msg: NzMessageService, private serviceDepartSercice: ServiceDepartService, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private groupService: GroupService) { }
+    private staffSercice: StaffSercice, private groupService: GroupService, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
 
     this.search();
 
@@ -142,6 +147,16 @@ export class ServicedepartComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  exportData() {
+
+    let url = AppConfig.serviceAddress + "/servicedepart/exportServiceDepart?name=" + this.name
+      + "&groupIds=" + this.groupIds;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
+
   }
 
 }

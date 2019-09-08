@@ -93,16 +93,7 @@
       </div>
 
       <div class="fr">
-        <nz-upload
-          [nzAction]="uploadUrl"
-          [nzCustomRequest]="customReq"
-          [nzAccept]="'.xls'"
-          [nzShowUploadList]="false"
-        >
-          <button nz-button class="importBtn">
-            <i nz-icon type="upload"></i><span>导入</span>
-          </button>
-        </nz-upload>
+          <app-common-import [uploadUrl]="uploadUrl" (search)="search($event)"></app-common-import>
       </div>
     </div>
     <div>

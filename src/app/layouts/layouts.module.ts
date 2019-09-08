@@ -98,6 +98,8 @@ import { UminemountainPermitAddComponent } from './../../app/business-modules/co
 import { CheckUminemountainAddComponent } from './../../app/business-modules/components/check/uminemountain/uminemountain-add/uminemountain-add.component';
 import { UminemountainFileComponent } from './../../app/business-modules/components/check/uminemountain/uminemountain-file/uminemountain-file.component';
 
+import { CommonImportComponent } from './../../app/layouts/components/common-import/common-import.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -130,7 +132,7 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
     ServicedepartSearchShowComponent,
     ServicedepartReportmanageComponent,
     ActivityComponent,
-    DailyComponent, CheckComponent, WitnessComponent,ReportComponent,
+    DailyComponent, CheckComponent, WitnessComponent, ReportComponent,
     SecurityFacComponent, AccidentComponent,
     UmineSearchShowComponent, UmineAddComponent, SecurityUmineplaceComponent,
     EquipdepartSearchShowComponent, EquipdepartAddComponent,
@@ -142,13 +144,13 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
     UminemountainSearchShowComponent, UminemountainAddComponent,
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
-    DailyAddComponent, CheckAddComponent, WitnessAddComponent, ReportAddComponent,CheckFileComponent,
+    DailyAddComponent, CheckAddComponent, WitnessAddComponent, ReportAddComponent, CheckFileComponent,
     SecurityFacAddComponent, AccidentAddComponent,
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
     CheckUmineplaceAddComponent, UmineplaceFileComponent, UminemountainPermitAddComponent,
-    CheckUminemountainAddComponent,UminemountainFileComponent
+    CheckUminemountainAddComponent, UminemountainFileComponent,CommonImportComponent
   ],
   exports: [
     LoginComponent,
@@ -173,7 +175,7 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
     ServicedepartSearchShowComponent,
     ServicedepartReportmanageComponent,
     ActivityComponent,
-    DailyComponent, CheckComponent, WitnessComponent,ReportComponent,
+    DailyComponent, CheckComponent, WitnessComponent, ReportComponent,
     SecurityFacComponent, AccidentComponent,
     UmineSearchShowComponent, UmineAddComponent, SecurityUmineplaceComponent,
     EquipdepartSearchShowComponent, EquipdepartAddComponent,
@@ -185,13 +187,13 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
     UminemountainSearchShowComponent, UminemountainAddComponent,
     UminemountainChildmanageComponent, UminemountainPermitComponent, CheckUminemountainComponent,
     ActivityPermitAddComponent, ActivityAddComponent, ActivityFileComponent,
-    DailyAddComponent, CheckAddComponent, WitnessAddComponent, ReportAddComponent,CheckFileComponent,
+    DailyAddComponent, CheckAddComponent, WitnessAddComponent, ReportAddComponent, CheckFileComponent,
     SecurityFacAddComponent, AccidentAddComponent,
     SecurityUmineplaceAddComponent, EquipPermitAddComponent, CheckEquipAddComponent,
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
     CheckUmineplaceAddComponent, UmineplaceFileComponent, UminemountainPermitAddComponent,
-    CheckUminemountainAddComponent,UminemountainFileComponent
+    CheckUminemountainAddComponent, UminemountainFileComponent,CommonImportComponent
   ]
 })
 export class LayoutsModule { }
