@@ -119,7 +119,13 @@ export class SupervisorComponent implements OnInit {
 
                 // 处理成功
                 item.onSuccess(event.body, item.file, event);
-                that.msg.create("success", "导入成功");
+                if (event.body.code == 200) {
+                    that.msg.create("success", "导入成功");
+                    that.search();
+                } else {
+                    that.msg.error(event.body.msg, { nzDuration: 10000 });
+                }
+
             }
         }, (err) => {
             // 处理失败
