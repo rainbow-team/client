@@ -63,18 +63,23 @@ export class NavMenuComponent implements OnInit, OnDestroy {
       this.permissionList.forEach(element => {
         if (element.indexOf(":") != element.lastIndexOf(":")) {
 
-          if (element.indexOf(parent?parent.id:"" + ":" + item.id) > -1) {
+          let str = (parent ? parent.id : "") + ":" + item.id;
+          if (element.indexOf(str) > -1) {
             item.isShow = true;
-            parent.isShow= true;
+            parent.isShow = true;
           }
 
         } else {
           if (element.indexOf(item.id) > -1) {
             item.isShow = true;
-            if(parent){
-              parent.isShow= true;
+            if (parent) {
+              parent.isShow = true;
+              //核安全监管机构特殊处理
+              if (parent.id == "SafetyRegulator") {
+                this.navMenu[1].isShow = true;
+              }
             }
-           
+
           }
         }
       });

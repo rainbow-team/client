@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
     {
       name: '首页',
       id: 'home',
-      route: '/home'
+      route: '/home',
+      isShow: true
     },
     {
       name: '监管信息',
@@ -23,7 +24,7 @@ export class HeaderComponent implements OnInit {
       children: [
         {
           name: '核安全监管机构信息',
-          id: '',
+          id: 'SafetyRegulator',
           route: '',
           children: [
             {
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
             },
             {
               name: '授权监管机构基本信息',
-              id: 'org',
+              id: 'supersivionOrg',
               route: '/supersivion/org'
             }
           ]
@@ -191,8 +192,8 @@ export class HeaderComponent implements OnInit {
       id: 'searchShow',
       route: '',
       children: [
-        { name: '综合查询', id: '', route: '/searchShow/integratedAuery' },
-        { name: '模拟展示', id: '', route: '/searchShow/simulation' }
+        { name: '综合查询', id: 'integratedAuery', route: '/searchShow/integratedAuery' },
+        { name: '模拟展示', id: 'simulation', route: '/searchShow/simulation' }
       ]
     },
     {
@@ -229,7 +230,7 @@ export class HeaderComponent implements OnInit {
     this.systemService.loginout().subscribe(res => {
       sessionStorage.removeItem("staffObj");
       sessionStorage.removeItem("permission");
-      
+
       this.router.navigate(['/login']);
     })
 

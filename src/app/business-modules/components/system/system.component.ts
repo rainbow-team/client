@@ -7,18 +7,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SystemComponent implements OnInit {
   menuItems: any = [
-    { name: '人员管理' },
-    { name: '角色管理' },
-    { name: '菜单管理' },
-    { name: '机构管理' },
+    { name: '人员管理', isShow: false, id: "system:user" },
+    { name: '角色管理', isShow: false, id: "system:role" },
+    { name: '菜单管理', isShow: false, id: "system:menu" },
+    { name: '机构管理', isShow: false, id: "system:org" },
     // { name: '参数设置' },
-    { name: '日志管理' }
+    { name: '日志管理', isShow: false, id: "system:log" }
   ];
 
   selectMenuName = '人员管理';
-  constructor() {}
+  permissionList: any;
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    let pers = sessionStorage.getItem("permission");
+    if (pers) {
+      this.permissionList = JSON.parse(pers);
+
+      let data = this.permissionList.filter(function (per) {
+        return per.indexOf("system") > -1;
+      });
+
+      this.menuItems.forEach(element => {
+
+        let items = data.filter(function (param) {
+          return param.indexOf(element.id) > -1
+        });
+
+        element.isShow = items.length > 0 ? true : false;
+      });
+
+
+    }
+  }
 
   clickMenu(item) {
     this.selectMenuName = item.name;

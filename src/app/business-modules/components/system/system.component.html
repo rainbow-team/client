@@ -1,16 +1,13 @@
 <div nz-row style="height: calc(100% - 60px);padding: 0,15px;">
   <div nz-col [nzSpan]="4" class="div_1">
     <div style="border-right: 1px solid #e2e2e2; height: 100%;">
-      <div
-        *ngFor="let item of menuItems; index as index"
-        class="div_menu"
-        (click)="clickMenu(item)"
-        [ngClass]="
+      <ng-container *ngFor="let item of menuItems; index as index">
+        <div *ngIf="item.isShow" class="div_menu" (click)="clickMenu(item)" [ngClass]="
           { true: 'menu_select', false: '' }[selectMenuName == item.name]
-        "
-      >
-        {{ item.name }}
-      </div>
+        ">
+          {{ item.name }}
+        </div>
+      </ng-container>
     </div>
   </div>
 
