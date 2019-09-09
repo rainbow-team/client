@@ -19,7 +19,8 @@
               <span class="clo_r">*</span>培训开始时间：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <nz-date-picker [(ngModel)]="data.beginDate" class="w200" name="beginDate" required [validation]="true">
+              <nz-date-picker [(ngModel)]="data.beginDate" class="w200" name="beginDate" required [validation]="true"
+              [nzDisabledDate]="disabledStartDate" (ngModelChange)="onStartChange($event)">
               </nz-date-picker>
             </div>
       
@@ -27,7 +28,8 @@
               <span class="clo_r">*</span>培训结束时间：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <nz-date-picker [(ngModel)]="data.endDate" class="w200" name="endDate" required [validation]="true">
+              <nz-date-picker [(ngModel)]="data.endDate" class="w200" name="endDate" required [validation]="true"
+              [nzDisabledDate]="disabledEndDate" (ngModelChange)="onEndChange($event)">
               </nz-date-picker>
             </div>
           </div>

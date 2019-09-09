@@ -24,6 +24,9 @@ export class ProducetrainAddComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
+  startValue: Date = null;
+  endValue: Date = null;
+
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
     private attachmentSercice: AttachmentSercice, private producetrainSercice: ProducetrainSercice) { }
@@ -46,6 +49,9 @@ export class ProducetrainAddComponent implements OnInit {
     if (id) {
       this.producetrainSercice.getProduceTrainRecordById(id).subscribe((res) => {
         this.data = res.msg;
+
+        this.startValue = new Date(this.data.beginDate);
+        this.endValue = new Date(this.data.endDate);
       });
 
       this.attachmentSercice.getFileListById(id).subscribe((res1) => {
@@ -113,6 +119,28 @@ export class ProducetrainAddComponent implements OnInit {
       }
     });
     return isValid;
+  }
+
+  disabledStartDate = (startValue: Date): boolean => {
+    if (!startValue || !this.endValue) {
+      return false;
+    }
+    return startValue.getTime() > this.endValue.getTime();
+  };
+
+  disabledEndDate = (endValue: Date): boolean => {
+    if (!endValue || !this.startValue) {
+      return false;
+    }
+    return endValue.getTime() <= this.startValue.getTime();
+  };
+
+  onStartChange(date: Date): void {
+    this.startValue = date;
+  }
+
+  onEndChange(date: Date): void {
+    this.endValue = date;
   }
 
 }

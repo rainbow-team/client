@@ -31,7 +31,11 @@ export class MonitorTrainAddComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
-  constructor(private msg: NzMessageService, private router: Router, private staffSercice: StaffSercice, 
+  startValue: Date = null;
+  endValue: Date = null;
+
+
+  constructor(private msg: NzMessageService, private router: Router, private staffSercice: StaffSercice,
     private supervisionTrainService: SupervisionTrainService, private ActivatedRoute: ActivatedRoute,
     private http: HttpClient, private attachmentSercice: AttachmentSercice) { }
 
@@ -55,6 +59,10 @@ export class MonitorTrainAddComponent implements OnInit {
     if (id) {
       this.supervisionTrainService.getMonitorTrainById(id).subscribe((res) => {
         this.data = res.msg;
+
+        this.startValue = new Date(this.data.beginDate);
+        this.endValue = new Date(this.data.endDate);
+
         this.staffObj.name = this.data.creatorName;
       });
 
@@ -192,5 +200,27 @@ export class MonitorTrainAddComponent implements OnInit {
       }
     });
     return isValid;
+  }
+
+  disabledStartDate = (startValue: Date): boolean => {
+    if (!startValue || !this.endValue) {
+      return false;
+    }
+    return startValue.getTime() > this.endValue.getTime();
+  };
+
+  disabledEndDate = (endValue: Date): boolean => {
+    if (!endValue || !this.startValue) {
+      return false;
+    }
+    return endValue.getTime() <= this.startValue.getTime();
+  };
+
+  onStartChange(date: Date): void {
+    this.startValue = date;
+  }
+
+  onEndChange(date: Date): void {
+    this.endValue = date;
   }
 }
