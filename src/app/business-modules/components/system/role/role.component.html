@@ -31,18 +31,20 @@
       >
         <thead>
           <tr>
-            <th>编号</th>
-            <th>角色名称</th>
-            <th>角色描述</th>
-            <th>操作</th>
+            <th style="width: 20%">编号</th>
+            <th style="width: 30%">角色名称</th>
+            <th style="width: 30%">角色描述</th>
+            <th style="width: 20%">操作</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of nestedTable.data; index as index">
-            <td>{{ (pageIndex - 1) * pageSize + 1 + index }}</td>
-            <td>{{ data.name }}</td>
-            <td>{{ data.note }}</td>
-            <td>
+            <td style="width: 20%">
+              {{ (pageIndex - 1) * pageSize + 1 + index }}
+            </td>
+            <td style="width: 30%">{{ data.name }}</td>
+            <td style="width: 30%">{{ data.note }}</td>
+            <td style="width: 20%">
               <a (click)="show(data, false)">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data, true)">编辑</a>

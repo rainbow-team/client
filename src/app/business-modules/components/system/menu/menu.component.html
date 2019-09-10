@@ -34,13 +34,17 @@
         </button>
       </div>
     </div>
-    <div style="max-height: 600px; overflow:scroll">
-      <nz-table #nestedTable [nzData]="dataSet">
+    <div>
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable tablescoll_rainbow"
+      >
         <thead>
           <tr>
-            <th>菜单名称</th>
-            <th>功能代码</th>
-            <th>操作</th>
+            <th style="width: 50%">菜单名称</th>
+            <th style="width: 30%">功能代码</th>
+            <th style="width: 20%">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +52,7 @@
             <ng-container *ngFor="let item of mapOfExpandedData[data.id]">
               <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
                 <td
+                  style="width: 50%"
                   [nzIndentSize]="item.level * 20"
                   [nzShowExpand]="item.children.length > 0"
                   [(nzExpand)]="item.expand"
@@ -57,8 +62,8 @@
                 >
                   {{ item.name }}
                 </td>
-                <td>{{ item.code }}</td>
-                <td>
+                <td style="width: 30%">{{ item.code }}</td>
+                <td style="width: 20%">
                   <a (click)="modify(item)">编辑</a>
                   <nz-divider nzType="vertical"></nz-divider>
                   <a
