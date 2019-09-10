@@ -36,7 +36,7 @@ export class MonitorWitnessReportComponent implements OnInit {
 
   data: any = [];
 
-  title: any = "监督检查统计";
+  title: any = "监督见证统计";
 
 
   configList: any = [];

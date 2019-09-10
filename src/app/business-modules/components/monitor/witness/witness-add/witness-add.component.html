@@ -4,7 +4,7 @@
   </div>
   <div class="div_contain_add" *ngIf="isShow==false">
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'">
-      <nz-radio-group [(ngModel)]="departType" [disabled]="isDisable">
+      <nz-radio-group [(ngModel)]="departType">
         <label nz-radio nzValue="fac">核设施营运单位</label>
         <label nz-radio nzValue="umine">铀矿冶单位</label>
         <label nz-radio nzValue="equip">核设备单位</label>
