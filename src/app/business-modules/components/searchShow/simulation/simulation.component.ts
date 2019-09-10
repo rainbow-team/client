@@ -27,31 +27,13 @@ export class SimulationComponent implements OnInit {
   unitType: any = 'unit_service'; //默认为核设施营运单位
   actionType: any = 'view'; //默认为查看模式
   isMarkerVisible: boolean;
-  isViewerVisible: boolean;
-  isEditorVisible: boolean;
   isMarkerLoading: boolean;
-  isViewerLoading: boolean;
-  isEditorLoading: boolean;
 
-  isSubjectVisible = false;
-  subjectTitle: any = '';
-  selectedSubject: any = {};
+  isDeleteConfirmVisible: boolean;
+  isDeleteConfirmLoading: boolean;
 
-  //图片上传start
-  showUploadList = {
-    showPreviewIcon: true,
-    showRemoveIcon: true,
-    hidePreviewIconInNonImage: true
-  };
-  previewImage: string | undefined = '';
-  previewVisible = false;
-  uploadUrl: any = AppConfig.serviceAddress + '/fileInfo/upload';
-  downLoadurl: any = AppConfig.serviceAddress + '/fileInfo/download';
-  //图片上传end
-
-  // canAddMaker: any = false;
   isProvinceMap: any = false;
-  // data: any = [];
+
   selectedUnit: any = {}; //选中查看的单位
   marker: any = {};
   unit_services: any = [];
@@ -59,19 +41,13 @@ export class SimulationComponent implements OnInit {
 
   unit_regions: any = [];
 
-  unitImageUrl = '';
-
-  unitId: any;
+  // unitId: any;
   markerType: any = '';
   geo: any;
   myChartProe: any;
   province: any = '';
 
-  editCache: { [key: string]: any } = {};
-  listOfData: any[] = [];
-  unit_subjects: any = [];
   fileList = [];
-  selectedRegion: any = {};
 
   constructor(
     private msg: NzMessageService,
@@ -198,7 +174,7 @@ export class SimulationComponent implements OnInit {
   }
 
   LoadProvinceMap(province: string, markpoints: any) {
-    var that = this;
+    let that = this;
     this.isProvinceMap = true;
     let symbolBlue =
       'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3FpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDphOGU3Nzk1ZS1lMzEyLTBmNGItODljZC0wNjI4MGZhMWFjNjciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODEyQUQ2M0JDQUQ1MTFFOUI5MDA5OTAwNEVDNTNENjIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ODEyQUQ2M0FDQUQ1MTFFOUI5MDA5OTAwNEVDNTNENjIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmE4ZTc3OTVlLWUzMTItMGY0Yi04OWNkLTA2MjgwZmExYWM2NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDphOGU3Nzk1ZS1lMzEyLTBmNGItODljZC0wNjI4MGZhMWFjNjciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5ANQLwAAACFklEQVR42qxW3U0CQRBeLryLz5pwVsBZAUcFQAfYAbxrPGIBSgVIBWAFQgVCBUJiAVwFOEO+S5ZlZm8PnWRyl53db352frZ2OByMRrdPJqZPl7hH3CBOIFoT74kXxB8/L2arYdQkBQB+Jh6YMHonHkuKzhQQOFs7hcVViD16ICULezFywNni+QXgBmfmwDj3AIKp+R/qF54cFSDmXxdaroXrnu+kCFHmAc+JJ8Qd4mtwB2u5J1zZ0YObxwNb/61s3HAmkSVrJY0TZFBLOX9XR45LtCNOCXxvpW6zkLH7rJjWU9RFU8Do+RSw5XsCYHdf3ZqgdbZ8hD0s+5QU8B3EgmBFB5f4HyoFN4DMYO9K2HMVKa4tbSs82dK1/qV7SiLloF3yLY+CRDlzUsk7YT12Ltt4EsFOzTN5pLmmhMsXykSQryMFoI3sKYowVwowQ0bx3rZkQISeLlXiFBmyRchGqN4J/mOrPb8rIVoUvWipWJARyNjXdOhshtkhpXpatywQFWA+9N1hgsqeK7FnenPb9VapCelS05J93Epid+AMA9pwGgB+gnUyMj13UYWOsRdHZqAXwdafKUDfH/8BfOzODu3Zsi7pQeJwIvBE6kVGacV5BfBce0OJCuBmlfsYamNV84CVcPHNAsBn2Bv+dKxwH2LcgzxwimujvDhKi65UAV4VrpKN/eLwUWmIrFA1rNbeCwFn+hVgAMmExuRl5WIYAAAAAElFTkSuQmCC';
@@ -293,11 +269,32 @@ export class SimulationComponent implements OnInit {
             that.router.navigate(['/searchShow/simulation/unit-show'], {
               queryParams: { id: params.data.id, province: that.province }
             });
-            // that.unitImageUrl =
-            //   AppConfig.serviceAddress +
-            //   '/fileInfo/download?id=' +
-            //   params.data.picId;
-            // that.showViewerDialog(unitType, unitId);
+          }
+
+          if (that.actionType === 'mark') {
+            that.isMarkerVisible = true;
+            that.attachmentSercice
+              .getFileListById(params.data.id)
+              .subscribe(res1 => {
+                if (res1.msg.length > 0) {
+                  res1.msg.forEach(element => {
+                    that.fileList = [];
+                    that.fileList.push({
+                      response: {
+                        msg: element.fileinfoId
+                      },
+                      name: element.fileinfoClientFileName
+                    });
+                  });
+                }
+              });
+            // that.unitId = params.data.unitId;
+            // that.unitType = params.data.unitType;
+            // that.geo = params.data.geo;
+          }
+
+          if (that.actionType === 'delete') {
+            that.isDeleteConfirmVisible = true;
           }
 
           // alert('markpoint clicked!\n' + params.toString());
@@ -314,6 +311,8 @@ export class SimulationComponent implements OnInit {
 
       this.myChartProe.getZr().on('click', params => {
         if (this.actionType === 'mark') {
+          this.marker = {};
+          this.fileList = [];
           this.isMarkerVisible = true;
           let pointInPixel = [params.offsetX, params.offsetY];
           if (this.myChartProe.containPixel({ seriesIndex: 0 }, pointInPixel)) {
@@ -332,185 +331,66 @@ export class SimulationComponent implements OnInit {
       return;
     }
     this.isMarkerLoading = true;
-    let unit: any = {};
-    unit.unitId = this.unitId; //用户选择的单位ID
+    // let unit: any = {};
+    // unit.unitId = this.unitId; //用户选择的单位ID
     if (this.unitType === 'unit_umine') {
-      unit.unitType = '1';
-      unit.name = this.unit_umines.find(obj => obj.id === unit.unitId).name;
+      this.marker.unitType = '1';
+      this.marker.name = this.unit_umines.find(
+        obj => obj.id === this.marker.unitId
+      ).name;
     } else {
-      unit.unitType = '0';
-      unit.name = this.unit_services.find(obj => obj.id === unit.unitId).name;
+      this.marker.unitType = '0';
+      this.marker.name = this.unit_services.find(
+        obj => obj.id === this.marker.unitId
+      ).name;
     }
-    unit.geo = this.geo.toString();
-    unit.province = this.province;
+    this.marker.geo = this.geo.toString();
+    this.marker.province = this.province;
 
     if (this.fileList.length > 0) {
-      unit.picId = this.fileList[0].response.msg;
+      this.marker.picId = this.fileList[0].response.msg;
+      this.marker.attachmentList = [];
+      this.marker.attachmentList.push({
+        fileinfoId: this.fileList[0].response.msg
+      });
     }
 
-    this.unitAddressService.saveOrUpdateUnitAddress(unit).subscribe(res => {
-      this.isMarkerLoading = false;
-      this.isMarkerVisible = false;
+    this.unitAddressService
+      .saveOrUpdateUnitAddress(this.marker)
+      .subscribe(res => {
+        this.isMarkerLoading = false;
+        this.isMarkerVisible = false;
 
-      if (res.code === 200) {
-        this.msg.create('success', '添加成功');
-        this.InitProvinceMap();
-      } else {
-        this.msg.create('error', '添加失败');
-      }
-    });
+        if (res.code === 200) {
+          this.msg.create('success', this.marker.id ? '修改成功' : '添加成功');
+          this.InitProvinceMap();
+        } else {
+          this.msg.create('error', this.marker.id ? '修改失败' : '添加失败');
+        }
+        this.marker = {};
+      });
   }
 
   markerCancel(): void {
     this.isMarkerVisible = false;
   }
-  showViewerDialog(unitType: any, unitId: any) {
-    this.isViewerVisible = true;
-    if (unitType === '0') {
-      //营运单位
-      this.serviceDepartService.getServiceDepartById(unitId).subscribe(res => {
-        this.selectedUnit = res.msg;
-      });
-    }
-    if (unitType === '1') {
-      this.umineService.getUmineById(unitId).subscribe(res => {
-        this.selectedUnit = res.msg;
-      });
-    }
-
-    this.unithotregionService
-      .getUnitHotRegionListByUnitId(unitId)
+  deleteOk(): void {
+    this.isDeleteConfirmLoading = true;
+    this.unitAddressService
+      .deleteUnitAddressById(this.marker.id)
       .subscribe(res => {
-        this.unit_regions = res.msg;
+        this.isDeleteConfirmLoading = false;
+        this.isDeleteConfirmVisible = false;
+        if (res.code === 200) {
+          this.msg.create('success', '删除成功');
+          this.InitProvinceMap();
+        } else {
+          this.msg.create('error', '删除失败');
+        }
       });
   }
-
-  viewerOk(): void {
-    this.isViewerVisible = false;
-  }
-  viewerCancel(): void {
-    this.isViewerVisible = false;
-  }
-
-  showEditorDialog(unitType: any, unitId: any) {
-    this.isEditorVisible = true;
-    if (unitType === '0') {
-      //营运单位
-      this.facSercice.getFacListByServiceid(unitId).subscribe(res => {
-        this.unit_subjects = res.msg;
-        this.initHotRegionTable(res.msg.length, unitId);
-      });
-    }
-    if (unitType === '1') {
-      this.umineMountainService
-        .getUminemountinaListByUmineId(unitId)
-        .subscribe(res => {
-          this.unit_subjects = res.msg;
-          this.initHotRegionTable(res.msg.length, unitId);
-        });
-    }
-  }
-  editorOk(): void {
-    this.isEditorLoading = true;
-    const regions = [];
-    // tslint:disable-next-line:forin
-    for (const key in this.editCache) {
-      let reg = this.editCache[key].data;
-      if (
-        reg.subjectId !== '' &&
-        reg.hotRegion !== '' &&
-        reg.previewUrl !== ''
-      ) {
-        regions.push(reg);
-      }
-    }
-
-    this.unithotregionService.insertRegionsBatch(regions).subscribe(res => {
-      this.isEditorLoading = false;
-      this.isEditorVisible = false;
-
-      if (res.code === 200) {
-        this.msg.create('success', '添加成功');
-      } else {
-        this.msg.create('error', '添加失败');
-      }
-    });
-  }
-  editorCancel(): void {
-    this.isEditorVisible = false;
-  }
-
-  startEdit(id: string): void {
-    this.editCache[id].edit = true;
-  }
-
-  cancelEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
-    this.editCache[id] = {
-      data: { ...this.listOfData[index] },
-      edit: false
-    };
-  }
-
-  saveEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
-    Object.assign(this.listOfData[index], this.editCache[id].data);
-    this.editCache[id].edit = false;
-  }
-
-  updateEditCache(): void {
-    this.listOfData.forEach(item => {
-      this.editCache[item.id] = {
-        edit: false,
-        data: { ...item }
-      };
-    });
-  }
-
-  initHotRegionTable(count: any, unitId: any) {
-    this.listOfData = [];
-    this.editCache = [];
-    for (let i = 0; i < count; i++) {
-      this.listOfData.push({
-        id: this.getNewGUIDString(),
-        unitId: unitId,
-        subjectId: '',
-        hotRegion: '',
-        previewUrl: ''
-      });
-    }
-    this.updateEditCache();
-  }
-
-  // addRow(): void {
-  //   this.listOfData = [
-  //     ...this.listOfData,
-  //     {
-  //       id: this.getNewGUIDString(),
-  //       subjectId: '',
-  //       hotRegion: '',
-  //       previewUrl: ''
-  //     }
-  //   ];
-  // }
-
-  showSubjectDetail(item) {
-    this.isSubjectVisible = true;
-    this.selectedRegion = item;
-    if (this.markerType === '0') {
-      this.subjectTitle = '核设施详细信息';
-      this.facSercice.getFacById(item.subjectId).subscribe(res => {
-        this.selectedSubject = res.msg;
-      });
-    }
-    if (this.markerType === '1') {
-      this.subjectTitle = '铀矿山详细信息';
-      this.umineMountainService
-        .getUmineMountainById(item.subjectId)
-        .subscribe(res => {
-          this.selectedSubject = res.msg;
-        });
-    }
+  deleteCancel(): void {
+    this.isDeleteConfirmVisible = false;
   }
 
   FormValidation() {
@@ -530,17 +410,4 @@ export class SimulationComponent implements OnInit {
       return v.toString(16);
     });
   }
-  // getNewGUIDString() {
-  //   // your favourite guid generation function could go here
-  //   // ex: http://stackoverflow.com/a/8809472/188246
-  //   let d = new Date().getTime();
-  //   if (window.performance && typeof window.performance.now === 'function') {
-  //     d += performance.now(); //use high-precision timer if available
-  //   }
-  //   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-  //     let r = (d + Math.random() * 16) % 16 | 0;
-  //     d = Math.floor(d / 16);
-  //     return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
-  //   });
-  // }
 }

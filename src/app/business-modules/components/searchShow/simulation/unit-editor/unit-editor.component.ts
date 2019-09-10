@@ -5,6 +5,7 @@ import { UnithotregionService } from 'src/app/services/unit/unithotregion.servic
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
 import { d } from '@angular/core/src/render3';
+import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 
 @Component({
   selector: 'app-unit-editor',
@@ -36,6 +37,7 @@ export class UnitEditorComponent implements OnInit {
     private msg: NzMessageService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private attachmentSercice: AttachmentSercice,
     private unithotregionService: UnithotregionService,
     private facSercice: FacSercice,
     private umineMountainService: UmineMountainService
@@ -94,6 +96,10 @@ export class UnitEditorComponent implements OnInit {
     this.isEditorLoading = true;
     if (this.fileList.length > 0) {
       this.subject.picId = this.fileList[0].response.msg;
+      this.subject.attachmentList = [];
+      this.subject.attachmentList.push({
+        fileinfoId: this.fileList[0].response.msg
+      });
     }
     this.subject.subjectName = this.unit_subjects.filter(
       sub => sub.id === this.subject.subjectId
@@ -106,6 +112,7 @@ export class UnitEditorComponent implements OnInit {
         this.isEditorLoading = false;
         this.isEditorVisible = false;
         this.subject = {};
+        this.fileList = [];
         if (res.code === 200) {
           this.msg.create('success', '保存成功');
           this.search();
@@ -127,9 +134,20 @@ export class UnitEditorComponent implements OnInit {
         .subscribe(res1 => {
           this.subject = res1.msg;
         });
-      // this.router.navigate(['/permit/equip/add'], {
-      //   queryParams: { id: this.selectId, isShow: false }
-      // });
+
+      this.attachmentSercice.getFileListById(this.selectId).subscribe(res1 => {
+        if (res1.msg.length > 0) {
+          res1.msg.forEach(element => {
+            this.fileList = [];
+            this.fileList.push({
+              response: {
+                msg: element.fileinfoId
+              },
+              name: element.fileinfoClientFileName
+            });
+          });
+        }
+      });
     } else {
       this.msg.create('warning', '请选择修改项');
     }
