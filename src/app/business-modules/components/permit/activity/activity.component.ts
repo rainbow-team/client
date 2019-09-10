@@ -15,6 +15,7 @@ export class ActivityPermitComponent implements OnInit {
   @Input() servicedepartId: any = "";
   @Input() umineId: any = "";
   @Input() facId: any = "";
+  @Input() equipdepartId: any = "";
 
   isSearchShow: any = false;
 
@@ -49,7 +50,7 @@ export class ActivityPermitComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    if (this.servicedepartId || this.umineId||this.facId) {
+    if (this.servicedepartId || this.umineId || this.facId||this.equipdepartId) {
       this.isSearchShow = true;
     }
 
@@ -116,6 +117,13 @@ export class ActivityPermitComponent implements OnInit {
       });
     }
 
+    if(this.equipdepartId){
+      option.conditions.push({
+        key: 'equipdepartId',
+        value: this.equipdepartId
+      });
+    }
+
     this.activityPermitService.getActivityPermitList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;
@@ -145,7 +153,9 @@ export class ActivityPermitComponent implements OnInit {
       this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
     } else if (this.facId) {
       this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
-    }else {
+    } else if(this.equipdepartId){
+      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
+    }else{
       this.router.navigate(['/permit/activity/add'], { queryParams: { id: item.id, isShow: true } });
     }
 

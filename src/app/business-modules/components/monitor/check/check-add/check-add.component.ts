@@ -194,9 +194,9 @@ export class CheckAddComponent implements OnInit {
     if (this.servicedepartId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 4 } });
     } else if (this.umineId_Router) {
-      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 3 } });
+      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 1 } });
     } else if (this.equipdepartId_Router) {
-      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: this.equipdepartId_Router, idx: 4 } });
+      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: this.equipdepartId_Router, idx: 5 } });
     } else {
       this.router.navigate(['/monitor/check']);
     }

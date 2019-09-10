@@ -137,7 +137,7 @@ export class DailyAddComponent implements OnInit {
     if (this.servicedepartId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 3 } });
     } else if (this.facId_Router) {
-      this.router.navigate(['/searchShow/integratedAuery/facSearch'], { queryParams: { id: this.facId_Router, idx: 4 } });
+      this.router.navigate(['/searchShow/integratedAuery/facSearch'], { queryParams: { id: this.facId_Router, idx: 5 } });
     } else {
       this.router.navigate(['/monitor/daily']);
     }

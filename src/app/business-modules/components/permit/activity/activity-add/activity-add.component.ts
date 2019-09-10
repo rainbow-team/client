@@ -21,6 +21,7 @@ export class ActivityPermitAddComponent implements OnInit {
   servicedepartId_Router: any = "";
   umineId_Router: any = "";
   facId_Router: any = "";
+  equipdepartId_Router: any = "";
 
   data: any = {};
   isSaving = false;
@@ -61,6 +62,7 @@ export class ActivityPermitAddComponent implements OnInit {
     this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams['servicedepartId'];
     this.umineId_Router = this.ActivatedRoute.snapshot.queryParams['umineId'];
     this.facId_Router = this.ActivatedRoute.snapshot.queryParams['facId'];
+    this.equipdepartId_Router = this.ActivatedRoute.snapshot.queryParams["equipdepartId"];
 
     if (isShow && isShow == 'true') {
       this.isShow = true;
@@ -158,7 +160,9 @@ export class ActivityPermitAddComponent implements OnInit {
       this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 1 } });
     } else if (this.facId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/facSearch'], { queryParams: { id: this.facId_Router, idx: 2 } });
-    }else {
+    } else if (this.equipdepartId_Router) {
+      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: this.equipdepartId_Router, idx: 2 } });
+    } else {
       this.router.navigate(['/permit/activity']);
     }
 

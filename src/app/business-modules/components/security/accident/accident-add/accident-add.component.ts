@@ -166,9 +166,9 @@ export class AccidentAddComponent implements OnInit {
 
   close() {
     if (this.servicedepartId_Router) {
-      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 7 } });
+      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 8 } });
     } else if(this.umineId_Router){
-      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 6 } });
+      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 4 } });
     }else{
       this.router.navigate(['/security/accident']);
     }

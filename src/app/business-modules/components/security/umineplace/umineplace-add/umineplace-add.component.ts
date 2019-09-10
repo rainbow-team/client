@@ -129,7 +129,7 @@ export class SecurityUmineplaceAddComponent implements OnInit {
 
   close() {
     if (this.umineId_Router) {
-      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 5 } });
+      this.router.navigate(['/searchShow/integratedAuery/umineSearch'], { queryParams: { id: this.umineId_Router, idx: 3 } });
     } else if (this.umineplaceId_Router) {
       this.router.navigate(['/searchShow/integratedAuery/umineplaceSearch'], { queryParams: { id: this.umineplaceId_Router, idx: 3 } });
     } else {

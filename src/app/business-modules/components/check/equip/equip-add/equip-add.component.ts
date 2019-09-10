@@ -137,7 +137,7 @@ export class CheckEquipAddComponent implements OnInit {
   close() {
 
     if(this.equipdepartId_Router){
-      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: this.equipdepartId_Router, idx: 2 } });
+      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: this.equipdepartId_Router, idx: 3 } });
     }else{
       this.router.navigate(['/check/equip']);
     }

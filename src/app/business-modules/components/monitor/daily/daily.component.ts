@@ -34,15 +34,19 @@ export class DailyComponent implements OnInit {
 
   facName: any = "";
 
-  facStatusTypeIds: any = [];
+  facStatusTypeIds: any;
 
-  fileTypeIds: any = [];
+  fileTypeIds: any ;
 
   file_name: any = "";
 
   file_date: any = [];
 
   selectId: any = "";
+
+  start_date: any = "";
+  end_date: any = "";
+
 
   constructor(private router: Router,
     private msg: NzMessageService, private dailyMonitorSercice: DailyMonitorSercice, private dictionarySercice: DictionarySercice,
@@ -77,11 +81,11 @@ export class DailyComponent implements OnInit {
       option.conditions.push({ key: "facName", value: this.facName })
     }
 
-    if (this.facStatusTypeIds.length > 0) {
+    if (this.facStatusTypeIds) {
       option.conditions.push({ key: "facStatusTypeIds", value: [this.facStatusTypeIds] })
     }
 
-    if (this.fileTypeIds.length > 0) {
+    if (this.fileTypeIds) {
       option.conditions.push({ key: "fileTypeIds", value: [this.fileTypeIds] })
     }
 
@@ -89,14 +93,12 @@ export class DailyComponent implements OnInit {
       option.conditions.push({ key: "file_name", value: this.file_name })
     }
 
-    if (this.file_date && this.file_date.length > 0) {
-      if (this.file_date[0]) {
-        option.conditions.push({ key: "start_date", value: this.file_date[0] })
-      }
+    if (this.start_date) {
+      option.conditions.push({ key: "start_date", value: this.start_date })
+    }
 
-      if (this.file_date[1]) {
-        option.conditions.push({ key: "end_date", value: this.file_date[1] })
-      }
+    if (this.end_date) {
+      option.conditions.push({ key: "end_date", value: this.end_date })
     }
 
     if (this.servicedepartId) {
@@ -124,11 +126,13 @@ export class DailyComponent implements OnInit {
   reset() {
     this.serviceDepartName = "";
     this.facName = "";
-    this.facStatusTypeIds = [];
-    this.fileTypeIds = [];
+    this.start_date="";
+    this.end_date="";
+    this.fileTypeIds = null;
     this.file_name = "";
     this.file_date = [];
     this.selectId = "";
+    this.facStatusTypeIds=null;
   }
 
   add() {
