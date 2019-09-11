@@ -9,43 +9,45 @@ import { StatisticsSercice } from 'src/app/services/statistics/statistics.servic
   styleUrls: ['./security-equip-problem-report.component.scss']
 })
 export class SecurityEquipProblemReportComponent implements OnInit {
-
-
   serviceDepartList: any = [];
 
-  ids: any ;
+  ids: any;
 
-  typeValue: any = "1";
+  typeValue: any = '3';
 
-  startDate: any = "";
+  startDate: any = '';
 
-  endDate: any = "";
+  endDate: any = '';
 
-  result: any = "";
-
+  result: any = '';
 
   condition: any = [
     {
-      type: "1", name: "问题类别", con: {
+      type: '1',
+      name: '问题类别',
+      con: {
         tableName: 'security_equip',
         propertyName: 'question_type_id',
         configTableName: 'config_equip_security_question_type',
-        startDate: "",
-        endDate: "",
+        startDate: '',
+        endDate: '',
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id"
+        idsProperty: 'service_id'
       }
-    }, {
-      type: "3", name: "整改状态及问题类别", con: {
+    },
+    {
+      type: '3',
+      name: '整改状态及问题类别',
+      con: {
         tableName: 'security_equip',
         propertyName: 'question_type_id',
         configTableName: 'config_equip_security_question_type',
-        startDate: "",
-        endDate: "",
+        startDate: '',
+        endDate: '',
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id"
+        idsProperty: 'service_id'
       }
     }
   ];
@@ -57,13 +59,13 @@ export class SecurityEquipProblemReportComponent implements OnInit {
 
   data: any = [];
 
-  title: any = "";
+  title: any = '';
 
-  des: any = "";
+  des: any = '';
 
   configList: any = [];
 
-  constructor(private statisticsSercice: StatisticsSercice) { }
+  constructor(private statisticsSercice: StatisticsSercice) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -76,12 +78,9 @@ export class SecurityEquipProblemReportComponent implements OnInit {
   }
 
   filterCondition() {
-
     var that = this;
-    this.result = this.condition.filter(function (p) {
-
+    this.result = this.condition.filter(function(p) {
       return p.type == that.typeValue;
-
     });
   }
 
@@ -91,8 +90,9 @@ export class SecurityEquipProblemReportComponent implements OnInit {
     let option1 = {
       tooltip: {
         trigger: 'axis',
-        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-          type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        axisPointer: {
+          // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
         }
       },
       legend: {
@@ -107,7 +107,6 @@ export class SecurityEquipProblemReportComponent implements OnInit {
       xAxis: {
         type: 'category',
         data: this.data.yearDate
-
       },
       yAxis: {
         type: 'value'
@@ -115,40 +114,40 @@ export class SecurityEquipProblemReportComponent implements OnInit {
       series: this.data.numberList
       //this.data.numberList
     };
-    this.myChart1 = echarts.init(document.getElementById("chart1"));
+    this.myChart1 = echarts.init(document.getElementById('chart1'));
     this.myChart1.setOption(option1);
-  };
+  }
 
   statistics() {
-
     this.filterCondition();
-    this.result[0].con["startDate"] = this.startDate;
-    this.result[0].con["endDate"] = this.endDate;
-    this.result[0].con["ids"] = this.ids;
-  
+    this.result[0].con['startDate'] = this.startDate;
+    this.result[0].con['endDate'] = this.endDate;
+    this.result[0].con['ids'] = this.ids;
 
     if (this.typeValue == 1) {
-      this.statisticsSercice.searchResultByDateConditon(this.result[0].con).subscribe(
-        (res) => {
+      this.statisticsSercice
+        .searchResultByDateConditon(this.result[0].con)
+        .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function (v) { return v.name });
+          this.configList = this.data.numberList.map(function(v) {
+            return v.name;
+          });
 
           this.initEchart1();
-
-        }
-      );
-    }else{
-      this.statisticsSercice.searchResultByStatusAndType(this.result[0].con).subscribe(
-        (res) => {
+        });
+    } else {
+      this.statisticsSercice
+        .searchResultByStatusAndType(this.result[0].con)
+        .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function (v) { return v.name });
+          this.configList = this.data.numberList.map(function(v) {
+            return v.name;
+          });
 
           this.initEchart1();
-
-        }
-      );
+        });
     }
 
     this.title = this.result[0].name;

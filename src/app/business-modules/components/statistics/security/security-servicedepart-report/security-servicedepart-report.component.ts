@@ -16,7 +16,7 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
   ids: any ;
 
-  typeValue: any = "1";
+  typeValue: any = "3";
 
   startDate: any = "";
 

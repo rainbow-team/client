@@ -35,7 +35,8 @@ export class CheckActivityReportComponent implements OnInit {
       this.initEchart();
     }, 100);
 
-    this.startDate = new Date();
+    let today = new Date();
+    this.startDate = new Date(today.setFullYear(today.getFullYear() - 5));
     this.endDate = new Date();
     this.statistics();
   }

@@ -8,37 +8,34 @@ import * as echarts from 'echarts';
   styleUrls: ['./accident-report.component.scss']
 })
 export class AccidentReportComponent implements OnInit {
-
-
-  result: any = "";
-
+  result: any = '';
 
   con = {
     tableName: 'security_accident',
     propertyName: 'occur_date',
     configTableName: '',
-    dateProperty:'occur_date'
+    dateProperty: 'occur_date'
   };
 
-  startDate: any = "";
+  startDate: any = '';
 
-  endDate: any = "";
+  endDate: any = '';
 
   myChart: any;
 
   data: any = [];
 
-  title: any = "事故事件统计";
+  title: any = '事故事件统计';
 
-  constructor(private statisticsSercice: StatisticsSercice) { }
+  constructor(private statisticsSercice: StatisticsSercice) {}
 
   ngOnInit() {
-
     setTimeout(() => {
       this.initEchart();
     }, 100);
 
-    this.startDate = new Date();
+    let today = new Date();
+    this.startDate = new Date(today.setFullYear(today.getFullYear() - 5));
     this.endDate = new Date();
     this.statistics();
   }
@@ -52,36 +49,35 @@ export class AccidentReportComponent implements OnInit {
         x: 'center'
       },
       tooltip: {
-        trigger: 'item',
+        trigger: 'item'
       },
       xAxis: {
         type: 'category',
-        data: this.data.map(function (v) { return v.name })
+        data: this.data.map(function(v) {
+          return v.name;
+        })
       },
       yAxis: {
         type: 'value'
       },
-      series: [{
-        data: this.data,
-        type: 'bar'
-      }]
+      series: [
+        {
+          data: this.data,
+          type: 'bar'
+        }
+      ]
     };
-    this.myChart = echarts.init(document.getElementById("chart"));
+    this.myChart = echarts.init(document.getElementById('chart'));
     this.myChart.setOption(option);
   }
 
   statistics() {
+    this.con['startDate'] = this.startDate;
+    this.con['endDate'] = this.endDate;
+    this.statisticsSercice.searchReportByDateAndSum(this.con).subscribe(res => {
+      this.data = res.msg;
 
-    this.con["startDate"] = this.startDate;
-    this.con["endDate"] = this.endDate;
-    this.statisticsSercice.searchReportByDateAndSum(this.con).subscribe(
-      (res) => {
-        this.data = res.msg;
-
-        this.initEchart();
-
-      }
-    );
-
+      this.initEchart();
+    });
   }
 }

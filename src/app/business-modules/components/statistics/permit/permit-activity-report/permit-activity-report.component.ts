@@ -8,24 +8,20 @@ import { StatisticsSercice } from 'src/app/services/statistics/statistics.servic
   styleUrls: ['./permit-activity-report.component.scss']
 })
 export class PermitActivityReportComponent implements OnInit {
+  startDate: any = '';
 
+  endDate: any = '';
 
-  startDate: any = "";
-
-  endDate: any = "";
-
-  result: any = "";
-
+  result: any = '';
 
   con = {
     tableName: 'permit_activity',
     propertyName: 'permit_date',
     configTableName: '',
-    startDate: "",
-    endDate: "",
-    dateProperty:'permit_date'
-  }
-
+    startDate: '',
+    endDate: '',
+    dateProperty: 'permit_date'
+  };
 
   catagrayData: any = [];
   numberData: any = [];
@@ -36,21 +32,20 @@ export class PermitActivityReportComponent implements OnInit {
 
   data: any = [];
 
-  title: any = "核活动许可统计";
+  title: any = '核活动许可统计';
 
-  constructor(private statisticsSercice: StatisticsSercice) { }
+  constructor(private statisticsSercice: StatisticsSercice) {}
 
   ngOnInit() {
-
     setTimeout(() => {
       this.initEchart();
     }, 100);
 
-    this.startDate = new Date();
+    let today = new Date();
+    this.startDate = new Date(today.setFullYear(today.getFullYear() - 5));
     this.endDate = new Date();
     this.statistics();
   }
-
 
   initEchart() {
     var that = this;
@@ -61,37 +56,36 @@ export class PermitActivityReportComponent implements OnInit {
         x: 'center'
       },
       tooltip: {
-        trigger: 'item',
+        trigger: 'item'
         //formatter: "{a} <br/>{b} : {c} ({d}%)"
       },
       xAxis: {
         type: 'category',
-        data: this.data.map(function (v) { return v.name })
+        data: this.data.map(function(v) {
+          return v.name;
+        })
       },
       yAxis: {
         type: 'value'
       },
-      series: [{
-        data: this.data,
-        type: 'bar'
-      }]
+      series: [
+        {
+          data: this.data,
+          type: 'bar'
+        }
+      ]
     };
-    this.myChart2 = echarts.init(document.getElementById("chart"));
+    this.myChart2 = echarts.init(document.getElementById('chart'));
     this.myChart2.setOption(option2);
   }
 
   statistics() {
+    this.con['startDate'] = this.startDate;
+    this.con['endDate'] = this.endDate;
+    this.statisticsSercice.searchReportByDateAndSum(this.con).subscribe(res => {
+      this.data = res.msg;
 
-    this.con["startDate"] = this.startDate;
-    this.con["endDate"] = this.endDate;
-    this.statisticsSercice.searchReportByDateAndSum(this.con).subscribe(
-      (res) => {
-        this.data = res.msg;
-
-        this.initEchart();
-
-      }
-    );
+      this.initEchart();
+    });
   }
 }
-

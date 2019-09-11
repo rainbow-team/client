@@ -8,22 +8,19 @@ import * as echarts from 'echarts';
   styleUrls: ['./monitor-check-report.component.scss']
 })
 export class MonitorCheckReportComponent implements OnInit {
+  startDate: any = '';
 
+  endDate: any = '';
 
-  startDate: any = "";
-
-  endDate: any = "";
-
-  result: any = "";
-
+  result: any = '';
 
   con = {
     tableName: 'monitor_check',
     propertyName: 'type_id',
     configTableName: 'config_monitor_check_type',
-    startDate: "",
-    endDate: "",
-    dateProperty:'start_date'
+    startDate: '',
+    endDate: '',
+    dateProperty: 'start_date'
   };
 
   catagrayData: any = [];
@@ -35,20 +32,19 @@ export class MonitorCheckReportComponent implements OnInit {
 
   data: any = [];
 
-  title: any = "监督检查统计";
-
+  title: any = '监督检查统计';
 
   configList: any = [];
 
-  constructor(private statisticsSercice: StatisticsSercice) { }
+  constructor(private statisticsSercice: StatisticsSercice) {}
 
   ngOnInit() {
-
     setTimeout(() => {
       this.initEchart1();
     }, 100);
 
-    this.startDate = new Date();
+    let today = new Date();
+    this.startDate = new Date(today.setFullYear(today.getFullYear() - 5));
     this.endDate = new Date();
     this.statistics();
   }
@@ -59,8 +55,9 @@ export class MonitorCheckReportComponent implements OnInit {
     let option1 = {
       tooltip: {
         trigger: 'axis',
-        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-          type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        axisPointer: {
+          // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
         }
       },
       legend: {
@@ -75,7 +72,6 @@ export class MonitorCheckReportComponent implements OnInit {
       xAxis: {
         type: 'category',
         data: this.data.yearDate
-
       },
       yAxis: {
         type: 'value'
@@ -83,25 +79,23 @@ export class MonitorCheckReportComponent implements OnInit {
       series: this.data.numberList
       //this.data.numberList
     };
-    this.myChart1 = echarts.init(document.getElementById("chart"));
+    this.myChart1 = echarts.init(document.getElementById('chart'));
     this.myChart1.setOption(option1);
-  };
-
-
-  statistics() {
-
-    this.con["startDate"] = this.startDate;
-    this.con["endDate"] = this.endDate;
-      this.statisticsSercice.searchResultByPermitDateConditon(this.con).subscribe(
-        (res) => {
-          this.data = res.msg;
-
-          this.configList = this.data.numberList.map(function (v) { return v.name });
-
-          this.initEchart1();
-
-        }
-      );
   }
 
+  statistics() {
+    this.con['startDate'] = this.startDate;
+    this.con['endDate'] = this.endDate;
+    this.statisticsSercice
+      .searchResultByPermitDateConditon(this.con)
+      .subscribe(res => {
+        this.data = res.msg;
+
+        this.configList = this.data.numberList.map(function(v) {
+          return v.name;
+        });
+
+        this.initEchart1();
+      });
+  }
 }
