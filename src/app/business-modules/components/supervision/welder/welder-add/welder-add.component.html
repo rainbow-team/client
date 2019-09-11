@@ -3,55 +3,81 @@
     焊接人员资质信息
   </div>
 
-  <div class="div_contain_add" *ngIf="isShow==false">
-
+  <div class="div_contain_add" *ngIf="isShow == false">
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>姓名：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input
+          nz-input
+          name="name"
+          [(ngModel)]="data.name"
+          required
+          [validation]="true"
+        />
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         身份证号：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <input nz-input name="identity" [(ngModel)]="data.identity" [validation]="true" [validationType]="'nullidcard'"
-          (ngModelChange)="identityChange($event)" />
-      </div>
-
-      <div nz-col [nzSpan]="4" class="ta_r">
-        性别：
-      </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <nz-radio-group [(ngModel)]="sexValue" style="width: 200px;text-align: left;">
-          <label nz-radio nzValue="1">男</label>
-          <label nz-radio nzValue="0">女</label>
-        </nz-radio-group>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input
+          nz-input
+          name="identity"
+          [(ngModel)]="data.identity"
+          [validation]="true"
+          [validationType]="'nullidcard'"
+          (ngModelChange)="identityChange($event)"
+        />
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
+        性别：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-radio-group
+          [(ngModel)]="sexValue"
+          style="width: 200px;text-align: left;"
+        >
+          <label nz-radio nzValue="1">男</label>
+          <label nz-radio nzValue="0">女</label>
+        </nz-radio-group>
+      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>聘用单位：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <input nz-input name="employDepart" [(ngModel)]="data.employDepart" required [validation]="true" />
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input
+          nz-input
+          name="employDepart"
+          [(ngModel)]="data.employDepart"
+          required
+          [validation]="true"
+        />
       </div>
-
+    </div>
+    <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
         发证单位：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
+      <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="certDepart" [(ngModel)]="data.certDepart" />
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>证书编号：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <input nz-input name="certNumber" [(ngModel)]="data.certNumber" required [validation]="true" />
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input
+          nz-input
+          name="certNumber"
+          [(ngModel)]="data.certNumber"
+          required
+          [validation]="true"
+        />
       </div>
     </div>
 
@@ -59,88 +85,112 @@
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>钢印号：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <input nz-input name="steelNumber" [(ngModel)]="data.steelNumber" required [validation]="true" />
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input
+          nz-input
+          name="steelNumber"
+          [(ngModel)]="data.steelNumber"
+          required
+          [validation]="true"
+        />
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>有效期限：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <nz-date-picker name="expireDate" [(ngModel)]="data.expireDate" required [validation]="true">
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-date-picker
+          name="expireDate"
+          [(ngModel)]="data.expireDate"
+          required
+          [validation]="true"
+        >
         </nz-date-picker>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>考试合格项目代号：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <input nz-input name="examProject" [(ngModel)]="data.examProject" required [validation]="true" />
+        <input
+          nz-input
+          name="examProject"
+          [(ngModel)]="data.examProject"
+          required
+          [validation]="true"
+        />
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-
       <div nz-col [nzSpan]="4" class="ta_r">
         备注：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="note" style="height: 70px;" [(ngModel)]="data.note"></textarea>
+        <textarea
+          nz-input
+          name="note"
+          style="height: 70px;"
+          [(ngModel)]="data.note"
+        ></textarea>
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
-
+    <app-attachment
+      [fileList]="fileList"
+      [refid]="data.id"
+      [isDisable]="isShow"
+    ></app-attachment>
   </div>
 
-  <div class="div_contain_add" *ngIf="isShow==true">
-
+  <div class="div_contain_add" *ngIf="isShow == true">
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
         姓名：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <span name="name" class="showText">{{data.name}}</span>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="name" class="showText">{{ data.name }}</span>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         身份证号：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <span name="identity" class="showText">{{data.identity}}</span>
-      </div>
-
-      <div nz-col [nzSpan]="4" class="ta_r">
-        性别：
-      </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <span name="sex" class="showText">{{data.sex|sex}}</span>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="identity" class="showText">{{ data.identity }}</span>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
+        性别：
+      </div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="sex" class="showText">{{ data.sex | sex }}</span>
+      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">
         聘用单位：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <span name="employDepart" class="showText">{{data.employDepart}}</span>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="employDepart" class="showText">{{
+          data.employDepart
+        }}</span>
       </div>
-
+    </div>
+    <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
         发证单位：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <span name="certDepart" class="showText">{{data.certDepart}}</span>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="certDepart" class="showText">{{ data.certDepart }}</span>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         证书编号：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <span name="certNumber" class="showText">{{data.certNumber}}</span>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="certNumber" class="showText">{{ data.certNumber }}</span>
       </div>
     </div>
 
@@ -148,15 +198,17 @@
       <div nz-col [nzSpan]="4" class="ta_r">
         钢印号：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <span name="steelNumber" class="showText">{{data.steelNumber}}</span>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="steelNumber" class="showText">{{ data.steelNumber }}</span>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         有效期限：
       </div>
-      <div nz-col [nzSpan]="4" class="ta_l">
-        <span name="expireDate" class="showText">{{data.expireDate|recordtime}}</span>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="expireDate" class="showText">{{
+          data.expireDate | recordtime
+        }}</span>
       </div>
     </div>
 
@@ -165,7 +217,7 @@
         考试合格项目代号：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <span name="examProject" class="showText">{{data.examProject}}</span>
+        <span name="examProject" class="showText">{{ data.examProject }}</span>
       </div>
     </div>
 
@@ -174,18 +226,34 @@
         备注：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div  class="showTextArea">{{data.note}}</div>
+        <div class="showTextArea">{{ data.note }}</div>
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
-
+    <app-attachment
+      [fileList]="fileList"
+      [refid]="data.id"
+      [isDisable]="isShow"
+    ></app-attachment>
   </div>
 
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
-      [nzLoading]="isSaving">保存</button>
+  <div
+    nz-row
+    [nzType]="'flex'"
+    [nzAlign]="'middle'"
+    class="div_bottom_add"
+    [nzJustify]="'end'"
+  >
+    <button
+      nz-button
+      nzType="primary"
+      (click)="save()"
+      *ngIf="!isShow"
+      style="margin-right: 10px;"
+      [nzLoading]="isSaving"
+    >
+      保存
+    </button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
-
 </div>

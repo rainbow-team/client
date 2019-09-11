@@ -8,7 +8,7 @@
           <label nz-radio nzValue="2">问题性质</label>
           <label nz-radio nzValue="3">整改状态及类别</label>
         </nz-radio-group>
-        请选择统计时间范围：
+        统计时间：
         <nz-year-picker [(ngModel)]="startDate" nzPlaceHolder="开始年份">
         </nz-year-picker>
         至
@@ -21,25 +21,32 @@
     </div>
   </nz-header>
   <nz-content>
-    <nz-tabset *ngIf="typeValue==1||typeValue==3">
+    <nz-tabset *ngIf="typeValue == 1 || typeValue == 3">
       <nz-tab nzTitle="统计图">
-        <div id="chart1" style="height: 400px;text-align: center">
-
-        </div>
+        <div id="chart1" style="height: 400px;text-align: center"></div>
       </nz-tab>
       <nz-tab nzTitle="统计表">
-        <nz-table #nestedTable [nzData]="data" class="commontable" [nzFrontPagination]="false"
-          [nzShowPagination]="false" [nzNoResult]="" [nzScroll]="{ y: '240px' }">
+        <nz-table
+          #nestedTable
+          [nzData]="data"
+          class="commontable"
+          [nzFrontPagination]="false"
+          [nzShowPagination]="false"
+          [nzNoResult]=""
+          [nzScroll]="{ y: '240px' }"
+        >
           <thead>
             <tr>
-              <th nzWidth="150px">{{title}}</th>
-              <th nzWidth="150px" *ngFor="let item of data.yearDate">{{item}}</th>
+              <th nzWidth="150px">{{ title }}</th>
+              <th nzWidth="150px" *ngFor="let item of data.yearDate">
+                {{ item }}
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of data.numberList">
-              <td>{{item.name}}</td>
-              <td *ngFor="let t of item.data">{{t}}</td>
+              <td>{{ item.name }}</td>
+              <td *ngFor="let t of item.data">{{ t }}</td>
               <!-- <td *ngFor="let item of data">{{item.value}}</td> -->
             </tr>
           </tbody>
@@ -47,25 +54,29 @@
       </nz-tab>
     </nz-tabset>
 
-    <nz-tabset *ngIf="typeValue==2">
+    <nz-tabset *ngIf="typeValue == 2">
       <nz-tab nzTitle="统计图">
-        <div id="chart2" style="height: 400px;text-align: center">
-
-        </div>
+        <div id="chart2" style="height: 400px;text-align: center"></div>
       </nz-tab>
       <nz-tab nzTitle="统计表">
-        <nz-table #nestedTable [nzData]="data" class="commontable" [nzFrontPagination]="false"
-          [nzShowPagination]="false" [nzNoResult]="">
+        <nz-table
+          #nestedTable
+          [nzData]="data"
+          class="commontable"
+          [nzFrontPagination]="false"
+          [nzShowPagination]="false"
+          [nzNoResult]=""
+        >
           <thead>
             <tr>
-              <th>{{title}}</th>
-              <th *ngFor="let item of data">{{item.name}}</th>
+              <th>{{ title }}</th>
+              <th *ngFor="let item of data">{{ item.name }}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>数量</td>
-              <td *ngFor="let item of data">{{item.value}}</td>
+              <td *ngFor="let item of data">{{ item.value }}</td>
             </tr>
           </tbody>
         </nz-table>

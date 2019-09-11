@@ -16,9 +16,8 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
   styleUrls: ['./daily-add.component.scss']
 })
 export class DailyAddComponent implements OnInit {
-
-  servicedepartId_Router: any = "";
-  facId_Router: any = "";
+  servicedepartId_Router: any = '';
+  facId_Router: any = '';
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
@@ -36,51 +35,56 @@ export class DailyAddComponent implements OnInit {
 
   orgList: any = [];
 
-  constructor(private msg: NzMessageService, private router: Router,
-    private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
-    private ActivatedRoute: ActivatedRoute, private attachmentSercice: AttachmentSercice,
-    private dailyMonitorSercice: DailyMonitorSercice, private serviceDepartService: ServiceDepartService,
-    private facSercice: FacSercice, private orgSercice: OrgSercice) { }
-
+  constructor(
+    private msg: NzMessageService,
+    private router: Router,
+    private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,
+    private activatedRoute: ActivatedRoute,
+    private attachmentSercice: AttachmentSercice,
+    private dailyMonitorSercice: DailyMonitorSercice,
+    private serviceDepartService: ServiceDepartService,
+    private facSercice: FacSercice,
+    private orgSercice: OrgSercice
+  ) {}
 
   ngOnInit() {
-
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    var id = this.ActivatedRoute.snapshot.queryParams["id"];
-    let isShow = this.ActivatedRoute.snapshot.queryParams["isShow"];
+    let id = this.activatedRoute.snapshot.queryParams['id'];
+    let isShow = this.activatedRoute.snapshot.queryParams['isShow'];
 
-    this.servicedepartId_Router = this.ActivatedRoute.snapshot.queryParams["servicedepartId"];
-    this.facId_Router = this.ActivatedRoute.snapshot.queryParams["facId"];
+    this.servicedepartId_Router = this.activatedRoute.snapshot.queryParams[
+      'servicedepartId'
+    ];
+    this.facId_Router = this.activatedRoute.snapshot.queryParams['facId'];
 
-    if (isShow && isShow == "true") {
+    if (isShow && isShow == 'true') {
       this.isShow = true;
     } else {
       this.isShow = false;
     }
 
-
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-
+    this.serviceDepartService.getAllDepartService().subscribe(res => {
       this.serviceDepartList = res.msg;
-    })
+    });
 
-    this.orgSercice.getAllOrgList().subscribe((res) => {
-
+    this.orgSercice.getAllOrgList().subscribe(res => {
       this.orgList = res.msg;
-    })
+    });
 
     if (id) {
-      this.dailyMonitorSercice.getDailyMonitorById(id).subscribe((res) => {
+      this.dailyMonitorSercice.getDailyMonitorById(id).subscribe(res => {
         this.data = res.msg;
-        this.facSercice.getFacListByServiceid(this.data.serviceId).subscribe((res) => {
-          this.facList = res.msg;
-        });
+        this.facSercice
+          .getFacListByServiceid(this.data.serviceId)
+          .subscribe(res => {
+            this.facList = res.msg;
+          });
       });
 
-      this.attachmentSercice.getFileListById(id).subscribe((res1) => {
-
+      this.attachmentSercice.getFileListById(id).subscribe(res1 => {
         if (res1.msg.length > 0) {
           res1.msg.forEach(element => {
             this.fileList.push({
@@ -91,19 +95,14 @@ export class DailyAddComponent implements OnInit {
             });
           });
         }
-      })
-
-
+      });
     } else {
       this.data.createDate = new Date();
       this.data.creatorId = this.staffObj.id;
     }
-
   }
 
-
   save() {
-
     if (!this.FormValidation()) {
       return;
     }
@@ -118,33 +117,34 @@ export class DailyAddComponent implements OnInit {
     }
 
     this.data.modifyId = this.staffObj.id;
-    this.dailyMonitorSercice.saveOrUpdateDailyMonitor(this.data).subscribe((res) => {
-      if (res.code == 200) {
-        this.msg.create('success', '保存成功');
-        this.router.navigate(['/monitor/daily']);
-      } else {
+    this.dailyMonitorSercice
+      .saveOrUpdateDailyMonitor(this.data)
+      .subscribe(res => {
+        if (res.code === 200) {
+          this.msg.create('success', '保存成功');
+          this.router.navigate(['/monitor/daily']);
+        } else {
+          this.msg.create('error', '保存失败');
+        }
 
-        this.msg.create('error', '保存失败');
-      }
-
-      this.isSaving = false;
-    });
-
+        this.isSaving = false;
+      });
   }
 
   close() {
-
     if (this.servicedepartId_Router) {
-      this.router.navigate(['/searchShow/integratedAuery/servicedepartSearch'], { queryParams: { id: this.servicedepartId_Router, idx: 3 } });
+      this.router.navigate(
+        ['/searchShow/integratedAuery/servicedepartSearch'],
+        { queryParams: { id: this.servicedepartId_Router, idx: 3 } }
+      );
     } else if (this.facId_Router) {
-      this.router.navigate(['/searchShow/integratedAuery/facSearch'], { queryParams: { id: this.facId_Router, idx: 5 } });
+      this.router.navigate(['/searchShow/integratedAuery/facSearch'], {
+        queryParams: { id: this.facId_Router, idx: 5 }
+      });
     } else {
       this.router.navigate(['/monitor/daily']);
     }
-
   }
-
-
 
   //表单手动触发验证
   FormValidation() {
@@ -158,9 +158,9 @@ export class DailyAddComponent implements OnInit {
   }
 
   serviceDepartChange(value: string): void {
-    this.facSercice.getFacListByServiceid(value).subscribe((res) => {
+    this.facSercice.getFacListByServiceid(value).subscribe(res => {
       this.facList = res.msg;
-    })
+    });
   }
 
   // facChange(value: string): void {

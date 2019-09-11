@@ -13,7 +13,7 @@
 
     <div nz-row class="ma_b20" *ngIf="activityType === 'fac'">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>核设施营运单位信息：
+        <span class="clo_r">*</span>核设施营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.serviceId" style="width: 100%" required [validation]="true"  (ngModelChange)="serviceDepartChange($event)"
@@ -24,7 +24,7 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>核设施信息：
+        <span class="clo_r">*</span>核设施：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.facId" style="width: 100%"  required [validation]="true" >
