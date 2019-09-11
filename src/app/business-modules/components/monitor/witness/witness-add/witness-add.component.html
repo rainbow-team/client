@@ -2,7 +2,7 @@
   <div class="div_top_add">
     监督见证信息
   </div>
-  <div class="div_contain_add" *ngIf="isShow==false">
+  <div class="div_contain_add" *ngIf="isShow==false" [appPageHeight]='300'>
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'">
       <nz-radio-group [(ngModel)]="departType">
         <label nz-radio nzValue="fac">核设施营运单位</label>
@@ -113,7 +113,7 @@
 
   </div>
 
-  <div class="div_contain_add" *ngIf="isShow==true">
+  <div class="div_contain_add" *ngIf="isShow==true" [appPageHeight]='300'>
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'" *ngIf="!isShow">
       <nz-radio-group [(ngModel)]="departType">
         <label nz-radio nzValue="fac">核设施营运单位</label>

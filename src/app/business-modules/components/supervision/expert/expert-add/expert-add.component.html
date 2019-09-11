@@ -3,7 +3,7 @@
     核安全监督专家信息
   </div>
   <!--新增和编辑页面-->
-  <div class="div_contain_add" *ngIf="isShow==false">
+  <div class="div_contain_add" *ngIf="isShow==false" [appPageHeight]='300'>
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="3" class="ta_r">
         <span class="clo_r">*</span>姓名：
@@ -91,7 +91,7 @@
 
 
   <!--显示页面-->
-  <div class="div_contain_add" *ngIf="isShow==true">
+  <div class="div_contain_add" *ngIf="isShow==true" [appPageHeight]='300'>
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="3" class="ta_r">
         姓名：

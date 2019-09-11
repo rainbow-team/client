@@ -17,7 +17,8 @@ export class HandleHttpInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {
 
-        let authID = this.cookieService.get('AUTH_ID');
+        let authID = sessionStorage.getItem('AUTH_ID');
+        authID = authID ? authID : "";
 
         let authReq = req;
         let requestUrl = req.url;
@@ -77,7 +78,13 @@ export class HandleHttpInterceptor implements HttpInterceptor {
 
             if (error.status == 403) {
                 sessionStorage.removeItem("staffObj");
-                location.reload();
+
+                window.alert("登录信息过期,3秒后将跳转至登录页面");
+                setTimeout(() => {
+
+                    window.location.href = AppConfig.clientAddress+"/#/login"
+                }, 3000);
+
             }
 
             // The backend returned an unsuccessful response code.

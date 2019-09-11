@@ -20,6 +20,10 @@
       return 'http://localhost:8080';
     },
 
+    get clientAddress() {
+      return 'http://localhost:4200';
+    },
+
     // 附件配置节点
     get fileConfig() {
       var self = this;

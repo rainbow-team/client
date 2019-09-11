@@ -2,7 +2,7 @@
   <div class="div_top_add">
     核安全设备安全问题
   </div>
-  <div class="div_contain_add" *ngIf="isShow==false">
+  <div class="div_contain_add" *ngIf="isShow==false" [appPageHeight]='300'>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -132,7 +132,7 @@
 
   </div>
 
-  <div class="div_contain_add" *ngIf="isShow==true">
+  <div class="div_contain_add" *ngIf="isShow==true" [appPageHeight]='300'>
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
           核设备单位：

@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 
             sessionStorage.setItem("permission",JSON.stringify(data.msg.permission));
 
-            this.cookieService.set('AUTH_ID', data.msg.ticket);
+            sessionStorage.setItem('AUTH_ID', data.msg.ticket);
 
             this.router.navigate(['/home']);
           } else {

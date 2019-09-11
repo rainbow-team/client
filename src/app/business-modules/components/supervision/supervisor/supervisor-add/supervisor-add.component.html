@@ -5,7 +5,7 @@
 
   <nz-tabset>
     <nz-tab nzTitle="监督员信息"  *ngIf="isShow==false">
-      <div class="div_contain_add" style="height: calc(100% - 20px);" >
+      <div class="div_contain_add" [appPageHeight]='300' >
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>姓名：
@@ -156,7 +156,7 @@
     </nz-tab>
 
     <nz-tab nzTitle="监督员信息"  *ngIf="isShow==true">
-        <div class="div_contain_add" style="height: calc(100% - 20px);" >
+        <div class="div_contain_add" [appPageHeight]='300'>
           <div nz-row class="ma_b20">
             <div nz-col [nzSpan]="3" class="ta_r">
               姓名：

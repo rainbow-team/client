@@ -2,7 +2,7 @@
   <div class="div_top_add">
     研究堆操纵员执照信息
   </div>
-  <div class="div_contain_add" *ngIf="isShow==false">
+  <div class="div_contain_add" *ngIf="isShow==false" [appPageHeight]='300'>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="3" class="ta_r">
@@ -93,7 +93,7 @@
     <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
   </div>
 
-  <div class="div_contain_add" *ngIf="isShow==true">
+  <div class="div_contain_add" *ngIf="isShow==true" [appPageHeight]='300'>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="3" class="ta_r">

@@ -54,7 +54,7 @@
 </div>
 
 <ng-template #uminemountainContent>
-  <div class="div_contain_add" style="height: calc(100% - 200px);" *ngIf="isShow==false">
+  <div class="div_contain_add" [appPageHeight]='300' *ngIf="isShow==false">
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -152,7 +152,7 @@
 
   </div>
 
-  <div class="div_contain_add" style="height: calc(100% - 200px);" *ngIf="isShow==true">
+  <div class="div_contain_add" [appPageHeight]='300' *ngIf="isShow==true">
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">

@@ -45,6 +45,10 @@ export class CheckAddComponent implements OnInit {
 
   departType: any = "";
 
+  
+  startValue: Date = null;
+  endValue: Date = null;
+
   constructor(private msg: NzMessageService, private router: Router,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private ActivatedRoute: ActivatedRoute, private attachmentSercice: AttachmentSercice,
@@ -106,6 +110,10 @@ export class CheckAddComponent implements OnInit {
         }
         this.checkData[0]=this.data.startDate;
         this.checkData[1]=this.data.endDate;
+
+        
+        this.startValue = new Date(this.data.startDate);
+        this.endValue = new Date(this.data.endDate);
       });
 
       // this.attachmentSercice.getFileListById(id).subscribe((res1) => {
@@ -214,5 +222,27 @@ export class CheckAddComponent implements OnInit {
       }
     });
     return isValid;
+  }
+
+  disabledStartDate = (startValue: Date): boolean => {
+    if (!startValue || !this.endValue) {
+      return false;
+    }
+    return startValue.getTime() > this.endValue.getTime();
+  };
+
+  disabledEndDate = (endValue: Date): boolean => {
+    if (!endValue || !this.startValue) {
+      return false;
+    }
+    return endValue.getTime() <= this.startValue.getTime();
+  };
+
+  onStartChange(date: Date): void {
+    this.startValue = date;
+  }
+
+  onEndChange(date: Date): void {
+    this.endValue = date;
   }
 }

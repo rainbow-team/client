@@ -6,6 +6,7 @@ import { DictionarySercice } from './../services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StatisticsSercice } from '../services/statistics/statistics.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
     templateUrl: './business-modules.component.html',
@@ -26,15 +27,14 @@ export class BusinessModulesComponent implements OnInit {
 
     constructor(private layoutChangeService: LayoutChangeService, private dictionarySercice: DictionarySercice,
         private staffSercice: StaffSercice, private router: Router, private activatedRoute: ActivatedRoute,
-        private statisticsSercice: StatisticsSercice) { }
+        private statisticsSercice: StatisticsSercice, private msg: NzMessageService) { }
 
     ngOnInit() {
 
         let logUser = this.staffSercice.getStaffObj();
-        if (!logUser.id) {
+        if (!logUser.id && this.router.url != "/login") {
             this.router.navigate(['/login'])
         }
-
 
         if (this.router.url == "/home") {
             this.isIndex = true;

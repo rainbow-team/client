@@ -2,7 +2,7 @@
   <div class="div_top_add">
     铀尾矿（渣）库许可信息
   </div>
-  <div class="div_contain_add" *ngIf="isShow==false">
+  <div class="div_contain_add" *ngIf="isShow==false" [appPageHeight]='300'>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -86,7 +86,7 @@
     <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isDisable"></app-attachment>
   </div>
 
-  <div class="div_contain_add" *ngIf="isShow==true">
+  <div class="div_contain_add" *ngIf="isShow==true" [appPageHeight]='300'>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">

@@ -99,6 +99,7 @@ import { CheckUminemountainAddComponent } from './../../app/business-modules/com
 import { UminemountainFileComponent } from './../../app/business-modules/components/check/uminemountain/uminemountain-file/uminemountain-file.component';
 
 import { CommonImportComponent } from './../../app/layouts/components/common-import/common-import.component';
+import { PageHeightDrective } from './_directives/pageHeightDrective';
 
 @NgModule({
   imports: [
@@ -150,7 +151,7 @@ import { CommonImportComponent } from './../../app/layouts/components/common-imp
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
     CheckUmineplaceAddComponent, UmineplaceFileComponent, UminemountainPermitAddComponent,
-    CheckUminemountainAddComponent, UminemountainFileComponent,CommonImportComponent
+    CheckUminemountainAddComponent, UminemountainFileComponent, CommonImportComponent,PageHeightDrective
   ],
   exports: [
     LoginComponent,
@@ -193,7 +194,7 @@ import { CommonImportComponent } from './../../app/layouts/components/common-imp
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
     CheckUmineplaceAddComponent, UmineplaceFileComponent, UminemountainPermitAddComponent,
-    CheckUminemountainAddComponent, UminemountainFileComponent,CommonImportComponent
+    CheckUminemountainAddComponent, UminemountainFileComponent, CommonImportComponent,PageHeightDrective
   ]
 })
 export class LayoutsModule { }
