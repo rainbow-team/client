@@ -2,7 +2,7 @@
   <div class="div_top_add">
     核活动许可信息
   </div>
-  <div class="div_contain_add" *ngIf="isShow==false">
+  <div class="div_contain_add" *ngIf="isShow == false">
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'">
       <nz-radio-group [(ngModel)]="activityType">
         <label nz-radio nzValue="fac">核设施营运单位</label>
@@ -10,15 +10,26 @@
       </nz-radio-group>
     </div>
 
-
     <div nz-row class="ma_b20" *ngIf="activityType === 'fac'">
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>核设施营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" required [validation]="true"  (ngModelChange)="serviceDepartChange($event)"
-          nzShowSearch required nzAllowClear >
-          <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
+        <nz-select
+          [(ngModel)]="data.serviceId"
+          style="width: 100%"
+          required
+          [validation]="true"
+          (ngModelChange)="serviceDepartChange($event)"
+          nzShowSearch
+          required
+          nzAllowClear
+        >
+          <nz-option
+            *ngFor="let option of serviceDepartList"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
           </nz-option>
         </nz-select>
       </div>
@@ -27,8 +38,17 @@
         <span class="clo_r">*</span>核设施：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.facId" style="width: 100%"  required [validation]="true" >
-          <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
+        <nz-select
+          [(ngModel)]="data.facId"
+          style="width: 100%"
+          required
+          [validation]="true"
+        >
+          <nz-option
+            *ngFor="let option of facList"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
           </nz-option>
         </nz-select>
       </div>
@@ -39,8 +59,17 @@
         <span class="clo_r">*</span>核设备单位：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <nz-select [(ngModel)]="data.equipDepartId" style="width: 100%" required [validation]="true" >
-          <nz-option *ngFor="let option of equipDepartList" [nzLabel]="option.name" [nzValue]="option.id">
+        <nz-select
+          [(ngModel)]="data.equipDepartId"
+          style="width: 100%"
+          required
+          [validation]="true"
+        >
+          <nz-option
+            *ngFor="let option of equipDepartList"
+            [nzLabel]="option.name"
+            [nzValue]="option.id"
+          >
           </nz-option>
         </nz-select>
       </div>
@@ -51,7 +80,14 @@
         <span class="clo_r">*</span>许可名称：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+        <input
+          maxlength="50"
+          nz-input
+          name="name"
+          [(ngModel)]="data.name"
+          required
+          [validation]="true"
+        />
       </div>
     </div>
 
@@ -60,9 +96,17 @@
         <span class="clo_r">*</span>活动类型：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.activityTypeId" style="width: 100%" required [validation]="true">
-          <nz-option *ngFor="let option of dictionary.config_activity_type" [nzLabel]="option.value"
-            [nzValue]="option.id">
+        <nz-select
+          [(ngModel)]="data.activityTypeId"
+          style="width: 100%"
+          required
+          [validation]="true"
+        >
+          <nz-option
+            *ngFor="let option of dictionary.config_activity_type"
+            [nzLabel]="option.value"
+            [nzValue]="option.id"
+          >
           </nz-option>
         </nz-select>
       </div>
@@ -71,7 +115,12 @@
         <span class="clo_r">*</span>许可时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="permitDate" [(ngModel)]="data.permitDate" required [validation]="true">
+        <nz-date-picker
+          name="permitDate"
+          [(ngModel)]="data.permitDate"
+          required
+          [validation]="true"
+        >
         </nz-date-picker>
       </div>
     </div>
@@ -81,14 +130,24 @@
         有效期限：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="validateTime" [(ngModel)]="data.validateTime"></nz-date-picker>
+        <nz-date-picker
+          name="validateTime"
+          [(ngModel)]="data.validateTime"
+        ></nz-date-picker>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>许可文号：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="licence" [(ngModel)]="data.licence" required [validation]="true" />
+        <input
+          maxlength="50"
+          nz-input
+          name="licence"
+          [(ngModel)]="data.licence"
+          required
+          [validation]="true"
+        />
       </div>
     </div>
 
@@ -97,7 +156,13 @@
         许可内容：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="content" [(ngModel)]="data.content" required [validation]="true"></textarea>
+        <textarea
+          nz-input
+          name="content"
+          [(ngModel)]="data.content"
+          required
+          [validation]="true"
+        ></textarea>
       </div>
     </div>
 
@@ -106,7 +171,11 @@
         许可条件：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="permitCondition" [(ngModel)]="data.permitCondition"></textarea>
+        <textarea
+          nz-input
+          name="permitCondition"
+          [(ngModel)]="data.permitCondition"
+        ></textarea>
       </div>
     </div>
 
@@ -119,31 +188,42 @@
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+    <app-attachment
+      [fileList]="fileList"
+      [refid]="data.id"
+      [isDisable]="isShow"
+    ></app-attachment>
   </div>
 
-  <div class="div_contain_add" *ngIf="isShow==true">
-    <div nz-row class="ma_b20" [nzType]="'flex'" [nzJustify]="'center'" *ngIf="!isShow">
+  <div class="div_contain_add" *ngIf="isShow == true">
+    <div
+      nz-row
+      class="ma_b20"
+      [nzType]="'flex'"
+      [nzJustify]="'center'"
+      *ngIf="!isShow"
+    >
       <nz-radio-group [(ngModel)]="activityType">
         <label nz-radio nzValue="fac">核设施</label>
         <label nz-radio nzValue="equip">核设备</label>
       </nz-radio-group>
     </div>
 
-
     <div nz-row class="ma_b20" *ngIf="activityType === 'fac'">
       <div nz-col [nzSpan]="4" class="ta_r">
         核设施营运单位信息：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="serviceDepartName" class="showText">{{data.serviceDepartName}}</span>
+        <span name="serviceDepartName" class="showText">{{
+          data.serviceDepartName
+        }}</span>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         核设施信息：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="facName" class="showText">{{data.facName}}</span>
+        <span name="facName" class="showText">{{ data.facName }}</span>
       </div>
     </div>
 
@@ -152,7 +232,9 @@
         核设备单位：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <span name="equipDepartName" class="showText">{{data.equipDepartName}}</span>
+        <span name="equipDepartName" class="showText">{{
+          data.equipDepartName
+        }}</span>
       </div>
     </div>
 
@@ -161,7 +243,7 @@
         许可名称：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <span name="name" class="showText">{{data.name}}</span>
+        <span name="name" class="showText">{{ data.name }}</span>
       </div>
     </div>
 
@@ -170,14 +252,16 @@
         活动类型：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="typeValue" class="showText">{{data.typeValue}}</span>
+        <span name="typeValue" class="showText">{{ data.typeValue }}</span>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         许可时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="permitDate" class="showText">{{data.permitDate|recordtime}}</span>
+        <span name="permitDate" class="showText">{{
+          data.permitDate | recordtime
+        }}</span>
       </div>
     </div>
 
@@ -186,14 +270,16 @@
         有效期限：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="validateTime" class="showText">{{data.validateTime|recordtime}}</span>
+        <span name="validateTime" class="showText">{{
+          data.validateTime | recordtime
+        }}</span>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         许可文号：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="licence" class="showText">{{data.licence}}</span>
+        <span name="licence" class="showText">{{ data.licence }}</span>
       </div>
     </div>
 
@@ -202,8 +288,7 @@
         许可内容：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-
-        <div  class="showTextArea">{{data.content}}</div>
+        <div class="showTextArea">{{ data.content }}</div>
       </div>
     </div>
 
@@ -212,7 +297,7 @@
         许可条件：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div  class="showTextArea">{{data.permitCondition}}</div>
+        <div class="showTextArea">{{ data.permitCondition }}</div>
       </div>
     </div>
 
@@ -221,16 +306,32 @@
         审评承诺：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div  class="showTextArea">{{data.promise}}</div>
+        <div class="showTextArea">{{ data.promise }}</div>
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+    <app-attachment
+      [fileList]="fileList"
+      [refid]="data.id"
+      [isDisable]="isShow"
+    ></app-attachment>
   </div>
 
-  <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
-      [nzLoading]="isSaving">
+  <div
+    nz-row
+    [nzType]="'flex'"
+    [nzAlign]="'middle'"
+    class="div_bottom_add"
+    [nzJustify]="'end'"
+  >
+    <button
+      nz-button
+      nzType="primary"
+      (click)="save()"
+      *ngIf="!isShow"
+      style="margin-right: 10px;"
+      [nzLoading]="isSaving"
+    >
       保存
     </button>
     <button nz-button nzType="default" (click)="close()">关闭</button>
