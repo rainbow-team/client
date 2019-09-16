@@ -27,4 +27,8 @@ export class UserService {
   deleteUserByIds(ids): any {
     return this.http.post('/user/deleteUsersByIds', ids);
   }
+
+  changePassword(currentUser: any): any {
+    return this.http.post('/user/changePassword', currentUser);
+  }
 }

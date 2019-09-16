@@ -114,6 +114,7 @@
         <div class="ta_r">
           <span class="clo_r">*</span>用户名：
           <input
+            maxlength="50"
             nz-input
             style="width:calc(100% - 100px)"
             [disabled]="isDisable"
@@ -127,9 +128,28 @@
       </div>
       <div nz-row style="height: 60px;">
         <div class="ta_r">
+          <span class="clo_r">*</span>密码：
+          <input
+            type="password"
+            maxlength="50"
+            nz-input
+            style="width:calc(100% - 100px)"
+            [disabled]="isDisable"
+            required
+            [validation]="true"
+            [validationType]="'password'"
+            nzSize="default"
+            [(ngModel)]="currentUser.password"
+            class="w200"
+          />
+        </div>
+      </div>
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
           <span class="clo_r">*</span>真实姓名：
           <input
             nz-input
+            maxlength="50"
             [disabled]="isDisable"
             style="width:calc(100% - 100px)"
             required
@@ -161,6 +181,7 @@
           <span class="clo_r">*</span>邮箱：
           <input
             nz-input
+            maxlength="50"
             style="width:calc(100% - 100px)"
             [disabled]="isDisable"
             nzSize="default"

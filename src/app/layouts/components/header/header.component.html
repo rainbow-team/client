@@ -1,42 +1,118 @@
 <div class="header">
   <div nz-row [nzType]="'flex'" [nzAlign]="'top'">
     <div nz-col [nzSpan]="6" style="font-size: 20px;">
-      <img src="../../../../assets/images/index_01.png" style="margin-right: 10px;">
+      <img
+        src="../../../../assets/images/index_01.png"
+        style="margin-right: 10px;"
+      />
       <span>核安全数据库</span>
     </div>
     <div nz-col [nzSpan]="18" style="text-align: right;">
       欢迎
-      <img src="../../../../assets/images/index_03.png">
-      <span style="margin-left: 8px;">{{name}}</span>
-      <nz-divider nzType="vertical" style="margin: 0 16px 0 35px;;height: 24px;width: 1px;"></nz-divider>
+      <img src="../../../../assets/images/index_03.png" />
+      <span style="margin-left: 8px;">{{ name }}</span>
+      <nz-divider
+        nzType="vertical"
+        style="margin: 0 16px 0 35px;;height: 24px;width: 1px;"
+      ></nz-divider>
 
-
-
-      <a nz-popover class="func-button" [nzContent]="contentTemplate" nzPlacement="bottomRight">
-        <img src="../../../../assets/images/index_05.png" alt="">
+      <a
+        nz-popover
+        class="func-button"
+        [nzContent]="contentTemplate"
+        nzPlacement="bottomRight"
+      >
+        <img src="../../../../assets/images/index_05.png" alt="" />
       </a>
-     
+
       <a class="func-button">
-        <img src="../../../../assets/images/index_07.png" alt="">
+        <img src="../../../../assets/images/index_07.png" alt="" />
+      </a>
+      <a (click)="changePassword()" class="func-button" title="修改密码">
+        <img src="../../../../assets/images/password.png" alt="" />
       </a>
       <a (click)="exitSystem()" class="func-button" title="退出">
-        <img src="../../../../assets/images/index_09.png" alt="">
+        <img src="../../../../assets/images/index_09.png" alt="" />
       </a>
 
       <ng-template #contentTemplate>
         <div>
-            法规标准数据库
+          法规标准数据库
         </div>
         <div>
-            放射性废物治理数据库
+          放射性废物治理数据库
         </div>
       </ng-template>
-
     </div>
   </div>
 
   <div>
     <app-nav-menu [navMenu]="navMenu"></app-nav-menu>
   </div>
-
+  <nz-modal
+    nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="修改密码"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()"
+    [nzOkLoading]="isOkLoading"
+    ><div>
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          <span class="clo_r">*</span>当前密码：
+          <input
+            type="password"
+            maxlength="50"
+            nz-input
+            style="width:calc(100% - 120px)"
+            [disabled]="isDisable"
+            required
+            [validation]="true"
+            nzSize="default"
+            [(ngModel)]="currentUser.password"
+            class="w200"
+          />
+        </div>
+      </div>
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          <span class="clo_r">*</span>新密码：
+          <input
+            type="password"
+            nz-input
+            maxlength="50"
+            [disabled]="isDisable"
+            style="width:calc(100% - 120px)"
+            required
+            [validation]="true"
+            [validationType]="'password'"
+            nzSize="default"
+            [(ngModel)]="currentUser.passwordNew"
+            class="w200"
+          />
+        </div>
+      </div>
+      <div nz-row style="height: 60px;">
+        <div class="ta_r">
+          <span class="clo_r">*</span>重新输入密码：
+          <input
+            type="password"
+            nz-input
+            maxlength="50"
+            [disabled]="isDisable"
+            style="width:calc(100% - 120px)"
+            required
+            [validation]="true"
+            [validationType]="'password'"
+            nzSize="default"
+            [(ngModel)]="currentUser.passwordCofirm"
+            class="w200"
+          />
+        </div>
+      </div>
+      <div nz-row style="height: 60px; color: red">
+        <label>{{ message }}</label>
+      </div>
+    </div>
+  </nz-modal>
 </div>
