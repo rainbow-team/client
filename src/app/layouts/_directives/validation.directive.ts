@@ -289,9 +289,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       return (
         value == null ||
         value == '' ||
-        /^(?![a-zA-z]+$)(?![0-9]+$)(?![!@#$%^&*~()_+{}|:"<>?]+$)(?![a-zA-z!@#$%^&*~()_+{}|:"<>?]+$)[a-zA-Z0-9!@#$%^&*~()_+{}|:"<>?].{0,50}$/.test(
-          value
-        )
+        /^(?=.*[a-zA-Z])(?=.*\d)[^]{12,50}$/.test(value)
       );
     }
   };
@@ -442,7 +440,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       success: 'success'
     },
     password: {
-      error: '密码必须是数字、字母或者特殊字符，数字与字符。',
+      error: '密码长度不少于12位，且必须包含字母和数字。',
       success: 'success'
     }
   };
