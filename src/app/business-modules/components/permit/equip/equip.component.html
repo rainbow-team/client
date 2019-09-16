@@ -5,7 +5,7 @@
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="5" *ngIf="!equipdepartId">
       核设备单位：
       <input nz-input [(ngModel)]="equipDepartName" nzSize="default" class="w200" />
     </div>
@@ -20,7 +20,7 @@
       <input nz-input nzSize="default" [(ngModel)]="facName" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="4" class="ta_r">
+    <div nz-col [nzSpan]="4" class="ta_r" style="float: right">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">
         查询
       </button>

@@ -1,6 +1,6 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="5" *ngIf="!isSearchShow">
       核设备单位：
       <input
         nz-input
@@ -30,7 +30,7 @@
       <input nz-input nzSize="default" [(ngModel)]="facName" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="4" class="ta_r">
+    <div nz-col [nzSpan]="4" class="ta_r" style="float: right">
       <button
         nz-button
         nzType="primary"

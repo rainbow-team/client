@@ -14,13 +14,18 @@
       </div>
   
   
-      <div nz-col [nzSpan]="5">
+      <div nz-col [nzSpan]="10">
         文件时间：
-        <nz-range-picker class="w200" [(ngModel)]="fileDate" [nzFormat]="yyyy-MM"> </nz-range-picker>
+        <nz-month-picker  [(ngModel)]="start_date"  >
+        </nz-month-picker>
+        -
+        <nz-month-picker  [(ngModel)]="end_date"   >
+        </nz-month-picker>
+        
       </div>
   
   
-      <div nz-col [nzSpan]="3" nzOffset="11">
+      <div nz-col [nzSpan]="3" nzOffset="6">
         <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
         <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
       </div>
@@ -70,7 +75,7 @@
               <td>{{(pageIndex-1)*pageSize+1+index}}</td>
               <!-- <td>{{data.fileName}}</td> -->
               <td>{{data.typeValue}}</td>
-              <td>{{data.fileDate|recordtime}}</td>
+              <td>{{data.fileDate|recordtime:'month'}}</td>
               <td>{{data.fileNo}}</td>
               <td>
                 <a (click)="show(data)">查看</a>
@@ -121,8 +126,8 @@
                   <span class="clo_r">*</span>文件时间：
               </div>
               <div nz-col [nzSpan]="8" class="ta_l">
-                <nz-date-picker name="fileDate" [(ngModel)]="data.fileDate" required [validation]="true" >
-                </nz-date-picker>
+                <nz-month-picker name="fileDate" [(ngModel)]="data.fileDate"  required [validation]="true" >
+                </nz-month-picker>
               </div>
             </div>
   
@@ -165,7 +170,7 @@
                 文件时间：
               </div>
               <div nz-col [nzSpan]="8" class="ta_l">
-                <span name="fileDate">{{data.fileDate|recordtime}}</span>
+                <span name="fileDate">{{data.fileDate|recordtime:'month'}}</span>
               </div>
             </div>
   

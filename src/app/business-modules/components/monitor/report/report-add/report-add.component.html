@@ -30,12 +30,12 @@
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>报告时间：
       </div>
-      <div nz-col [nzSpan]="8" class="ta_l">
+      <div nz-col [nzSpan]="4" class="ta_l">
         <nz-date-picker name="reportDate" [(ngModel)]="data.reportDate" style="width: 100%" required [validation]="true">
         </nz-date-picker>
       </div>
 
-      <div nz-col [nzSpan]="4" class="ta_r">
+      <div nz-col [nzSpan]="4" [nzOffset]="4" class="ta_r">
         <span class="clo_r">*</span>报告名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">

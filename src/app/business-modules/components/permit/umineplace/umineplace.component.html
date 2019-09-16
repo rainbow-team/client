@@ -5,7 +5,7 @@
       <input nz-input nzSize="default" [(ngModel)]="umineName" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="6">
+    <div nz-col [nzSpan]="6" *ngIf="!umineplaceId">
       铀尾矿（渣）库名称：
       <input
         nz-input
@@ -30,7 +30,7 @@
       <nz-range-picker class="w200" [(ngModel)]="permitDate"> </nz-range-picker>
     </div>
 
-    <div nz-col [nzSpan]="3" class="ta_r">
+    <div nz-col [nzSpan]="3" class="ta_r" style="float: right">
       <button
         nz-button
         nzType="primary"

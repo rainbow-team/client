@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout style="    height: 100%;">
   <nz-header nzTheme="light" style="height: 50px;">
     <div nz-row>
       <div nz-col [nzSpan]="20" class="ta_l">
@@ -20,20 +20,19 @@
       </div>
     </div>
   </nz-header>
-  <nz-content>
-    <nz-tabset *ngIf="typeValue == 1 || typeValue == 3">
+  <nz-content style="height:calc(100% - 64px);">
+    <nz-tabset *ngIf="typeValue == 1 || typeValue == 3" style="    height: 100%;">
       <nz-tab nzTitle="统计图">
-        <div id="chart1" style="height: 400px;text-align: center"></div>
+        <div id="chart1" style="text-align: center" [appPageHeight]='314'></div>
       </nz-tab>
       <nz-tab nzTitle="统计表">
         <nz-table
           #nestedTable
-          [nzData]="data"
+          [nzData]="data.yearDate"
           class="commontable"
           [nzFrontPagination]="false"
           [nzShowPagination]="false"
           [nzNoResult]=""
-          [nzScroll]="{ y: '240px' }"
         >
           <thead>
             <tr>
@@ -54,9 +53,9 @@
       </nz-tab>
     </nz-tabset>
 
-    <nz-tabset *ngIf="typeValue == 2">
+    <nz-tabset *ngIf="typeValue == 2" style="    height: 100%;">
       <nz-tab nzTitle="统计图">
-        <div id="chart2" style="height: 400px;text-align: center"></div>
+        <div id="chart2" style="text-align: center" [appPageHeight]='314'></div>
       </nz-tab>
       <nz-tab nzTitle="统计表">
         <nz-table

@@ -1,6 +1,6 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="5" *ngIf="!isSearchShow">
       单位名称：
       <input
         nz-input
@@ -10,7 +10,7 @@
         placeholder="请输入单位名称"
       />
     </div>
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="5" *ngIf="!facId">
       设施名称：
       <input
         nz-input
@@ -47,7 +47,7 @@
         placeholder="请输入审查内容"
       />
     </div>
-    <div nz-col [nzSpan]="4" class="ta_r">
+    <div nz-col [nzSpan]="4" class="ta_r" style="float: right">
       <button
         nz-button
         nzType="primary"

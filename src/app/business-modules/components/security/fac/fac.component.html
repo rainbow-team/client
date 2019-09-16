@@ -1,6 +1,6 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="5" *ngIf="!isSearchShow">
       营运单位：
       <input
         nz-input
@@ -10,7 +10,7 @@
       />
     </div>
 
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="5" *ngIf="!facId">
       设施名称：
       <input nz-input nzSize="default" [(ngModel)]="facName" class="w200" />
     </div>
@@ -39,7 +39,7 @@
       </nz-select>
     </div>
 
-    <div nz-col [nzSpan]="4" class="ta_r">
+    <div nz-col [nzSpan]="4" class="ta_r"  style="float: right">
       <button
         nz-button
         nzType="primary"
@@ -170,7 +170,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]='420'>
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"

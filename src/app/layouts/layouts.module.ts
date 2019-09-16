@@ -100,6 +100,7 @@ import { UminemountainFileComponent } from './../../app/business-modules/compone
 
 import { CommonImportComponent } from './../../app/layouts/components/common-import/common-import.component';
 import { PageHeightDrective } from './_directives/pageHeightDrective';
+import { PageWidthDrective } from './_directives/pageWidthDrective';
 
 @NgModule({
   imports: [
@@ -151,7 +152,8 @@ import { PageHeightDrective } from './_directives/pageHeightDrective';
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
     CheckUmineplaceAddComponent, UmineplaceFileComponent, UminemountainPermitAddComponent,
-    CheckUminemountainAddComponent, UminemountainFileComponent, CommonImportComponent,PageHeightDrective
+    CheckUminemountainAddComponent, UminemountainFileComponent, CommonImportComponent, PageHeightDrective,
+    PageWidthDrective
   ],
   exports: [
     LoginComponent,
@@ -194,7 +196,8 @@ import { PageHeightDrective } from './_directives/pageHeightDrective';
     EquipFileComponent, SecurityEquipAddComponent, PermitFacAddComponent,
     CheckFacAddComponent, CheckFacFileComponent, UmineplacePermitAddComponent,
     CheckUmineplaceAddComponent, UmineplaceFileComponent, UminemountainPermitAddComponent,
-    CheckUminemountainAddComponent, UminemountainFileComponent, CommonImportComponent,PageHeightDrective
+    CheckUminemountainAddComponent, UminemountainFileComponent, CommonImportComponent, PageHeightDrective,
+    PageWidthDrective
   ]
 })
 export class LayoutsModule { }

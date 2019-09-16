@@ -610,12 +610,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
   ShowErrorTip(msg) {
     if (!$(this.el.nativeElement).is(':hidden')) {
       // if(this.el.nativeElement.localName=""){
-      $(this.el.nativeElement)
-        .find('input')
-        .addClass('ng2-invalid');
-      $(this.el.nativeElement)
-        .find('nz-select')
-        .addClass('ng2-invalid');
+    
       // }else{
       $(this.el.nativeElement).addClass('ng2-invalid');
       // }
@@ -663,12 +658,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       }
     }
     $(this.el.nativeElement).removeClass('ng2-invalid');
-    $(this.el.nativeElement)
-      .find('input')
-      .removeClass('ng2-invalid');
-    $(this.el.nativeElement)
-      .find('nz-select')
-      .removeClass('ng2-invalid');
+   
     if (this.tips) {
       this.tips.hide();
     }

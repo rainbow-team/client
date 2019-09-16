@@ -35,14 +35,12 @@
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>核设施：
+        核设施：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select
           [(ngModel)]="data.facId"
           style="width: 100%"
-          required
-          [validation]="true"
         >
           <nz-option
             *ngFor="let option of facList"
@@ -114,7 +112,7 @@
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>许可时间：
       </div>
-      <div nz-col [nzSpan]="8" class="ta_l">
+      <div nz-col [nzSpan]="4" class="ta_l">
         <nz-date-picker
           name="permitDate"
           [(ngModel)]="data.permitDate"

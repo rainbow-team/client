@@ -1,6 +1,6 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="5" *ngIf="!isSearchShow">
       单位名称：
       <input
         nz-input
@@ -45,7 +45,7 @@
       <nz-range-picker class="w200" [(ngModel)]="check_date"> </nz-range-picker>
     </div>
 
-    <div nz-col [nzSpan]="4" class="ta_r">
+    <div nz-col [nzSpan]="4" class="ta_r" style="float: right">
       <button
         nz-button
         nzType="primary"
@@ -125,7 +125,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]='400'>
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"

@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout style="    height: 100%;">
   <nz-header nzTheme="light">
     统计时间：
     <nz-year-picker [(ngModel)]="startDate" nzPlaceHolder="开始年份">
@@ -10,10 +10,10 @@
       <button nz-button nzType="primary" (click)="statistics()">统计</button>
     </div>
   </nz-header>
-  <nz-content>
-    <nz-tabset>
+  <nz-content style="height:calc(100% - 64px);">
+    <nz-tabset style="    height: 100%;">
       <nz-tab nzTitle="统计图">
-        <div id="chart" style="height: 400px;text-align: center"></div>
+        <div id="chart" style="text-align: center" [appPageHeight]='314'></div>
       </nz-tab>
       <nz-tab nzTitle="统计表">
         <nz-table
