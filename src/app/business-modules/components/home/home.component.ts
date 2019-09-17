@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
       });
 
     this.statisticsSercice
-      .getStatisticsResultByCondition(this.conStatus)
+      .getStatisticsResultByCondition(this.conType)
       .subscribe(res => {
         this.typeData = res.msg;
         this.initEchart();
