@@ -44,12 +44,12 @@
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>许可时间：
       </div>
-      <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="permitDate" [(ngModel)]="data.permitDate" required [validation]="true">
+      <div nz-col [nzSpan]="4" class="ta_l">
+        <nz-date-picker name="permitDate" [(ngModel)]="data.permitDate" required [validation]="true" style="width: 100%">
         </nz-date-picker>
       </div>
 
-      <div nz-col [nzSpan]="4" class="ta_r">
+      <div nz-col [nzSpan]="4" [nzOffset]="4" class="ta_r">
         <span class="clo_r">*</span>许可文号：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">

@@ -26,7 +26,7 @@
 
     <div nz-row class="ma_b20" *ngIf="accidentType==='fac'">
       <div nz-col [nzSpan]="4" class="ta_r">
-        核设施信息：
+        核设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.facId" style="width: 100%" nzShowSearch nzAllowClear>
@@ -64,7 +64,7 @@
     <div nz-row class="ma_b20" *ngIf="accidentType==='umineplace'">
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        铀尾矿(渣)库信息：
+        铀尾矿(渣)库名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.uminePlaceId" style="width: 100%" nzShowSearch nzAllowClear>
@@ -123,7 +123,7 @@
         <span class="clo_r">*</span>发生时间：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-date-picker name="occurDate" [(ngModel)]="data.occurDate" style="width: 100%" [validation]="true">
+        <nz-date-picker name="occurDate" [(ngModel)]="data.occurDate" style="width: 100%" required [validation]="true">
         </nz-date-picker>
       </div>
     </div>
@@ -140,43 +140,41 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>事故事件后果：
+        事故事件后果：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="consequence" style="height: 70px;" [(ngModel)]="data.consequence" required
-          [validation]="true">
-                      </textarea>
+        <textarea nz-input name="consequence" style="height: 70px;" [(ngModel)]="data.consequence" >
+        </textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>原因分析：
+        原因分析：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="reason" style="height: 70px;" [(ngModel)]="data.reason" required [validation]="true">
-                        </textarea>
+        <textarea nz-input name="reason" style="height: 70px;" [(ngModel)]="data.reason">
+        </textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>处理措施：
+        处理措施：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="measure" style="height: 70px;" [(ngModel)]="data.measure" required [validation]="true">
-                          </textarea>
+        <textarea nz-input name="measure" style="height: 70px;" [(ngModel)]="data.measure">
+        </textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>经验反馈：
+        经验反馈：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="feedback" style="height: 70px;" [(ngModel)]="data.feedback" required
-          [validation]="true">
-                            </textarea>
+        <textarea nz-input name="feedback" style="height: 70px;" [(ngModel)]="data.feedback">
+        </textarea>
       </div>
     </div>
 
@@ -203,7 +201,7 @@
 
     <div nz-row class="ma_b20" *ngIf="accidentType==='fac'">
       <div nz-col [nzSpan]="4" class="ta_r">
-        核设施信息：
+        核设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="facName" class="showText">{{data.facName}}</span>
@@ -231,7 +229,7 @@
     <div nz-row class="ma_b20" *ngIf="accidentType==='umineplace'">
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        铀尾矿(渣)库信息：
+        铀尾矿(渣)库名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <span name="uminePlaceName" class="showText">{{data.uminePlaceName}}</span>

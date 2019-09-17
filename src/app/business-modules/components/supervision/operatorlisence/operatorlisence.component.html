@@ -1,25 +1,43 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="4">
       姓名：
-      <input nz-input nzSize="default" [(ngModel)]="name" class="w200" />
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w150" />
     </div>
 
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="4">
       聘用单位：
       <input
         nz-input
         nzSize="default"
         [(ngModel)]="employ_depart"
-        class="w200"
+        class="w120"
       />
     </div>
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="4">
       研究堆名称：
-      <input nz-input nzSize="default" [(ngModel)]="heap_name" class="w200" />
+      <input nz-input nzSize="default" [(ngModel)]="heap_name" class="w120" />
     </div>
 
-    <div nz-col [nzSpan]="4" [nzOffset]="5" class="ta_r">
+    <div nz-col [nzSpan]="4">
+      执照种类：
+      <nz-select [(ngModel)]="lisenceTypeIds" class="w120">
+        <nz-option
+          *ngFor="let option of dictionary.config_operator_license_type"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <div nz-col [nzSpan]="5">
+      有效期限：
+      <nz-range-picker class="w150" [(ngModel)]="expire_date">
+      </nz-range-picker>
+    </div>
+
+    <div nz-col [nzSpan]="3" class="ta_r">
       <button
         nz-button
         nzType="primary"
@@ -31,24 +49,6 @@
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
         重置
       </button>
-    </div>
-  </div>
-  <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="8">
-      执照种类：
-      <nz-select [(ngModel)]="lisenceTypeIds" style="width: 300px">
-        <nz-option
-          *ngFor="let option of dictionary.config_operator_license_type"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
-        </nz-option>
-      </nz-select>
-    </div>
-    <div nz-col [nzSpan]="5">
-      有效期限：
-      <nz-range-picker class="w200" [(ngModel)]="expire_date">
-      </nz-range-picker>
     </div>
   </div>
 

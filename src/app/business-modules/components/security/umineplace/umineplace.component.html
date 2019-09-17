@@ -55,9 +55,9 @@
   </div>
 
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="4">
+    <div nz-col [nzSpan]="5">
       问题内容：
-      <input nz-input nzSize="default" [(ngModel)]="content" class="w150" />
+      <input nz-input nzSize="default" [(ngModel)]="content" class="w200" />
     </div>
 
     <div nz-col [nzSpan]="5">
@@ -81,7 +81,7 @@
 
     <div nz-col [nzSpan]="5">
       问题性质：
-      <nz-select [(ngModel)]="questionNatureIds" class="w200">
+      <nz-select [(ngModel)]="questionNatureIds" class="w150">
         <nz-option
           *ngFor="
             let option of dictionary.config_umine_place_security_question_nature
@@ -93,9 +93,9 @@
       </nz-select>
     </div>
 
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="4">
       整改状态：
-      <nz-select [(ngModel)]="reformStatusTypeIds" class="w200">
+      <nz-select [(ngModel)]="reformStatusTypeIds" class="w100">
         <nz-option
           *ngFor="let option of dictionary.config_security_reform_status"
           [nzLabel]="option.value"

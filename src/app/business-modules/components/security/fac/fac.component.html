@@ -55,19 +55,19 @@
   </div>
 
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="4">
+    <div nz-col [nzSpan]="5">
       问题内容：
-      <input nz-input nzSize="default" [(ngModel)]="content" class="w150" />
+      <input nz-input nzSize="default" [(ngModel)]="content" class="w200" />
     </div>
 
     <div nz-col [nzSpan]="5">
       发现时间：
-      <nz-range-picker class="w200" [(ngModel)]="find_date"> </nz-range-picker>
+      <nz-range-picker class="w150" [(ngModel)]="find_date"> </nz-range-picker>
     </div>
 
     <div nz-col [nzSpan]="5">
       问题类别：
-      <nz-select [(ngModel)]="questionTypeIds" class="w200">
+      <nz-select [(ngModel)]="questionTypeIds" class="w150">
         <nz-option
           *ngFor="let option of dictionary.config_fac_security_question_type"
           [nzLabel]="option.value"
@@ -79,7 +79,7 @@
 
     <div nz-col [nzSpan]="5">
       问题性质：
-      <nz-select [(ngModel)]="questionNatureIds" class="w200">
+      <nz-select [(ngModel)]="questionNatureIds" class="w150">
         <nz-option
           *ngFor="let option of dictionary.config_fac_security_question_nature"
           [nzLabel]="option.value"
@@ -89,9 +89,9 @@
       </nz-select>
     </div>
 
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="4">
       整改状态：
-      <nz-select [(ngModel)]="reformStatusTypeIds" class="w200">
+      <nz-select [(ngModel)]="reformStatusTypeIds" class="w100">
         <nz-option
           *ngFor="let option of dictionary.config_security_reform_status"
           [nzLabel]="option.value"

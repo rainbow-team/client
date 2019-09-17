@@ -1,12 +1,12 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="4" *ngIf="!isSearchShow">
+    <div nz-col [nzSpan]="5" *ngIf="!isSearchShow">
       单位名称：
-      <input nz-input nzSize="default" [(ngModel)]="depart" class="w150" />
+      <input nz-input nzSize="default" [(ngModel)]="depart" class="w200" />
     </div>
-    <div nz-col [nzSpan]="4">
+    <div nz-col [nzSpan]="5">
       设施名称：
-      <input nz-input nzSize="default" [(ngModel)]="fac" class="w150" />
+      <input nz-input nzSize="default" [(ngModel)]="fac" class="w200" />
     </div>
     <div nz-col [nzSpan]="5">
       核设施状态：
@@ -19,7 +19,7 @@
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="6">
+    <div nz-col [nzSpan]="5">
       铀尾矿(渣)库状态：
       <nz-select [(ngModel)]="uminePlaceStatusTypeIds" class="w150">
         <nz-option
@@ -30,7 +30,7 @@
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="5" class="ta_r"  style="float: right">
+    <div nz-col [nzSpan]="4" class="ta_r"  style="float: right">
       <button
         nz-button
         nzType="primary"
