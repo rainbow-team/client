@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -22,14 +22,18 @@ export class FacReportComponent implements OnInit {
   dataSet: any = [];
   data: any = {};
 
-  selectId:any="";
+  selectId: any = "";
   fileList = [];
 
-  modalTitle:any="";
-  okText:any="";
+  modalTitle: any = "";
+  okText: any = "";
   isVisible: any = false;
-  isShow:any=false;
-  isSaving:any=false;
+  isShow: any = false;
+  isSaving: any = false;
+
+  typeId: any = "";
+  start_date: any;
+  end_date: any;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private facSercice: FacSercice,
@@ -42,7 +46,7 @@ export class FacReportComponent implements OnInit {
     this.search();
   }
 
-  
+
   search() {
 
     var option = {
@@ -52,6 +56,16 @@ export class FacReportComponent implements OnInit {
     }
 
     option.conditions.push({ key: "facId", value: this.facId });
+
+    if (this.typeId) {
+      option.conditions.push({ key: "typeId", value: this.typeId });
+    }
+    if (this.start_date) {
+      option.conditions.push({ key: "start_date", value: this.start_date });
+    }
+    if (this.end_date) {
+      option.conditions.push({ key: "end_date", value: this.end_date });
+    }
 
     this.facSercice.getFacReportList(option).subscribe(
       (data) => {
@@ -64,33 +78,39 @@ export class FacReportComponent implements OnInit {
 
   }
 
-  reset(){
-    this.selectId="";
-    this.data=[];
-    this.fileList=[];
+  reset() {
+    this.selectId = "";
+    this.data = [];
+    this.fileList = [];
+  }
+
+  resetQuery() {
+    this.typeId = "";
+    this.start_date = null;
+    this.end_date = null;
   }
 
   add() {
     this.data = {};
-    this.fileList=[];
+    this.fileList = [];
     this.modalTitle = "添加定期报告信息";
     this.okText = "提交";
     this.isVisible = true;
-    this.isShow=false;
+    this.isShow = false;
     this.isSaving = false;
-    this.selectId="";
+    this.selectId = "";
 
   }
 
-  modify(){
+  modify() {
     if (this.selectId) {
       this.modalTitle = "修改定期报告信息";
       this.okText = "提交";
       this.isVisible = true;
-      this.isShow=false;
+      this.isShow = false;
       this.isSaving = false;
 
-      this.fileList=[];
+      this.fileList = [];
 
       this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
 
@@ -163,19 +183,19 @@ export class FacReportComponent implements OnInit {
       });
     }
 
-      this.facSercice.saveOrUpdateFacReport(this.data).subscribe((res) => {
-        if (res.code == 200) {
-          this.msg.create('success', '保存成功');
-          this.search();
-          this.isVisible = false;
-        } else {
+    this.facSercice.saveOrUpdateFacReport(this.data).subscribe((res) => {
+      if (res.code == 200) {
+        this.msg.create('success', '保存成功');
+        this.search();
+        this.isVisible = false;
+      } else {
 
-          this.msg.create('error', '保存失败');
-        }
+        this.msg.create('error', '保存失败');
+      }
 
-        this.isSaving = false;
-      });
-    }
+      this.isSaving = false;
+    });
+  }
 
   selectItem(data) {
     this.selectId = data.id;

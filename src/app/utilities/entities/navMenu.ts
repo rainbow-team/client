@@ -6,7 +6,8 @@ export interface NavMenuItem {
   selected?: boolean;
   route?: string;
   children?: NavMenuItem[];
-  isShow?:boolean;
+  isShow?: boolean;
+  breadcrumbList?:string[];
 }
 
 export declare type NavMenu = NavMenuItem[];

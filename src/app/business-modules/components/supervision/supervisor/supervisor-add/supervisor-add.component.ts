@@ -87,19 +87,19 @@ export class SupervisorAddComponent implements OnInit {
         this.staffObj.name = this.data.creatorName;
       });
 
-      // this.attachmentSercice.getFileListById(id).subscribe((res1) => {
+      this.attachmentSercice.getFileListById(id).subscribe((res1) => {
 
-      //   if (res1.msg.length > 0) {
-      //     res1.msg.forEach(element => {
-      //       this.fileList.push({
-      //         response: {
-      //           msg: element.fileinfoId
-      //         },
-      //         name: element.fileinfoClientFileName
-      //       });
-      //     });
-      //   }
-      // })
+        if (res1.msg.length > 0) {
+          res1.msg.forEach(element => {
+            this.fileList.push({
+              response: {
+                msg: element.fileinfoId
+              },
+              name: element.fileinfoClientFileName
+            });
+          });
+        }
+      })
     } else {
       this.data.createDate = new Date();
     }
