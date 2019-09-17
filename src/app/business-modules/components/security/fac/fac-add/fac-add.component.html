@@ -21,7 +21,7 @@
         设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.facId" style="width: 100%">
+        <nz-select [(ngModel)]="data.facId" style="width: 100%" nzAllowClear>
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
