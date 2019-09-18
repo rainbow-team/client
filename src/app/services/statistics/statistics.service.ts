@@ -8,6 +8,10 @@ import { Observable } from 'rxjs';
 export class StatisticsSercice {
   constructor(private http: HttpClient) {}
 
+  getStatisticsResultByTypeAndDate(param): any {
+    return this.http.post('/statistics/getStatisticsResultByTypeAndDate', param);
+  }
+
   getStatisticsResultByCondition(param): any {
     return this.http.post('/statistics/getStatisticsResultByCondition', param);
   }

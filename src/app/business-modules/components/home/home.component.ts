@@ -34,13 +34,17 @@ export class HomeComponent implements OnInit {
   conYear = {
     tableName: 'unit_fac',
     propertyName: 'build_year',
-    configTableName: 'config_fac_supervison_category',
+    configTableName: 'config_fac_type',
     reportName: ''
   };
 
   statusData: any = [];
 
   typeData: any = [];
+
+  yearData: any = [];
+
+  configList: any = [];
 
   constructor(
     private statisticsSercice: StatisticsSercice,
@@ -73,6 +77,18 @@ export class HomeComponent implements OnInit {
         values.push(element.value);
       });
       this.initStatistiscByRegionsChart(names, values);
+    });
+
+    this.statisticsSercice
+    .getStatisticsResultByTypeAndDate(this.conYear)
+    .subscribe(res => {
+      this.yearData = res.msg;
+
+      this.configList = this.yearData.numberList.map(function(v) {
+        return v.name;
+      });
+
+      this.initEchart();
     });
   }
   initStatistiscByRegionsChart(names: any[], values: any[]) {
@@ -245,41 +261,30 @@ export class HomeComponent implements OnInit {
 
     let option4 = {
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        axisPointer: {
+          // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+        }
       },
       legend: {
-        data: ['生产设施', '科研设施', '废物管理']
+        data: this.configList
       },
-      calculable: true,
-      xAxis: [
-        {
-          type: 'category',
-          boundaryGap: false,
-          data: ['2016', '2017', '2018']
-        }
-      ],
-      yAxis: [
-        {
-          type: 'value'
-        }
-      ],
-      series: [
-        {
-          name: '生产设施',
-          type: 'line',
-          data: [38, 26, 19]
-        },
-        {
-          name: '科研设施',
-          type: 'line',
-          data: [39, 50, 28]
-        },
-        {
-          name: '废物管理',
-          type: 'line',
-          data: [46, 39, 43]
-        }
-      ]
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        data: this.yearData.yearDate
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: this.yearData.numberList
+      //this.data.numberList
     };
 
     this.myChart2 = echarts.init(document.getElementById('chart2'));
