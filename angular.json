@@ -56,7 +56,7 @@
               "src/styles.scss",
               "src/assets/css/formValidation.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/jquery/dist/jquery.js","src/assets/lib/jquery.table2excel.js"]
           },
           "configurations": {
             "production": {

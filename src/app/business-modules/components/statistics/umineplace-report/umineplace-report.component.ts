@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
+declare var $: any;
 
 @Component({
   selector: 'app-umineplace-report',
@@ -163,6 +164,12 @@ export class UmineplaceReportComponent implements OnInit {
       );
     }
     this.title = this.result[0].name;
+  }
+
+  exportTable() {
+    $("#umineplaceTable").table2excel({
+       filename: "铀尾矿(渣)库统计",
+    });
   }
 
 }

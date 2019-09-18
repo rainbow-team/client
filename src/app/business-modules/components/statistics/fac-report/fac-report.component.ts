@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
+declare var $: any;
 
 @Component({
   selector: 'app-fac-report',
@@ -112,7 +113,7 @@ export class FacReportComponent implements OnInit {
   title: any = '';
   des: any = '';
 
-  constructor(private statisticsSercice: StatisticsSercice) {}
+  constructor(private statisticsSercice: StatisticsSercice) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -124,7 +125,7 @@ export class FacReportComponent implements OnInit {
 
   filterCondition() {
     var that = this;
-    this.result = this.condition.filter(function(p) {
+    this.result = this.condition.filter(function (p) {
       return p.type == that.typeValue;
     });
   }
@@ -230,4 +231,11 @@ export class FacReportComponent implements OnInit {
   typeChanged($event) {
     this.statistics();
   }
+
+  exportTable() {
+    $("#factable").table2excel({
+       filename: "核设施统计",
+    });
+  }
+
 }
