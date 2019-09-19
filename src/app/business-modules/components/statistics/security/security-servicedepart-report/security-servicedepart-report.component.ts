@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import * as echarts from 'echarts';
+declare var $: any;
 
 @Component({
   selector: 'app-security-servicedepart-report',
@@ -239,5 +240,11 @@ export class SecurityServicedepartReportComponent implements OnInit {
     }
 
     this.title = this.result[0].name;
+  }
+
+  exportTable() {
+    $("#ssr").table2excel({
+       filename: "核设施营运单位安全问题统计",
+    });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
+declare var $: any;
 
 @Component({
   selector: 'app-permit-equip-report',
@@ -97,5 +98,11 @@ export class PermitEquipReportComponent implements OnInit {
 
         this.initEchart1();
       });
+  }
+
+  exportTable() {
+    $("#per").table2excel({
+       filename: "核安全设备许可统计",
+    });
   }
 }

@@ -10,6 +10,7 @@ import { OrgComponent } from './org/org.component';
 import { SystemMenuComponent } from './menu/menu.component';
 import { UserComponent } from './user/user.component';
 import { RoleComponent } from './role/role.component';
+import { SystemLogComponent } from './system-log/system-log.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
     OrgComponent,
     RoleComponent,
     UserComponent,
-    SystemMenuComponent
+    SystemMenuComponent,
+    SystemLogComponent
   ]
 })
-export class SystemModule {}
+export class SystemModule { }

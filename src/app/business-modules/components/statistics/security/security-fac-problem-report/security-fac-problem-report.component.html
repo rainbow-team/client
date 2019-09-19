@@ -20,6 +20,7 @@
       </div>
 
       <div nz-col [nzSpan]="4" [nzOffset]="12" class="ta_r">
+         <button nz-button nzType="primary" (click)="exportTable()" style="margin-right: 10px;">导出</button>
         <button nz-button nzType="primary" (click)="statistics()">统计</button>
       </div>
     </div>
@@ -53,6 +54,7 @@
           [nzFrontPagination]="false"
           [nzShowPagination]="false"
           [nzNoResult]=""
+          id="sfpr"
         >
           <thead>
             <tr>
@@ -85,6 +87,7 @@
           [nzFrontPagination]="false"
           [nzShowPagination]="false"
           [nzNoResult]=""
+          id="sfpr"
         >
           <thead>
             <tr>

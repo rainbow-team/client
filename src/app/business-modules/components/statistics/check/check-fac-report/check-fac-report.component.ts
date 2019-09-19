@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
+declare var $: any;
 
 @Component({
   selector: 'app-check-fac-report',
@@ -170,5 +171,11 @@ export class CheckFacReportComponent implements OnInit {
     }
 
     this.title = this.result[0].name;
+  }
+
+  exportTable() {
+    $("#cfr").table2excel({
+       filename: "核设施审评统计",
+    });
   }
 }

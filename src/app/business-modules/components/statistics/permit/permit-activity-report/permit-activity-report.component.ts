@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
+declare var $: any;
 
 @Component({
   selector: 'app-permit-activity-report',
@@ -86,6 +87,12 @@ export class PermitActivityReportComponent implements OnInit {
       this.data = res.msg;
 
       this.initEchart();
+    });
+  }
+
+  exportTable() {
+    $("#par").table2excel({
+       filename: "核活动许可统计",
     });
   }
 }

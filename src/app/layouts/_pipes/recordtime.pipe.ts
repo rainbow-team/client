@@ -24,6 +24,10 @@ export class RecordtimePipe implements PipeTransform {
             result = result.split("-")[0]+"/"+result.split("-")[1];
         }
 
+        if (type == "time") {
+            result = date;
+        }
+
         return result;
     }
 

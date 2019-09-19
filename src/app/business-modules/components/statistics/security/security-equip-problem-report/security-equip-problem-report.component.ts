@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
+declare var $: any;
 
 @Component({
   selector: 'app-security-equip-problem-report',
@@ -151,5 +152,11 @@ export class SecurityEquipProblemReportComponent implements OnInit {
     }
 
     this.title = this.result[0].name;
+  }
+
+  exportTable() {
+    $("#sepr").table2excel({
+       filename: "核安全设备安全问题统计",
+    });
   }
 }

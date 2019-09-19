@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
+declare var $: any;
 
 @Component({
   selector: 'app-monitor-witness-report',
@@ -97,5 +98,11 @@ export class MonitorWitnessReportComponent implements OnInit {
 
         this.initEchart1();
       });
+  }
+
+  exportTable() {
+    $("#mwr").table2excel({
+       filename: "监督见证统计",
+    });
   }
 }

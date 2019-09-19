@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
+declare var $: any;
 
 @Component({
   selector: 'app-accident-report',
@@ -78,6 +79,12 @@ export class AccidentReportComponent implements OnInit {
       this.data = res.msg;
 
       this.initEchart();
+    });
+  }
+
+  exportTable() {
+    $("#arc").table2excel({
+       filename: "事故事件统计",
     });
   }
 }

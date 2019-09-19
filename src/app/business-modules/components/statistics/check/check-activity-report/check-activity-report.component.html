@@ -10,6 +10,9 @@
     <div style="text-align: right;float:right">
       <button nz-button nzType="primary" (click)="statistics()">统计</button>
     </div>
+    <div style="text-align: right;float:right;margin-right: 10px;">
+      <button nz-button nzType="primary" (click)="exportTable()">导出</button>
+    </div>
   </nz-header>
   <nz-content style="height:calc(100% - 64px);">
     <nz-tabset style="    height: 100%;">
@@ -24,6 +27,7 @@
           [nzFrontPagination]="false"
           [nzShowPagination]="false"
           [nzNoResult]=""
+          id="car"
         >
           <thead>
             <tr>

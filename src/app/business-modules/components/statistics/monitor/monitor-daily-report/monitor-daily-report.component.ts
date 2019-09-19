@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
+declare var $: any;
 
 @Component({
   selector: 'app-monitor-daily-report',
@@ -97,5 +98,11 @@ export class MonitorDailyReportComponent implements OnInit {
 
         this.initEchart1();
       });
+  }
+
+  exportTable() {
+    $("#mdr").table2excel({
+       filename: "日常监督统计",
+    });
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
+declare var $: any;
+
 @Component({
   selector: 'app-check-equip-report',
   templateUrl: './check-equip-report.component.html',
@@ -96,5 +98,11 @@ export class CheckEquipReportComponent implements OnInit {
 
         this.initEchart1();
       });
+  }
+
+  exportTable() {
+    $("#cer").table2excel({
+       filename: "核安全设备审评统计",
+    });
   }
 }

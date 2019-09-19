@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
 import * as echarts from 'echarts';
 import { NzMessageService } from 'ng-zorro-antd';
+declare var $: any;
 
 @Component({
   selector: 'app-check-activity-report',
@@ -80,6 +81,12 @@ export class CheckActivityReportComponent implements OnInit {
       this.data = res.msg;
 
       this.initEchart();
+    });
+  }
+
+  exportTable() {
+    $("#car").table2excel({
+       filename: "核活动审评统计",
     });
   }
 }
