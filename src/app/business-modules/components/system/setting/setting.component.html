@@ -9,8 +9,9 @@
       <nz-table #editRowTable [nzData]="dataSet" [nzShowPagination]=false>
         <thead>
           <tr>
-            <th style="color: #0050b3;" nzWidth="40%">链接名称</th>
-            <th style="color: #0050b3;" nzWidth="40%">链接地址</th>
+            <th style="color: #0050b3;" nzWidth="30%">链接名称</th>
+            <th style="color: #0050b3;" nzWidth="30%">链接地址</th>
+            <th style="color: #0050b3;" nzWidth="20%">排序</th>
             <th></th>
           </tr>
         </thead>
@@ -19,35 +20,44 @@
             <td>
               <div class="editable-cell">
                 <div class="editable-cell-text-wrapper">
-                  <ng-container *ngIf="!editCache[data.key].edit">
-                    {{data.Name}}
+                  <ng-container *ngIf="!editCache[data.id].edit">
+                    {{data.name}}
                   </ng-container>
-                  <ng-container *ngIf="editCache[data.key].edit">
-                    <input type="text" nz-input [(ngModel)]="editCache[data.key].data.Name">
+                  <ng-container *ngIf="editCache[data.id].edit">
+                    <input type="text" nz-input [(ngModel)]="editCache[data.id].data.name">
                   </ng-container>
                 </div>
               </div>
             </td>
             <td>
-              <ng-container *ngIf="!editCache[data.key].edit">
-                {{data.Url}}
+              <ng-container *ngIf="!editCache[data.id].edit">
+                {{data.address}}
               </ng-container>
-              <ng-container *ngIf="editCache[data.key].edit">
-                <input type="text" nz-input [(ngModel)]="editCache[data.key].data.Url">
+              <ng-container *ngIf="editCache[data.id].edit">
+                <input type="text" nz-input [(ngModel)]="editCache[data.id].data.address">
+              </ng-container>
+            </td>
+
+            <td>
+              <ng-container *ngIf="!editCache[data.id].edit">
+                {{data.linkorder}}
+              </ng-container>
+              <ng-container *ngIf="editCache[data.id].edit">
+                <input type="text" nz-input [(ngModel)]="editCache[data.id].data.linkorder">
               </ng-container>
             </td>
             <td>
               <div class="editable-row-operations">
-                <ng-container *ngIf="!editCache[data.key].edit">
-                  <a (click)="startEdit(data.key)">编辑</a>
+                <ng-container *ngIf="!editCache[data.id].edit">
+                  <a (click)="startEdit(data.id)">编辑</a>
                   <nz-divider nzType="vertical"></nz-divider>
                 </ng-container>
-                <ng-container *ngIf="editCache[data.key].edit">
-                  <a (click)="saveEdit(data.key)">保存</a>
+                <ng-container *ngIf="editCache[data.id].edit">
+                  <a (click)="saveEdit(data.id)">保存</a>
                   <nz-divider nzType="vertical"></nz-divider>
                 </ng-container>
                 <ng-container>
-                  <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="cancelEdit(data.key)">
+                  <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="cancelEdit(data.id)">
                     <a nz-popconfirm>删除</a>
                   </nz-popconfirm>
                 </ng-container>
@@ -60,7 +70,7 @@
     </div>
 
     <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" style="margin-top:40px; color: #a9a9a9;">
-      <button nz-button nzType="dashed" nzBlock>
+      <button nz-button nzType="dashed" nzBlock (click)="addlink()">
         <i nz-icon type="plus" theme="outline"></i>
         新增友情链接</button>
     </div>
@@ -101,3 +111,67 @@
     </div>
   </div>
 </div>
+
+<nz-modal
+[(nzVisible)]="isVisible"
+nzTitle="添加友情链接"
+(nzOnCancel)="isVisible=false;"
+(nzOnOk)="handleOk()"
+>
+<div>
+  <div nz-row style="height: 60px;">
+    <div class="ta_r">
+      <span class="clo_r">*</span>链接名称：
+      <input
+      name="linkName"
+        maxlength="50"
+        nz-input
+        style="width:calc(100% - 100px)"
+        required
+        [validation]="true"
+        nzSize="default"
+        [(ngModel)]="linkdata.name"
+        class="w200"
+      />
+    </div>
+  </div>
+
+  <div nz-row style="height: 60px;">
+    <div class="ta_r">
+      <span class="clo_r">*</span>链接地址：
+      <input
+        nz-input
+        name="linkaddress"
+        maxlength="50"
+        [disabled]="isDisable"
+        style="width:calc(100% - 100px)"
+        required
+        [validation]="true"
+        nzSize="default"
+        [(ngModel)]="linkdata.address"
+        class="w200"
+      />
+    </div>
+  </div>
+ 
+  <div nz-row style="height: 60px;">
+    <div class="ta_r">
+      <span class="clo_r">*</span>排序：
+      <input
+        nz-input
+        name="linkorder"
+        maxlength="50"
+        [disabled]="isDisable"
+        style="width:calc(100% - 100px)"
+        required
+        [validation]="true"
+        nzSize="default"
+        [(ngModel)]="linkdata.linkorder"
+        class="w200"
+      />
+    </div>
+  </div>
+ 
+
+</div>
+</nz-modal>

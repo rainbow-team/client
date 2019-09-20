@@ -15,7 +15,7 @@ import { ValidationDirective } from '../../_directives/validation.directive';
 })
 export class HeaderComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
-  
+
   @Input()
   navMenu: NavMenu = [];
 
@@ -109,5 +109,10 @@ export class HeaderComponent implements OnInit {
 
       this.router.navigate(['/login']);
     });
+  }
+
+  help() {
+
+    window.open("src/assets/file/" + AppConfig.helpFileName);
   }
 }

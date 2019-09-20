@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
+declare var $: any;
+
 @Component({
   selector: 'app-security-umineplace-problem-report',
   templateUrl: './security-umineplace-problem-report.component.html',
@@ -204,5 +206,11 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
     }
 
     this.title = this.result[0].name;
+  }
+
+  exportTable() {
+    $("#sup").table2excel({
+       filename: "铀尾矿(渣)库安全问题统计",
+    });
   }
 }

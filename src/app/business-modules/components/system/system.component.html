@@ -11,12 +11,12 @@
     </div>
   </div>
 
-  <div nz-col [nzSpan]="20" style="background: #fff;height: 100%;">
-    <app-setting *ngIf="selectMenuName == '参数设置'"></app-setting>
+  <div nz-col [nzSpan]="20" style="background: #fff;height: 100%;"> 
     <app-user *ngIf="selectMenuName == '人员管理'"></app-user>
     <app-role *ngIf="selectMenuName == '角色管理'"></app-role>
     <app-menu *ngIf="selectMenuName == '菜单管理'"></app-menu>
     <app-org *ngIf="selectMenuName == '机构管理'"></app-org>
     <app-system-log *ngIf="selectMenuName == '日志管理'"></app-system-log>
+    <app-setting *ngIf="selectMenuName == '静态数据设置'"></app-setting>
   </div>
 </div>

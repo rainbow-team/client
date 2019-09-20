@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { SettingService } from 'src/app/services/system/setting.service';
+import { NzMessageService } from 'ng-zorro-antd';
+import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
+import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 
 @Component({
   selector: 'app-setting',
@@ -7,12 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingComponent implements OnInit {
 
+  @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
-  dataSet: any = [
-    { Name: "法律标准数据库", Url: "192.168.5.123", key: 1 },
-    { Name: "放射性废物治理数据库", Url: "192.168.5.123", key: 2 }
-  ];
+
+  dataSet: any = [];
   editCache = {};
+  isVisible: any = false;
+  linkdata: any = {};
+  dictionary: any = [];
 
   configList: any = [
     { Name: "事故事件性质", TableName: "config_accident_nature" },
@@ -23,15 +29,18 @@ export class SettingComponent implements OnInit {
   ];
 
   dicItems: any = [
-   
+
   ]
 
   selectConfigItem: any;
 
-  constructor() { }
+  constructor(private settingService: SettingService, private msg: NzMessageService, private dictionarySercice: DictionarySercice) { }
 
   ngOnInit() {
-    this.updateEditCache();
+
+    this.dictionary = this.dictionarySercice.getAllConfig();
+
+    this.searchLink();
     this.selectConfigItem = this.configList[0];
   }
 
@@ -40,20 +49,49 @@ export class SettingComponent implements OnInit {
   }
 
   cancelEdit(key: string): void {
+
+    const index = this.dataSet.findIndex(item => item.id === key);
+    this.settingService.deleteLinkDetailById(this.dataSet[index].id).subscribe((res) => {
+      if (res.code == 200) {
+        this.msg.create('success', '删除成功');
+        this.searchLink();
+      } else {
+        this.msg.create('error', '删除失败');
+      }
+
+    })
+
+
     this.editCache[key].edit = false;
   }
 
   saveEdit(key: string): void {
-    const index = this.dataSet.findIndex(item => item.key === key);
+
+    if (!this.editCache[key].data.name || !this.editCache[key].data.address || !this.editCache[key].data.linkorder) {
+
+      this.msg.create('warning', '链接名称,链接地址,排序都不能为空');
+      return;
+    }
+
+    const index = this.dataSet.findIndex(item => item.id === key);
     Object.assign(this.dataSet[index], this.editCache[key].data);
-    // this.dataSet[ index ] = this.editCache[ key ].data;
+
+    this.settingService.modifyLink(this.dataSet[index]).subscribe((res) => {
+
+      if (res.code == 200) {
+        this.msg.create('success', '编辑成功');
+      } else {
+        this.msg.create('error', '编辑失败');
+      }
+    })
+
     this.editCache[key].edit = false;
   }
 
   updateEditCache(): void {
     this.dataSet.forEach(item => {
-      if (!this.editCache[item.key]) {
-        this.editCache[item.key] = {
+      if (!this.editCache[item.id]) {
+        this.editCache[item.id] = {
           edit: false,
           data: { ...item }
         };
@@ -61,8 +99,49 @@ export class SettingComponent implements OnInit {
     });
   }
 
+  searchLink() {
+    this.settingService.getAllLinkList().subscribe((res) => {
+      this.dataSet = res.msg;
+      this.updateEditCache();
+    })
+  }
+
+  addlink() {
+    this.linkdata = {};
+    this.isVisible = true;
+  }
+
+  handleOk() {
+
+    if (!this.FormValidation()) {
+      return;
+    }
+
+    this.settingService.addLink(this.linkdata).subscribe((res) => {
+
+      if (res.code == 200) {
+        this.msg.create('success', '新增成功');
+        this.isVisible = false;
+        this.searchLink();
+      } else {
+        this.msg.create('error', '新增失败');
+      }
+    })
+  }
+
+
+
   clickConfigItem(item) {
     this.selectConfigItem = item;
   }
 
+  FormValidation() {
+    let isValid = true;
+    this.directives.forEach(d => {
+      if (!d.validationValue()) {
+        isValid = false;
+      }
+    });
+    return isValid;
+  }
 }
