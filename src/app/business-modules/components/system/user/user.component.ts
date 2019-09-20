@@ -35,6 +35,8 @@ export class UserComponent implements OnInit {
   username: string;
   realname: string;
   mobile: string;
+  selectId: any = '';
+  isView = false; //查看操作标志
 
   constructor(
     private msg: NzMessageService,
@@ -128,16 +130,12 @@ export class UserComponent implements OnInit {
     this.isDisable = false;
   }
 
-  show(item, flag) {
+  show(item) {
     this.isVisible = true;
-    if (flag) {
-      this.title = '编辑用户信息';
-      this.isDisable = false;
-    } else {
-      this.isDisable = true;
-      this.title = '查看用户信息';
-    }
+    this.isView = true;
+    this.title = '查看用户信息';
     this.currentUser = item;
+    this.isDisable = true;
     this.userService.getUserWithRoleByUserId(item.id).subscribe(data => {
       const roleList: any = [];
       for (let i = 0; i < data.msg.roleList.length; i++) {
@@ -147,20 +145,49 @@ export class UserComponent implements OnInit {
     });
   }
 
-  delete(item) {
-    this.userService.deleteUserByIds([item.id]).subscribe(res => {
-      if (res.code === 200) {
-        this.msg.create('success', '删除成功');
-        this.search();
-      } else if (res.code === 500) {
-        this.msg.create('warning', res.msg);
-      } else {
-        this.msg.create('error', '删除失败');
-      }
-    });
+  modify() {
+    if (this.selectId) {
+      this.isDisable = false;
+      this.isVisible = true;
+      this.title = '编辑用户信息';
+      this.userService
+        .getUserWithRoleByUserId(this.currentUser.id)
+        .subscribe(data => {
+          const roleList: any = [];
+          for (let i = 0; i < data.msg.roleList.length; i++) {
+            roleList.push(data.msg.roleList[i].id);
+          }
+          this.currentUser.roleList = roleList;
+        });
+    } else {
+      this.msg.create('warning', '请选择修改项');
+    }
+  }
+
+  delete() {
+    if (this.selectId) {
+      this.userService.deleteUserByIds([this.selectId]).subscribe(res => {
+        if (res.code === 200) {
+          this.msg.create('success', '删除成功');
+          this.search();
+        } else if (res.code === 500) {
+          this.msg.create('warning', res.msg);
+        } else {
+          this.msg.create('error', '删除失败');
+        }
+      });
+    } else {
+      this.msg.create('warning', '请选择删除项');
+    }
   }
 
   handleOk(): void {
+    //查看详情操作直接返回
+    if (this.isView) {
+      this.isView = false;
+      this.isVisible = false;
+      return;
+    }
     if (!this.FormValidation()) {
       return;
     }
@@ -186,6 +213,13 @@ export class UserComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+    this.isDisable = false;
+    this.isView = false;
+  }
+
+  selectItem(data) {
+    this.currentUser = data;
+    this.selectId = data.id;
   }
   FormValidation() {
     let isValid = true;

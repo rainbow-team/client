@@ -52,6 +52,39 @@
       <div class="fl" style="color: #0050b3;">
         用户信息（共{{ totalCount }}条）
       </div>
+      <div class="fr">
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除吗?"
+          (nzOnConfirm)="delete()"
+        >
+          删除
+        </button>
+      </div>
+
+      <div class="fr">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="modify()"
+        >
+          编辑
+        </button>
+      </div>
+
+      <div class="fr">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="add()"
+        >
+          添加
+        </button>
+      </div>
     </div>
     <div>
       <nz-table
@@ -77,7 +110,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data; index as index">
+          <tr
+            *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ itemSeleted: data.id == selectId }"
+            (click)="selectItem(data)"
+          >
             <td style="width: 5%">
               {{ (pageIndex - 1) * pageSize + 1 + index }}
             </td>
@@ -86,8 +123,8 @@
             <td style="width: 20%">{{ data.mobile }}</td>
             <td style="width: 20%">{{ data.email }}</td>
             <td style="width: 15%">
-              <a (click)="show(data, false)">查看</a>
-              <nz-divider nzType="vertical"></nz-divider>
+              <a (click)="show(data)">查看</a>
+              <!-- <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data, true)">编辑</a>
               <nz-divider nzType="vertical"></nz-divider>
               <a
@@ -95,7 +132,7 @@
                 nzTitle="确定删除吗?"
                 (nzOnConfirm)="delete(data)"
                 >删除</a
-              >
+              > -->
             </td>
           </tr>
         </tbody>
