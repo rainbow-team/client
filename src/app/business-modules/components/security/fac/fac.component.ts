@@ -7,6 +7,7 @@ import { ServiceDepartService } from 'src/app/services/unit/servicedepart.servic
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { FacSecuritySercice } from 'src/app/services/security/fac.service';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-security-fac',
@@ -57,15 +58,19 @@ export class SecurityFacComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private facSecuritySercice: FacSecuritySercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService,
-    private facSercice: FacSercice, private statisticsSercice: StatisticsSercice) { }
+    private facSercice: FacSercice, private statisticsSercice: StatisticsSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("security:fac:manage");
 
     if (this.servicedepartId || this.facId) {
       this.isSearchShow = true;
@@ -219,5 +224,29 @@ export class SecurityFacComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  exportFacSecurity() {
+
+    let start_date = "", end_date = "";
+    if (this.find_date && this.find_date.length > 0) {
+        if (this.find_date[0]) {
+            start_date = this.find_date[0];
+        }
+
+        if (this.find_date[1]) {
+            end_date = this.find_date[1];
+        }
+    }
+
+    let url = AppConfig.serviceAddress + "/facsecurity/exportFacSecurity?serviceDepartName=" + this.serviceDepartName
+        +  "&facName=" + this.facName + "&facStatusTypeIds=" + this.facStatusTypeIds
+        +  "&checkTypeIds=" + this.checkTypeIds + "&content=" + this.content
+        +  "&start_date=" + encodeURIComponent(start_date) + "&end_date=" + encodeURIComponent(end_date)
+        +  "&questionTypeIds=" + this.questionTypeIds + "&questionNatureIds=" + this.questionNatureIds
+        +  "&reformStatusTypeIds=" + this.reformStatusTypeIds;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
 }

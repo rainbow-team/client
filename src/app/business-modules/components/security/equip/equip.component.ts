@@ -6,6 +6,7 @@ import { EquipSecuritySercice } from 'src/app/services/security/equip.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-security-equip',
@@ -46,6 +47,9 @@ export class SecurityEquipComponent implements OnInit {
   reformStatusTypeIds: any = [];
 
   selectId: any = "";
+
+  canManage: any = false;
+
   // equipDepartIds: any = [];
 
   // equipDepartList: any = [];
@@ -61,30 +65,20 @@ export class SecurityEquipComponent implements OnInit {
 
   constructor(private router: Router,
     private msg: NzMessageService, private equipSecuritySercice: EquipSecuritySercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private facSercice: FacSercice) { }
+    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private facSercice: FacSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
+    this.canManage = this.utilitiesSercice.checkPermission("security:equip:manage");
+
     if (this.equipdepartId) {
       this.isSearchShow = true;
     }
 
     this.search();
-
-    // this.serviceDepartService.getAllDepartService().subscribe((res) => {
-    //   if (res.code == 200) {
-    //     this.serviceDepartList = [];
-    //     res.msg.forEach(element => {
-    //       this.serviceDepartList.push({
-    //         id: element.id,
-    //         name: element.name
-    //       });
-    //     });
-    //   }
-    // })
   }
 
   search() {
@@ -218,5 +212,28 @@ export class SecurityEquipComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  exportEquipSecurity() {
+
+    let start_date = "", end_date = "";
+    if (this.find_date && this.find_date.length > 0) {
+        if (this.find_date[0]) {
+            start_date = this.find_date[0];
+        }
+
+        if (this.find_date[1]) {
+            end_date = this.find_date[1];
+        }
+    }
+
+    let url = AppConfig.serviceAddress + "/equipsecurity/exportEquipSecurity?equipDepartName=" + this.equipDepartName
+        +  "&name=" + this.name + "&serviceDepartName=" + this.serviceDepartName
+        +  "&facName=" + this.facName + "&checkTypeIds=" + this.checkTypeIds+ "&content=" + this.content
+        +  "&start_date=" + encodeURIComponent(start_date) + "&end_date=" + encodeURIComponent(end_date)
+        +  "&questionTypeIds=" + this.questionTypeIds + "&reformStatusTypeIds=" + this.reformStatusTypeIds;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
 }

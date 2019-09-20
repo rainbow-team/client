@@ -11,32 +11,20 @@
     <div nz-col [nzSpan]="5">
       核设施状态：
       <nz-select [(ngModel)]="facStatusTypeIds" class="w150">
-        <nz-option
-          *ngFor="let option of dictionary.config_fac_status"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
+        <nz-option *ngFor="let option of dictionary.config_fac_status" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="5">
       铀尾矿(渣)库状态：
       <nz-select [(ngModel)]="uminePlaceStatusTypeIds" class="w150">
-        <nz-option
-          *ngFor="let option of dictionary.config_umine_place_status"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
+        <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
+          [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="4" class="ta_r"  style="float: right">
-      <button
-        nz-button
-        nzType="primary"
-        style="width: 70px; margin-right: 10px;"
-        (click)="search()"
-      >
+    <div nz-col [nzSpan]="4" class="ta_r" style="float: right">
+      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">
         查询
       </button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
@@ -59,11 +47,8 @@
     <div nz-col [nzSpan]="5">
       问题类别：
       <nz-select [(ngModel)]="typeIds" class="w200">
-        <nz-option
-          *ngFor="let option of dictionary.config_accident_type"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
+        <nz-option *ngFor="let option of dictionary.config_accident_type" [nzLabel]="option.value"
+          [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
@@ -71,11 +56,8 @@
     <div nz-col [nzSpan]="5">
       问题性质：
       <nz-select [(ngModel)]="natureIds" class="w200">
-        <nz-option
-          *ngFor="let option of dictionary.config_accident_nature"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
+        <nz-option *ngFor="let option of dictionary.config_accident_nature" [nzLabel]="option.value"
+          [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
@@ -87,53 +69,35 @@
         事故事件（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="!isSearchShow">
-        <button
-          nz-button
-          nzType="danger"
-          nz-popconfirm
-          nzTitle="确定删除吗?"
-          (nzOnConfirm)="delete()"
-        >
+      <div class="fr" *ngIf="canManage||!isSearchShow">
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">
           删除
         </button>
       </div>
 
-      <div class="fr" *ngIf="!isSearchShow">
-        <button
-          nz-button
-          nzType="primary"
-          style=" margin-right: 10px;"
-          (click)="modify()"
-        >
+      <div class="fr" *ngIf="canManage||!isSearchShow">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">
           编辑
         </button>
       </div>
 
-      <div class="fr" *ngIf="!isSearchShow">
-        <button
-          nz-button
-          nzType="primary"
-          style=" margin-right: 10px;"
-          (click)="add()"
-        >
+      <div class="fr" *ngIf="canManage||!isSearchShow">
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">
           添加
         </button>
       </div>
+
+      <div class="fr" *ngIf="canManage">
+        <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportAccidentSecurity()">
+          导出
+        </button>
+      </div>
+
     </div>
     <div>
-      <nz-table
-        #nestedTable
-        [nzData]="dataSet"
-        class="commontable tablescoll_rainbow"
-        [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex"
-        nzShowSizeChanger
-        [nzPageSize]="pageSize"
-        [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)"
-        (nzPageSizeChange)="pageSizeChange($event)"
-      >
+      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
         <thead>
           <tr>
             <th style="width: 5%">序号</th>
@@ -148,11 +112,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let data of nestedTable.data; index as index"
-            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
-            (click)="selectItem(data)"
-          >
+          <tr *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]" (click)="selectItem(data)">
             <td style="width: 5%">
               {{ (pageIndex - 1) * pageSize + 1 + index }}
             </td>

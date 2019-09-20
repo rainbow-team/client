@@ -6,6 +6,7 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 import { UmineplaceSecuritySercice } from 'src/app/services/security/umineplace.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-security-umineplace',
@@ -48,16 +49,20 @@ export class SecurityUmineplaceComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
+
   constructor(private router: Router,
     private msg: NzMessageService, private umineService: UmineService,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
-    private umineplaceSecuritySercice: UmineplaceSecuritySercice) { }
+    private umineplaceSecuritySercice: UmineplaceSecuritySercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
+    this.canManage = this.utilitiesSercice.checkPermission("security:umineplace:manage");
 
     if (this.umineId || this.umineplaceId) {
       this.isSearchShow = true;
@@ -228,6 +233,30 @@ export class SecurityUmineplaceComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  exportUmineplaceSecurity() {
+
+    let start_date = "", end_date = "";
+    if (this.find_date && this.find_date.length > 0) {
+        if (this.find_date[0]) {
+            start_date = this.find_date[0];
+        }
+
+        if (this.find_date[1]) {
+            end_date = this.find_date[1];
+        }
+    }
+
+    let url = AppConfig.serviceAddress + "/umineplacesecurity/exportUmineplaceSecurity?umineName=" + this.umineName
+        +  "&uminePlaceName=" + this.uminePlaceName + "&statusTypeIds=" + this.statusTypeIds
+        +  "&checkTypeIds=" + this.checkTypeIds + "&content=" + this.content
+        +  "&start_date=" + encodeURIComponent(start_date) + "&end_date=" + encodeURIComponent(end_date)
+        +  "&questionTypeIds=" + this.questionTypeIds + "&questionNatureIds=" + this.questionNatureIds
+        +  "&reformStatusTypeIds=" + this.reformStatusTypeIds;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
 }
 

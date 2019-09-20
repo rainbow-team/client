@@ -8,6 +8,7 @@ import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-accident',
@@ -47,16 +48,20 @@ export class AccidentComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private accidentSecuritySercice: AccidentSecuritySercice,
     private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private uminePlaceService: UminePlaceService, private serviceDepartService: ServiceDepartService,
-    private umineService: UmineService, private facSercice: FacSercice) { }
+    private umineService: UmineService, private facSercice: FacSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("security:accident:manage");
 
     if (this.servicedepartId || this.umineId) {
       this.isSearchShow = true;
@@ -210,5 +215,28 @@ export class AccidentComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  exportAccidentSecurity() {
+
+    let start_date = "", end_date = "";
+    if (this.occur_date && this.occur_date.length > 0) {
+        if (this.occur_date[0]) {
+            start_date = this.occur_date[0];
+        }
+
+        if (this.occur_date[1]) {
+            end_date = this.occur_date[1];
+        }
+    }
+
+    let url = AppConfig.serviceAddress + "/accidentsecurity/exportAccidentSecurity?depart=" + this.depart
+        +  "&fac=" + this.fac + "&facStatusTypeIds=" + this.facStatusTypeIds
+        +  "&uminePlaceStatusTypeIds=" + this.uminePlaceStatusTypeIds + "&name=" + this.name
+        +  "&start_date=" + encodeURIComponent(start_date) + "&end_date=" + encodeURIComponent(end_date)
+        +  "&typeIds=" + this.typeIds + "&natureIds=" + this.natureIds;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
 }
