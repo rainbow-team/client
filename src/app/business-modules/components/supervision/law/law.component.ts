@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { LawSercice } from 'src/app/services/supervision/law.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-law',
@@ -27,15 +28,19 @@ export class LawComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private lawSercice: LawSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    
+    this.canManage = this.utilitiesSercice.checkPermission("law:manage");
 
     this.search();
   }
@@ -128,4 +133,26 @@ export class LawComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportLaw() {
+
+    let start_date = "", end_date = "";
+    if (this.fb_date && this.fb_date.length > 0) {
+        if (this.fb_date[0]) {
+            start_date = this.fb_date[0];
+        }
+
+        if (this.fb_date[1]) {
+            end_date = this.fb_date[1];
+        }
+    }
+
+    let url = AppConfig.serviceAddress + "/law/exportLaw?code=" + this.code
+        +  "&startTime=" + encodeURIComponent(start_date) + "&endTime=" + encodeURIComponent(end_date)
+        + "&name=" + this.name;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
+  }
+
 }

@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { ProducetrainSercice } from 'src/app/services/supervision/producetrain.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-producetrain',
@@ -28,14 +29,18 @@ export class ProducetrainComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private producetrainSercice: ProducetrainSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("producetrain:manage");
 
     this.search();
   }
@@ -127,4 +132,26 @@ export class ProducetrainComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportProduceTrain() {
+
+    let start_date = "", end_date = "";
+    if (this.px_date && this.px_date.length > 0) {
+        if (this.px_date[0]) {
+            start_date = this.px_date[0];
+        }
+
+        if (this.px_date[1]) {
+            end_date = this.px_date[1];
+        }
+    }
+
+    let url = AppConfig.serviceAddress + "/producetrain/exportProduceTrain?batch=" + this.batch
+        +  "&begin_date=" + encodeURIComponent(start_date) + "&end_date=" + encodeURIComponent(end_date)
+        + "&place=" + this.place;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
+  }
+
 }

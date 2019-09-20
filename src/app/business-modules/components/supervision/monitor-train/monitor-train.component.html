@@ -34,7 +34,7 @@
         核安全监督培训信息列表（共{{ totalCount }}条）
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="danger"
@@ -46,7 +46,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="primary"
@@ -57,7 +57,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="primary"
@@ -68,11 +68,17 @@
         </button>
       </div>
 
-      <div class="fr">
-        <button nz-button nzType="primary" style="margin-right: 10px;">
+      <div class="fr" *ngIf="canManage">
+        <button
+          nz-button
+          nzType="primary"
+          style="margin-right: 10px;"
+          (click)="exportMonitorTrain()"
+        >
           导出
         </button>
       </div>
+      
     </div>
     <div>
       <nz-table

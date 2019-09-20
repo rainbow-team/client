@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { OperatorLisenceSercice } from 'src/app/services/supervision/operatorlisence.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-operatorlisence',
@@ -29,14 +30,18 @@ export class OperatorlisenceComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private operatorLisenceSercice: OperatorLisenceSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("operatorlisence:manage");
 
     this.search();
   }
@@ -136,5 +141,28 @@ export class OperatorlisenceComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+
+  exportOperator() {
+
+    let start_date = "", end_date = "";
+    if (this.expire_date && this.expire_date.length > 0) {
+        if (this.expire_date[0]) {
+            start_date = this.expire_date[0];
+        }
+
+        if (this.expire_date[1]) {
+            end_date = this.expire_date[1];
+        }
+    }
+
+    let url = AppConfig.serviceAddress + "/operatorlisence/exportOperator?name=" + this.name
+        +  "&employ_depart=" + this.employ_depart + "&heap_name=" + this.heap_name
+        +  "&lisenceTypeIds=" + this.lisenceTypeIds
+        +  "&start_date=" + encodeURIComponent(start_date) + "&end_date=" + encodeURIComponent(end_date);
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
 }

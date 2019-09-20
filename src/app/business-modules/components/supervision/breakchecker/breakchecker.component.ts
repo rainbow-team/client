@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { BreakCheckerSercice } from 'src/app/services/supervision/breakchecker.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-breakchecker',
@@ -31,14 +32,18 @@ export class BreakcheckerComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private breakCheckerSercice: BreakCheckerSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("breakchecker:manage");
 
     this.search();
   }
@@ -140,4 +145,26 @@ export class BreakcheckerComponent implements OnInit {
     this.search();
   }
 
+  exportBreakChecker() {
+
+    let start_date = "", end_date = "";
+    if (this.valid_date && this.valid_date.length > 0) {
+        if (this.valid_date[0]) {
+            start_date = this.valid_date[0];
+        }
+
+        if (this.valid_date[1]) {
+            end_date = this.valid_date[1];
+        }
+    }
+
+    let url = AppConfig.serviceAddress + "/breakchecker/exportBreakChecker?name=" + this.name
+        +  "&employ_depart=" + this.employ_depart + "&checkMethodIds=" + this.checkMethodIds
+        +  "&checkLevelIds=" + this.checkLevelIds
+        +  "&start_date=" + encodeURIComponent(start_date) + "&end_date=" + encodeURIComponent(end_date)
+        +  "&cert_number=" + this.cert_number;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
+  }
 }

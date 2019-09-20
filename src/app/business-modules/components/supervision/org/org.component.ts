@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { OrgSercice } from 'src/app/services/supervision/org.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-org',
@@ -27,14 +28,19 @@ export class OrgComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private orgSercice: OrgSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("supersivionOrg:manage");
+
 
     this.search();
   }
@@ -105,6 +111,7 @@ export class OrgComponent implements OnInit {
     }
   }
 
+  
   selectItem(data) {
     this.selectId = data.id;
   }
@@ -123,5 +130,16 @@ export class OrgComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  exportOrg() {
+
+    let url = AppConfig.serviceAddress + "/org/exportOrg?name=" + this.name
+        + "&leader=" + this.leader + "&natureIds=" + this.natureIds;
+
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
+
   }
 }

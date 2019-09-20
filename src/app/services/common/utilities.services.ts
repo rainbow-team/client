@@ -32,7 +32,7 @@ export class UtilitiesSercice {
 
     wrapUrl(url): any {
         
-        let authID = this.cookieService.get('AUTH_ID');
+        let authID = sessionStorage.getItem('AUTH_ID');
         var p = 'AUTH_ID=' + encodeURIComponent(authID);
         if (url.indexOf('?') >= 0) {
             url += '&' + p;

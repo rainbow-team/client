@@ -47,7 +47,7 @@
         授权监管机构基本信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="danger"
@@ -59,7 +59,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="primary"
@@ -70,7 +70,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="primary"
@@ -80,6 +80,18 @@
           添加
         </button>
       </div>
+
+      <div class="fr" *ngIf="canManage">
+        <button
+          nz-button
+          nzType="primary"
+          style="margin-right: 10px;"
+          (click)="exportOrg()"
+        >
+          导出
+        </button>
+      </div>
+
     </div>
     <div>
       <nz-table

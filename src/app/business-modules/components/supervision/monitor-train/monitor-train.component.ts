@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { SupervisionTrainService } from 'src/app/services/supervision/supervisortrain.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-monitor-train',
@@ -10,7 +11,8 @@ import { SupervisionTrainService } from 'src/app/services/supervision/supervisor
 })
 export class MonitorTrainComponent implements OnInit {
 
-  constructor(private router: Router, private SupervisionTrainService: SupervisionTrainService, private msg: NzMessageService) { }
+  constructor(private router: Router, private SupervisionTrainService: SupervisionTrainService, 
+    private msg: NzMessageService, private utilitiesSercice: UtilitiesSercice) { }
 
   dataSet: any = [];
 
@@ -23,8 +25,8 @@ export class MonitorTrainComponent implements OnInit {
   pageSize: any = 10;
 
   px_date:any=[];
-  batch: any;
-  place: any;
+  batch: any="";
+  place: any="";
 
   sortName: any;
   sortValue: any;
@@ -35,7 +37,11 @@ export class MonitorTrainComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
   ngOnInit() {
+
+    this.canManage = this.utilitiesSercice.checkPermission("monitorTrain:manage");
 
     this.search();
   }
@@ -85,7 +91,7 @@ export class MonitorTrainComponent implements OnInit {
     this.search();
   }
 
-  sortBatch(sort) {
+ /* sortBatch(sort) {
     this.sortName = "batch";
     this.sortValue = sort;
 
@@ -117,7 +123,7 @@ export class MonitorTrainComponent implements OnInit {
     
     this.search();
   }
-
+*/
 
   pageSizeChange(num) {
     this.pageSize = num;
@@ -191,5 +197,26 @@ export class MonitorTrainComponent implements OnInit {
 
   selectItem(data) {
     this.selectId = data.id;
+  }
+
+  exportMonitorTrain() {
+
+    let start_date = "", end_date = "";
+    if (this.px_date && this.px_date.length > 0) {
+        if (this.px_date[0]) {
+            start_date = this.px_date[0];
+        }
+
+        if (this.px_date[1]) {
+            end_date = this.px_date[1];
+        }
+    }
+
+    let url = AppConfig.serviceAddress + "/supervisiontrain/exportMonitorTrain?batch=" + this.batch
+        +  "&beginDate=" + encodeURIComponent(start_date) + "&endDate=" + encodeURIComponent(end_date)
+        + "&place=" + this.place;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
 }

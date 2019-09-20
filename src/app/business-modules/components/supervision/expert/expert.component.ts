@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { ExpertSercice } from 'src/app/services/supervision/expert.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-expert',
@@ -29,14 +30,18 @@ export class ExpertComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private expertSercice: ExpertSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("expert:manage");
 
     this.search();
   }
@@ -126,4 +131,15 @@ export class ExpertComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportExpert() {
+
+
+    let url = AppConfig.serviceAddress + "/supervisionexpert/exportExpert?name=" + this.name
+        +  "&major=" + this.major + "&startAge=" + this.startAge + "&endAge=" + this.endAge;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
+  }
+
 }

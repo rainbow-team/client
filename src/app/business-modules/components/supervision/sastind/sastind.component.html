@@ -51,18 +51,6 @@
         </button>
       </div>
 
-      <div class="fr" style="margin-right: 10px;" *ngIf="canManage">
-        <nz-upload
-          [nzAction]="uploadUrl"
-          [nzCustomRequest]="customReq"
-          [nzAccept]="'.xls,.xlsx'"
-          [nzShowUploadList]="false"
-        >
-          <button nz-button class="importBtn">
-            <i nz-icon type="upload"></i><span>导入</span>
-          </button>
-        </nz-upload>
-      </div>
     </div>
     <div>
       <nz-table
