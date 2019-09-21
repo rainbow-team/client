@@ -7,6 +7,7 @@ import { ServiceDepartService } from 'src/app/services/unit/servicedepart.servic
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { DailyMonitorSercice } from 'src/app/services/monitor/daily.service';
 import { OrgSercice } from 'src/app/services/supervision/org.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-daily',
@@ -47,16 +48,19 @@ export class DailyComponent implements OnInit {
   start_date: any = "";
   end_date: any = "";
 
+  canManage: any = false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private dailyMonitorSercice: DailyMonitorSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private orgService: OrgSercice,
-    private serviceDepartService: ServiceDepartService, private facService: FacSercice) { }
+    private serviceDepartService: ServiceDepartService, private facService: FacSercice, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("monitor:daily:manage");
 
     if (this.servicedepartId || this.facId) {
       this.isSearchShow = true;
@@ -126,13 +130,14 @@ export class DailyComponent implements OnInit {
   reset() {
     this.serviceDepartName = "";
     this.facName = "";
+    this.facStatusTypeIds=[];
+    this.fileTypeIds = [];
+    this.file_name = "";
     this.start_date="";
     this.end_date="";
-    this.fileTypeIds = null;
-    this.file_name = "";
     this.file_date = [];
     this.selectId = "";
-    this.facStatusTypeIds=null;
+
   }
 
   add() {
@@ -191,5 +196,16 @@ export class DailyComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  exportDailyMonitor() {
+
+    let url = AppConfig.serviceAddress + "/dailymonitor/exportDailyMonitor?serviceDepartName=" + this.serviceDepartName
+        +  "&facName=" + this.facName + "&facStatusTypeIds=" + this.facStatusTypeIds
+        +  "&fileTypeIds=" + this.fileTypeIds + "&file_name=" + this.file_name
+        +  "&start_date=" + encodeURIComponent(this.start_date) + "&end_date=" + encodeURIComponent(this.end_date);
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
 }
