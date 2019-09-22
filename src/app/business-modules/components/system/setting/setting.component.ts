@@ -213,7 +213,7 @@ export class SettingComponent implements OnInit {
   //编辑字典项
   edit(data) {
     this.isDicVisible = true;
-    this.dicdata = data;
+    this.dicdata = JSON.parse(JSON.stringify(data));
   }
 
   handleDicOk() {
