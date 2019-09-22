@@ -19,18 +19,66 @@ export class SettingComponent implements OnInit {
   isVisible: any = false;
   linkdata: any = {};
   dictionary: any = [];
+  selectId: any = "";
+
+  isDicVisible: any = false;
 
   configList: any = [
     { Name: "事故事件性质", TableName: "config_accident_nature" },
     { Name: "事故事件类别", TableName: "config_accident_type" },
+    { Name: "核活动及其他审评信息文件类型", TableName: "config_activity_check_file_type" },
     { Name: "核活动类型", TableName: "config_activity_type" },
     { Name: "无损检验等级", TableName: "config_check_level" },
-    { Name: "无损检验方法", TableName: "config_check_method" }
+    { Name: "无损检验方法", TableName: "config_check_method" },
+    { Name: "学位", TableName: "config_degree" },
+    { Name: "单位类型", TableName: "config_depart_type" },
+    { Name: "学历", TableName: "config_education" },
+    { Name: "核安全设备评审阶段", TableName: "config_equip_check_stage" },
+    { Name: "设备核安全级别", TableName: "config_equip_level" },
+    { Name: "核安全设备许可阶段", TableName: "config_equip_permit_stage" },
+    { Name: "设备安全问题类别", TableName: "config_equip_security_question_type" },
+    { Name: "核安全设备类别", TableName: "config_equip_type" },
+    { Name: "设施/设备/铀尾矿(渣)库审评文件类型", TableName: "config_fac_check_file_type" },
+    { Name: "核设施审评阶段表", TableName: "config_fac_check_stage" },
+    { Name: "核设施审评类型表", TableName: "config_fac_check_type" },
+    { Name: "核设施的许可情况", TableName: "config_fac_permit_situation" },
+    { Name: "核设施许可阶段", TableName: "config_fac_permit_stage" },
+    { Name: "核设施定期报告类型", TableName: "config_fac_report_type" },
+    { Name: "核设施安全问题性质", TableName: "config_fac_security_question_nature" },
+    { Name: "核设施安全问题类型", TableName: "config_fac_security_question_type" },
+    { Name: "核设施状态", TableName: "config_fac_status" },
+    { Name: "核设施监管类别", TableName: "config_fac_supervison_category" },
+    { Name: "核设施类型", TableName: "config_fac_type" },
+    { Name: "监督检查文件类型", TableName: "config_monitor_check_file_type" },
+    { Name: "监督检查类型表", TableName: "config_monitor_check_type" },
+    { Name: "日常监督文件类型", TableName: "config_monitor_daily_file_type" },
+    { Name: "监督报告类型", TableName: "config_monitor_report_type" },
+    { Name: "研究堆操纵员执照种类", TableName: "config_operator_license_type" },
+    { Name: "政治面貌", TableName: "config_political" },
+    { Name: "审评状态", TableName: "config_review_status" },
+    { Name: "安全问题检查类型", TableName: "config_security_check_type" },
+    { Name: "安全问题整改状态", TableName: "config_security_reform_status" },
+    { Name: "授权监管机构单位性质", TableName: "config_supervision_org_nature" },
+    { Name: "核安全监督员类别", TableName: "config_supervisor_type" },
+    { Name: "职称", TableName: "config_title" },
+    { Name: "井下消防验收情况", TableName: "config_umine_mountain_accept" },
+    { Name: "铀矿山井下消防审查文件类型", TableName: "config_umine_mountain_check_file_type" },
+    { Name: "井下消防审查备案情况", TableName: "config_umine_mountain_record" },
+    { Name: "铀矿山设施状态", TableName: "config_umine_mountain_status" },
+    { Name: "铀尾矿(渣)库审评阶段", TableName: "config_umine_place_check_stage" },
+    { Name: "铀尾矿(渣)库审评类型", TableName: "config_umine_place_check_type" },
+    { Name: "铀尾矿(渣)库等别", TableName: "config_umine_place_level" },
+    { Name: "铀尾矿（渣）库许可情况", TableName: "config_umine_place_permit_situation" },
+    { Name: "铀尾矿(渣)库许可阶段", TableName: "config_umine_place_permit_stage" },
+    { Name: "铀尾矿(渣)库安全问题性质", TableName: "config_umine_place_security_question_nature" },
+    { Name: "铀尾矿(渣)库安全问题类别表", TableName: "config_umine_place_security_question_type" },
+    { Name: "铀尾矿(渣) 库设施状态", TableName: "config_umine_place_status" }
   ];
 
   dicItems: any = [
 
-  ]
+  ];
+  dicdata: any = {};
 
   selectConfigItem: any;
 
@@ -42,6 +90,7 @@ export class SettingComponent implements OnInit {
 
     this.searchLink();
     this.selectConfigItem = this.configList[0];
+    this.getDicItemsByTableName();
   }
 
   startEdit(key: string): void {
@@ -70,6 +119,11 @@ export class SettingComponent implements OnInit {
     if (!this.editCache[key].data.name || !this.editCache[key].data.address || !this.editCache[key].data.linkorder) {
 
       this.msg.create('warning', '链接名称,链接地址,排序都不能为空');
+      return;
+    }
+
+    if(!(/^\d+$/.test(this.editCache[key].data.linkorder))){
+      this.msg.create('warning', '排序必须为数值');
       return;
     }
 
@@ -133,6 +187,52 @@ export class SettingComponent implements OnInit {
 
   clickConfigItem(item) {
     this.selectConfigItem = item;
+    this.getDicItemsByTableName();
+  }
+
+  selectItem(data) {
+    this.selectId = data.id;
+  }
+
+  //根据表名获取信息
+  getDicItemsByTableName() {
+
+    this.dictionarySercice.getDicItemsByTableName(this.selectConfigItem.TableName).subscribe((res) => {
+
+      this.dicItems = res.msg;
+    });
+  }
+
+
+  //添加字典项
+  addDic() {
+    this.isDicVisible = true;
+    this.dicdata = {};
+  }
+
+  //编辑字典项
+  edit(data) {
+    this.isDicVisible = true;
+    this.dicdata = data;
+  }
+
+  handleDicOk() {
+
+    if (!this.FormValidation()) {
+      return;
+    }
+
+    this.dicdata.tableName = this.selectConfigItem.TableName;
+    this.dictionarySercice.SaveOrUpdateConfig(this.dicdata).subscribe((res) => {
+
+      if (res.code == 200) {
+        this.msg.create('success', '保存成功');
+        this.isDicVisible = false;
+        this.getDicItemsByTableName();
+      } else {
+        this.msg.create('error', '保存失败');
+      }
+    })
   }
 
   FormValidation() {
@@ -144,4 +244,5 @@ export class SettingComponent implements OnInit {
     });
     return isValid;
   }
+
 }

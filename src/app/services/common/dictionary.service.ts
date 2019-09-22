@@ -9,7 +9,7 @@ export class DictionarySercice {
     constructor(private http: HttpClient) { }
 
 
-    getAllConfig(isInit=false): any {
+    getAllConfig(isInit = false): any {
 
         let dics = localStorage.getItem("dics");
         if (dics && !isInit) {
@@ -22,6 +22,16 @@ export class DictionarySercice {
                 }
             )
         }
+    }
+
+    getDicItemsByTableName(tableName): any {
+        return this.http.get('/config/getDicItemsByTableName?tableName=' + tableName);
+    }
+
+    SaveOrUpdateConfig(data): any {
+
+        var url = data.id ? "/config/modifyConfig" : "/config/addConfig";
+        return this.http.post(url, data);
     }
 
 

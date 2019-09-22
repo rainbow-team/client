@@ -7,6 +7,7 @@ import { SystemService } from 'src/app/services/system/system.service';
 import { NgModel } from '@angular/forms';
 import { UserService } from 'src/app/services/system/user.service';
 import { ValidationDirective } from '../../_directives/validation.directive';
+import { SettingService } from 'src/app/services/system/setting.service';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
   isOkLoading: boolean;
   currentUser: any = {};
   message: any = '';
+  linkData: any = [];
 
   constructor(
     private router: Router,
@@ -32,14 +34,13 @@ export class HeaderComponent implements OnInit {
     private msg: NzMessageService,
     private staffSercice: StaffSercice,
     private userService: UserService,
-    private systemService: SystemService
+    private systemService: SystemService,
+    private settingService: SettingService
   ) { }
 
   ngOnInit() {
     this.name = this.staffSercice.getStaffObj().username;
-    // this.ngModel.valueChanges.subscribe(v => {
-    //   this.message = '';
-    // });
+    this.getAllLinkList();
   }
   changePassword() {
     this.currentUser = {};
@@ -115,4 +116,15 @@ export class HeaderComponent implements OnInit {
 
     window.open("src/assets/file/" + AppConfig.helpFileName);
   }
+
+  getAllLinkList() {
+    this.settingService.getAllLinkList().subscribe((res) => {
+      this.linkData = res.msg;
+    })
+  }
+
+  cilckLink(data) {
+    window.open(data.address);
+  }
+
 }

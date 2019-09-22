@@ -81,9 +81,9 @@
   <div nz-col [nzSpan]="12" class="div1">
     <div nz-row class="div_title">
       <div nz-col [nzSpan]="6">系统配置</div>
-      <div nz-col [nzSpan]="18" style="text-align: right;">
+      <!-- <div nz-col [nzSpan]="18" style="text-align: right;">
         <button nz-button nzType="primary"><i nz-icon type="plus" theme="outline"></i>添加</button>
-      </div>
+      </div> -->
 
     </div>
 
@@ -91,87 +91,93 @@
       <div class="div_config">
         <div *ngFor="let item of configList" class="div_config_item"
           [ngClass]="{true:'div_config_item_select',false:''}[selectConfigItem.Name==item.Name]"
-          (click)="clickConfigItem(item)">
-          {{item.Name}}
+          (click)="clickConfigItem(item)" nz-tooltip nzPlacement="rightTop" nzTitle="{{item.Name}}">
+          {{item.Name|tooltips:9}}
         </div>
       </div>
 
-      <div>
+      <div style="float: right;
+      width: 65%;">
         <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" style="color: #a9a9a9;margin-bottom: 10px;">
-          <button nz-button nzType="dashed" nzBlock>
+          <button nz-button nzType="dashed" nzBlock (click)="addDic()">
             <i nz-icon type="plus" theme="outline"></i>
-            新增字段</button>
+            新增</button>
         </div>
 
-        <div *ngFor="let item of dicItems">
-          {{item.Name}}
-        </div>
-
+        <nz-table #nestedTable [nzData]="dicItems" class="commontable tablescoll_rainbow" [nzShowPagination]="false">
+          <thead>
+            <tr>
+              <th style="width: 40%">名称</th>
+              <th style="width: 40%">排序</th>
+              <th style="width: 20%">操作</th>
+            </tr>
+          </thead>
+          <tbody [appPageHeight]='340'>
+            <tr *ngFor="let data of nestedTable.data; index as index" [ngClass]="{ itemSeleted: data.id == selectId }"
+              (click)="selectItem(data)">
+              <td style="width: 40%">{{ data.value }}</td>
+              <td style="width: 40%">{{ data.order }}</td>
+              <td style="width: 20%">
+                <a (click)="edit(data)">编辑</a>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
       </div>
     </div>
   </div>
 </div>
 
-<nz-modal
-[(nzVisible)]="isVisible"
-nzTitle="添加友情链接"
-(nzOnCancel)="isVisible=false;"
-(nzOnOk)="handleOk()"
->
-<div>
-  <div nz-row style="height: 60px;">
-    <div class="ta_r">
-      <span class="clo_r">*</span>链接名称：
-      <input
-      name="linkName"
-        maxlength="50"
-        nz-input
-        style="width:calc(100% - 100px)"
-        required
-        [validation]="true"
-        nzSize="default"
-        [(ngModel)]="linkdata.name"
-        class="w200"
-      />
+<nz-modal *ngIf="isVisible" [(nzVisible)]="isVisible" nzTitle="添加友情链接" (nzOnCancel)="isVisible=false;" (nzOnOk)="handleOk()">
+  <div>
+    <div nz-row style="height: 60px;">
+      <div class="ta_r">
+        <span class="clo_r">*</span>链接名称：
+        <input name="linkName" maxlength="50" nz-input style="width:calc(100% - 100px)" required [validation]="true"
+          nzSize="default" [(ngModel)]="linkdata.name" class="w200" />
+      </div>
     </div>
-  </div>
 
-  <div nz-row style="height: 60px;">
-    <div class="ta_r">
-      <span class="clo_r">*</span>链接地址：
-      <input
-        nz-input
-        name="linkaddress"
-        maxlength="50"
-        [disabled]="isDisable"
-        style="width:calc(100% - 100px)"
-        required
-        [validation]="true"
-        nzSize="default"
-        [(ngModel)]="linkdata.address"
-        class="w200"
-      />
+    <div nz-row style="height: 60px;">
+      <div class="ta_r">
+        <span class="clo_r">*</span>链接地址：
+        <input nz-input name="linkaddress" maxlength="50" style="width:calc(100% - 100px)"
+          required [validation]="true" nzSize="default" [(ngModel)]="linkdata.address" class="w200" />
+      </div>
     </div>
-  </div>
- 
-  <div nz-row style="height: 60px;">
-    <div class="ta_r">
-      <span class="clo_r">*</span>排序：
-      <input
-        nz-input
-        name="linkorder"
-        maxlength="50"
-        [disabled]="isDisable"
-        style="width:calc(100% - 100px)"
-        required
-        [validation]="true"
-        nzSize="default"
-        [(ngModel)]="linkdata.linkorder"
-        class="w200"
-      />
-    </div>
-  </div>
- 
 
-</div>
+    <div nz-row style="height: 60px;">
+      <div class="ta_r">
+        <span class="clo_r">*</span>排序：
+        <input nz-input name="linkorder" maxlength="50"  style="width:calc(100% - 100px)" required
+          [validation]="true" [validationType]="'number'" nzSize="default" [(ngModel)]="linkdata.linkorder" class="w200" />
+      </div>
+    </div>
+
+
+  </div>
+</nz-modal>
+
+
+<nz-modal *ngIf="isDicVisible" [(nzVisible)]="isDicVisible" nzTitle="添加字典项" (nzOnCancel)="isDicVisible=false;" (nzOnOk)="handleDicOk()">
+  <div>
+    <div nz-row style="height: 60px;">
+      <div class="ta_r">
+        <span class="clo_r">*</span>名称：
+        <input name="dicName" maxlength="50" nz-input style="width:calc(100% - 100px)" required [validation]="true"
+          nzSize="default" [(ngModel)]="dicdata.value" class="w200" />
+      </div>
+    </div>
+
+
+    <div nz-row style="height: 60px;">
+      <div class="ta_r">
+        <span class="clo_r">*</span>排序：
+        <input nz-input name="dicorder" maxlength="50"  style="width:calc(100% - 100px)" required
+          [validation]="true" [validationType]="'number'" nzSize="default" [(ngModel)]="dicdata.order" class="w200" />
+      </div>
+    </div>
+
+
+  </div>
 </nz-modal>
