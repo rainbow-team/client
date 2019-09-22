@@ -61,13 +61,26 @@ export class PermitEquipReportComponent implements OnInit {
           type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
         }
       },
+      title: {
+        text: "核安全设备许可统计",
+        x: 'center',
+        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+      },
       legend: {
+        bottom: 0,
+        left: 'center',
         data: this.configList
+      },
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
       },
       grid: {
         left: '3%',
         right: '4%',
-        bottom: '3%',
+        // bottom: '3%',
         containLabel: true
       },
       xAxis: {
@@ -77,7 +90,8 @@ export class PermitEquipReportComponent implements OnInit {
       yAxis: {
         type: 'value'
       },
-      series: this.data.numberList
+      series: this.data.numberList,
+      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
       //this.data.numberList
     };
     this.myChart1 = echarts.init(document.getElementById('chart'));

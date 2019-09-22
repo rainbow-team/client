@@ -115,6 +115,11 @@ export class SecurityServicedepartReportComponent implements OnInit {
     var that = this;
 
     let option1 = {
+      title: {
+        text: "核设施营运单位安全问题统计("+that.result[0].name+")",
+        x: 'center',
+        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+      },
       tooltip: {
         trigger: 'axis',
         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -122,12 +127,14 @@ export class SecurityServicedepartReportComponent implements OnInit {
         }
       },
       legend: {
+        bottom: 0,
+        left: 'center',
         data: this.configList
       },
       grid: {
         left: '3%',
         right: '4%',
-        bottom: '3%',
+        // bottom: '3%',
         containLabel: true
       },
       xAxis: {
@@ -138,7 +145,13 @@ export class SecurityServicedepartReportComponent implements OnInit {
       yAxis: {
         type: 'value'
       },
-      series: this.data.numberList
+      series: this.data.numberList,
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      },
       //this.data.numberList
     };
     this.myChart1 = echarts.init(document.getElementById("chart1"));
@@ -149,8 +162,9 @@ export class SecurityServicedepartReportComponent implements OnInit {
     var that = this;
 
     let option2 = {
+    
       title: {
-        text: that.result[0].name,
+        text: "核设施营运单位安全问题统计("+that.result[0].name+")",
         x: 'center'
       },
       tooltip: {
@@ -167,7 +181,13 @@ export class SecurityServicedepartReportComponent implements OnInit {
       series: [{
         data: this.data,
         type: 'bar'
-      }]
+      }],
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      },
     };
     this.myChart2 = echarts.init(document.getElementById("chart2"));
     this.myChart2.setOption(option2);

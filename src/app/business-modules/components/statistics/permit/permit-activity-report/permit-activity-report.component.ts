@@ -54,7 +54,8 @@ export class PermitActivityReportComponent implements OnInit {
     let option2 = {
       title: {
         text: this.title,
-        x: 'center'
+        x: 'center',
+        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
       },
       tooltip: {
         trigger: 'item'
@@ -69,12 +70,19 @@ export class PermitActivityReportComponent implements OnInit {
       yAxis: {
         type: 'value'
       },
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      },
       series: [
         {
           data: this.data,
           type: 'bar'
         }
-      ]
+      ],
+      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
     };
     this.myChart2 = echarts.init(document.getElementById('chart'));
     this.myChart2.setOption(option2);

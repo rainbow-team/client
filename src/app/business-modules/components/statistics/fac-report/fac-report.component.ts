@@ -112,6 +112,7 @@ export class FacReportComponent implements OnInit {
 
   title: any = '';
   des: any = '';
+  chartTitle: any = "";
 
   constructor(private statisticsSercice: StatisticsSercice) { }
 
@@ -128,13 +129,15 @@ export class FacReportComponent implements OnInit {
     this.result = this.condition.filter(function (p) {
       return p.type == that.typeValue;
     });
+
+    that.chartTitle = "核设施统计(" + this.result[0].name + ")";
   }
 
   initEchart() {
     //var that= this;
     let option3 = {
       title: {
-        text: this.result[0].name,
+        text: this.chartTitle,
         x: 'center'
       },
       tooltip: {
@@ -142,28 +145,13 @@ export class FacReportComponent implements OnInit {
         formatter: '{a} <br/>{b} : {c} ({d}%)'
       },
       legend: {
-        orient: 'vertical',
-        x: 'bottom',
-        data: ['新设施', '旧设施']
+        bottom: 10,
+        left: 'center'
+       
       },
       toolbox: {
         show: true,
         feature: {
-          mark: { show: true },
-          dataView: { show: true, readOnly: false },
-          magicType: {
-            show: true,
-            type: ['pie', 'funnel'],
-            option: {
-              funnel: {
-                x: '25%',
-                width: '50%',
-                funnelAlign: 'left',
-                max: 1548
-              }
-            }
-          },
-          restore: { show: true },
           saveAsImage: { show: true }
         }
       },
@@ -173,21 +161,11 @@ export class FacReportComponent implements OnInit {
           name: this.result[0].name,
           type: 'pie',
           radius: '55%',
-          center: ['50%', '60%'],
+          center: ['50%', '50%'],
           data: this.data
-          // data: [
-          //   { value: 47, name: '新设施' },
-          //   { value: 74, name: '旧设施' },
-          // ]
         }
       ],
-      color: [
-        'rgb(254,67,101)',
-        'rgb(252,157,154)',
-        'rgb(249,205,173)',
-        'rgb(200,200,169)',
-        'rgb(131,175,155)'
-      ]
+      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
     };
 
     this.myChart3 = echarts.init(document.getElementById('chart3qq'));
@@ -234,7 +212,7 @@ export class FacReportComponent implements OnInit {
 
   exportTable() {
     $("#factable").table2excel({
-       filename: "核设施统计",
+      filename: "核设施统计",
     });
   }
 

@@ -65,6 +65,7 @@ export class UmineplaceReportComponent implements OnInit {
 
   title: any = "";
   des: any = "";
+  chartTitle: any = "";
 
   constructor(private statisticsSercice: StatisticsSercice) { }
 
@@ -84,13 +85,15 @@ export class UmineplaceReportComponent implements OnInit {
       return p.type == that.typeValue;
 
     });
+
+    that.chartTitle = "铀尾矿(渣)库统计(" + this.result[0].name + ")";
   }
 
   initEchart() {
     var that = this;
     let option3 = {
       title: {
-        text: that.result[0].name,
+        text: that.chartTitle ,
         x: 'center'
       },
       tooltip: {
@@ -98,28 +101,12 @@ export class UmineplaceReportComponent implements OnInit {
         formatter: "{a} <br/>{b} : {c} ({d}%)"
       },
       legend: {
-        orient: 'vertical',
-        x: 'bottom',
-        data: ['新设施', '旧设施']
+        bottom: 10,
+        left: 'center'
       },
       toolbox: {
         show: true,
         feature: {
-          mark: { show: true },
-          dataView: { show: true, readOnly: false },
-          magicType: {
-            show: true,
-            type: ['pie', 'funnel'],
-            option: {
-              funnel: {
-                x: '25%',
-                width: '50%',
-                funnelAlign: 'left',
-                max: 1548
-              }
-            }
-          },
-          restore: { show: true },
           saveAsImage: { show: true }
         }
       },
@@ -129,15 +116,12 @@ export class UmineplaceReportComponent implements OnInit {
           name: that.result[0].name,
           type: 'pie',
           radius: '55%',
-          center: ['50%', '60%'],
+          center: ['50%', '50%'],
           data: that.data
-          // data: [
-          //   { value: 47, name: '新设施' },
-          //   { value: 74, name: '旧设施' },
-          // ]
+         
         }
       ],
-      color: ['rgb(254,67,101)', 'rgb(252,157,154)', 'rgb(249,205,173)', 'rgb(200,200,169)', 'rgb(131,175,155)']
+      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
     };
 
     this.myChart3 = echarts.init(document.getElementById("chart3qq"));

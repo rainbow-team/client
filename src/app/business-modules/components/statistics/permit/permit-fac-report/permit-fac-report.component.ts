@@ -82,6 +82,12 @@ export class PermitFacReportComponent implements OnInit {
     var that = this;
 
     let option1 = {
+      title: {
+        text: "核设施许可统计",
+        x: 'center',
+        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+      },
+
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -90,12 +96,14 @@ export class PermitFacReportComponent implements OnInit {
         }
       },
       legend: {
+        bottom: 0,
+        left: 'center',
         data: this.configList
       },
       grid: {
         left: '3%',
         right: '4%',
-        bottom: '3%',
+        // bottom: '3%',
         containLabel: true
       },
       xAxis: {
@@ -105,8 +113,14 @@ export class PermitFacReportComponent implements OnInit {
       yAxis: {
         type: 'value'
       },
-      series: this.data.numberList
-      //this.data.numberList
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      },
+      series: this.data.numberList,
+      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
     };
     this.myChart1 = echarts.init(document.getElementById('chart1'));
     this.myChart1.setOption(option1);
@@ -117,7 +131,7 @@ export class PermitFacReportComponent implements OnInit {
 
     let option2 = {
       title: {
-        text: that.result[0].name,
+        text: "核设施许可统计("+that.result[0].name+")",
         x: 'center'
       },
       tooltip: {
@@ -126,19 +140,34 @@ export class PermitFacReportComponent implements OnInit {
       },
       xAxis: {
         type: 'category',
-        data: this.data.map(function(v) {
+        data: that.data.map(function(v) {
+          return v.name;
+        })
+      },
+      legend: {
+        bottom: 0,
+        left: 'center',
+        data:that.data.map(function(v) {
           return v.name;
         })
       },
       yAxis: {
         type: 'value'
       },
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      },
       series: [
         {
           data: this.data,
           type: 'bar'
         }
-      ]
+      ],
+      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+     
     };
     this.myChart2 = echarts.init(document.getElementById('chart2'));
     this.myChart2.setOption(option2);
@@ -174,7 +203,7 @@ export class PermitFacReportComponent implements OnInit {
 
   exportTable() {
     $("#pfr").table2excel({
-       filename: "核安全设备许可统计",
+       filename: "核设施许可统计",
     });
   }
 }

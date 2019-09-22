@@ -306,10 +306,10 @@ export class BusinessModulesComponent implements OnInit {
 
             let url = this.router.url;
             if (url.indexOf("?") > -1) {
-                url = url.substring(0, url.lastIndexOf("/"));
+                url = url.substring(0, url.indexOf("?"));
             }
 
-            if (data[i].route == url) {
+            if (url.indexOf(data[i].route) > -1 && data[i].route) {
                 result = data[i].breadcrumbList;
                 break;
             }
