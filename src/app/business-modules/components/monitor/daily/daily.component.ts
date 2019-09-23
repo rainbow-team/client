@@ -15,10 +15,8 @@ import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
   styleUrls: ['./daily.component.scss']
 })
 export class DailyComponent implements OnInit {
-
-  @Input() servicedepartId: any = "";
-  @Input() facId: any = "";
-
+  @Input() servicedepartId: any = '';
+  @Input() facId: any = '';
 
   isSearchShow: any = false;
 
@@ -31,43 +29,53 @@ export class DailyComponent implements OnInit {
 
   dataSet: any = [];
 
-  serviceDepartName: any = "";
+  serviceDepartName: any = '';
 
-  facName: any = "";
+  facName: any = '';
 
   facStatusTypeIds: any;
 
-  fileTypeIds: any ;
+  fileTypeIds: any;
 
-  file_name: any = "";
+  file_name: any = '';
 
   file_date: any = [];
 
-  selectId: any = "";
+  selectId: any = '';
 
-  start_date: any = "";
-  end_date: any = "";
+  start_date: any = '';
+  end_date: any = '';
 
   canManage: any = false;
 
-  constructor(private router: Router,
-    private msg: NzMessageService, private dailyMonitorSercice: DailyMonitorSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private orgService: OrgSercice,
-    private serviceDepartService: ServiceDepartService, private facService: FacSercice, private utilitiesSercice: UtilitiesSercice) { }
+  uploadUrl: any = AppConfig.serviceAddress + '/dailymonitor/importData';
+
+  constructor(
+    private router: Router,
+    private msg: NzMessageService,
+    private dailyMonitorSercice: DailyMonitorSercice,
+    private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,
+    private orgService: OrgSercice,
+    private serviceDepartService: ServiceDepartService,
+    private facService: FacSercice,
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
-
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+    this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
 
-    this.canManage = this.utilitiesSercice.checkPermission("monitor:daily:manage");
+    this.canManage = this.utilitiesSercice.checkPermission(
+      'monitor:daily:manage'
+    );
 
     if (this.servicedepartId || this.facId) {
       this.isSearchShow = true;
     }
 
     this.search();
-
   }
 
   search() {
@@ -75,34 +83,40 @@ export class DailyComponent implements OnInit {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
       conditions: []
-    }
+    };
 
     if (this.serviceDepartName) {
-      option.conditions.push({ key: "serviceDepartName", value: this.serviceDepartName })
+      option.conditions.push({
+        key: 'serviceDepartName',
+        value: this.serviceDepartName
+      });
     }
 
     if (this.facName) {
-      option.conditions.push({ key: "facName", value: this.facName })
+      option.conditions.push({ key: 'facName', value: this.facName });
     }
 
     if (this.facStatusTypeIds) {
-      option.conditions.push({ key: "facStatusTypeIds", value: [this.facStatusTypeIds] })
+      option.conditions.push({
+        key: 'facStatusTypeIds',
+        value: [this.facStatusTypeIds]
+      });
     }
 
     if (this.fileTypeIds) {
-      option.conditions.push({ key: "fileTypeIds", value: [this.fileTypeIds] })
+      option.conditions.push({ key: 'fileTypeIds', value: [this.fileTypeIds] });
     }
 
     if (this.file_name) {
-      option.conditions.push({ key: "file_name", value: this.file_name })
+      option.conditions.push({ key: 'file_name', value: this.file_name });
     }
 
     if (this.start_date) {
-      option.conditions.push({ key: "start_date", value: this.start_date })
+      option.conditions.push({ key: 'start_date', value: this.start_date });
     }
 
     if (this.end_date) {
-      option.conditions.push({ key: "end_date", value: this.end_date })
+      option.conditions.push({ key: 'end_date', value: this.end_date });
     }
 
     if (this.servicedepartId) {
@@ -119,25 +133,22 @@ export class DailyComponent implements OnInit {
       });
     }
 
-    this.dailyMonitorSercice.getDailyMonitorList(option).subscribe(
-      (data) => {
-        this.dataSet = data.msg.currentList;
-        this.totalCount = data.msg.recordCount;
-      }
-    );
+    this.dailyMonitorSercice.getDailyMonitorList(option).subscribe(data => {
+      this.dataSet = data.msg.currentList;
+      this.totalCount = data.msg.recordCount;
+    });
   }
 
   reset() {
-    this.serviceDepartName = "";
-    this.facName = "";
-    this.facStatusTypeIds=[];
+    this.serviceDepartName = '';
+    this.facName = '';
+    this.facStatusTypeIds = [];
     this.fileTypeIds = [];
-    this.file_name = "";
-    this.start_date="";
-    this.end_date="";
+    this.file_name = '';
+    this.start_date = '';
+    this.end_date = '';
     this.file_date = [];
-    this.selectId = "";
-
+    this.selectId = '';
   }
 
   add() {
@@ -145,41 +156,49 @@ export class DailyComponent implements OnInit {
   }
 
   show(item) {
-
     if (this.servicedepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitordailyAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitordailyAdd'], {
+        queryParams: {
+          id: item.id,
+          isShow: true,
+          servicedepartId: this.servicedepartId
+        }
+      });
     } else if (this.facId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitordailyAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitordailyAdd'], {
+        queryParams: { id: item.id, isShow: true, facId: this.facId }
+      });
     } else {
-      this.router.navigate(['/monitor/daily/add'], { queryParams: { id: item.id, isShow: true } });
+      this.router.navigate(['/monitor/daily/add'], {
+        queryParams: { id: item.id, isShow: true }
+      });
     }
-
   }
 
   modify() {
     if (this.selectId) {
-      this.router.navigate(['/monitor/daily/add'], { queryParams: { id: this.selectId, isShow: false } });
+      this.router.navigate(['/monitor/daily/add'], {
+        queryParams: { id: this.selectId, isShow: false }
+      });
     } else {
-      this.msg.create("warning", "请选择修改项");
+      this.msg.create('warning', '请选择修改项');
     }
   }
 
   delete() {
-
     if (this.selectId) {
-
-      this.dailyMonitorSercice.deleteDailyMonitorById(this.selectId).subscribe((res) => {
-
-        if (res.code == 200) {
-          this.msg.create("success", res.msg);
-          this.search();
-        } else {
-          this.msg.create("error", res.msg);
-        }
-      })
-
+      this.dailyMonitorSercice
+        .deleteDailyMonitorById(this.selectId)
+        .subscribe(res => {
+          if (res.code == 200) {
+            this.msg.create('success', res.msg);
+            this.search();
+          } else {
+            this.msg.create('error', res.msg);
+          }
+        });
     } else {
-      this.msg.create("warning", "请选择删除项");
+      this.msg.create('warning', '请选择删除项');
     }
   }
 
@@ -199,13 +218,24 @@ export class DailyComponent implements OnInit {
   }
 
   exportDailyMonitor() {
-
-    let url = AppConfig.serviceAddress + "/dailymonitor/exportDailyMonitor?serviceDepartName=" + this.serviceDepartName
-        +  "&facName=" + this.facName + "&facStatusTypeIds=" + this.facStatusTypeIds
-        +  "&fileTypeIds=" + this.fileTypeIds + "&file_name=" + this.file_name
-        +  "&start_date=" + encodeURIComponent(this.start_date) + "&end_date=" + encodeURIComponent(this.end_date);
+    let url =
+      AppConfig.serviceAddress +
+      '/dailymonitor/exportDailyMonitor?serviceDepartName=' +
+      this.serviceDepartName +
+      '&facName=' +
+      this.facName +
+      '&facStatusTypeIds=' +
+      this.facStatusTypeIds +
+      '&fileTypeIds=' +
+      this.fileTypeIds +
+      '&file_name=' +
+      this.file_name +
+      '&start_date=' +
+      encodeURIComponent(this.start_date) +
+      '&end_date=' +
+      encodeURIComponent(this.end_date);
 
     url = this.utilitiesSercice.wrapUrl(url);
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   }
 }
