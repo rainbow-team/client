@@ -5,6 +5,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { ReportMonitorSercice } from 'src/app/services/monitor/report.service';
 import { OrgSercice } from 'src/app/services/supervision/org.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-report',
@@ -12,8 +13,6 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
   styleUrls: ['./report.component.scss']
 })
 export class ReportComponent implements OnInit {
-
-
   dictionary: any = {};
   staffObj: any = {};
 
@@ -23,27 +22,31 @@ export class ReportComponent implements OnInit {
 
   dataSet: any = [];
 
-  orgName: any = "";
+  orgName: any = '';
 
   typeIds: any = [];
 
-  name: any = "";
+  name: any = '';
 
   report_date = [];
 
-  selectId: any = "";
+  selectId: any = '';
+  uploadUrl: any = AppConfig.serviceAddress + '/reportmonitor/importData';
 
-  constructor(private router: Router,
-    private msg: NzMessageService, private reportMonitorSercice: ReportMonitorSercice,
-    private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice) { }
+  constructor(
+    private router: Router,
+    private msg: NzMessageService,
+    private reportMonitorSercice: ReportMonitorSercice,
+    private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
-
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
-
+    this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
     this.search();
-
   }
 
   search() {
@@ -51,48 +54,49 @@ export class ReportComponent implements OnInit {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
       conditions: []
-    }
+    };
 
     if (this.orgName) {
-      option.conditions.push({ key: "orgName", value: this.orgName })
+      option.conditions.push({ key: 'orgName', value: this.orgName });
     }
 
     if (this.typeIds.length > 0) {
-      option.conditions.push({ key: "typeIds", value: [this.typeIds] })
+      option.conditions.push({ key: 'typeIds', value: [this.typeIds] });
     }
 
     if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
+      option.conditions.push({ key: 'name', value: this.name });
     }
 
     if (this.report_date && this.report_date.length > 0) {
       if (this.report_date[0]) {
-        option.conditions.push({ key: "start_date", value: this.report_date[0] })
+        option.conditions.push({
+          key: 'start_date',
+          value: this.report_date[0]
+        });
       }
 
       if (this.report_date[1]) {
-        option.conditions.push({ key: "end_date", value: this.report_date[1] })
+        option.conditions.push({ key: 'end_date', value: this.report_date[1] });
       }
     }
 
-    this.reportMonitorSercice.getReportMonitorList(option).subscribe(
-      (data) => {
-        this.dataSet = data.msg.currentList;
-        this.totalCount = data.msg.recordCount;
-      }
-    );
+    this.reportMonitorSercice.getReportMonitorList(option).subscribe(data => {
+      this.dataSet = data.msg.currentList;
+      this.totalCount = data.msg.recordCount;
+    });
   }
 
   reset() {
-    this.orgName = "";
+    this.orgName = '';
 
     this.typeIds = [];
 
-    this.name = "";
+    this.name = '';
 
     this.report_date = [];
 
-    this.selectId = "";
+    this.selectId = '';
   }
 
   add() {
@@ -100,33 +104,35 @@ export class ReportComponent implements OnInit {
   }
 
   show(item) {
-    this.router.navigate(['/monitor/report/add'], { queryParams: { id: item.id, isShow: true } });
+    this.router.navigate(['/monitor/report/add'], {
+      queryParams: { id: item.id, isShow: true }
+    });
   }
 
   modify() {
     if (this.selectId) {
-      this.router.navigate(['/monitor/report/add'], { queryParams: { id: this.selectId, isShow: false } });
+      this.router.navigate(['/monitor/report/add'], {
+        queryParams: { id: this.selectId, isShow: false }
+      });
     } else {
-      this.msg.create("warning", "请选择修改项");
+      this.msg.create('warning', '请选择修改项');
     }
   }
 
   delete() {
-
     if (this.selectId) {
-
-      this.reportMonitorSercice.deleteReportMonitorById(this.selectId).subscribe((res) => {
-
-        if (res.code == 200) {
-          this.msg.create("success", res.msg);
-          this.search();
-        } else {
-          this.msg.create("error", res.msg);
-        }
-      })
-    }
-    else {
-      this.msg.create("warning", "请选择删除项");
+      this.reportMonitorSercice
+        .deleteReportMonitorById(this.selectId)
+        .subscribe(res => {
+          if (res.code == 200) {
+            this.msg.create('success', res.msg);
+            this.search();
+          } else {
+            this.msg.create('error', res.msg);
+          }
+        });
+    } else {
+      this.msg.create('warning', '请选择删除项');
     }
   }
 
@@ -145,4 +151,3 @@ export class ReportComponent implements OnInit {
     this.search();
   }
 }
-

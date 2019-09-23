@@ -11,8 +11,8 @@ export class SystemComponent implements OnInit {
     { name: '角色管理', isShow: false, id: "system:role" },
     { name: '菜单管理', isShow: false, id: "system:menu" },
     { name: '机构管理', isShow: false, id: "system:org" },
-    // { name: '参数设置' },
-    { name: '日志管理', isShow: false, id: "system:log" }
+    { name: '日志管理', isShow: false, id: "system:log" },
+    { name: '静态数据设置', isShow: false, id: "system:setting" },
   ];
 
   selectMenuName = '人员管理';

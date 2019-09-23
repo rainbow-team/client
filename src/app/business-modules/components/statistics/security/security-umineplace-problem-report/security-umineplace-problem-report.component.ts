@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { StatisticsSercice } from 'src/app/services/statistics/statistics.service';
+declare var $: any;
+
 @Component({
   selector: 'app-security-umineplace-problem-report',
   templateUrl: './security-umineplace-problem-report.component.html',
@@ -102,6 +104,11 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
     var that = this;
 
     let option1 = {
+      title: {
+        text: "铀尾矿(渣)库安全问题统计("+that.result[0].name+")",
+        x: 'center',
+        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+      },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -110,12 +117,14 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
         }
       },
       legend: {
+        bottom: 0,
+        left: 'center',
         data: this.configList
       },
       grid: {
         left: '3%',
         right: '4%',
-        bottom: '3%',
+        // bottom: '3%',
         containLabel: true
       },
       xAxis: {
@@ -125,7 +134,13 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
       yAxis: {
         type: 'value'
       },
-      series: this.data.numberList
+      series: this.data.numberList,
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      }
       //this.data.numberList
     };
     this.myChart1 = echarts.init(document.getElementById('chart1'));
@@ -136,8 +151,9 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
     var that = this;
 
     let option2 = {
+    
       title: {
-        text: that.result[0].name,
+        text: "铀尾矿(渣)库安全问题统计("+that.result[0].name+")",
         x: 'center'
       },
       tooltip: {
@@ -158,7 +174,13 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
           data: this.data,
           type: 'bar'
         }
-      ]
+      ],
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      }
     };
     this.myChart2 = echarts.init(document.getElementById('chart2'));
     this.myChart2.setOption(option2);
@@ -204,5 +226,11 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
     }
 
     this.title = this.result[0].name;
+  }
+
+  exportTable() {
+    $("#sup").table2excel({
+       filename: "铀尾矿(渣)库安全问题统计",
+    });
   }
 }

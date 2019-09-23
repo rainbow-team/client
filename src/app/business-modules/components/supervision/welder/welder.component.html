@@ -67,7 +67,7 @@
             <th style="width: 10%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]='385'>
           <tr *ngFor="let data of nestedTable.data;index as index"
           [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
             <td style="width: 10%">{{(pageIndex-1)*pageSize+1+index}}</td>

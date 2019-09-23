@@ -83,6 +83,12 @@
           添加
         </button>
       </div>
+      <div class="fr">
+        <app-common-import
+          [uploadUrl]="uploadUrl"
+          (search)="search($event)"
+        ></app-common-import>
+      </div>
     </div>
     <div>
       <nz-table
@@ -107,7 +113,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]="400">
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"

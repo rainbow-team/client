@@ -24,6 +24,10 @@
       return 'http://localhost:4200';
     },
 
+    get helpFileName(){
+      return "用户帮助.docx";
+    },
+
     // 附件配置节点
     get fileConfig() {
       var self = this;

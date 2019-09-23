@@ -83,6 +83,11 @@ export class CheckFacReportComponent implements OnInit {
     var that = this;
 
     let option1 = {
+      title: {
+        text: "核设施审评统计",
+        x: 'center',
+        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+      },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -91,12 +96,14 @@ export class CheckFacReportComponent implements OnInit {
         }
       },
       legend: {
+        bottom: 0,
+        left: 'center',
         data: this.configList
       },
       grid: {
         left: '3%',
         right: '4%',
-        bottom: '3%',
+        // bottom: '3%',
         containLabel: true
       },
       xAxis: {
@@ -106,7 +113,14 @@ export class CheckFacReportComponent implements OnInit {
       yAxis: {
         type: 'value'
       },
-      series: this.data.numberList
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      },
+      series: this.data.numberList,
+      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
       //this.data.numberList
     };
     this.myChart1 = echarts.init(document.getElementById('chart1'));
@@ -118,7 +132,7 @@ export class CheckFacReportComponent implements OnInit {
 
     let option2 = {
       title: {
-        text: that.result[0].name,
+        text: "核设施审评统计("+that.result[0].name+")",
         x: 'center'
       },
       tooltip: {
@@ -139,7 +153,14 @@ export class CheckFacReportComponent implements OnInit {
           data: this.data,
           type: 'bar'
         }
-      ]
+      ],
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      },
+      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
     };
     this.myChart2 = echarts.init(document.getElementById('chart2'));
     this.myChart2.setOption(option2);

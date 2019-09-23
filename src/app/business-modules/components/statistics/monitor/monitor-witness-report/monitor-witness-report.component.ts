@@ -54,6 +54,11 @@ export class MonitorWitnessReportComponent implements OnInit {
     var that = this;
 
     let option1 = {
+      title: {
+        text: "监督见证统计",
+        x: 'center',
+        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+      },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -62,12 +67,14 @@ export class MonitorWitnessReportComponent implements OnInit {
         }
       },
       legend: {
+        bottom: 0,
+        left: 'center',
         data: this.configList
       },
       grid: {
         left: '3%',
         right: '4%',
-        bottom: '3%',
+        // bottom: '3%',
         containLabel: true
       },
       xAxis: {
@@ -77,7 +84,14 @@ export class MonitorWitnessReportComponent implements OnInit {
       yAxis: {
         type: 'value'
       },
-      series: this.data.numberList
+      series: this.data.numberList,
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      },
+      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
       //this.data.numberList
     };
     this.myChart1 = echarts.init(document.getElementById('chart'));

@@ -28,7 +28,7 @@ export class AccidentReportComponent implements OnInit {
 
   title: any = '事故事件统计';
 
-  constructor(private statisticsSercice: StatisticsSercice) {}
+  constructor(private statisticsSercice: StatisticsSercice) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -46,15 +46,16 @@ export class AccidentReportComponent implements OnInit {
 
     let option = {
       title: {
-        text: that.title,
-        x: 'center'
+        text: "事故事件统计",
+        x: 'center',
+        subtext: this.startDate.getFullYear() + "年" + "-" + this.endDate.getFullYear() + "年"
       },
       tooltip: {
         trigger: 'item'
       },
       xAxis: {
         type: 'category',
-        data: this.data.map(function(v) {
+        data: this.data.map(function (v) {
           return v.name;
         })
       },
@@ -66,7 +67,13 @@ export class AccidentReportComponent implements OnInit {
           data: this.data,
           type: 'bar'
         }
-      ]
+      ], 
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: { show: true }
+        }
+      }
     };
     this.myChart = echarts.init(document.getElementById('chart'));
     this.myChart.setOption(option);
@@ -84,7 +91,7 @@ export class AccidentReportComponent implements OnInit {
 
   exportTable() {
     $("#arc").table2excel({
-       filename: "事故事件统计",
+      filename: "事故事件统计",
     });
   }
 }

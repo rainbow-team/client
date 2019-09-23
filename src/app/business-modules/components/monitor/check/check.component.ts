@@ -7,6 +7,7 @@ import { ServiceDepartService } from 'src/app/services/unit/servicedepart.servic
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { CheckMonitorSercice } from 'src/app/services/monitor/check.service';
 import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-check',
@@ -14,10 +15,9 @@ import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
   styleUrls: ['./check.component.scss']
 })
 export class CheckComponent implements OnInit {
-
-  @Input() servicedepartId: any = "";
-  @Input() umineId: any = "";
-  @Input() equipdepartId: any = "";
+  @Input() servicedepartId: any = '';
+  @Input() umineId: any = '';
+  @Input() equipdepartId: any = '';
 
   isSearchShow: any = false;
 
@@ -30,13 +30,13 @@ export class CheckComponent implements OnInit {
 
   dataSet: any = [];
 
-  name: any = "";
+  name: any = '';
 
-  content:any="";
+  content: any = '';
 
-  typeIds:any=[];
+  typeIds: any = [];
 
-  check_date:any=[];
+  check_date: any = [];
 
   equipDepartIds: any = [];
 
@@ -50,17 +50,25 @@ export class CheckComponent implements OnInit {
 
   facList: any = [];
 
-  selectId: any = "";
+  selectId: any = '';
+  uploadUrl: any = AppConfig.serviceAddress + '/checkmonitor/importData';
 
-  constructor(private router: Router,
-    private msg: NzMessageService, private checkMonitorSercice: CheckMonitorSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private equipDepartService: EquipDepartService,
-    private serviceDepartService: ServiceDepartService, private umineService: UmineService) { }
+  constructor(
+    private router: Router,
+    private msg: NzMessageService,
+    private checkMonitorSercice: CheckMonitorSercice,
+    private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,
+    private equipDepartService: EquipDepartService,
+    private serviceDepartService: ServiceDepartService,
+    private umineService: UmineService,
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
-
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+    this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
 
     if (this.servicedepartId || this.umineId || this.equipdepartId) {
       this.isSearchShow = true;
@@ -68,7 +76,7 @@ export class CheckComponent implements OnInit {
 
     this.search();
 
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
+    this.serviceDepartService.getAllDepartService().subscribe(res => {
       if (res.code == 200) {
         this.serviceDepartList = [];
         res.msg.forEach(element => {
@@ -78,7 +86,7 @@ export class CheckComponent implements OnInit {
           });
         });
       }
-    })
+    });
   }
 
   search() {
@@ -86,27 +94,30 @@ export class CheckComponent implements OnInit {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
       conditions: []
-    }
+    };
 
     if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
+      option.conditions.push({ key: 'name', value: this.name });
     }
 
     if (this.content) {
-      option.conditions.push({ key: "content", value: this.content })
+      option.conditions.push({ key: 'content', value: this.content });
     }
 
     if (this.typeIds.length > 0) {
-      option.conditions.push({ key: "typeIds", value: [this.typeIds] })
+      option.conditions.push({ key: 'typeIds', value: [this.typeIds] });
     }
 
     if (this.check_date && this.check_date.length > 0) {
       if (this.check_date[0]) {
-        option.conditions.push({ key: "start_date", value: this.check_date[0] })
+        option.conditions.push({
+          key: 'start_date',
+          value: this.check_date[0]
+        });
       }
 
       if (this.check_date[1]) {
-        option.conditions.push({ key: "end_date", value: this.check_date[1] })
+        option.conditions.push({ key: 'end_date', value: this.check_date[1] });
       }
     }
 
@@ -131,20 +142,17 @@ export class CheckComponent implements OnInit {
       });
     }
 
-
-    this.checkMonitorSercice.getCheckMonitorList(option).subscribe(
-      (data) => {
-        this.dataSet = data.msg.currentList;
-        this.totalCount = data.msg.recordCount;
-      }
-    );
+    this.checkMonitorSercice.getCheckMonitorList(option).subscribe(data => {
+      this.dataSet = data.msg.currentList;
+      this.totalCount = data.msg.recordCount;
+    });
   }
 
   reset() {
-    this.name = "";
-    this.content="";
-    this.typeIds=[];
-    this.check_date=[];
+    this.name = '';
+    this.content = '';
+    this.typeIds = [];
+    this.check_date = [];
     //this.groupIds = [];
   }
 
@@ -153,39 +161,54 @@ export class CheckComponent implements OnInit {
   }
 
   show(item) {
-
     if (this.servicedepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], {
+        queryParams: {
+          id: item.id,
+          isShow: true,
+          servicedepartId: this.servicedepartId
+        }
+      });
     } else if (this.umineId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], {
+        queryParams: { id: item.id, isShow: true, umineId: this.umineId }
+      });
     } else if (this.equipdepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/monitorcheckAdd'], {
+        queryParams: {
+          id: item.id,
+          isShow: true,
+          equipdepartId: this.equipdepartId
+        }
+      });
     } else {
-      this.router.navigate(['/monitor/check/add'], { queryParams: { id: item.id, isShow: true } });
+      this.router.navigate(['/monitor/check/add'], {
+        queryParams: { id: item.id, isShow: true }
+      });
     }
-
   }
 
   modify() {
     if (this.selectId) {
-      this.router.navigate(['/monitor/check/add'], { queryParams: { id: this.selectId, isShow: false } });
+      this.router.navigate(['/monitor/check/add'], {
+        queryParams: { id: this.selectId, isShow: false }
+      });
     } else {
-      this.msg.create("warning", "请选择修改项");
+      this.msg.create('warning', '请选择修改项');
     }
   }
 
   delete() {
-
-    this.checkMonitorSercice.deleteCheckMonitorById(this.selectId).subscribe((res) => {
-
-      if (res.code == 200) {
-        this.msg.create("success", res.msg);
-        this.search();
-      } else {
-        this.msg.create("error", res.msg);
-      }
-    })
-
+    this.checkMonitorSercice
+      .deleteCheckMonitorById(this.selectId)
+      .subscribe(res => {
+        if (res.code == 200) {
+          this.msg.create('success', res.msg);
+          this.search();
+        } else {
+          this.msg.create('error', res.msg);
+        }
+      });
   }
 
   selectItem(data) {

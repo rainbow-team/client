@@ -87,9 +87,19 @@
 
     <div nz-col [nzSpan]="10">
       文件时间：
-      <nz-month-picker class="w200" [nzSize]="size" [(ngModel)]="start_date" nzPlaceHolder="开始日期"></nz-month-picker>
+      <nz-month-picker
+        class="w200"
+        [nzSize]="'size'"
+        [(ngModel)]="start_date"
+        nzPlaceHolder="开始日期"
+      ></nz-month-picker>
       -
-      <nz-month-picker class="w200" [nzSize]="size" [(ngModel)]="end_date" nzPlaceHolder="结束日期"></nz-month-picker>
+      <nz-month-picker
+        class="w200"
+        [nzSize]="'size'"
+        [(ngModel)]="end_date"
+        nzPlaceHolder="结束日期"
+      ></nz-month-picker>
     </div>
   </div>
   <div nz-row class="div_contain">
@@ -99,7 +109,7 @@
         日常监督信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="!isSearchShow">
+      <div class="fr" *ngIf="canManage || !isSearchShow">
         <button
           nz-button
           nzType="danger"
@@ -111,7 +121,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="!isSearchShow">
+      <div class="fr" *ngIf="canManage || !isSearchShow">
         <button
           nz-button
           nzType="primary"
@@ -122,7 +132,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="!isSearchShow">
+      <div class="fr" *ngIf="canManage || !isSearchShow">
         <button
           nz-button
           nzType="primary"
@@ -131,6 +141,24 @@
         >
           添加
         </button>
+      </div>
+
+      <div class="fr" *ngIf="canManage">
+        <button
+          nz-button
+          nzType="primary"
+          style="margin-right: 10px;"
+          (click)="exportDailyMonitor()"
+        >
+          导出
+        </button>
+      </div>
+
+      <div class="fr">
+        <app-common-import
+          [uploadUrl]="uploadUrl"
+          (search)="search($event)"
+        ></app-common-import>
       </div>
     </div>
     <div>
@@ -159,7 +187,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]="420">
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
