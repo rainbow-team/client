@@ -33,9 +33,9 @@ export class DailyComponent implements OnInit {
 
   facName: any = '';
 
-  facStatusTypeIds: any;
+  facStatusTypeIds: any=[];
 
-  fileTypeIds: any;
+  fileTypeIds: any=[];
 
   file_name: any = '';
 
@@ -220,20 +220,10 @@ export class DailyComponent implements OnInit {
   exportDailyMonitor() {
     let url =
       AppConfig.serviceAddress +
-      '/dailymonitor/exportDailyMonitor?serviceDepartName=' +
-      this.serviceDepartName +
-      '&facName=' +
-      this.facName +
-      '&facStatusTypeIds=' +
-      this.facStatusTypeIds +
-      '&fileTypeIds=' +
-      this.fileTypeIds +
-      '&file_name=' +
-      this.file_name +
-      '&start_date=' +
-      encodeURIComponent(this.start_date) +
-      '&end_date=' +
-      encodeURIComponent(this.end_date);
+      '/dailymonitor/exportDailyMonitor?serviceDepartName=' + this.serviceDepartName 
+      +'&facName=' +  this.facName +'&facStatusTypeIds=' + this.facStatusTypeIds +
+      '&fileTypeIds=' + this.fileTypeIds + '&file_name=' + this.file_name +
+      '&start_date=' + encodeURIComponent(this.start_date) +'&end_date=' + encodeURIComponent(this.end_date);
 
     url = this.utilitiesSercice.wrapUrl(url);
     window.open(url, '_blank');
