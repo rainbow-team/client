@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { ActivityPermitService } from 'src/app/services/permit/activity.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-permit-activity',
@@ -11,11 +12,10 @@ import { ActivityPermitService } from 'src/app/services/permit/activity.service'
   styleUrls: ['./activity.component.scss']
 })
 export class ActivityPermitComponent implements OnInit {
-
-  @Input() servicedepartId: any = "";
-  @Input() umineId: any = "";
-  @Input() facId: any = "";
-  @Input() equipdepartId: any = "";
+  @Input() servicedepartId: any = '';
+  @Input() umineId: any = '';
+  @Input() facId: any = '';
+  @Input() equipdepartId: any = '';
 
   isSearchShow: any = false;
 
@@ -28,29 +28,37 @@ export class ActivityPermitComponent implements OnInit {
 
   dataSet: any = [];
 
-  departName: any = "";
-  facName: any = "";
+  departName: any = '';
+  facName: any = '';
   name: any = '';
 
   content: any = '';
   typeIds: any = [];
   permitDate: any = [];
 
-  selectId: any = "";
+  selectId: any = '';
+  uploadUrl: any = AppConfig.serviceAddress + '/activitypermit/importData';
 
   constructor(
     private router: Router,
     private msg: NzMessageService,
     private activityPermitService: ActivityPermitService,
     private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice
-  ) { }
+    private staffSercice: StaffSercice,
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+    this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
 
-    if (this.servicedepartId || this.umineId || this.facId||this.equipdepartId) {
+    if (
+      this.servicedepartId ||
+      this.umineId ||
+      this.facId ||
+      this.equipdepartId
+    ) {
       this.isSearchShow = true;
     }
 
@@ -117,7 +125,7 @@ export class ActivityPermitComponent implements OnInit {
       });
     }
 
-    if(this.equipdepartId){
+    if (this.equipdepartId) {
       option.conditions.push({
         key: 'equipdepartId',
         value: this.equipdepartId
@@ -131,15 +139,13 @@ export class ActivityPermitComponent implements OnInit {
   }
 
   reset() {
-
-    this.departName = "";
-    this.facName = "";
+    this.departName = '';
+    this.facName = '';
     this.name = '';
     this.content = '';
     this.typeIds = [];
     this.permitDate = [];
-    this.selectId = "";
-
+    this.selectId = '';
   }
 
   add() {
@@ -148,31 +154,48 @@ export class ActivityPermitComponent implements OnInit {
 
   show(item) {
     if (this.servicedepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], {
+        queryParams: {
+          id: item.id,
+          isShow: true,
+          servicedepartId: this.servicedepartId
+        }
+      });
     } else if (this.umineId) {
-      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
+      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], {
+        queryParams: { id: item.id, isShow: true, umineId: this.umineId }
+      });
     } else if (this.facId) {
-      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
-    } else if(this.equipdepartId){
-      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
-    }else{
-      this.router.navigate(['/permit/activity/add'], { queryParams: { id: item.id, isShow: true } });
+      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], {
+        queryParams: { id: item.id, isShow: true, facId: this.facId }
+      });
+    } else if (this.equipdepartId) {
+      this.router.navigate(['/searchShow/integratedAuery/permitActivityAdd'], {
+        queryParams: {
+          id: item.id,
+          isShow: true,
+          equipdepartId: this.equipdepartId
+        }
+      });
+    } else {
+      this.router.navigate(['/permit/activity/add'], {
+        queryParams: { id: item.id, isShow: true }
+      });
     }
-
   }
 
   modify() {
     if (this.selectId) {
-      this.router.navigate(['/permit/activity/add'], { queryParams: { id: this.selectId, isShow: false } });
+      this.router.navigate(['/permit/activity/add'], {
+        queryParams: { id: this.selectId, isShow: false }
+      });
     } else {
-      this.msg.create("warning", "请选择修改项");
+      this.msg.create('warning', '请选择修改项');
     }
   }
 
   delete() {
-
     if (this.selectId) {
-
       this.activityPermitService
         .deleteActivityPermitByIds([this.selectId])
         .subscribe(res => {
@@ -184,7 +207,7 @@ export class ActivityPermitComponent implements OnInit {
           }
         });
     } else {
-      this.msg.create("warning", "请选择删除项");
+      this.msg.create('warning', '请选择删除项');
     }
   }
 
@@ -202,5 +225,4 @@ export class ActivityPermitComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
-
 }

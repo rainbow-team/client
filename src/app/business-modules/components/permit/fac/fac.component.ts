@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { Permit_FacSercice } from 'src/app/services/permit/permit_fac.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-permit-fac',
@@ -11,8 +12,7 @@ import { Permit_FacSercice } from 'src/app/services/permit/permit_fac.service';
   styleUrls: ['./fac.component.scss']
 })
 export class PermitFacComponent implements OnInit {
-
-  @Input() facId: any = "";
+  @Input() facId: any = '';
 
   dictionary: any = {};
   staffObj: any = {};
@@ -23,23 +23,27 @@ export class PermitFacComponent implements OnInit {
 
   dataSet: any = [];
 
-
-  serviceDepartName: any = "";
-  facName: any = "";
-  permitStageIds: any = "";
+  serviceDepartName: any = '';
+  facName: any = '';
+  permitStageIds: any = '';
   permit_date: any = [];
 
-  selectId: any = "";
+  selectId: any = '';
+  uploadUrl: any = AppConfig.serviceAddress + '/facpermit/importData';
 
-  constructor(private router: Router,
-    private msg: NzMessageService, private permit_FacSercice: Permit_FacSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+  constructor(
+    private router: Router,
+    private msg: NzMessageService,
+    private permit_FacSercice: Permit_FacSercice,
+    private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
-
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
-
+    this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
     this.search();
   }
 
@@ -48,45 +52,52 @@ export class PermitFacComponent implements OnInit {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
       conditions: []
-    }
+    };
 
     if (this.serviceDepartName) {
-      option.conditions.push({ key: "serviceDepartName", value: this.serviceDepartName })
+      option.conditions.push({
+        key: 'serviceDepartName',
+        value: this.serviceDepartName
+      });
     }
     if (this.facName) {
-      option.conditions.push({ key: "facName", value: this.facName })
+      option.conditions.push({ key: 'facName', value: this.facName });
     }
     if (this.permitStageIds) {
-      option.conditions.push({ key: "permitStageIds", value: [this.permitStageIds] })
+      option.conditions.push({
+        key: 'permitStageIds',
+        value: [this.permitStageIds]
+      });
     }
     if (this.permit_date && this.permit_date.length > 0) {
       if (this.permit_date[0]) {
-        option.conditions.push({ key: "start_date", value: this.permit_date[0] })
+        option.conditions.push({
+          key: 'start_date',
+          value: this.permit_date[0]
+        });
       }
 
       if (this.permit_date[1]) {
-        option.conditions.push({ key: "end_date", value: this.permit_date[1] })
+        option.conditions.push({ key: 'end_date', value: this.permit_date[1] });
       }
     }
 
     if (this.facId) {
-      option.conditions.push({ key: "facId", value: this.facId })
+      option.conditions.push({ key: 'facId', value: this.facId });
     }
 
-    this.permit_FacSercice.getFacPermitList(option).subscribe(
-      (data) => {
-        this.dataSet = data.msg.currentList;
-        this.totalCount = data.msg.recordCount;
-      }
-    );
+    this.permit_FacSercice.getFacPermitList(option).subscribe(data => {
+      this.dataSet = data.msg.currentList;
+      this.totalCount = data.msg.recordCount;
+    });
   }
 
   reset() {
-    this.serviceDepartName = "";
-    this.facName = "";
-    this.permitStageIds = "";
+    this.serviceDepartName = '';
+    this.facName = '';
+    this.permitStageIds = '';
     this.permit_date = [];
-    this.selectId = "";
+    this.selectId = '';
   }
 
   add() {
@@ -94,41 +105,43 @@ export class PermitFacComponent implements OnInit {
   }
 
   show(item) {
-
     if (this.facId) {
-      this.router.navigate(['/searchShow/integratedAuery/permitfacAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
+      this.router.navigate(['/searchShow/integratedAuery/permitfacAdd'], {
+        queryParams: { id: item.id, isShow: true, facId: this.facId }
+      });
     } else {
-      this.router.navigate(['/permit/fac/add'], { queryParams: { id: item.id, isShow: true } });
+      this.router.navigate(['/permit/fac/add'], {
+        queryParams: { id: item.id, isShow: true }
+      });
     }
-
   }
 
   modify() {
     if (this.selectId) {
-      this.router.navigate(['/permit/fac/add'], { queryParams: { id: this.selectId, isShow: false } });
+      this.router.navigate(['/permit/fac/add'], {
+        queryParams: { id: this.selectId, isShow: false }
+      });
     } else {
-      this.msg.create("warning", "请选择修改项");
+      this.msg.create('warning', '请选择修改项');
     }
   }
 
   delete() {
     if (this.selectId) {
-
-      this.permit_FacSercice.deleteFacPermitByIds([this.selectId]).subscribe((res) => {
-
-        if (res.code == 200) {
-          this.msg.create("success", res.msg);
-          this.search();
-        } else {
-          this.msg.create("error", res.msg);
-        }
-      })
-
+      this.permit_FacSercice
+        .deleteFacPermitByIds([this.selectId])
+        .subscribe(res => {
+          if (res.code == 200) {
+            this.msg.create('success', res.msg);
+            this.search();
+          } else {
+            this.msg.create('error', res.msg);
+          }
+        });
     } else {
-      this.msg.create("warning", "请选择删除项");
+      this.msg.create('warning', '请选择删除项');
     }
   }
-
 
   selectItem(data) {
     this.selectId = data.id;
