@@ -14,9 +14,8 @@ import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
   styleUrls: ['./umineplace.component.scss']
 })
 export class SecurityUmineplaceComponent implements OnInit {
-
-  @Input() umineId: any = "";
-  @Input() umineplaceId: any = "";
+  @Input() umineId: any = '';
+  @Input() umineplaceId: any = '';
 
   isSearchShow: any = false;
 
@@ -29,15 +28,15 @@ export class SecurityUmineplaceComponent implements OnInit {
 
   dataSet: any = [];
 
-  umineName: any = "";
+  umineName: any = '';
 
-  uminePlaceName: any = "";
+  uminePlaceName: any = '';
 
   statusTypeIds: any = [];
 
   checkTypeIds: any = [];
 
-  content: any = "";
+  content: any = '';
 
   find_date: any = [];
 
@@ -47,22 +46,29 @@ export class SecurityUmineplaceComponent implements OnInit {
 
   reformStatusTypeIds: any = [];
 
-  selectId: any = "";
+  selectId: any = '';
 
   canManage: any = false;
+  uploadUrl: any = AppConfig.serviceAddress + '/umineplacesecurity/importData';
 
-
-  constructor(private router: Router,
-    private msg: NzMessageService, private umineService: UmineService,
-    private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
-    private umineplaceSecuritySercice: UmineplaceSecuritySercice, private utilitiesSercice: UtilitiesSercice) { }
+  constructor(
+    private router: Router,
+    private msg: NzMessageService,
+    private umineService: UmineService,
+    private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,
+    private umineplaceSecuritySercice: UmineplaceSecuritySercice,
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
-
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+    this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
 
-    this.canManage = this.utilitiesSercice.checkPermission("security:umineplace:manage");
+    this.canManage = this.utilitiesSercice.checkPermission(
+      'security:umineplace:manage'
+    );
 
     if (this.umineId || this.umineplaceId) {
       this.isSearchShow = true;
@@ -82,7 +88,6 @@ export class SecurityUmineplaceComponent implements OnInit {
     //   }
     // })
 
-
     // this.facSercice.getAllDepartService().subscribe((res) => {
     //   if (res.code == 200) {
     //     this.serviceDepartList = [];
@@ -94,7 +99,6 @@ export class SecurityUmineplaceComponent implements OnInit {
     //     });
     //   }
     // })
-
   }
 
   search() {
@@ -102,48 +106,66 @@ export class SecurityUmineplaceComponent implements OnInit {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
       conditions: []
-    }
+    };
 
     if (this.umineName) {
-      option.conditions.push({ key: "umineName", value: this.umineName })
+      option.conditions.push({ key: 'umineName', value: this.umineName });
     }
 
     if (this.uminePlaceName) {
-      option.conditions.push({ key: "uminePlaceName", value: this.uminePlaceName })
+      option.conditions.push({
+        key: 'uminePlaceName',
+        value: this.uminePlaceName
+      });
     }
 
     if (this.statusTypeIds.length > 0) {
-      option.conditions.push({ key: "statusTypeIds", value: [this.statusTypeIds] })
+      option.conditions.push({
+        key: 'statusTypeIds',
+        value: [this.statusTypeIds]
+      });
     }
 
     if (this.checkTypeIds.length > 0) {
-      option.conditions.push({ key: "checkTypeIds", value: [this.checkTypeIds] })
+      option.conditions.push({
+        key: 'checkTypeIds',
+        value: [this.checkTypeIds]
+      });
     }
 
     if (this.content) {
-      option.conditions.push({ key: "content", value: this.content })
+      option.conditions.push({ key: 'content', value: this.content });
     }
 
     if (this.find_date && this.find_date.length > 0) {
       if (this.find_date[0]) {
-        option.conditions.push({ key: "start_date", value: this.find_date[0] })
+        option.conditions.push({ key: 'start_date', value: this.find_date[0] });
       }
 
       if (this.find_date[1]) {
-        option.conditions.push({ key: "end_date", value: this.find_date[1] })
+        option.conditions.push({ key: 'end_date', value: this.find_date[1] });
       }
     }
 
     if (this.questionTypeIds.length > 0) {
-      option.conditions.push({ key: "questionTypeIds", value: [this.questionTypeIds] })
+      option.conditions.push({
+        key: 'questionTypeIds',
+        value: [this.questionTypeIds]
+      });
     }
 
     if (this.questionNatureIds.length > 0) {
-      option.conditions.push({ key: "questionNatureIds", value: [this.questionNatureIds] })
+      option.conditions.push({
+        key: 'questionNatureIds',
+        value: [this.questionNatureIds]
+      });
     }
 
     if (this.reformStatusTypeIds.length > 0) {
-      option.conditions.push({ key: "reformStatusTypeIds", value: [this.reformStatusTypeIds] })
+      option.conditions.push({
+        key: 'reformStatusTypeIds',
+        value: [this.reformStatusTypeIds]
+      });
     }
 
     // if (this.groupIds.length > 0) {
@@ -151,32 +173,31 @@ export class SecurityUmineplaceComponent implements OnInit {
     // }
 
     if (this.umineId) {
-      option.conditions.push({ key: "umineId", value: this.umineId })
+      option.conditions.push({ key: 'umineId', value: this.umineId });
     }
     if (this.umineplaceId) {
-      option.conditions.push({ key: "umineplaceId", value: this.umineplaceId })
+      option.conditions.push({ key: 'umineplaceId', value: this.umineplaceId });
     }
 
-
-    this.umineplaceSecuritySercice.getUmineplaceSecurityList(option).subscribe(
-      (data) => {
+    this.umineplaceSecuritySercice
+      .getUmineplaceSecurityList(option)
+      .subscribe(data => {
         this.dataSet = data.msg.currentList;
         this.totalCount = data.msg.recordCount;
-      }
-    );
+      });
   }
 
   reset() {
-    this.umineName = "";
-    this.uminePlaceName = "";
+    this.umineName = '';
+    this.uminePlaceName = '';
     this.statusTypeIds = [];
     this.checkTypeIds = [];
-    this.content = "";
+    this.content = '';
     this.find_date = [];
     this.questionTypeIds = [];
     this.questionNatureIds = [];
     this.reformStatusTypeIds = [];
-    this.selectId = "";
+    this.selectId = '';
   }
 
   add() {
@@ -184,39 +205,53 @@ export class SecurityUmineplaceComponent implements OnInit {
   }
 
   show(item) {
-
     if (this.umineId) {
-      this.router.navigate(['/searchShow/integratedAuery/securityUmineplaceAdd'], { queryParams: { id: item.id, isShow: true, umineId: this.umineId } });
+      this.router.navigate(
+        ['/searchShow/integratedAuery/securityUmineplaceAdd'],
+        { queryParams: { id: item.id, isShow: true, umineId: this.umineId } }
+      );
     } else if (this.umineplaceId) {
-      this.router.navigate(['/searchShow/integratedAuery/securityUmineplaceAdd'], { queryParams: { id: item.id, isShow: true, umineplaceId: this.umineplaceId } });
+      this.router.navigate(
+        ['/searchShow/integratedAuery/securityUmineplaceAdd'],
+        {
+          queryParams: {
+            id: item.id,
+            isShow: true,
+            umineplaceId: this.umineplaceId
+          }
+        }
+      );
     } else {
-      this.router.navigate(['/security/umineplace/add'], { queryParams: { id: item.id, isShow: true } });
+      this.router.navigate(['/security/umineplace/add'], {
+        queryParams: { id: item.id, isShow: true }
+      });
     }
-
   }
 
   modify() {
     if (this.selectId) {
-      this.router.navigate(['/security/umineplace/add'], { queryParams: { id: this.selectId, isShow: false } });
+      this.router.navigate(['/security/umineplace/add'], {
+        queryParams: { id: this.selectId, isShow: false }
+      });
     } else {
-      this.msg.create("warning", "请选择修改项");
+      this.msg.create('warning', '请选择修改项');
     }
   }
 
   delete() {
-
     if (this.selectId) {
-      this.umineplaceSecuritySercice.deleteUmineplaceSecurityById(this.selectId).subscribe((res) => {
-
-        if (res.code == 200) {
-          this.msg.create("success", res.msg);
-          this.search();
-        } else {
-          this.msg.create("error", res.msg);
-        }
-      })
-    }else {
-      this.msg.create("warning", "请选择删除项");
+      this.umineplaceSecuritySercice
+        .deleteUmineplaceSecurityById(this.selectId)
+        .subscribe(res => {
+          if (res.code == 200) {
+            this.msg.create('success', res.msg);
+            this.search();
+          } else {
+            this.msg.create('error', res.msg);
+          }
+        });
+    } else {
+      this.msg.create('warning', '请选择删除项');
     }
   }
 
@@ -236,27 +271,42 @@ export class SecurityUmineplaceComponent implements OnInit {
   }
 
   exportUmineplaceSecurity() {
-
-    let start_date = "", end_date = "";
+    let start_date = '',
+      end_date = '';
     if (this.find_date && this.find_date.length > 0) {
-        if (this.find_date[0]) {
-            start_date = this.find_date[0];
-        }
+      if (this.find_date[0]) {
+        start_date = this.find_date[0];
+      }
 
-        if (this.find_date[1]) {
-            end_date = this.find_date[1];
-        }
+      if (this.find_date[1]) {
+        end_date = this.find_date[1];
+      }
     }
 
-    let url = AppConfig.serviceAddress + "/umineplacesecurity/exportUmineplaceSecurity?umineName=" + this.umineName
-        +  "&uminePlaceName=" + this.uminePlaceName + "&statusTypeIds=" + this.statusTypeIds
-        +  "&checkTypeIds=" + this.checkTypeIds + "&content=" + this.content
-        +  "&start_date=" + encodeURIComponent(start_date) + "&end_date=" + encodeURIComponent(end_date)
-        +  "&questionTypeIds=" + this.questionTypeIds + "&questionNatureIds=" + this.questionNatureIds
-        +  "&reformStatusTypeIds=" + this.reformStatusTypeIds;
+    let url =
+      AppConfig.serviceAddress +
+      '/umineplacesecurity/exportUmineplaceSecurity?umineName=' +
+      this.umineName +
+      '&uminePlaceName=' +
+      this.uminePlaceName +
+      '&statusTypeIds=' +
+      this.statusTypeIds +
+      '&checkTypeIds=' +
+      this.checkTypeIds +
+      '&content=' +
+      this.content +
+      '&start_date=' +
+      encodeURIComponent(start_date) +
+      '&end_date=' +
+      encodeURIComponent(end_date) +
+      '&questionTypeIds=' +
+      this.questionTypeIds +
+      '&questionNatureIds=' +
+      this.questionNatureIds +
+      '&reformStatusTypeIds=' +
+      this.reformStatusTypeIds;
 
     url = this.utilitiesSercice.wrapUrl(url);
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   }
 }
-

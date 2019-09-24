@@ -15,9 +15,8 @@ import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
   styleUrls: ['./fac.component.scss']
 })
 export class SecurityFacComponent implements OnInit {
-
-  @Input() servicedepartId: any = "";
-  @Input() facId: any = "";
+  @Input() servicedepartId: any = '';
+  @Input() facId: any = '';
 
   isSearchShow: any = false;
 
@@ -30,15 +29,15 @@ export class SecurityFacComponent implements OnInit {
 
   dataSet: any = [];
 
-  serviceDepartName: any = "";
+  serviceDepartName: any = '';
 
-  facName: any = "";
+  facName: any = '';
 
   facStatusTypeIds: any = [];
 
   checkTypeIds: any = [];
 
-  content: any = "";
+  content: any = '';
 
   find_date: any = [];
 
@@ -52,32 +51,39 @@ export class SecurityFacComponent implements OnInit {
     tableName: 'unit_fac',
     propertyName: 'build_year',
     configTableName: 'config_fac_supervison_category'
-  }
+  };
 
   data: any = [];
 
-  selectId: any = "";
+  selectId: any = '';
 
   canManage: any = false;
-
-  constructor(private router: Router,
-    private msg: NzMessageService, private facSecuritySercice: FacSecuritySercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService,
-    private facSercice: FacSercice, private statisticsSercice: StatisticsSercice, private utilitiesSercice: UtilitiesSercice) { }
+  uploadUrl: any = AppConfig.serviceAddress + '/facsecurity/importData';
+  constructor(
+    private router: Router,
+    private msg: NzMessageService,
+    private facSecuritySercice: FacSecuritySercice,
+    private dictionarySercice: DictionarySercice,
+    private staffSercice: StaffSercice,
+    private serviceDepartService: ServiceDepartService,
+    private facSercice: FacSercice,
+    private statisticsSercice: StatisticsSercice,
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
-
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
-
-    this.canManage = this.utilitiesSercice.checkPermission("security:fac:manage");
+    this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
+    this.canManage = this.utilitiesSercice.checkPermission(
+      'security:fac:manage'
+    );
 
     if (this.servicedepartId || this.facId) {
       this.isSearchShow = true;
     }
 
     this.search();
-
   }
 
   search() {
@@ -85,49 +91,66 @@ export class SecurityFacComponent implements OnInit {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
       conditions: []
-
-    }
+    };
 
     if (this.serviceDepartName) {
-      option.conditions.push({ key: "serviceDepartName", value: this.serviceDepartName })
+      option.conditions.push({
+        key: 'serviceDepartName',
+        value: this.serviceDepartName
+      });
     }
 
     if (this.facName) {
-      option.conditions.push({ key: "facName", value: this.facName })
+      option.conditions.push({ key: 'facName', value: this.facName });
     }
 
     if (this.facStatusTypeIds.length > 0) {
-      option.conditions.push({ key: "facStatusTypeIds", value: [this.facStatusTypeIds] })
+      option.conditions.push({
+        key: 'facStatusTypeIds',
+        value: [this.facStatusTypeIds]
+      });
     }
 
     if (this.checkTypeIds.length > 0) {
-      option.conditions.push({ key: "checkTypeIds", value: [this.checkTypeIds] })
+      option.conditions.push({
+        key: 'checkTypeIds',
+        value: [this.checkTypeIds]
+      });
     }
 
     if (this.content) {
-      option.conditions.push({ key: "content", value: this.content })
+      option.conditions.push({ key: 'content', value: this.content });
     }
 
     if (this.find_date && this.find_date.length > 0) {
       if (this.find_date[0]) {
-        option.conditions.push({ key: "start_date", value: this.find_date[0] })
+        option.conditions.push({ key: 'start_date', value: this.find_date[0] });
       }
 
       if (this.find_date[1]) {
-        option.conditions.push({ key: "end_date", value: this.find_date[1] })
+        option.conditions.push({ key: 'end_date', value: this.find_date[1] });
       }
     }
 
     if (this.questionTypeIds.length > 0) {
-      option.conditions.push({ key: "questionTypeIds", value: [this.questionTypeIds] })
+      option.conditions.push({
+        key: 'questionTypeIds',
+        value: [this.questionTypeIds]
+      });
     }
 
     if (this.questionNatureIds.length > 0) {
-      option.conditions.push({ key: "questionNatureIds", value: [this.questionNatureIds] })
+      option.conditions.push({
+        key: 'questionNatureIds',
+        value: [this.questionNatureIds]
+      });
     }
 
     if (this.reformStatusTypeIds.length > 0) {
-      option.conditions.push({ key: "reformStatusTypeIds", value: [this.reformStatusTypeIds] })
+      option.conditions.push({
+        key: 'reformStatusTypeIds',
+        value: [this.reformStatusTypeIds]
+      });
     }
 
     if (this.servicedepartId) {
@@ -143,30 +166,29 @@ export class SecurityFacComponent implements OnInit {
         value: this.facId
       });
     }
-    this.facSecuritySercice.getFacSecurityList(option).subscribe(
-      (data) => {
-        this.dataSet = data.msg.currentList;
-        this.totalCount = data.msg.recordCount;
-      }
-    );
+    this.facSecuritySercice.getFacSecurityList(option).subscribe(data => {
+      this.dataSet = data.msg.currentList;
+      this.totalCount = data.msg.recordCount;
+    });
   }
 
   reset() {
-    this.serviceDepartName = "";
-    this.facName = "";
+    this.serviceDepartName = '';
+    this.facName = '';
     this.facStatusTypeIds = [];
     this.checkTypeIds = [];
-    this.content = "";
+    this.content = '';
     this.find_date = [];
     this.questionTypeIds = [];
     this.questionNatureIds = [];
     this.reformStatusTypeIds = [];
 
-    this.statisticsSercice.getStatisticsResultByYear(this.condition).subscribe((res) => {
-
-      this.data = res.msg;
-    });
-    this.selectId = "";
+    this.statisticsSercice
+      .getStatisticsResultByYear(this.condition)
+      .subscribe(res => {
+        this.data = res.msg;
+      });
+    this.selectId = '';
   }
 
   add() {
@@ -175,39 +197,48 @@ export class SecurityFacComponent implements OnInit {
 
   show(item) {
     if (this.servicedepartId) {
-      this.router.navigate(['/searchShow/integratedAuery/securityfacAdd'], { queryParams: { id: item.id, isShow: true, servicedepartId: this.servicedepartId } });
+      this.router.navigate(['/searchShow/integratedAuery/securityfacAdd'], {
+        queryParams: {
+          id: item.id,
+          isShow: true,
+          servicedepartId: this.servicedepartId
+        }
+      });
     } else if (this.facId) {
-      this.router.navigate(['/searchShow/integratedAuery/securityfacAdd'], { queryParams: { id: item.id, isShow: true, facId: this.facId } });
+      this.router.navigate(['/searchShow/integratedAuery/securityfacAdd'], {
+        queryParams: { id: item.id, isShow: true, facId: this.facId }
+      });
     } else {
-      this.router.navigate(['/security/fac/add'], { queryParams: { id: item.id, isShow: true } });
+      this.router.navigate(['/security/fac/add'], {
+        queryParams: { id: item.id, isShow: true }
+      });
     }
-
   }
 
   modify() {
     if (this.selectId) {
-      this.router.navigate(['/security/fac/add'], { queryParams: { id: this.selectId, isShow: false } });
+      this.router.navigate(['/security/fac/add'], {
+        queryParams: { id: this.selectId, isShow: false }
+      });
     } else {
-      this.msg.create("warning", "请选择修改项");
+      this.msg.create('warning', '请选择修改项');
     }
   }
 
   delete() {
-
     if (this.selectId) {
-
-      this.facSecuritySercice.deleteFacSecurityById(this.selectId).subscribe((res) => {
-
-        if (res.code == 200) {
-          this.msg.create("success", res.msg);
-          this.search();
-        } else {
-          this.msg.create("error", res.msg);
-        }
-      })
-    }
-    else {
-      this.msg.create("warning", "请选择删除项");
+      this.facSecuritySercice
+        .deleteFacSecurityById(this.selectId)
+        .subscribe(res => {
+          if (res.code == 200) {
+            this.msg.create('success', res.msg);
+            this.search();
+          } else {
+            this.msg.create('error', res.msg);
+          }
+        });
+    } else {
+      this.msg.create('warning', '请选择删除项');
     }
   }
 
@@ -227,26 +258,42 @@ export class SecurityFacComponent implements OnInit {
   }
 
   exportFacSecurity() {
-
-    let start_date = "", end_date = "";
+    let start_date = '',
+      end_date = '';
     if (this.find_date && this.find_date.length > 0) {
-        if (this.find_date[0]) {
-            start_date = this.find_date[0];
-        }
+      if (this.find_date[0]) {
+        start_date = this.find_date[0];
+      }
 
-        if (this.find_date[1]) {
-            end_date = this.find_date[1];
-        }
+      if (this.find_date[1]) {
+        end_date = this.find_date[1];
+      }
     }
 
-    let url = AppConfig.serviceAddress + "/facsecurity/exportFacSecurity?serviceDepartName=" + this.serviceDepartName
-        +  "&facName=" + this.facName + "&facStatusTypeIds=" + this.facStatusTypeIds
-        +  "&checkTypeIds=" + this.checkTypeIds + "&content=" + this.content
-        +  "&start_date=" + encodeURIComponent(start_date) + "&end_date=" + encodeURIComponent(end_date)
-        +  "&questionTypeIds=" + this.questionTypeIds + "&questionNatureIds=" + this.questionNatureIds
-        +  "&reformStatusTypeIds=" + this.reformStatusTypeIds;
+    let url =
+      AppConfig.serviceAddress +
+      '/facsecurity/exportFacSecurity?serviceDepartName=' +
+      this.serviceDepartName +
+      '&facName=' +
+      this.facName +
+      '&facStatusTypeIds=' +
+      this.facStatusTypeIds +
+      '&checkTypeIds=' +
+      this.checkTypeIds +
+      '&content=' +
+      this.content +
+      '&start_date=' +
+      encodeURIComponent(start_date) +
+      '&end_date=' +
+      encodeURIComponent(end_date) +
+      '&questionTypeIds=' +
+      this.questionTypeIds +
+      '&questionNatureIds=' +
+      this.questionNatureIds +
+      '&reformStatusTypeIds=' +
+      this.reformStatusTypeIds;
 
     url = this.utilitiesSercice.wrapUrl(url);
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   }
 }

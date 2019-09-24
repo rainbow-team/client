@@ -7,14 +7,22 @@
 
     <div nz-col [nzSpan]="5">
       设施名称：
-      <input nz-input nzSize="default" [(ngModel)]="uminePlaceName" class="w200" />
+      <input
+        nz-input
+        nzSize="default"
+        [(ngModel)]="uminePlaceName"
+        class="w200"
+      />
     </div>
 
     <div nz-col [nzSpan]="5">
       设施状态：
       <nz-select [(ngModel)]="statusTypeIds" class="w200">
-        <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
-          [nzValue]="option.id">
+        <nz-option
+          *ngFor="let option of dictionary.config_umine_place_status"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
@@ -22,14 +30,22 @@
     <div nz-col [nzSpan]="5">
       检查类型：
       <nz-select [(ngModel)]="checkTypeIds" class="w200">
-        <nz-option *ngFor="let option of dictionary.config_security_check_type" [nzLabel]="option.value"
-          [nzValue]="option.id">
+        <nz-option
+          *ngFor="let option of dictionary.config_security_check_type"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
 
     <div nz-col [nzSpan]="4" class="ta_r" style="float: right">
-      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">
+      <button
+        nz-button
+        nzType="primary"
+        style="width: 70px; margin-right: 10px;"
+        (click)="search()"
+      >
         查询
       </button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
@@ -52,9 +68,13 @@
     <div nz-col [nzSpan]="5">
       问题类别：
       <nz-select [(ngModel)]="questionTypeIds" class="w200">
-        <nz-option *ngFor="
+        <nz-option
+          *ngFor="
             let option of dictionary.config_umine_place_security_question_type
-          " [nzLabel]="option.value" [nzValue]="option.id">
+          "
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
@@ -62,9 +82,13 @@
     <div nz-col [nzSpan]="5">
       问题性质：
       <nz-select [(ngModel)]="questionNatureIds" class="w150">
-        <nz-option *ngFor="
+        <nz-option
+          *ngFor="
             let option of dictionary.config_umine_place_security_question_nature
-          " [nzLabel]="option.value" [nzValue]="option.id">
+          "
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
@@ -72,8 +96,11 @@
     <div nz-col [nzSpan]="4">
       整改状态：
       <nz-select [(ngModel)]="reformStatusTypeIds" class="w100">
-        <nz-option *ngFor="let option of dictionary.config_security_reform_status" [nzLabel]="option.value"
-          [nzValue]="option.id">
+        <nz-option
+          *ngFor="let option of dictionary.config_security_reform_status"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
@@ -86,36 +113,71 @@
         铀尾矿(渣)库安全问题信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="canManage||!isSearchShow">
-        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">
+      <div class="fr" *ngIf="canManage || !isSearchShow">
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除吗?"
+          (nzOnConfirm)="delete()"
+        >
           删除
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage||!isSearchShow">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">
+      <div class="fr" *ngIf="canManage || !isSearchShow">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="modify()"
+        >
           编辑
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage||!isSearchShow">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">
+      <div class="fr" *ngIf="canManage || !isSearchShow">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="add()"
+        >
           添加
         </button>
       </div>
 
       <div class="fr" *ngIf="canManage">
-        <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportUmineplaceSecurity()">
+        <button
+          nz-button
+          nzType="primary"
+          style="margin-right: 10px;"
+          (click)="exportUmineplaceSecurity()"
+        >
           导出
         </button>
       </div>
 
-
+      <div class="fr">
+        <app-common-import
+          [uploadUrl]="uploadUrl"
+          (search)="search($event)"
+        ></app-common-import>
+      </div>
     </div>
     <div>
-      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable tablescoll_rainbow"
+        [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+        [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
+      >
         <thead>
           <tr>
             <th style="width: 5%">序号</th>
@@ -132,15 +194,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data; index as index"
-            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]" (click)="selectItem(data)">
+          <tr
+            *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
+            (click)="selectItem(data)"
+          >
             <td style="width: 5%">
               {{ (pageIndex - 1) * pageSize + 1 + index }}
             </td>
             <td style="width: 15%" nz-tooltip nzTitle="{{ data.umineName }}">
               {{ data.umineName | tooltips: 15 }}
             </td>
-            <td style="width: 13%" nz-tooltip nzTitle="{{ data.uminePlaceName }}">
+            <td
+              style="width: 13%"
+              nz-tooltip
+              nzTitle="{{ data.uminePlaceName }}"
+            >
               {{ data.uminePlaceName | tooltips: 15 }}
             </td>
             <td style="width: 8%">{{ data.uminePlaceStatusTypeValue }}</td>
