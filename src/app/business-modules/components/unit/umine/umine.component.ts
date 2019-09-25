@@ -5,6 +5,7 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { GroupService } from 'src/app/services/unit/group.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-umine',
@@ -31,16 +32,18 @@ export class UmineComponent implements OnInit {
   groupList: any = [];
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private groupService: GroupService) { }
+    private staffSercice: StaffSercice, private groupService: GroupService,private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
+    this.canManage = this.utilitiesSercice.checkPermission("umine:manage");
     this.search();
 
     this.groupService.getAllGroup().subscribe((res) => {
@@ -140,4 +143,14 @@ export class UmineComponent implements OnInit {
   selectItem(data) {
     this.selectId = data.id;
   }
+
+  exportUmine(){
+
+    let url = AppConfig.serviceAddress + "/umine/exportUmine?name="+this.name; 
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
+
+  }
+
 }

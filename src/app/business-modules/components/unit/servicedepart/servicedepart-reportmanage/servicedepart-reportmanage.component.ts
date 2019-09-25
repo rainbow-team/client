@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-servicedepart-reportmanage',
@@ -35,15 +36,20 @@ export class ServicedepartReportmanageComponent implements OnInit {
   fileList = [];
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService,
-    private serviceDepartSercice: ServiceDepartService, private attachmentSercice: AttachmentSercice) { }
+    private serviceDepartSercice: ServiceDepartService, private attachmentSercice: AttachmentSercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.serviceId = id;
+
+    this.canManage = this.utilitiesSercice.checkPermission("servicedepart:manage");
+
     this.search();
   }
 

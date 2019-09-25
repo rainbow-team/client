@@ -3,6 +3,7 @@ import { ValidationDirective } from 'src/app/layouts/_directives/validation.dire
 import { Router,ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { FacSercice } from 'src/app/services/unit/fac.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-fac-improve',
@@ -35,13 +36,16 @@ export class FacImproveComponent implements OnInit {
   pageSize: any = 10;
 
   selectId: any = "";
-
+  canManage:any=false;
+  
   constructor(private router: Router,
-    private ActivatedRoute: ActivatedRoute, private msg: NzMessageService,private facSercice: FacSercice) { }
+    private ActivatedRoute: ActivatedRoute, private msg: NzMessageService,private facSercice: FacSercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
+    this.canManage = this.utilitiesSercice.checkPermission("fac:manage");
     this.facId = id;
     this.search();
   }

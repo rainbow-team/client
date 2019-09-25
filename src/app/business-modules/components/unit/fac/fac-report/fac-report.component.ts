@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-unit-fac-report',
@@ -34,15 +35,19 @@ export class FacReportComponent implements OnInit {
   typeId: any = "";
   start_date: any;
   end_date: any;
+  canManage:any=false;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private facSercice: FacSercice,
-    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice) { }
+    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.facId = id;
     this.dictionary = this.dictionarySercice.getAllConfig();
+
+    this.canManage = this.utilitiesSercice.checkPermission("fac:manage");
     this.search();
   }
 

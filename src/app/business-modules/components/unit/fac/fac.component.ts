@@ -40,6 +40,7 @@ export class FacComponent implements OnInit {
   is_flood: any = "";
 
   selectId: any = "";
+  canManage: any = false;
 
   uploadUrl: any = AppConfig.serviceAddress + "/fac/importFac";
 
@@ -51,6 +52,8 @@ export class FacComponent implements OnInit {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("group:manage");
 
     this.serviceDepartService.getAllDepartService().subscribe((res) => {
       if (res.code == 200) {

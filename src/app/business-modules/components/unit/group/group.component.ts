@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { GroupService } from 'src/app/services/unit/group.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-group',
@@ -26,15 +27,18 @@ export class GroupComponent implements OnInit {
   name: any = "";
 
   selectId: any = "";
+  canManage: any = false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private groupSercice: GroupService, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private staffSercice: StaffSercice,private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission("group:manage");
 
     this.search();
   }
@@ -117,6 +121,13 @@ export class GroupComponent implements OnInit {
 
   selectItem(data) {
     this.selectId = data.id;
+  }
+
+  exportGroup(){
+    let url = AppConfig.serviceAddress + "/group/exportGroup?name="+this.name; 
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
   
 }

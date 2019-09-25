@@ -6,7 +6,7 @@
         安技改信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="danger"
@@ -18,7 +18,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="primary"
@@ -29,7 +29,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="primary"
@@ -61,7 +61,7 @@
             <th style="width: 10%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]='460'>
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"

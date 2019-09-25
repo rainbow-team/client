@@ -25,18 +25,24 @@
           核设备单位信息（共{{totalCount}}条）
         </div>
 
-        <div class="fr" *ngIf="isSearchShow=='0'">
+        <div class="fr" *ngIf="isSearchShow=='0'&&canManage">
             <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
           </div>
           
-          <div class="fr" *ngIf="isSearchShow=='0'">
+          <div class="fr" *ngIf="isSearchShow=='0'&&canManage">
             <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
           </div>
           
-          <div class="fr" *ngIf="isSearchShow=='0'">
+          <div class="fr" *ngIf="isSearchShow=='0'&&canManage">
             <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
           </div>
         
+          <div class="fr" *ngIf="isSearchShow == '0'&&canManage">
+            <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportEquipdepart()">
+              导出
+            </button>
+          </div>
+
       </div>
       <div>
         <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
@@ -52,7 +58,7 @@
               <th style="width: 10%">操作</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody [appPageHeight]='390'>
             <tr *ngFor="let data of nestedTable.data;index as index"
             [ngClass]="{true:'itemSeleted',false:''}[data.id==selectId]" (click)="selectItem(data)">
              <td style="width: 10%">{{(pageIndex-1)*pageSize+1+index}}</td>

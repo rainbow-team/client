@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-equipdepart',
@@ -27,15 +28,17 @@ export class EquipdepartComponent implements OnInit {
   product: any = "";
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private equipDepartService: EquipDepartService, private dictionaryService: DictionarySercice,
-    private staffSercice: StaffSercice) { }
+    private staffSercice: StaffSercice,private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionaryService.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+    this.canManage = this.utilitiesSercice.checkPermission("equipdepart:manage");
 
     this.search();
   }
@@ -126,5 +129,14 @@ export class EquipdepartComponent implements OnInit {
 
   selectItem(data) {
     this.selectId = data.id;
+  }
+
+  exportEquipdepart(){
+
+    let url = AppConfig.serviceAddress + "/equipdepart/exportEquipDepart?name="+this.name+"&product="+this.product; 
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
+
   }
 }

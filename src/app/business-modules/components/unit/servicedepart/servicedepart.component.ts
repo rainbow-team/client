@@ -32,6 +32,8 @@ export class ServicedepartComponent implements OnInit {
 
   selectId: any = "";
 
+  canManage: any = false;
+
   uploadUrl: any = AppConfig.serviceAddress + "/servicedepart/importServiceDepart";
 
 
@@ -45,6 +47,7 @@ export class ServicedepartComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
+    this.canManage = this.utilitiesSercice.checkPermission("servicedepart:manage");
 
     this.search();
 
