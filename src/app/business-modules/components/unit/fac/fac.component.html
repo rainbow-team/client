@@ -125,6 +125,12 @@
           导出
         </button>
       </div>
+      <div class="fr">
+        <app-common-import
+          [uploadUrl]="uploadUrl"
+          (search)="search($event)"
+        ></app-common-import>
+      </div>
 
       <div class="fr" *ngIf="isSearchShow == '0'&&canManage">
         <app-common-import [uploadUrl]="uploadUrl" (search)="search($event)"></app-common-import>

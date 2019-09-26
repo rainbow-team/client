@@ -131,6 +131,12 @@
           添加
         </button>
       </div>
+      <div class="fr">
+        <app-common-import
+          [uploadUrl]="uploadUrl"
+          (search)="search($event)"
+        ></app-common-import>
+      </div>
     </div>
     <div>
       <nz-table
