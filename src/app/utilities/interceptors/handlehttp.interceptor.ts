@@ -79,11 +79,17 @@ export class HandleHttpInterceptor implements HttpInterceptor {
             if (error.status == 403) {
                 sessionStorage.removeItem("staffObj");
 
-                window.alert("登录信息过期,3秒后将跳转至登录页面");
-                setTimeout(() => {
+                var hash = window.location.hash;
+               
+                if (hash && hash != "#/login") {
+                    window.alert("登录信息过期,3秒后将跳转至登录页面");
+                    setTimeout(() => {
 
-                    window.location.href = AppConfig.clientAddress+"/#/login"
-                }, 3000);
+                        window.location.href = AppConfig.clientAddress + "/#/login"
+                    }, 3000);
+                }
+
+
 
             }
 

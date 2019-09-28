@@ -33,9 +33,9 @@ export class DailyComponent implements OnInit {
 
   facName: any = '';
 
-  facStatusTypeIds: any=[];
+  facStatusTypeIds: any="";
 
-  fileTypeIds: any=[];
+  fileTypeIds: any="";
 
   file_name: any = '';
 
