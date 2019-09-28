@@ -3,9 +3,9 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UnithotregionService } from 'src/app/services/unit/unithotregion.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
-import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
 import { d } from '@angular/core/src/render3';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
+import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 
 @Component({
   selector: 'app-unit-editor',
@@ -40,7 +40,7 @@ export class UnitEditorComponent implements OnInit {
     private attachmentSercice: AttachmentSercice,
     private unithotregionService: UnithotregionService,
     private facSercice: FacSercice,
-    private umineMountainService: UmineMountainService
+    private uminePlaceService: UminePlaceService
   ) {}
 
   ngOnInit() {
@@ -55,8 +55,8 @@ export class UnitEditorComponent implements OnInit {
       });
     }
     if (this.unitType === '1') {
-      this.umineMountainService
-        .getUminemountinaListByUmineId(this.unitId)
+      this.uminePlaceService
+        .getUmineplaceListByUmineId(this.unitId)
         .subscribe(res => {
           this.unit_subjects = res.msg;
         });

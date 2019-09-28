@@ -1,20 +1,14 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { NzMessageService, UploadFile } from 'ng-zorro-antd';
-import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as echarts from 'echarts';
+import { NzMessageService } from 'ng-zorro-antd';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
-
+import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UnitAddressService } from 'src/app/services/unit/unitaddress.service';
-import { FacSercice } from 'src/app/services/unit/fac.service';
-import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
-import { UnithotregionService } from 'src/app/services/unit/unithotregion.service';
 
-import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-
-import * as echarts from 'echarts';
-import { Runner } from 'protractor';
 declare var MapConfig: any;
 
 @Component({
@@ -56,9 +50,6 @@ export class SimulationComponent implements OnInit {
     private serviceDepartService: ServiceDepartService,
     private umineService: UmineService,
     private unitAddressService: UnitAddressService,
-    private facSercice: FacSercice,
-    private umineMountainService: UmineMountainService,
-    private unithotregionService: UnithotregionService,
     private attachmentSercice: AttachmentSercice,
     private activatedRoute: ActivatedRoute
   ) {}

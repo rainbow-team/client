@@ -229,6 +229,7 @@
             <div nz-col nzSpan="16">
               <a
                 nz-button
+                [attr.disabled]="disabled"
                 style="margin-left:25px"
                 nzType="primary"
                 this.isSubjectVisible="true;"
@@ -254,7 +255,7 @@
         <div *ngIf="unitAddress.unitType === '1'">
           <div nz-row>
             <div nz-col [nzSpan]="8" class="ta_r">
-              铀矿山名称：
+              名称：
             </div>
             <div nz-col [nzSpan]="16" class="ta_l">
               <span class="showText">{{ selectedSubject.name }}</span>
@@ -292,6 +293,7 @@
             <div nz-col nzSpan="16">
               <a
                 nz-button
+                [attr.disabled]="disabled"
                 style="margin-left:25px"
                 nzType="primary"
                 this.isSubjectVisible="true;"
@@ -306,7 +308,7 @@
                 nz-button
                 nzType="primary"
                 target="_blank"
-                href="/#/searchShow/integratedAuery/uminmountainSearch?id={{
+                href="/#/searchShow/integratedAuery/umineplaceSearch?id={{
                   selectedSubject.id
                 }}"
                 >详细信息</a

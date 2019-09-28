@@ -56,7 +56,7 @@
         <thead>
           <tr>
             <th style="width: 5%">序号</th>
-            <th style="width: 25%">核设施/矿山名称</th>
+            <th style="width: 25%">核设施/铀尾矿（渣）库名称</th>
             <th style="width: 30%">对应热区坐标</th>
             <th style="width: 40%">三维展示链接</th>
           </tr>
@@ -99,15 +99,14 @@
     (nzOnOk)="editorOk()"
     [nzOkLoading]="isEditorLoading"
   >
-    <div style="height:360px">
+    <div style="height:360px;width: 480px">
       <div nz-row style="height: 60px;">
-        <div class="ta_r">
-          <span class="clo_r">*</span>核设施/铀矿山：
-          <nz-select
-            style="width:calc(100% - 120px)"
-            [(ngModel)]="subject.subjectId"
-            class="w200"
-          >
+        <div nz-col nzSpan="9" class="ta_r">
+          <span class="clo_r">*</span>核设施/铀尾矿（渣）库：
+        </div>
+
+        <div nz-col nzSpan="15" class="ta_l">
+          <nz-select [(ngModel)]="subject.subjectId" style="width: 100%">
             <nz-option
               *ngFor="let option of unit_subjects"
               [nzLabel]="option.name"
@@ -119,26 +118,23 @@
       </div>
 
       <div nz-row style="height: 60px;">
-        <div class="ta_r">
+        <div nz-col nzSpan="9" class="ta_r">
           <span class="clo_r">*</span>热区坐标：
-          <input
-            style="width:calc(100% - 120px)"
-            type="text"
-            nz-input
-            [(ngModel)]="subject.hotRegion"
-          />
+        </div>
+        <div nz-col nzSpan="15" class="ta_l">
+          <input type="text" nz-input [(ngModel)]="subject.hotRegion" />
         </div>
       </div>
 
       <div nz-row style="height: 60px;">
         <div class="ta_r">
-          <span class="clo_r">*</span>三维预览地址：
-          <input
-            style="width:calc(100% - 120px)"
-            type="text"
-            nz-input
-            [(ngModel)]="subject.previewUrl"
-          />
+          <div nz-col nzSpan="9">
+            <span class="clo_r">*</span>三维预览地址：
+          </div>
+
+          <div nz-col nzSpan="15" class="ta_l">
+            <input type="text" nz-input [(ngModel)]="subject.previewUrl" />
+          </div>
         </div>
       </div>
       <app-attachment

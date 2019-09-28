@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UnitAddressService } from 'src/app/services/unit/unitaddress.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
-import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
 import { UnithotregionService } from 'src/app/services/unit/unithotregion.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 
 @Component({
   selector: 'app-unit-show',
@@ -25,13 +25,14 @@ export class UnitShowComponent implements OnInit {
   subjectImageUrl = '';
   province = '';
 
+  disabled = false;
   constructor(
     private router: Router,
     private unitAddressService: UnitAddressService,
     private serviceDepartService: ServiceDepartService,
     private umineService: UmineService,
     private facSercice: FacSercice,
-    private umineMountainService: UmineMountainService,
+    private uminePlaceService: UminePlaceService,
     private unithotregionService: UnithotregionService,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -70,6 +71,9 @@ export class UnitShowComponent implements OnInit {
   showSubjectDetail(item) {
     this.isSubjectVisible = true;
     this.selectedRegion = item;
+    if (!this.selectedRegion.previewUrl) {
+      this.disabled = true;
+    }
     this.subjectImageUrl =
       AppConfig.serviceAddress + '/fileInfo/download?id=' + item.picId;
     if (this.unitAddress.unitType === '0') {
@@ -79,9 +83,9 @@ export class UnitShowComponent implements OnInit {
       });
     }
     if (this.unitAddress.unitType === '1') {
-      this.subjectTitle = '铀矿山详细信息';
-      this.umineMountainService
-        .getUmineMountainById(item.subjectId)
+      this.subjectTitle = '铀尾矿（渣）库详细信息';
+      this.uminePlaceService
+        .getUminePlaceById(item.subjectId)
         .subscribe(res => {
           this.selectedSubject = res.msg;
         });
