@@ -1,14 +1,17 @@
 <div style="height: 100%;background:#fff">
   <div nz-row style="    padding: 0 10px;">
-
     <div nz-col [nzSpan]="5">
       班次：
       <input nz-input [(ngModel)]="batchSearch" nzSize="default" class="w200" />
     </div>
 
-
     <div nz-col [nzSpan]="4" class="ta_r" style="float: right">
-      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">
+      <button
+        nz-button
+        nzType="primary"
+        style="width: 70px; margin-right: 10px;"
+        (click)="search()"
+      >
         查询
       </button>
     </div>
@@ -18,53 +21,86 @@
     <div nz-row style="height: 50px" class="div_top">
       <div class="fl div_top_tip"></div>
       <div class="fl" style="color: #0050b3;">
-        培训信息（共{{totalCount}}条）
+        培训信息（共{{ totalCount }}条）
       </div>
 
-  
-        <div class="fr">
-          <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
-        </div>
-        <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
-        </div>
-        <div class="fr">
-          <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
-        </div>
-
+      <div class="fr">
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除吗?"
+          (nzOnConfirm)="delete()"
+        >
+          删除
+        </button>
+      </div>
+      <div class="fr">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="modify()"
+        >
+          编辑
+        </button>
+      </div>
+      <div class="fr">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="add()"
+        >
+          添加
+        </button>
+      </div>
     </div>
     <div nz-row>
-      <nz-table #nestedTable [nzData]="dataSet" class="commontable" [nzFrontPagination]="false" [nzTotal]="totalCount"
-        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize"
-        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)"
-        class="tablescoll_rainbow">
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable"
+        [nzFrontPagination]="false"
+        [nzTotal]="totalCount"
+        [nzPageIndex]="pageIndex"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+        (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
+        class="tablescoll_rainbow"
+      >
         <thead>
           <tr>
             <!-- <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th> -->
-            <th>序号</th>
-            <th>培训班次</th>
-            <th>培训开始时间</th>
-            <th>培训结束时间</th>
-            <th>成绩</th>
-            <th>监督员证号</th>
-            <th>发证日期</th>
-            <th>到期时间</th>
+            <th style="width: 10%">序号</th>
+            <th style="width: 20%">培训班次</th>
+            <th style="width: 10%">培训开始时间</th>
+            <th style="width: 10%">培训结束时间</th>
+            <th style="width: 10%">成绩</th>
+            <th style="width: 20%">监督员证号</th>
+            <th style="width: 10%">发证日期</th>
+            <th style="width: 10%">到期时间</th>
             <!-- <th>操作</th> -->
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of nestedTable.data;index as index " [ngClass]="{'itemSeleted':data.id==selectId}"
-            (click)="selectItem(data)">
-
+          <tr
+            *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ itemSeleted: data.id == selectId }"
+            (click)="selectItem(data)"
+          >
             <!-- <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td> -->
-            <td>{{(pageIndex-1)*pageSize+1+index}}</td>
-            <td>{{data.trainClass}}</td>
-            <td>{{data.trainStartDate|recordtime}}</td>
-            <td>{{data.trainEndDate|recordtime}}</td>
-            <td>{{data.score}}</td>
-            <td>{{data.number}}</td>
-            <td>{{data.issueDate|recordtime}}</td>
-            <td>{{data.expireDate|recordtime}}</td>
+            <td style="width: 10%">
+              {{ (pageIndex - 1) * pageSize + 1 + index }}
+            </td>
+            <td style="width: 20%">{{ data.trainClass }}</td>
+            <td style="width: 10%">{{ data.trainStartDate | recordtime }}</td>
+            <td style="width: 10%">{{ data.trainEndDate | recordtime }}</td>
+            <td style="width: 10%">{{ data.score }}</td>
+            <td style="width: 20%">{{ data.number }}</td>
+            <td style="width: 10%">{{ data.issueDate | recordtime }}</td>
+            <td style="width: 10%">{{ data.expireDate | recordtime }}</td>
             <!-- <td>
               <a (click)="show(data,true);">查看</a>
               <nz-divider nzType="vertical"></nz-divider>
@@ -73,7 +109,6 @@
           </tr>
         </tbody>
       </nz-table>
-
     </div>
   </div>
 
@@ -81,9 +116,16 @@
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div> -->
 
-  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消" (nzOnOk)="save();"
-    (nzOnCancel)="isVisible=false;" nzWidth="700" [nzOkLoading]="isSaving">
-
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    [nzTitle]="modalTitle"
+    [nzOkText]="okText"
+    nzCancelText="取消"
+    (nzOnOk)="save()"
+    (nzOnCancel)="isVisible = false"
+    nzWidth="700"
+    [nzOkLoading]="isSaving"
+  >
     <div style="padding: 10px 30px 50px 0;">
       <div nz-row class="ma_b20">
         <!-- <div nz-col [nzSpan]="4" class="ta_r">
@@ -98,23 +140,48 @@
 
         <div nz-col [nzSpan]="12" class="ta_r">
           <span class="clo_r">*</span>培训班次：
-          <input nz-input name="batch" [(ngModel)]="batch" style="width: 140px;" required [validation]="true"
-            readonly="true" />
-          <button nz-button nzType="primary" style=" margin-left: 10px;width: 50px;padding-left: 10px;"
-            (click)="Associate()">选择</button>
+          <input
+            nz-input
+            name="batch"
+            [(ngModel)]="batch"
+            style="width: 140px;"
+            required
+            [validation]="true"
+            readonly="true"
+          />
+          <button
+            nz-button
+            nzType="primary"
+            style=" margin-left: 10px;width: 50px;padding-left: 10px;"
+            (click)="Associate()"
+          >
+            选择
+          </button>
         </div>
       </div>
       <div nz-row class="ma_b20">
         <div nz-col [nzSpan]="12" class="ta_r">
           <span class="clo_r">*</span>培训开始时间：
-          <nz-date-picker name="beginDate" [(ngModel)]="beginDate" class="w200" required [validation]="true"
-            [disabled]="true">
+          <nz-date-picker
+            name="beginDate"
+            [(ngModel)]="beginDate"
+            class="w200"
+            required
+            [validation]="true"
+            [disabled]="true"
+          >
           </nz-date-picker>
         </div>
         <div nz-col [nzSpan]="12" class="ta_r">
           <span class="clo_r">*</span>培训结束时间：
-          <nz-date-picker name="endDate" [(ngModel)]="endDate" class="w200" required [validation]="true"
-            [disabled]="true">
+          <nz-date-picker
+            name="endDate"
+            [(ngModel)]="endDate"
+            class="w200"
+            required
+            [validation]="true"
+            [disabled]="true"
+          >
           </nz-date-picker>
         </div>
       </div>
@@ -125,34 +192,59 @@
         </div>
         <div nz-col [nzSpan]="12" class="ta_r">
           监督员证号：
-          <input nz-input name="number" [(ngModel)]="data.number" class="w200" />
+          <input
+            nz-input
+            name="number"
+            [(ngModel)]="data.number"
+            class="w200"
+          />
         </div>
       </div>
       <div nz-row>
         <div nz-col [nzSpan]="12" class="ta_r">
           发证日期：
-          <nz-date-picker name="issueDate" [(ngModel)]="data.issueDate" class="w200"
-            (ngModelChange)="changeIssueDate($event)" [disabled]="isDisable">
+          <nz-date-picker
+            name="issueDate"
+            [(ngModel)]="data.issueDate"
+            class="w200"
+            (ngModelChange)="changeIssueDate($event)"
+            [disabled]="isDisable"
+          >
           </nz-date-picker>
         </div>
         <div nz-col [nzSpan]="12" class="ta_r">
           到期时间：
-          <nz-date-picker name="expireDate" [(ngModel)]="data.expireDate" class="w200" [disabled]="true">
+          <nz-date-picker
+            name="expireDate"
+            [(ngModel)]="data.expireDate"
+            class="w200"
+            [disabled]="true"
+          >
           </nz-date-picker>
         </div>
       </div>
     </div>
   </nz-modal>
 
-
-  <nz-modal [(nzVisible)]="isAssociateVisible" nzTitle="关联培训信息" nzOkText="确定" nzCancelText="取消"
-    (nzOnOk)="ConfirmAssociate()" (nzOnCancel)="isAssociateVisible=false;" nzWidth="1000px">
-
+  <nz-modal
+    [(nzVisible)]="isAssociateVisible"
+    nzTitle="关联培训信息"
+    nzOkText="确定"
+    nzCancelText="取消"
+    (nzOnOk)="ConfirmAssociate()"
+    (nzOnCancel)="isAssociateVisible = false"
+    nzWidth="1000px"
+  >
     <div style="position:relative;min-height:300px;">
       <div nz-row style="height: 50px" [nzType]="'flex'" [nzAlign]="'middle'">
         <div nz-col [nzSpan]="8">
           <nz-input-group [nzSuffix]="suffixIconSearch" style="width: 300px;">
-            <input type="text" nz-input placeholder="请输入班次搜索" [(ngModel)]="batchAssociate">
+            <input
+              type="text"
+              nz-input
+              placeholder="请输入班次搜索"
+              [(ngModel)]="batchAssociate"
+            />
           </nz-input-group>
           <ng-template #suffixIconSearch>
             <i nz-icon type="search" (click)="selectMonitorList()"></i>
@@ -160,10 +252,19 @@
         </div>
       </div>
       <div nz-row>
-        <nz-table #nestedTableAssociate [nzData]="MonitorList" class="commontable" [nzFrontPagination]="false"
-          [nzScroll]="{ y: '240px' }" [nzTotal]="totalCountAssociate" [nzPageIndex]="pageIndexAssociate"
-          nzShowSizeChanger [nzPageSize]="pageSizeAssociate" (nzPageIndexChange)="pageIndexAssociateChange($event)"
-          (nzPageSizeChange)="pageSizeAssociateChange($event)">
+        <nz-table
+          #nestedTableAssociate
+          [nzData]="MonitorList"
+          class="commontable"
+          [nzFrontPagination]="false"
+          [nzScroll]="{ y: '240px' }"
+          [nzTotal]="totalCountAssociate"
+          [nzPageIndex]="pageIndexAssociate"
+          nzShowSizeChanger
+          [nzPageSize]="pageSizeAssociate"
+          (nzPageIndexChange)="pageIndexAssociateChange($event)"
+          (nzPageSizeChange)="pageSizeAssociateChange($event)"
+        >
           <thead>
             <tr>
               <th style="width: 5%">序号</th>
@@ -177,24 +278,31 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of nestedTableAssociate.data;index as index" (click)="clickAssociateItem(data)"
-              [ngClass]="{true:'table_select',false:''}[selectAssociateItem.id==data.id]">
-              <td style="width: 5%">{{(pageIndexAssociate-1)*pageSizeAssociate+1+index}}</td>
-              <td style="width: 15%">{{data.batch}}</td>
-              <td style="width: 15%">{{data.beginDate|recordtime}}</td>
-              <td style="width: 15%">{{data.endDate|recordtime}}</td>
-              <td style="width: 15%">{{data.place}}</td>
-              <td style="width: 10%">{{data.number}}</td>
-              <td style="width: 25%" nz-tooltip nzTitle={{data.content}}>{{data.content|tooltips:10}}</td>
+            <tr
+              *ngFor="let data of nestedTableAssociate.data; index as index"
+              (click)="clickAssociateItem(data)"
+              [ngClass]="
+                { true: 'table_select', false: '' }[
+                  selectAssociateItem.id == data.id
+                ]
+              "
+            >
+              <td style="width: 5%">
+                {{ (pageIndexAssociate - 1) * pageSizeAssociate + 1 + index }}
+              </td>
+              <td style="width: 15%">{{ data.batch }}</td>
+              <td style="width: 15%">{{ data.beginDate | recordtime }}</td>
+              <td style="width: 15%">{{ data.endDate | recordtime }}</td>
+              <td style="width: 15%">{{ data.place }}</td>
+              <td style="width: 10%">{{ data.number }}</td>
+              <td style="width: 25%" nz-tooltip nzTitle="{{ data.content }}">
+                {{ data.content | tooltips: 10 }}
+              </td>
               <!-- <td>{{data.note}}</td> -->
             </tr>
           </tbody>
         </nz-table>
       </div>
-
     </div>
-
-
   </nz-modal>
-
 </div>
