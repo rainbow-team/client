@@ -5,6 +5,7 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-uminemountain',
@@ -33,15 +34,19 @@ export class UminemountainComponent implements OnInit {
   acceptIds: any = [];
 
   selectId: any = "";
+  canManage: any = false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private umineMountainService: UmineMountainService) { }
+    private staffSercice: StaffSercice, private umineMountainService: UmineMountainService,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
+
+    this.canManage = this.utilitiesSercice.checkPermission('uminemountain:manage');
 
     this.search();
   }
@@ -93,7 +98,7 @@ export class UminemountainComponent implements OnInit {
     this.name = "";
     this.umineName = "";
     this.build_start_year = "";
-    this.build_end_year="";
+    this.build_end_year = "";
     this.statusIds = [];
     this.recordIds = [];
     this.acceptIds = []

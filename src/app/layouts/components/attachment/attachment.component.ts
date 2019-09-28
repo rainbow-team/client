@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { UploadXHRArgs } from 'ng-zorro-antd';
 import { HttpRequest, HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-attachment',
@@ -17,7 +18,7 @@ export class AttachmentComponent implements OnInit {
   uploadUrl: any = AppConfig.serviceAddress + "/fileInfo/upload";
   downLoadurl: any = AppConfig.serviceAddress + "/fileInfo/download";
 
-  constructor(private attachmentSercice: AttachmentSercice, private http: HttpClient) { }
+  constructor(private attachmentSercice: AttachmentSercice, private http: HttpClient, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
   }
@@ -73,7 +74,30 @@ export class AttachmentComponent implements OnInit {
   }
 
   downloadAccessory(item) {
-    window.open(this.downLoadurl + "?id=" + item.response.msg);
+    window.open(this.downLoadurl + "?id=" + item.response.msg + "&type=1");
+  }
+
+  canPreview (fileName) {
+
+    var pos = fileName.lastIndexOf('.');
+    var format = fileName.substring(pos + 1);
+    var picType = ['pdf', 'doc', 'txt', 'docx'];
+    var res = false;
+
+    picType.forEach(element => {
+      if (element == format.toLowerCase()) {
+        res = true;
+      }
+    });
+
+    return res;
+  }
+
+  preview(item) {
+
+    var url = this.downLoadurl + "?id=" + item.response.msg + "&type=2";
+ 
+    window.open('src/assets/usermanual/web/viewer.html?url=' + this.utilitiesSercice.wrapUrl(url),"_blank");
   }
 
 }

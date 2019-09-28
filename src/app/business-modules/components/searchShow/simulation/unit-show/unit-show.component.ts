@@ -35,7 +35,7 @@ export class UnitShowComponent implements OnInit {
     private uminePlaceService: UminePlaceService,
     private unithotregionService: UnithotregionService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     let id = this.activatedRoute.snapshot.queryParams['id'];
@@ -44,7 +44,7 @@ export class UnitShowComponent implements OnInit {
       this.unitAddress = res.msg;
       this.showUnitDetail(this.unitAddress.unitType, this.unitAddress.unitId);
       this.unitImageUrl =
-        AppConfig.serviceAddress + '/fileInfo/download?id=' + res.msg.picId;
+        AppConfig.serviceAddress + '/fileInfo/download?id=' + res.msg.picId + "&type=1";
     });
   }
 
@@ -75,7 +75,7 @@ export class UnitShowComponent implements OnInit {
       this.disabled = true;
     }
     this.subjectImageUrl =
-      AppConfig.serviceAddress + '/fileInfo/download?id=' + item.picId;
+      AppConfig.serviceAddress + '/fileInfo/download?id=' + item.picId + "&type=1";
     if (this.unitAddress.unitType === '0') {
       this.subjectTitle = '核设施详细信息';
       this.facSercice.getFacById(item.subjectId).subscribe(res => {

@@ -6,6 +6,7 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { FacCheckSercice } from 'src/app/services/check/fac.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-check-fac',
@@ -33,16 +34,18 @@ export class CheckFacComponent implements OnInit {
   stageIds: any = [];
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private facService: FacSercice, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private facCheckSercice: FacCheckSercice) { }
+    private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private facCheckSercice: FacCheckSercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
-
+    this.canManage = this.utilitiesSercice.checkPermission('check:fac:manage');
     this.search();
   }
 

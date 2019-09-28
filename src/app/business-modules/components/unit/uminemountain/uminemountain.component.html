@@ -77,7 +77,7 @@
         铀矿山信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="isSearchShow == '0'">
+      <div class="fr" *ngIf="isSearchShow == '0'&&canManage">
         <button
           nz-button
           nzType="danger"
@@ -89,7 +89,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="isSearchShow == '0'">
+      <div class="fr" *ngIf="isSearchShow == '0'&&canManage">
         <button
           nz-button
           nzType="primary"
@@ -100,7 +100,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="isSearchShow == '0'">
+      <div class="fr" *ngIf="isSearchShow == '0'&&canManage">
         <button
           nz-button
           nzType="primary"
@@ -136,7 +136,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]='420'>
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"

@@ -6,6 +6,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { UmineplaceCheckSercice } from 'src/app/services/check/umineplace.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-check-umineplace',
@@ -32,17 +33,17 @@ export class CheckUmineplaceComponent implements OnInit {
   stageIds: any = [];
 
   selectId: any = "";
-
+  canManage:any=false;
   constructor(private router: Router,
     private msg: NzMessageService, private umineplaceCheckSercice: UmineplaceCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineService: UmineService,
-    private uminePlaceService: UminePlaceService) { }
+    private uminePlaceService: UminePlaceService,private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
-
+    this.canManage = this.utilitiesSercice.checkPermission('check:umineplace:manage');
     this.search();
 
   }

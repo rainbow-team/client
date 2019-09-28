@@ -7,6 +7,7 @@ import { EquipCheckService } from 'src/app/services/check/equip.service';
 import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-check-equip',
@@ -35,17 +36,19 @@ export class EquipComponent implements OnInit {
   stageIds: any = [];
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private equipCheckService: EquipCheckService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private equipDepartService: EquipDepartService,
-    private serviceDepartService: ServiceDepartService, private facSercice: FacSercice) { }
+    private serviceDepartService: ServiceDepartService, private facSercice: FacSercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
-
+    this.canManage = this.utilitiesSercice.checkPermission('check:equip:manage');
     this.search();
 
   }

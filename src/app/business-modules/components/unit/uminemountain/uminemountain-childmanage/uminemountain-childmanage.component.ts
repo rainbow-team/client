@@ -3,6 +3,7 @@ import { ValidationDirective } from 'src/app/layouts/_directives/validation.dire
 import { Router,ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-uminemountain-childmanage',
@@ -34,14 +35,17 @@ export class UminemountainChildmanageComponent implements OnInit {
   pageSize: any = 10;
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(private router: Router,
-    private ActivatedRoute: ActivatedRoute, private msg: NzMessageService,private umineMountainService: UmineMountainService) { }
+    private ActivatedRoute: ActivatedRoute, private msg: NzMessageService,private umineMountainService: UmineMountainService,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.umineMountainId = id;
+    this.canManage = this.utilitiesSercice.checkPermission('uminemountain:manage');
     this.search();
   }
 

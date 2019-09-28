@@ -6,6 +6,7 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { FacCheckSercice } from 'src/app/services/check/fac.service';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-check-fac-file',
@@ -39,10 +40,12 @@ export class CheckFacFileComponent implements OnInit {
   file_name: any = "";
   typeIds: any = [];
   fileDate: any = [];
+  canManage:any=false;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private facCheckSercice: FacCheckSercice,
-    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice) { }
+    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
 
 
@@ -51,6 +54,8 @@ export class CheckFacFileComponent implements OnInit {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.facId = id;
     this.dictionary = this.dictionarySercice.getAllConfig();
+
+    this.canManage = this.utilitiesSercice.checkPermission('check:fac:manage');
     this.search();
   }
 

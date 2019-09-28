@@ -38,6 +38,7 @@ export class ActivityPermitComponent implements OnInit {
 
   selectId: any = '';
   uploadUrl: any = AppConfig.serviceAddress + '/activitypermit/importData';
+  canManage: any = false;
 
   constructor(
     private router: Router,
@@ -46,12 +47,14 @@ export class ActivityPermitComponent implements OnInit {
     private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice,
     private utilitiesSercice: UtilitiesSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
+
+    this.canManage = this.utilitiesSercice.checkPermission('permit:activity:manage');
 
     if (
       this.servicedepartId ||

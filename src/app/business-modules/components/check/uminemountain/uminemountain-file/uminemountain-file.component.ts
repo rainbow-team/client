@@ -5,6 +5,7 @@ import { UminemountainCheckSercice } from 'src/app/services/check/uminemountain.
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-uminemountain-file',
@@ -37,15 +38,18 @@ export class UminemountainFileComponent implements OnInit {
   // file_name:any="";
   typeIds:any=[];
   fileDate:any=[];
+  canManage:any=false;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private uminemountainCheckSercice: UminemountainCheckSercice,
-    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice) { }
+    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.uminemountainId = id;
     this.dictionary = this.dictionarySercice.getAllConfig();
+    this.canManage = this.utilitiesSercice.checkPermission('check:uminemountain:manage');
     this.search();
   }
 

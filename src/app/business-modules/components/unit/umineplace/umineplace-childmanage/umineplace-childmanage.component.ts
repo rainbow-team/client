@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-umineplace-childmanage',
@@ -35,14 +36,17 @@ export class UmineplaceChildmanageComponent implements OnInit {
   pageSize: any = 10;
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(private router: Router,
-    private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private uminePlaceService: UminePlaceService) { }
+    private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private uminePlaceService: UminePlaceService,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.uminePlaceId = id;
+    this.canManage = this.utilitiesSercice.checkPermission('umineplace:manage');
     this.search();
   }
 

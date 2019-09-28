@@ -7,6 +7,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { Jsonp } from '@angular/http/src/http';
 import { SupervisionTrainService } from 'src/app/services/supervision/supervisortrain.service';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-supervisor-childmanage',
@@ -59,10 +60,11 @@ export class SupervisorChildmanageComponent implements OnInit {
   endDate: any;
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(private router: Router, private dictionarySercice: DictionarySercice, private staffSercice: StaffSercice,
     private ActivatedRoute: ActivatedRoute, private supervisionSercice: SupervisionSercice,
-    private msg: NzMessageService, private supervisionTrainService: SupervisionTrainService) { }
+    private msg: NzMessageService, private supervisionTrainService: SupervisionTrainService,private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
@@ -71,6 +73,8 @@ export class SupervisorChildmanageComponent implements OnInit {
 
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.supervisorId = id;
+    this.canManage = this.utilitiesSercice.checkPermission("supervisor:manage");
+
     this.search();
   }
 

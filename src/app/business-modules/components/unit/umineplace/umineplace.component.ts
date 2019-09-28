@@ -36,6 +36,7 @@ export class UmineplaceComponent implements OnInit {
 
   selectId: any = '';
   uploadUrl: any = AppConfig.serviceAddress + '/umineplace/importData';
+  canManage: any = false;
 
   constructor(
     private router: Router,
@@ -45,12 +46,15 @@ export class UmineplaceComponent implements OnInit {
     private staffSercice: StaffSercice,
     private uminePlaceService: UminePlaceService,
     private utilitiesSercice: UtilitiesSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
+
+    this.canManage = this.utilitiesSercice.checkPermission('umineplace:manage');
+
     this.search();
   }
 

@@ -7,6 +7,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-check-activity',
@@ -40,11 +41,12 @@ export class ActivityComponent implements OnInit {
   content: any = "";
 
   selectId: any = "";
-
+  canManage: any = false;
   constructor(private router: Router,
     private msg: NzMessageService, private activityCheckSercice: ActivityCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private equipDepartService: EquipDepartService,
-    private serviceDepartService: ServiceDepartService, private facService: FacSercice) { }
+    private serviceDepartService: ServiceDepartService, private facService: FacSercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
@@ -54,7 +56,7 @@ export class ActivityComponent implements OnInit {
     if (this.servicedepartId || this.umineId || this.equipdepartId || this.facId) {
       this.isSearchShow = true;
     }
-
+    this.canManage = this.utilitiesSercice.checkPermission('check:activity:manage');
     this.search();
 
 

@@ -40,7 +40,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="isSearchShow == '0'&&canManage">
+      <div class="fr" *ngIf="isSearchShow == '0'">
         <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportGroup()">
           导出
         </button>
@@ -62,7 +62,7 @@
             <th style="width: 12%">操作</th>
           </tr>
         </thead>
-        <tbody [appPageHeight]='390'>
+        <tbody [appPageHeight]='385'>
           <tr *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]" (click)="selectItem(data)">
             <td style="width: 12%">

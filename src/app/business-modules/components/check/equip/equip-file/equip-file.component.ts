@@ -5,6 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { EquipCheckService } from 'src/app/services/check/equip.service';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-equip-file',
@@ -37,15 +38,18 @@ export class EquipFileComponent implements OnInit {
   // file_name:any="";
   typeIds:any=[];
   fileDate:any=[];
+  canManage:any=false;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private equipCheckService: EquipCheckService,
-    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice) { }
+    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.equipId = id;
     this.dictionary = this.dictionarySercice.getAllConfig();
+    this.canManage = this.utilitiesSercice.checkPermission('check:equip:manage');
     this.search();
   }
 

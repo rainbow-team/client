@@ -35,6 +35,8 @@ export class EquipPermitComponent implements OnInit {
 
   selectId: any = '';
   uploadUrl: any = AppConfig.serviceAddress + '/equippermit/importData';
+  canManage: any = false;
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -42,12 +44,14 @@ export class EquipPermitComponent implements OnInit {
     private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice,
     private utilitiesSercice: UtilitiesSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
+
+    this.canManage = this.utilitiesSercice.checkPermission('permit:equip:manage');
     this.search();
   }
 

@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { UmineMountainPermitService } from 'src/app/services/permit/uminemountain.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-permit-uminemountain',
@@ -29,19 +30,22 @@ export class UminemountainPermitComponent implements OnInit {
   acceptDate: any = [];
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(
     private router: Router,
     private msg: NzMessageService,
     private umineMountainPermitService: UmineMountainPermitService,
     private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice
+    private staffSercice: StaffSercice,
+    private utilitiesSercice:UtilitiesSercice
   ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
+    this.canManage = this.utilitiesSercice.checkPermission('permit:uminemountain:manage');
     this.search();
   }
 

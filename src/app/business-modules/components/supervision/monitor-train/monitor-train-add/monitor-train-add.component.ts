@@ -70,8 +70,11 @@ export class MonitorTrainAddComponent implements OnInit {
 
         if (res1.msg.length > 0) {
           res1.msg.forEach(element => {
+           
             this.fileList.push({
-              uid: element.fileinfoId,
+              response: {
+                msg: element.fileinfoId
+              },
               name: element.fileinfoClientFileName
             });
           });

@@ -37,6 +37,7 @@ export class SupervisorComponent implements OnInit {
     selectId: any = "";
 
     uploadUrl: any = AppConfig.serviceAddress + "/Supervisor/importSupervisor";
+    canManage: any = false;
 
     constructor(private supervisionSercice: SupervisionSercice, private http: HttpClient, private router: Router,
         private msg: NzMessageService, private dictionarySercice: DictionarySercice,
@@ -48,6 +49,8 @@ export class SupervisorComponent implements OnInit {
         this.staffObj = this.staffSercice.getStaffObj();
 
         this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
+
+        this.canManage = this.utilitiesSercice.checkPermission("supervisor:manage");
 
         this.search();
     }

@@ -47,7 +47,7 @@
         核安全监管员信息列表（共{{ totalCount }}条）
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="danger"
@@ -59,7 +59,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="primary"
@@ -70,7 +70,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
         <button
           nz-button
           nzType="primary"
@@ -92,7 +92,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="canManage">
           <app-common-import [uploadUrl]="uploadUrl" (search)="search($event)"></app-common-import>
       </div>
     </div>
@@ -123,7 +123,7 @@
             <th style="width: 10%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]='395'>
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ itemSeleted: data.id == selectId }"

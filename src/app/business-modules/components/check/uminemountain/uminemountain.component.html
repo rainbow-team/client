@@ -52,7 +52,7 @@
         铀矿山井下消防审查信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="!uminemountainId">
+      <div class="fr" *ngIf="!uminemountainId&&canManage">
         <button
           nz-button
           nzType="danger"
@@ -64,7 +64,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="!uminemountainId">
+      <div class="fr" *ngIf="!uminemountainId&&canManage">
         <button
           nz-button
           nzType="primary"
@@ -75,7 +75,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="!uminemountainId">
+      <div class="fr" *ngIf="!uminemountainId&&canManage">
         <button
           nz-button
           nzType="primary"
@@ -109,7 +109,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]='395'>
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"

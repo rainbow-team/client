@@ -58,7 +58,7 @@ export class FacComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
-    this.canManage = this.utilitiesSercice.checkPermission('group:manage');
+    this.canManage = this.utilitiesSercice.checkPermission('fac:manage');
 
     this.serviceDepartService.getAllDepartService().subscribe(res => {
       if (res.code == 200) {

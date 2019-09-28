@@ -6,6 +6,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UminemountainCheckSercice } from 'src/app/services/check/uminemountain.service';
 import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-check-uminemountain',
@@ -32,17 +33,17 @@ export class CheckUminemountainComponent implements OnInit {
   content: any = "";
 
   selectId: any = "";
-
+  canManage:any=false;
   constructor(private router: Router,
     private msg: NzMessageService, private uminemountainCheckSercice: UminemountainCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineService: UmineService,
-    private umineMountainService: UmineMountainService) { }
+    private umineMountainService: UmineMountainService,private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
-
+    this.canManage = this.utilitiesSercice.checkPermission('check:uminemountain:manage');
     this.search();
   }
 

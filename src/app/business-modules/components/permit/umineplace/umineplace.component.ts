@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { UmineplacePermitService } from 'src/app/services/permit/umineplace.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-permit-umineplace',
@@ -29,19 +30,21 @@ export class UmineplacePermitComponent implements OnInit {
   permitDate: any = '';
 
   selectId: any = "";
+  canManage:any=false;
 
   constructor(
     private router: Router,
     private msg: NzMessageService,
     private umineplacePermitService: UmineplacePermitService,
     private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice
+    private staffSercice: StaffSercice,
+    private utilitiesSercice:UtilitiesSercice
   ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
-
+    this.canManage = this.utilitiesSercice.checkPermission('permit:umineplace:manage');
     this.search();
   }
 
