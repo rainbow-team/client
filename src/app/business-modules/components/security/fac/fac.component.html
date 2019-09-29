@@ -153,7 +153,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="!isSearchShow && canManage">
         <app-common-import
           [uploadUrl]="uploadUrl"
           (search)="search()"

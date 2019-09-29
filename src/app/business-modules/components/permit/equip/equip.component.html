@@ -127,12 +127,17 @@
       </div>
 
       <div class="fr">
-        <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportEquipPermit()">
+        <button
+          nz-button
+          nzType="primary"
+          style="margin-right: 10px;"
+          (click)="exportEquipPermit()"
+        >
           导出
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="!equipdepartId && canManage">
         <app-common-import
           [uploadUrl]="uploadUrl"
           (search)="search()"
@@ -168,7 +173,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody [appPageHeight]='430'>
+        <tbody [appPageHeight]="430">
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
