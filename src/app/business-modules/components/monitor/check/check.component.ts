@@ -51,6 +51,10 @@ export class CheckComponent implements OnInit {
   facList: any = [];
 
   selectId: any = '';
+
+  canManage: any = false;
+
+
   uploadUrl: any = AppConfig.serviceAddress + '/checkmonitor/importData';
 
   constructor(
@@ -63,12 +67,16 @@ export class CheckComponent implements OnInit {
     private serviceDepartService: ServiceDepartService,
     private umineService: UmineService,
     private utilitiesSercice: UtilitiesSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
+
+    this.canManage = this.utilitiesSercice.checkPermission(
+      'monitor:check:manage'
+    );
 
     if (this.servicedepartId || this.umineId || this.equipdepartId) {
       this.isSearchShow = true;
@@ -225,4 +233,30 @@ export class CheckComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportCheckMonitor() {
+
+    let start_date = '',
+      end_date = '';
+    if (this.check_date && this.check_date.length > 0) {
+      if (this.check_date[0]) {
+        start_date = this.check_date[0];
+      }
+
+      if (this.check_date[1]) {
+        end_date = this.check_date[1];
+      }
+    }
+
+
+    let url =
+      AppConfig.serviceAddress +
+      '/checkmonitor/exportCheckMonitor?name=' + this.name
+      + '&content=' + this.content + '&typeIds=' + this.typeIds
+      + '&start_date=' + encodeURIComponent(start_date) + '&end_date=' + encodeURIComponent(end_date);
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
 }
