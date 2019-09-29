@@ -46,7 +46,7 @@ export class ActivityComponent implements OnInit {
     private msg: NzMessageService, private activityCheckSercice: ActivityCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private equipDepartService: EquipDepartService,
     private serviceDepartService: ServiceDepartService, private facService: FacSercice,
-    private utilitiesSercice:UtilitiesSercice) { }
+    private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
@@ -192,4 +192,15 @@ export class ActivityComponent implements OnInit {
     this.search();
   }
 
+  exportActivityCheck() {
+
+    let url =
+      AppConfig.serviceAddress +
+      '/activitycheck/exportActivityCheck?name=' + this.name
+      + '&facName=' + this.facName + '&typeIds=' + this.typeIds
+      + '&content=' + this.content;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
 }

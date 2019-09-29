@@ -139,5 +139,18 @@ export class CheckUminemountainComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportUminemountainCheck() {
+
+    let url =
+      AppConfig.serviceAddress +
+      '/uminemountaincheck/exportUminemountainCheck?umineName=' + this.umineName
+      + '&umineMountainName=' + this.umineMountainName + '&content=' + this.content;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
+
 }
 
