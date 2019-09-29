@@ -52,7 +52,7 @@
         核设施许可信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="!facId&&canManage">
+      <div class="fr" *ngIf="!facId && canManage">
         <button
           nz-button
           nzType="danger"
@@ -64,7 +64,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="!facId&&canManage">
+      <div class="fr" *ngIf="!facId && canManage">
         <button
           nz-button
           nzType="primary"
@@ -75,7 +75,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="!facId&&canManage">
+      <div class="fr" *ngIf="!facId && canManage">
         <button
           nz-button
           nzType="primary"
@@ -87,15 +87,20 @@
       </div>
 
       <div class="fr">
-        <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportFacPermit()">
+        <button
+          nz-button
+          nzType="primary"
+          style="margin-right: 10px;"
+          (click)="exportFacPermit()"
+        >
           导出
         </button>
       </div>
 
-      <div class="fr" *ngIf="!facId&&canManage">
+      <div class="fr" *ngIf="!facId && canManage">
         <app-common-import
           [uploadUrl]="uploadUrl"
-          (search)="search($event)"
+          (search)="search()"
         ></app-common-import>
       </div>
     </div>
@@ -123,7 +128,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody [appPageHeight]='395'>
+        <tbody [appPageHeight]="395">
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"

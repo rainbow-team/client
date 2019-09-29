@@ -64,12 +64,12 @@
           导出
         </button>
       </div>
-
-
-      <div class="fr">
+      
+      
+      <div class="fr" *ngIf="isSearchShow == '0' && canManage">
         <app-common-import [uploadUrl]="uploadUrl" (search)="search()"></app-common-import>
       </div>
-    </div>
+      
     <div>
       <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
         [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"

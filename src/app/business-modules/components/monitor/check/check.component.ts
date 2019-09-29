@@ -56,6 +56,7 @@ export class CheckComponent implements OnInit {
 
 
   uploadUrl: any = AppConfig.serviceAddress + '/checkmonitor/importData';
+  canManage: any = false;
 
   constructor(
     private router: Router,
@@ -73,6 +74,9 @@ export class CheckComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
+    this.canManage = this.utilitiesSercice.checkPermission(
+      'monitor:check:manage'
+    );
 
     this.canManage = this.utilitiesSercice.checkPermission(
       'monitor:check:manage'

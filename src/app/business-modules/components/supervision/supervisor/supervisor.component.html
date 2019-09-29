@@ -93,7 +93,10 @@
       </div>
 
       <div class="fr" *ngIf="canManage">
-          <app-common-import [uploadUrl]="uploadUrl" (search)="search($event)"></app-common-import>
+        <app-common-import
+          [uploadUrl]="uploadUrl"
+          (search)="search()"
+        ></app-common-import>
       </div>
     </div>
     <div>
@@ -123,7 +126,7 @@
             <th style="width: 10%">操作</th>
           </tr>
         </thead>
-        <tbody [appPageHeight]='395'>
+        <tbody [appPageHeight]="395">
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ itemSeleted: data.id == selectId }"
