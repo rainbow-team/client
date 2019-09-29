@@ -207,4 +207,31 @@ export class EquipPermitComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportEquipPermit() {
+
+    let start_date = '',
+      end_date = '';
+    if (this.permit_date && this.permit_date.length > 0) {
+      if (this.permit_date[0]) {
+        start_date = this.permit_date[0];
+      }
+
+      if (this.permit_date[1]) {
+        end_date = this.permit_date[1];
+      }
+    }
+    
+    let url =
+      AppConfig.serviceAddress +
+      '/equippermit/exportEquipPermit?name=' + this.name 
+      +'&equipDepartName=' +  this.equipDepartName +'&serviceDepartName=' +  this.serviceDepartName 
+      +'&facName=' +  this.facName
+      +'&typeIds=' +  this.typeIds +'&levelIds=' +  this.levelIds +'&stageIds=' +  this.stageIds
+      +'&start_date=' + encodeURIComponent(start_date) +'&end_date=' + encodeURIComponent(end_date);
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
 }

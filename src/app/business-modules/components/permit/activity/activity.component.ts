@@ -228,4 +228,31 @@ export class ActivityPermitComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportActivityPermit() {
+
+    
+    let start_date = '',
+      end_date = '';
+    if (this.permitDate && this.permitDate.length > 0) {
+      if (this.permitDate[0]) {
+        start_date = this.permitDate[0];
+      }
+
+      if (this.permitDate[1]) {
+        end_date = this.permitDate[1];
+      }
+    }
+
+    let url =
+      AppConfig.serviceAddress +
+      '/activitypermit/exportActivityPermit?departName=' + this.departName 
+      +'&facName=' +  this.facName +'&name=' +  this.name +'&content=' +  this.content
+      +'&typeIds=' +  this.typeIds
+      +'&start_date=' + encodeURIComponent(start_date) +'&end_date=' + encodeURIComponent(end_date);
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
 }

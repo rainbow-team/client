@@ -105,8 +105,8 @@ export class UminemountainPermitComponent implements OnInit {
   reset() {
     this.umineName = '';
     this.umineMountainName = '';
-    this.recordtime = '';
-    this.acceptDate = '';
+    this.recordtime = [];
+    this.acceptDate = [];
     this.selectId = "";
   }
 
@@ -164,4 +164,46 @@ export class UminemountainPermitComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportUminemountainPermit() {
+
+    let record_start_date = '', record_end_date = '',
+        accept_start_date='',accept_end_date='';
+
+    if (this.recordtime && this.recordtime.length > 0) {
+      if (this.recordtime[0]) {
+        record_start_date = this.recordtime[0];
+      }
+
+      if (this.recordtime[1]) {
+        record_start_date = this.recordtime[1];
+      }
+    }
+    
+    if (this.acceptDate && this.acceptDate.length > 0) {
+      if (this.acceptDate[0]) {
+        accept_start_date = this.acceptDate[0];
+      }
+
+      if (this.acceptDate[1]) {
+        accept_end_date = this.acceptDate[1];
+      }
+    }
+
+    this.umineName = '';
+    this.umineMountainName = '';
+    this.recordtime = [];
+    this.acceptDate = [];
+
+    let url =
+      AppConfig.serviceAddress +
+      '/uminemountainpermit/exportUminemountainPermit?umineName=' + this.umineName 
+      +'&umineMountainName=' +  this.umineMountainName
+      +'&record_start_date=' + encodeURIComponent(record_start_date) +'&record_end_date=' + encodeURIComponent(record_end_date)
+      +'&accept_start_date=' + encodeURIComponent(accept_start_date) +'&accept_end_date=' + encodeURIComponent(accept_end_date);
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
 }

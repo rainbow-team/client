@@ -218,6 +218,7 @@ export class DailyComponent implements OnInit {
   }
 
   exportDailyMonitor() {
+    
     let url =
       AppConfig.serviceAddress +
       '/dailymonitor/exportDailyMonitor?serviceDepartName=' + this.serviceDepartName 

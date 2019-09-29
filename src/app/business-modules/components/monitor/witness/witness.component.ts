@@ -218,21 +218,22 @@ export class WitnessComponent implements OnInit {
   exportWitnessMonitor() {
 
     let start_date = '',
-    end_date = '';
-  if (this.witness_date && this.witness_date.length > 0) {
-    if (this.witness_date[0]) {
-      start_date = this.witness_date[0];
-    }
+      end_date = '';
+    if (this.witness_date && this.witness_date.length > 0) {
+      if (this.witness_date[0]) {
+        start_date = this.witness_date[0];
+      }
 
-    if (this.witness_date[1]) {
-      end_date = this.witness_date[1];
+      if (this.witness_date[1]) {
+        end_date = this.witness_date[1];
+      }
     }
-  }
+    
     let url =
       AppConfig.serviceAddress +
-      '/witnessmonitor/exportWitnessMonitor?name=' + this.name 
-      +'&witness_obj=' +  this.obj +'&witness_items=' + this.items 
-      +'&start_date=' + encodeURIComponent(start_date) +'&end_date=' + encodeURIComponent(end_date);
+      '/witnessmonitor/exportWitnessMonitor?name=' + this.name
+      + '&witness_obj=' + this.obj + '&witness_items=' + this.items
+      + '&start_date=' + encodeURIComponent(start_date) + '&end_date=' + encodeURIComponent(end_date);
 
     url = this.utilitiesSercice.wrapUrl(url);
     window.open(url, '_blank');

@@ -27,7 +27,7 @@ export class UmineplacePermitComponent implements OnInit {
   umineName: any = '';
   uminePlaceName: any = '';
   stageIds: any = [];
-  permitDate: any = '';
+  permitDate: any = [];
 
   selectId: any = "";
   canManage:any=false;
@@ -107,7 +107,7 @@ export class UmineplacePermitComponent implements OnInit {
     this.umineName = '';
     this.uminePlaceName = '';
     this.stageIds = [];
-    this.permitDate = '';
+    this.permitDate = [];
     this.selectId = "";
   }
 
@@ -167,4 +167,30 @@ export class UmineplacePermitComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportUmineplacePermit() {
+
+    let start_date = '',
+      end_date = '';
+    if (this.permitDate && this.permitDate.length > 0) {
+      if (this.permitDate[0]) {
+        start_date = this.permitDate[0];
+      }
+
+      if (this.permitDate[1]) {
+        end_date = this.permitDate[1];
+      }
+    }
+    
+    let url =
+      AppConfig.serviceAddress +
+      '/umineplacepermit/exportUmineplacePermit?umineName=' + this.umineName 
+      +'&uminePlaceName=' +  this.uminePlaceName +'&stageIds=' +  this.stageIds
+      +'&start_date=' + encodeURIComponent(start_date) +'&end_date=' + encodeURIComponent(end_date);
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
+
 }

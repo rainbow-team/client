@@ -31,6 +31,10 @@ export class ReportComponent implements OnInit {
   report_date = [];
 
   selectId: any = '';
+
+  canManage: any = false;
+
+
   uploadUrl: any = AppConfig.serviceAddress + '/reportmonitor/importData';
 
   constructor(
@@ -46,6 +50,12 @@ export class ReportComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
+
+    this.canManage = this.utilitiesSercice.checkPermission(
+      'monitor:report:manage'
+    );
+
+
     this.search();
   }
 
@@ -150,4 +160,30 @@ export class ReportComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportReportMonitor() {
+
+    
+    let start_date = '',
+      end_date = '';
+    if (this.report_date && this.report_date.length > 0) {
+      if (this.report_date[0]) {
+        start_date = this.report_date[0];
+      }
+
+      if (this.report_date[1]) {
+        end_date = this.report_date[1];
+      }
+    }
+
+    let url =
+      AppConfig.serviceAddress +
+      '/reportmonitor/exportReportMonitor?orgName=' + this.orgName 
+      +'&typeIds=' +  this.typeIds
+      +'&start_date=' + encodeURIComponent(start_date) +'&end_date=' + encodeURIComponent(end_date);
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
 }

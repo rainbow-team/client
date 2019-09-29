@@ -160,4 +160,29 @@ export class PermitFacComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportFacPermit() {
+
+    let start_date = '',
+      end_date = '';
+    if (this.permit_date && this.permit_date.length > 0) {
+      if (this.permit_date[0]) {
+        start_date = this.permit_date[0];
+      }
+
+      if (this.permit_date[1]) {
+        end_date = this.permit_date[1];
+      }
+    }
+    
+    let url =
+      AppConfig.serviceAddress +
+      '/facpermit/exportFacPermit?serviceDepartName=' + this.serviceDepartName 
+      +'&facName=' +  this.facName +'&permitStageIds=' +  this.permitStageIds
+      +'&start_date=' + encodeURIComponent(start_date) +'&end_date=' + encodeURIComponent(end_date);
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
 }
