@@ -56,7 +56,6 @@ export class CheckComponent implements OnInit {
 
 
   uploadUrl: any = AppConfig.serviceAddress + '/checkmonitor/importData';
-  canManage: any = false;
 
   constructor(
     private router: Router,
