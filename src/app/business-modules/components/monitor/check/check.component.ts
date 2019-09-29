@@ -77,10 +77,6 @@ export class CheckComponent implements OnInit {
       'monitor:check:manage'
     );
 
-    this.canManage = this.utilitiesSercice.checkPermission(
-      'monitor:check:manage'
-    );
-
     if (this.servicedepartId || this.umineId || this.equipdepartId) {
       this.isSearchShow = true;
     }

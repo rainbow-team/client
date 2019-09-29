@@ -8,6 +8,7 @@ import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UnitAddressService } from 'src/app/services/unit/unitaddress.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 declare var MapConfig: any;
 
@@ -42,7 +43,7 @@ export class SimulationComponent implements OnInit {
   province: any = '';
 
   fileList = [];
-
+  canManage: any = false;
   constructor(
     private msg: NzMessageService,
     private http: HttpClient,
@@ -51,10 +52,15 @@ export class SimulationComponent implements OnInit {
     private umineService: UmineService,
     private unitAddressService: UnitAddressService,
     private attachmentSercice: AttachmentSercice,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private utilitiesSercice:UtilitiesSercice
+  ) { }
 
   ngOnInit() {
+
+    this.canManage = this.utilitiesSercice.checkPermission(
+      'searchShow:simulation:manage'
+    );
     this.province = this.activatedRoute.snapshot.queryParams['id'];
     if (this.province) {
       this.InitProvinceMap();
@@ -237,7 +243,7 @@ export class SimulationComponent implements OnInit {
         ]
       });
 
-      this.myChartProe.on('click', function(params) {
+      this.myChartProe.on('click', function (params) {
         if (params.componentType === 'markPoint') {
           that.marker = params.data;
           let unitId = params.data.unitId;
@@ -395,7 +401,7 @@ export class SimulationComponent implements OnInit {
   }
 
   getNewGUIDString() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       let r = (Math.random() * 16) | 0,
         v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);

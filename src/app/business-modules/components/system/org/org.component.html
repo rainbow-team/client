@@ -30,7 +30,7 @@
             <th style="width: 20%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]='400'>
           <ng-container *ngFor="let data of nestedTable.data">
             <ng-container *ngFor="let item of mapOfExpandedData[data.id]">
               <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">

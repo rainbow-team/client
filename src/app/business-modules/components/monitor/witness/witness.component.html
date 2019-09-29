@@ -43,7 +43,7 @@
         监督见证信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="canManage || !isSearchShow">
+      <div class="fr" *ngIf="!isSearchShow && canManage">
         <button
           nz-button
           nzType="danger"
@@ -55,7 +55,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage || !isSearchShow">
+      <div class="fr" *ngIf="!isSearchShow && canManage">
         <button
           nz-button
           nzType="primary"
@@ -66,7 +66,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage || !isSearchShow">
+      <div class="fr" *ngIf="!isSearchShow && canManage">
         <button
           nz-button
           nzType="primary"
@@ -76,7 +76,7 @@
           添加
         </button>
       </div>
-      <div class="fr" *ngIf="canManage">
+      <div class="fr" *ngIf="!isSearchShow">
         <button
           nz-button
           nzType="primary"
@@ -87,7 +87,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="isSearchShow == '0' && canManage">
+      <div class="fr" *ngIf="!isSearchShow && canManage">
         <app-common-import
           [uploadUrl]="uploadUrl"
           (search)="search()"

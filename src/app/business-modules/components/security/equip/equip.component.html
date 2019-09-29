@@ -76,25 +76,25 @@
         核安全设备安全问题信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="canManage||!isSearchShow">
+      <div class="fr" *ngIf="canManage&&!isSearchShow">
         <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">
           删除
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage||!isSearchShow">
+      <div class="fr" *ngIf="canManage&&!isSearchShow">
         <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">
           编辑
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage||!isSearchShow">
+      <div class="fr" *ngIf="canManage&&!isSearchShow">
         <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">
           添加
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage">
+      <div class="fr" *ngIf="!isSearchShow">
         <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportEquipSecurity()">
           导出
         </button>
@@ -120,7 +120,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody [appPageHeight]="430">
           <tr *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]" (click)="selectItem(data)">
             <td style="width: 5%">

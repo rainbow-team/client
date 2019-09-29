@@ -108,7 +108,7 @@
         核设施安全问题信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="canManage || !isSearchShow">
+      <div class="fr" *ngIf="!isSearchShow && canManage">
         <button
           nz-button
           nzType="danger"
@@ -120,7 +120,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage || !isSearchShow">
+      <div class="fr" *ngIf="!isSearchShow && canManage">
         <button
           nz-button
           nzType="primary"
@@ -131,7 +131,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage || !isSearchShow">
+      <div class="fr" *ngIf="!isSearchShow && canManage">
         <button
           nz-button
           nzType="primary"
@@ -142,7 +142,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="canManage">
+      <div class="fr" *ngIf="!isSearchShow">
         <button
           nz-button
           nzType="primary"
@@ -188,7 +188,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody [appPageHeight]="420">
+        <tbody [appPageHeight]="430">
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"

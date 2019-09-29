@@ -7,6 +7,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { RoleService } from 'src/app/services/system/role.service';
 import { OrgService } from 'src/app/services/system/org.service';
 import { UserService } from 'src/app/services/system/user.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-user',
@@ -37,17 +38,22 @@ export class UserComponent implements OnInit {
   mobile: string;
   selectId: any = '';
   isView = false; //查看操作标志
+  canManage:any=false;
 
   constructor(
     private msg: NzMessageService,
     private roleService: RoleService,
     private orgService: OrgService,
     private userService: UserService,
-    private staffSercice: StaffSercice
+    private staffSercice: StaffSercice,
+    private utilitiesSercice:UtilitiesSercice
   ) {}
 
   ngOnInit() {
     this.staffObj = this.staffSercice.getStaffObj();
+    this.canManage = this.utilitiesSercice.checkPermission(
+      'monitor:daily:manage'
+    );
     this.search();
   }
 

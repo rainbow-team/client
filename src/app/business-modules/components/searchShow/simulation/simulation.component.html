@@ -12,9 +12,9 @@
     <div class="act">
       <nz-radio-group [(ngModel)]="actionType" [nzButtonStyle]="'solid'">
         <label nz-radio-button nzValue="view">查看</label>
-        <label nz-radio-button nzValue="mark">标记</label>
-        <label nz-radio-button nzValue="edit">编辑热区</label>
-        <label nz-radio-button nzValue="delete">删除</label>
+        <label nz-radio-button nzValue="mark" *ngIf="canManage">标记</label>
+        <label nz-radio-button nzValue="edit" *ngIf="canManage">编辑热区</label>
+        <label nz-radio-button nzValue="delete" *ngIf="canManage">删除</label>
       </nz-radio-group>
     </div>
   </div>

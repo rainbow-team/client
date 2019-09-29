@@ -5,6 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { CheckMonitorSercice } from 'src/app/services/monitor/check.service';
+import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
 @Component({
   selector: 'app-check-file',
@@ -41,15 +42,21 @@ export class CheckFileComponent implements OnInit {
 
   start_date: any;
   end_date: any;
+  canManage: any = false;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private checkMonitorSercice: CheckMonitorSercice,
-    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice) { }
+    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
+    private utilitiesSercice:UtilitiesSercice) { }
 
   ngOnInit() {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
     this.departId = id;
     this.dictionary = this.dictionarySercice.getAllConfig();
+
+    this.canManage = this.utilitiesSercice.checkPermission(
+      'monitor:check:manage'
+    );
     this.search();
   }
 
