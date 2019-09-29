@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     private unitAddressService: UnitAddressService,
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initEchart();
@@ -80,16 +80,16 @@ export class HomeComponent implements OnInit {
     });
 
     this.statisticsSercice
-    .getStatisticsResultByTypeAndDate(this.conYear)
-    .subscribe(res => {
-      this.yearData = res.msg;
+      .getStatisticsResultByTypeAndDate(this.conYear)
+      .subscribe(res => {
+        this.yearData = res.msg;
 
-      this.configList = this.yearData.numberList.map(function(v) {
-        return v.name;
+        this.configList = this.yearData.numberList.map(function (v) {
+          return v.name;
+        });
+
+        this.initEchart();
       });
-
-      this.initEchart();
-    });
   }
   initStatistiscByRegionsChart(names: any[], values: any[]) {
     let option1 = {
@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
             //通常情况下：
             normal: {
               //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-              color: function(params) {
+              color: function (params) {
                 var colorList = [
                   '#1779d1',
                   '#49b8ec',
@@ -153,14 +153,27 @@ export class HomeComponent implements OnInit {
         trigger: 'axis'
       },
       calculable: true,
-      xAxis: [
+      xAxis:
+      {
+        type: 'category',
+        data: this.statusData.map(function (v) {
+          return v.name;
+        }),
+        axisLabel:
         {
-          type: 'category',
-          data: this.statusData.map(function(v) {
-            return v.name;
-          })
+          interval: 0,
+          formatter: function (val) {
+            if (val.length > 3) {
+              return (val.substring(0, 3) + '...').split("").join("\n"); 
+             
+            } else {
+              return val.split("").join("\n");
+            }
+          }
+
         }
-      ],
+      }
+      ,
       yAxis: [
         {
           type: 'value'
@@ -168,7 +181,7 @@ export class HomeComponent implements OnInit {
       ],
       series: [
         {
-          name: '数量',
+
           type: 'bar',
           data: this.statusData,
           barWidth: 10,
@@ -185,7 +198,7 @@ export class HomeComponent implements OnInit {
             //通常情况下：
             normal: {
               //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-              color: function(params) {
+              color: function (params) {
                 var colorList = ['#1779d1'];
                 return colorList[params.dataIndex];
               }
@@ -211,7 +224,9 @@ export class HomeComponent implements OnInit {
         y: 'center', //图例在垂直方向上面显示居中
         itemWidth: 10, //图例标记的图形宽度
         itemHeight: 10, //图例标记的图形高度
-        data: ['类型一', '类型二', '类型三', '类型四'],
+        data: this.typeData.map(function (v) {
+          return v.name
+        }),
         textStyle: {
           //图例文字的样式
           color: '#333', //文字颜色
@@ -283,7 +298,8 @@ export class HomeComponent implements OnInit {
       yAxis: {
         type: 'value'
       },
-      series: this.yearData.numberList
+      series: this.yearData.numberList,
+      color: ['#339900', '#FF9900', '#33CC99', '#339966', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
       //this.data.numberList
     };
 
