@@ -110,6 +110,12 @@
           添加
         </button>
       </div>
+
+      <div class="fr" *ngIf="isSearchShow == '0'">
+        <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportUmineMountain()">
+          导出
+        </button>
+      </div>
     </div>
     <div>
       <nz-table

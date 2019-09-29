@@ -197,4 +197,22 @@ export class UmineplaceComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportUminePlace() {
+
+    let url = AppConfig.serviceAddress + "/umineplace/exportUminePlace?name=" + this.name
+      + "&umineName=" + this.umineName
+      + "&build_start_year=" + encodeURIComponent(this.build_start_year)
+      + "&build_end_year=" + encodeURIComponent(this.build_end_year)
+      + "&levelIds=" + this.levelIds
+      + "&statusIds=" + this.statusIds
+      + "&reviewStatusIds=" + this.reviewStatusIds
+      + "&permitSituationIds=" + this.permitSituationIds
+      + "&have_monitor=" + this.have_monitor
+
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
+  }
+
 }

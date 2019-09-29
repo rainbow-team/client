@@ -164,7 +164,7 @@ export class HomeComponent implements OnInit {
           interval: 0,
           formatter: function (val) {
             if (val.length > 3) {
-              return (val.substring(0, 3) + '...').split("").join("\n"); 
+              return (val.substring(0, 3)).split("").join("\n"); 
              
             } else {
               return val.split("").join("\n");

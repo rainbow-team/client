@@ -39,7 +39,7 @@ export class UminemountainComponent implements OnInit {
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineMountainService: UmineMountainService,
-    private utilitiesSercice:UtilitiesSercice) { }
+    private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
@@ -162,5 +162,20 @@ export class UminemountainComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  exportUmineMountain() {
+
+    let url = AppConfig.serviceAddress + "/uminemountain/exportUmineMountain?name=" + this.name
+      + "&umineName=" + this.umineName
+      + "&build_start_year=" + encodeURIComponent(this.build_start_year)
+      + "&build_end_year=" + encodeURIComponent(this.build_end_year)
+      + "&statusIds=" + this.statusIds
+      + "&recordIds=" + this.recordIds
+      + "&acceptIds=" + this.acceptIds
+
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, "_blank");
   }
 }
