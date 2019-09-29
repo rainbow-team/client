@@ -147,4 +147,21 @@ export class CheckUmineplaceComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportUmineplaceCheck() {
+
+    this.umineName = "";
+    this.uminePlaceName = "";
+    this.typeIds = []
+    this.stageIds = [];
+
+    let url =
+      AppConfig.serviceAddress +
+      '/umineplacecheck/exportUmineplaceCheck?umineName=' + this.umineName
+      + '&uminePlaceName=' + this.uminePlaceName + '&typeIds=' + this.typeIds + '&stageIds=' + this.stageIds;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
 }

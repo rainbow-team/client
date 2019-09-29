@@ -2,62 +2,31 @@
   <div nz-row style="height: 40px;">
     <div nz-col [nzSpan]="5">
       营运单位：
-      <input
-        nz-input
-        nzSize="default"
-        [(ngModel)]="umineName"
-        class="w200"
-        placeholder="请输入营运单位"
-      />
+      <input nz-input nzSize="default" [(ngModel)]="umineName" class="w200" placeholder="请输入营运单位" />
     </div>
     <div nz-col [nzSpan]="6" *ngIf="!umineplaceId">
       铀尾矿(渣)库名称：
-      <input
-        nz-input
-        nzSize="default"
-        [(ngModel)]="uminePlaceName"
-        class="w200"
-        placeholder="请输入铀尾矿(渣)库名称"
-      />
+      <input nz-input nzSize="default" [(ngModel)]="uminePlaceName" class="w200" placeholder="请输入铀尾矿(渣)库名称" />
     </div>
     <div nz-col [nzSpan]="5">
       审评类型：
-      <nz-select
-        [(ngModel)]="typeIds"
-        class="w200"
-        nzPlaceHolder="请选择审评类型"
-      >
-        <nz-option
-          *ngFor="let option of dictionary.config_umine_place_check_type"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
+      <nz-select [(ngModel)]="typeIds" class="w200" nzPlaceHolder="请选择审评类型">
+        <nz-option *ngFor="let option of dictionary.config_umine_place_check_type" [nzLabel]="option.value"
+          [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
     <div nz-col [nzSpan]="5">
       审评阶段：
-      <nz-select
-        [(ngModel)]="stageIds"
-        class="w200"
-        nzPlaceHolder="请选择审评阶段"
-      >
-        <nz-option
-          *ngFor="let option of dictionary.config_umine_place_check_stage"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
+      <nz-select [(ngModel)]="stageIds" class="w200" nzPlaceHolder="请选择审评阶段">
+        <nz-option *ngFor="let option of dictionary.config_umine_place_check_stage" [nzLabel]="option.value"
+          [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
 
     <div nz-col [nzSpan]="3" class="ta_r" style="float: right">
-      <button
-        nz-button
-        nzType="primary"
-        style="width: 70px; margin-right: 10px;"
-        (click)="search()"
-      >
+      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">
         查询
       </button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
@@ -74,52 +43,34 @@
       </div>
 
       <div class="fr" *ngIf="!umineplaceId&&canManage">
-        <button
-          nz-button
-          nzType="danger"
-          nz-popconfirm
-          nzTitle="确定删除吗?"
-          (nzOnConfirm)="delete()"
-        >
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">
           删除
         </button>
       </div>
 
       <div class="fr" *ngIf="!umineplaceId&&canManage">
-        <button
-          nz-button
-          nzType="primary"
-          style=" margin-right: 10px;"
-          (click)="modify()"
-        >
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">
           编辑
         </button>
       </div>
 
       <div class="fr" *ngIf="!umineplaceId&&canManage">
-        <button
-          nz-button
-          nzType="primary"
-          style=" margin-right: 10px;"
-          (click)="add()"
-        >
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">
           添加
         </button>
       </div>
+
+      <div class="fr">
+        <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportUmineplaceCheck()">
+          导出
+        </button>
+      </div>
+
     </div>
     <div>
-      <nz-table
-        #nestedTable
-        [nzData]="dataSet"
-        class="commontable tablescoll_rainbow"
-        [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex"
-        nzShowSizeChanger
-        [nzPageSize]="pageSize"
-        [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)"
-        (nzPageSizeChange)="pageSizeChange($event)"
-      >
+      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
         <thead>
           <tr>
             <th style="width: 5%">序号</th>
@@ -132,11 +83,8 @@
           </tr>
         </thead>
         <tbody [appPageHeight]='395'>
-          <tr
-            *ngFor="let data of nestedTable.data; index as index"
-            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
-            (click)="selectItem(data)"
-          >
+          <tr *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]" (click)="selectItem(data)">
             <td style="width: 5%">
               {{ (pageIndex - 1) * pageSize + 1 + index }}
             </td>

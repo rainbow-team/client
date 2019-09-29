@@ -36,13 +36,13 @@ export class EquipComponent implements OnInit {
   stageIds: any = [];
 
   selectId: any = "";
-  canManage:any=false;
+  canManage: any = false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private equipCheckService: EquipCheckService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private equipDepartService: EquipDepartService,
     private serviceDepartService: ServiceDepartService, private facSercice: FacSercice,
-    private utilitiesSercice:UtilitiesSercice) { }
+    private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
@@ -111,12 +111,12 @@ export class EquipComponent implements OnInit {
 
   show(item) {
 
-    if(this.equipdepartId){
+    if (this.equipdepartId) {
       this.router.navigate(['/searchShow/integratedAuery/checkequipAdd'], { queryParams: { id: item.id, isShow: true, equipdepartId: this.equipdepartId } });
-    }else{
+    } else {
       this.router.navigate(['/check/equip/add'], { queryParams: { id: item.id, isShow: true } });
     }
-   
+
   }
 
   modify() {
@@ -159,4 +159,18 @@ export class EquipComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportEquipCheck() {
+
+    let url =
+      AppConfig.serviceAddress +
+      '/equipcheck/exportEquipCheck?name=' + this.name
+      + '&equipDepartName=' + this.equipDepartName + '&serviceDepartName=' + this.serviceDepartName
+      + '&facName=' + this.facName + '&typeIds=' + this.typeIds
+      + '&levelIds=' + this.levelIds + '&stageIds=' + this.stageIds;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
+
 }

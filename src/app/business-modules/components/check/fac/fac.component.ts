@@ -153,4 +153,16 @@ export class CheckFacComponent implements OnInit {
     this.pageIndex = 1;
     this.search();
   }
+
+  exportFacCheck() {
+
+    let url =
+      AppConfig.serviceAddress +
+      '/faccheck/exportFacCheck?serviceDepartName=' + this.serviceDepartName 
+      +'&facName=' +  this.facName +'&typeIds=' + this.typeIds 
+      +'&stageIds=' + this.stageIds;
+
+    url = this.utilitiesSercice.wrapUrl(url);
+    window.open(url, '_blank');
+  }
 }
