@@ -92,7 +92,7 @@
         核设备许可信息（共{{ totalCount }}条）
       </div>
 
-      <div class="fr" *ngIf="!equipdepartId">
+      <div class="fr" *ngIf="!equipdepartId&&canManage">
         <button
           nz-button
           nzType="danger"
@@ -104,7 +104,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="!equipdepartId">
+      <div class="fr" *ngIf="!equipdepartId&&canManage">
         <button
           nz-button
           nzType="primary"
@@ -115,7 +115,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="!equipdepartId">
+      <div class="fr" *ngIf="!equipdepartId&&canManage">
         <button
           nz-button
           nzType="primary"
@@ -137,7 +137,7 @@
         </button>
       </div>
 
-      <div class="fr" *ngIf="!equipdepartId && canManage">
+      <div class="fr" *ngIf="!equipdepartId&&canManage">
         <app-common-import
           [uploadUrl]="uploadUrl"
           (search)="search()"
