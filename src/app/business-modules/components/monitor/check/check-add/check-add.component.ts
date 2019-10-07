@@ -91,7 +91,7 @@ export class CheckAddComponent implements OnInit {
       this.equipDepartList = res.msg;
     })
 
-    this.orgSercice.getAllOrgList().subscribe((res) => {
+    this.orgSercice.getOrgAndSastindList().subscribe((res) => {
 
       this.orgList = res.msg;
     })

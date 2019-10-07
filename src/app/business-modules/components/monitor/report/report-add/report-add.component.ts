@@ -48,7 +48,7 @@ export class ReportAddComponent implements OnInit {
       this.isShow = false;
     }
 
-    this.orgSercice.getAllOrgList().subscribe((res) => {
+    this.orgSercice.getOrgAndSastindList().subscribe((res) => {
 
       this.orgList = res.msg;
     })

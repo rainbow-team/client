@@ -13,6 +13,10 @@ export class OrgSercice {
         return this.http.post('/org/getAllOrgList', null);
     }
 
+    getOrgAndSastindList(): any {
+        return this.http.post('/org/getOrgAndSastindList', null);
+    }
+
     getOrgList(param): any {
         return this.http.post('/org/getOrgList', param);
     }
@@ -30,6 +34,6 @@ export class OrgSercice {
     }
 
     deleteOrgByIds(ids): any {
-        return this.http.post('/org/deleteOrgByIds',ids);
+        return this.http.post('/org/deleteOrgByIds', ids);
     }
 }
