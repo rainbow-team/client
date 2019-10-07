@@ -66,21 +66,21 @@ export class RoleComponent implements OnInit {
     this.menuService.getAllMenu().subscribe(data => {
       // this.dataSet = data.msg;
       this.allMenuList = data.msg;
-      this.menuTreeNodes = this.generateTree2(data.msg, '0');
     });
   }
 
-  generateTree2(data, parentId) {
+  generateTree2(data, parentId, canCheck) {
     const itemArr: any[] = [];
-    for (var i = 0; i < data.length; i++) {
-      var node = data[i];
-      if (node.parentId == parentId) {
+    for (let i = 0; i < data.length; i++) {
+      let node = data[i];
+      if (node.parentId === parentId) {
         let newNode: NzTreeNodeOptions;
         newNode = {
           key: node.id,
-          title: node.name
+          title: node.name,
+          disabled: canCheck
         };
-        let children = this.generateTree2(data, node.id);
+        let children = this.generateTree2(data, node.id, canCheck);
         if (children != null) {
           newNode.children = children;
         } else {
@@ -112,12 +112,15 @@ export class RoleComponent implements OnInit {
     if (flag) {
       this.title = '编辑角色信息';
       this.isDisable = false;
+      this.menuTreeNodes = this.generateTree2(this.allMenuList, '0', false);
     } else {
       this.isDisable = true;
       this.title = '查看角色信息';
+      this.menuTreeNodes = this.generateTree2(this.allMenuList, '0', true);
     }
     this.currentRole = item;
     this.roleService.getRoleById(item.id).subscribe(data => {
+      this.ckeckedRoleMenuList = [];
       const meluList: any = [];
       for (let i = 0; i < data.msg.roleMenuList.length; i++) {
         meluList.push(data.msg.roleMenuList[i].id);
