@@ -25,7 +25,7 @@
     },
 
     get helpFileName(){
-      return "用户帮助.docx";
+      return "帮助文档.zip";
     },
 
     // 附件配置节点
