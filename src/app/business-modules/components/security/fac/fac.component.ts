@@ -59,6 +59,8 @@ export class SecurityFacComponent implements OnInit {
 
   canManage: any = false;
   uploadUrl: any = AppConfig.serviceAddress + '/facsecurity/importData';
+  pageHeight: any;
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -69,7 +71,7 @@ export class SecurityFacComponent implements OnInit {
     private facSercice: FacSercice,
     private statisticsSercice: StatisticsSercice,
     private utilitiesSercice: UtilitiesSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
@@ -83,6 +85,7 @@ export class SecurityFacComponent implements OnInit {
       this.isSearchShow = true;
     }
 
+    this.pageHeight = this.isSearchShow ? 540 : 430;
     this.search();
   }
 

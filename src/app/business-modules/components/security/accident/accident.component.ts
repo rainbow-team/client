@@ -49,7 +49,8 @@ export class AccidentComponent implements OnInit {
 
   canManage: any = false;
   uploadUrl: any = AppConfig.serviceAddress + '/accidentsecurity/importData';
-
+  pageHeight:any;
+  
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -75,6 +76,8 @@ export class AccidentComponent implements OnInit {
     if (this.servicedepartId || this.umineId) {
       this.isSearchShow = true;
     }
+
+    this.pageHeight = this.isSearchShow ? 540 : 430;
     this.search();
   }
 

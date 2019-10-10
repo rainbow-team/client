@@ -31,6 +31,7 @@ export class UminemountainPermitComponent implements OnInit {
 
   selectId: any = "";
   canManage:any=false;
+  pageHeight:any;
 
   constructor(
     private router: Router,
@@ -46,6 +47,8 @@ export class UminemountainPermitComponent implements OnInit {
     this.staffObj = this.staffSercice.getStaffObj();
 
     this.canManage = this.utilitiesSercice.checkPermission('permit:uminemountain:manage');
+
+    this.pageHeight = this.uminemountainId ? 505 : 395;
     this.search();
   }
 

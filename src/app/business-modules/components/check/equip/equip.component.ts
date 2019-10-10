@@ -37,6 +37,7 @@ export class EquipComponent implements OnInit {
 
   selectId: any = "";
   canManage: any = false;
+  pageHeight:any;
 
   constructor(private router: Router,
     private msg: NzMessageService, private equipCheckService: EquipCheckService, private dictionarySercice: DictionarySercice,
@@ -49,6 +50,8 @@ export class EquipComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.canManage = this.utilitiesSercice.checkPermission('check:equip:manage');
+
+    this.pageHeight = this.equipdepartId ? 535 : 425;
     this.search();
 
   }

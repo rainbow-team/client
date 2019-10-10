@@ -50,6 +50,7 @@ export class SecurityUmineplaceComponent implements OnInit {
 
   canManage: any = false;
   uploadUrl: any = AppConfig.serviceAddress + '/umineplacesecurity/importData';
+  pageHeight:any;
 
   constructor(
     private router: Router,
@@ -74,6 +75,7 @@ export class SecurityUmineplaceComponent implements OnInit {
       this.isSearchShow = true;
     }
 
+    this.pageHeight = this.isSearchShow ? 540 : 430;
     this.search();
 
     // this.serviceDepartService.getAllDepartService().subscribe((res) => {

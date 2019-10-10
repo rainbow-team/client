@@ -31,6 +31,7 @@ export class UmineplacePermitComponent implements OnInit {
 
   selectId: any = "";
   canManage:any=false;
+  pageHeight:any;
 
   constructor(
     private router: Router,
@@ -45,6 +46,8 @@ export class UmineplacePermitComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.canManage = this.utilitiesSercice.checkPermission('permit:umineplace:manage');
+
+    this.pageHeight = this.umineplaceId ? 505 : 395;
     this.search();
   }
 

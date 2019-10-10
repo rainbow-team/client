@@ -34,6 +34,8 @@ export class CheckUminemountainComponent implements OnInit {
 
   selectId: any = "";
   canManage:any=false;
+  pageHeight:any;
+
   constructor(private router: Router,
     private msg: NzMessageService, private uminemountainCheckSercice: UminemountainCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineService: UmineService,
@@ -44,6 +46,8 @@ export class CheckUminemountainComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.canManage = this.utilitiesSercice.checkPermission('check:uminemountain:manage');
+
+    this.pageHeight = this.uminemountainId ? 505 : 395;
     this.search();
   }
 

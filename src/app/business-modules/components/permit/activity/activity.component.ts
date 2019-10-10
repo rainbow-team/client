@@ -39,6 +39,7 @@ export class ActivityPermitComponent implements OnInit {
   selectId: any = '';
   uploadUrl: any = AppConfig.serviceAddress + '/activitypermit/importData';
   canManage: any = false;
+  pageHeight: any;
 
   constructor(
     private router: Router,
@@ -64,6 +65,8 @@ export class ActivityPermitComponent implements OnInit {
     ) {
       this.isSearchShow = true;
     }
+
+    this.pageHeight = this.isSearchShow ? 540 : 430;
 
     this.search();
   }
@@ -231,7 +234,7 @@ export class ActivityPermitComponent implements OnInit {
 
   exportActivityPermit() {
 
-    
+
     let start_date = '',
       end_date = '';
     if (this.permitDate && this.permitDate.length > 0) {
@@ -246,10 +249,10 @@ export class ActivityPermitComponent implements OnInit {
 
     let url =
       AppConfig.serviceAddress +
-      '/activitypermit/exportActivityPermit?departName=' + this.departName 
-      +'&facName=' +  this.facName +'&name=' +  this.name +'&content=' +  this.content
-      +'&typeIds=' +  this.typeIds
-      +'&start_date=' + encodeURIComponent(start_date) +'&end_date=' + encodeURIComponent(end_date);
+      '/activitypermit/exportActivityPermit?departName=' + this.departName
+      + '&facName=' + this.facName + '&name=' + this.name + '&content=' + this.content
+      + '&typeIds=' + this.typeIds
+      + '&start_date=' + encodeURIComponent(start_date) + '&end_date=' + encodeURIComponent(end_date);
 
     url = this.utilitiesSercice.wrapUrl(url);
     window.open(url, '_blank');

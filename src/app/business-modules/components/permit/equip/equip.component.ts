@@ -36,6 +36,7 @@ export class EquipPermitComponent implements OnInit {
   selectId: any = '';
   uploadUrl: any = AppConfig.serviceAddress + '/equippermit/importData';
   canManage: any = false;
+  pageHeight:any;
 
   constructor(
     private router: Router,
@@ -52,6 +53,8 @@ export class EquipPermitComponent implements OnInit {
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
 
     this.canManage = this.utilitiesSercice.checkPermission('permit:equip:manage');
+
+    this.pageHeight = this.equipdepartId ? 540 : 430;
     this.search();
   }
 

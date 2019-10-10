@@ -43,7 +43,8 @@ export class WitnessComponent implements OnInit {
   canManage: any = false;
 
   uploadUrl: any = AppConfig.serviceAddress + '/witnessmonitor/importData';
-
+  pageHeight:any;
+  
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -69,6 +70,7 @@ export class WitnessComponent implements OnInit {
       'monitor:witness:manage'
     );
 
+    this.pageHeight = this.isSearchShow ? 510 : 400;
     this.search();
   }
 

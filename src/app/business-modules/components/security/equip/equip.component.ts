@@ -61,7 +61,7 @@ export class SecurityEquipComponent implements OnInit {
   // facIds: any = [];
 
   // facList: any = [];
-
+  pageHeight:any;
 
   constructor(private router: Router,
     private msg: NzMessageService, private equipSecuritySercice: EquipSecuritySercice, private dictionarySercice: DictionarySercice,
@@ -77,6 +77,8 @@ export class SecurityEquipComponent implements OnInit {
     if (this.equipdepartId) {
       this.isSearchShow = true;
     }
+
+    this.pageHeight = this.isSearchShow ? 540 : 430;
 
     this.search();
   }

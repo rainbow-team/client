@@ -31,6 +31,7 @@ export class PermitFacComponent implements OnInit {
   selectId: any = '';
   uploadUrl: any = AppConfig.serviceAddress + '/facpermit/importData';
   canManage:any=false;
+  pageHeight:any;
 
   constructor(
     private router: Router,
@@ -47,6 +48,8 @@ export class PermitFacComponent implements OnInit {
     this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
 
     this.canManage = this.utilitiesSercice.checkPermission('permit:fac:manage');
+
+    this.pageHeight = this.facId ? 505 : 395;
     this.search();
   }
 

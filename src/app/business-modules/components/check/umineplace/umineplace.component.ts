@@ -34,6 +34,9 @@ export class CheckUmineplaceComponent implements OnInit {
 
   selectId: any = "";
   canManage:any=false;
+
+  pageHeight:any;
+  
   constructor(private router: Router,
     private msg: NzMessageService, private umineplaceCheckSercice: UmineplaceCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineService: UmineService,
@@ -44,6 +47,8 @@ export class CheckUmineplaceComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.canManage = this.utilitiesSercice.checkPermission('check:umineplace:manage');
+
+    this.pageHeight = this.umineplaceId ? 505 : 395;
     this.search();
 
   }

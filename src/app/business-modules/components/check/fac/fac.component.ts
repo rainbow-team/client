@@ -35,7 +35,8 @@ export class CheckFacComponent implements OnInit {
 
   selectId: any = "";
   canManage:any=false;
-
+  pageHeight:any;
+  
   constructor(private router: Router,
     private msg: NzMessageService, private facService: FacSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private facCheckSercice: FacCheckSercice,
@@ -46,6 +47,8 @@ export class CheckFacComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
     this.canManage = this.utilitiesSercice.checkPermission('check:fac:manage');
+
+    this.pageHeight = this.facId ? 505 : 395;
     this.search();
   }
 

@@ -54,7 +54,7 @@ export class CheckComponent implements OnInit {
 
   canManage: any = false;
 
-
+  pageHeight: any;
   uploadUrl: any = AppConfig.serviceAddress + '/checkmonitor/importData';
 
   constructor(
@@ -81,6 +81,7 @@ export class CheckComponent implements OnInit {
       this.isSearchShow = true;
     }
 
+    this.pageHeight = this.isSearchShow ? 510 : 400;
     this.search();
 
     this.serviceDepartService.getAllDepartService().subscribe(res => {

@@ -42,6 +42,8 @@ export class ActivityComponent implements OnInit {
 
   selectId: any = "";
   canManage: any = false;
+  pageHeight:any;
+
   constructor(private router: Router,
     private msg: NzMessageService, private activityCheckSercice: ActivityCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private equipDepartService: EquipDepartService,
@@ -57,6 +59,8 @@ export class ActivityComponent implements OnInit {
       this.isSearchShow = true;
     }
     this.canManage = this.utilitiesSercice.checkPermission('check:activity:manage');
+
+    this.pageHeight = this.isSearchShow ? 505 : 395;
     this.search();
 
 

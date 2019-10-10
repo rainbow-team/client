@@ -128,7 +128,7 @@
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
-        <tbody [appPageHeight]="395">
+        <tbody [appPageHeight]="pageHeight">
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
