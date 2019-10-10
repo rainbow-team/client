@@ -229,10 +229,9 @@
             <div nz-col nzSpan="16">
               <a
                 nz-button
-                [attr.disabled]="disabled"
+                [ngClass]="{ true: 'btnDisabled', false: '' }[disabled]"
                 style="margin-left:25px"
                 nzType="primary"
-                this.isSubjectVisible="true;"
                 target="_blank"
                 href="{{ selectedRegion.previewUrl }}"
                 >三维动态展示</a
@@ -293,10 +292,9 @@
             <div nz-col nzSpan="16">
               <a
                 nz-button
-                [attr.disabled]="disabled"
+                [ngClass]="{ true: 'btnDisabled', false: '' }[disabled]"
                 style="margin-left:25px"
                 nzType="primary"
-                this.isSubjectVisible="true;"
                 target="_blank"
                 href="{{ selectedRegion.previewUrl }}"
                 >三维动态展示</a
