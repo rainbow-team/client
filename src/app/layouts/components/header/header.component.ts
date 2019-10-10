@@ -114,7 +114,7 @@ export class HeaderComponent implements OnInit {
 
   help() {
 
-    window.open("src/assets/file/" + AppConfig.helpFileName);
+    window.open("assets/file/" + AppConfig.helpFileName);
   }
 
   getAllLinkList() {
