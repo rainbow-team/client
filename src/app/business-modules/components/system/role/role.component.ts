@@ -134,6 +134,7 @@ export class RoleComponent implements OnInit {
     this.isDisable = false;
     this.title = '添加角色';
     this.currentRole = {};
+    this.menuTreeNodes = this.generateTree2(this.allMenuList, '0', false);
   }
 
   delete(item) {
