@@ -109,7 +109,7 @@
             <th style="width: 15%">操作</th>
           </tr>
         </thead>
-        <tbody [appPageHeight]="400">
+        <tbody [appPageHeight]='400'>
           <tr
             *ngFor="let data of nestedTable.data; index as index"
             [ngClass]="{ itemSeleted: data.id == selectId }"
@@ -250,7 +250,8 @@
         <div class="ta_r">
           角色：
           <nz-select
-            style="width:calc(100% - 100px);"
+            [nzDropdownStyle]="{ 'max-height': '200px' }"
+            style="width:calc(100% - 100px)"
             [(ngModel)]="currentUser.roleList"
             [disabled]="isDisable"
             class="w200"
