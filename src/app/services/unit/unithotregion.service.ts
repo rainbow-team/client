@@ -18,9 +18,9 @@ export class UnithotregionService {
     return this.http.post('/unithotregion/getUnitHotRegionList', parma);
   }
 
-  getUnitHotRegionListByUnitId(unitId): any {
+  getUnitHotRegionListByAddressId(unitId): any {
     return this.http.post(
-      '/unithotregion/getUnitHotRegionListByUnitId',
+      '/unithotregion/getUnitHotRegionListByAddressId',
       unitId
     );
   }

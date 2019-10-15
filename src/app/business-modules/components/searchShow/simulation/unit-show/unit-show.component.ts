@@ -25,6 +25,8 @@ export class UnitShowComponent implements OnInit {
   subjectImageUrl = '';
   province = '';
 
+  addressId = '';
+
   disabled = false;
   constructor(
     private router: Router,
@@ -35,17 +37,22 @@ export class UnitShowComponent implements OnInit {
     private uminePlaceService: UminePlaceService,
     private unithotregionService: UnithotregionService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
-    let id = this.activatedRoute.snapshot.queryParams['id'];
+    this.addressId = this.activatedRoute.snapshot.queryParams['id'];
     this.province = this.activatedRoute.snapshot.queryParams['province'];
-    this.unitAddressService.getUnitAddressById(id).subscribe(res => {
-      this.unitAddress = res.msg;
-      this.showUnitDetail(this.unitAddress.unitType, this.unitAddress.unitId);
-      this.unitImageUrl =
-        AppConfig.serviceAddress + '/fileInfo/download?id=' + res.msg.picId + "&type=1";
-    });
+    this.unitAddressService
+      .getUnitAddressById(this.addressId)
+      .subscribe(res => {
+        this.unitAddress = res.msg;
+        this.showUnitDetail(this.unitAddress.unitType, this.unitAddress.unitId);
+        this.unitImageUrl =
+          AppConfig.serviceAddress +
+          '/fileInfo/download?id=' +
+          res.msg.picId +
+          '&type=1';
+      });
   }
 
   showUnitDetail(unitType: any, unitId: any) {
@@ -62,7 +69,7 @@ export class UnitShowComponent implements OnInit {
     }
 
     this.unithotregionService
-      .getUnitHotRegionListByUnitId(unitId)
+      .getUnitHotRegionListByAddressId(this.addressId)
       .subscribe(res => {
         this.unit_regions = res.msg;
       });
@@ -75,7 +82,10 @@ export class UnitShowComponent implements OnInit {
       this.disabled = true;
     }
     this.subjectImageUrl =
-      AppConfig.serviceAddress + '/fileInfo/download?id=' + item.picId + "&type=1";
+      AppConfig.serviceAddress +
+      '/fileInfo/download?id=' +
+      item.picId +
+      '&type=1';
     if (this.unitAddress.unitType === '0') {
       this.subjectTitle = '核设施详细信息';
       this.facSercice.getFacById(item.subjectId).subscribe(res => {
