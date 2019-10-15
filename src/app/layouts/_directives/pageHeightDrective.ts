@@ -9,17 +9,27 @@ export class PageHeightDrective {
         this.nativeElement = element.nativeElement;
     }
     @Input('appPageHeight') OffsetHeight: number;
+    @Input('type') pageType: number = 1;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
-
-        this.nativeElement.style.height = (event.target.innerHeight - this.OffsetHeight) + 'px';
+        if(this.pageType==1){
+            this.nativeElement.style.height = (event.target.innerHeight - this.OffsetHeight) + 'px';
+        }else{
+            this.nativeElement.style.height = (event.target.innerHeight - this.OffsetHeight)/2 + 'px';
+        }
+       
         //console.log('页面变化了'+event.target.innerHeight);
     }
 
 
     ngAfterViewInit() {
-        this.nativeElement.style.height = (window.innerHeight - this.OffsetHeight) + 'px';
+        if(this.pageType==1){
+            this.nativeElement.style.height = (window.innerHeight - this.OffsetHeight) + 'px';
+        }else{
+            this.nativeElement.style.height = (window.innerHeight - this.OffsetHeight)/2 + 'px';
+        }
+       
         //console.log('ngAfterViewInit'+window.innerHeight);
     }
 

@@ -2,7 +2,7 @@
     <div nz-col [nzSpan]="10" class="div1">
         <div>
             模拟地图查询
-            <div id="map" style="width:600px;height: 600px;">
+            <div id="map" style="width:600px;" [appPageHeight]='252'>
 
             </div>
         </div>
@@ -13,7 +13,7 @@
                 <div>
                     核设施分布统计
                 </div>
-                <div id="chart1" style="height: 230px;">
+                <div id="chart1" [appPageHeight]='272' [type]="2">
 
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <div>
                     核设施状态统计
                 </div>
-                <div id="chart2" style="height: 230px;">
+                <div id="chart2"  [appPageHeight]='272' [type]="2">
 
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div>
                     核设施监管类别统计
                 </div>
-                <div id="chart3" style="height: 230px;">
+                <div id="chart3"  [appPageHeight]='272' [type]="2">
 
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div>
                     核设施年代及类型统计
                 </div>
-                <div id="chart4" style="height: 200px;">
+                <div id="chart4"  [appPageHeight]='272' [type]="2">
 
                 </div>
             </div>

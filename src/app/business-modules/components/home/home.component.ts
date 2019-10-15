@@ -54,19 +54,21 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.initEchart();
+
+    this.LoadChinaMap();
+
     this.statisticsSercice
       .getStatisticsResultByCondition(this.conStatus)
       .subscribe(res => {
         this.statusData = res.msg;
-        this.initEchart();
+        this.initEchart2();
       });
 
     this.statisticsSercice
       .getStatisticsResultByCondition(this.conType)
       .subscribe(res => {
         this.typeData = res.msg;
-        this.initEchart();
+        this.initEchart3();
       });
 
     this.statisticsSercice.statisticsFacilitiesByRegion().subscribe(res => {
@@ -148,6 +150,50 @@ export class HomeComponent implements OnInit {
   }
 
   initEchart() {
+
+
+   
+
+    let option4 = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+        }
+      },
+      legend: {
+        data: this.configList
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        data: this.yearData.yearDate
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: this.yearData.numberList,
+      color: ['#339900', '#FF9900', '#33CC99', '#339966', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
+      //this.data.numberList
+    };
+
+
+
+  
+
+    this.myChart4 = echarts.init(document.getElementById('chart4'));
+    this.myChart4.setOption(option4);
+
+
+  }
+
+  initEchart2() {
     let option2 = {
       tooltip: {
         trigger: 'axis'
@@ -164,8 +210,8 @@ export class HomeComponent implements OnInit {
           interval: 0,
           formatter: function (val) {
             if (val.length > 3) {
-              return (val.substring(0, 3)).split("").join("\n"); 
-             
+              return (val.substring(0, 3)).split("").join("\n");
+
             } else {
               return val.split("").join("\n");
             }
@@ -208,6 +254,11 @@ export class HomeComponent implements OnInit {
       ]
     };
 
+    this.myChart2 = echarts.init(document.getElementById('chart2'));
+    this.myChart2.setOption(option2);
+  }
+
+  initEchart3(){
     let option3 = {
       tooltip: {
         //提示框组件
@@ -274,45 +325,8 @@ export class HomeComponent implements OnInit {
       ]
     };
 
-    let option4 = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          // 坐标轴指示器，坐标轴触发有效
-          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-        }
-      },
-      legend: {
-        data: this.configList
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      xAxis: {
-        type: 'category',
-        data: this.yearData.yearDate
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: this.yearData.numberList,
-      color: ['#339900', '#FF9900', '#33CC99', '#339966', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
-      //this.data.numberList
-    };
-
-    this.myChart2 = echarts.init(document.getElementById('chart2'));
-    this.myChart2.setOption(option2);
-
     this.myChart3 = echarts.init(document.getElementById('chart3'));
     this.myChart3.setOption(option3);
-
-    this.myChart4 = echarts.init(document.getElementById('chart4'));
-    this.myChart4.setOption(option4);
-
-    this.LoadChinaMap();
   }
 
   LoadChinaMap() {
