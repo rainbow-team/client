@@ -1,10 +1,15 @@
 <!-- <div style="padding: 0 0 0 50px;"> -->
 <div *ngIf="fileList&&fileList.length>0||!isDisable">
+
+  <div class="limitTips">请上传小于100M的附件</div>
+
   <nz-upload *ngIf="!isDisable" [nzAction]="uploadUrl" [nzFileList]="fileList" [nzCustomRequest]="customReq"
-    [nzShowUploadList]="false" [nzMultiple]="true" [nzLimit]="3" [nzSize]="10240">
+    [nzShowUploadList]="false" [nzMultiple]="true" [nzLimit]="3" [nzBeforeUpload]="beforeUpload">
     <i nz-icon type="plus" class="upload_i"></i>
     <div class="ant-upload-text">上传附件</div>
   </nz-upload>
+
+
 
   <div *ngIf="isDisable" class="check_style">
     附件
@@ -14,7 +19,7 @@
     <div *ngFor="let fileItem of fileList">
       <div class="file_item">
         <i nz-icon type="paper-clip" theme="outline" class="flie_item_pic"></i>
-        <span nz-tooltip nzTitle={{fileItem.name}}>{{fileItem.name|tooltips:10}}</span>
+        <span nz-tooltip nzTitle={{fileItem.name}}>{{fileItem.name|tooltips:30}}</span>
         <i nz-icon type="download" theme="outline" (click)="downloadAccessory(fileItem)"></i>
         <i nz-icon type="eye" theme="outline" *ngIf="canPreview(fileItem.name)" (click)="preview(fileItem)"></i>
         <i nz-icon type="close" style="color: red;" theme="outline" class="file_item_delete" *ngIf="!isDisable"

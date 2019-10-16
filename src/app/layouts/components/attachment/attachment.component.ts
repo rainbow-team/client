@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
-import { UploadXHRArgs } from 'ng-zorro-antd';
+import { UploadXHRArgs, NzMessageService } from 'ng-zorro-antd';
 import { HttpRequest, HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 
@@ -18,18 +18,32 @@ export class AttachmentComponent implements OnInit {
   uploadUrl: any = AppConfig.serviceAddress + "/fileInfo/upload";
   downLoadurl: any = AppConfig.serviceAddress + "/fileInfo/download";
 
-  constructor(private attachmentSercice: AttachmentSercice, private http: HttpClient, private utilitiesSercice: UtilitiesSercice) { }
+  constructor(private attachmentSercice: AttachmentSercice, private http: HttpClient, private utilitiesSercice: UtilitiesSercice,
+    private msg: NzMessageService) { }
 
   ngOnInit() {
   }
 
+  beforeUpload = (file, fileList) => {
+
+    if (file.size > 100 * 1024 * 1024) {
+      this.msg.create("error", "附件大小不能大于100M");
+      return false;
+    }
+
+    return true;
+  }
+
   customReq = (item: UploadXHRArgs) => {
+
     // 构建一个 FormData 对象，用于存储文件或其他参数
     const formData = new FormData();
     // tslint:disable-next-line:no-any
     formData.append('file', item.file as any);
     formData.append('filename', item.file.name);
     formData.append('refid', this.refid);
+
+
 
     const req = new HttpRequest('POST', item.action, formData, {
       reportProgress: true,
@@ -77,7 +91,7 @@ export class AttachmentComponent implements OnInit {
     window.open(this.downLoadurl + "?id=" + item.response.msg + "&type=1");
   }
 
-  canPreview (fileName) {
+  canPreview(fileName) {
 
     var pos = fileName.lastIndexOf('.');
     var format = fileName.substring(pos + 1);
@@ -96,8 +110,8 @@ export class AttachmentComponent implements OnInit {
   preview(item) {
 
     var url = this.downLoadurl + "?id=" + item.response.msg + "&type=2";
- 
-    window.open('assets/usermanual/web/viewer.html?url=' + this.utilitiesSercice.wrapUrl(url),"_blank");
+
+    window.open('assets/usermanual/web/viewer.html?url=' + this.utilitiesSercice.wrapUrl(url), "_blank");
   }
 
 }
