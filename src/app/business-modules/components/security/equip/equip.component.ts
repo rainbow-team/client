@@ -63,6 +63,8 @@ export class SecurityEquipComponent implements OnInit {
   // facList: any = [];
   pageHeight:any;
 
+  checked: any = false;
+  
   constructor(private router: Router,
     private msg: NzMessageService, private equipSecuritySercice: EquipSecuritySercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private facSercice: FacSercice, private utilitiesSercice: UtilitiesSercice) { }
@@ -136,6 +138,10 @@ export class SecurityEquipComponent implements OnInit {
 
     if (this.equipdepartId) {
       option.conditions.push({ key: "equipdepartId", value: this.equipdepartId })
+    }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
     }
 
     this.equipSecuritySercice.getEquipSecurityList(option).subscribe(

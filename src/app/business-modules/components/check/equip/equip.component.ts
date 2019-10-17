@@ -39,6 +39,8 @@ export class EquipComponent implements OnInit {
   canManage: any = false;
   pageHeight:any;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private equipCheckService: EquipCheckService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private equipDepartService: EquipDepartService,
@@ -89,6 +91,10 @@ export class EquipComponent implements OnInit {
       option.conditions.push({ key: "equipdepartId", value: this.equipdepartId })
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.equipCheckService.getEquipCheckList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;

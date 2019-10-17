@@ -37,6 +37,8 @@ export class CheckFacComponent implements OnInit {
   canManage:any=false;
   pageHeight:any;
   
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private facService: FacSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private serviceDepartService: ServiceDepartService, private facCheckSercice: FacCheckSercice,
@@ -85,6 +87,10 @@ export class CheckFacComponent implements OnInit {
       option.conditions.push({ key: "facId", value: this.facId })
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.facCheckSercice.getFacCheckList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;

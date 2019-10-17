@@ -29,6 +29,8 @@ export class GroupComponent implements OnInit {
   selectId: any = "";
   canManage: any = false;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private groupSercice: GroupService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice,private utilitiesSercice:UtilitiesSercice) { }
@@ -54,6 +56,10 @@ export class GroupComponent implements OnInit {
       option.conditions.push({ key: "name", value: this.name })
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.groupSercice.getGroupList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;

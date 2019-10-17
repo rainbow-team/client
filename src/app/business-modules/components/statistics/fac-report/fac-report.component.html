@@ -16,9 +16,9 @@
       <label nz-radio nzValue="9">防洪要求 </label>
     </nz-radio-group>
 
-    <div style="text-align: right;float:right; ">
+    <!-- <div style="text-align: right;float:right; ">
       <button nz-button nzType="primary" (click)="statistics()">统计</button>
-    </div>
+    </div> -->
 
     <div style="text-align: right;float:right;margin-right: 10px;">
       <button nz-button nzType="primary" (click)="exportTable()">导出</button>
@@ -27,11 +27,15 @@
   <nz-content style="height:calc(100% - 64px);">
     <nz-tabset style="height: 100%;">
       <nz-tab nzTitle="统计图">
-        <div id="chart3qq" style="text-align: center;" [appPageHeight]='314' ></div>
+        <div
+          id="chart3qq"
+          style="text-align: center;"
+          [appPageHeight]="314"
+        ></div>
       </nz-tab>
-      <nz-tab nzTitle="统计表" >
+      <nz-tab nzTitle="统计表">
         <nz-table
-          id ="factable"
+          id="factable"
           #nestedTable
           [nzData]="data"
           class="commontable"

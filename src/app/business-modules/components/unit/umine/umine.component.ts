@@ -34,6 +34,8 @@ export class UmineComponent implements OnInit {
   selectId: any = "";
   canManage:any=false;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private groupService: GroupService,private utilitiesSercice:UtilitiesSercice) { }
@@ -74,6 +76,10 @@ export class UmineComponent implements OnInit {
       option.conditions.push({ key: "groupIds", value: this.groupIds })
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.umineSercice.getUmineList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;

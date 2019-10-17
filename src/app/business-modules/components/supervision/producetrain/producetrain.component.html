@@ -5,7 +5,7 @@
       <input nz-input nzSize="default" [(ngModel)]="batch" class="w200" />
     </div>
     <div nz-col [nzSpan]="7">
-      培训开始时间：
+      培训开始日期：
       <nz-range-picker class="w200" [(ngModel)]="px_date"> </nz-range-picker>
     </div>
     <div nz-col [nzSpan]="5">
@@ -81,6 +81,11 @@
         </button>
       </div>
 
+      
+      <div class="fr">
+        <label nz-checkbox [(ngModel)]="checked">按时间排序</label>
+      </div>
+      
     </div>
     <div>
       <nz-table

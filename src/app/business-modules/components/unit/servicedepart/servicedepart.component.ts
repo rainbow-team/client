@@ -34,6 +34,8 @@ export class ServicedepartComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   uploadUrl: any = AppConfig.serviceAddress + "/servicedepart/importServiceDepart";
 
 
@@ -79,6 +81,10 @@ export class ServicedepartComponent implements OnInit {
       option.conditions.push({ key: "groupIds", value: [this.groupIds] })
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.serviceDepartSercice.getServiceDepartList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;

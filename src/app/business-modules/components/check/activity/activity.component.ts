@@ -44,6 +44,8 @@ export class ActivityComponent implements OnInit {
   canManage: any = false;
   pageHeight:any;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private activityCheckSercice: ActivityCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private equipDepartService: EquipDepartService,
@@ -117,6 +119,9 @@ export class ActivityComponent implements OnInit {
       });
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
 
     this.activityCheckSercice.getActivityCheckList(option).subscribe(
       (data) => {

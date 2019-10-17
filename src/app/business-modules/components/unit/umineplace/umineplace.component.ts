@@ -38,6 +38,8 @@ export class UmineplaceComponent implements OnInit {
   uploadUrl: any = AppConfig.serviceAddress + '/umineplace/importData';
   canManage: any = false;
 
+  checked: any = false;
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -113,6 +115,11 @@ export class UmineplaceComponent implements OnInit {
       option.conditions.push({ key: 'have_monitor', value: this.have_monitor });
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+
+    
     this.uminePlaceService.getUminePlaceList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;

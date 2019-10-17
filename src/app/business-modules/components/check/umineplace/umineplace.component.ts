@@ -37,6 +37,9 @@ export class CheckUmineplaceComponent implements OnInit {
 
   pageHeight:any;
   
+  checked: any = false;
+
+
   constructor(private router: Router,
     private msg: NzMessageService, private umineplaceCheckSercice: UmineplaceCheckSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineService: UmineService,
@@ -78,6 +81,9 @@ export class CheckUmineplaceComponent implements OnInit {
       option.conditions.push({ key: "umineplaceId", value: this.umineplaceId })
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
 
     this.umineplaceCheckSercice.getUmineplaceCheckList(option).subscribe(
       (data) => {

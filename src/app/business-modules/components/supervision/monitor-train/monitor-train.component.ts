@@ -39,6 +39,8 @@ export class MonitorTrainComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   ngOnInit() {
 
     this.canManage = this.utilitiesSercice.checkPermission("monitorTrain:manage");
@@ -77,6 +79,10 @@ export class MonitorTrainComponent implements OnInit {
 
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+  }
+  
     this.SupervisionTrainService.getMonitorTrainList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
