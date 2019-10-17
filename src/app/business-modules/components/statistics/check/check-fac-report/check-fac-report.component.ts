@@ -79,6 +79,18 @@ export class CheckFacReportComponent implements OnInit {
     });
   }
 
+  getStyle() {
+
+    let widthP = 0;
+    if (this.data.yearDate.length > 0) {
+      widthP = 80 / this.data.yearDate.length
+    }
+
+    return {
+      "width": widthP + "%"
+    }
+  }
+
   initEchart1() {
     var that = this;
 

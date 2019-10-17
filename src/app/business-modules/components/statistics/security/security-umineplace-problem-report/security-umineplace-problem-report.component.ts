@@ -140,7 +140,8 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
         feature: {
           saveAsImage: { show: true }
         }
-      }
+      },
+      color:['#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
       //this.data.numberList
     };
     this.myChart1 = echarts.init(document.getElementById('chart1'));
@@ -180,7 +181,8 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
         feature: {
           saveAsImage: { show: true }
         }
-      }
+      },
+      color:['#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
     };
     this.myChart2 = echarts.init(document.getElementById('chart2'));
     this.myChart2.setOption(option2);
