@@ -44,6 +44,8 @@ export class SimulationComponent implements OnInit {
 
   fileList = [];
   canManage: any = false;
+  umineId: any;
+  serviceId: any;
   constructor(
     private msg: NzMessageService,
     private http: HttpClient,
@@ -53,11 +55,10 @@ export class SimulationComponent implements OnInit {
     private unitAddressService: UnitAddressService,
     private attachmentSercice: AttachmentSercice,
     private activatedRoute: ActivatedRoute,
-    private utilitiesSercice:UtilitiesSercice
-  ) { }
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
-
     this.canManage = this.utilitiesSercice.checkPermission(
       'searchShow:simulation:manage'
     );
@@ -243,7 +244,7 @@ export class SimulationComponent implements OnInit {
         ]
       });
 
-      this.myChartProe.on('click', function (params) {
+      this.myChartProe.on('click', function(params) {
         if (params.componentType === 'markPoint') {
           that.marker = params.data;
           let unitId = params.data.unitId;
@@ -332,11 +333,13 @@ export class SimulationComponent implements OnInit {
     // unit.unitId = this.unitId; //用户选择的单位ID
     if (this.unitType === 'unit_umine') {
       this.marker.unitType = '1';
+      this.marker.unitId = this.umineId;
       this.marker.name = this.unit_umines.find(
         obj => obj.id === this.marker.unitId
       ).name;
     } else {
       this.marker.unitType = '0';
+      this.marker.unitId = this.serviceId;
       this.marker.name = this.unit_services.find(
         obj => obj.id === this.marker.unitId
       ).name;
@@ -401,7 +404,7 @@ export class SimulationComponent implements OnInit {
   }
 
   getNewGUIDString() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       let r = (Math.random() * 16) | 0,
         v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);

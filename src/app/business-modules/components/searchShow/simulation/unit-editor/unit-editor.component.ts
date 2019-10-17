@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UnithotregionService } from 'src/app/services/unit/unithotregion.service';
@@ -6,6 +6,7 @@ import { FacSercice } from 'src/app/services/unit/fac.service';
 import { d } from '@angular/core/src/render3';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
+import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 
 @Component({
   selector: 'app-unit-editor',
@@ -13,6 +14,7 @@ import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
   styleUrls: ['./unit-editor.component.scss']
 })
 export class UnitEditorComponent implements OnInit {
+  @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
   pageIndex: any = 1;
   totalCount: any;
   pageSize: any = 10;
@@ -93,6 +95,9 @@ export class UnitEditorComponent implements OnInit {
     this.subject = {};
   }
   editorOk() {
+    if (!this.FormValidation()) {
+      return;
+    }
     this.isEditorLoading = true;
     if (this.fileList.length > 0) {
       this.subject.picId = this.fileList[0].response.msg;
@@ -189,5 +194,15 @@ export class UnitEditorComponent implements OnInit {
     this.router.navigate(['/searchShow/simulation'], {
       queryParams: { id: this.province }
     });
+  }
+
+  FormValidation() {
+    let isValid = true;
+    this.directives.forEach(d => {
+      if (!d.validationValue()) {
+        isValid = false;
+      }
+    });
+    return isValid;
   }
 }
