@@ -97,7 +97,8 @@
     nzTitle="{{ title }}"
     (nzOnCancel)="editorCancel()"
     (nzOnOk)="editorOk()"
-    [nzOkLoading]="isEditorLoading" [nzCancelText]="null"
+    [nzOkLoading]="isEditorLoading"
+    [nzCancelText]="null"
   >
     <div style="height:360px;width: 480px">
       <div nz-row style="height: 60px;">
@@ -106,7 +107,12 @@
         </div>
 
         <div nz-col nzSpan="15" class="ta_l">
-          <nz-select [(ngModel)]="subject.subjectId" style="width: 100%">
+          <nz-select
+            [(ngModel)]="subject.subjectId"
+            style="width: 100%"
+            required
+            [validation]="true"
+          >
             <nz-option
               *ngFor="let option of unit_subjects"
               [nzLabel]="option.name"
@@ -122,7 +128,13 @@
           <span class="clo_r">*</span>热区坐标：
         </div>
         <div nz-col nzSpan="15" class="ta_l">
-          <input type="text" nz-input [(ngModel)]="subject.hotRegion" />
+          <input
+            type="text"
+            nz-input
+            [(ngModel)]="subject.hotRegion"
+            required
+            [validation]="true"
+          />
         </div>
       </div>
 
@@ -133,7 +145,13 @@
           </div>
 
           <div nz-col nzSpan="15" class="ta_l">
-            <input type="text" nz-input [(ngModel)]="subject.previewUrl" />
+            <input
+              type="text"
+              nz-input
+              [(ngModel)]="subject.previewUrl"
+              required
+              [validation]="true"
+            />
           </div>
         </div>
       </div>

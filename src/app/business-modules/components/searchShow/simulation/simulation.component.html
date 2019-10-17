@@ -11,7 +11,7 @@
     </div>
     <div class="act">
       <nz-radio-group [(ngModel)]="actionType" [nzButtonStyle]="'solid'">
-        <label nz-radio-button nzValue="view">查看</label>
+        <label nz-radio-button nzValue="view" *ngIf="canManage">查看</label>
         <label nz-radio-button nzValue="mark" *ngIf="canManage">标记</label>
         <label nz-radio-button nzValue="edit" *ngIf="canManage">编辑热区</label>
         <label nz-radio-button nzValue="delete" *ngIf="canManage">删除</label>
@@ -25,9 +25,10 @@
     (nzOnCancel)="markerCancel()"
     (nzOnOk)="markerOk()"
     [nzOkLoading]="isMarkerLoading"
-    nzWidth="400px" [nzCancelText]="null"
+    nzWidth="400px"
+    [nzCancelText]="null"
   >
-    <div style="height: 400px">
+    <div style="height: 300px">
       <div nz-row style="height: 50px;">
         <div class="ta_l">
           <span class="clo_r">*</span>单位类型：
@@ -44,10 +45,12 @@
         style="height: 50px;"
       >
         <div class="ta_l">
-          <span class="clo_r">*</span>请选择核设施营运单位：
+          <span class="clo_r">*</span>请选择单位：
           <nz-select
-            style="width:calc(100% - 200px)"
-            [(ngModel)]="marker.unitId"
+            style="width:calc(100% - 100px)"
+            required
+            [validation]="true"
+            [(ngModel)]="serviceId"
             [disabled]="isDisable"
             class="w200"
           >
@@ -67,10 +70,12 @@
         style="height: 50px;"
       >
         <div class="ta_l">
-          <span class="clo_r">*</span>请选择铀矿冶单位：
+          <span class="clo_r">*</span>请选择单位：
           <nz-select
-            style="width:calc(100% - 200px)"
-            [(ngModel)]="marker.unitId"
+            required
+            [validation]="true"
+            style="width:calc(100% - 100px)"
+            [(ngModel)]="umineId"
             [disabled]="isDisable"
             class="w200"
           >
@@ -95,7 +100,8 @@
     nzTitle="提示"
     (nzOnCancel)="deleteCancel()"
     (nzOnOk)="deleteOk()"
-    [nzOkLoading]="isDeleteConfirmLoading" [nzCancelText]="null"
+    [nzOkLoading]="isDeleteConfirmLoading"
+    [nzCancelText]="null"
   >
     <p>确定要删除该单位在地图上的标记吗？</p>
   </nz-modal>

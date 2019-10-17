@@ -1,26 +1,33 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="7">
-      铀尾矿（渣）库名称：
-      <input nz-input nzSize="default" [(ngModel)]="name" class="w150" />
+    <div nz-col [nzSpan]="6">
+      铀尾矿(渣)库名称：
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="6">
       营运单位：
-      <input nz-input nzSize="default" [(ngModel)]="umineName" class="w150" />
+      <input nz-input nzSize="default" [(ngModel)]="umineName" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="7">
-      铀尾矿(渣)等别：
-      <nz-select [(ngModel)]="levelIds" class="w180">
-        <nz-option *ngFor="let option of dictionary.config_umine_place_level" [nzLabel]="option.value"
-          [nzValue]="option.id">
+    <div nz-col [nzSpan]="6">
+      许可情况：
+      <nz-select [(ngModel)]="permitSituationIds" class="w200">
+        <nz-option
+          *ngFor="let option of dictionary.config_umine_place_permit_situation"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
-
-    <div nz-col [nzSpan]="5" class="ta_r">
-      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">
+    <div nz-col [nzSpan]="6" class="ta_r">
+      <button
+        nz-button
+        nzType="primary"
+        style="width: 70px; margin-right: 10px;"
+        (click)="search()"
+      >
         查询
       </button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
@@ -30,47 +37,56 @@
   </div>
 
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="14">
-      建造年代：
-      <nz-year-picker [(ngModel)]="build_start_year"></nz-year-picker>
-      至
-      <nz-year-picker [(ngModel)]="build_end_year"></nz-year-picker>
+    <div nz-col [nzSpan]="6">
+      铀 尾 矿(渣) 等 别：
+      <nz-select [(ngModel)]="levelIds" class="w200">
+        <nz-option
+          *ngFor="let option of dictionary.config_umine_place_level"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
+        </nz-option>
+      </nz-select>
+    </div>
+    <div nz-col [nzSpan]="6">
+      审评状态：
+      <nz-select [(ngModel)]="reviewStatusIds" class="w200">
+        <nz-option
+          *ngFor="let option of dictionary.config_review_status"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
+        </nz-option>
+      </nz-select>
     </div>
 
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       设施状态：
       <nz-select [(ngModel)]="statusIds" class="w200">
-        <nz-option *ngFor="let option of dictionary.config_umine_place_status" [nzLabel]="option.value"
-          [nzValue]="option.id">
+        <nz-option
+          *ngFor="let option of dictionary.config_umine_place_status"
+          [nzLabel]="option.value"
+          [nzValue]="option.id"
+        >
         </nz-option>
       </nz-select>
     </div>
   </div>
 
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="7">
-      审评状态：
-      <nz-select [(ngModel)]="reviewStatusIds" class="w150">
-        <nz-option *ngFor="let option of dictionary.config_review_status" [nzLabel]="option.value"
-          [nzValue]="option.id">
-        </nz-option>
-      </nz-select>
-    </div>
-
-    <div nz-col [nzSpan]="7">
-      许可情况：
-      <nz-select [(ngModel)]="permitSituationIds" class="w200">
-        <nz-option *ngFor="let option of dictionary.config_umine_place_permit_situation" [nzLabel]="option.value"
-          [nzValue]="option.id">
-        </nz-option>
-      </nz-select>
-    </div>
-    <div nz-col [nzSpan]="9">
+    <div nz-col [nzSpan]="6">
       是否设置坝体监测设施：
-      <nz-select [(ngModel)]="have_monitor" class="w200">
+      <nz-select [(ngModel)]="have_monitor" class="w180">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
         <nz-option nzValue="0" nzLabel="否"></nz-option>
       </nz-select>
+    </div>
+
+    <div nz-col [nzSpan]="18">
+      建造年代：
+      <nz-year-picker [(ngModel)]="build_start_year"></nz-year-picker>
+      至
+      <nz-year-picker [(ngModel)]="build_end_year"></nz-year-picker>
     </div>
   </div>
 
@@ -82,42 +98,74 @@
       </div>
 
       <div class="fr" *ngIf="isSearchShow == '0' && canManage">
-        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除吗?"
+          (nzOnConfirm)="delete()"
+        >
           删除
         </button>
       </div>
 
       <div class="fr" *ngIf="isSearchShow == '0' && canManage">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="modify()"
+        >
           编辑
         </button>
       </div>
 
       <div class="fr" *ngIf="isSearchShow == '0' && canManage">
-        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">
+        <button
+          nz-button
+          nzType="primary"
+          style=" margin-right: 10px;"
+          (click)="add()"
+        >
           添加
         </button>
       </div>
 
       <div class="fr" *ngIf="isSearchShow == '0'">
-        <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportUminePlace()">
+        <button
+          nz-button
+          nzType="primary"
+          style="margin-right: 10px;"
+          (click)="exportUminePlace()"
+        >
           导出
         </button>
       </div>
 
       <div class="fr" *ngIf="isSearchShow == '0' && canManage">
-        <app-common-import [uploadUrl]="uploadUrl" (search)="search()"></app-common-import>
+        <app-common-import
+          [uploadUrl]="uploadUrl"
+          (search)="search()"
+        ></app-common-import>
       </div>
 
       <div class="fr">
         <label nz-checkbox [(ngModel)]="checked">按时间排序</label>
       </div>
-      
     </div>
     <div>
-      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
+      <nz-table
+        #nestedTable
+        [nzData]="dataSet"
+        class="commontable tablescoll_rainbow"
+        [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+        [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
+      >
         <thead>
           <tr>
             <th style="width: 5%">序号</th>
@@ -133,8 +181,11 @@
           </tr>
         </thead>
         <tbody [appPageHeight]="500">
-          <tr *ngFor="let data of nestedTable.data; index as index"
-            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]" (click)="selectItem(data)">
+          <tr
+            *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
+            (click)="selectItem(data)"
+          >
             <td style="width: 5%">
               {{ (pageIndex - 1) * pageSize + 1 + index }}
             </td>
