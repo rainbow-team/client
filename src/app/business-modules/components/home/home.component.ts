@@ -46,6 +46,8 @@ export class HomeComponent implements OnInit {
 
   configList: any = [];
 
+  chart2XData:any=[];
+
   constructor(
     private statisticsSercice: StatisticsSercice,
     private unitAddressService: UnitAddressService,
@@ -61,6 +63,11 @@ export class HomeComponent implements OnInit {
       .getStatisticsResultByCondition(this.conStatus)
       .subscribe(res => {
         this.statusData = res.msg;
+
+        this.chart2XData = this.statusData.map(function (v) {
+          return v.name;
+        });
+
         this.initEchart2();
       });
 
@@ -152,7 +159,7 @@ export class HomeComponent implements OnInit {
   initEchart() {
 
 
-   
+
 
     let option4 = {
       tooltip: {
@@ -185,7 +192,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  
+
 
     this.myChart4 = echarts.init(document.getElementById('chart4'));
     this.myChart4.setOption(option4);
@@ -202,29 +209,54 @@ export class HomeComponent implements OnInit {
       xAxis:
       {
         type: 'category',
-        data: this.statusData.map(function (v) {
-          return v.name;
-        }),
+        data: this.chart2XData,
+        nameTextStyle: {
+          fontWeight: 'normal',
+          fontSize: '12'
+        },
         axisLabel:
         {
+          show: true,
           interval: 0,
           formatter: function (val) {
-            if (val.length > 3) {
-              return (val.substring(0, 3)).split("").join("\n");
+            if (val.indexOf("（") > -1) {
+
+              let xVData = val.split("）");
+              xVData[0] = xVData[0] + "）";
+
+              return xVData.join("\n");
 
             } else {
               return val.split("").join("\n");
             }
+          },
+          textStyle: {
+            fontSize: '12',
+            fontWeight: 'normal'
           }
 
         }
-      }
-      ,
+        // axisLabel: {
+        //   interval: 0,    //强制文字产生间隔
+        //   rotate: 30,     //文字逆时针旋转45°
+        //   textStyle: {    //文字样式
+        //     color: "black",
+        //     fontFamily: 'Microsoft YaHei'
+        //   }
+        // }
+
+      },
       yAxis: [
         {
           type: 'value'
         }
       ],
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
       series: [
         {
 
@@ -258,7 +290,7 @@ export class HomeComponent implements OnInit {
     this.myChart2.setOption(option2);
   }
 
-  initEchart3(){
+  initEchart3() {
     let option3 = {
       tooltip: {
         //提示框组件

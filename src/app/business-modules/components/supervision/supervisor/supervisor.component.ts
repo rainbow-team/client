@@ -36,6 +36,8 @@ export class SupervisorComponent implements OnInit {
 
     selectId: any = "";
 
+    checked: any = false;
+
     uploadUrl: any = AppConfig.serviceAddress + "/Supervisor/importSupervisor";
     canManage: any = false;
 
@@ -122,6 +124,10 @@ export class SupervisorComponent implements OnInit {
 
         if (this.typeIds.length > 0) {
             option.conditions.push({ key: "typeIds", value: [this.typeIds] })
+        }
+
+        if (this.checked) {
+            option.conditions.push({ key: "checked", value: "checked" })
         }
 
         this.supervisionSercice.getSupervisorList(option).subscribe(

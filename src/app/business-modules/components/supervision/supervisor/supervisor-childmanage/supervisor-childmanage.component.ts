@@ -301,4 +301,8 @@ export class SupervisorChildmanageComponent implements OnInit {
     this.pageIndex = 1;
     this.selectMonitorList();
   }
+
+  reset(){
+    this.batchSearch = "";
+  }
 }
