@@ -21,12 +21,7 @@
     </div>
 
     <div nz-col [nzSpan]="4" class="ta_r" style="float: right">
-      <button
-        nz-button
-        nzType="primary"
-        style="width: 70px; margin-right: 10px;"
-        (click)="search()"
-      >
+      <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">
         查询
       </button>
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
@@ -38,11 +33,8 @@
     <div nz-col [nzSpan]="5">
       活动类型：
       <nz-select [(ngModel)]="typeIds" class="w200">
-        <nz-option
-          *ngFor="let option of dictionary.config_activity_type"
-          [nzLabel]="option.value"
-          [nzValue]="option.id"
-        >
+        <nz-option *ngFor="let option of dictionary.config_activity_type" [nzLabel]="option.value"
+          [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>
@@ -60,70 +52,42 @@
       </div>
 
       <div class="fr" *ngIf="!isSearchShow && canManage">
-        <button
-          nz-button
-          nzType="danger"
-          nz-popconfirm
-          nzTitle="确定删除吗?"
-          (nzOnConfirm)="delete()"
-        >
+        <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">
           删除
         </button>
       </div>
 
       <div class="fr" *ngIf="!isSearchShow && canManage">
-        <button
-          nz-button
-          nzType="primary"
-          style=" margin-right: 10px;"
-          (click)="modify()"
-        >
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">
           编辑
         </button>
       </div>
 
       <div class="fr" *ngIf="!isSearchShow && canManage">
-        <button
-          nz-button
-          nzType="primary"
-          style=" margin-right: 10px;"
-          (click)="add()"
-        >
+        <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">
           添加
         </button>
       </div>
 
       <div class="fr" *ngIf="!isSearchShow">
-        <button
-          nz-button
-          nzType="primary"
-          style="margin-right: 10px;"
-          (click)="exportActivityPermit()"
-        >
+        <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportActivityPermit()">
           导出
         </button>
       </div>
 
       <div class="fr" *ngIf="!isSearchShow && canManage">
-        <app-common-import
-          [uploadUrl]="uploadUrl"
-          (search)="search()"
-        ></app-common-import>
+        <app-common-import [uploadUrl]="uploadUrl" (search)="search()"></app-common-import>
       </div>
+
+      <div class="fr">
+        <label nz-checkbox [(ngModel)]="checked">按时间排序</label>
+      </div>
+
     </div>
     <div>
-      <nz-table
-        #nestedTable
-        [nzData]="dataSet"
-        class="commontable tablescoll_rainbow"
-        [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex"
-        nzShowSizeChanger
-        [nzPageSize]="pageSize"
-        [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)"
-        (nzPageSizeChange)="pageSizeChange($event)"
-      >
+      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
         <thead>
           <tr>
             <th style="width: 5%">序号</th>
@@ -139,11 +103,8 @@
           </tr>
         </thead>
         <tbody [appPageHeight]="pageHeight">
-          <tr
-            *ngFor="let data of nestedTable.data; index as index"
-            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]"
-            (click)="selectItem(data)"
-          >
+          <tr *ngFor="let data of nestedTable.data; index as index"
+            [ngClass]="{ true: 'itemSeleted', false: '' }[data.id == selectId]" (click)="selectItem(data)">
             <td style="width: 5%">
               {{ (pageIndex - 1) * pageSize + 1 + index }}
             </td>

@@ -38,6 +38,8 @@ export class EquipPermitComponent implements OnInit {
   canManage: any = false;
   pageHeight:any;
 
+  checked: any = false;
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -129,6 +131,10 @@ export class EquipPermitComponent implements OnInit {
       });
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.equipPermitService.getEquipPermitList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;

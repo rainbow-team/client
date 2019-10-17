@@ -32,6 +32,8 @@ export class ExpertComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private expertSercice: ExpertSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
@@ -64,6 +66,10 @@ export class ExpertComponent implements OnInit {
     }
     if (this.endAge) {
       option.conditions.push({ key: "endAge", value: this.endAge })
+    }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
     }
 
     this.expertSercice.getExpertList(option).subscribe(

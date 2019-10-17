@@ -31,6 +31,8 @@ export class ProducetrainComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private producetrainSercice: ProducetrainSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
@@ -68,6 +70,10 @@ export class ProducetrainComponent implements OnInit {
       option.conditions.push({ key: "place", value: this.place })
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+  }
+  
     this.producetrainSercice.getProduceTrainList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;

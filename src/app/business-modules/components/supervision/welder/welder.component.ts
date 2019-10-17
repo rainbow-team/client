@@ -32,6 +32,8 @@ export class WelderComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private welderSercice: WelderSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
@@ -72,6 +74,10 @@ export class WelderComponent implements OnInit {
       }
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.welderSercice.getWelderList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;

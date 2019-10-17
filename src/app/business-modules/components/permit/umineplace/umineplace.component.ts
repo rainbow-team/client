@@ -33,6 +33,8 @@ export class UmineplacePermitComponent implements OnInit {
   canManage:any=false;
   pageHeight:any;
 
+  checked: any = false;
+  
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -96,6 +98,10 @@ export class UmineplacePermitComponent implements OnInit {
         key: 'umineplaceId',
         value: this.umineplaceId
       });
+    }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
     }
 
     this.umineplacePermitService

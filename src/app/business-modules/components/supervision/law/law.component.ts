@@ -25,10 +25,11 @@ export class LawComponent implements OnInit {
   name: any = "";
   fb_date: any = [];
 
-
   selectId: any = "";
 
   canManage: any = false;
+
+  checked: any = false;
 
   constructor(private router: Router,
     private msg: NzMessageService, private lawSercice: LawSercice, private dictionarySercice: DictionarySercice,
@@ -68,6 +69,11 @@ export class LawComponent implements OnInit {
         option.conditions.push({ key: "endTime", value: this.fb_date[1] })
       }
     }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+  }
+
 
     this.lawSercice.getLawList(option).subscribe(
       (data) => {

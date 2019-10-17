@@ -52,6 +52,8 @@ export class SecurityUmineplaceComponent implements OnInit {
   uploadUrl: any = AppConfig.serviceAddress + '/umineplacesecurity/importData';
   pageHeight:any;
 
+  checked: any = false;
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -181,6 +183,10 @@ export class SecurityUmineplaceComponent implements OnInit {
       option.conditions.push({ key: 'umineplaceId', value: this.umineplaceId });
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.umineplaceSecuritySercice
       .getUmineplaceSecurityList(option)
       .subscribe(data => {

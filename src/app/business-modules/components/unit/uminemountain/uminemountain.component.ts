@@ -36,6 +36,8 @@ export class UminemountainComponent implements OnInit {
   selectId: any = "";
   canManage: any = false;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineMountainService: UmineMountainService,
@@ -86,6 +88,10 @@ export class UminemountainComponent implements OnInit {
       option.conditions.push({ key: "acceptIds", value: [this.acceptIds] })
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.umineMountainService.getUmineMountainList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;

@@ -54,6 +54,8 @@ export class CheckComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   pageHeight: any;
   uploadUrl: any = AppConfig.serviceAddress + '/checkmonitor/importData';
 
@@ -150,6 +152,10 @@ export class CheckComponent implements OnInit {
       });
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.checkMonitorSercice.getCheckMonitorList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;

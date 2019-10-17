@@ -30,6 +30,8 @@ export class OrgComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private orgSercice: OrgSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
@@ -60,6 +62,10 @@ export class OrgComponent implements OnInit {
     }
     if (this.leader) {
       option.conditions.push({ key: "leader", value: this.leader })
+    }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
     }
 
     this.orgSercice.getOrgList(option).subscribe(

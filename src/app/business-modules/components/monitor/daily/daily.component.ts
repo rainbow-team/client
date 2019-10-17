@@ -47,6 +47,8 @@ export class DailyComponent implements OnInit {
   end_date: any = '';
 
   canManage: any = false;
+  
+  checked: any = false;
 
   uploadUrl: any = AppConfig.serviceAddress + '/dailymonitor/importData';
   pageHeight: any;
@@ -135,6 +137,10 @@ export class DailyComponent implements OnInit {
       });
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.dailyMonitorSercice.getDailyMonitorList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;
