@@ -112,9 +112,9 @@ export class FacReportComponent implements OnInit {
 
   title: any = '';
   des: any = '';
-  chartTitle: any = "";
+  chartTitle: any = '';
 
-  constructor(private statisticsSercice: StatisticsSercice) { }
+  constructor(private statisticsSercice: StatisticsSercice) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -126,11 +126,11 @@ export class FacReportComponent implements OnInit {
 
   filterCondition() {
     var that = this;
-    this.result = this.condition.filter(function (p) {
+    this.result = this.condition.filter(function(p) {
       return p.type == that.typeValue;
     });
 
-    that.chartTitle = "核设施统计(" + this.result[0].name + ")";
+    that.chartTitle = '核设施统计(' + this.result[0].name + ')';
   }
 
   initEchart() {
@@ -147,7 +147,6 @@ export class FacReportComponent implements OnInit {
       legend: {
         bottom: 10,
         left: 'center'
-       
       },
       toolbox: {
         show: true,
@@ -165,7 +164,21 @@ export class FacReportComponent implements OnInit {
           data: this.data
         }
       ],
-      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+      color: [
+        '#339900',
+        '#FF9900',
+        '#33CC99',
+        '#339966',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ]
     };
 
     this.myChart3 = echarts.init(document.getElementById('chart3qq'));
@@ -211,9 +224,8 @@ export class FacReportComponent implements OnInit {
   }
 
   exportTable() {
-    $("#factable").table2excel({
-      filename: "核设施统计",
+    $('#factable').table2excel({
+      filename: '核设施统计'
     });
   }
-
 }

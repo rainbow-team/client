@@ -1,17 +1,20 @@
 <nz-layout style="    height: 100%;">
   <nz-header nzTheme="light">
-      统计方式：
-      <nz-radio-group [(ngModel)]="typeValue">
-        <label nz-radio nzValue="1">建造年代</label>
-        <label nz-radio nzValue="2">铀尾矿(渣)库等别</label>
-        <label nz-radio nzValue="3">设施状态</label>
-        <label nz-radio nzValue="4">审评状态</label>
-        <label nz-radio nzValue="5">许可情况</label>
-      </nz-radio-group>
-    
-    <div style="text-align: right;float:right">
+    统计方式：
+    <nz-radio-group
+      [(ngModel)]="typeValue"
+      (ngModelChange)="typeChanged($event)"
+    >
+      <label nz-radio nzValue="1">建造年代</label>
+      <label nz-radio nzValue="2">铀尾矿(渣)库等别</label>
+      <label nz-radio nzValue="3">设施状态</label>
+      <label nz-radio nzValue="4">审评状态</label>
+      <label nz-radio nzValue="5">许可情况</label>
+    </nz-radio-group>
+
+    <!-- <div style="text-align: right;float:right">
       <button nz-button nzType="primary" (click)="statistics()">统计</button>
-    </div>
+    </div> -->
 
     <div style="text-align: right;float:right;margin-right: 10px;">
       <button nz-button nzType="primary" (click)="exportTable()">导出</button>
@@ -20,23 +23,32 @@
   <nz-content style="height:calc(100% - 64px);">
     <nz-tabset style="height: 100%;">
       <nz-tab nzTitle="统计图">
-        <div id="chart3qq" style="text-align: center" [appPageHeight]='314'>
-
-        </div>
+        <div
+          id="chart3qq"
+          style="text-align: center"
+          [appPageHeight]="314"
+        ></div>
       </nz-tab>
       <nz-tab nzTitle="统计表">
-        <nz-table #nestedTable [nzData]="data" class="commontable" [nzFrontPagination]="false"
-          [nzShowPagination]="false" [nzNoResult]="" id="umineplaceTable">
+        <nz-table
+          #nestedTable
+          [nzData]="data"
+          class="commontable"
+          [nzFrontPagination]="false"
+          [nzShowPagination]="false"
+          [nzNoResult]=""
+          id="umineplaceTable"
+        >
           <thead>
             <tr>
-              <th>{{title}}</th>
-              <th *ngFor="let item of data">{{item.name}}</th>
+              <th>{{ title }}</th>
+              <th *ngFor="let item of data">{{ item.name }}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>数量</td>
-              <td *ngFor="let item of data">{{item.value}}</td>
+              <td *ngFor="let item of data">{{ item.value }}</td>
             </tr>
           </tbody>
         </nz-table>
