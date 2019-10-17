@@ -44,7 +44,7 @@ export class FacComponent implements OnInit {
   checked: any = false;
 
   uploadUrl: any = AppConfig.serviceAddress + '/fac/importData';
-
+  pageHeight: any = 560;
 
   constructor(
     private router: Router,
@@ -54,7 +54,7 @@ export class FacComponent implements OnInit {
     private staffSercice: StaffSercice,
     private serviceDepartService: ServiceDepartService,
     private utilitiesSercice: UtilitiesSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
@@ -74,6 +74,10 @@ export class FacComponent implements OnInit {
         });
       }
     });
+
+    if (this.isSearchShow != "0") {
+      this.pageHeight = 590;
+    }
 
     this.search();
   }
@@ -157,7 +161,7 @@ export class FacComponent implements OnInit {
     if (this.checked) {
       option.conditions.push({ key: "checked", value: "checked" })
     }
-    
+
     this.facSercice.getFacList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;

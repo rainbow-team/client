@@ -38,6 +38,8 @@ export class UminemountainComponent implements OnInit {
 
   checked: any = false;
 
+  pageHeight: any = 420;
+
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private umineMountainService: UmineMountainService,
@@ -51,6 +53,10 @@ export class UminemountainComponent implements OnInit {
     this.canManage = this.utilitiesSercice.checkPermission('uminemountain:manage');
 
     this.search();
+
+    if (this.isSearchShow != "0") {
+      this.pageHeight = 450;
+    }
   }
 
   search() {
@@ -91,7 +97,7 @@ export class UminemountainComponent implements OnInit {
     if (this.checked) {
       option.conditions.push({ key: "checked", value: "checked" })
     }
-    
+
     this.umineMountainService.getUmineMountainList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
