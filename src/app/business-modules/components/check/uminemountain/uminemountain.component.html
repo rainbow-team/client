@@ -47,7 +47,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="!uminemountainId">
         <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportUminemountainCheck()">
           导出
         </button>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ActivityCheckSercice } from 'src/app/services/check/activity.service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -26,24 +26,26 @@ export class ActivityFileComponent implements OnInit {
   dataSet: any = [];
   data: any = {};
 
-  selectId:any="";
+  selectId: any = "";
   fileList = [];
 
-  modalTitle:any="";
-  okText:any="";
+  modalTitle: any = "";
+  okText: any = "";
   isVisible: any = false;
-  isShow:any=false;
-  isSaving:any=false;
+  isShow: any = false;
+  isSaving: any = false;
 
   // file_name:any="";
-  typeIds:any=[];
-  fileDate:any=[];
-  canManage:any=false;
+  typeIds: any = [];
+  fileDate: any = [];
+  canManage: any = false;
+
+  isSearchShow: any = false;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private activityCheckSercice: ActivityCheckSercice,
     private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
-    private utilitiesSercice:UtilitiesSercice) { }
+    private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
@@ -51,9 +53,15 @@ export class ActivityFileComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.canManage = this.utilitiesSercice.checkPermission('permit:activity:manage');
     this.search();
+
+    let url = window.location.href;
+
+    if (url.indexOf("searchShow") != -1) {
+      this.isSearchShow = true;
+    }
   }
 
-  
+
   search() {
 
     var option = {
@@ -108,25 +116,25 @@ export class ActivityFileComponent implements OnInit {
 
   add() {
     this.data = {};
-    this.fileList=[];
+    this.fileList = [];
     this.modalTitle = "添加审评文件";
     this.okText = "提交";
     this.isVisible = true;
-    this.isShow=false;
+    this.isShow = false;
     this.isSaving = false;
-    this.selectId="";
+    this.selectId = "";
 
   }
 
-  modify(){
+  modify() {
     if (this.selectId) {
       this.modalTitle = "修改审评文件";
       this.okText = "提交";
       this.isVisible = true;
-      this.isShow=false;
+      this.isShow = false;
       this.isSaving = false;
 
-      this.fileList=[];
+      this.fileList = [];
 
       this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
 
@@ -165,8 +173,8 @@ export class ActivityFileComponent implements OnInit {
   //查看与编辑
   show(param) {
 
-    this.fileList=[];
-    
+    this.fileList = [];
+
     this.data = param;
 
     this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
@@ -192,7 +200,7 @@ export class ActivityFileComponent implements OnInit {
     if (!this.FormValidation()) {
       return;
     }
-    
+
     this.isSaving = true;
     this.data.checkActivityId = this.activityId;
 
@@ -204,19 +212,19 @@ export class ActivityFileComponent implements OnInit {
       });
     }
 
-      this.activityCheckSercice.saveOrUpdateActivityFileCheck(this.data).subscribe((res) => {
-        if (res.code == 200) {
-          this.msg.create('success', '保存成功');
-          this.search();
-          this.isVisible = false;
-        } else {
+    this.activityCheckSercice.saveOrUpdateActivityFileCheck(this.data).subscribe((res) => {
+      if (res.code == 200) {
+        this.msg.create('success', '保存成功');
+        this.search();
+        this.isVisible = false;
+      } else {
 
-          this.msg.create('error', '保存失败');
-        }
+        this.msg.create('error', '保存失败');
+      }
 
-        this.isSaving = false;
-      });
-    }
+      this.isSaving = false;
+    });
+  }
 
   selectItem(data) {
     this.selectId = data.id;
@@ -231,25 +239,25 @@ export class ActivityFileComponent implements OnInit {
     this.isShow = false;
   }
 
-    //表单手动触发验证
-    FormValidation() {
-      let isValid = true;
-      this.directives.forEach(d => {
-        if (!d.validationValue()) {
-          isValid = false;
-        }
-      });
-      return isValid;
-    }
-    
-    pageIndexChange(num) {
-      this.pageIndex = num;
-      this.search();
-    }
-  
-    pageSizeChange(num) {
-      this.pageSize = num;
-      this.pageIndex = 1;
-      this.search();
-    }
+  //表单手动触发验证
+  FormValidation() {
+    let isValid = true;
+    this.directives.forEach(d => {
+      if (!d.validationValue()) {
+        isValid = false;
+      }
+    });
+    return isValid;
+  }
+
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
+  }
 }

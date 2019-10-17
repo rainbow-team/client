@@ -83,20 +83,20 @@
 
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
-            定期报告时间：
+            <span class="clo_r">*</span>定期报告时间：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-date-picker name="reportDate" [(ngModel)]="data.reportDate">
+            <nz-date-picker name="reportDate" [(ngModel)]="data.reportDate" required [validation]="true">
             </nz-date-picker>
           </div>
         </div>
 
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="4" class="ta_r">
-            定期报告类别：
+            <span class="clo_r">*</span>定期报告类别：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <nz-select [(ngModel)]="data.typeId" style="width: 100%">
+            <nz-select [(ngModel)]="data.typeId" style="width: 100%" name="dqbglb" required [validation]="true">
               <nz-option *ngFor="let option of dictionary.config_fac_report_type" [nzLabel]="option.value"
                 [nzValue]="option.id">
               </nz-option>

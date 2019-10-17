@@ -60,10 +60,10 @@
 
         <div nz-row class="ma_b20">
             <div nz-col [nzSpan]="4" class="ta_r">
-              报告年度：
+              <span class="clo_r">*</span>报告年度：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <nz-year-picker name="reportDate" [(ngModel)]="data.reportYear">
+              <nz-year-picker name="reportDate" [(ngModel)]="data.reportYear" required [validation]="true">
               </nz-year-picker>
             </div>
           </div>
