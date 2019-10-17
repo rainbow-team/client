@@ -53,7 +53,7 @@
 
   </div>
 
-  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消" (nzOnOk)="save();"
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" [nzCancelText]="null" (nzOnOk)="save();"
     (nzOnCancel)="isVisible=false;" nzWidth="800px" [nzOkLoading]="isSaving">
 
     <div style="padding: 10px 30px 50px 0;">
@@ -73,7 +73,7 @@
   </nz-modal>
 
   <nz-modal [(nzVisible)]="isShow" nzTitle="年度报告详情" nzOkText="关闭" nzWidth="800px" (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()">
+  (nzOnOk)="handleOk()" [nzCancelText]="null">
 
   <div style="padding: 10px 20px;">
 

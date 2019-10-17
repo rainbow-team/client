@@ -36,7 +36,7 @@
     <app-nav-menu [navMenu]="navMenu"></app-nav-menu>
   </div>
   <nz-modal nz-modal [(nzVisible)]="isVisible" nzTitle="修改密码" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
-    [nzOkLoading]="isOkLoading">
+    [nzOkLoading]="isOkLoading" [nzCancelText]="null">
     <div>
       <div nz-row style="height: 60px;">
         <div class="ta_r">

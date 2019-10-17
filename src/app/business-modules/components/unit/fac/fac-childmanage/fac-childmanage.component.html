@@ -102,7 +102,7 @@
     <button nz-button nzType="default" (click)="close()">关闭</button>
   </div>
 
-  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消" (nzOnOk)="save();"
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" [nzCancelText]="null" (nzOnOk)="save();"
     (nzOnCancel)="isVisible=false;" nzWidth="700" [nzOkLoading]="isSaving">
 
     <div style="padding: 10px 30px 50px 0;">
@@ -127,7 +127,7 @@
     </div>
   </nz-modal>
 
-  <nz-modal [(nzVisible)]="isVisibleReport" [nzTitle]="modalTitleReport" [nzOkText]="okTextReport" nzCancelText="取消"
+  <nz-modal [(nzVisible)]="isVisibleReport" [nzTitle]="modalTitleReport" [nzOkText]="okTextReport" [nzCancelText]="null"
     (nzOnOk)="saveReport();" (nzOnCancel)="isVisibleReport=false;" nzWidth="700" [nzOkLoading]="isSavingReport">
 
     <div style="padding: 10px 30px 50px 0;">

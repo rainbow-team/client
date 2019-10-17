@@ -35,16 +35,16 @@
         >
           <thead>
             <tr>
-              <th >{{ title }}</th>
-              <th *ngFor="let item of data.yearDate">
+              <th style="width: 20%">{{ title }}</th>
+              <th *ngFor="let item of data.yearDate" [ngStyle]="getStyle()">
                 {{ item }}
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody [appPageHeight]='378'>
             <tr *ngFor="let item of data.numberList">
-              <td>{{ item.name }}</td>
-              <td *ngFor="let t of item.data">{{ t }}</td>
+              <td style="width: 20%">{{ item.name }}</td>
+              <td *ngFor="let t of item.data" [ngStyle]="getStyle()">{{ t }}</td>
               <!-- <td *ngFor="let item of data">{{item.value}}</td> -->
             </tr>
           </tbody>

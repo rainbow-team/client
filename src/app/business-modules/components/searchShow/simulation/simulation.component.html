@@ -25,7 +25,7 @@
     (nzOnCancel)="markerCancel()"
     (nzOnOk)="markerOk()"
     [nzOkLoading]="isMarkerLoading"
-    nzWidth="400px"
+    nzWidth="400px" [nzCancelText]="null"
   >
     <div style="height: 400px">
       <div nz-row style="height: 50px;">
@@ -95,7 +95,7 @@
     nzTitle="提示"
     (nzOnCancel)="deleteCancel()"
     (nzOnOk)="deleteOk()"
-    [nzOkLoading]="isDeleteConfirmLoading"
+    [nzOkLoading]="isDeleteConfirmLoading" [nzCancelText]="null"
   >
     <p>确定要删除该单位在地图上的标记吗？</p>
   </nz-modal>

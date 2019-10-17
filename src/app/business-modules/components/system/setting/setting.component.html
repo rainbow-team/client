@@ -128,7 +128,7 @@
   </div>
 </div>
 
-<nz-modal *ngIf="isVisible" [(nzVisible)]="isVisible" nzTitle="添加友情链接" (nzOnCancel)="isVisible=false;" (nzOnOk)="handleOk()">
+<nz-modal *ngIf="isVisible" [(nzVisible)]="isVisible" nzTitle="添加友情链接" (nzOnCancel)="isVisible=false;" (nzOnOk)="handleOk()" [nzCancelText]="null">
   <div>
     <div nz-row style="height: 60px;">
       <div class="ta_r">
@@ -159,7 +159,7 @@
 </nz-modal>
 
 
-<nz-modal *ngIf="isDicVisible" [(nzVisible)]="isDicVisible" nzTitle="添加字典项" (nzOnCancel)="isDicVisible=false;" (nzOnOk)="handleDicOk()">
+<nz-modal *ngIf="isDicVisible" [(nzVisible)]="isDicVisible" nzTitle="添加字典项" (nzOnCancel)="isDicVisible=false;" (nzOnOk)="handleDicOk()" [nzCancelText]="null">
   <div>
     <div nz-row style="height: 60px;">
       <div class="ta_r">

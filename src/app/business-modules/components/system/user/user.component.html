@@ -144,7 +144,7 @@
     nzTitle="{{ title }}"
     (nzOnCancel)="handleCancel()"
     (nzOnOk)="handleOk()"
-    [nzOkLoading]="isOkLoading"
+    [nzOkLoading]="isOkLoading" [nzCancelText]="null"
   >
     <div>
       <div nz-row style="height: 60px;">

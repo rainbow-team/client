@@ -76,7 +76,7 @@
 
 
     <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
-      (nzOnCancel)="previewVisible=false">
+      (nzOnCancel)="previewVisible=false" [nzCancelText]="null">
       <ng-template #modalContent>
         <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
       </ng-template>
@@ -154,7 +154,7 @@
 
 
     <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
-      (nzOnCancel)="previewVisible=false">
+      (nzOnCancel)="previewVisible=false" [nzCancelText]="null">
       <ng-template #modalContent>
         <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
       </ng-template>

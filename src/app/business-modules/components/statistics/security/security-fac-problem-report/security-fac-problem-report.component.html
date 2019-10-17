@@ -58,16 +58,16 @@
         >
           <thead>
             <tr>
-              <th style="width: 15%">{{ title }}</th>
-              <th  *ngFor="let item of data.yearDate">
+              <th style="width: 25%">{{ title }}</th>
+              <th  *ngFor="let item of data.yearDate" style="width: 25%">
                 {{ item }}
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody [appPageHeight]='428'>
             <tr *ngFor="let item of data.numberList">
-              <td>{{ item.name }}</td>
-              <td *ngFor="let t of item.data">{{ t }}</td>
+              <td style="width: 25%">{{ item.name }}</td>
+              <td *ngFor="let t of item.data" style="width: 25%">{{ t }}</td>
               <!-- <td *ngFor="let item of data">{{item.value}}</td> -->
             </tr>
           </tbody>

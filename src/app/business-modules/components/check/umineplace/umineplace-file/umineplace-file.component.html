@@ -6,7 +6,7 @@
     </div> -->
     <div nz-col [nzSpan]="5">
       文件类型：
-      <nz-select [(ngModel)]="typeIds" class="w200"  nzPlaceHolder="请选择文件类型">
+      <nz-select [(ngModel)]="typeIds" class="w200" nzPlaceHolder="请选择文件类型">
         <nz-option *ngFor="let option of dictionary.config_fac_check_file_type" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -33,7 +33,7 @@
 
       </div>
       <div class="fl" style="color: #0050b3;">
-          审评文件信息（共{{totalCount}}条）
+        审评文件信息（共{{totalCount}}条）
       </div>
 
       <div class="fr" *ngIf="canManage&&!isSearchShow">
@@ -84,7 +84,7 @@
       </nz-table>
 
 
-      <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" nzCancelText="取消"
+      <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzOkText]="okText" [nzCancelText]="null"
         (nzOnOk)="save();" (nzOnCancel)="isVisible=false;" nzWidth="800px" [nzOkLoading]="isSaving">
 
         <div style="padding: 10px 30px 50px 0;">
@@ -99,10 +99,11 @@
 
           <div nz-row class="ma_b20">
             <div nz-col [nzSpan]="4" class="ta_r">
-                <span class="clo_r">*</span>文件类型：
+              <span class="clo_r">*</span>文件类型：
             </div>
             <div nz-col [nzSpan]="20" class="ta_l">
-              <nz-select [(ngModel)]="data.checkFileTypeId" style="width: 100%" required [validation]="true"  nzAllowClear nzShowSearch nzPlaceHolder="请选择文件类型">
+              <nz-select [(ngModel)]="data.checkFileTypeId" style="width: 100%" required [validation]="true"
+                nzAllowClear nzShowSearch nzPlaceHolder="请选择文件类型">
                 <nz-option *ngFor="let option of dictionary.config_fac_check_file_type" [nzLabel]="option.value"
                   [nzValue]="option.id">
                 </nz-option>
@@ -115,10 +116,10 @@
               文件文号：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <input nz-input name="fileNo" [(ngModel)]="data.fileNo"/>
+              <input nz-input name="fileNo" [(ngModel)]="data.fileNo" />
             </div>
             <div nz-col [nzSpan]="4" class="ta_r">
-                <span class="clo_r">*</span>文件时间：
+              <span class="clo_r">*</span>文件时间：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
               <nz-month-picker name="fileDate" [(ngModel)]="data.fileDate" required [validation]="true">
@@ -132,7 +133,7 @@
       </nz-modal>
 
       <nz-modal [(nzVisible)]="isShow" nzTitle="审评文件详情" nzOkText="关闭" nzWidth="800px" (nzOnCancel)="handleCancel()"
-        (nzOnOk)="handleOk()">
+        (nzOnOk)="handleOk()" [nzCancelText]="null">
 
         <div style="padding: 10px 20px;">
 
