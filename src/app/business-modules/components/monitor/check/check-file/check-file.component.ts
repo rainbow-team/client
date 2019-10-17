@@ -44,6 +44,8 @@ export class CheckFileComponent implements OnInit {
   end_date: any;
   canManage: any = false;
 
+  isSearchShow: any = false;
+
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private checkMonitorSercice: CheckMonitorSercice,
     private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
@@ -58,6 +60,12 @@ export class CheckFileComponent implements OnInit {
       'monitor:check:manage'
     );
     this.search();
+
+    let url = window.location.href;
+
+    if (url.indexOf("searchShow") != -1) {
+      this.isSearchShow = true;
+    }
   }
 
 

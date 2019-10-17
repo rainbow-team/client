@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SystemService } from '../../../services/system/system.service';
 import { CookieService } from 'ngx-cookie-service';
 import { StaffSercice } from '../../../services/common/staff-service';
+declare var $: any;
 
 @Component({
   selector: 'app-login',
@@ -53,6 +54,14 @@ export class LoginComponent implements OnInit {
         that.drawCode();
       }
     }, 100);
+
+    $(document).keypress(function (e) {
+      var eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+      //eCode等于13代表回车事件
+      if (eCode == 13) {
+        that.login();
+      }
+    });
 
   }
 
@@ -175,6 +184,8 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+
+
 
 
 

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
+import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 
 @Component({
   selector: 'app-unit-fac-report',
@@ -12,6 +13,8 @@ import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
   styleUrls: ['./fac-report.component.scss']
 })
 export class FacReportComponent implements OnInit {
+
+  @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
 
   facId: any = "";
   dictionary: any = [];
@@ -35,12 +38,12 @@ export class FacReportComponent implements OnInit {
   typeId: any = "";
   start_date: any;
   end_date: any;
-  canManage:any=false;
+  canManage: any = false;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private facSercice: FacSercice,
     private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
-    private utilitiesSercice:UtilitiesSercice) { }
+    private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
@@ -177,6 +180,10 @@ export class FacReportComponent implements OnInit {
 
   save() {
 
+    if (!this.FormValidation()) {
+      return;
+    }
+
     this.isSaving = true;
     this.data.facId = this.facId;
 
@@ -224,5 +231,16 @@ export class FacReportComponent implements OnInit {
     this.pageSize = num;
     this.pageIndex = 1;
     this.search();
+  }
+
+  //表单手动触发验证
+  FormValidation() {
+    let isValid = true;
+    this.directives.forEach(d => {
+      if (!d.validationValue()) {
+        isValid = false;
+      }
+    });
+    return isValid;
   }
 }
