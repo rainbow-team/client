@@ -34,6 +34,8 @@ export class BreakcheckerComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private breakCheckerSercice: BreakCheckerSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
@@ -79,6 +81,11 @@ export class BreakcheckerComponent implements OnInit {
     if (this.cert_number) {
       option.conditions.push({ key: "cert_number", value: this.cert_number })
     }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
 
     this.breakCheckerSercice.getBreakCheckerList(option).subscribe(
       (data) => {

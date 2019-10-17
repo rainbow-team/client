@@ -51,6 +51,8 @@ export class AccidentComponent implements OnInit {
   uploadUrl: any = AppConfig.serviceAddress + '/accidentsecurity/importData';
   pageHeight:any;
   
+  checked: any = false;
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -153,6 +155,11 @@ export class AccidentComponent implements OnInit {
       });
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+
+    
     this.accidentSecuritySercice
       .getAccidentSecurityList(option)
       .subscribe(data => {

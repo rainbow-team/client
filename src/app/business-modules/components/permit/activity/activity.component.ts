@@ -40,7 +40,8 @@ export class ActivityPermitComponent implements OnInit {
   uploadUrl: any = AppConfig.serviceAddress + '/activitypermit/importData';
   canManage: any = false;
   pageHeight: any;
-
+  checked: any = false;
+  
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -136,6 +137,10 @@ export class ActivityPermitComponent implements OnInit {
         key: 'equipdepartId',
         value: this.equipdepartId
       });
+    }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
     }
 
     this.activityPermitService.getActivityPermitList(option).subscribe(data => {

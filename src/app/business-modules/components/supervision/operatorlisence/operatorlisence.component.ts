@@ -32,6 +32,8 @@ export class OperatorlisenceComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   constructor(private router: Router,
     private msg: NzMessageService, private operatorLisenceSercice: OperatorLisenceSercice, private dictionarySercice: DictionarySercice,
     private staffSercice: StaffSercice, private utilitiesSercice: UtilitiesSercice) { }
@@ -73,6 +75,10 @@ export class OperatorlisenceComponent implements OnInit {
       if (this.expire_date[1]) {
         option.conditions.push({ key: "end_date", value: this.expire_date[1] })
       }
+    }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
     }
 
 

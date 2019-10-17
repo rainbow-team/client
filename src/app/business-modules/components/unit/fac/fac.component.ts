@@ -41,7 +41,10 @@ export class FacComponent implements OnInit {
   selectId: any = '';
   canManage: any = false;
 
+  checked: any = false;
+
   uploadUrl: any = AppConfig.serviceAddress + '/fac/importData';
+
 
   constructor(
     private router: Router,
@@ -151,6 +154,10 @@ export class FacComponent implements OnInit {
       option.conditions.push({ key: 'is_flood', value: this.is_flood });
     }
 
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.facSercice.getFacList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;

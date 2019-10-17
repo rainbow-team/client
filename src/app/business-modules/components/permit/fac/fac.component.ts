@@ -32,7 +32,8 @@ export class PermitFacComponent implements OnInit {
   uploadUrl: any = AppConfig.serviceAddress + '/facpermit/importData';
   canManage:any=false;
   pageHeight:any;
-
+  checked: any = false;
+  
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -90,6 +91,10 @@ export class PermitFacComponent implements OnInit {
 
     if (this.facId) {
       option.conditions.push({ key: 'facId', value: this.facId });
+    }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
     }
 
     this.permit_FacSercice.getFacPermitList(option).subscribe(data => {

@@ -61,6 +61,8 @@ export class SecurityFacComponent implements OnInit {
   uploadUrl: any = AppConfig.serviceAddress + '/facsecurity/importData';
   pageHeight: any;
 
+  checked: any = false;
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -169,6 +171,11 @@ export class SecurityFacComponent implements OnInit {
         value: this.facId
       });
     }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.facSecuritySercice.getFacSecurityList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;

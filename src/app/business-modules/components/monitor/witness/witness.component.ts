@@ -42,6 +42,8 @@ export class WitnessComponent implements OnInit {
 
   canManage: any = false;
 
+  checked: any = false;
+
   uploadUrl: any = AppConfig.serviceAddress + '/witnessmonitor/importData';
   pageHeight:any;
   
@@ -129,6 +131,11 @@ export class WitnessComponent implements OnInit {
         value: this.equipdepartId
       });
     }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
+    }
+    
     this.witnessMonitorSercice.getWitnessMonitorList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;

@@ -32,6 +32,7 @@ export class UminemountainPermitComponent implements OnInit {
   selectId: any = "";
   canManage:any=false;
   pageHeight:any;
+  checked: any = false;
 
   constructor(
     private router: Router,
@@ -95,6 +96,10 @@ export class UminemountainPermitComponent implements OnInit {
         key: 'uminemountainId',
         value: this.uminemountainId
       });
+    }
+
+    if (this.checked) {
+      option.conditions.push({ key: "checked", value: "checked" })
     }
 
     this.umineMountainPermitService
