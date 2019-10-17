@@ -41,6 +41,8 @@ export class UmineplaceFileComponent implements OnInit {
   fileDate: any = [];
   canManage:any=false;
 
+  isSearchShow: any = false;
+  
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private umineplaceCheckSercice: UmineplaceCheckSercice,
     private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
@@ -52,6 +54,12 @@ export class UmineplaceFileComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.canManage = this.utilitiesSercice.checkPermission('check:umineplace:manage');
     this.search();
+
+    let url = window.location.href;
+
+    if (url.indexOf("searchShow") != -1) {
+      this.isSearchShow = true;
+    }
   }
 
 

@@ -42,6 +42,8 @@ export class CheckFacFileComponent implements OnInit {
   fileDate: any = [];
   canManage:any=false;
 
+  isSearchShow: any = false;
+  
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private facCheckSercice: FacCheckSercice,
     private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
@@ -57,6 +59,12 @@ export class CheckFacFileComponent implements OnInit {
 
     this.canManage = this.utilitiesSercice.checkPermission('check:fac:manage');
     this.search();
+
+    let url = window.location.href;
+
+    if (url.indexOf("searchShow") != -1) {
+      this.isSearchShow = true;
+    }
   }
 
 

@@ -16,7 +16,7 @@
       
           <div nz-row class="ma_b20">
             <div nz-col [nzSpan]="4" class="ta_r">
-              <span class="clo_r">*</span>培训开始时间：
+              <span class="clo_r">*</span>培训开始日期：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
               <nz-date-picker [(ngModel)]="data.beginDate" class="w200" name="beginDate" required [validation]="true"
@@ -25,7 +25,7 @@
             </div>
       
             <div nz-col [nzSpan]="4" class="ta_r">
-              <span class="clo_r">*</span>培训结束时间：
+              <span class="clo_r">*</span>培训结束日期：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
               <nz-date-picker [(ngModel)]="data.endDate" class="w200" name="endDate" required [validation]="true"
@@ -87,14 +87,14 @@
   
       <div nz-row class="ma_b20">
         <div nz-col [nzSpan]="4" class="ta_r">
-          培训开始时间：
+          培训开始日期：
         </div>
         <div nz-col [nzSpan]="8" class="ta_l">
           <span name="beginDate" class="showText">{{data.beginDate|recordtime}}</span>
         </div>
   
         <div nz-col [nzSpan]="4" class="ta_r">
-          培训结束时间：
+          培训结束日期：
         </div>
         <div nz-col [nzSpan]="8" class="ta_l">
           <span name="endDate" class="showText">{{data.endDate|recordtime}}</span>

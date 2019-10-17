@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/system/user.service';
 import { SystemLogService } from 'src/app/services/system/systemlog.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-system-log',
@@ -21,7 +22,8 @@ export class SystemLogComponent implements OnInit {
   starttime: any = "";
   endtime: any = "";
 
-  constructor(private userService: UserService,private systemLogService:SystemLogService) { }
+  constructor(private userService: UserService, private systemLogService: SystemLogService,
+    private msg: NzMessageService) { }
 
   ngOnInit() {
 
@@ -73,6 +75,17 @@ export class SystemLogComponent implements OnInit {
     this.userId = '';
     this.starttime = '';
     this.endtime = '';
+  }
+
+  deleteAll() {
+
+    this.systemLogService.deleteSystemLog().subscribe((data) => {
+
+      if (data.code == 200) {
+        this.msg.create('success', '删除成功');
+        this.search();
+      }
+    })
   }
 
 }

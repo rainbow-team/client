@@ -163,9 +163,9 @@ export class ServicedepartReportmanageComponent implements OnInit {
   //添加的保存
   save() {
 
-    // if (!this.FormValidation()) {
-    //   return;
-    // }
+    if (!this.FormValidation()) {
+      return;
+    }
 
     this.isSaving = true;
     this.data.serviceId = this.serviceId;
@@ -196,16 +196,16 @@ export class ServicedepartReportmanageComponent implements OnInit {
   }
 
 
-  // //表单手动触发验证
-  // FormValidation() {
-  //   let isValid = true;
-  //   this.directives.forEach(d => {
-  //     if (!d.validationValue()) {
-  //       isValid = false;
-  //     }
-  //   });
-  //   return isValid;
-  // }
+   //表单手动触发验证
+  FormValidation() {
+    let isValid = true;
+    this.directives.forEach(d => {
+      if (!d.validationValue()) {
+        isValid = false;
+      }
+    });
+    return isValid;
+  }
 
   selectItem(data) {
     this.selectId = data.reportId;

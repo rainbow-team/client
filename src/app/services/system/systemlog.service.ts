@@ -13,5 +13,9 @@ export class SystemLogService {
     return this.http.post('/SystemLog/getSystemLogList', param);
   }
 
- 
+  deleteSystemLog(): any {
+    return this.http.post('/SystemLog/deleteSystemLog', null);
+  }
+
+
 }

@@ -78,8 +78,8 @@
             <!-- <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th> -->
             <th style="width: 10%">序号</th>
             <th style="width: 20%">培训班次</th>
-            <th style="width: 10%">培训开始时间</th>
-            <th style="width: 10%">培训结束时间</th>
+            <th style="width: 10%">培训开始日期</th>
+            <th style="width: 10%">培训结束日期</th>
             <th style="width: 10%">成绩</th>
             <th style="width: 20%">监督员证号</th>
             <th style="width: 10%">发证日期</th>
@@ -164,7 +164,7 @@
       </div>
       <div nz-row class="ma_b20">
         <div nz-col [nzSpan]="12" class="ta_r">
-          <span class="clo_r">*</span>培训开始时间：
+          <span class="clo_r">*</span>培训开始日期：
           <nz-date-picker
             name="beginDate"
             [(ngModel)]="beginDate"
@@ -176,7 +176,7 @@
           </nz-date-picker>
         </div>
         <div nz-col [nzSpan]="12" class="ta_r">
-          <span class="clo_r">*</span>培训结束时间：
+          <span class="clo_r">*</span>培训结束日期：
           <nz-date-picker
             name="endDate"
             [(ngModel)]="endDate"

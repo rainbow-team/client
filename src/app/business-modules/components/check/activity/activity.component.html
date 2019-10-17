@@ -57,7 +57,7 @@
         </button>
       </div>
 
-      <div class="fr">
+      <div class="fr" *ngIf="!isSearchShow">
         <button nz-button nzType="primary" style="margin-right: 10px;" (click)="exportActivityCheck()">
           导出
         </button>

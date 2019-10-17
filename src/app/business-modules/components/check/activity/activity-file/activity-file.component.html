@@ -34,15 +34,15 @@
             审评文件信息（共{{totalCount}}条）
         </div>
   
-        <div class="fr" *ngIf="canManage">
+        <div class="fr" *ngIf="canManage&&!isSearchShow">
           <button nz-button nzType="danger" nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete()">删除</button>
         </div>
   
-        <div class="fr"  *ngIf="canManage">
+        <div class="fr"  *ngIf="canManage&&!isSearchShow">
           <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="modify()">编辑</button>
         </div>
   
-        <div class="fr"  *ngIf="canManage">
+        <div class="fr"  *ngIf="canManage&&!isSearchShow">
           <button nz-button nzType="primary" style=" margin-right: 10px;" (click)="add()">添加</button>
         </div>
   
