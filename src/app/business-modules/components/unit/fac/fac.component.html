@@ -194,17 +194,17 @@
         <thead>
           <tr>
             <th style="width: 5%">序号</th>
-            <th style="width: 10%">核设施名称</th>
-            <th style="width: 8%">核设施编号</th>
-            <th style="width: 8%">营运单位</th>
-            <th style="width: 8%">建造年代</th>
-            <th style="width: 8%">监管类别</th>
+            <th style="width: 13%">核设施名称</th>
+            <th style="width: 10%">核设施编号</th>
+            <th style="width: 13%">营运单位</th>
+            <th style="width: 5%">建造年代</th>
+            <th style="width: 5%">监管类别</th>
             <th style="width: 8%">设施类型</th>
             <th style="width: 8%">设施状态</th>
             <th style="width: 8%">审评状态</th>
-            <th style="width: 8%">许可情况</th>
-            <th style="width: 8%">是否满足抗震设防等级</th>
-            <th style="width: 8%">是否满足防洪要求</th>
+            <th style="width: 12%">许可情况</th>
+            <th style="width: 5%">是否满足抗震设防等级</th>
+            <th style="width: 5%">是否满足防洪要求</th>
             <th style="width: 5%">操作</th>
           </tr>
         </thead>
@@ -217,31 +217,31 @@
             <td style="width: 5%">
               {{ (pageIndex - 1) * pageSize + 1 + index }}
             </td>
-            <td style="width: 10%" nz-tooltip nzTitle="{{ data.name }}">
-              {{ data.name | tooltips: 5 }}
+            <td style="width: 13%" nz-tooltip nzTitle="{{ data.name }}">
+              {{ data.name | tooltips: 12 }}
             </td>
-            <td style="width: 8%" nz-tooltip nzTitle="{{ data.code }}">
-              {{ data.code | tooltips: 5 }}
+            <td style="width: 10%" nz-tooltip nzTitle="{{ data.code }}">
+              {{ data.code | tooltips: 10 }}
             </td>
-            <td style="width: 8%" nz-tooltip nzTitle="{{ data.serviceDepart }}">
-              {{ data.serviceDepart | tooltips: 5 }}
+            <td style="width: 13%" nz-tooltip nzTitle="{{ data.serviceDepart }}">
+              {{ data.serviceDepart | tooltips: 10 }}
             </td>
-            <td style="width: 8%">{{ data.buildYear | recordtime: 'year' }}</td>
-            <td style="width: 8%">{{ data.supervisionCategoryValue }}</td>
+            <td style="width: 5%">{{ data.buildYear | recordtime: 'year' }}</td>
+            <td style="width: 5%">{{ data.supervisionCategoryValue }}</td>
             <td style="width: 8%">{{ data.typeValue }}</td>
             <td style="width: 8%" nz-tooltip nzTitle="{{ data.statusValue }}">
-              {{ data.statusValue | tooltips: 5 }}
+              {{ data.statusValue | tooltips: 6 }}
             </td>
             <td style="width: 8%">{{ data.reviewStatusValue }}</td>
             <td
-              style="width: 8%"
+              style="width: 12%"
               nz-tooltip
               nzTitle="{{ data.permitSituationValue }}"
             >
-              {{ data.permitSituationValue | tooltips: 5 }}
+              {{ data.permitSituationValue | tooltips: 10 }}
             </td>
-            <td style="width: 8%">{{ data.isEarthquake | isTrue }}</td>
-            <td style="width: 8%">{{ data.isFlood | isTrue }}</td>
+            <td style="width: 5%">{{ data.isEarthquake | isTrue }}</td>
+            <td style="width: 5%">{{ data.isFlood | isTrue }}</td>
             <td style="width: 5%">
               <a (click)="show(data)">查看</a>
             </td>
