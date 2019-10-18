@@ -150,8 +150,8 @@ export class DailyComponent implements OnInit {
   reset() {
     this.serviceDepartName = '';
     this.facName = '';
-    this.facStatusTypeIds = [];
-    this.fileTypeIds = [];
+    this.facStatusTypeIds = "";
+    this.fileTypeIds = "";
     this.file_name = '';
     this.start_date = '';
     this.end_date = '';
