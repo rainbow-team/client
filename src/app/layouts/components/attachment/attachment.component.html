@@ -1,7 +1,7 @@
 <!-- <div style="padding: 0 0 0 50px;"> -->
 <div *ngIf="fileList&&fileList.length>0||!isDisable">
 
-  <div class="limitTips">请上传小于100M的附件</div>
+  <div *ngIf="!isDisable" class="limitTips">请上传小于100M的附件</div>
 
   <nz-upload *ngIf="!isDisable" [nzAction]="uploadUrl" [nzFileList]="fileList" [nzCustomRequest]="customReq"
     [nzShowUploadList]="false" [nzMultiple]="true" [nzLimit]="3" [nzBeforeUpload]="beforeUpload">
