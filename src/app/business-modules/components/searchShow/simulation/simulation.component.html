@@ -1,9 +1,9 @@
 <div nz-col *ngIf="!isProvinceMap">
-  <div id="mapChina" style="width:100%;height:600px"></div>
+  <div id="mapChina" style="width:100%;" [appPageHeight]="200"></div>
 </div>
 <div *ngIf="isProvinceMap">
   <div nz-col [nzSpan]="24">
-    <div id="mapProvince" style="width:100%;height:600px"></div>
+    <div id="mapProvince" style="width:100%;" [appPageHeight]="200"></div>
     <div class="ret">
       <button nz-button nzType="primary" (click)="LoadChinaMap()">
         返回全国地图
