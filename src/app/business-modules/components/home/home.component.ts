@@ -48,6 +48,8 @@ export class HomeComponent implements OnInit {
   chart4Data: any = [];
 
   chart2XData: any = [];
+  chart2YData: any = [];
+  lastName = "";
 
   constructor(
     private statisticsSercice: StatisticsSercice,
@@ -67,6 +69,13 @@ export class HomeComponent implements OnInit {
 
         this.chart2XData = this.statusData.map(function (v) {
           return v.name;
+        });
+
+        this.lastName = this.chart2XData[this.chart2XData.length - 1];
+        this.chart2XData[this.chart2XData.length - 1] = "";
+
+        this.chart2YData = this.statusData.map(function (v) {
+          return v.value;
         });
 
         this.initEchart2();
@@ -109,7 +118,7 @@ export class HomeComponent implements OnInit {
             array.push(parseFloat(element[i]))
           }
 
-          this.chart4Data.push({ name: this.yearData.yearDate[i], data: array, type: "bar" ,barWidth:20});
+          this.chart4Data.push({ name: this.yearData.yearDate[i], data: array, type: "bar", barWidth: 20 });
 
         }
 
@@ -218,24 +227,45 @@ export class HomeComponent implements OnInit {
   }
 
   initEchart2() {
+
+    let num = 0;
+    let that = this;
+
     let option2 = {
       tooltip: {
         trigger: 'axis'
       },
-      calculable: true,
+      grid: {
+        left: '3%',
+        right: '5%',
+        bottom: '3%',
+        containLabel: true
+      },
       xAxis:
       {
         type: 'category',
-        data: this.chart2XData,
-        nameTextStyle: {
-          fontWeight: 'normal',
-          fontSize: '12'
+        data: that.chart2XData,
+        axisTick: {
+          alignWithLabel: true
         },
         axisLabel:
         {
           show: true,
           interval: 0,
           formatter: function (val) {
+
+
+            if (val == "") {
+              if (num != 2) {
+                num++;
+                return "";
+              } else {
+
+                return that.lastName.split("").join("\n");
+              }
+
+            }
+
             if (val.indexOf("（") > -1) {
 
               let xVData = val.split("）");
@@ -253,14 +283,6 @@ export class HomeComponent implements OnInit {
           }
 
         }
-        // axisLabel: {
-        //   interval: 0,    //强制文字产生间隔
-        //   rotate: 30,     //文字逆时针旋转45°
-        //   textStyle: {    //文字样式
-        //     color: "black",
-        //     fontFamily: 'Microsoft YaHei'
-        //   }
-        // }
 
       },
       yAxis: [
@@ -268,18 +290,12 @@ export class HomeComponent implements OnInit {
           type: 'value'
         }
       ],
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
       series: [
         {
-
+          name: "数量",
           type: 'bar',
-          data: this.statusData,
-          barWidth: 10,
+          data: that.chart2YData,
+          barWidth: 20,
           label: {
             normal: {
               show: true,
@@ -300,7 +316,8 @@ export class HomeComponent implements OnInit {
             }
           }
         }
-      ]
+      ],
+      color: ['#1779d1']
     };
 
     this.myChart2 = echarts.init(document.getElementById('chart2'));
