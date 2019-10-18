@@ -45,8 +45,9 @@ export class HomeComponent implements OnInit {
   yearData: any = [];
 
   configList: any = [];
+  chart4Data: any = [];
 
-  chart2XData:any=[];
+  chart2XData: any = [];
 
   constructor(
     private statisticsSercice: StatisticsSercice,
@@ -96,6 +97,22 @@ export class HomeComponent implements OnInit {
         this.configList = this.yearData.numberList.map(function (v) {
           return v.name;
         });
+
+
+        for (let i = 0; i < this.yearData.yearDate.length; i++) {
+
+
+          let array = [];
+
+          for (let j = 0; j < this.yearData.numberList.length; j++) {
+            let element = this.yearData.numberList[j].data;
+            array.push(parseFloat(element[i]))
+          }
+
+          this.chart4Data.push({ name: this.yearData.yearDate[i], data: array, type: "bar" ,barWidth:20});
+
+        }
+
 
         this.initEchart();
       });
@@ -170,7 +187,7 @@ export class HomeComponent implements OnInit {
         }
       },
       legend: {
-        data: this.configList
+        data: this.yearData.yearDate
       },
       grid: {
         left: '3%',
@@ -180,12 +197,12 @@ export class HomeComponent implements OnInit {
       },
       xAxis: {
         type: 'category',
-        data: this.yearData.yearDate
+        data: this.configList
       },
       yAxis: {
         type: 'value'
       },
-      series: this.yearData.numberList,
+      series: this.chart4Data,
       color: ['#339900', '#FF9900', '#33CC99', '#339966', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
       //this.data.numberList
     };
