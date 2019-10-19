@@ -415,15 +415,13 @@ export class HomeComponent implements OnInit {
           //左侧小导航图标
           visualMap: {
             show: true,
-            x: 'left',
-            y: 'center',
+            x: 'right',
+            y: 'bottom',
             splitList: [
+              { start: 50, end: 100 },
               { start: 25, end: 50 },
-              { start: 15, end: 25 },
-              { start: 8, end: 15 },
-              { start: 4, end: 8 },
-              { start: 2, end: 4 },
-              { start: 0, end: 2 }
+              { start: 10, end: 25 },
+              { start: 0, end: 10 }
             ],
             color: [
               '#5475f5',
@@ -441,7 +439,7 @@ export class HomeComponent implements OnInit {
               name: '数据',
               type: 'map',
               mapType: 'china',
-              zoom: 1.2,
+              zoom: 1,
               roam: true,
               label: {
                 normal: {
