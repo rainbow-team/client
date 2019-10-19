@@ -13,12 +13,16 @@
         </nz-select>
       </div>
   
-      <div nz-col [nzSpan]="5">
+      <div nz-col [nzSpan]="10">
         文件时间：
-        <nz-range-picker class="w200" [(ngModel)]="fileDate"> </nz-range-picker>
+        <!-- <nz-range-picker class="w200" [(ngModel)]="fileDate"> </nz-range-picker>
+         -->
+         <nz-month-picker class="w200" [nzSize]="'size'" [(ngModel)]="start_date" nzPlaceHolder="开始日期"></nz-month-picker>
+         -
+         <nz-month-picker class="w200" [nzSize]="'size'" [(ngModel)]="end_date" nzPlaceHolder="结束日期"></nz-month-picker>
       </div>
   
-      <div nz-col [nzSpan]="3" nzOffset="11">
+      <div nz-col [nzSpan]="3" nzOffset="6">
         <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">查询</button>
         <button nz-button nzType="default" style="width: 70px;" (click)="reset()">重置</button>
       </div>

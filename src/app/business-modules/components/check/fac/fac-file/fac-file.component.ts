@@ -40,14 +40,17 @@ export class CheckFacFileComponent implements OnInit {
   file_name: any = "";
   typeIds: any = [];
   fileDate: any = [];
-  canManage:any=false;
+  canManage: any = false;
+
+  start_date: any;
+  end_date: any;
 
   isSearchShow: any = false;
-  
+
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private facCheckSercice: FacCheckSercice,
     private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
-    private utilitiesSercice:UtilitiesSercice) { }
+    private utilitiesSercice: UtilitiesSercice) { }
 
 
 
@@ -86,21 +89,21 @@ export class CheckFacFileComponent implements OnInit {
       option.conditions.push({ key: "typeIds", value: [this.typeIds] })
     }
 
-    if (this.fileDate && this.fileDate.length > 0) {
-      if (this.fileDate[0]) {
-        option.conditions.push({
-          key: 'start_date',
-          value: this.fileDate[0]
-        });
-      }
 
-      if (this.fileDate[1]) {
-        option.conditions.push({
-          key: 'end_date',
-          value: this.fileDate[1]
-        });
-      }
+    if (this.start_date) {
+      option.conditions.push({
+        key: 'start_date',
+        value: this.start_date
+      });
     }
+
+    if (this.end_date) {
+      option.conditions.push({
+        key: 'end_date',
+        value: this.end_date
+      });
+    }
+
 
     this.facCheckSercice.getFacFileCheckList(option).subscribe(
       (data) => {
@@ -122,6 +125,8 @@ export class CheckFacFileComponent implements OnInit {
     this.file_name = "";
     this.typeIds = [];
     this.fileDate = [];
+    this.start_date="";
+    this.end_date="";
   }
 
   add() {
@@ -210,7 +215,7 @@ export class CheckFacFileComponent implements OnInit {
     if (!this.FormValidation()) {
       return;
     }
-    
+
     this.isSaving = true;
     this.data.checkFacId = this.facId;
 

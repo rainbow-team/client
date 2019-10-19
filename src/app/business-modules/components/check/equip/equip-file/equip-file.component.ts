@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
@@ -26,26 +26,29 @@ export class EquipFileComponent implements OnInit {
   dataSet: any = [];
   data: any = {};
 
-  selectId:any="";
+  selectId: any = "";
   fileList = [];
 
-  modalTitle:any="";
-  okText:any="";
+  modalTitle: any = "";
+  okText: any = "";
   isVisible: any = false;
-  isShow:any=false;
-  isSaving:any=false;
+  isShow: any = false;
+  isSaving: any = false;
 
   // file_name:any="";
-  typeIds:any=[];
-  fileDate:any=[];
-  canManage:any=false;
+  typeIds: any = [];
+  fileDate: any = [];
+  canManage: any = false;
 
   isSearchShow: any = false;
+
+  start_date: any;
+  end_date: any;
 
   constructor(private router: Router,
     private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private equipCheckService: EquipCheckService,
     private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
-    private utilitiesSercice:UtilitiesSercice) { }
+    private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
     var id = this.ActivatedRoute.snapshot.queryParams["id"];
@@ -61,7 +64,7 @@ export class EquipFileComponent implements OnInit {
     }
   }
 
-  
+
   search() {
 
     var option = {
@@ -80,21 +83,20 @@ export class EquipFileComponent implements OnInit {
       option.conditions.push({ key: "typeIds", value: [this.typeIds] })
     }
 
-    if (this.fileDate && this.fileDate.length > 0) {
-      if (this.fileDate[0]) {
-        option.conditions.push({
-          key: 'start_date',
-          value: this.fileDate[0]
-        });
-      }
-
-      if (this.fileDate[1]) {
-        option.conditions.push({
-          key: 'end_date',
-          value: this.fileDate[1]
-        });
-      }
+    if (this.start_date) {
+      option.conditions.push({
+        key: 'start_date',
+        value: this.start_date
+      });
     }
+
+    if (this.end_date) {
+      option.conditions.push({
+        key: 'end_date',
+        value: this.end_date
+      });
+    }
+
 
     this.equipCheckService.getEquipFileCheckList(option).subscribe(
       (data) => {
@@ -112,29 +114,31 @@ export class EquipFileComponent implements OnInit {
     // this.file_name = "";
     this.typeIds = [];
     this.fileDate = [];
+    this.start_date = "";
+    this.end_date = "";
   }
 
   add() {
     this.data = {};
-    this.fileList=[];
+    this.fileList = [];
     this.modalTitle = "添加审评文件";
     this.okText = "提交";
     this.isVisible = true;
-    this.isShow=false;
+    this.isShow = false;
     this.isSaving = false;
-    this.selectId="";
+    this.selectId = "";
 
   }
 
-  modify(){
+  modify() {
     if (this.selectId) {
       this.modalTitle = "修改审评文件";
       this.okText = "提交";
       this.isVisible = true;
-      this.isShow=false;
+      this.isShow = false;
       this.isSaving = false;
 
-      this.fileList=[];
+      this.fileList = [];
 
       this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
 
@@ -173,8 +177,8 @@ export class EquipFileComponent implements OnInit {
   //查看与编辑
   show(param) {
 
-    this.fileList=[];
-    
+    this.fileList = [];
+
     this.data = param;
 
     this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
@@ -212,19 +216,19 @@ export class EquipFileComponent implements OnInit {
       });
     }
 
-      this.equipCheckService.saveOrUpdateEquipFileCheck(this.data).subscribe((res) => {
-        if (res.code == 200) {
-          this.msg.create('success', '保存成功');
-          this.search();
-          this.isVisible = false;
-        } else {
+    this.equipCheckService.saveOrUpdateEquipFileCheck(this.data).subscribe((res) => {
+      if (res.code == 200) {
+        this.msg.create('success', '保存成功');
+        this.search();
+        this.isVisible = false;
+      } else {
 
-          this.msg.create('error', '保存失败');
-        }
+        this.msg.create('error', '保存失败');
+      }
 
-        this.isSaving = false;
-      });
-    }
+      this.isSaving = false;
+    });
+  }
 
   selectItem(data) {
     this.selectId = data.id;
@@ -239,25 +243,25 @@ export class EquipFileComponent implements OnInit {
     this.isShow = false;
   }
 
-    //表单手动触发验证
-    FormValidation() {
-      let isValid = true;
-      this.directives.forEach(d => {
-        if (!d.validationValue()) {
-          isValid = false;
-        }
-      });
-      return isValid;
-    }
+  //表单手动触发验证
+  FormValidation() {
+    let isValid = true;
+    this.directives.forEach(d => {
+      if (!d.validationValue()) {
+        isValid = false;
+      }
+    });
+    return isValid;
+  }
 
-    pageIndexChange(num) {
-      this.pageIndex = num;
-      this.search();
-    }
-  
-    pageSizeChange(num) {
-      this.pageSize = num;
-      this.pageIndex = 1;
-      this.search();
-    }
+  pageIndexChange(num) {
+    this.pageIndex = num;
+    this.search();
+  }
+
+  pageSizeChange(num) {
+    this.pageSize = num;
+    this.pageIndex = 1;
+    this.search();
+  }
 }

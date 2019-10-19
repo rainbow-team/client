@@ -44,9 +44,12 @@ export class WitnessComponent implements OnInit {
 
   checked: any = false;
 
+  start_date: any;
+  end_date: any;
+
   uploadUrl: any = AppConfig.serviceAddress + '/witnessmonitor/importData';
-  pageHeight:any;
-  
+  pageHeight: any;
+
   constructor(
     private router: Router,
     private msg: NzMessageService,
@@ -57,7 +60,7 @@ export class WitnessComponent implements OnInit {
     private serviceDepartService: ServiceDepartService,
     private umineService: UmineService,
     private utilitiesSercice: UtilitiesSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dictionary = this.dictionarySercice.getAllConfig();
@@ -72,7 +75,7 @@ export class WitnessComponent implements OnInit {
       'monitor:witness:manage'
     );
 
-    this.pageHeight = this.isSearchShow ? 510 : 400;
+    this.pageHeight = this.isSearchShow ? 550 : 440;
     this.search();
   }
 
@@ -95,21 +98,21 @@ export class WitnessComponent implements OnInit {
       option.conditions.push({ key: 'witness_items', value: this.items });
     }
 
-    if (this.witness_date && this.witness_date.length > 0) {
-      if (this.witness_date[0]) {
-        option.conditions.push({
-          key: 'start_date',
-          value: this.witness_date[0]
-        });
-      }
 
-      if (this.witness_date[1]) {
-        option.conditions.push({
-          key: 'end_date',
-          value: this.witness_date[1]
-        });
-      }
+    if (this.start_date) {
+      option.conditions.push({
+        key: 'start_date',
+        value: this.start_date
+      });
     }
+
+    if (this.end_date) {
+      option.conditions.push({
+        key: 'end_date',
+        value: this.end_date
+      });
+    }
+
 
     if (this.servicedepartId) {
       option.conditions.push({
@@ -135,7 +138,7 @@ export class WitnessComponent implements OnInit {
     if (this.checked) {
       option.conditions.push({ key: "checked", value: "checked" })
     }
-    
+
     this.witnessMonitorSercice.getWitnessMonitorList(option).subscribe(data => {
       this.dataSet = data.msg.currentList;
       this.totalCount = data.msg.recordCount;
@@ -148,6 +151,8 @@ export class WitnessComponent implements OnInit {
     this.items = '';
     this.witness_date = [];
     this.selectId = '';
+    this.start_date = "";
+    this.end_date = "";
   }
 
   add() {
@@ -237,7 +242,7 @@ export class WitnessComponent implements OnInit {
         end_date = this.witness_date[1];
       }
     }
-    
+
     let url =
       AppConfig.serviceAddress +
       '/witnessmonitor/exportWitnessMonitor?name=' + this.name

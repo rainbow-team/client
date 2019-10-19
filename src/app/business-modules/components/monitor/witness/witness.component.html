@@ -10,16 +10,16 @@
       <input nz-input nzSize="default" [(ngModel)]="obj" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="5">
+    <div nz-col [nzSpan]="10">
       见证时间：
-      <nz-range-picker class="w200" [(ngModel)]="witness_date">
-      </nz-range-picker>
+      <!-- <nz-range-picker class="w200" [(ngModel)]="witness_date">
+      </nz-range-picker> -->
+      <nz-month-picker class="w200" [nzSize]="'size'" [(ngModel)]="start_date" nzPlaceHolder="开始日期"></nz-month-picker>
+      -
+      <nz-month-picker class="w200" [nzSize]="'size'" [(ngModel)]="end_date" nzPlaceHolder="结束日期"></nz-month-picker>
     </div>
 
-    <div nz-col [nzSpan]="5">
-      见证事项：
-      <input nz-input nzSize="default" [(ngModel)]="items" class="w200" />
-    </div>
+  
 
     <div nz-col [nzSpan]="4" class="ta_r" style="float: right">
       <button nz-button nzType="primary" style="width: 70px; margin-right: 10px;" (click)="search()">
@@ -28,6 +28,13 @@
       <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
         重置
       </button>
+    </div>
+  </div>
+
+  <div nz-row style="height: 40px;">
+    <div nz-col [nzSpan]="5">
+      见证事项：
+      <input nz-input nzSize="default" [(ngModel)]="items" class="w200" />
     </div>
   </div>
 
