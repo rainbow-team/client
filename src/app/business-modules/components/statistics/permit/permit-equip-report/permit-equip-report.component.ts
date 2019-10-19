@@ -88,6 +88,7 @@ export class PermitEquipReportComponent implements OnInit {
         data: this.data.yearDate
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       series: this.data.numberList,

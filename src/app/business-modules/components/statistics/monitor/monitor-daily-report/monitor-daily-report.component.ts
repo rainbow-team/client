@@ -55,9 +55,14 @@ export class MonitorDailyReportComponent implements OnInit {
 
     let option1 = {
       title: {
-        text: "日常监督统计",
+        text: '日常监督统计',
         x: 'center',
-        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+        subtext:
+          this.startDate.getFullYear() +
+          '年' +
+          '-' +
+          this.endDate.getFullYear() +
+          '年'
       },
       tooltip: {
         trigger: 'axis',
@@ -82,6 +87,7 @@ export class MonitorDailyReportComponent implements OnInit {
         data: this.data.yearDate
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       series: this.data.numberList,
@@ -91,7 +97,21 @@ export class MonitorDailyReportComponent implements OnInit {
           saveAsImage: { show: true }
         }
       },
-      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+      color: [
+        '#339900',
+        '#FF9900',
+        '#33CC99',
+        '#339966',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ]
       //this.data.numberList
     };
     this.myChart1 = echarts.init(document.getElementById('chart'));
@@ -115,8 +135,8 @@ export class MonitorDailyReportComponent implements OnInit {
   }
 
   exportTable() {
-    $("#mdr").table2excel({
-       filename: "日常监督统计",
+    $('#mdr').table2excel({
+      filename: '日常监督统计'
     });
   }
 }

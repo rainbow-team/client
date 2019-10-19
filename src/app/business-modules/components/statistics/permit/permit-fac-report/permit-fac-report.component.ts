@@ -59,7 +59,7 @@ export class PermitFacReportComponent implements OnInit {
 
   configList: any = [];
 
-  constructor(private statisticsSercice: StatisticsSercice) { }
+  constructor(private statisticsSercice: StatisticsSercice) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -73,21 +73,20 @@ export class PermitFacReportComponent implements OnInit {
 
   filterCondition() {
     var that = this;
-    this.result = this.condition.filter(function (p) {
+    this.result = this.condition.filter(function(p) {
       return p.type == that.typeValue;
     });
   }
 
   getStyle() {
-
     let widthP = 0;
     if (this.data.yearDate.length > 0) {
-      widthP = 80 / this.data.yearDate.length
+      widthP = 80 / this.data.yearDate.length;
     }
 
     return {
-      "width": widthP + "%"
-    }
+      width: widthP + '%'
+    };
   }
 
   initEchart1() {
@@ -95,9 +94,14 @@ export class PermitFacReportComponent implements OnInit {
 
     let option1 = {
       title: {
-        text: "核设施许可统计",
+        text: '核设施许可统计',
         x: 'center',
-        subtext: this.startDate.getFullYear() + "年" + "-" + this.endDate.getFullYear() + "年"
+        subtext:
+          this.startDate.getFullYear() +
+          '年' +
+          '-' +
+          this.endDate.getFullYear() +
+          '年'
       },
 
       tooltip: {
@@ -123,6 +127,7 @@ export class PermitFacReportComponent implements OnInit {
         data: this.data.yearDate
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       toolbox: {
@@ -132,7 +137,21 @@ export class PermitFacReportComponent implements OnInit {
         }
       },
       series: this.data.numberList,
-      color: ['#339900', '#FF9900', '#33CC99', '#339966', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
+      color: [
+        '#339900',
+        '#FF9900',
+        '#33CC99',
+        '#339966',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ]
     };
     this.myChart1 = echarts.init(document.getElementById('chart1'));
     this.myChart1.setOption(option1);
@@ -143,7 +162,7 @@ export class PermitFacReportComponent implements OnInit {
 
     let option2 = {
       title: {
-        text: "核设施许可统计(" + that.result[0].name + ")",
+        text: '核设施许可统计(' + that.result[0].name + ')',
         x: 'center'
       },
       tooltip: {
@@ -152,18 +171,19 @@ export class PermitFacReportComponent implements OnInit {
       },
       xAxis: {
         type: 'category',
-        data: that.data.map(function (v) {
+        data: that.data.map(function(v) {
           return v.name;
         })
       },
       legend: {
         bottom: 0,
         left: 'center',
-        data: that.data.map(function (v) {
+        data: that.data.map(function(v) {
           return v.name;
         })
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       toolbox: {
@@ -178,8 +198,21 @@ export class PermitFacReportComponent implements OnInit {
           type: 'bar'
         }
       ],
-      color: ['#339900', '#FF9900', '#33CC99', '#339966', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
-
+      color: [
+        '#339900',
+        '#FF9900',
+        '#33CC99',
+        '#339966',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ]
     };
     this.myChart2 = echarts.init(document.getElementById('chart2'));
     this.myChart2.setOption(option2);
@@ -195,7 +228,7 @@ export class PermitFacReportComponent implements OnInit {
         .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function (v) {
+          this.configList = this.data.numberList.map(function(v) {
             return v.name;
           });
 
@@ -214,8 +247,8 @@ export class PermitFacReportComponent implements OnInit {
   }
 
   exportTable() {
-    $("#pfr").table2excel({
-      filename: "核设施许可统计",
+    $('#pfr').table2excel({
+      filename: '核设施许可统计'
     });
   }
 }

@@ -116,9 +116,14 @@ export class SecurityFacProblemReportComponent implements OnInit {
 
     let option1 = {
       title: {
-        text: "核设施安全问题统计("+that.result[0].name+")",
+        text: '核设施安全问题统计(' + that.result[0].name + ')',
         x: 'center',
-        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+        subtext:
+          this.startDate.getFullYear() +
+          '年' +
+          '-' +
+          this.endDate.getFullYear() +
+          '年'
       },
       tooltip: {
         trigger: 'axis',
@@ -143,6 +148,7 @@ export class SecurityFacProblemReportComponent implements OnInit {
         data: this.data.yearDate
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       series: this.data.numberList,
@@ -162,9 +168,8 @@ export class SecurityFacProblemReportComponent implements OnInit {
     var that = this;
 
     let option2 = {
-     
       title: {
-        text: "核设施安全问题统计("+that.result[0].name+")",
+        text: '核设施安全问题统计(' + that.result[0].name + ')',
         x: 'center'
       },
       tooltip: {
@@ -178,6 +183,7 @@ export class SecurityFacProblemReportComponent implements OnInit {
         })
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       series: [
@@ -266,8 +272,8 @@ export class SecurityFacProblemReportComponent implements OnInit {
   }
 
   exportTable() {
-    $("#sfpr").table2excel({
-       filename: "核设施安全问题统计",
+    $('#sfpr').table2excel({
+      filename: '核设施安全问题统计'
     });
   }
 }

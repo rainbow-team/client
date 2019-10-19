@@ -68,6 +68,7 @@ export class PermitActivityReportComponent implements OnInit {
         })
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       toolbox: {

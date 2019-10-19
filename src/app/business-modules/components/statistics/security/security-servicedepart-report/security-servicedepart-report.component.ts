@@ -11,57 +11,62 @@ declare var $: any;
   styleUrls: ['./security-servicedepart-report.component.scss']
 })
 export class SecurityServicedepartReportComponent implements OnInit {
-
-
   serviceDepartList: any = [];
 
-  ids: any ;
+  ids: any;
 
-  typeValue: any = "3";
+  typeValue: any = '3';
 
-  startDate: any = "";
+  startDate: any = '';
 
-  endDate: any = "";
+  endDate: any = '';
 
-  result: any = "";
-
+  result: any = '';
 
   condition: any = [
     {
-      type: "1", name: "问题类别", con: {
+      type: '1',
+      name: '问题类别',
+      con: {
         tableName: 'security_fac',
         propertyName: 'question_type_id',
         configTableName: 'config_fac_security_question_type',
-        startDate: "",
-        endDate: "",
+        startDate: '',
+        endDate: '',
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id",
-        isService:'true'
+        idsProperty: 'service_id',
+        isService: 'true'
       }
-    }, {
-      type: "2", name: "问题性质", con: {
+    },
+    {
+      type: '2',
+      name: '问题性质',
+      con: {
         tableName: 'security_fac',
         propertyName: 'question_nature_id',
         configTableName: 'config_fac_security_question_nature',
-        startDate: "",
-        endDate: "",
+        startDate: '',
+        endDate: '',
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id",
-        isService:'true'
+        idsProperty: 'service_id',
+        isService: 'true'
       }
-    },{
-      type: "3", name: "整改状态及问题类别", con: {
+    },
+    {
+      type: '3',
+      name: '整改状态及问题类别',
+      con: {
         tableName: 'security_fac',
         propertyName: 'question_type_id',
         configTableName: 'config_fac_security_question_type',
-        startDate: "",
-        endDate: "",
+        startDate: '',
+        endDate: '',
         dateProperty: 'find_date',
         ids: [],
-        idsProperty:"service_id",
-        isService:'true'
+        idsProperty: 'service_id',
+        isService: 'true'
       }
     }
   ];
@@ -75,22 +80,21 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
   data: any = [];
 
-  title: any = "";
+  title: any = '';
 
-  des: any = "";
+  des: any = '';
 
   configList: any = [];
 
-  constructor(private statisticsSercice: StatisticsSercice,
-    private serviceDepartService: ServiceDepartService, ) { }
+  constructor(
+    private statisticsSercice: StatisticsSercice,
+    private serviceDepartService: ServiceDepartService
+  ) {}
 
   ngOnInit() {
-
-    this.serviceDepartService.getAllDepartService().subscribe((res) => {
-
+    this.serviceDepartService.getAllDepartService().subscribe(res => {
       this.serviceDepartList = res.msg;
-    })
-
+    });
 
     setTimeout(() => {
       this.initEchart1();
@@ -102,12 +106,9 @@ export class SecurityServicedepartReportComponent implements OnInit {
   }
 
   filterCondition() {
-
     var that = this;
-    this.result = this.condition.filter(function (p) {
-
+    this.result = this.condition.filter(function(p) {
       return p.type == that.typeValue;
-
     });
   }
 
@@ -116,14 +117,20 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
     let option1 = {
       title: {
-        text: "核设施营运单位安全问题统计("+that.result[0].name+")",
+        text: '核设施营运单位安全问题统计(' + that.result[0].name + ')',
         x: 'center',
-        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+        subtext:
+          this.startDate.getFullYear() +
+          '年' +
+          '-' +
+          this.endDate.getFullYear() +
+          '年'
       },
       tooltip: {
         trigger: 'axis',
-        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-          type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        axisPointer: {
+          // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
         }
       },
       legend: {
@@ -140,9 +147,9 @@ export class SecurityServicedepartReportComponent implements OnInit {
       xAxis: {
         type: 'category',
         data: this.data.yearDate
-
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       series: this.data.numberList,
@@ -151,120 +158,123 @@ export class SecurityServicedepartReportComponent implements OnInit {
         feature: {
           saveAsImage: { show: true }
         }
-      },
+      }
       //this.data.numberList
     };
-    this.myChart1 = echarts.init(document.getElementById("chart1"));
+    this.myChart1 = echarts.init(document.getElementById('chart1'));
     this.myChart1.setOption(option1);
-  };
+  }
 
   initEchart2() {
     var that = this;
 
     let option2 = {
-    
       title: {
-        text: "核设施营运单位安全问题统计("+that.result[0].name+")",
+        text: '核设施营运单位安全问题统计(' + that.result[0].name + ')',
         x: 'center'
       },
       tooltip: {
-        trigger: 'item',
+        trigger: 'item'
         //formatter: "{a} <br/>{b} : {c} ({d}%)"
       },
       xAxis: {
         type: 'category',
-        data: this.data.map(function (v) { return v.name })
+        data: this.data.map(function(v) {
+          return v.name;
+        })
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
-      series: [{
-        data: this.data,
-        type: 'bar'
-      }],
+      series: [
+        {
+          data: this.data,
+          type: 'bar'
+        }
+      ],
       toolbox: {
         show: true,
         feature: {
           saveAsImage: { show: true }
         }
-      },
+      }
     };
-    this.myChart2 = echarts.init(document.getElementById("chart2"));
+    this.myChart2 = echarts.init(document.getElementById('chart2'));
     this.myChart2.setOption(option2);
   }
 
   statistics() {
-
     this.filterCondition();
-    this.result[0].con["startDate"] = this.startDate;
-    this.result[0].con["endDate"] = this.endDate;
-    this.result[0].con["ids"] = this.ids;
+    this.result[0].con['startDate'] = this.startDate;
+    this.result[0].con['endDate'] = this.endDate;
+    this.result[0].con['ids'] = this.ids;
     // if (this.ids == null) {
     //   this.result[0].con["ids"] = null;
 
     // }
     //  else {
     //    this.result[0].con["ids"] = this.ids;
-      // if (this.typeValue == 1) {
-      //   this.statisticsSercice.searchResultByPermitDateConditon(this.result[0].con).subscribe(
-      //     (res) => {
-      //       this.data = res.msg;
+    // if (this.typeValue == 1) {
+    //   this.statisticsSercice.searchResultByPermitDateConditon(this.result[0].con).subscribe(
+    //     (res) => {
+    //       this.data = res.msg;
 
-      //       this.configList = this.data.numberList.map(function (v) { return v.name });
+    //       this.configList = this.data.numberList.map(function (v) { return v.name });
 
-      //       this.initEchart1();
+    //       this.initEchart1();
 
-      //     }
-      //   );
-      // } else {
-      //   this.statisticsSercice.searchResultByPermitStageConditon(this.result[0].con).subscribe(
-      //     (res) => {
-      //       this.data = res.msg;
-      //       this.initEchart2();
-      //     }
-      //   );
-      // }
+    //     }
+    //   );
+    // } else {
+    //   this.statisticsSercice.searchResultByPermitStageConditon(this.result[0].con).subscribe(
+    //     (res) => {
+    //       this.data = res.msg;
+    //       this.initEchart2();
+    //     }
+    //   );
+    // }
     //  }
 
     if (this.typeValue == 1) {
-      this.statisticsSercice.searchResultByDateConditon(this.result[0].con).subscribe(
-        (res) => {
+      this.statisticsSercice
+        .searchResultByDateConditon(this.result[0].con)
+        .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function (v) { return v.name });
+          this.configList = this.data.numberList.map(function(v) {
+            return v.name;
+          });
 
           this.initEchart1();
-
-        }
-      );
-    } else if(this.typeValue==2){
-
-      this.statisticsSercice.searchResultByTypeConditon(this.result[0].con).subscribe(
-        (res) => {
+        });
+    } else if (this.typeValue == 2) {
+      this.statisticsSercice
+        .searchResultByTypeConditon(this.result[0].con)
+        .subscribe(res => {
           this.data = res.msg;
           this.initEchart2();
-
-        }
-      );
-    }else{
-      this.statisticsSercice.searchResultByStatusAndType(this.result[0].con).subscribe(
-        (res) => {
+        });
+    } else {
+      this.statisticsSercice
+        .searchResultByStatusAndType(this.result[0].con)
+        .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function (v) { return v.name });
+          this.configList = this.data.numberList.map(function(v) {
+            return v.name;
+          });
 
           this.initEchart1();
-
-        }
-      );
+        });
     }
 
     this.title = this.result[0].name;
   }
 
   exportTable() {
-    $("#ssr").table2excel({
-       filename: "核设施营运单位安全问题统计",
+    $('#ssr').table2excel({
+      filename: '核设施营运单位安全问题统计'
     });
   }
 }

@@ -55,9 +55,14 @@ export class CheckEquipReportComponent implements OnInit {
 
     let option1 = {
       title: {
-        text: "核安全设备审评统计",
+        text: '核安全设备审评统计',
         x: 'center',
-        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+        subtext:
+          this.startDate.getFullYear() +
+          '年' +
+          '-' +
+          this.endDate.getFullYear() +
+          '年'
       },
       tooltip: {
         trigger: 'axis',
@@ -82,6 +87,7 @@ export class CheckEquipReportComponent implements OnInit {
         data: this.data.yearDate
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       toolbox: {
@@ -90,7 +96,21 @@ export class CheckEquipReportComponent implements OnInit {
           saveAsImage: { show: true }
         }
       },
-      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+      color: [
+        '#339900',
+        '#FF9900',
+        '#33CC99',
+        '#339966',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ],
       series: this.data.numberList
       //this.data.numberList
     };
@@ -115,8 +135,8 @@ export class CheckEquipReportComponent implements OnInit {
   }
 
   exportTable() {
-    $("#cer").table2excel({
-       filename: "核安全设备审评统计",
+    $('#cer').table2excel({
+      filename: '核安全设备审评统计'
     });
   }
 }

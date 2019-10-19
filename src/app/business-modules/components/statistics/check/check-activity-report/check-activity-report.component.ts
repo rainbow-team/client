@@ -47,9 +47,14 @@ export class CheckActivityReportComponent implements OnInit {
 
     let option = {
       title: {
-        text: "核活动审评统计",
+        text: '核活动审评统计',
         x: 'center',
-        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+        subtext:
+          this.startDate.getFullYear() +
+          '年' +
+          '-' +
+          this.endDate.getFullYear() +
+          '年'
       },
       tooltip: {
         trigger: 'item'
@@ -61,6 +66,7 @@ export class CheckActivityReportComponent implements OnInit {
         })
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       series: [
@@ -75,7 +81,21 @@ export class CheckActivityReportComponent implements OnInit {
           saveAsImage: { show: true }
         }
       },
-      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+      color: [
+        '#339900',
+        '#FF9900',
+        '#33CC99',
+        '#339966',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ]
     };
     this.myChart = echarts.init(document.getElementById('chart'));
     this.myChart.setOption(option);
@@ -93,8 +113,8 @@ export class CheckActivityReportComponent implements OnInit {
   }
 
   exportTable() {
-    $("#car").table2excel({
-       filename: "核活动审评统计",
+    $('#car').table2excel({
+      filename: '核活动审评统计'
     });
   }
 }

@@ -132,6 +132,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
         data: this.data.yearDate
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       series: this.data.numberList,
@@ -168,6 +169,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
         })
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       series: [

@@ -80,15 +80,14 @@ export class CheckFacReportComponent implements OnInit {
   }
 
   getStyle() {
-
     let widthP = 0;
     if (this.data.yearDate.length > 0) {
-      widthP = 80 / this.data.yearDate.length
+      widthP = 80 / this.data.yearDate.length;
     }
 
     return {
-      "width": widthP + "%"
-    }
+      width: widthP + '%'
+    };
   }
 
   initEchart1() {
@@ -96,9 +95,14 @@ export class CheckFacReportComponent implements OnInit {
 
     let option1 = {
       title: {
-        text: "核设施审评统计",
+        text: '核设施审评统计',
         x: 'center',
-        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+        subtext:
+          this.startDate.getFullYear() +
+          '年' +
+          '-' +
+          this.endDate.getFullYear() +
+          '年'
       },
       tooltip: {
         trigger: 'axis',
@@ -123,6 +127,7 @@ export class CheckFacReportComponent implements OnInit {
         data: this.data.yearDate
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       toolbox: {
@@ -132,7 +137,21 @@ export class CheckFacReportComponent implements OnInit {
         }
       },
       series: this.data.numberList,
-      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+      color: [
+        '#339900',
+        '#FF9900',
+        '#33CC99',
+        '#339966',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ]
       //this.data.numberList
     };
     this.myChart1 = echarts.init(document.getElementById('chart1'));
@@ -144,7 +163,7 @@ export class CheckFacReportComponent implements OnInit {
 
     let option2 = {
       title: {
-        text: "核设施审评统计("+that.result[0].name+")",
+        text: '核设施审评统计(' + that.result[0].name + ')',
         x: 'center'
       },
       tooltip: {
@@ -158,6 +177,7 @@ export class CheckFacReportComponent implements OnInit {
         })
       },
       yAxis: {
+        name: '数量(个)',
         type: 'value'
       },
       series: [
@@ -172,7 +192,21 @@ export class CheckFacReportComponent implements OnInit {
           saveAsImage: { show: true }
         }
       },
-      color:['#339900', '#FF9900','#33CC99','#339966','#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+      color: [
+        '#339900',
+        '#FF9900',
+        '#33CC99',
+        '#339966',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ]
     };
     this.myChart2 = echarts.init(document.getElementById('chart2'));
     this.myChart2.setOption(option2);
@@ -207,8 +241,8 @@ export class CheckFacReportComponent implements OnInit {
   }
 
   exportTable() {
-    $("#cfr").table2excel({
-       filename: "核设施审评统计",
+    $('#cfr').table2excel({
+      filename: '核设施审评统计'
     });
   }
 }

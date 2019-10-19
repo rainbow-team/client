@@ -49,17 +49,16 @@ export class HomeComponent implements OnInit {
 
   chart2XData: any = [];
   chart2YData: any = [];
-  lastName = "";
+  lastName = '';
 
   constructor(
     private statisticsSercice: StatisticsSercice,
     private unitAddressService: UnitAddressService,
     private http: HttpClient,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
-
     this.LoadChinaMap();
 
     this.statisticsSercice
@@ -67,14 +66,14 @@ export class HomeComponent implements OnInit {
       .subscribe(res => {
         this.statusData = res.msg;
 
-        this.chart2XData = this.statusData.map(function (v) {
+        this.chart2XData = this.statusData.map(function(v) {
           return v.name;
         });
 
         this.lastName = this.chart2XData[this.chart2XData.length - 1];
-        this.chart2XData[this.chart2XData.length - 1] = "";
+        this.chart2XData[this.chart2XData.length - 1] = '';
 
-        this.chart2YData = this.statusData.map(function (v) {
+        this.chart2YData = this.statusData.map(function(v) {
           return v.value;
         });
 
@@ -103,25 +102,25 @@ export class HomeComponent implements OnInit {
       .subscribe(res => {
         this.yearData = res.msg;
 
-        this.configList = this.yearData.numberList.map(function (v) {
+        this.configList = this.yearData.numberList.map(function(v) {
           return v.name;
         });
 
-
         for (let i = 0; i < this.yearData.yearDate.length; i++) {
-
-
           let array = [];
 
           for (let j = 0; j < this.yearData.numberList.length; j++) {
             let element = this.yearData.numberList[j].data;
-            array.push(parseFloat(element[i]))
+            array.push(parseFloat(element[i]));
           }
 
-          this.chart4Data.push({ name: this.yearData.yearDate[i], data: array, type: "bar", barWidth: 20 });
-
+          this.chart4Data.push({
+            name: this.yearData.yearDate[i],
+            data: array,
+            type: 'bar',
+            barWidth: 20
+          });
         }
-
 
         this.initEchart();
       });
@@ -140,6 +139,7 @@ export class HomeComponent implements OnInit {
       ],
       yAxis: [
         {
+          name: '数量(座)',
           type: 'value'
         }
       ],
@@ -162,7 +162,7 @@ export class HomeComponent implements OnInit {
             //通常情况下：
             normal: {
               //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-              color: function (params) {
+              color: function(params) {
                 var colorList = [
                   '#1779d1',
                   '#49b8ec',
@@ -183,10 +183,6 @@ export class HomeComponent implements OnInit {
   }
 
   initEchart() {
-
-
-
-
     let option4 = {
       tooltip: {
         trigger: 'axis',
@@ -209,25 +205,33 @@ export class HomeComponent implements OnInit {
         data: this.configList
       },
       yAxis: {
+        name: '数量(座)',
         type: 'value'
       },
       series: this.chart4Data,
-      color: ['#339900', '#FF9900', '#33CC99', '#339966', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
+      color: [
+        '#339900',
+        '#FF9900',
+        '#33CC99',
+        '#339966',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ]
       //this.data.numberList
     };
 
-
-
-
-
     this.myChart4 = echarts.init(document.getElementById('chart4'));
     this.myChart4.setOption(option4);
-
-
   }
 
   initEchart2() {
-
     let num = 0;
     let that = this;
 
@@ -241,58 +245,49 @@ export class HomeComponent implements OnInit {
         bottom: '3%',
         containLabel: true
       },
-      xAxis:
-      {
+      xAxis: {
         type: 'category',
         data: that.chart2XData,
         axisTick: {
           alignWithLabel: true
         },
-        axisLabel:
-        {
+        axisLabel: {
           show: true,
           interval: 0,
-          formatter: function (val) {
-
-
-            if (val == "") {
+          formatter: function(val) {
+            if (val == '') {
               if (num != 2) {
                 num++;
-                return "";
+                return '';
               } else {
-
-                return that.lastName.split("").join("\n");
+                return that.lastName.split('').join('\n');
               }
-
             }
 
-            if (val.indexOf("（") > -1) {
+            if (val.indexOf('（') > -1) {
+              let xVData = val.split('）');
+              xVData[0] = xVData[0] + '）';
 
-              let xVData = val.split("）");
-              xVData[0] = xVData[0] + "）";
-
-              return xVData.join("\n");
-
+              return xVData.join('\n');
             } else {
-              return val.split("").join("\n");
+              return val.split('').join('\n');
             }
           },
           textStyle: {
             fontSize: '12',
             fontWeight: 'normal'
           }
-
         }
-
       },
       yAxis: [
         {
+          name: '数量(座)',
           type: 'value'
         }
       ],
       series: [
         {
-          name: "数量",
+          name: '数量',
           type: 'bar',
           data: that.chart2YData,
           barWidth: 20,
@@ -309,7 +304,7 @@ export class HomeComponent implements OnInit {
             //通常情况下：
             normal: {
               //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-              color: function (params) {
+              color: function(params) {
                 var colorList = ['#1779d1'];
                 return colorList[params.dataIndex];
               }
@@ -341,8 +336,8 @@ export class HomeComponent implements OnInit {
         y: 'center', //图例在垂直方向上面显示居中
         itemWidth: 10, //图例标记的图形宽度
         itemHeight: 10, //图例标记的图形高度
-        data: this.typeData.map(function (v) {
-          return v.name
+        data: this.typeData.map(function(v) {
+          return v.name;
         }),
         textStyle: {
           //图例文字的样式
