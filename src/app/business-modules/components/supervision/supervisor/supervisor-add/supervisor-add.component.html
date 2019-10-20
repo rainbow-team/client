@@ -14,7 +14,7 @@
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>身份证号：
             <input nz-input name="identity" [(ngModel)]="data.identity" class="w200" required [validation]="true"
-              [validationType]="'idcard'"  (ngModelChange)="identityChange($event)" />
+              [validationType]="'idcard'" [isBlur]="'1'"  (ngModelChange)="identityChange($event)" />
           </div>
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>性别：
@@ -79,7 +79,7 @@
 
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>政治面貌：
-            <nz-select nzAllowClear [(ngModel)]="data.politicalId" class="w200" required
+            <nz-select nzAllowClear [(ngModel)]="data.politicalId" class="w200" required name="zzmm"
               [validation]="true">
               <nz-option *ngFor="let option of dictionary.config_political" [nzLabel]="option.value"
                 [nzValue]="option.id">
@@ -94,7 +94,7 @@
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>联系方式：
             <input nz-input name="contact" [(ngModel)]="data.contact" class="w200"  required
-              [validation]="true" [validationType]="'phonenumber'" />
+              [validation]="true" [validationType]="'phonenumber'" [isBlur]="'1'"/>
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">

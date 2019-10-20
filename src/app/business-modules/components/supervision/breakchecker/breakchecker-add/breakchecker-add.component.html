@@ -13,11 +13,11 @@
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
-        身份证号：
+        <span class="clo_r">*</span>身份证号：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="identity" [(ngModel)]="data.identity" [validation]="true" [validationType]="'nullidcard'"
-          (ngModelChange)="identityChange($event)" />
+        <input nz-input name="identity" [(ngModel)]="data.identity" [validation]="true" [validationType]="'idcard'"
+          (ngModelChange)="identityChange($event)" [isBlur]="'1'"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">

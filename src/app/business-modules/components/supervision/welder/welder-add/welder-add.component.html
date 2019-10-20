@@ -28,7 +28,7 @@
           [(ngModel)]="data.identity"
           [validation]="true"
           [validationType]="'nullidcard'"
-          (ngModelChange)="identityChange($event)"
+          (ngModelChange)="identityChange($event)" [isBlur]="'1'"
         />
       </div>
     </div>

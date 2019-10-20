@@ -63,19 +63,18 @@ export class ExpertAddComponent implements OnInit {
   //身份证变化
   identityChange(params) {
 
-    var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-    if (reg.test(params)) {
-
-      this.data.birthday = new Date(params.substring(6, 10), params.substring(10, 12) - 1, params.substring(12, 14));
-      this.getAge();
-      if (parseInt(params.substr(16, 1)) % 2 == 1) {
-        //男
-        return this.sexValue = "1";
-      } else {
-        //女
-        return this.sexValue = "0";
+    var reg = /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+      if (reg.test(params)) {
+  
+        this.data.birthday = new Date(params.substring(6, 10), params.substring(10, 12) - 1, params.substring(12, 14),8);
+        if (parseInt(params.substr(16, 1)) % 2 == 1) {
+          //男
+          return this.sexValue = "1";
+        } else {
+          //女
+          return this.sexValue = "0";
+        }
       }
-    }
   }
 
   getAge() {

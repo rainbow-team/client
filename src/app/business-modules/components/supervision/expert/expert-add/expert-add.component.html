@@ -20,7 +20,7 @@
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
         <input nz-input name="identity" [(ngModel)]="data.identity" [validation]="true" [validationType]="'nullidcard'"
-          (ngModelChange)="identityChange($event)" />
+          (ngModelChange)="identityChange($event)" [isBlur]="'1'"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
@@ -67,7 +67,7 @@
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
         <input nz-input name="contact" [(ngModel)]="data.contact" required [validation]="true"
-          [validationType]="'phonenumber'" />
+          [validationType]="'phonenumber'" [isBlur]="'1'"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
