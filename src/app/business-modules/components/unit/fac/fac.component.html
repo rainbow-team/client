@@ -120,17 +120,17 @@
   </div>
 
   <div nz-row style="height: 40px;" *ngIf="isSearchShow != '0'">
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       设施名称：
       <input nz-input nzSize="default" [(ngModel)]="name" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       设施编号：
       <input nz-input nzSize="default" [(ngModel)]="code" class="w200" />
     </div>
 
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       营运单位：
       <input
         nz-input
@@ -140,7 +140,7 @@
       />
     </div>
 
-    <div nz-col [nzSpan]="3" class="ta_r">
+    <div nz-col [nzSpan]="4"  [nzOffset]="2" class="ta_r">
       <button
         nz-button
         nzType="primary"
@@ -156,7 +156,7 @@
   </div>
 
   <div nz-row style="height: 40px;" *ngIf="isSearchShow != '0'">
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       监管类别：
       <nz-select [(ngModel)]="supervisionCategoryIds" class="w200">
         <nz-option
@@ -167,7 +167,7 @@
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       设施类型：
       <nz-select [(ngModel)]="typeIds" class="w200">
         <nz-option
@@ -179,7 +179,7 @@
       </nz-select>
     </div>
 
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       设施状态：
       <nz-select [(ngModel)]="statusIds" class="w200">
         <nz-option
@@ -193,7 +193,7 @@
   </div>
 
   <div nz-row style="height: 40px;" *ngIf="isSearchShow != '0'">
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       审评状态：
       <nz-select [(ngModel)]="reviewStatusIds" class="w200">
         <nz-option
@@ -204,7 +204,7 @@
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       许可情况：
       <nz-select [(ngModel)]="permitSituationIds" class="w200">
         <nz-option
@@ -215,7 +215,7 @@
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       满足防洪：
       <nz-select [(ngModel)]="is_earthquake" class="w200">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
@@ -225,7 +225,7 @@
   </div>
 
   <div nz-row style="height: 40px;" *ngIf="isSearchShow != '0'">
-    <div nz-col [nzSpan]="7">
+    <div nz-col [nzSpan]="6">
       满足抗震：
       <nz-select [(ngModel)]="is_flood" class="w200">
         <nz-option nzValue="1" nzLabel="是"></nz-option>
@@ -233,7 +233,7 @@
       </nz-select>
     </div>
 
-    <div nz-col [nzSpan]="10">
+    <div nz-col [nzSpan]="12">
       建造年代：
       <nz-year-picker [(ngModel)]="build_start_year"></nz-year-picker>
       至

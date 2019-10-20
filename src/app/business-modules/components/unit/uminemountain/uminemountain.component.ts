@@ -55,7 +55,7 @@ export class UminemountainComponent implements OnInit {
     this.search();
 
     if (this.isSearchShow != "0") {
-      this.pageHeight = 450;
+      this.pageHeight = 490;
     }
   }
 

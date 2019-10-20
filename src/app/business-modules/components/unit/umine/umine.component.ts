@@ -32,13 +32,15 @@ export class UmineComponent implements OnInit {
   groupList: any = [];
 
   selectId: any = "";
-  canManage:any=false;
+  canManage: any = false;
 
   checked: any = false;
 
+  pageHeight: any = 390;
+
   constructor(private router: Router,
     private msg: NzMessageService, private umineSercice: UmineService, private dictionarySercice: DictionarySercice,
-    private staffSercice: StaffSercice, private groupService: GroupService,private utilitiesSercice:UtilitiesSercice) { }
+    private staffSercice: StaffSercice, private groupService: GroupService, private utilitiesSercice: UtilitiesSercice) { }
 
   ngOnInit() {
 
@@ -58,7 +60,11 @@ export class UmineComponent implements OnInit {
           });
         });
       }
-    })
+    });
+
+    if (this.isSearchShow != "0") {
+      this.pageHeight = 410;
+    }
   }
 
   search() {
@@ -79,7 +85,7 @@ export class UmineComponent implements OnInit {
     if (this.checked) {
       option.conditions.push({ key: "checked", value: "checked" })
     }
-    
+
     this.umineSercice.getUmineList(option).subscribe(
       (data) => {
         this.dataSet = data.msg.currentList;
@@ -150,9 +156,9 @@ export class UmineComponent implements OnInit {
     this.selectId = data.id;
   }
 
-  exportUmine(){
+  exportUmine() {
 
-    let url = AppConfig.serviceAddress + "/umine/exportUmine?name="+this.name; 
+    let url = AppConfig.serviceAddress + "/umine/exportUmine?name=" + this.name;
 
     url = this.utilitiesSercice.wrapUrl(url);
     window.open(url, "_blank");
