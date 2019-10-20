@@ -1,6 +1,6 @@
 <div style="height: 100%;">
   <div nz-row style="height: 50px;    padding: 10px;">
-    <div nz-col [nzSpan]="8">
+    <div nz-col [nzSpan]="6">
       操作人员：
       <nz-select [(ngModel)]="userId" class="w200">
         <nz-option *ngFor="let option of userList" [nzLabel]="option.username"
@@ -8,7 +8,7 @@
         </nz-option>
       </nz-select>
     </div>
-    <div nz-col [nzSpan]="10">
+    <div nz-col [nzSpan]="12">
       操作时间：
       <nz-date-picker [(ngModel)]="starttime" ></nz-date-picker>
       -

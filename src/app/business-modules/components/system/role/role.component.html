@@ -1,34 +1,23 @@
 <div style="height: 100%;">
-  <div nz-row class="div_title">
+  <!-- <div nz-row class="div_title">
     系统角色信息
-  </div>
+  </div> -->
   <div nz-row class="div_contain">
     <div class="div_top">
+      <div class="fl div_top_tip"></div>
+      <div class="fl" style="color: #0050b3;">
+        角色信息（共{{ totalCount }}条）
+      </div>
       <div class="fr">
-        <button
-          nz-button
-          nzType="primary"
-          style=" margin-right: 10px;"
-          class="addbtn"
-          (click)="add()"
-        >
+        <button nz-button nzType="primary" style=" margin-right: 10px;" class="addbtn" (click)="add()">
           添加
         </button>
       </div>
     </div>
     <div>
-      <nz-table
-        #nestedTable
-        [nzData]="dataSet"
-        class="commontable tablescoll_rainbow"
-        [nzFrontPagination]="false"
-        [nzPageIndex]="pageIndex"
-        nzShowSizeChanger
-        [nzPageSize]="pageSize"
-        [nzTotal]="totalCount"
-        (nzPageIndexChange)="pageIndexChange($event)"
-        (nzPageSizeChange)="pageSizeChange($event)"
-      >
+      <nz-table #nestedTable [nzData]="dataSet" class="commontable tablescoll_rainbow" [nzFrontPagination]="false"
+        [nzPageIndex]="pageIndex" nzShowSizeChanger [nzPageSize]="pageSize" [nzTotal]="totalCount"
+        (nzPageIndexChange)="pageIndexChange($event)" (nzPageSizeChange)="pageSizeChange($event)">
         <thead>
           <tr>
             <th style="width: 20%">编号</th>
@@ -49,41 +38,23 @@
               <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data, true)">编辑</a>
               <nz-divider nzType="vertical"></nz-divider>
-              <a
-                nz-popconfirm
-                nzTitle="确定删除吗?"
-                (nzOnConfirm)="delete(data)"
-                >删除</a
-              >
+              <a nz-popconfirm nzTitle="确定删除吗?" (nzOnConfirm)="delete(data)">删除</a>
             </td>
           </tr>
         </tbody>
       </nz-table>
     </div>
   </div>
-  <nz-modal
-    [(nzVisible)]="isVisible"
-    nzTitle="{{ title }}"
-    (nzOnCancel)="handleCancel()"
-    (nzOnOk)="handleOk()"
-    [nzOkLoading]="isOkLoading" [nzCancelText]="null"
-  >
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="{{ title }}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+    [nzOkLoading]="isOkLoading" [nzCancelText]="null">
     <div>
       <div nz-row style="height: 60px;">
         <div nz-col [nzSpan]="6" class="ta_r">
           <span class="clo_r">*</span>角色名称：
         </div>
         <div nz-col [nzSpan]="18" class="ta_l">
-          <input
-            style="width:calc(100% - 100px)"
-            [disabled]="isDisable"
-            nz-input
-            required
-            [validation]="true"
-            nzSize="default"
-            [(ngModel)]="currentRole.name"
-            class="w200"
-          />
+          <input style="width:calc(100% - 100px)" [disabled]="isDisable" nz-input required [validation]="true"
+            nzSize="default" [(ngModel)]="currentRole.name" class="w200" />
         </div>
       </div>
       <div nz-row style="height: 60px;">
@@ -91,16 +62,8 @@
           <span class="clo_r">*</span>角色描述：
         </div>
         <div nz-col [nzSpan]="18" class="ta_l">
-          <input
-            nz-input
-            style="width:calc(100% - 100px)"
-            [disabled]="isDisable"
-            required
-            [validation]="true"
-            nzSize="default"
-            [(ngModel)]="currentRole.note"
-            class="w200"
-          />
+          <input nz-input style="width:calc(100% - 100px)" [disabled]="isDisable" required [validation]="true"
+            nzSize="default" [(ngModel)]="currentRole.note" class="w200" />
         </div>
       </div>
       <ng-template #omittedPlaceHolder let-omittedValues>
@@ -124,13 +87,8 @@
           >
           </nz-tree-select> -->
           <div class="ta_l" style="height: 200px;overflow: scroll">
-            <nz-tree
-              (nzCheckBoxChange)="updateRoleMenuList($event)"
-              [nzData]="menuTreeNodes"
-              nzCheckable="true"
-              nzMultiple="true"
-              [(nzCheckedKeys)]="ckeckedRoleMenuList"
-            >
+            <nz-tree (nzCheckBoxChange)="updateRoleMenuList($event)" [nzData]="menuTreeNodes" nzCheckable="true"
+              nzMultiple="true" [(nzCheckedKeys)]="ckeckedRoleMenuList">
             </nz-tree>
           </div>
         </div>
