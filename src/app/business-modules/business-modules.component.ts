@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { StatisticsSercice } from '../services/statistics/statistics.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ignoreElements } from 'rxjs/operators';
+declare var $: any;
 
 @Component({
     templateUrl: './business-modules.component.html',
@@ -100,7 +101,8 @@ export class BusinessModulesComponent implements OnInit {
                     route: '/supersivion/operatorlisence',
                     breadcrumbList: ["监管信息", "研究堆操纵员执照信息"]
                 }
-            ]
+            ],
+            isopen : false
         },
         {
             name: '营运单位及设施',
@@ -134,7 +136,8 @@ export class BusinessModulesComponent implements OnInit {
                     route: '/unit/uminemountain',
                     breadcrumbList: ["营运单位及设施", "铀矿山信息"]
                 }
-            ]
+            ],
+            isopen : false
         },
         {
             name: '核安全许可',
@@ -156,7 +159,8 @@ export class BusinessModulesComponent implements OnInit {
                     route: '/permit/uminemountain',
                     breadcrumbList: ["核安全许可", "铀矿山井下消防许可信息"]
                 }
-            ]
+            ],
+            isopen : false
         },
         {
             name: '核安全审评',
@@ -183,7 +187,8 @@ export class BusinessModulesComponent implements OnInit {
                     route: '/check/uminemountain',
                     breadcrumbList: ["核安全审评", "铀矿山井下消防审查信息"]
                 }
-            ]
+            ],
+            isopen : false
         },
         {
             name: '核安全监督',
@@ -194,7 +199,8 @@ export class BusinessModulesComponent implements OnInit {
                 { name: '监督检查信息', id: 'check', route: '/monitor/check', breadcrumbList: ["核安全监督", "监督检查信息"] },
                 { name: '监督见证信息', id: 'witness', route: '/monitor/witness', breadcrumbList: ["核安全监督", "监督见证信息"] },
                 { name: '监督报告信息', id: 'report', route: '/monitor/report', breadcrumbList: ["核安全监督", "监督报告信息"] }
-            ]
+            ],
+            isopen : false
         },
         {
             name: '安全信息',
@@ -210,7 +216,8 @@ export class BusinessModulesComponent implements OnInit {
                     breadcrumbList: ["安全信息", "铀尾矿(渣)库安全问题"]
                 },
                 { name: '事故事件', id: 'accident', route: '/security/accident', breadcrumbList: ["安全信息", "事故事件"] }
-            ]
+            ],
+            isopen : false
         },
         {
             name: '统计分析',
@@ -272,7 +279,7 @@ export class BusinessModulesComponent implements OnInit {
         this.breadcrumbList = this.getBreadcrumbList(this.navMenu);
 
 
-
+        $(".ant-menu-sub").css({"display":"none"});
 
         this.layoutChangeService.routeChange.subscribe((data: any) => {
             if (data[0] == "首页") {

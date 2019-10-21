@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { LayoutChangeService } from '../../services/layout-change.service';
 import { NavMenuState, ContentPanelState } from 'src/app/utilities/enum';
 import { NavMenu, NavMenuItem } from 'src/app/utilities/entities/navMenu';
+import { CustomReuseStrategy } from './../../../utilities/custom-reuse-strategy';
 
 @Component({
   selector: 'app-nav-menu',
@@ -92,6 +93,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     let checkedItem = null;
     let breadcrumbName = [];
 
+
     if (menuItem3) {
       checkedItem = menuItem3;
       breadcrumbName.push(menuItem1.name);
@@ -106,15 +108,22 @@ export class NavMenuComponent implements OnInit, OnDestroy {
       checkedItem = menuItem1;
     }
 
+    menuItem1.isopen = false;
     this.checkedTopItem = menuItem1;
 
+    CustomReuseStrategy.deleteAllRouteSnapshot();
     // 路由跳转
     if (checkedItem.route) {
 
       this.layoutService.routeChange.next(breadcrumbName);
       this.router.navigate([checkedItem.route]);
 
+
     }
+  }
+
+  mouseenter(item) {
+    item.isopen = true;
   }
 
   ngOnDestroy() {

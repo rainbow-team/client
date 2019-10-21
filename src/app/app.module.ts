@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { LayoutsModule } from './layouts/layouts.module';
 import { HandleHttpInterceptor } from './utilities/interceptors/handlehttp.interceptor';
 import { CookieService } from 'ngx-cookie-service';
+import { CustomReuseStrategy } from './utilities/custom-reuse-strategy';
+import { RouteReuseStrategy } from '@angular/router';
 
 /** 配置 angular i18n **/
 registerLocaleData(zh);
@@ -32,6 +34,7 @@ registerLocaleData(zh);
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: HandleHttpInterceptor, multi: true },
     { provide: NZ_I18N, useValue: zh_CN },
+    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
     CookieService
   ],
   bootstrap: [AppComponent]

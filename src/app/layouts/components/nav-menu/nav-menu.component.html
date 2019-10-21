@@ -2,7 +2,8 @@
   <ul nz-menu [nzMode]="'horizontal'" style="line-height: 30px;">
     <ng-container *ngFor="let item of navMenu">
       <li nz-submenu *ngIf="item.children && item.children.length>0&&item.isShow; else navMenuItem"
-        style="width: 9%;text-align: center;line-height: 30px;" [ngClass]="{'li_select':item.id==checkedTopItem.id}">
+         style="width: 9%;text-align: center;line-height: 30px;"
+        [ngClass]="{'li_select':item.id==checkedTopItem.id}">
         <span title>
           <!-- <i nz-icon type="setting"></i> -->
           <span>{{item.name}}</span>
@@ -17,7 +18,7 @@
               </span>
 
               <ul>
-                <ng-container  *ngFor="let thirdChild of child.children">
+                <ng-container *ngFor="let thirdChild of child.children">
                   <li nz-menu-item nzPlacement="right" *ngIf="thirdChild.isShow"
                     (click)="menuItemClick(item,child,thirdChild)">
                     <span title>

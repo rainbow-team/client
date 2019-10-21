@@ -8,6 +8,7 @@ export interface NavMenuItem {
   children?: NavMenuItem[];
   isShow?: boolean;
   breadcrumbList?:string[];
+  isopen?:boolean;
 }
 
 export declare type NavMenu = NavMenuItem[];
