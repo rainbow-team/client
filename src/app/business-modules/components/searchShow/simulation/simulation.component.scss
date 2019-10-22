@@ -21,3 +21,13 @@ i[nz-icon] {
   margin-top: 8px;
   color: #666;
 }
+
+.mapLicense {
+  z-index: 999;
+  position: absolute;
+  width: 100%;
+  bottom: 4px;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}

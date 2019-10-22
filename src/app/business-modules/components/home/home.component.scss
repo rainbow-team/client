@@ -1,15 +1,25 @@
-.div1{
-    height: calc(100% - 10px);
-    background: #fff;
-    margin-right: 20px;
-    padding: 20px;
+.div1 {
+  height: calc(100% - 10px);
+  background: #fff;
+  margin-right: 20px;
+  padding: 20px;
 }
 
-.div2{
-    height: calc(100% - 10px);
-    width: calc(50% - 10px);
-    background: #fff;
-    background-image: url(../../../../assets/images/index_30.png);
-    background-repeat: no-repeat;
-    padding: 10px;
+.div2 {
+  height: calc(100% - 10px);
+  width: calc(50% - 10px);
+  background: #fff;
+  background-image: url(../../../../assets/images/index_30.png);
+  background-repeat: no-repeat;
+  padding: 10px;
+}
+
+.mapLicense {
+  z-index: 999;
+  position: absolute;
+  bottom: 4px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-weight: bold;
 }

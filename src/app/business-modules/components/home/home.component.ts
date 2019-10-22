@@ -410,7 +410,7 @@ export class HomeComponent implements OnInit {
           //左侧小导航图标
           visualMap: {
             show: true,
-            x: 'right',
+            x: 'left',
             y: 'bottom',
             splitList: [
               { start: 50, end: 100 },
