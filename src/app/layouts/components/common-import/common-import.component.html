@@ -1,10 +1,12 @@
-<nz-upload
-[nzAction]="uploadUrl"
-[nzCustomRequest]="customReq"
-[nzAccept]="'.xls'"
-[nzShowUploadList]="false"
->
-<button nz-button class="importBtn">
-  <i nz-icon type="upload"></i><span>导入</span>
-</button>
+
+<nz-alert style="    position: fixed;
+top: 15px;
+left: 0;
+padding: 16px;" *ngIf="warnText" nzType="warning" nzCloseable [nzMessage]="warnText" (nzOnClose)="afterClose()">
+</nz-alert>
+<nz-upload [nzAction]="uploadUrl" [nzCustomRequest]="customReq" [nzAccept]="'.xls'" [nzShowUploadList]="false">
+  <button nz-button class="importBtn">
+    <i nz-icon type="upload"></i><span>导入</span>
+  </button>
 </nz-upload>
+
