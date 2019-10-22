@@ -44,7 +44,7 @@ export class FacComponent implements OnInit {
   checked: any = false;
 
   uploadUrl: any = AppConfig.serviceAddress + '/fac/importData';
-  pageHeight: any = 560;
+  pageHeight: any = 490;
 
   constructor(
     private router: Router,
@@ -76,7 +76,7 @@ export class FacComponent implements OnInit {
     });
 
     if (this.isSearchShow != "0") {
-      this.pageHeight = 590;
+      this.pageHeight = 530;
     }
 
     this.search();

@@ -39,7 +39,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
     /** 表示对所有路由允许复用 如果你有路由不想利用可以在这加一些业务逻辑判断 */
     shouldDetach(route: ActivatedRouteSnapshot): boolean {
 
-        if (route['_routerState'].url == "login") {
+        if (route['_routerState'].url == "login"||route['_routerState'].url == "home") {
             return false;
         }
        return true;
