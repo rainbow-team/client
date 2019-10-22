@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
     private unitAddressService: UnitAddressService,
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.LoadChinaMap();
@@ -66,14 +66,14 @@ export class HomeComponent implements OnInit {
       .subscribe(res => {
         this.statusData = res.msg;
 
-        this.chart2XData = this.statusData.map(function(v) {
+        this.chart2XData = this.statusData.map(function (v) {
           return v.name;
         });
 
         this.lastName = this.chart2XData[this.chart2XData.length - 1];
         this.chart2XData[this.chart2XData.length - 1] = '';
 
-        this.chart2YData = this.statusData.map(function(v) {
+        this.chart2YData = this.statusData.map(function (v) {
           return v.value;
         });
 
@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit {
       .subscribe(res => {
         this.yearData = res.msg;
 
-        this.configList = this.yearData.numberList.map(function(v) {
+        this.configList = this.yearData.numberList.map(function (v) {
           return v.name;
         });
 
@@ -118,7 +118,16 @@ export class HomeComponent implements OnInit {
             name: this.yearData.yearDate[i],
             data: array,
             type: 'bar',
-            barWidth: 20
+            barWidth: 20,
+            label: {
+              normal: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                  color: 'black'
+                }
+              }
+            }
           });
         }
 
@@ -162,7 +171,7 @@ export class HomeComponent implements OnInit {
             //通常情况下：
             normal: {
               //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-              color: function(params) {
+              color: function (params) {
                 var colorList = [
                   '#1779d1',
                   '#49b8ec',
@@ -254,7 +263,7 @@ export class HomeComponent implements OnInit {
         axisLabel: {
           show: true,
           interval: 0,
-          formatter: function(val) {
+          formatter: function (val) {
             if (val == '') {
               if (num != 2) {
                 num++;
@@ -304,7 +313,7 @@ export class HomeComponent implements OnInit {
             //通常情况下：
             normal: {
               //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-              color: function(params) {
+              color: function (params) {
                 var colorList = ['#1779d1'];
                 return colorList[params.dataIndex];
               }
@@ -336,7 +345,7 @@ export class HomeComponent implements OnInit {
         y: 'center', //图例在垂直方向上面显示居中
         itemWidth: 10, //图例标记的图形宽度
         itemHeight: 10, //图例标记的图形高度
-        data: this.typeData.map(function(v) {
+        data: this.typeData.map(function (v) {
           return v.name;
         }),
         textStyle: {
@@ -359,7 +368,7 @@ export class HomeComponent implements OnInit {
               label: {
                 //饼图图形上的文本标签
                 show: true, //平常不显示
-                formatter: '{c}',
+                formatter: '{c}({d}%)',
                 position: 'inner'
               },
               labelLine: {
