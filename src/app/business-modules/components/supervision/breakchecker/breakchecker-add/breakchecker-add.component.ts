@@ -97,6 +97,13 @@ export class BreakcheckerAddComponent implements OnInit {
     this.data.attachmentList = [];
 
     if (this.fileList.length > 0) {
+
+      if (!this.fileList[this.fileList.length-1].response) {
+
+        this.msg.create('warning', '附件还未上传完毕,请稍等');
+        this.isSaving = false;
+        return;
+      }
       this.fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });

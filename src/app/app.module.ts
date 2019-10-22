@@ -34,7 +34,7 @@ registerLocaleData(zh);
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: HandleHttpInterceptor, multi: true },
     { provide: NZ_I18N, useValue: zh_CN },
-    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
+    // { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
     CookieService
   ],
   bootstrap: [AppComponent]

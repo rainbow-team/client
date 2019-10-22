@@ -38,8 +38,8 @@ export class SupervisorAddComponent implements OnInit {
   totalCount: any;
   pageSize: any = 10;
 
-  isShowTrain=false;
-  
+  isShowTrain = false;
+
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private supervisionSercice: SupervisionSercice, private ActivatedRoute: ActivatedRoute,
     private http: HttpClient, private attachmentSercice: AttachmentSercice, private orgSercice: OrgSercice) { }
@@ -50,7 +50,7 @@ export class SupervisorAddComponent implements OnInit {
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
 
-    this.isShowTrain=false;
+    this.isShowTrain = false;
     this.orgSercice.getAllOrgList().subscribe((res) => {
       if (res.code == 200) {
         this.orgList = [];
@@ -70,7 +70,7 @@ export class SupervisorAddComponent implements OnInit {
 
     if (isShow && isShow == "true") {
       this.isShow = true;
-    
+
     } else {
       this.isShow = false;
     }
@@ -133,7 +133,7 @@ export class SupervisorAddComponent implements OnInit {
     var reg = /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
     if (reg.test(params)) {
 
-      this.data.birthday = new Date(params.substring(6, 10), params.substring(10, 12) - 1, params.substring(12, 14),8);
+      this.data.birthday = new Date(params.substring(6, 10), params.substring(10, 12) - 1, params.substring(12, 14), 8);
       if (parseInt(params.substr(16, 1)) % 2 == 1) {
         //男
         return this.sexValue = "1";
@@ -152,8 +152,15 @@ export class SupervisorAddComponent implements OnInit {
 
     this.isSaving = true;
     this.data.attachmentList = [];
-    this.data.expireDate="";
+    this.data.expireDate = "";
     if (this.fileList.length > 0) {
+
+      if (!this.fileList[this.fileList.length-1].response) {
+
+        this.msg.create('warning', '附件还未上传完毕,请稍等');
+        this.isSaving = false;
+        return;
+      }
       this.fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });
@@ -181,7 +188,7 @@ export class SupervisorAddComponent implements OnInit {
     this.router.navigate(['/supersivion/supervisor']);
   }
 
- 
+
 
   //表单手动触发验证
   FormValidation() {

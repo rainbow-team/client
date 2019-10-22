@@ -109,9 +109,13 @@ export class AttachmentComponent implements OnInit {
 
   preview(item) {
 
-    var url = this.downLoadurl + "?id=" + item.response.msg + "&type=2";
+    if (item && item.response) {
+      var url = this.downLoadurl + "?id=" + item.response.msg + "&type=2";
 
-    window.open('assets/usermanual/web/viewer.html?url=' + this.utilitiesSercice.wrapUrl(url), "_blank");
+      window.open('assets/usermanual/web/viewer.html?url=' + this.utilitiesSercice.wrapUrl(url), "_blank");
+    }
+
+
   }
 
 }
