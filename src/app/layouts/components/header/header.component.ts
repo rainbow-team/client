@@ -1,4 +1,10 @@
-import { Component, OnInit, QueryList, ViewChildren, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+  Input
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { NavMenu } from 'src/app/utilities/entities/navMenu';
@@ -19,7 +25,7 @@ export class HeaderComponent implements OnInit {
 
   @Input()
   navMenu: NavMenu = [];
-
+  title = '';
   name: any = '';
   isVisible: boolean;
   isOkLoading: boolean;
@@ -36,10 +42,11 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private systemService: SystemService,
     private settingService: SettingService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.name = this.staffSercice.getStaffObj().username;
+    this.title = AppConfig.systemTitle;
     this.getAllLinkList();
   }
   changePassword() {
@@ -113,18 +120,16 @@ export class HeaderComponent implements OnInit {
   }
 
   help() {
-
-    window.open("assets/file/" + AppConfig.helpFileName);
+    window.open('assets/file/' + AppConfig.helpFileName);
   }
 
   getAllLinkList() {
-    this.settingService.getAllLinkList().subscribe((res) => {
+    this.settingService.getAllLinkList().subscribe(res => {
       this.linkData = res.msg;
-    })
+    });
   }
 
   cilckLink(data) {
     window.open(data.address);
   }
-
 }
