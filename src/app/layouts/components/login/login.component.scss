@@ -67,3 +67,16 @@
     font-size: 13px;
 }
 
+.div_tips{
+  width: 80%;
+  line-height: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  z-index: 100;
+  color: #ffffff;
+  left: 10%;
+  background: #717171;
+  opacity: 0.8;
+}

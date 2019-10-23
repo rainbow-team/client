@@ -51,6 +51,9 @@ export class HomeComponent implements OnInit {
   chart2YData: any = [];
   lastName = '';
 
+  copyright: any = "";
+  support: any = "";
+
   constructor(
     private statisticsSercice: StatisticsSercice,
     private unitAddressService: UnitAddressService,
@@ -60,6 +63,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.LoadChinaMap();
+
+    this.copyright = AppConfig.copyright;
+    this.support = AppConfig.support;
 
     this.statisticsSercice
       .getStatisticsResultByCondition(this.conStatus)

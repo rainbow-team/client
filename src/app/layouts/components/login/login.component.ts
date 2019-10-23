@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
   canvas: any;
   rand: any;
 
+  showTip: any = false;
+
   getVerifyCode =
     AppConfig.serviceAddress + '/getVerifyCode?' + new Date().getTime();
 
@@ -101,7 +103,7 @@ export class LoginComponent implements OnInit {
     private systemService: SystemService,
     private cookieService: CookieService,
     private staffSercice: StaffSercice
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.copyright = AppConfig.copyright;
@@ -112,7 +114,7 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       that.drawCode();
 
-      document.getElementById('code_img').onclick = function() {
+      document.getElementById('code_img').onclick = function () {
         $('#verifyCanvas').remove();
         $('#verify').after(
           '<canvas width="100" height="40" id="verifyCanvas"></canvas>'
@@ -121,7 +123,7 @@ export class LoginComponent implements OnInit {
       };
     }, 100);
 
-    $(document).keypress(function(e) {
+    $(document).keypress(function (e) {
       var eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
       //eCode等于13代表回车事件
       if (eCode == 13) {
