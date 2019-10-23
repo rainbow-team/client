@@ -39,10 +39,10 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
     /** 表示对所有路由允许复用 如果你有路由不想利用可以在这加一些业务逻辑判断 */
     shouldDetach(route: ActivatedRouteSnapshot): boolean {
 
-        if (route['_routerState'].url == "login"||route['_routerState'].url == "home") {
+        if (route['_routerState'].url == "login" || route['_routerState'].url == "home") {
             return false;
         }
-       return true;
+        return true;
 
 
     }
@@ -63,7 +63,17 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
         route: ActivatedRouteSnapshot,
         handle: DetachedRouteHandle | null
     ): void {
-        CustomReuseStrategy.handlers[this.getRouteUrl(route)] = handle;
+
+        let url = window.location.hash;
+        if (url.indexOf("true") > -1) {
+            CustomReuseStrategy.handlers[this.getRouteUrl(route)] = handle;
+        } else {
+            if (this.getRouteUrl(route).indexOf("true") == -1) {
+                CustomReuseStrategy.deleteAllRouteSnapshot();
+            }
+           
+        }
+
     }
 
     /** 使用route的path作为快照的key */
