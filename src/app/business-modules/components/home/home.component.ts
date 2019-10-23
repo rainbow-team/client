@@ -425,7 +425,7 @@ export class HomeComponent implements OnInit {
           //左侧小导航图标
           visualMap: {
             show: true,
-            x: 'left',
+            x: 'right',
             y: 'bottom',
             splitList: [
               { start: 50, end: 100 },
@@ -449,7 +449,7 @@ export class HomeComponent implements OnInit {
               name: '数据',
               type: 'map',
               mapType: 'china',
-              zoom: 1,
+              zoom: 0.9,
               roam: true,
               label: {
                 normal: {

@@ -121,7 +121,7 @@ export class SimulationComponent implements OnInit {
           //左侧小导航图标
           visualMap: {
             show: true,
-            x: 'left',
+            x: 'right',
             y: 'bottom',
             splitList: [
               { start: 50, end: 100 },
