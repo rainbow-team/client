@@ -24,6 +24,8 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
   permissionList: any = [];
 
+  hoverItemId: any = {};
+
   constructor(private router: Router,
     private zone: NgZone,
     private layoutService: LayoutChangeService) {
@@ -108,7 +110,6 @@ export class NavMenuComponent implements OnInit, OnDestroy {
       checkedItem = menuItem1;
     }
 
-    menuItem1.isopen = false;
     this.checkedTopItem = menuItem1;
 
     CustomReuseStrategy.deleteAllRouteSnapshot();
@@ -122,13 +123,22 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     }
   }
 
-  mouseenter(item) {
-    item.isopen = true;
-  }
-
   ngOnDestroy() {
     if (this.subRouterEvent) {
       this.subRouterEvent.unsubscribe();
     }
   }
+
+  mouseenter(item) {
+    var that = this;
+    that.hoverItemId = item.id;
+  }
+
+  OpenChange(flag) {
+    if (!flag) {
+      this.hoverItemId = "";
+    }
+  }
+
+
 }

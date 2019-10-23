@@ -15,7 +15,7 @@
 
     //版权
     copyright:
-      '版权：Copyright©2018  国防科工局军用核设施核安全技术审评监督中心  All Rights Reserved',
+      '版权：Copyright©2019  国防科工局军用核设施核安全技术审评监督中心  All Rights Reserved',
 
     support: '技术支持： 核动力运行研究所',
     // WCF服务完整地址
