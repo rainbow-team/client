@@ -53,7 +53,7 @@
 
 .login_copy1{
   position: absolute;
-  bottom: 30px;
+  bottom: 42px;
   color: #ffffff;
   left: calc(50% - 283px);
   font-size: 13px;
@@ -61,10 +61,18 @@
 
 .login_copy2{
   position: absolute;
-    bottom: 7px;
+    bottom: 24px;
     left: calc(50% - 144px);
     color: #ffffff;
     font-size: 13px;
+}
+
+.login_copy3{
+  position: absolute;
+  bottom: 7px;
+  left: calc(50% - 297px);
+  color: #ffffff;
+  font-size: 13px;
 }
 
 .div_tips{
