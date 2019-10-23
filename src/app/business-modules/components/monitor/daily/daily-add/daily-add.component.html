@@ -57,7 +57,9 @@
         文件名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="fileName" [(ngModel)]="data.fileName" placeholder="请输入文件名称" />
+        <input nz-input name="fileName" [(ngModel)]="data.fileName" placeholder="请输入文件名称" 
+        [validation]="true"
+        [validationType]="'maxlength'" [validationLenth]="255"/>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">

@@ -39,7 +39,7 @@
         <span class="clo_r">*</span>报告名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" style="width: 100%"  required [validation]="true"/>
+        <input nz-input name="name" [(ngModel)]="data.name" style="width: 100%"  required [validation]="true" [validationType]="'maxlength'" [validationLenth]="36"/>
       </div>
     </div>
 

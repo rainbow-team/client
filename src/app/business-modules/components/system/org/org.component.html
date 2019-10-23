@@ -55,7 +55,7 @@
         <div class="ta_r">
           <span class="clo_r">*</span>部门名称：
           <input nz-input style="width:calc(100% - 100px)" required [validation]="true" nzSize="default"
-            [(ngModel)]="currentOrg.name" class="w200" />
+            [(ngModel)]="currentOrg.name" class="w200" [validationType]="'maxlength'" [validationLenth]="150"/>
         </div>
       </div>
 
@@ -63,7 +63,7 @@
         <div class="ta_r">
           <span class="clo_r">*</span>部门编码：
           <input nz-input style="width:calc(100% - 100px)" required [validation]="true" nzSize="default"
-            [(ngModel)]="currentOrg.code" class="w200" />
+            [(ngModel)]="currentOrg.code" class="w200" [validationType]="'maxlength'" [validationLenth]="36"/>
         </div>
       </div>
 

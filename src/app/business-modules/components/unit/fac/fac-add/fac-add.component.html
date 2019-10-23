@@ -41,13 +41,13 @@
         <span class="clo_r">*</span>核设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true"  [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
       <div nz-col [nzSpan]="4" class="ta_r">
         核设施编号：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="code" [(ngModel)]="data.code" />
+        <input nz-input name="code" [(ngModel)]="data.code" [validation]="true"  [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
     </div>
 
@@ -56,7 +56,7 @@
         参建单位：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <input nz-input name="builder" [(ngModel)]="data.builder" />
+        <input nz-input name="builder" [(ngModel)]="data.builder" [validation]="true"  [validationType]="'maxlength'" [validationLenth]="100"/>
       </div>
     </div>
 

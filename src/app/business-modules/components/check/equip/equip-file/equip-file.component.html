@@ -119,7 +119,8 @@
                 文件文号：
               </div>
               <div nz-col [nzSpan]="8" class="ta_l">
-                <input nz-input name="fileNo" [(ngModel)]="data.fileNo"/>
+                <input nz-input name="fileNo" [(ngModel)]="data.fileNo" [validation]="true"
+                [validationType]="'maxlength'" [validationLenth]="36"/>
               </div>
               <div nz-col [nzSpan]="4" class="ta_r">
                   <span class="clo_r">*</span>文件时间：

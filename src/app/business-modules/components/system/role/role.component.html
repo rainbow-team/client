@@ -54,7 +54,7 @@
         </div>
         <div nz-col [nzSpan]="18" class="ta_l">
           <input style="width:calc(100% - 100px)" [disabled]="isDisable" nz-input required [validation]="true"
-            nzSize="default" [(ngModel)]="currentRole.name" class="w200" />
+            nzSize="default" [(ngModel)]="currentRole.name" class="w200"   [validationType]="'maxlength'" [validationLenth]="100"/>
         </div>
       </div>
       <div nz-row style="height: 60px;">

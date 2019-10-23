@@ -27,7 +27,7 @@
         <span class="clo_r">*</span>单位名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true"  [validationType]="'maxlength'" [validationLenth]="30" />
       </div>
     </div>
 
@@ -37,14 +37,15 @@
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="emergencyTel" [(ngModel)]="data.emergencyTel" [validation]="true"
-          [validationType]="'nullnumber'" [isBlur]="'1'"/>
+          [validationType]="'nullnumber'" [isBlur]="'1'" maxlength="30"/>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         传真：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="fax" [(ngModel)]="data.fax" />
+        <input nz-input name="fax" [(ngModel)]="data.fax" [validation]="true"
+        [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
     </div>
 
@@ -53,7 +54,8 @@
         地址：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="address" [(ngModel)]="data.address" />
+        <input nz-input name="address" [(ngModel)]="data.address" [validation]="true"
+        [validationType]="'maxlength'" [validationLenth]="100"/>
       </div>
     </div>
 
@@ -63,7 +65,8 @@
         法人代表：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="owner" [(ngModel)]="data.owner" />
+        <input nz-input name="owner" [(ngModel)]="data.owner" [validation]="true"
+        [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
     </div>
 
@@ -72,7 +75,8 @@
         主管质量领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="leader" [(ngModel)]="data.leader" />
+        <input nz-input name="leader" [(ngModel)]="data.leader" [validation]="true"
+        [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -80,7 +84,7 @@
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" [validation]="true"
-          [validationType]="'nullnumber'" [isBlur]="'1'"/>
+          [validationType]="'nullnumber'" [isBlur]="'1'" maxlength="30"/>
       </div>
     </div>
 
@@ -90,7 +94,8 @@
         质量部门领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="departQualityLeader" [(ngModel)]="data.departQualityLeader" />
+        <input nz-input name="departQualityLeader" [(ngModel)]="data.departQualityLeader" [validation]="true"
+        [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -98,7 +103,7 @@
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="departQualityLeaderTel" [(ngModel)]="data.departQualityLeaderTel" [validation]="true"
-          [validationType]="'nullnumber'" [isBlur]="'1'"/>
+          [validationType]="'nullnumber'" [isBlur]="'1'" maxlength="30"/>
       </div>
     </div>
 

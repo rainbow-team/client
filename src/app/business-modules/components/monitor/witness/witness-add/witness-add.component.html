@@ -52,7 +52,9 @@
         见证对象：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <input nz-input name="witnessObject" [(ngModel)]="data.witnessObject" style="width: 100%" />
+        <input nz-input name="witnessObject" [(ngModel)]="data.witnessObject" style="width: 100%" 
+        [validation]="true"
+        [validationType]="'maxlength'" [validationLenth]="36"/>
       </div>
     </div>
 
@@ -69,7 +71,8 @@
         见证人：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="witness" [(ngModel)]="data.witness" style="width: 100%"  />
+        <input nz-input name="witness" [(ngModel)]="data.witness" style="width: 100%"  [validation]="true"
+        [validationType]="'maxlength'" [validationLenth]="50" />
       </div>
     </div>
 

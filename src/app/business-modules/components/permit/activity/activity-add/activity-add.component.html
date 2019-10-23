@@ -79,12 +79,11 @@
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
         <input
-          maxlength="50"
           nz-input
           name="name"
           [(ngModel)]="data.name"
           required
-          [validation]="true"
+          [validation]="true"  [validationType]="'maxlength'" [validationLenth]="50"
         />
       </div>
     </div>
@@ -138,13 +137,12 @@
         <span class="clo_r">*</span>许可文号：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input
-          maxlength="50"
+        <input 
           nz-input
           name="licence"
           [(ngModel)]="data.licence"
           required
-          [validation]="true"
+          [validation]="true"  [validationType]="'maxlength'" [validationLenth]="50"
         />
       </div>
     </div>

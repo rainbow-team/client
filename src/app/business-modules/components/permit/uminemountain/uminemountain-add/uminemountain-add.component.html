@@ -39,7 +39,7 @@
         <span class="clo_r">*</span>备案文号：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="recordNumber" [(ngModel)]="data.recordNumber" required [validation]="true" />
+        <input nz-input name="recordNumber" [(ngModel)]="data.recordNumber" required [validation]="true"  [validationType]="'maxlength'" [validationLenth]="36"/>
       </div>
     </div>
 
@@ -56,7 +56,7 @@
         验收文号：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="acceptNumber" [(ngModel)]="data.acceptNumber" />
+        <input nz-input name="acceptNumber" [(ngModel)]="data.acceptNumber" [validation]="true"  [validationType]="'maxlength'" [validationLenth]="50"/>
       </div>
     </div>
 

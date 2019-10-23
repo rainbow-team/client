@@ -90,7 +90,8 @@
         <span class="clo_r">*</span>事故事件名称：
       </div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <input nz-input name="name" style="width: 100%" [(ngModel)]="data.name" required [validation]="true" />
+        <input nz-input name="name" style="width: 100%" [(ngModel)]="data.name" required [validation]="true" 
+        [validationType]="'maxlength'" [validationLenth]="36"/>
       </div>
     </div>
 

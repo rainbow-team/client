@@ -11,7 +11,7 @@
             <span class="clo_r">*</span>设备名称：
           </div>
           <div nz-col [nzSpan]="8" class="ta_l">
-            <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+            <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true"  [validationType]="'maxlength'" [validationLenth]="40"/>
           </div>
           <div nz-col [nzSpan]="4" class="ta_r">
               <span class="clo_r">*</span>单位名称：
