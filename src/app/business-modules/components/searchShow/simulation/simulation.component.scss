@@ -25,10 +25,9 @@ i[nz-icon] {
 .mapLicense {
   z-index: 999;
   position: absolute;
-  width: calc(100% - 321px);
+  width: calc(100% - 121px);
   bottom: 15px;
-  left: 321px;
   display: block;
-  text-align: center;
+  padding-left: 150px;
   font-weight: bold;
 }
