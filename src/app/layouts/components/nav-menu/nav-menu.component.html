@@ -2,7 +2,7 @@
   <ul nz-menu [nzMode]="'horizontal'" style="line-height: 30px;">
     <ng-container *ngFor="let item of navMenu">
       <li nz-submenu *ngIf="item.children && item.children.length>0&&item.isShow; else navMenuItem" (nzOpenChange)="OpenChange($event)"
-        style="width: 9%;text-align: center;line-height: 30px;" (mouseenter)="mouseenter(item)" 
+        style="width: 9%;text-align: center;line-height: 30px;" (mouseenter)="mouseenter(item)" (mouseleave)="mouseleave()"
         [ngClass]="{'li_select':item.id==checkedTopItem.id||hoverItemId==item.id}">
         <span title>
           <!-- <i nz-icon type="setting"></i> -->

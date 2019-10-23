@@ -23,6 +23,8 @@ export class SettingComponent implements OnInit {
 
   isDicVisible: any = false;
 
+  searchText: any = "";
+
   configList: any = [
     { Name: "事故事件性质", TableName: "config_accident_nature" },
     { Name: "事故事件类别", TableName: "config_accident_type" },
@@ -75,6 +77,8 @@ export class SettingComponent implements OnInit {
     { Name: "铀尾矿(渣) 库设施状态", TableName: "config_umine_place_status" }
   ];
 
+  configListCopy: any = [];
+
   dicItems: any = [
 
   ];
@@ -88,8 +92,12 @@ export class SettingComponent implements OnInit {
 
     this.dictionary = this.dictionarySercice.getAllConfig();
 
+    this.configList.sort((a, b) => a.Name.localeCompare(b.Name, 'zh-Hans-CN', { sensitivity: 'accent' }))
+
     this.searchLink();
     this.selectConfigItem = this.configList[0];
+
+    this.configListCopy = JSON.parse(JSON.stringify(this.configList));
     this.getDicItemsByTableName();
   }
 
@@ -97,6 +105,28 @@ export class SettingComponent implements OnInit {
     this.editCache[key].edit = true;
   }
 
+  searchDic() {
+
+    var that = this;
+
+    if (that.searchText) {
+      that.configList=that.configList.filter(function (params) {
+
+        return params.Name.indexOf(that.searchText) != -1;
+      });
+
+      if (that.configList.length > 0) {
+        that.selectConfigItem = that.configList[0];
+        that.getDicItemsByTableName();
+      }
+
+    } else {
+      that.configList = JSON.parse(JSON.stringify(that.configListCopy));
+      that.selectConfigItem = that.configList[0];
+      that.getDicItemsByTableName();
+
+    }
+  }
   cancelEdit(key: string): void {
 
     const index = this.dataSet.findIndex(item => item.id === key);
@@ -122,7 +152,7 @@ export class SettingComponent implements OnInit {
       return;
     }
 
-    if(!(/^\d+$/.test(this.editCache[key].data.linkorder))){
+    if (!(/^\d+$/.test(this.editCache[key].data.linkorder))) {
       this.msg.create('warning', '排序必须为数值');
       return;
     }

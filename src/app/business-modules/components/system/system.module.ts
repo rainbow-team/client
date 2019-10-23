@@ -11,6 +11,7 @@ import { SystemMenuComponent } from './menu/menu.component';
 import { UserComponent } from './user/user.component';
 import { RoleComponent } from './role/role.component';
 import { SystemLogComponent } from './system-log/system-log.component';
+import { LinkComponent } from './link/link.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
     RoleComponent,
     UserComponent,
     SystemMenuComponent,
-    SystemLogComponent
+    SystemLogComponent,
+    LinkComponent
   ]
 })
 export class SystemModule { }

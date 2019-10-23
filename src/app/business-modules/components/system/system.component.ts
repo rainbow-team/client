@@ -13,6 +13,7 @@ export class SystemComponent implements OnInit {
     { name: '机构管理', isShow: false, id: "system:org" },
     { name: '日志管理', isShow: false, id: "system:log" },
     { name: '静态数据设置', isShow: false, id: "system:setting" },
+    { name: '友情链接管理', isShow: false, id: "system:link" }
   ];
 
   selectMenuName = '人员管理';

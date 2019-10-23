@@ -134,6 +134,13 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     that.hoverItemId = item.id;
   }
 
+  mouseleave(){
+    let dom =document.getElementById("ulsub");
+
+    if(!dom){
+      this.hoverItemId ="";
+    }
+  }
   OpenChange(flag) {
     if (!flag) {
       this.hoverItemId = "";

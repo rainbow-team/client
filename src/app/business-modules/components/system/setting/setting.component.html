@@ -1,98 +1,29 @@
 <div nz-row style="height: 100%;">
-  <div nz-col [nzSpan]="12" class="div1" style="border-right: 1px dashed #e5e5e5">
 
+  <div nz-col [nzSpan]="24" class="div1">
     <div nz-row class="div_title">
-      友情链接
-    </div>
-
-    <div nz-row>
-      <nz-table #editRowTable [nzData]="dataSet" [nzShowPagination]=false>
-        <thead>
-          <tr>
-            <th style="color: #0050b3;" nzWidth="30%">链接名称</th>
-            <th style="color: #0050b3;" nzWidth="30%">链接地址</th>
-            <th style="color: #0050b3;" nzWidth="20%">排序</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of editRowTable.data">
-            <td>
-              <div class="editable-cell">
-                <div class="editable-cell-text-wrapper">
-                  <ng-container *ngIf="!editCache[data.id].edit">
-                    {{data.name}}
-                  </ng-container>
-                  <ng-container *ngIf="editCache[data.id].edit">
-                    <input type="text" nz-input [(ngModel)]="editCache[data.id].data.name">
-                  </ng-container>
-                </div>
-              </div>
-            </td>
-            <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.address}}
-              </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <input type="text" nz-input [(ngModel)]="editCache[data.id].data.address">
-              </ng-container>
-            </td>
-
-            <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.linkorder}}
-              </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <input type="text" nz-input [(ngModel)]="editCache[data.id].data.linkorder">
-              </ng-container>
-            </td>
-            <td>
-              <div class="editable-row-operations">
-                <ng-container *ngIf="!editCache[data.id].edit">
-                  <a (click)="startEdit(data.id)">编辑</a>
-                  <nz-divider nzType="vertical"></nz-divider>
-                </ng-container>
-                <ng-container *ngIf="editCache[data.id].edit">
-                  <a (click)="saveEdit(data.id)">保存</a>
-                  <nz-divider nzType="vertical"></nz-divider>
-                </ng-container>
-                <ng-container>
-                  <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="cancelEdit(data.id)">
-                    <a nz-popconfirm>删除</a>
-                  </nz-popconfirm>
-                </ng-container>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </nz-table>
-
-    </div>
-
-    <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" style="margin-top:40px; color: #a9a9a9;">
-      <button nz-button nzType="dashed" nzBlock (click)="addlink()">
-        <i nz-icon type="plus" theme="outline"></i>
-        新增友情链接</button>
-    </div>
-
-
-  </div>
-
-  <div nz-col [nzSpan]="12" class="div1">
-    <div nz-row class="div_title">
-      <div nz-col [nzSpan]="6">系统配置</div>
+      <div nz-col [nzSpan]="10">系统配置</div>
       <!-- <div nz-col [nzSpan]="18" style="text-align: right;">
         <button nz-button nzType="primary"><i nz-icon type="plus" theme="outline"></i>添加</button>
       </div> -->
 
     </div>
 
-    <div nz-row style="height: 100%;">
+    <div nz-row style="height: calc(100% - 15px);">
       <div class="div_config">
+
+        <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style="    margin-bottom: 10px;">
+          <input type="text" nz-input placeholder="请输入字典名称" [(ngModel)]="searchText" >
+        </nz-input-group>
+
+        <ng-template #suffixIconButton>
+          <button nz-button nzType="primary" nzSearch (click)="searchDic()"><i nz-icon type="search"></i></button>
+        </ng-template>
+
         <div *ngFor="let item of configList" class="div_config_item"
           [ngClass]="{true:'div_config_item_select',false:''}[selectConfigItem.Name==item.Name]"
           (click)="clickConfigItem(item)" nz-tooltip nzPlacement="rightTop" nzTitle="{{item.Name}}">
-          {{item.Name|tooltips:9}}
+          {{item.Name|tooltips:20}}
         </div>
       </div>
 
@@ -128,7 +59,8 @@
   </div>
 </div>
 
-<nz-modal *ngIf="isVisible" [(nzVisible)]="isVisible" nzTitle="添加友情链接" (nzOnCancel)="isVisible=false;" (nzOnOk)="handleOk()" [nzCancelText]="null">
+<nz-modal *ngIf="isVisible" [(nzVisible)]="isVisible" nzTitle="添加友情链接" (nzOnCancel)="isVisible=false;"
+  (nzOnOk)="handleOk()" [nzCancelText]="null">
   <div>
     <div nz-row style="height: 60px;">
       <div class="ta_r">
@@ -141,16 +73,16 @@
     <div nz-row style="height: 60px;">
       <div class="ta_r">
         <span class="clo_r">*</span>链接地址：
-        <input nz-input name="linkaddress" maxlength="50" style="width:calc(100% - 100px)"
-          required [validation]="true" nzSize="default" [(ngModel)]="linkdata.address" class="w200" />
+        <input nz-input name="linkaddress" maxlength="50" style="width:calc(100% - 100px)" required [validation]="true"
+          nzSize="default" [(ngModel)]="linkdata.address" class="w200" />
       </div>
     </div>
 
     <div nz-row style="height: 60px;">
       <div class="ta_r">
         <span class="clo_r">*</span>排序：
-        <input nz-input name="linkorder" maxlength="50"  style="width:calc(100% - 100px)" required
-          [validation]="true" [validationType]="'number'" nzSize="default" [(ngModel)]="linkdata.linkorder" class="w200" />
+        <input nz-input name="linkorder" maxlength="50" style="width:calc(100% - 100px)" required [validation]="true"
+          [validationType]="'number'" nzSize="default" [(ngModel)]="linkdata.linkorder" class="w200" />
       </div>
     </div>
 
@@ -159,7 +91,8 @@
 </nz-modal>
 
 
-<nz-modal *ngIf="isDicVisible" [(nzVisible)]="isDicVisible" nzTitle="添加字典项" (nzOnCancel)="isDicVisible=false;" (nzOnOk)="handleDicOk()" [nzCancelText]="null">
+<nz-modal *ngIf="isDicVisible" [(nzVisible)]="isDicVisible" nzTitle="添加字典项" (nzOnCancel)="isDicVisible=false;"
+  (nzOnOk)="handleDicOk()" [nzCancelText]="null">
   <div>
     <div nz-row style="height: 60px;">
       <div class="ta_r">
@@ -173,8 +106,8 @@
     <div nz-row style="height: 60px;">
       <div class="ta_r">
         <span class="clo_r">*</span>排序：
-        <input nz-input name="dicorder" maxlength="50"  style="width:calc(100% - 100px)" required
-          [validation]="true" [validationType]="'number'" nzSize="default" [(ngModel)]="dicdata.order" class="w200" />
+        <input nz-input name="dicorder" maxlength="50" style="width:calc(100% - 100px)" required [validation]="true"
+          [validationType]="'number'" nzSize="default" [(ngModel)]="dicdata.order" class="w200" />
       </div>
     </div>
 
