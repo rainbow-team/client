@@ -9,7 +9,7 @@
         <span class="clo_r">*</span>姓名：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true"       [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
 
     </div>
@@ -47,7 +47,7 @@
         <span class="clo_r">*</span>专业：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="major" [(ngModel)]="data.major" required [validation]="true" />
+        <input nz-input name="major" [(ngModel)]="data.major" required [validation]="true"      [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
@@ -67,14 +67,14 @@
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
         <input nz-input name="contact" [(ngModel)]="data.contact" required [validation]="true"
-          [validationType]="'number'" [isBlur]="'1'"/>
+          [validationType]="'number'" [isBlur]="'1'" maxlength="30"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
         <span class="clo_r">*</span>所属单位：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="org" [(ngModel)]="data.org" class="w200" required [validation]="true" />
+        <input nz-input name="org" [(ngModel)]="data.org" class="w200" required [validation]="true"      [validationType]="'maxlength'" [validationLenth]="36"/>
       </div>
     </div>
 

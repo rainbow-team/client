@@ -6,11 +6,11 @@
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>法规文号：
-        <input nz-input name="code" [(ngModel)]="data.code" class="w200" required [validation]="true" />
+        <input nz-input name="code" [(ngModel)]="data.code" class="w200" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>法规名称：
-        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true" />
+        <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="50"/>
       </div>
       <div nz-col [nzSpan]="8" class="ta_r">
         <span class="clo_r">*</span>发布时间 ：

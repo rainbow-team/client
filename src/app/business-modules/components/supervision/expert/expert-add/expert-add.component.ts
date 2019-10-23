@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
@@ -25,7 +25,7 @@ export class ExpertAddComponent implements OnInit {
   dictionary: any = {};
   staffObj: any = {};
 
-  age:any="";
+  age: any = "";
 
   constructor(private msg: NzMessageService, private router: Router, private dictionarySercice: DictionarySercice
     , private staffSercice: StaffSercice, private ActivatedRoute: ActivatedRoute,
@@ -64,17 +64,20 @@ export class ExpertAddComponent implements OnInit {
   identityChange(params) {
 
     var reg = /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
-      if (reg.test(params)) {
-  
-        this.data.birthday = new Date(params.substring(6, 10), params.substring(10, 12) - 1, params.substring(12, 14),8);
-        if (parseInt(params.substr(16, 1)) % 2 == 1) {
-          //男
-          return this.sexValue = "1";
-        } else {
-          //女
-          return this.sexValue = "0";
-        }
+    if (reg.test(params)) {
+
+      this.data.birthday = new Date(params.substring(6, 10), params.substring(10, 12) - 1, params.substring(12, 14), 8);
+      this.getAge();
+      if (parseInt(params.substr(16, 1)) % 2 == 1) {
+        //男
+        return this.sexValue = "1";
+      } else {
+        //女
+        return this.sexValue = "0";
       }
+
+
+    }
   }
 
   getAge() {

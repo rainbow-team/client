@@ -9,7 +9,7 @@
         <span class="clo_r">*</span>姓名：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
@@ -37,7 +37,7 @@
         <span class="clo_r">*</span>聘用单位：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="employDepart" [(ngModel)]="data.employDepart" required [validation]="true" />
+        <input nz-input name="employDepart" [(ngModel)]="data.employDepart" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="35"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
@@ -70,15 +70,15 @@
         证书编号：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="certNumber" [(ngModel)]="data.certNumber" required [validation]="true" />
+        <input nz-input name="certNumber" [(ngModel)]="data.certNumber" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
 
 
       <div nz-col [nzSpan]="3" class="ta_r">
         <span class="clo_r">*</span>有效期限：
       </div>
-      <div nz-col [nzSpan]="5" class="ta_l">
-        <nz-date-picker name="validDate" [(ngModel)]="data.validDate" required [validation]="true">
+      <div nz-col [nzSpan]="4" class="ta_l">
+        <nz-date-picker name="validDate" class="w200" [(ngModel)]="data.validDate" required [validation]="true">
         </nz-date-picker>
       </div>
     </div>
@@ -95,8 +95,8 @@
       <div nz-col [nzSpan]="3" class="ta_r">
         发证日期：
       </div>
-      <div nz-col [nzSpan]="5" class="ta_l">
-        <nz-date-picker name="certDate" [(ngModel)]="data.certDate" required [validation]="true">
+      <div nz-col [nzSpan]="4" class="ta_l">
+        <nz-date-picker name="certDate" class="w200" [(ngModel)]="data.certDate" required [validation]="true">
         </nz-date-picker>
       </div>
 

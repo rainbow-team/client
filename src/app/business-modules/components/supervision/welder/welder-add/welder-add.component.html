@@ -14,7 +14,7 @@
           name="name"
           [(ngModel)]="data.name"
           required
-          [validation]="true"
+          [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"
         />
       </div>
 
@@ -55,7 +55,7 @@
           name="employDepart"
           [(ngModel)]="data.employDepart"
           required
-          [validation]="true"
+          [validation]="true" [validationType]="'maxlength'" [validationLenth]="35"
         />
       </div>
     </div>
@@ -64,7 +64,7 @@
         发证单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="certDepart" [(ngModel)]="data.certDepart" />
+        <input nz-input name="certDepart" [(ngModel)]="data.certDepart" [validation]="true"  [validationType]="'maxlength'" [validationLenth]="35"/>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -76,7 +76,7 @@
           name="certNumber"
           [(ngModel)]="data.certNumber"
           required
-          [validation]="true"
+          [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"
         />
       </div>
     </div>
@@ -91,14 +91,14 @@
           name="steelNumber"
           [(ngModel)]="data.steelNumber"
           required
-          [validation]="true"
+          [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"
         />
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
         <span class="clo_r">*</span>有效期限：
       </div>
-      <div nz-col [nzSpan]="8" class="ta_l">
+      <div nz-col [nzSpan]="4" class="ta_l">
         <nz-date-picker
           name="expireDate"
           [(ngModel)]="data.expireDate"

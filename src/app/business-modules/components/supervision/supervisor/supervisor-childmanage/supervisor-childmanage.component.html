@@ -191,7 +191,7 @@
       <div nz-row class="ma_b20">
         <div nz-col [nzSpan]="12" class="ta_r">
           成绩：
-          <input nz-input name="score" [(ngModel)]="data.score" class="w200" />
+          <input nz-input name="score" maxlength="100" [(ngModel)]="data.score" class="w200" />
         </div>
         <div nz-col [nzSpan]="12" class="ta_r">
           监督员证号：
@@ -199,7 +199,7 @@
             nz-input
             name="number"
             [(ngModel)]="data.number"
-            class="w200"
+            class="w200" maxlength="40"
           />
         </div>
       </div>

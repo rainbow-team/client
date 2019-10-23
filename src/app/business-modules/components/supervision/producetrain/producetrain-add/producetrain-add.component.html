@@ -10,7 +10,7 @@
               <span class="clo_r">*</span>培训班次：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <input nz-input name="batch" [(ngModel)]="data.batch" required [validation]="true" />
+              <input nz-input name="batch" [(ngModel)]="data.batch" required [validation]="true"   [validationType]="'maxlength'" [validationLenth]="50"/>
             </div>
           </div>
       
@@ -18,16 +18,16 @@
             <div nz-col [nzSpan]="4" class="ta_r">
               <span class="clo_r">*</span>培训开始日期：
             </div>
-            <div nz-col [nzSpan]="8" class="ta_l">
+            <div nz-col [nzSpan]="4" class="ta_l">
               <nz-date-picker [(ngModel)]="data.beginDate" class="w200" name="beginDate" required [validation]="true"
               [nzDisabledDate]="disabledStartDate" (ngModelChange)="onStartChange($event)">
               </nz-date-picker>
             </div>
       
-            <div nz-col [nzSpan]="4" class="ta_r">
+            <div nz-col [nzSpan]="4" class="ta_r" [nzOffset]="4">
               <span class="clo_r">*</span>培训结束日期：
             </div>
-            <div nz-col [nzSpan]="8" class="ta_l">
+            <div nz-col [nzSpan]="4" class="ta_l">
               <nz-date-picker [(ngModel)]="data.endDate" class="w200" name="endDate" required [validation]="true"
               [nzDisabledDate]="disabledEndDate" (ngModelChange)="onEndChange($event)">
               </nz-date-picker>
@@ -39,7 +39,7 @@
               <span class="clo_r">*</span>培训地点：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <input nz-input [(ngModel)]="data.place" name="place" required [validation]="true" />
+              <input nz-input [(ngModel)]="data.place" name="place" required [validation]="true"   [validationType]="'maxlength'" [validationLenth]="50"/>
             </div>
       
       
@@ -47,7 +47,7 @@
               参培人数：
             </div>
             <div nz-col [nzSpan]="8" class="ta_l">
-              <input nz-input [(ngModel)]="data.number" validation="true" [validationType]="'nullnumber'" name="number" />
+              <input nz-input [(ngModel)]="data.number" validation="true" [validationType]="'nullnumber'" maxlength="11" name="number" />
             </div>
           </div>
       

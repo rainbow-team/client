@@ -9,7 +9,7 @@
         <span class="clo_r">*</span>姓名：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
@@ -24,7 +24,7 @@
         <span class="clo_r">*</span>聘用单位：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="employDepart" [(ngModel)]="data.employDepart" required [validation]="true" />
+        <input nz-input name="employDepart" [(ngModel)]="data.employDepart" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="35"/>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
         <span class="clo_r">*</span>研究堆名称：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="heapName" [(ngModel)]="data.heapName" required [validation]="true" />
+        <input nz-input name="heapName" [(ngModel)]="data.heapName" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="36"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
@@ -51,7 +51,7 @@
         <span class="clo_r">*</span>执照编号：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="licenseNumber" [(ngModel)]="data.licenseNumber" required [validation]="true" />
+        <input nz-input name="licenseNumber" [(ngModel)]="data.licenseNumber" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
     </div>
 
@@ -60,19 +60,19 @@
         发证单位：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="certDepart" [(ngModel)]="data.certDepart" />
+        <input nz-input name="certDepart" [(ngModel)]="data.certDepart" [validation]="true" [validationType]="'maxlength'" [validationLenth]="35"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
         <span class="clo_r">*</span>发证日期：
       </div>
-      <div nz-col [nzSpan]="5" class="ta_l">
+      <div nz-col [nzSpan]="4" class="ta_l">
         <nz-date-picker name="certDate" [(ngModel)]="data.certDate" (ngModelChange)="changeIssueDate($event)" required
           [validation]="true">
         </nz-date-picker>
       </div>
 
-      <div nz-col [nzSpan]="3" class="ta_r">
+      <div nz-col [nzSpan]="3" class="ta_r" [nzOffset]="1">
         有效期限：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
