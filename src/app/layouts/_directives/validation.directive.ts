@@ -35,6 +35,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
   @Input('connect-less') connectLess: any;
   @Input('connect-more') connectMore: any;
   @Input('isBlur') isBulr: any = 0;
+  @Input('validationLenth') maxLength = 0;
 
   //#region  复杂实时比较
 
@@ -167,6 +168,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
         )
       );
     },
+
     areaNumber: function (value) {
       return value != null && /^\d+(\.\d{1,2})?$/.test(value);
     },
@@ -206,7 +208,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     },
     idcard: function (value) {
       // return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
-      return  /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(value);
+      return /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(value);
     },
     nullidcard: function (value) {
       return (
@@ -295,6 +297,15 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
       );
     }
   };
+
+  exPressionExtend = {
+    maxlength: function (value, num) {
+      if (!value) {
+        return true;
+      }
+      return value.length <= num
+    },
+  }
   defaultMsg = {
     required: {
       error: '必填',
@@ -469,6 +480,7 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
         .height();
     }
     let tipTop = $(this.el.nativeElement).height() + 13 + preheight;
+    tipTop = tipTop == 13 ? 35 : tipTop;
     let prevAllList = $(this.el.nativeElement).prevAll();
     let prevAllWidth = 0;
     for (var i = 0; i < prevAllList.length; i++) {
@@ -510,17 +522,17 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
 
       setTimeout(() => {
         let test = document.getElementsByName(nameT)[0];
-      
+
         test.onmouseout = () => {
           that.validationValue();
         }
 
-        test.onmouseenter=()=>{
+        test.onmouseenter = () => {
           this.HideErrorTip();
         }
 
       }, 1000);
-     
+
 
     }
 
@@ -561,7 +573,8 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
             isValid = false;
             let errorMessage = '';
             if (this.defaultMsg[key]) {
-              errorMessage += this.defaultMsg[key].error + '';
+              let tipExtend = key == "maxlength" ? this.maxLength : "";
+              errorMessage += this.defaultMsg[key].error + tipExtend;
             } else {
               errorMessage += key + '：未指定错误消息';
             }
@@ -572,7 +585,14 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
         }
       } else {
         if (this.type) {
-          if (this.expression[this.type](this.ngModel.value)) {
+
+          let flag = false;
+          if (this.type == "maxlength") {
+            flag = this.exPressionExtend[this.type](this.ngModel.value, this.maxLength)
+          } else {
+            flag = this.expression[this.type](this.ngModel.value)
+          }
+          if (flag) {
             //value对比
             let theMaxValue =
               this.maxValue || this.maxValue == 0
@@ -619,7 +639,9 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
             }
           } else {
             isValid = false;
-            let errorMessage = this.defaultMsg[this.type].error + '';
+
+            let tipExtend = this.type == "maxlength" ? this.maxLength : "";
+            let errorMessage = this.defaultMsg[this.type].error + tipExtend;
             this.ShowErrorTip(errorMessage);
           }
         } else {

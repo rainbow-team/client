@@ -10,7 +10,8 @@
         <span class="clo_r">*</span>监管机构：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true" />
+        <input nz-input name="name" [(ngModel)]="data.name" required [validation]="true"
+        [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -31,7 +32,7 @@
         <span class="clo_r">*</span>机构领导：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="leader" [(ngModel)]="data.leader" required [validation]="true" />
+        <input nz-input name="leader" [(ngModel)]="data.leader" maxlength="30" required [validation]="true" />
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
@@ -39,7 +40,7 @@
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <input nz-input name="leaderTel" [(ngModel)]="data.leaderTel" [validation]="true"
-          [validationType]="'nullphonenumber'" [isBlur]="'1'"/>
+          [validationType]="'nullnumber'" [isBlur]="'1'" maxlength="30"/>
       </div>
 
     </div>

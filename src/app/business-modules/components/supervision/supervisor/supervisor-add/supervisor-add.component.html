@@ -9,7 +9,7 @@
         <div nz-row class="ma_b20">
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>姓名：
-            <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"/>
+            <input nz-input name="name" [(ngModel)]="data.name" class="w200" required [validation]="true"  [validationType]="'maxlength'" [validationLenth]="30"/>
           </div>
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>身份证号：
@@ -74,7 +74,7 @@
 
           <div nz-col [nzSpan]="8" class="ta_r">
             职务：
-            <input nz-input name="post" [(ngModel)]="data.post" class="w200"  />
+            <input nz-input name="post" [(ngModel)]="data.post" class="w200" [validation]="true"  [validationType]="'maxlength'" [validationLenth]="30" />
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
@@ -94,7 +94,7 @@
           <div nz-col [nzSpan]="8" class="ta_r">
             <span class="clo_r">*</span>联系方式：
             <input nz-input name="contact" [(ngModel)]="data.contact" class="w200"  required
-              [validation]="true" [validationType]="'phonenumber'" [isBlur]="'1'"/>
+              [validation]="true" [validationType]="'number'" maxlength="30" [isBlur]="'1'"/>
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
@@ -123,7 +123,7 @@
 
           <div nz-col [nzSpan]="8" class="ta_r">
             毕业学校：
-            <input nz-input name="educationSchool" [(ngModel)]="data.educationSchool" class="w200"/>
+            <input nz-input name="educationSchool" [validation]="true"  [validationType]="'maxlength'" [validationLenth]="30" [(ngModel)]="data.educationSchool" class="w200"/>
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
@@ -137,7 +137,7 @@
         <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
           <div nz-col [nzSpan]="8" class="ta_r">
             专业：
-            <input nz-input name="major" [(ngModel)]="data.major" class="w200"  />
+            <input nz-input name="major" [(ngModel)]="data.major" class="w200"  [validation]="true"  [validationType]="'maxlength'" [validationLenth]="30"/>
           </div>
         </div>
 
