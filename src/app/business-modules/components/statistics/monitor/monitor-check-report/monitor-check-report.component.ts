@@ -74,7 +74,10 @@ export class MonitorCheckReportComponent implements OnInit {
       legend: {
         bottom: 0,
         left: 'center',
-        data: this.configList
+        data: this.configList,
+        textStyle: {
+          fontSize: 14
+        } 
       },
       grid: {
         left: '3%',
@@ -128,6 +131,23 @@ export class MonitorCheckReportComponent implements OnInit {
 
         this.configList = this.data.numberList.map(function(v) {
           return v.name;
+        });
+
+        this.data.numberList.forEach(element => {
+          element.label = {
+            normal: {
+              show: true,
+              position: 'insideTop',
+              textStyle: {
+                color: 'black'
+              },
+              formatter: function (params) {
+                let num = params.value;
+                return num > 0 ? num : "";
+              }
+            },
+
+          }
         });
 
         this.initEchart1();

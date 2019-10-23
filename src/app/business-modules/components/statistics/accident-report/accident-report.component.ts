@@ -71,7 +71,16 @@ export class AccidentReportComponent implements OnInit {
       series: [
         {
           data: this.data,
-          type: 'bar'
+          type: 'bar',
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              textStyle: {
+                color: 'black'
+              }
+            }
+          }
         }
       ],
       toolbox: {

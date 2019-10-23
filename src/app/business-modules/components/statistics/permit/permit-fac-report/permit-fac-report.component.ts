@@ -59,7 +59,7 @@ export class PermitFacReportComponent implements OnInit {
 
   configList: any = [];
 
-  constructor(private statisticsSercice: StatisticsSercice) {}
+  constructor(private statisticsSercice: StatisticsSercice) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -73,7 +73,7 @@ export class PermitFacReportComponent implements OnInit {
 
   filterCondition() {
     var that = this;
-    this.result = this.condition.filter(function(p) {
+    this.result = this.condition.filter(function (p) {
       return p.type == that.typeValue;
     });
   }
@@ -114,7 +114,10 @@ export class PermitFacReportComponent implements OnInit {
       legend: {
         bottom: 0,
         left: 'center',
-        data: this.configList
+        data: this.configList,
+        textStyle: {
+          fontSize: 14
+        }
       },
       grid: {
         left: '3%',
@@ -171,14 +174,17 @@ export class PermitFacReportComponent implements OnInit {
       },
       xAxis: {
         type: 'category',
-        data: that.data.map(function(v) {
+        data: that.data.map(function (v) {
           return v.name;
         })
       },
       legend: {
         bottom: 0,
         left: 'center',
-        data: that.data.map(function(v) {
+        textStyle: {
+          fontSize: 14
+        },
+        data: that.data.map(function (v) {
           return v.name;
         })
       },
@@ -195,7 +201,16 @@ export class PermitFacReportComponent implements OnInit {
       series: [
         {
           data: this.data,
-          type: 'bar'
+          type: 'bar',
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              textStyle: {
+                color: 'black'
+              }
+            }
+          },
         }
       ],
       color: [
@@ -228,8 +243,25 @@ export class PermitFacReportComponent implements OnInit {
         .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function(v) {
+          this.configList = this.data.numberList.map(function (v) {
             return v.name;
+          });
+
+          this.data.numberList.forEach(element => {
+            element.label = {
+              normal: {
+                show: true,
+                position: 'insideTop',
+                textStyle: {
+                  color: 'black'
+                },
+                formatter: function (params) {
+                  let num = params.value;
+                  return num > 0 ? num : "";
+                }
+              },
+
+            }
           });
 
           this.initEchart1();

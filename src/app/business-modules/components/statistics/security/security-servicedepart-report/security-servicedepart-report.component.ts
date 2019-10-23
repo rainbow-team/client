@@ -89,7 +89,7 @@ export class SecurityServicedepartReportComponent implements OnInit {
   constructor(
     private statisticsSercice: StatisticsSercice,
     private serviceDepartService: ServiceDepartService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.serviceDepartService.getAllDepartService().subscribe(res => {
@@ -107,7 +107,7 @@ export class SecurityServicedepartReportComponent implements OnInit {
 
   filterCondition() {
     var that = this;
-    this.result = this.condition.filter(function(p) {
+    this.result = this.condition.filter(function (p) {
       return p.type == that.typeValue;
     });
   }
@@ -136,7 +136,10 @@ export class SecurityServicedepartReportComponent implements OnInit {
       legend: {
         bottom: 0,
         left: 'center',
-        data: this.configList
+        data: this.configList,
+        textStyle: {
+          fontSize: 14
+        }
       },
       grid: {
         left: '3%',
@@ -179,7 +182,7 @@ export class SecurityServicedepartReportComponent implements OnInit {
       },
       xAxis: {
         type: 'category',
-        data: this.data.map(function(v) {
+        data: this.data.map(function (v) {
           return v.name;
         })
       },
@@ -190,7 +193,17 @@ export class SecurityServicedepartReportComponent implements OnInit {
       series: [
         {
           data: this.data,
-          type: 'bar'
+          type: 'bar',
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              textStyle: {
+                color: 'black'
+              }
+            }
+          }
+
         }
       ],
       toolbox: {
@@ -242,8 +255,25 @@ export class SecurityServicedepartReportComponent implements OnInit {
         .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function(v) {
+          this.configList = this.data.numberList.map(function (v) {
             return v.name;
+          });
+
+          this.data.numberList.forEach(element => {
+            element.label = {
+              normal: {
+                show: true,
+                position: 'insideTop',
+                textStyle: {
+                  color: 'black'
+                },
+                formatter: function (params) {
+                  let num = params.value;
+                  return num > 0 ? num : "";
+                }
+              },
+
+            }
           });
 
           this.initEchart1();
@@ -261,10 +291,26 @@ export class SecurityServicedepartReportComponent implements OnInit {
         .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function(v) {
+          this.configList = this.data.numberList.map(function (v) {
             return v.name;
           });
 
+          this.data.numberList.forEach(element => {
+            element.label = {
+              normal: {
+                show: true,
+                position: 'insideTop',
+                textStyle: {
+                  color: 'black'
+                },
+                formatter: function (params) {
+                  let num = params.value;
+                  return num > 0 ? num : "";
+                }
+              },
+  
+            }
+          });
           this.initEchart1();
         });
     }

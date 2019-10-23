@@ -81,7 +81,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
 
   configList: any = [];
 
-  constructor(private statisticsSercice: StatisticsSercice) {}
+  constructor(private statisticsSercice: StatisticsSercice) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -95,7 +95,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
 
   filterCondition() {
     var that = this;
-    this.result = this.condition.filter(function(p) {
+    this.result = this.condition.filter(function (p) {
       return p.type == that.typeValue;
     });
   }
@@ -105,9 +105,9 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
 
     let option1 = {
       title: {
-        text: "铀尾矿(渣)库安全问题统计("+that.result[0].name+")",
+        text: "铀尾矿(渣)库安全问题统计(" + that.result[0].name + ")",
         x: 'center',
-        subtext:this.startDate.getFullYear() +"年"+ "-" +this.endDate.getFullYear()+"年"
+        subtext: this.startDate.getFullYear() + "年" + "-" + this.endDate.getFullYear() + "年"
       },
       tooltip: {
         trigger: 'axis',
@@ -119,7 +119,10 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
       legend: {
         bottom: 0,
         left: 'center',
-        data: this.configList
+        data: this.configList,
+        textStyle: {
+          fontSize: 14
+        }
       },
       grid: {
         left: '3%',
@@ -142,7 +145,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
           saveAsImage: { show: true }
         }
       },
-      color:['#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+      color: ['#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
       //this.data.numberList
     };
     this.myChart1 = echarts.init(document.getElementById('chart1'));
@@ -153,9 +156,9 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
     var that = this;
 
     let option2 = {
-    
+
       title: {
-        text: "铀尾矿(渣)库安全问题统计("+that.result[0].name+")",
+        text: "铀尾矿(渣)库安全问题统计(" + that.result[0].name + ")",
         x: 'center'
       },
       tooltip: {
@@ -164,7 +167,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
       },
       xAxis: {
         type: 'category',
-        data: this.data.map(function(v) {
+        data: this.data.map(function (v) {
           return v.name;
         })
       },
@@ -175,7 +178,16 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
       series: [
         {
           data: this.data,
-          type: 'bar'
+          type: 'bar',
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              textStyle: {
+                color: 'black'
+              }
+            }
+          }
         }
       ],
       toolbox: {
@@ -184,7 +196,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
           saveAsImage: { show: true }
         }
       },
-      color:['#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+      color: ['#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
     };
     this.myChart2 = echarts.init(document.getElementById('chart2'));
     this.myChart2.setOption(option2);
@@ -202,8 +214,25 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
         .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function(v) {
+          this.configList = this.data.numberList.map(function (v) {
             return v.name;
+          });
+
+          this.data.numberList.forEach(element => {
+            element.label = {
+              normal: {
+                show: true,
+                position: 'insideTop',
+                textStyle: {
+                  color: 'black'
+                },
+                formatter: function (params) {
+                  let num = params.value;
+                  return num > 0 ? num : "";
+                }
+              },
+  
+            }
           });
 
           this.initEchart1();
@@ -221,10 +250,26 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
         .subscribe(res => {
           this.data = res.msg;
 
-          this.configList = this.data.numberList.map(function(v) {
+          this.configList = this.data.numberList.map(function (v) {
             return v.name;
           });
 
+          this.data.numberList.forEach(element => {
+            element.label = {
+              normal: {
+                show: true,
+                position: 'insideTop',
+                textStyle: {
+                  color: 'black'
+                },
+                formatter: function (params) {
+                  let num = params.value;
+                  return num > 0 ? num : "";
+                }
+              },
+  
+            }
+          });
           this.initEchart1();
         });
     }
@@ -234,7 +279,7 @@ export class SecurityUmineplaceProblemReportComponent implements OnInit {
 
   exportTable() {
     $("#sup").table2excel({
-       filename: "铀尾矿(渣)库安全问题统计",
+      filename: "铀尾矿(渣)库安全问题统计",
     });
   }
 }

@@ -16,8 +16,8 @@
         </nz-year-picker>
       </div>
       <div nz-col [nzSpan]="4" class="ta_r">
-        <button nz-button nzType="primary" (click)="exportTable()" style="margin-right: 10px;">导出</button>
-        <button nz-button nzType="primary" (click)="statistics()">统计</button>
+        <button nz-button nzType="primary" (click)="statistics()" style="margin-right: 10px;">统计</button>
+        <button nz-button nzType="primary" (click)="exportTable()">导出</button>
       </div>
     </div>
   </nz-header>
@@ -27,15 +27,8 @@
         <div id="chart1" style="text-align: center" [appPageHeight]='314'></div>
       </nz-tab>
       <nz-tab nzTitle="统计表">
-        <nz-table
-          #nestedTable
-          [nzData]="data.yearDate"
-          class="commontable"
-          [nzFrontPagination]="false"
-          [nzShowPagination]="false"
-          [nzNoResult]=""
-          id="sup"
-        >
+        <nz-table #nestedTable [nzData]="data.yearDate" class="commontable" [nzFrontPagination]="false"
+          [nzShowPagination]="false" [nzNoResult]="" id="sup">
           <thead>
             <tr>
               <th nzWidth="150px">{{ title }}</th>
@@ -60,15 +53,8 @@
         <div id="chart2" style="text-align: center" [appPageHeight]='314'></div>
       </nz-tab>
       <nz-tab nzTitle="统计表">
-        <nz-table
-          #nestedTable
-          [nzData]="data"
-          class="commontable"
-          [nzFrontPagination]="false"
-          [nzShowPagination]="false"
-          [nzNoResult]=""
-          id="sup"
-        >
+        <nz-table #nestedTable [nzData]="data" class="commontable" [nzFrontPagination]="false"
+          [nzShowPagination]="false" [nzNoResult]="" id="sup">
           <thead>
             <tr>
               <th>{{ title }}</th>

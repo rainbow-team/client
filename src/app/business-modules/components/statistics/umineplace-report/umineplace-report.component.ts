@@ -74,7 +74,7 @@ export class UmineplaceReportComponent implements OnInit {
   des: any = '';
   chartTitle: any = '';
 
-  constructor(private statisticsSercice: StatisticsSercice) {}
+  constructor(private statisticsSercice: StatisticsSercice) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -85,7 +85,7 @@ export class UmineplaceReportComponent implements OnInit {
 
   filterCondition() {
     var that = this;
-    this.result = this.condition.filter(function(p) {
+    this.result = this.condition.filter(function (p) {
       return p.type == that.typeValue;
     });
 
@@ -105,7 +105,10 @@ export class UmineplaceReportComponent implements OnInit {
       },
       legend: {
         bottom: 10,
-        left: 'center'
+        left: 'center',
+        textStyle: {
+          fontSize: 14
+        }
       },
       toolbox: {
         show: true,
@@ -120,7 +123,11 @@ export class UmineplaceReportComponent implements OnInit {
           type: 'pie',
           radius: '55%',
           center: ['50%', '50%'],
-          data: that.data
+          data: that.data,
+          label: {
+            formatter: '{b}: {c}  ({d}%)',
+            fontSize: 14
+          },
         }
       ],
       color: [

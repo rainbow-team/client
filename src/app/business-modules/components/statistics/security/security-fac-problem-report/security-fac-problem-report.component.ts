@@ -135,7 +135,10 @@ export class SecurityFacProblemReportComponent implements OnInit {
       legend: {
         bottom: 0,
         left: 'center',
-        data: this.configList
+        data: this.configList,
+        textStyle: {
+          fontSize: 14
+        }
       },
       grid: {
         left: '3%',
@@ -189,7 +192,16 @@ export class SecurityFacProblemReportComponent implements OnInit {
       series: [
         {
           data: this.data,
-          type: 'bar'
+          type: 'bar',
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              textStyle: {
+                color: 'black'
+              }
+            }
+          }
         }
       ],
       toolbox: {
@@ -245,6 +257,23 @@ export class SecurityFacProblemReportComponent implements OnInit {
             return v.name;
           });
 
+          this.data.numberList.forEach(element => {
+            element.label = {
+              normal: {
+                show: true,
+                position: 'insideTop',
+                textStyle: {
+                  color: 'black'
+                },
+                formatter: function (params) {
+                  let num = params.value;
+                  return num > 0 ? num : "";
+                }
+              },
+  
+            }
+          });
+
           this.initEchart1();
         });
     } else if (this.typeValue == 2) {
@@ -264,6 +293,22 @@ export class SecurityFacProblemReportComponent implements OnInit {
             return v.name;
           });
 
+          this.data.numberList.forEach(element => {
+            element.label = {
+              normal: {
+                show: true,
+                position: 'insideTop',
+                textStyle: {
+                  color: 'black'
+                },
+                formatter: function (params) {
+                  let num = params.value;
+                  return num > 0 ? num : "";
+                }
+              },
+  
+            }
+          });
           this.initEchart1();
         });
     }

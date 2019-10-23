@@ -12,10 +12,10 @@
     <nz-year-picker [(ngModel)]="endDate" nzPlaceHolder="结束年份">
     </nz-year-picker>
     <div style="text-align: right;float:right">
-      <button nz-button nzType="primary" (click)="statistics()">统计</button>
+      <button nz-button nzType="primary" (click)="exportTable()">导出</button>
     </div>
     <div style="text-align: right;float:right;margin-right: 10px;">
-      <button nz-button nzType="primary" (click)="exportTable()">导出</button>
+      <button nz-button nzType="primary" (click)="statistics()">统计</button>
     </div>
   </nz-header>
   <nz-content style="height:calc(100% - 64px);">
