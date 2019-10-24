@@ -141,9 +141,11 @@ export class NavMenuComponent implements OnInit, OnDestroy {
       this.hoverItemId ="";
     }
   }
-  OpenChange(flag) {
+  OpenChange(flag,item) {
     if (!flag) {
       this.hoverItemId = "";
+    }else{
+      this.hoverItemId = item.id;
     }
   }
 

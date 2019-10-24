@@ -99,7 +99,7 @@
 
           <div nz-col [nzSpan]="8" class="ta_r">
             从事核安全工作时间：
-            <input nz-input name="continueTime" [(ngModel)]="data.continueTime" class="w200" />
+            <input nz-input name="continueTime" [(ngModel)]="data.continueTime" class="w200"  [validation]="true"  [validationType]="'maxlength'" [validationLenth]="30" />
           </div>
 
           <div nz-col [nzSpan]="8" class="ta_r">
