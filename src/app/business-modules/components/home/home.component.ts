@@ -365,7 +365,7 @@ export class HomeComponent implements OnInit {
         {
           name: '', //系列名称
           type: 'pie', //类型 pie表示饼图
-          center: ['40%', '50%'], //设置饼的原心坐标 不设置就会默认在中心的位置
+          center: ['45%', '50%'], //设置饼的原心坐标 不设置就会默认在中心的位置
           radius: ['50%', '70%'], //饼图的半径,第一项是内半径,第二项是外半径,内半径为0就是真的饼,不是环形
           itemStyle: {
             //图形样式
@@ -375,11 +375,14 @@ export class HomeComponent implements OnInit {
                 //饼图图形上的文本标签
                 show: true, //平常不显示
                 formatter: '{c}({d}%)',
-                position: 'inner'
+                // position: 'inner'
+                textStyle: {
+                  fontSize: '12'
+                }
               },
               labelLine: {
                 //标签的视觉引导线样式
-                show: false //平常不显示
+                show: true //平常不显示
               }
             },
             emphasis: {
@@ -389,7 +392,7 @@ export class HomeComponent implements OnInit {
                 show: true,
                 position: 'center',
                 textStyle: {
-                  fontSize: '10',
+                  fontSize: '12',
                   fontWeight: 'bold'
                 }
               }
