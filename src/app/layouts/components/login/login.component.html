@@ -12,19 +12,19 @@
   <div class="login_contain">
     <div>
       <nz-input-group [nzPrefix]="prefixUser">
-        <input nz-input placeholder="请输入用户名" class="login_input" [(ngModel)]="username" />
+        <input nz-input placeholder="请输入用户名" (keydown.enter)="login()" class="login_input" [(ngModel)]="username" />
       </nz-input-group>
     </div>
 
     <div>
       <nz-input-group [nzPrefix]="prefixPsw">
-        <input nz-input type="password" placeholder="请输入密码" class="login_input" [(ngModel)]="password" />
+        <input nz-input type="password" placeholder="请输入密码" (keydown.enter)="login()" class="login_input" [(ngModel)]="password" />
       </nz-input-group>
     </div>
 
     <div>
       <nz-input-group [nzPrefix]="prefixIdy" [nzSuffix]="suffixIdy">
-        <input nz-input placeholder="请输入验证码" class="login_input" [(ngModel)]="code" id="verify" />
+        <input nz-input placeholder="请输入验证码" class="login_input" (keydown.enter)="login()" [(ngModel)]="code" id="verify" />
       </nz-input-group>
     </div>
 
