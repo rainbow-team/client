@@ -430,6 +430,7 @@ export class HomeComponent implements OnInit {
             show: true,
             x: 'right',
             y: 'bottom',
+            orient:"horizontal",
             splitList: [
               { start: 50, end: 100 },
               { start: 25, end: 50 },
@@ -452,7 +453,7 @@ export class HomeComponent implements OnInit {
               name: '数据',
               type: 'map',
               mapType: 'china',
-              zoom: 0.9,
+              zoom: 1.2,
               roam: true,
               label: {
                 normal: {
