@@ -34,4 +34,8 @@ export class UnithotregionService {
   deleteUnitHotRegionById(id): any {
     return this.http.post('/unithotregion/deleteUnitHotRegionById', id);
   }
+
+  isUnitHotRegionExist(id): any {
+    return this.http.post('/unithotregion/isUnitHotRegionExist', id);
+  }
 }

@@ -111,6 +111,7 @@
             [(ngModel)]="subject.subjectId"
             style="width: 100%"
             required
+            [disabled]="isModify"
             [validation]="true"
           >
             <nz-option

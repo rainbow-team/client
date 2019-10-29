@@ -34,6 +34,7 @@ export class UnitEditorComponent implements OnInit {
   unitType: any;
   fileList = [];
   markerId: any;
+  isModify: boolean;
 
   constructor(
     private msg: NzMessageService,
@@ -92,6 +93,7 @@ export class UnitEditorComponent implements OnInit {
   add() {
     this.isEditorVisible = true;
     this.title = '添加';
+    this.isModify = false;
     this.subject = {};
   }
   editorOk() {
@@ -111,20 +113,47 @@ export class UnitEditorComponent implements OnInit {
     )[0].name;
     this.subject.unitId = this.unitId;
     this.subject.addressId = this.markerId;
-    this.unithotregionService
-      .saveOrUpdateUnitHotRegion(this.subject)
-      .subscribe(res => {
-        this.isEditorLoading = false;
-        this.isEditorVisible = false;
-        this.subject = {};
-        this.fileList = [];
-        if (res.code === 200) {
-          this.msg.create('success', '保存成功');
-          this.search();
-        } else {
-          this.msg.create('error', '保存失败');
-        }
-      });
+    if (this.isModify) {
+      //修改流程，不需要判断核设施是否 存在
+      this.unithotregionService
+        .saveOrUpdateUnitHotRegion(this.subject)
+        .subscribe(res1 => {
+          this.isEditorLoading = false;
+          this.isEditorVisible = false;
+          this.subject = {};
+          this.fileList = [];
+          if (res1.code === 200) {
+            this.msg.create('success', '保存成功');
+            this.search();
+          } else {
+            this.msg.create('error', '保存失败');
+          }
+        });
+    } else {
+      this.unithotregionService
+        .isUnitHotRegionExist(this.subject.subjectId)
+        .subscribe(res => {
+          if (res.code === 200) {
+            this.unithotregionService
+              .saveOrUpdateUnitHotRegion(this.subject)
+              .subscribe(res1 => {
+                this.isEditorLoading = false;
+                this.isEditorVisible = false;
+                this.subject = {};
+                this.fileList = [];
+                if (res1.code === 200) {
+                  this.msg.create('success', '保存成功');
+                  this.search();
+                } else {
+                  this.msg.create('error', '保存失败');
+                }
+              });
+          } else {
+            this.msg.create('error', '保存失败，核设施/铀尾矿渣库已经存在。');
+            this.isEditorLoading = false;
+          }
+        });
+    }
   }
   editorCancel() {
     this.isEditorVisible = false;
@@ -133,6 +162,7 @@ export class UnitEditorComponent implements OnInit {
   modify() {
     if (this.selectId) {
       this.title = '修改';
+      this.isModify = true;
       this.isEditorVisible = true;
       this.unithotregionService
         .getUnitHotRegionById(this.selectId)
