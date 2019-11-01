@@ -35,10 +35,10 @@ export class UserComponent implements OnInit {
   isDisable: boolean;
   username: string;
   realname: string;
-  mobile: string;
+  department: string;
   selectId: any = '';
   isView = false; //查看操作标志
-  canManage:any=false;
+  canManage: any = false;
 
   constructor(
     private msg: NzMessageService,
@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
     private orgService: OrgService,
     private userService: UserService,
     private staffSercice: StaffSercice,
-    private utilitiesSercice:UtilitiesSercice
+    private utilitiesSercice: UtilitiesSercice
   ) {}
 
   ngOnInit() {
@@ -67,8 +67,8 @@ export class UserComponent implements OnInit {
     if (this.username) {
       option.conditions.push({ key: 'username', value: this.username });
     }
-    if (this.mobile) {
-      option.conditions.push({ key: 'mobile', value: this.mobile });
+    if (this.department) {
+      option.conditions.push({ key: 'department', value: this.department });
     }
     if (this.realname) {
       option.conditions.push({ key: 'realname', value: this.realname });
@@ -125,13 +125,14 @@ export class UserComponent implements OnInit {
 
   reset() {
     this.username = '';
-    this.mobile = '';
+    this.department = '';
     this.realname = '';
   }
 
   add() {
     this.title = '添加用户';
     this.currentUser = {};
+    this.currentUser.creatorId = this.staffObj.id;
     this.isVisible = true;
     this.isDisable = false;
   }
@@ -156,6 +157,7 @@ export class UserComponent implements OnInit {
       this.isDisable = false;
       this.isVisible = true;
       this.title = '编辑用户信息';
+      this.currentUser.modifyId = this.staffObj.id;
       this.userService
         .getUserWithRoleByUserId(this.currentUser.id)
         .subscribe(data => {

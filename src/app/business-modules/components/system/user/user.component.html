@@ -22,13 +22,13 @@
     </div>
 
     <div nz-col [nzSpan]="6">
-      电话：
+      部门：
       <input
         nz-input
         nzSize="default"
-        [(ngModel)]="mobile"
+        [(ngModel)]="department"
         class="w200"
-        placeholder="请输入电话"
+        placeholder="请输入部门"
       />
     </div>
 
@@ -103,10 +103,11 @@
           <tr>
             <th style="width: 5%">编号</th>
             <th style="width: 20%">用户名</th>
-            <th style="width: 20%">真实姓名</th>
-            <th style="width: 20%">电话</th>
+            <th style="width: 15%">真实姓名</th>
+            <th style="width: 20%">部门</th>
+            <th style="width: 15%">电话</th>
             <th style="width: 20%">邮箱</th>
-            <th style="width: 15%">操作</th>
+            <th style="width: 5%">操作</th>
           </tr>
         </thead>
         <tbody [appPageHeight]="400">
@@ -119,10 +120,11 @@
               {{ (pageIndex - 1) * pageSize + 1 + index }}
             </td>
             <td style="width: 20%">{{ data.username }}</td>
-            <td style="width: 20%">{{ data.realname }}</td>
-            <td style="width: 20%">{{ data.mobile }}</td>
+            <td style="width: 15%">{{ data.realname }}</td>
+            <td style="width: 20%">{{ data.department }}</td>
+            <td style="width: 15%">{{ data.mobile }}</td>
             <td style="width: 20%">{{ data.email }}</td>
-            <td style="width: 15%">
+            <td style="width: 5%">
               <a (click)="show(data)">查看</a>
               <!-- <nz-divider nzType="vertical"></nz-divider>
               <a (click)="show(data, true)">编辑</a>
@@ -144,7 +146,8 @@
     nzTitle="{{ title }}"
     (nzOnCancel)="handleCancel()"
     (nzOnOk)="handleOk()"
-    [nzOkLoading]="isOkLoading" [nzCancelText]="null"
+    [nzOkLoading]="isOkLoading"
+    [nzCancelText]="null"
   >
     <div>
       <div nz-row style="height: 60px;">
@@ -158,7 +161,9 @@
             [validation]="true"
             nzSize="default"
             [(ngModel)]="currentUser.username"
-            class="w200"  [validationType]="'maxlength'" [validationLenth]="50"
+            class="w200"
+            [validationType]="'maxlength'"
+            [validationLenth]="50"
           />
         </div>
       </div>
@@ -191,30 +196,32 @@
             [validation]="true"
             nzSize="default"
             [(ngModel)]="currentUser.realname"
-            class="w200" [validationType]="'maxlength'" [validationLenth]="50"
+            class="w200"
+            [validationType]="'maxlength'"
+            [validationLenth]="50"
           />
         </div>
       </div>
       <div nz-row style="height: 60px;">
         <div class="ta_r">
-          <span class="clo_r">*</span>电话：
+          电话：
           <input
             nz-input
             [disabled]="isDisable"
             style="width:calc(100% - 100px)"
-            required
             [validation]="true"
-            [validationType]="'number'"
+            [validationType]="'nullphonenumber'"
             nzSize="default"
             [(ngModel)]="currentUser.mobile"
-            class="w200" maxlength="50"
+            class="w200"
+            maxlength="50"
             [isBlur]="'1'"
           />
         </div>
       </div>
       <div nz-row style="height: 60px;">
         <div class="ta_r">
-          <span class="clo_r">*</span>邮箱：
+          邮箱：
           <input
             nz-input
             maxlength="50"
@@ -223,7 +230,7 @@
             nzSize="default"
             [(ngModel)]="currentUser.email"
             [validation]="true"
-            [validationType]="'email'"
+            [validationType]="'nullemail'"
             class="w200"
           />
         </div>
@@ -241,12 +248,15 @@
             [nzAllowClear]="true"
             [(ngModel)]="currentUser.orgId"
             nzShowExpand
+            required
+            [validation]="true"
           >
           </nz-tree-select>
         </div>
       </div>
       <div nz-row style="height: 60px;">
         <div class="ta_r">
+          <span class="clo_r">*</span>
           角色：
           <nz-select
             style="width:calc(100% - 100px)"
@@ -255,6 +265,7 @@
             class="w200"
             nzMode="multiple"
             [disabled]="isDisable"
+            required
             [validation]="true"
           >
             <nz-option

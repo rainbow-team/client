@@ -1,6 +1,6 @@
 .nav-menu {
   height: 100%;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   position: relative;
 
   ul {
@@ -8,20 +8,23 @@
     background: #0050b3;
     border: 0;
     color: #fff;
+    font-size: 16px;
 
-     li:hover{
-        background: #fff;
-        color: #0050b3;
-        border:0;
-        border-radius: 5px;
-         
-     }
+    li:hover {
+      background: #fff;
+      color: #0050b3;
+      border: 0;
+      border-radius: 5px;
+    }
+  }
+  li {
+    font-size: 16px;
   }
 
-  .li_select{
+  .li_select {
     background: #fff;
     color: #0050b3;
-    border:0;
+    border: 0;
     border-radius: 5px;
   }
 
@@ -29,7 +32,7 @@
     position: absolute;
     height: 40px;
     width: 100%;
-    background-color: #2F3643;
+    background-color: #2f3643;
     left: 0;
     bottom: 0;
     display: flex;
@@ -38,6 +41,10 @@
   }
 }
 
-.submenu_line{
+.ant-menu-item {
+  font-size: 16px;
+}
+
+.submenu_line {
   border-bottom: #cccccc;
 }

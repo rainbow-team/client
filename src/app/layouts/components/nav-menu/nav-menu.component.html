@@ -1,28 +1,45 @@
 <div class="nav-menu">
   <ul nz-menu [nzMode]="'horizontal'" style="line-height: 30px;">
     <ng-container *ngFor="let item of navMenu">
-      <li nz-submenu *ngIf="item.children && item.children.length>0&&item.isShow; else navMenuItem" (nzOpenChange)="OpenChange($event,item)"
+      <li
+        nz-submenu
+        *ngIf="
+          item.children && item.children.length > 0 && item.isShow;
+          else navMenuItem
+        "
+        (nzOpenChange)="OpenChange($event, item)"
         style="width: 9%;text-align: center;line-height: 30px;"
-        [ngClass]="{'li_select':item.id==checkedTopItem.id||hoverItemId==item.id}">
+        [ngClass]="{
+          li_select: item.id == checkedTopItem.id || hoverItemId == item.id
+        }"
+      >
         <span title>
           <!-- <i nz-icon type="setting"></i> -->
-          <span>{{item.name}}</span>
+          <span>{{ item.name }}</span>
         </span>
-        <ul  id="ulsub">
-
+        <ul id="ulsub">
           <ng-container *ngFor="let child of item.children">
-
-            <li *ngIf="child.children && child.children.length>0;else navChildMenuItem" nz-submenu>
+            <li
+              *ngIf="
+                child.children && child.children.length > 0;
+                else navChildMenuItem
+              "
+              nz-submenu
+            >
               <span title>
-                <span>{{child.name}}</span>
+                <span style="font-size: 16px;">{{ child.name }}</span>
               </span>
 
               <ul>
                 <ng-container *ngFor="let thirdChild of child.children">
-                  <li nz-menu-item nzPlacement="right" *ngIf="thirdChild.isShow"
-                    (click)="menuItemClick(item,child,thirdChild)">
+                  <li
+                    nz-menu-item
+                    nzPlacement="right"
+                    *ngIf="thirdChild.isShow"
+                    (click)="menuItemClick(item, child, thirdChild)"
+                  >
                     <span title>
-                      <span>{{thirdChild.name}}</span>
+                      <span>{{ thirdChild.name }}</span>
                     </span>
                   </li>
                 </ng-container>
@@ -30,23 +47,33 @@
             </li>
 
             <ng-template #navChildMenuItem>
-              <li nz-menu-item nzPlacement="right" *ngIf="child.isShow" (click)="menuItemClick(item,child,null)">
+              <li
+                nz-menu-item
+                nzPlacement="right"
+                *ngIf="child.isShow"
+                (click)="menuItemClick(item, child, null)"
+              >
                 <span title>
-                  <span>{{child.name}}</span>
+                  <span>{{ child.name }}</span>
                 </span>
               </li>
             </ng-template>
-
           </ng-container>
-
         </ul>
       </li>
       <ng-template #navMenuItem>
-        <li nz-menu-item *ngIf="item.isShow" (click)="menuItemClick(item,null,null)" (mouseenter)="mouseenter(item)" (mouseleave)="mouseleave()"
-          style="width: 9%;text-align: center;line-height: 30px;" [ngClass]="{'li_select':item.id==checkedTopItem.id}">
+        <li
+          nz-menu-item
+          *ngIf="item.isShow"
+          (click)="menuItemClick(item, null, null)"
+          (mouseenter)="mouseenter(item)"
+          (mouseleave)="mouseleave()"
+          style="width: 9%;text-align: center;line-height: 30px;"
+          [ngClass]="{ li_select: item.id == checkedTopItem.id }"
+        >
           <span title>
             <!-- <i nz-icon type="mail"></i> -->
-            <span>{{item.name}}</span>
+            <span>{{ item.name }}</span>
           </span>
         </li>
       </ng-template>
