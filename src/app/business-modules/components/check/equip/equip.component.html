@@ -45,8 +45,8 @@
     </div>
 
     <div nz-col [nzSpan]="5">
-      审评阶段：
-      <nz-select [(ngModel)]="stageIds" class="w200" nzPlaceHolder="请选择审评阶段">
+      审评类型：
+      <nz-select [(ngModel)]="stageIds" class="w200" nzPlaceHolder="请选择审评类型">
         <nz-option *ngFor="let option of dictionary.config_equip_check_stage" [nzLabel]="option.value"
           [nzValue]="option.id">
         </nz-option>
@@ -103,7 +103,7 @@
             <th style="width: 10%">设施名称</th>
             <th style="width: 10%">设备类别</th>
             <th style="width: 10%">核安全级别</th>
-            <th style="width: 10%">审评阶段</th>
+            <th style="width: 10%">审评类型</th>
             <th style="width: 10%">审评时间</th>
             <th style="width: 5%">操作</th>
           </tr>

@@ -44,6 +44,15 @@
       证书编号：
       <input nz-input nzSize="default" [(ngModel)]="cert_number" class="w200" />
     </div>
+
+    <div nz-col [nzSpan]="5">
+      考试地点：
+      <nz-select [(ngModel)]="examPlaceIds" class="w200">
+        <nz-option *ngFor="let option of dictionary.config_exam_place" [nzLabel]="option.value" [nzValue]="option.id">
+        </nz-option>
+      </nz-select>
+    </div>
+
   </div>
 
   <div nz-row class="div_contain">
@@ -94,7 +103,8 @@
             <th style="width: 10%">检验方法</th>
             <th style="width: 10%">等级</th>
             <th style="width: 10%">有效期限</th>
-            <th style="width: 20%">证书编号</th>
+            <th style="width: 10%">证书编号</th>
+            <th style="width: 10%">考试地点</th>
             <th style="width: 10%">操作</th>
           </tr>
         </thead>
@@ -109,7 +119,8 @@
             <td style="width: 10%">{{ data.checkMethodValue }}</td>
             <td style="width: 10%">{{ data.checkLevelValue }}</td>
             <td style="width: 10%">{{ data.validDate | recordtime }}</td>
-            <td style="width: 20%">{{ data.certNumber }}</td>
+            <td style="width: 10%">{{ data.certNumber }}</td>
+            <td style="width: 10%">{{ data.examPlaceValue }}</td>
             <td style="width: 10%">
               <a (click)="show(data)">查看</a>
             </td>

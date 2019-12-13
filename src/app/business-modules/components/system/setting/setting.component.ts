@@ -35,9 +35,9 @@ export class SettingComponent implements OnInit {
     { Name: "学位", TableName: "config_degree" },
     { Name: "单位类型", TableName: "config_depart_type" },
     { Name: "学历", TableName: "config_education" },
-    { Name: "核安全设备评审阶段", TableName: "config_equip_check_stage" },
+    { Name: "核安全设备审评类型", TableName: "config_equip_check_stage" },
     { Name: "设备核安全级别", TableName: "config_equip_level" },
-    { Name: "核安全设备许可阶段", TableName: "config_equip_permit_stage" },
+    { Name: "核安全设备许可类型", TableName: "config_equip_permit_stage" },
     { Name: "设备安全问题类别", TableName: "config_equip_security_question_type" },
     { Name: "核安全设备类别", TableName: "config_equip_type" },
     { Name: "设施/设备/铀尾矿(渣)库审评文件类型", TableName: "config_fac_check_file_type" },
@@ -58,7 +58,7 @@ export class SettingComponent implements OnInit {
     { Name: "研究堆操纵员执照种类", TableName: "config_operator_license_type" },
     { Name: "政治面貌", TableName: "config_political" },
     { Name: "审评状态", TableName: "config_review_status" },
-    { Name: "安全问题检查类型", TableName: "config_security_check_type" },
+    { Name: "发现方式", TableName: "config_security_check_type" },
     { Name: "安全问题整改状态", TableName: "config_security_reform_status" },
     { Name: "授权监管机构单位性质", TableName: "config_supervision_org_nature" },
     { Name: "核安全监督员类别", TableName: "config_supervisor_type" },
@@ -74,7 +74,8 @@ export class SettingComponent implements OnInit {
     { Name: "铀尾矿(渣)库许可阶段", TableName: "config_umine_place_permit_stage" },
     { Name: "铀尾矿(渣)库安全问题性质", TableName: "config_umine_place_security_question_nature" },
     { Name: "铀尾矿(渣)库安全问题类别表", TableName: "config_umine_place_security_question_type" },
-    { Name: "铀尾矿(渣) 库设施状态", TableName: "config_umine_place_status" }
+    { Name: "铀尾矿(渣) 库设施状态", TableName: "config_umine_place_status" },
+    { Name: "无损检验人员考试地点", TableName: "config_exam_place" }
   ];
 
   configListCopy: any = [];

@@ -29,7 +29,7 @@ export class BreakcheckerComponent implements OnInit {
   employ_depart: any = "";
   valid_date: any = [];
   cert_number: any = "";
-
+  examPlaceIds:any=[];
   selectId: any = "";
 
   canManage: any = false;
@@ -82,6 +82,10 @@ export class BreakcheckerComponent implements OnInit {
       option.conditions.push({ key: "cert_number", value: this.cert_number })
     }
 
+    if (this.examPlaceIds.length > 0) {
+      option.conditions.push({ key: "examPlaceIds", value: [this.examPlaceIds] })
+    }
+
     if (this.checked) {
       option.conditions.push({ key: "checked", value: "checked" })
     }
@@ -102,6 +106,7 @@ export class BreakcheckerComponent implements OnInit {
     this.employ_depart = "";
     this.valid_date = [];
     this.cert_number = "";
+    this.examPlaceIds=[];
     this.selectId = "";
   }
 

@@ -90,10 +90,10 @@ export class BusinessModulesComponent implements OnInit {
           breadcrumbList: ['监管信息', '安全生产培训信息']
         },
         {
-          name: '核安全监督专家信息',
+          name: '核安全专家信息',
           id: 'expert',
           route: 'supersivion/expert',
-          breadcrumbList: ['监管信息', '核安全监督专家信息']
+          breadcrumbList: ['监管信息', '核安全专家信息']
         },
         {
           name: '焊接人员资质信息',

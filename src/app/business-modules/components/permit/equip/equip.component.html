@@ -45,7 +45,7 @@
       </nz-select>
     </div>
     <div nz-col [nzSpan]="5">
-      许可阶段：
+      许可类型：
       <nz-select [(ngModel)]="stageIds" class="w200">
         <nz-option *ngFor="let option of dictionary.config_equip_permit_stage" [nzLabel]="option.value"
           [nzValue]="option.id">
@@ -112,7 +112,7 @@
             <th style="width: 10%">设施名称</th>
             <th>设备类别</th>
             <th>核安全级别</th>
-            <th>许可阶段</th>
+            <th>许可类型</th>
             <th>许可时间</th>
             <th>有效期限</th>
             <th style="width: 12%">许可文号</th>

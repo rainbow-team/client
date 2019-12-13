@@ -20,7 +20,7 @@
     </div>
 
     <div nz-col [nzSpan]="5">
-      检查类型：
+      发现方式：
       <nz-select [(ngModel)]="checkTypeIds" class="w200">
         <nz-option *ngFor="let option of dictionary.config_security_check_type" [nzLabel]="option.value"
           [nzValue]="option.id">
@@ -128,7 +128,7 @@
             <th style="width: 15%">营运单位</th>
             <th style="width: 13%">设施名称</th>
             <th style="width: 8%">设施状态</th>
-            <th style="width: 8%">检查类型</th>
+            <th style="width: 8%">发现方式</th>
             <th style="width: 12%">问题内容</th>
             <th style="width: 8%">发现时间</th>
             <th style="width: 8%">问题类别</th>

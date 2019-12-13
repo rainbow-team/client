@@ -102,6 +102,28 @@
 
     </div>
 
+    <div nz-row class="ma_b20">
+
+      <div nz-col [nzSpan]="3" class="ta_r">
+        考试成绩：
+      </div>
+      <div nz-col [nzSpan]="5" class="ta_l">
+        <input nz-input name="examScore" [(ngModel)]="data.examScore" />
+      </div>
+
+      <div nz-col [nzSpan]="3" class="ta_r">
+        考试地点：
+      </div>
+      <div nz-col [nzSpan]="5" class="ta_l">
+        <nz-select [(ngModel)]="data.examPlaceId" style="width: 100%" required [validation]="true">
+          <nz-option *ngFor="let option of dictionary.config_exam_place" [nzLabel]="option.value"
+            [nzValue]="option.id">
+          </nz-option>
+        </nz-select>
+      </div>
+
+    </div>
+
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
       <div nz-col [nzSpan]="3" class="ta_r">
         备注：
@@ -190,6 +212,21 @@
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
         <span name="certDate" class="showText">{{data.certDate|recordtime}}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="3" class="ta_r">
+        考试成绩：
+      </div>
+      <div nz-col [nzSpan]="5" class="ta_l">
+        <span name="examScore" class="showText">{{data.examScore}}</span>
+      </div>
+      <div nz-col [nzSpan]="3" class="ta_r">
+        考试地点：
+      </div>
+      <div nz-col [nzSpan]="5" class="ta_l">
+        <span name="examPlace" class="showText">{{data.examPlaceValue}}</span>
       </div>
     </div>
 
