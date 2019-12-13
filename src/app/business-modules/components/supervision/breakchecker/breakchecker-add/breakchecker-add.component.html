@@ -108,7 +108,7 @@
         考试成绩：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="examScore" [(ngModel)]="data.examScore" />
+        <input nz-input name="examScore" [(ngModel)]="data.examScore" [validation]="true" [validationType]="'maxlength'" [validationLenth]="100"/>
       </div>
 
       <div nz-col [nzSpan]="3" class="ta_r">
@@ -116,7 +116,7 @@
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
         <nz-select [(ngModel)]="data.examPlaceId" style="width: 100%" required [validation]="true">
-          <nz-option *ngFor="let option of dictionary.config_exam_place" [nzLabel]="option.value"
+          <nz-option *ngFor="let option of dictionary.config_break_checker_exam_place" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
         </nz-select>

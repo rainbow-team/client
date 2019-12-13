@@ -48,7 +48,7 @@
     <div nz-col [nzSpan]="5">
       考试地点：
       <nz-select [(ngModel)]="examPlaceIds" class="w200">
-        <nz-option *ngFor="let option of dictionary.config_exam_place" [nzLabel]="option.value" [nzValue]="option.id">
+        <nz-option *ngFor="let option of dictionary.config_break_checker_exam_place" [nzLabel]="option.value" [nzValue]="option.id">
         </nz-option>
       </nz-select>
     </div>

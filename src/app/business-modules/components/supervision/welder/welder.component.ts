@@ -28,6 +28,8 @@ export class WelderComponent implements OnInit {
   exam_project: any = "";
   expire_date: any = [];
 
+  examPlaceIds:any=[];
+
   selectId:any="";
 
   canManage: any = false;
@@ -74,6 +76,10 @@ export class WelderComponent implements OnInit {
       }
     }
 
+    if (this.examPlaceIds.length > 0) {
+      option.conditions.push({ key: "examPlaceIds", value: [this.examPlaceIds] })
+    }
+
     if (this.checked) {
       option.conditions.push({ key: "checked", value: "checked" })
     }
@@ -91,6 +97,7 @@ export class WelderComponent implements OnInit {
     this.employ_depart = "";
     this.exam_project = "";
     this.expire_date = [];
+    this.examPlaceIds=[];
     this.selectId="";
   }
 

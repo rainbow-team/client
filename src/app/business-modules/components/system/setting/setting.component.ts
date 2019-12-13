@@ -75,7 +75,8 @@ export class SettingComponent implements OnInit {
     { Name: "铀尾矿(渣)库安全问题性质", TableName: "config_umine_place_security_question_nature" },
     { Name: "铀尾矿(渣)库安全问题类别表", TableName: "config_umine_place_security_question_type" },
     { Name: "铀尾矿(渣) 库设施状态", TableName: "config_umine_place_status" },
-    { Name: "无损检验人员考试地点", TableName: "config_exam_place" }
+    { Name: "无损检验人员考试地点", TableName: "config_break_checker_exam_place" },
+    { Name: "焊接人员考试地点", TableName: "config_welder_exam_place" }
   ];
 
   configListCopy: any = [];
