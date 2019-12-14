@@ -1,43 +1,74 @@
 <nz-layout style="    height: 100%;">
-    <nz-header nzTheme="light">
-        统计时间：
-        <nz-year-picker [(ngModel)]="startDate"  nzPlaceHolder="开始年份">
-        </nz-year-picker>
-        至
-        <nz-year-picker [(ngModel)]="endDate"  nzPlaceHolder="结束年份">
-        </nz-year-picker>
-        
-      <div style="text-align: right;float:right">
-        <button nz-button nzType="primary" (click)="exportTable()">导出</button>
-      </div>
-      <div style="text-align: right;float:right;margin-right: 10px;">
-        <button nz-button nzType="primary" (click)="statistics()">统计</button>
+    <nz-header nzTheme="light" style="height: 50px;">
+      <div nz-row>
+        <div nz-col [nzSpan]="20" class="ta_l">
+          统计方式：
+          <nz-radio-group [(ngModel)]="typeValue">
+            <label nz-radio nzValue="1">事故事件类别</label>
+            <label nz-radio nzValue="2">事故事件性质</label>
+          </nz-radio-group>
+          统计时间：
+          <nz-year-picker [(ngModel)]="startDate" nzPlaceHolder="开始年份">
+          </nz-year-picker>
+          至
+          <nz-year-picker [(ngModel)]="endDate" nzPlaceHolder="结束年份">
+          </nz-year-picker>
+        </div>
+        <div nz-col [nzSpan]="4" class="ta_r">
+          <button nz-button nzType="primary" (click)="statistics()" style="margin-right: 10px;">统计</button>
+          <button nz-button nzType="primary" (click)="exportTable()">导出</button>
+        </div>
       </div>
     </nz-header>
     <nz-content style="height:calc(100% - 64px);">
-      <nz-tabset style="    height: 100%;">
+      <nz-tabset  *ngIf="typeValue == 1 || typeValue == 3" style="height: 100%;">
         <nz-tab nzTitle="统计图">
-          <div id="chart" style="text-align: center" [appPageHeight]='314'>
-  
-          </div>
+          <div id="chart1" style="text-align: center" [appPageHeight]='314'></div>
         </nz-tab>
         <nz-tab nzTitle="统计表">
-          <nz-table #nestedTable [nzData]="data" class="commontable" [nzFrontPagination]="false"
-            [nzShowPagination]="false" [nzNoResult]="" id="arc">
+          <nz-table #nestedTable [nzData]="data.yearDate" class="commontable" [nzFrontPagination]="false"
+            [nzShowPagination]="false" [nzNoResult]="" id="sup">
             <thead>
               <tr>
-                <th>{{title}}</th>
-                <th *ngFor="let item of data">{{item.name}}</th>
+                <th nzWidth="150px">{{ title }}</th>
+                <th nzWidth="150px" *ngFor="let item of data.yearDate">
+                  {{ item }}
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>数量</td>
-                <td *ngFor="let item of data">{{item.value}}</td>
+              <tr *ngFor="let item of data.numberList">
+                <td>{{ item.name }}</td>
+                <td *ngFor="let t of item.data">{{ t }}</td>
+                <!-- <td *ngFor="let item of data">{{item.value}}</td> -->
               </tr>
             </tbody>
           </nz-table>
         </nz-tab>
       </nz-tabset>
+
+      <nz-tabset *ngIf="typeValue == 2" style="    height: 100%;">
+        <nz-tab nzTitle="统计图">
+          <div id="chart2" style="text-align: center" [appPageHeight]='314'></div>
+        </nz-tab>
+        <nz-tab nzTitle="统计表">
+          <nz-table #nestedTable [nzData]="data" class="commontable" [nzFrontPagination]="false"
+            [nzShowPagination]="false" [nzNoResult]="" id="sup">
+            <thead>
+              <tr>
+                <th>{{ title }}</th>
+                <th *ngFor="let item of data">{{ item.name }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>数量</td>
+                <td *ngFor="let item of data">{{ item.value }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </nz-tab>
+      </nz-tabset>
+      
     </nz-content>
   </nz-layout>
