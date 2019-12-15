@@ -380,8 +380,8 @@
 .showText {
   float: left;
   text-align: left;
-  height: 30px;
-  overflow: auto;
+  min-height: 30px;
+  // overflow: auto;
   word-break: break-all;
   //width: 200px
 }

@@ -10,7 +10,7 @@
       />
     </map>
   </div>
-  <div nz-col [nzSpan]="8">
+  <div nz-col [nzSpan]="8" style="overflow:scroll;" [appPageHeight]="235">
     <div nz-row>
       <div nz-col [nzSpan]="7" class="ta_r">
         单位名称：
@@ -28,22 +28,22 @@
       </div>
     </div>
 
-    <div nz-row>
+    <div nz-row style="    margin-bottom: 10px;">
       <div nz-col [nzSpan]="7" class="ta_r">
         基本概况：
       </div>
       <div nz-col [nzSpan]="17" class="ta_l">
-        <span class="showText" style="height: 86px">{{
+        <span class="showText" >{{
           selectedUnit.survey
         }}</span>
       </div>
     </div>
-    <div nz-row>
+    <div nz-row style="    margin-bottom: 10px;">
       <div nz-col [nzSpan]="7" class="ta_r">
         厂址特征：
       </div>
       <div nz-col [nzSpan]="17" class="ta_l">
-        <span class="showText" style="height: 86px">{{
+        <span class="showText" >{{
           selectedUnit.feature
         }}</span>
       </div>
@@ -126,7 +126,7 @@
         备注：
       </div>
       <div nz-col [nzSpan]="17" class="ta_l">
-        <span class="showText">{{ selectedUnit.note }}</span>
+        <span class="showText" >{{ selectedUnit.note }}</span>
       </div>
     </div>
   </div>
