@@ -21,5 +21,8 @@ export class AttachmentSercice {
         return this.http.get('/fileInfo/getFileListById?id='+param);
     }
 
+    saveFileLog(param):any{
+        return this.http.post('/fileInfo/saveFileLog',param);
+    }
 
 }

@@ -19,6 +19,7 @@ declare var MapConfig: any;
 })
 export class SimulationComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+  
   unitType: any = 'unit_service'; //默认为核设施营运单位
   actionType: any = 'view'; //默认为查看模式
   isMarkerVisible: boolean;

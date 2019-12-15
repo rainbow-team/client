@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,6 +11,7 @@ import { UmineService } from 'src/app/services/unit/umine.service';
 import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 import { OrgSercice } from 'src/app/services/supervision/org.service';
 import { WitnessMonitorSercice } from 'src/app/services/monitor/witness.service';
+import { AttachmentComponent } from 'src/app/layouts/components/attachment/attachment.component';
 
 @Component({
   selector: 'app-witness-add',
@@ -20,6 +21,10 @@ import { WitnessMonitorSercice } from 'src/app/services/monitor/witness.service'
 export class WitnessAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+  
+  @ViewChild(AttachmentComponent)
+  child:AttachmentComponent
+  
   servicedepartId_Router: any = "";
   umineId_Router: any = "";
   equipdepartId_Router: any = "";
@@ -138,15 +143,16 @@ export class WitnessAddComponent implements OnInit {
     this.isSaving = true;
     this.data.attachmentList = [];
 
-    if (this.fileList.length > 0) {
+    var fileList = this.child.fileList;
+    if (fileList.length > 0) {
 
-      if (!this.fileList[this.fileList.length-1].response) {
+      if (!fileList[fileList.length-1].response) {
 
         this.msg.create('warning', '附件还未上传完毕,请稍等');
         this.isSaving = false;
         return;
       }
-      this.fileList.forEach(element => {
+      fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });
     }

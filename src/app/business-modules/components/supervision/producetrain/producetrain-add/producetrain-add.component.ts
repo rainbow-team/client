@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
 import { StaffSercice } from 'src/app/services/common/staff-service';
@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { ProducetrainSercice } from 'src/app/services/supervision/producetrain.service';
+import { AttachmentComponent } from 'src/app/layouts/components/attachment/attachment.component';
 
 @Component({
   selector: 'app-producetrain-add',
@@ -15,6 +16,8 @@ import { ProducetrainSercice } from 'src/app/services/supervision/producetrain.s
 export class ProducetrainAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+  @ViewChild(AttachmentComponent)
+  child:AttachmentComponent
 
   data: any = {};
   isSaving = false;
@@ -83,15 +86,17 @@ export class ProducetrainAddComponent implements OnInit {
     this.isSaving = true;
     this.data.attachmentList = [];
 
-    if (this.fileList.length > 0) {
+    
+    var fileList = this.child.fileList;
+    if (fileList.length > 0) {
 
-      if (!this.fileList[this.fileList.length-1].response) {
+      if (!fileList[fileList.length-1].response) {
 
         this.msg.create('warning', '附件还未上传完毕,请稍等');
         this.isSaving = false;
         return;
       }
-      this.fileList.forEach(element => {
+      fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });
     }

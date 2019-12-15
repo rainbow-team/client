@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -6,6 +6,7 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 import { EquipCheckService } from 'src/app/services/check/equip.service';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
+import { AttachmentComponent } from 'src/app/layouts/components/attachment/attachment.component';
 
 @Component({
   selector: 'app-equip-file',
@@ -15,6 +16,8 @@ import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
 export class EquipFileComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+  @ViewChild(AttachmentComponent)
+  child:AttachmentComponent
 
   equipId: any = "";
   dictionary: any = [];
@@ -210,14 +213,15 @@ export class EquipFileComponent implements OnInit {
 
     this.data.attachmentList = [];
 
-    if (this.fileList.length > 0) {
-      if (!this.fileList[this.fileList.length-1].response) {
+    var fileList = this.child.fileList;
+    if (fileList.length > 0) {
+      if (!fileList[fileList.length-1].response) {
 
         this.msg.create('warning', '附件还未上传完毕,请稍等');
         this.isSaving = false;
         return;
       }
-      this.fileList.forEach(element => {
+      fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });
     }

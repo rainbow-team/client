@@ -115,7 +115,7 @@
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+    <app-attachment [fileList]="fileList" [moduleName]="'焊接人员资质信息'" [refid]="data.id" [isDisable]="isShow" #child></app-attachment>
   </div>
 
   <div class="div_contain_add" *ngIf="isShow == true" [appPageHeight]='300'>
@@ -219,7 +219,7 @@
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+    <app-attachment [fileList]="fileList" [moduleName]="'焊接人员资质信息'" [refid]="data.id" [isDisable]="isShow" #child></app-attachment>
   </div>
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">

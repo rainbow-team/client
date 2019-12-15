@@ -3,6 +3,7 @@ import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { UploadXHRArgs, NzMessageService } from 'ng-zorro-antd';
 import { HttpRequest, HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-attachment',
@@ -14,6 +15,7 @@ export class AttachmentComponent implements OnInit {
   @Input() fileList = [];
   @Input() refid = "";
   @Input() isDisable = false;
+  @Input() moduleName = "";
 
   uploadUrl: any = AppConfig.serviceAddress + "/fileInfo/upload";
   downLoadurl: any = AppConfig.serviceAddress + "/fileInfo/download";
@@ -22,6 +24,7 @@ export class AttachmentComponent implements OnInit {
     private msg: NzMessageService) { }
 
   ngOnInit() {
+    this.uploadUrl = this.utilitiesSercice.wrapUrl(this.uploadUrl);
   }
 
   beforeUpload = (file, fileList) => {
@@ -42,8 +45,7 @@ export class AttachmentComponent implements OnInit {
     formData.append('file', item.file as any);
     formData.append('filename', item.file.name);
     formData.append('refid', this.refid);
-
-
+    formData.append('moduleName', this.moduleName);
 
     const req = new HttpRequest('POST', item.action, formData, {
       reportProgress: true,
@@ -69,7 +71,9 @@ export class AttachmentComponent implements OnInit {
     });
   }
 
-  RemoveAttachment(item) {
+  async RemoveAttachment(item) {
+
+    await this.saveFileLog(item.response.msg, "删除");
 
     this.attachmentSercice.deleteFileById(item.response.msg).subscribe(
       (data) => {
@@ -81,6 +85,8 @@ export class AttachmentComponent implements OnInit {
               break;
             }
           }
+
+
         }
       }
     );
@@ -88,7 +94,22 @@ export class AttachmentComponent implements OnInit {
   }
 
   downloadAccessory(item) {
-    window.open(this.downLoadurl + "?id=" + item.response.msg + "&type=1");
+
+
+    this.saveFileLog(item.response.msg, "下载");
+    var url = this.downLoadurl + "?id=" + item.response.msg + "&type=1"
+    window.open(this.utilitiesSercice.wrapUrl(url));
+  }
+
+  saveFileLog(id, type) {
+    var data = {
+      id: id,
+      moduleName: this.moduleName,
+      type: type
+    }
+    this.attachmentSercice.saveFileLog(data).subscribe((res) => {
+
+    });
   }
 
   canPreview(fileName) {

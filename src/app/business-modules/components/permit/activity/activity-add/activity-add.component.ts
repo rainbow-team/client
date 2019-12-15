@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input, ViewChild } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,6 +9,7 @@ import { ActivityPermitService } from 'src/app/services/permit/activity.service'
 import { ServiceDepartService } from 'src/app/services/unit/servicedepart.service';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
+import { AttachmentComponent } from 'src/app/layouts/components/attachment/attachment.component';
 
 @Component({
   selector: 'app-activity-add',
@@ -17,6 +18,10 @@ import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
 })
 export class ActivityPermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+
+  
+  @ViewChild(AttachmentComponent)
+  child:AttachmentComponent
 
   servicedepartId_Router: any = "";
   umineId_Router: any = "";
@@ -123,15 +128,17 @@ export class ActivityPermitAddComponent implements OnInit {
     this.isSaving = true;
     this.data.attachmentList = [];
 
-    if (this.fileList.length > 0) {
+    var fileList = this.child.fileList;
 
-      if (!this.fileList[this.fileList.length-1].response) {
+    if (fileList.length > 0) {
+
+      if (!fileList[fileList.length-1].response) {
 
         this.msg.create('warning', '附件还未上传完毕,请稍等');
         this.isSaving = false;
         return;
       }
-      this.fileList.forEach(element => {
+      fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });
     }

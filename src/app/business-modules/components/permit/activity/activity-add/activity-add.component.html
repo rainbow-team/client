@@ -186,7 +186,8 @@
       [fileList]="fileList"
       [refid]="data.id"
       [isDisable]="isShow"
-    ></app-attachment>
+      [moduleName]="'核活动许可信息'"
+    #child></app-attachment>
   </div>
 
   <div class="div_contain_add" *ngIf="isShow == true" [appPageHeight]='300'>
@@ -308,7 +309,8 @@
       [fileList]="fileList"
       [refid]="data.id"
       [isDisable]="isShow"
-    ></app-attachment>
+      [moduleName]="'核活动许可信息'"
+    #child></app-attachment>
   </div>
 
   <div

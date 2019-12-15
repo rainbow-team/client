@@ -84,7 +84,7 @@
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+    <app-attachment [fileList]="fileList" [refid]="data.id" [moduleName]="'核设施许可信息'" [isDisable]="isShow" #child></app-attachment>
   </div>
 
   <div class="div_contain_add" *ngIf="isShow==true" [appPageHeight]='300'>
@@ -157,7 +157,7 @@
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id" [isDisable]="isShow"></app-attachment>
+    <app-attachment [fileList]="fileList" [moduleName]="'核设施许可信息'" [refid]="data.id" [isDisable]="isShow" #child></app-attachment>
   </div>
 
 

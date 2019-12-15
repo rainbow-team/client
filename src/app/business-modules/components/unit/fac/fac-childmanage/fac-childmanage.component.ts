@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FacSercice } from 'src/app/services/unit/fac.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { DictionarySercice } from 'src/app/services/common/dictionary.service';
+import { AttachmentComponent } from 'src/app/layouts/components/attachment/attachment.component';
 
 @Component({
   selector: 'app-fac-childmanage',
@@ -14,6 +15,8 @@ import { DictionarySercice } from 'src/app/services/common/dictionary.service';
 export class FacChildmanageComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+  @ViewChild(AttachmentComponent)
+  child:AttachmentComponent
 
   dataSet: any = [];
   data: any = {};

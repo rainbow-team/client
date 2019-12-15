@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input, ViewChild } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -7,6 +7,7 @@ import { StaffSercice } from 'src/app/services/common/staff-service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UmineMountainService } from 'src/app/services/unit/uminemountain.service';
+import { AttachmentComponent } from 'src/app/layouts/components/attachment/attachment.component';
 
 @Component({
   selector: 'app-uminemountain-add',
@@ -17,6 +18,10 @@ export class UminemountainAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
   @Input() uminemountainSearchId: any = "";
+
+  
+  @ViewChild(AttachmentComponent)
+  child:AttachmentComponent
 
   data: any = {};
   isSaving = false;
@@ -129,15 +134,17 @@ export class UminemountainAddComponent implements OnInit {
     this.isSaving = true;
     this.data.attachmentList = [];
 
-    if (this.fileList.length > 0) {
+    
+    var fileList = this.child.fileList;
+    if (fileList.length > 0) {
 
-      if (!this.fileList[this.fileList.length-1].response) {
+      if (!fileList[fileList.length-1].response) {
 
         this.msg.create('warning', '附件还未上传完毕,请稍等');
         this.isSaving = false;
         return;
       }
-      this.fileList.forEach(element => {
+      fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });
     }

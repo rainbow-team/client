@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { NzMessageService, UploadFile, UploadXHRArgs } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DictionarySercice } from './../../../../../services/common/dictionary.service'
@@ -9,6 +9,7 @@ import { OrgSercice } from 'src/app/services/supervision/org.service';
 import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
+import { AttachmentComponent } from 'src/app/layouts/components/attachment/attachment.component';
 
 @Component({
   selector: 'app-supervisor-add',
@@ -18,6 +19,8 @@ import { ValidationDirective } from 'src/app/layouts/_directives/validation.dire
 export class SupervisorAddComponent implements OnInit {
 
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+  @ViewChild(AttachmentComponent)
+  child:AttachmentComponent
 
   data: any = {};
   isSaving = false;
@@ -153,15 +156,17 @@ export class SupervisorAddComponent implements OnInit {
     this.isSaving = true;
     this.data.attachmentList = [];
     this.data.expireDate = "";
-    if (this.fileList.length > 0) {
 
-      if (!this.fileList[this.fileList.length-1].response) {
+    var fileList = this.child.fileList;
+    if (fileList.length > 0) {
+
+      if (!fileList[fileList.length-1].response) {
 
         this.msg.create('warning', '附件还未上传完毕,请稍等');
         this.isSaving = false;
         return;
       }
-      this.fileList.forEach(element => {
+     fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });
     }

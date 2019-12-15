@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { ValidationDirective } from 'src/app/layouts/_directives/validation.directive';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,6 +8,7 @@ import { AttachmentSercice } from 'src/app/services/common/attachment.service';
 import { UmineplacePermitService } from 'src/app/services/permit/umineplace.service';
 import { UmineService } from 'src/app/services/unit/umine.service';
 import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
+import { AttachmentComponent } from 'src/app/layouts/components/attachment/attachment.component';
 
 @Component({
   selector: 'app-permit-umineplace-add',
@@ -16,6 +17,10 @@ import { UminePlaceService } from 'src/app/services/unit/umineplace.service';
 })
 export class UmineplacePermitAddComponent implements OnInit {
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
+
+  
+  @ViewChild(AttachmentComponent)
+  child:AttachmentComponent
 
   umineplaceId_Router: any = "";
 
@@ -100,15 +105,16 @@ export class UmineplacePermitAddComponent implements OnInit {
     this.isSaving = true;
     this.data.attachmentList = [];
 
-    if (this.fileList.length > 0) {
+    var fileList = this.child.fileList;
+    if (fileList.length > 0) {
 
-      if (!this.fileList[this.fileList.length-1].response) {
+      if (!fileList[fileList.length-1].response) {
 
         this.msg.create('warning', '附件还未上传完毕,请稍等');
         this.isSaving = false;
         return;
       }
-      this.fileList.forEach(element => {
+     fileList.forEach(element => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });
     }
