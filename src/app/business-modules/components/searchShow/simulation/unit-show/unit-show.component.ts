@@ -80,6 +80,8 @@ export class UnitShowComponent implements OnInit {
     this.selectedRegion = item;
     if (!this.selectedRegion.previewUrl) {
       this.disabled = true;
+    }else{
+      this.disabled = false;
     }
     this.subjectImageUrl =
       AppConfig.serviceAddress +
