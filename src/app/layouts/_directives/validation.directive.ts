@@ -216,6 +216,17 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
           ))
       );
     },
+    nullfax:function (value) {
+
+      return (
+        value == null ||
+        value == '' ||
+        ( /^(\d{3,4}-)?\d{7,8}$/.test(
+            value
+          ))
+      );
+     
+    },
     idcard: function(value) {
       // return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
       return /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(
@@ -397,6 +408,10 @@ export class ValidationDirective implements AfterViewInit, OnDestroy {
     nullphonenumber: {
       error: '输入必须是电话号码格式',
       success: ' is nullphonenumber!'
+    },
+    nullfax:{
+      error: '输入必须是传真格式',
+      success: ' is nullfax!'
     },
     nullAreaNumber: {
       error: '输入必须是数字且格式为整数1~11位+小数点0~2位',
