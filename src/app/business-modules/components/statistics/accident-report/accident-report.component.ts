@@ -37,7 +37,7 @@ export class AccidentReportComponent implements OnInit {
     },
     {
       type: '2',
-      name: '问事故事件性质',
+      name: '事故事件性质',
       con: {
         tableName: 'security_accident',
         propertyName: 'nature_id',

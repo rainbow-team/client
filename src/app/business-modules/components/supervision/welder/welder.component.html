@@ -1,8 +1,8 @@
 <div style="height: 100%;">
   <div nz-row style="height: 40px;">
-    <div nz-col [nzSpan]="4">
+    <div nz-col [nzSpan]="3">
       姓名：
-      <input nz-input nzSize="default" [(ngModel)]="name" class="w150">
+      <input nz-input nzSize="default" [(ngModel)]="name" class="w120">
     </div>
     <div nz-col [nzSpan]="4">
       聘用单位：
@@ -26,7 +26,7 @@
       </nz-select>
     </div>
 
-    <div nz-col [nzSpan]="2" class="ta_r">
+    <div nz-col [nzSpan]="3" class="ta_r">
       <button nz-button nzType="primary" style="width: 60px; margin-right: 10px;" (click)="search()">查询</button>
       <button nz-button nzType="default" style="width: 60px;" (click)="reset()">重置</button>
     </div>
