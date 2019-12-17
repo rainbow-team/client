@@ -115,7 +115,7 @@
         考试地点：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <nz-select [(ngModel)]="data.examPlaceId" style="width: 100%" required [validation]="true">
+        <nz-select [(ngModel)]="data.examPlaceId" style="width: 100%">
           <nz-option *ngFor="let option of dictionary.config_break_checker_exam_place" [nzLabel]="option.value"
             [nzValue]="option.id">
           </nz-option>
