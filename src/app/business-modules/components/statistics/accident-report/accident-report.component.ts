@@ -148,7 +148,7 @@ export class AccidentReportComponent implements OnInit {
     let option2 = {
 
       title: {
-        text: "铀尾矿(渣)库安全问题统计(" + that.result[0].name + ")",
+        text: "事故事件统计(" + that.result[0].name + ")",
         x: 'center'
       },
       tooltip: {
