@@ -235,6 +235,8 @@ export class AccidentReportComponent implements OnInit {
           this.initEchart2();
         });
     }
+
+    this.title = this.result[0].name;
   }
 
   exportTable() {
