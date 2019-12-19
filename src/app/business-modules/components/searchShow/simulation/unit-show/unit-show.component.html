@@ -5,6 +5,7 @@
       <area
         *ngFor="let item of unit_regions"
         shape="polygon"
+        title="{{ item.subjectName }}"
         coords="{{ item.hotRegion }}"
         (click)="showSubjectDetail(item)"
       />
@@ -33,9 +34,7 @@
         基本概况：
       </div>
       <div nz-col [nzSpan]="17" class="ta_l">
-        <span class="showText" >{{
-          selectedUnit.survey
-        }}</span>
+        <span class="showText">{{ selectedUnit.survey }}</span>
       </div>
     </div>
     <div nz-row style="    margin-bottom: 10px;">
@@ -43,9 +42,7 @@
         厂址特征：
       </div>
       <div nz-col [nzSpan]="17" class="ta_l">
-        <span class="showText" >{{
-          selectedUnit.feature
-        }}</span>
+        <span class="showText">{{ selectedUnit.feature }}</span>
       </div>
     </div>
     <div nz-row>
@@ -126,7 +123,7 @@
         备注：
       </div>
       <div nz-col [nzSpan]="17" class="ta_l">
-        <span class="showText" >{{ selectedUnit.note }}</span>
+        <span class="showText">{{ selectedUnit.note }}</span>
       </div>
     </div>
   </div>
