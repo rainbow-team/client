@@ -28,7 +28,7 @@
         营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select name="serviceId" [(ngModel)]="data.serviceId" style="width: 100%"   (ngModelChange)="serviceDepartChange($event)">
+        <nz-select name="serviceId" [(ngModel)]="data.serviceId" style="width: 100%"   (ngModelChange)="serviceDepartChange($event)" nzAllowClear nzShowSearch>
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
@@ -38,7 +38,7 @@
         设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.facId" style="width: 100%" >
+        <nz-select [(ngModel)]="data.facId" style="width: 100%" nzAllowClear nzShowSearch>
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>

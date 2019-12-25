@@ -172,17 +172,17 @@ export class CheckAddComponent implements OnInit {
       this.data.umineId = "";
     }
 
-    if (this.checkData && this.checkData.length > 0) {
-      if (this.checkData[0]) {
-        this.data.startDate=this.checkData[0];
-        //option.conditions.push({ key: "start_date", value: this.witness_date[0] })
-      }
+    // if (this.checkData && this.checkData.length > 0) {
+    //   if (this.checkData[0]) {
+    //     this.data.startDate=this.checkData[0];
+    //     //option.conditions.push({ key: "start_date", value: this.witness_date[0] })
+    //   }
 
-      if (this.checkData[1]) {
-        this.data.endDate=this.checkData[1];
-        //option.conditions.push({ key: "end_date", value: this.witness_date[1] })
-      }
-    }
+    //   if (this.checkData[1]) {
+    //     this.data.endDate=this.checkData[1];
+    //     //option.conditions.push({ key: "end_date", value: this.witness_date[1] })
+    //   }
+    // }
 
     this.checkMonitorSercice.saveOrUpdateCheckMonitor(this.data).subscribe((res) => {
       if (res.code == 200) {
