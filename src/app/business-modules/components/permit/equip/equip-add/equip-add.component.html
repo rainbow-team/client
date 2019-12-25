@@ -25,20 +25,20 @@
 
     <div nz-row class="ma_b20">
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>营运单位：
+        营运单位：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select name="serviceId" [(ngModel)]="data.serviceId" style="width: 100%"  required [validation]="true"  (ngModelChange)="serviceDepartChange($event)">
+        <nz-select name="serviceId" [(ngModel)]="data.serviceId" style="width: 100%"   (ngModelChange)="serviceDepartChange($event)">
           <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
 
       <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>设施名称：
+        设施名称：
       </div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.facId" style="width: 100%"  required [validation]="true" >
+        <nz-select [(ngModel)]="data.facId" style="width: 100%" >
           <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
           </nz-option>
         </nz-select>
