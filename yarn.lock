@@ -117,10 +117,10 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/cli@~6.2.8":
+"@angular/cli@^6.2.8":
   version "6.2.9"
-  resolved "http://registry.npm.taobao.org/@angular/cli/download/@angular/cli-6.2.9.tgz#1f00dcfeba93d9eca1f107f5d3c4a6ffb47f7eef"
-  integrity sha1-HwDc/rqT2eyh8Qf108Sm/7R/fu8=
+  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-6.2.9.tgz#1f00dcfeba93d9eca1f107f5d3c4a6ffb47f7eef"
+  integrity sha512-4xuTbmMKGx1bMi0KA3Xmtx/emy10wlSwTXoUijlhd2tcWmlI2wRjAYjR7efSbFo8dVskiq0CyAVFWr1IanYQZw==
   dependencies:
     "@angular-devkit/architect" "0.8.9"
     "@angular-devkit/core" "0.8.9"
@@ -353,10 +353,10 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/jquery@^3.3.29":
-  version "3.3.29"
-  resolved "http://registry.npm.taobao.org/@types/jquery/download/@types/jquery-3.3.29.tgz#680a2219ce3c9250483722fccf5570d1e2d08abd"
-  integrity sha1-aAoiGc48klBINyL8z1Vw0eLQir0=
+"@types/jquery@^3.3.30":
+  version "3.3.33"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.33.tgz#61d9cbd4004ffcdf6cf7e34720a87a5625a7d8e9"
+  integrity sha512-U6IdXYGkfUI42SR79vB2Spj+h1Ly3J3UZjpd8mi943lh126TK7CB+HZOxGh2nM3IySor7wqVQdemD/xtydsBKA==
   dependencies:
     "@types/sizzle" "*"
 
@@ -585,9 +585,9 @@ acorn-dynamic-import@^3.0.0:
     acorn "^5.0.0"
 
 acorn@^5.0.0, acorn@^5.6.2:
-  version "5.7.3"
-  resolved "http://registry.npm.taobao.org/acorn/download/acorn-5.7.3.tgz?cache=0&other_urls=http%3A%2F%2Fregistry.npm.taobao.org%2Facorn%2Fdownload%2Facorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
-  integrity sha1-Z6ojG/iBKXS4UjWpZ3Hra9B+onk=
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
+  integrity sha512-1D++VG7BhrtvQpNbBzovKNc1FLGGEE/oGe7b9xJm/RFHMBeUaUGpluV9RLjZa47YFdPcDAenEYuq9pQPcMdLJg==
 
 adm-zip@^0.4.9:
   version "0.4.13"
@@ -1128,6 +1128,11 @@ boolbase@~1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/boolbase/download/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
+
+bootstrap@^4.3.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.4.1.tgz#8582960eea0c5cd2bede84d8b0baf3789c3e8b01"
+  integrity sha512-tbx5cHubwE6e2ZG7nqM3g/FZ5PQEDMWmMGNrCUBVRPHXTJaH7CBDdsLeu3eCh3B1tzAxTnAbtmrzvWEvT2NNEA==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -2273,6 +2278,13 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
+
+echarts@^4.2.1:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.6.0.tgz#b5a47a1046cec93ceeef954f9ee54751340558ec"
+  integrity sha512-xKkcr6v9UVOSF+PMuj7Ngt3bnzLwN1sSXWCvpvX+jYb3mePYsZnABq7wGkPac/m0nV653uGHXoHK8DCKCprdNg==
+  dependencies:
+    zrender "4.2.0"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -4031,9 +4043,9 @@ jasminewd2@^2.1.0:
   resolved "http://registry.npm.taobao.org/jasminewd2/download/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
   integrity sha1-43zwsX8ZnM4jvqcbIDk5Uka07E4=
 
-jquery@2.2.4:
+jquery@^2.2.4:
   version "2.2.4"
-  resolved "http://registry.npm.taobao.org/jquery/download/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
   integrity sha1-LInWiJterFIqfuoywUUhVZxsvwI=
 
 js-base64@^2.1.8:
@@ -4863,6 +4875,18 @@ ng-zorro-antd@1.8.1:
     "@angular/cdk" "^6.0.0"
     "@ant-design/icons-angular" "^1.0.1"
     date-fns "^1.29.0"
+    tslib "^1.9.0"
+
+ngx-cookie-service@^2.2.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-2.4.0.tgz#293de6d393220f8fe5712a4c9f724042404e6971"
+  integrity sha512-uR/6mCQ1t+XY5G1/irqRhoEddx1PPtmz7JHM/2nn5yQmicnj+n48x8C2PMxwaYDHKRh7QPQ9G5scR36Mmdz09A==
+
+ngx-echarts@^4.2.1:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/ngx-echarts/-/ngx-echarts-4.2.2.tgz#9eb5f69f923084869ea014f117915cd6cc366343"
+  integrity sha512-iLxOFnfKhUYP8Qw22AUY2ugSEd1Uvt6AeYhiaSqpg/G6NDmM/NwpdLt+fGAjax2aY7e94ORuwhXnl2gxtNzt7Q==
+  dependencies:
     tslib "^1.9.0"
 
 nice-try@^1.0.4:
@@ -7789,3 +7813,8 @@ zone.js@~0.8.26:
   version "0.8.29"
   resolved "http://registry.npm.taobao.org/zone.js/download/zone.js-0.8.29.tgz#8dce92aa0dd553b50bc5bfbb90af9986ad845a12"
   integrity sha1-jc6Sqg3VU7ULxb+7kK+Zhq2EWhI=
+
+zrender@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.2.0.tgz#d001302e155f28de1f9fc7fcd5c254bad28471cf"
+  integrity sha512-YJ9hxt5uFincYYU3KK31+Ce+B6PJmYYK0Q9fQ6jOUAoC/VHbe4kCKAPkxKeT7jGTxrK5wYu18R0TLGqj2zbEOA==
