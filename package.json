@@ -27,7 +27,7 @@
     "esri-loader": "^2.9.1",
     "font-awesome": "^4.7.0",
     "jquery": "^2.2.4",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "ng-zorro-antd": "1.8.1",
     "ngx-cookie-service": "^2.2.0",
