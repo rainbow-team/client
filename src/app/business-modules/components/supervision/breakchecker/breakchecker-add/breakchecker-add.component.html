@@ -70,7 +70,7 @@
         证书编号：
       </div>
       <div nz-col [nzSpan]="5" class="ta_l">
-        <input nz-input name="certNumber" [(ngModel)]="data.certNumber" required [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"/>
+        <input nz-input name="certNumber" [(ngModel)]="data.certNumber" [validation]="true" [validationType]="'maxlength'" [validationLenth]="30"/>
       </div>
 
 
@@ -96,7 +96,7 @@
         发证日期：
       </div>
       <div nz-col [nzSpan]="4" class="ta_l">
-        <nz-date-picker name="certDate" class="w200" [(ngModel)]="data.certDate" required [validation]="true">
+        <nz-date-picker name="certDate" class="w200" [(ngModel)]="data.certDate" [validation]="true">
         </nz-date-picker>
       </div>
 
