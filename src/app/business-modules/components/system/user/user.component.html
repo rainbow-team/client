@@ -1,5 +1,5 @@
-<div style="height: 100%;">
-  <div nz-row style="height: 50px;padding: 10px;">
+<div style="height: 100%">
+  <div nz-row style="height: 50px; padding: 10px">
     <div nz-col [nzSpan]="6">
       账号：
       <input
@@ -36,12 +36,12 @@
       <button
         nz-button
         nzType="primary"
-        style="width: 70px; margin-right: 10px;"
+        style="width: 70px; margin-right: 10px"
         (click)="search()"
       >
         查询
       </button>
-      <button nz-button nzType="default" style="width: 70px;" (click)="reset()">
+      <button nz-button nzType="default" style="width: 70px" (click)="reset()">
         重置
       </button>
     </div>
@@ -49,7 +49,7 @@
   <div nz-row class="div_contain">
     <div class="div_top">
       <div class="fl div_top_tip"></div>
-      <div class="fl" style="color: #0050b3;">
+      <div class="fl" style="color: #0050b3">
         用户信息（共{{ totalCount }}条）
       </div>
       <div class="fr">
@@ -68,7 +68,7 @@
         <button
           nz-button
           nzType="primary"
-          style=" margin-right: 10px;"
+          style="margin-right: 10px"
           (click)="modify()"
         >
           编辑
@@ -79,7 +79,7 @@
         <button
           nz-button
           nzType="primary"
-          style=" margin-right: 10px;"
+          style="margin-right: 10px"
           (click)="add()"
         >
           添加
@@ -150,12 +150,12 @@
     [nzCancelText]="null"
   >
     <div>
-      <div nz-row style="height: 60px;">
+      <div nz-row style="height: 60px">
         <div class="ta_r">
           <span class="clo_r">*</span>用户名：
           <input
             nz-input
-            style="width:calc(100% - 100px)"
+            style="width: calc(100% - 100px)"
             [disabled]="isDisable"
             required
             [validation]="true"
@@ -167,14 +167,14 @@
           />
         </div>
       </div>
-      <div nz-row style="height: 60px;">
+      <div nz-row style="height: 60px">
         <div class="ta_r">
           <span class="clo_r">*</span>密码：
           <input
             type="password"
             maxlength="50"
             nz-input
-            style="width:calc(100% - 100px)"
+            style="width: calc(100% - 100px)"
             [disabled]="isDisable"
             required
             [validation]="true"
@@ -185,13 +185,13 @@
           />
         </div>
       </div>
-      <div nz-row style="height: 60px;">
+      <div nz-row style="height: 60px">
         <div class="ta_r">
           <span class="clo_r">*</span>真实姓名：
           <input
             nz-input
             [disabled]="isDisable"
-            style="width:calc(100% - 100px)"
+            style="width: calc(100% - 100px)"
             required
             [validation]="true"
             nzSize="default"
@@ -202,13 +202,13 @@
           />
         </div>
       </div>
-      <div nz-row style="height: 60px;">
+      <div nz-row style="height: 60px">
         <div class="ta_r">
           电话：
           <input
             nz-input
             [disabled]="isDisable"
-            style="width:calc(100% - 100px)"
+            style="width: calc(100% - 100px)"
             [validation]="true"
             [validationType]="'nullphonenumber'"
             nzSize="default"
@@ -219,13 +219,13 @@
           />
         </div>
       </div>
-      <div nz-row style="height: 60px;">
+      <div nz-row style="height: 60px">
         <div class="ta_r">
           邮箱：
           <input
             nz-input
             maxlength="50"
-            style="width:calc(100% - 100px)"
+            style="width: calc(100% - 100px)"
             [disabled]="isDisable"
             nzSize="default"
             [(ngModel)]="currentUser.email"
@@ -235,12 +235,12 @@
           />
         </div>
       </div>
-      <div nz-row style="height: 60px;">
+      <div nz-row style="height: 60px">
         <div class="ta_r">
           <span class="clo_r">*</span>所在部门：
           <nz-tree-select
             [nzDropdownStyle]="{ 'max-height': '300px' }"
-            style="width:calc(100% - 100px)"
+            style="width: calc(100% - 100px)"
             [disabled]="isDisable"
             nzPlaceHolder="请选择部门"
             [nzNodes]="orgTreeNodes"
@@ -254,12 +254,12 @@
           </nz-tree-select>
         </div>
       </div>
-      <div nz-row style="height: 60px;">
+      <div nz-row style="height: 60px">
         <div class="ta_r">
           <span class="clo_r">*</span>
           角色：
           <nz-select
-            style="width:calc(100% - 100px)"
+            style="width: calc(100% - 100px)"
             [(ngModel)]="currentUser.roleList"
             [disabled]="isDisable"
             class="w200"

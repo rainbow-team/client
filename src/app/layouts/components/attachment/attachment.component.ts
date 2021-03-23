@@ -116,7 +116,7 @@ export class AttachmentComponent implements OnInit {
 
     var pos = fileName.lastIndexOf('.');
     var format = fileName.substring(pos + 1);
-    var picType = ['pdf', 'doc', 'txt', 'docx'];
+    var picType = ['pdf', 'doc', 'txt', 'docx', 'ofd'];
     var res = false;
 
     picType.forEach(element => {
@@ -132,8 +132,8 @@ export class AttachmentComponent implements OnInit {
 
     if (item && item.response) {
       var url = this.downLoadurl + "?id=" + item.response.msg + "&type=2";
-
-      window.open('assets/usermanual/web/viewer.html?url=' + this.utilitiesSercice.wrapUrl(url), "_blank");
+      
+      window.open(AppConfig.webReaderAddress + encodeURIComponent(this.utilitiesSercice.wrapUrl(url)), "_blank");
     }
 
 

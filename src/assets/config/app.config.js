@@ -20,11 +20,15 @@
     support: '技术支持： 核动力运行研究所',
     // WCF服务完整地址
     get serviceAddress() {
-      return 'http://localhost:8080';
+      return 'http://localhost:8080/rainbow';
     },
 
     get clientAddress() {
       return 'http://localhost:4200';
+    },
+
+    get webReaderAddress(){
+      return 'http://localhost:8086/web-reader/reader?file='
     },
 
     get helpFileName() {

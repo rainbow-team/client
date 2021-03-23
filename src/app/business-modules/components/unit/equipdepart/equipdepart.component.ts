@@ -1,18 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd';
-import { DictionarySercice } from 'src/app/services/common/dictionary.service';
-import { StaffSercice } from 'src/app/services/common/staff-service';
-import { EquipDepartService } from 'src/app/services/unit/equipdepart.service';
-import { UtilitiesSercice } from 'src/app/services/common/utilities.services';
+import { Component, OnInit, Input } from "@angular/core";
+import { Router } from "@angular/router";
+import { NzMessageService } from "ng-zorro-antd";
+import { DictionarySercice } from "src/app/services/common/dictionary.service";
+import { StaffSercice } from "src/app/services/common/staff-service";
+import { EquipDepartService } from "src/app/services/unit/equipdepart.service";
+import { UtilitiesSercice } from "src/app/services/common/utilities.services";
 
 @Component({
-  selector: 'app-equipdepart',
-  templateUrl: './equipdepart.component.html',
-  styleUrls: ['./equipdepart.component.scss']
+  selector: "app-equipdepart",
+  templateUrl: "./equipdepart.component.html",
+  styleUrls: ["./equipdepart.component.scss"],
 })
 export class EquipdepartComponent implements OnInit {
-
   @Input() isSearchShow = "0";
 
   dictionary: any = {};
@@ -28,19 +27,25 @@ export class EquipdepartComponent implements OnInit {
   product: any = "";
 
   selectId: any = "";
-  canManage:any=false;
+  canManage: any = false;
 
   checked: any = false;
 
-  constructor(private router: Router,
-    private msg: NzMessageService, private equipDepartService: EquipDepartService, private dictionaryService: DictionarySercice,
-    private staffSercice: StaffSercice,private utilitiesSercice:UtilitiesSercice) { }
+  constructor(
+    private router: Router,
+    private msg: NzMessageService,
+    private equipDepartService: EquipDepartService,
+    private dictionaryService: DictionarySercice,
+    private staffSercice: StaffSercice,
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
-
     this.dictionary = this.dictionaryService.getAllConfig();
     this.staffObj = this.staffSercice.getStaffObj();
-    this.canManage = this.utilitiesSercice.checkPermission("equipdepart:manage");
+    this.canManage = this.utilitiesSercice.checkPermission(
+      "equipdepart:manage"
+    );
 
     this.search();
   }
@@ -49,28 +54,25 @@ export class EquipdepartComponent implements OnInit {
     var option = {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
-      conditions: []
-    }
+      conditions: [],
+    };
 
     if (this.name) {
-      option.conditions.push({ key: "name", value: this.name })
+      option.conditions.push({ key: "name", value: this.name });
     }
 
     if (this.product) {
-      option.conditions.push({ key: "product", value: this.product })
+      option.conditions.push({ key: "product", value: this.product });
     }
 
     if (this.checked) {
-      option.conditions.push({ key: "checked", value: "checked" })
+      option.conditions.push({ key: "checked", value: "checked" });
     }
-    
 
-    this.equipDepartService.getEquipDepartList(option).subscribe(
-      (data) => {
-        this.dataSet = data.msg.currentList;
-        this.totalCount = data.msg.recordCount;
-      }
-    );
+    this.equipDepartService.getEquipDepartList(option).subscribe((data) => {
+      this.dataSet = data.msg.currentList;
+      this.totalCount = data.msg.recordCount;
+    });
   }
 
   pageIndexChange(num) {
@@ -91,43 +93,45 @@ export class EquipdepartComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/unit/equipdepart/add']);
+    this.router.navigate(["/unit/equipdepart/add"]);
   }
 
   show(item) {
-
     if (this.isSearchShow == "0") {
-      this.router.navigate(['/unit/equipdepart/add'], { queryParams: { id: item.id, isShow: true } });
+      this.router.navigate(["/unit/equipdepart/add"], {
+        queryParams: { id: item.id, isShow: true },
+      });
     } else {
-      this.router.navigate(['/searchShow/integratedAuery/equipdepartSearch'], { queryParams: { id: item.id } });
+      this.router.navigate(["/searchShow/integratedAuery/equipdepartSearch"], {
+        queryParams: { id: item.id },
+      });
     }
   }
 
   modify() {
     if (this.selectId) {
-      this.router.navigate(['/unit/equipdepart/add'], { queryParams: { id: this.selectId, isShow: false } });
+      this.router.navigate(["/unit/equipdepart/add"], {
+        queryParams: { id: this.selectId, isShow: false },
+      });
     } else {
       this.msg.create("warning", "请选择修改项");
     }
   }
 
-
   delete() {
-
     if (this.selectId) {
-
-      this.equipDepartService.deleteEquipDepartById(this.selectId).subscribe((res) => {
-
-        if (res.code == 200) {
-          this.msg.create("success", res.msgg);
-          this.search();
-        } else if (res.code == 500) {
-          this.msg.create("warning", res.msg);
-        } else {
-          this.msg.create("error", res.msg);
-        }
-      })
-
+      this.equipDepartService
+        .deleteEquipDepartById(this.selectId)
+        .subscribe((res) => {
+          if (res.code == 200) {
+            this.msg.create("success", res.msg);
+            this.search();
+          } else if (res.code == 500) {
+            this.msg.create("warning", res.msg);
+          } else {
+            this.msg.create("error", res.msg);
+          }
+        });
     } else {
       this.msg.create("warning", "请选择删除项");
     }
@@ -137,12 +141,15 @@ export class EquipdepartComponent implements OnInit {
     this.selectId = data.id;
   }
 
-  exportEquipdepart(){
-
-    let url = AppConfig.serviceAddress + "/equipdepart/exportEquipDepart?name="+this.name+"&product="+this.product; 
+  exportEquipdepart() {
+    let url =
+      AppConfig.serviceAddress +
+      "/equipdepart/exportEquipDepart?name=" +
+      this.name +
+      "&product=" +
+      this.product;
 
     url = this.utilitiesSercice.wrapUrl(url);
     window.open(url, "_blank");
-
   }
 }
