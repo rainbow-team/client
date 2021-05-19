@@ -1,169 +1,254 @@
-<div style="height: 100%;background:#fff">
-  <div class="div_top_add">
-    核设施许可信息
-  </div>
-  <div class="div_contain_add" *ngIf="isShow==false" [appPageHeight]='300'>
-
+<div style="height: 100%; background: #fff">
+  <div class="div_top_add">核设施许可信息</div>
+  <div class="div_contain_add" *ngIf="isShow == false" [appPageHeight]="300">
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>营运单位：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r"><span class="clo_r">*</span>营运单位：</div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <nz-select [(ngModel)]="data.serviceId" style="width: 100%" required [validation]="true" (ngModelChange)="serviceDepartChange($event)"
-          [disabled]="isDisable">
-          <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id">
-          </nz-option>
+        <nz-select
+          [(ngModel)]="data.serviceId"
+          style="width: 100%"
+          required
+          [validation]="true"
+          (ngModelChange)="serviceDepartChange($event)"
+        >
+          <nz-option *ngFor="let option of serviceDepartList" [nzLabel]="option.name" [nzValue]="option.id"> </nz-option>
         </nz-select>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>设施名称：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r"><span class="clo_r">*</span>设施名称：</div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.facId" style="width: 100%" required [validation]="true">
-          <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id">
-          </nz-option>
+          <nz-option *ngFor="let option of facList" [nzLabel]="option.name" [nzValue]="option.id"> </nz-option>
         </nz-select>
       </div>
 
-      <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>许可阶段：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r"><span class="clo_r">*</span>许可阶段：</div>
       <div nz-col [nzSpan]="8" class="ta_l">
         <nz-select [(ngModel)]="data.stageId" style="width: 100%" required [validation]="true">
-          <nz-option *ngFor="let option of dictionary.config_fac_permit_stage" [nzLabel]="option.value"
-            [nzValue]="option.id">
+          <nz-option *ngFor="let option of dictionary.config_fac_permit_stage" [nzLabel]="option.value" [nzValue]="option.id">
           </nz-option>
         </nz-select>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        <span class="clo_r">*</span>许可时间：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r"><span class="clo_r">*</span>许可时间：</div>
       <div nz-col [nzSpan]="4" class="ta_l">
         <nz-date-picker name="permitDate" [(ngModel)]="data.permitDate" required [validation]="true" style="width: 100%">
         </nz-date-picker>
       </div>
 
-      <div nz-col [nzSpan]="4" [nzOffset]="4" class="ta_r">
-        <span class="clo_r">*</span>许可文号：
-      </div>
+      <div nz-col [nzSpan]="4" [nzOffset]="4" class="ta_r"><span class="clo_r">*</span>许可文号：</div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <input nz-input name="licence" [(ngModel)]="data.licence" required [validation]="true"  [validationType]="'maxlength'" [validationLenth]="50"/>
+        <input
+          nz-input
+          name="licence"
+          [(ngModel)]="data.licence"
+          required
+          [validation]="true"
+          [validationType]="'maxlength'"
+          [validationLenth]="50"
+        />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">保密等级：</div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-select
+          [(ngModel)]="data.securityLevel"
+          (ngModelChange)="securityLevelChange($event)"
+          style="width: 100%"
+          required
+          [validation]="true"
+        >
+          <nz-option
+            *ngFor="let option of dictionary.config_info_security_level"
+            [nzLabel]="option.value"
+            [nzValue]="option.id"
+          >
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r" *ngIf="data.securityLevel > 64">定密依据：</div>
+      <div nz-col [nzSpan]="8" class="ta_l" *ngIf="data.securityLevel > 64">
+        <input
+          nz-input
+          name="securityGist"
+          [(ngModel)]="data.securityGist"
+          [validation]="true"
+          [validationType]="'maxlength'"
+          [validationLenth]="100"
+        />
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" *ngIf="data.securityLevel > 64">
+      <div nz-col [nzSpan]="4" class="ta_r">保密期限：</div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <input
+          nz-input
+          name="securityTimeLimit"
+          [(ngModel)]="data.securityTimeLimit"
+          [validation]="true"
+          [validationType]="'number'"
+          [validationLenth]="8"
+        />
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r">知悉范围：</div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <div class="ta_l" style="height: 200px; overflow: scroll">
+          <nz-tree [nzData]="userNodes" nzCheckable="true" nzMultiple="true" [(nzCheckedKeys)]="checkedUsers">
+            <ng-template #nzTreeTemplate let-node>
+              <span>{{ node.title }}</span>
+              <nz-tag *ngIf="node?.origin?.isUser">{{ node?.origin?.securityLevelValue }}</nz-tag>
+            </ng-template>
+          </nz-tree>
+
+          <!-- <nz-tree-select
+            style="max-height: 300px"
+            [nzNodes]="userNodes"
+            nzShowSearch
+            nzCheckable
+            nzMaxTagCount="4"
+            nzPlaceHolder="请选择用户"
+            [(ngModel)]="checkedUsers"
+          >
+            <ng-template #nzTreeTemplate let-node>
+              <span>{{ node.title }}</span>
+              <nz-tag *ngIf="node?.origin?.isUser">{{ node?.origin?.securityLevelValue }}</nz-tag>
+            </ng-template>
+          </nz-tree-select> -->
+        </div>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        许可范围：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">许可范围：</div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="scope" style="height: 40px;" [(ngModel)]="data.scope"></textarea>
+        <textarea nz-input name="scope" style="height: 40px" [(ngModel)]="data.scope"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        许可条件：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">许可条件：</div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="condition" style="height: 70px;" [(ngModel)]="data.condition"></textarea>
+        <textarea nz-input name="condition" style="height: 70px" [(ngModel)]="data.condition"></textarea>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        审评承诺：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">审评承诺：</div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <textarea nz-input name="promise" style="height: 70px;" [(ngModel)]="data.promise"></textarea>
+        <textarea nz-input name="promise" style="height: 70px" [(ngModel)]="data.promise"></textarea>
       </div>
     </div>
 
-    <app-attachment [fileList]="fileList" [refid]="data.id" [moduleName]="'核设施许可信息'" [isDisable]="isShow" #child></app-attachment>
+    <app-attachment
+      [fileList]="fileList"
+      [refid]="data.id"
+      [securityLevel]="data.securityLevel"
+      [moduleName]="'核设施许可信息'"
+      [isDisable]="isShow"
+      #child
+    ></app-attachment>
   </div>
 
-  <div class="div_contain_add" *ngIf="isShow==true" [appPageHeight]='300'>
-
+  <div class="div_contain_add" *ngIf="isShow == true" [appPageHeight]="300">
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        营运单位：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">营运单位：</div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="serviceDepartName" class="showText">{{data.serviceDepartName}}</span>
+        <span name="serviceDepartName" class="showText">{{ data.serviceDepartName }}</span>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        设施名称：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">设施名称：</div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="facName" class="showText">{{data.facName}}</span>
+        <span name="facName" class="showText">{{ data.facName }}</span>
       </div>
 
-      <div nz-col [nzSpan]="4" class="ta_r">
-        许可阶段：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">许可阶段：</div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="permitStageValue" class="showText">{{data.permitStageValue}}</span>
+        <span name="permitStageValue" class="showText">{{ data.permitStageValue }}</span>
       </div>
     </div>
 
     <div nz-row class="ma_b20">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        许可时间：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">许可时间：</div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="permitDate" class="showText">{{data.permitDate|recordtime}}</span>
+        <span name="permitDate" class="showText">{{ data.permitDate | recordtime }}</span>
       </div>
 
-      <div nz-col [nzSpan]="4" class="ta_r">
-        许可文号：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">许可文号：</div>
       <div nz-col [nzSpan]="8" class="ta_l">
-        <span name="licence" class="showText">{{data.licence}}</span>
+        <span name="licence" class="showText">{{ data.licence }}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20">
+      <div nz-col [nzSpan]="4" class="ta_r">保密等级：</div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="securityLevelValue" class="showText">{{ data.securityLevelValue }}</span>
+      </div>
+
+      <div nz-col [nzSpan]="4" class="ta_r" *ngIf="data.securityLevel > 64">定密依据：</div>
+      <div nz-col [nzSpan]="8" class="ta_l" *ngIf="data.securityLevel > 64">
+        <span name="securityGist" class="showText">{{ data.securityGist }}</span>
+      </div>
+    </div>
+
+    <div nz-row class="ma_b20" *ngIf="data.securityLevel > 64">
+      <div nz-col [nzSpan]="4" class="ta_r">保密期限：</div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <span name="securityTimeLimit" class="showText">{{ data.securityTimeLimit }}</span>
+      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">知悉范围：</div>
+      <div nz-col [nzSpan]="8" class="ta_l">
+        <nz-tree [nzData]="userNodes" nzCheckable="true" nzMultiple="true" [(nzCheckedKeys)]="checkedUsers">
+          <ng-template #nzTreeTemplate let-node>
+            <span>{{ node.title }}</span>
+            <nz-tag *ngIf="node?.origin?.isUser">{{ node?.origin?.securityLevelValue }}</nz-tag>
+          </ng-template>
+        </nz-tree>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        许可范围：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">许可范围：</div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div  style="height: 40px;" class="showTextArea">{{data.scope}}</div>
+        <div style="height: 40px" class="showTextArea">{{ data.scope }}</div>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        许可条件：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">许可条件：</div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div  class="showTextArea">{{data.condition}}</div>
+        <div class="showTextArea">{{ data.condition }}</div>
       </div>
     </div>
 
     <div nz-row class="ma_b20" [nzType]="'flex'" [nzAlign]="'top'">
-      <div nz-col [nzSpan]="4" class="ta_r">
-        审评承诺：
-      </div>
+      <div nz-col [nzSpan]="4" class="ta_r">审评承诺：</div>
       <div nz-col [nzSpan]="20" class="ta_l">
-        <div  class="showTextArea">{{data.promise}}</div>
+        <div class="showTextArea">{{ data.promise }}</div>
       </div>
     </div>
-
-    <app-attachment [fileList]="fileList" [moduleName]="'核设施许可信息'" [refid]="data.id" [isDisable]="isShow" #child></app-attachment>
+    <app-attachment
+      [fileList]="fileList"
+      [moduleName]="'核设施许可信息'"
+      [refid]="data.id"
+      [isDisable]="isShow"
+      #child
+    ></app-attachment>
   </div>
-
 
   <div nz-row [nzType]="'flex'" [nzAlign]="'middle'" class="div_bottom_add" [nzJustify]="'end'">
-    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px;"
-      [nzLoading]="isSaving">
+    <button nz-button nzType="primary" (click)="save()" *ngIf="!isShow" style="margin-right: 10px" [nzLoading]="isSaving">
       保存
     </button>
     <button nz-button nzType="default" (click)="close()">关闭</button>

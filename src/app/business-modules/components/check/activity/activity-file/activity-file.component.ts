@@ -11,15 +11,14 @@ import { AttachmentComponent } from 'src/app/layouts/components/attachment/attac
 @Component({
   selector: 'app-activity-file',
   templateUrl: './activity-file.component.html',
-  styleUrls: ['./activity-file.component.scss']
+  styleUrls: ['./activity-file.component.scss'],
 })
 export class ActivityFileComponent implements OnInit {
-
   @ViewChildren(ValidationDirective) directives: QueryList<ValidationDirective>;
   @ViewChild(AttachmentComponent)
-  child:AttachmentComponent
+  child: AttachmentComponent;
 
-  activityId: any = "";
+  activityId: any = '';
   dictionary: any = [];
 
   pageIndex: any = 1;
@@ -29,11 +28,11 @@ export class ActivityFileComponent implements OnInit {
   dataSet: any = [];
   data: any = {};
 
-  selectId: any = "";
+  selectId: any = '';
   fileList = [];
 
-  modalTitle: any = "";
-  okText: any = "";
+  modalTitle: any = '';
+  okText: any = '';
   isVisible: any = false;
   isShow: any = false;
   isSaving: any = false;
@@ -48,13 +47,18 @@ export class ActivityFileComponent implements OnInit {
   start_date: any;
   end_date: any;
 
-  constructor(private router: Router,
-    private ActivatedRoute: ActivatedRoute, private msg: NzMessageService, private activityCheckSercice: ActivityCheckSercice,
-    private attachmentSercice: AttachmentSercice, private dictionarySercice: DictionarySercice,
-    private utilitiesSercice: UtilitiesSercice) { }
+  constructor(
+    private router: Router,
+    private ActivatedRoute: ActivatedRoute,
+    private msg: NzMessageService,
+    private activityCheckSercice: ActivityCheckSercice,
+    private attachmentSercice: AttachmentSercice,
+    private dictionarySercice: DictionarySercice,
+    private utilitiesSercice: UtilitiesSercice
+  ) {}
 
   ngOnInit() {
-    var id = this.ActivatedRoute.snapshot.queryParams["id"];
+    var id = this.ActivatedRoute.snapshot.queryParams['id'];
     this.activityId = id;
     this.dictionary = this.dictionarySercice.getAllConfig();
     this.canManage = this.utilitiesSercice.checkPermission('permit:activity:manage');
@@ -62,82 +66,74 @@ export class ActivityFileComponent implements OnInit {
 
     let url = window.location.href;
 
-    if (url.indexOf("searchShow") != -1) {
+    if (url.indexOf('searchShow') != -1) {
       this.isSearchShow = true;
     }
   }
 
-
   search() {
-
     var option = {
       pageNo: this.pageIndex,
       pageSize: this.pageSize,
-      conditions: []
-    }
+      conditions: [],
+    };
 
-    option.conditions.push({ key: "activityId", value: this.activityId });
+    option.conditions.push({ key: 'activityId', value: this.activityId });
 
     // if (this.file_name) {
     //   option.conditions.push({ key: "file_name", value: this.file_name })
     // }
 
     if (this.typeIds.length > 0) {
-      option.conditions.push({ key: "typeIds", value: [this.typeIds] })
+      option.conditions.push({ key: 'typeIds', value: [this.typeIds] });
     }
-
 
     if (this.start_date) {
       option.conditions.push({
         key: 'start_date',
-        value: this.start_date
+        value: this.start_date,
       });
     }
 
     if (this.end_date) {
       option.conditions.push({
         key: 'end_date',
-        value: this.end_date
+        value: this.end_date,
       });
     }
 
-
-    this.activityCheckSercice.getActivityFileCheckList(option).subscribe(
-      (data) => {
-        this.dataSet = data.msg.currentList;
-        this.totalCount = data.msg.recordCount;
-      }
-    );
-
+    this.activityCheckSercice.getActivityFileCheckList(option).subscribe((data) => {
+      this.dataSet = data.msg.currentList;
+      this.totalCount = data.msg.recordCount;
+    });
   }
 
   reset() {
-    this.selectId = "";
+    this.selectId = '';
     this.data = [];
     this.fileList = [];
     // this.file_name = "";
     this.typeIds = [];
     this.fileDate = [];
-    this.start_date = "";
-    this.end_date = "";
+    this.start_date = '';
+    this.end_date = '';
   }
 
   add() {
     this.data = {};
     this.fileList = [];
-    this.modalTitle = "添加审评文件";
-    this.okText = "提交";
+    this.modalTitle = '添加审评文件';
+    this.okText = '提交';
     this.isVisible = true;
     this.isShow = false;
     this.isSaving = false;
-    this.selectId = "";
-
+    this.selectId = '';
   }
 
   modify() {
     if (this.selectId) {
-      this.modalTitle = "修改审评文件";
-      this.okText = "提交";
+      this.modalTitle = '修改审评文件';
+      this.okText = '提交';
       this.isVisible = true;
       this.isShow = false;
       this.isSaving = false;
@@ -145,21 +141,19 @@ export class ActivityFileComponent implements OnInit {
       this.fileList = [];
 
       this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
-
         if (res1.msg.length > 0) {
-          res1.msg.forEach(element => {
+          res1.msg.forEach((element) => {
             this.fileList.push({
               response: {
-                msg: element.fileinfoId
+                msg: element.fileinfoId,
               },
-              name: element.fileinfoClientFileName
+              name: element.fileinfoClientFileName,
             });
           });
         }
-      })
-
+      });
     } else {
-      this.msg.create("warning", "请选择修改项");
+      this.msg.create('warning', '请选择修改项');
     }
   }
 
@@ -167,44 +161,41 @@ export class ActivityFileComponent implements OnInit {
     if (this.selectId) {
       this.activityCheckSercice.deleteActivityFileCheckByIds([this.selectId]).subscribe((res) => {
         if (res.code == 200) {
-          this.msg.create("success", res.msg);
+          this.msg.create('success', res.msg);
           this.search();
         } else {
-          this.msg.create("error", res.msg);
+          this.msg.create('error', res.msg);
         }
-      })
+      });
     } else {
-      this.msg.create("warning", "请选择删除项");
+      this.msg.create('warning', '请选择删除项');
     }
   }
 
   //查看与编辑
   show(param) {
-
     this.fileList = [];
 
     this.data = param;
 
     this.attachmentSercice.getFileListById(this.data.id).subscribe((res1) => {
-
       if (res1.msg.length > 0) {
-        res1.msg.forEach(element => {
+        res1.msg.forEach((element) => {
           this.fileList.push({
             response: {
-              msg: element.fileinfoId
+              msg: element.fileinfoId,
             },
-            name: element.fileinfoClientFileName
+            name: element.fileinfoClientFileName,
           });
         });
       }
-    })
+    });
 
     this.isVisible = false;
     this.isShow = true;
   }
 
   save() {
-
     if (!this.FormValidation()) {
       return;
     }
@@ -216,13 +207,12 @@ export class ActivityFileComponent implements OnInit {
 
     var fileList = this.child.fileList;
     if (fileList.length > 0) {
-      if (!fileList[fileList.length-1].response) {
-
+      if (!fileList[fileList.length - 1].response) {
         this.msg.create('warning', '附件还未上传完毕,请稍等');
         this.isSaving = false;
         return;
       }
-      fileList.forEach(element => {
+      fileList.forEach((element) => {
         this.data.attachmentList.push({ fileinfoId: element.response.msg });
       });
     }
@@ -233,7 +223,6 @@ export class ActivityFileComponent implements OnInit {
         this.search();
         this.isVisible = false;
       } else {
-
         this.msg.create('error', '保存失败');
       }
 
@@ -257,7 +246,7 @@ export class ActivityFileComponent implements OnInit {
   //表单手动触发验证
   FormValidation() {
     let isValid = true;
-    this.directives.forEach(d => {
+    this.directives.forEach((d) => {
       if (!d.validationValue()) {
         isValid = false;
       }
